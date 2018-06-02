@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Yutong Dai</title>
+    <link>/post/zh/</link>
+    <description>Recent content in Posts on Yutong Dai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="/post/zh/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>中文测试</title>
+      <link>/post/zh/chinese-test/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/chinese-test/</guid>
+      <description>这是一个中文测试。</description>
+    </item>
+    
+  </channel>
+</rss>

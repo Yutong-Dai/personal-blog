@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Yutong Dai on Yutong Dai</title>
+    <link>/</link>
+    <description>Recent content in Yutong Dai on Yutong Dai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0800</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Play with Sparse Matrix</title>
+      <link>/post/en/play-with-sparse-matrix/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/play-with-sparse-matrix/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#motivation&#34;&gt;Motivation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#solution&#34;&gt;Solution&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#slicing&#34;&gt;Slicing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#basic-linear-algebra-operations&#34;&gt;Basic linear algebra operations&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;motivation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Motivation&lt;/h1&gt;
+&lt;p&gt;Recently, I have to deal with matrices with sparsity structures. If I coerce them using the &lt;code&gt;as.matrix&lt;/code&gt; function, they consume my RAM wildly. So I turn to the package &lt;a href=&#34;http://www.econ.uiuc.edu/~roger/research/sparse/SparseM.pdf&#34;&gt;SparseM&lt;/a&gt; for possible solutions.&lt;/p&gt;
+&lt;p&gt;What I want to do are,&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Performe basic linear algebra operations on sparse matrices, mainly including multiplication, transpose, and etc.&lt;/li&gt;
+&lt;li&gt;Slice rows or columns by their indices.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The package &lt;code&gt;SparseM&lt;/code&gt; can perfectly fulfill my needs.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;solution&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Solution&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1234)
+A &amp;lt;- matrix(rnorm(16), ncol=4, nrow=4)
+A[A &amp;lt; 0] &amp;lt;- 0
+A&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           [,1]      [,2] [,3]       [,4]
+## [1,] 0.0000000 0.4291247    0 0.00000000
+## [2,] 0.2774292 0.5060559    0 0.06445882
+## [3,] 1.0844412 0.0000000    0 0.95949406
+## [4,] 0.0000000 0.0000000    0 0.00000000&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We reformat A in &lt;code&gt;csr&lt;/code&gt; form:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;suppressMessages(library(SparseM)) 
+A.csr &amp;lt;- as.matrix.csr(A)
+A.csr&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## An object of class &amp;quot;matrix.csr&amp;quot;
+## Slot &amp;quot;ra&amp;quot;:
+## [1] 0.42912469 0.27742924 0.50605589 0.06445882 1.08444118 0.95949406
+## 
+## Slot &amp;quot;ja&amp;quot;:
+## [1] 2 1 2 4 1 4
+## 
+## Slot &amp;quot;ia&amp;quot;:
+## [1] 1 2 5 7 7
+## 
+## Slot &amp;quot;dimension&amp;quot;:
+## [1] 4 4&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ra: a real array of non-zero elements containing the non-zero elements of A, stored in row order. Thus, if i &amp;lt; j, all elements of row i precede elements from row j. The order of elements within the rows is immaterial.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ja: an integer array of non-zero elements containing the column indices of the elements stored in ra.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;ia: an integer array of n+1 elements containing pointers to the beginning of each row in the arrays ra and ja. Thus ia[i] indicates the position in the arrays ra and ja where the ith row begins. The last (n + 1)st element of ia indicates where the n + 1 row would start, if it existed.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;div id=&#34;slicing&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Slicing&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;A.csr[,1:2]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## An object of class &amp;quot;matrix.csr&amp;quot;
+## Slot &amp;quot;ra&amp;quot;:
+## [1] 0.4291247 0.2774292 0.5060559 1.0844412
+## 
+## Slot &amp;quot;ja&amp;quot;:
+## [1] 2 1 2 1
+## 
+## Slot &amp;quot;ia&amp;quot;:
+## [1] 1 2 4 5 5
+## 
+## Slot &amp;quot;dimension&amp;quot;:
+## [1] 4 2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;as.matrix(A.csr[,1:2])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           [,1]      [,2]
+## [1,] 0.0000000 0.4291247
+## [2,] 0.2774292 0.5060559
+## [3,] 1.0844412 0.0000000
+## [4,] 0.0000000 0.0000000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;A.csr[, -1]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## An object of class &amp;quot;matrix.csr&amp;quot;
+## Slot &amp;quot;ra&amp;quot;:
+## [1] 0.42912469 0.50605589 0.06445882 0.95949406
+## 
+## Slot &amp;quot;ja&amp;quot;:
+## [1] 1 1 3 3
+## 
+## Slot &amp;quot;ia&amp;quot;:
+## [1] 1 2 4 5 5
+## 
+## Slot &amp;quot;dimension&amp;quot;:
+## [1] 4 3&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;as.matrix(A.csr[, -1])&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           [,1] [,2]       [,3]
+## [1,] 0.4291247    0 0.00000000
+## [2,] 0.5060559    0 0.06445882
+## [3,] 0.0000000    0 0.95949406
+## [4,] 0.0000000    0 0.00000000&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;basic-linear-algebra-operations&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Basic linear algebra operations&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;t(A.csr)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## An object of class &amp;quot;matrix.csr&amp;quot;
+## Slot &amp;quot;ra&amp;quot;:
+## [1] 0.27742924 1.08444118 0.42912469 0.50605589 0.06445882 0.95949406
+## 
+## Slot &amp;quot;ja&amp;quot;:
+## [1] 2 3 1 2 2 3
+## 
+## Slot &amp;quot;ia&amp;quot;:
+## [1] 1 3 5 5 7
+## 
+## Slot &amp;quot;dimension&amp;quot;:
+## [1] 4 4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;as.matrix(A.csr %*% c(1,2,3,4))&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           [,1]
+## [1,] 0.8582494
+## [2,] 1.5473763
+## [3,] 4.9224174
+## [4,] 0.0000000&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;A %*% c(1,2,3,4)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##           [,1]
+## [1,] 0.8582494
+## [2,] 1.5473763
+## [3,] 4.9224174
+## [4,] 0.0000000&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can even visualize its sparse structure:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(1234)
+A &amp;lt;- matrix(rnorm(2000), ncol=50, nrow=40)
+A[abs(A) &amp;lt; 0.7] &amp;lt;- 0
+image(as.matrix.csr(A))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-06-01-play-with-sparse-matrix_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>中文测试</title>
+      <link>/post/zh/chinese-test/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/chinese-test/</guid>
+      <description>&lt;p&gt;这是一个中文测试。&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Get Data from Website</title>
+      <link>/post/en/get-data-from-website/</link>
+      <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/get-data-from-website/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#motivation&#34;&gt;Motivation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#solutions&#34;&gt;Solutions&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#download&#34;&gt;Download&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#uncompress-data-files&#34;&gt;Uncompress data files&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#load-libsvm-format-data&#34;&gt;Load libsvm format data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#complete-code&#34;&gt;Complete Code&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;motivation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Motivation&lt;/h1&gt;
+&lt;p&gt;I’m using the datasets &lt;a href=&#34;http://www.csie.ntu.edu.tw/~cjlin/libsvm/&#34;&gt;libsvm&lt;/a&gt; to do some numerical experiments. The sizes of datasets, like epsilon&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;, are of severalGBs. So it is hard to play with the data on my desktop. I am lucky to run the experiments on a server. So my workflow is:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Download datasets on the server.&lt;/li&gt;
+&lt;li&gt;Preprocess datastes.&lt;/li&gt;
+&lt;li&gt;Run experiments.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The problems I encounted are&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;How to use &lt;code&gt;R&lt;/code&gt; functions to download data?&lt;/li&gt;
+&lt;li&gt;Since dataset files are compressed, how to uncompresse them?&lt;/li&gt;
+&lt;li&gt;How to read dataset are of the &lt;code&gt;libsvm&lt;/code&gt; format?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;solutions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Solutions&lt;/h1&gt;
+&lt;p&gt;If you only care about the way to download datasets from R, then you can stop once finish reading the following subsection.&lt;/p&gt;
+&lt;div id=&#34;download&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Download&lt;/h2&gt;
+&lt;p&gt;Use built-in function &lt;code&gt;download.file&lt;/code&gt;, one can finish the task.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;download.file(target_path, path_filename_extension)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For example,&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;download.file(https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/epsilon_normalized.bz2, &amp;quot;./data/epsilon_normalized.bz2&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;uncompress-data-files&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Uncompress data files&lt;/h2&gt;
+&lt;p&gt;Changce are that you datasets are compressed in &lt;code&gt;.zip&lt;/code&gt;, &lt;code&gt;.bz2&lt;/code&gt; and etc. formats, so you cannot directly load your data into the memory. You can use the function &lt;code&gt;bunzip2&lt;/code&gt; from the &lt;code&gt;R.utils&lt;/code&gt; packages.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;bunzip2(path_filet_to_uncompress, path_file_to_save, remove = FALSE, skip = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;remove: If TRUE, the compressed file will be removed once uncompression finished.&lt;/li&gt;
+&lt;li&gt;skip: If TRUE and the output file already exists, the output file is returned as is.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For example,&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;download.file(&amp;quot;./data/epsilon_normalized.bz2&amp;quot;, &amp;quot;./data/epsilon_normalized&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Here, the original dataset file &lt;code&gt;epsilon_normalized&lt;/code&gt; has no extension.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;load-libsvm-format-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Load libsvm format data&lt;/h2&gt;
+&lt;p&gt;The libsvm format data is of form&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;label&amp;gt; &amp;lt;index 1&amp;gt;:&amp;lt;value 1&amp;gt; &amp;lt;index 2&amp;gt;:&amp;lt;value 2&amp;gt; ... &amp;lt;index n&amp;gt;:&amp;lt;value n&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For example,&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1 1:12 2:34 3:56
+2 1:98 2:76 3:65&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For more information, please refer to this &lt;a href=&#34;https://stats.stackexchange.com/questions/61328/libsvm-data-format&#34;&gt;post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We can use the &lt;code&gt;read.matrix.csr&lt;/code&gt; function from the &lt;code&gt;e1071&lt;/code&gt; package.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data &amp;lt;- read.matrix.csr(file, fac=TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For example,&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data &amp;lt;- read.matrix.csr(&amp;quot;./data/epsilon_normalized&amp;quot;, fac=TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that &lt;code&gt;data&lt;/code&gt; here is a list and matrix are stored in &lt;code&gt;sparse matrix&lt;/code&gt; format. We can use &lt;code&gt;data$x&lt;/code&gt; and &lt;code&gt;data$y&lt;/code&gt; to extract the feature matrix and the label vector respectively.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;complete-code&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Complete Code&lt;/h2&gt;
+&lt;p&gt;The complete code to download and uncompress data files is&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;get_data &amp;lt;- function(target_path, save_path, save_name, extension, unzip=TRUE){
+  path_file &amp;lt;- paste(save_path,save_name,sep=&amp;quot;/&amp;quot;)
+  path_file_extension &amp;lt;- paste(path_file, extension, sep=&amp;quot;.&amp;quot;)
+  download.file(target_path, path_file_extension)
+  if (unzip){
+    require(R.utils)
+    bunzip2(path_file_extension, path_file, remove = FALSE, skip = TRUE)
+    print(&amp;quot;unzip finished!&amp;quot;)
+  }
+  print(paste(&amp;quot;data is strored at:&amp;quot;, save_path))
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The complete code to load &lt;code&gt;libsvm&lt;/code&gt; format data is&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;process_data &amp;lt;- function(file, convert_to_factor=FALSE){
+  require(e1071)
+  require(SparseM)
+  print(&amp;quot;loading data&amp;quot;)
+  data &amp;lt;- read.matrix.csr(file, fac=convert_to_factor)
+  print(&amp;quot;loading finished&amp;quot;)
+  x &amp;lt;- as.matrix(data$x)
+  print(&amp;quot;x was conveted to dense matrix form&amp;quot;)
+  y &amp;lt;- as.matrix(data$y)
+  results &amp;lt;- list(x=x,y=y)
+  return(results)
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;&lt;a href=&#34;https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/epsilon_normalized.bz2&#34; class=&#34;uri&#34;&gt;https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/binary/epsilon_normalized.bz2&lt;/a&gt;&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bookdown Syntax</title>
+      <link>/post/en/bookdown-syntax/</link>
+      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/bookdown-syntax/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#math-equations-with-labels&#34;&gt;Math Equations with labels&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Following contents are adapeted from Yihui Xie’s &lt;a href=&#34;https://bookdown.org/yihui/bookdown/components.html&#34;&gt;bookdown&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div id=&#34;math-equations-with-labels&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Math Equations with labels&lt;/h1&gt;
+&lt;p&gt;My personal preference is to use &lt;code&gt;algin&lt;/code&gt; and &lt;code&gt;equation&lt;/code&gt; for long or complicated and simple expressions respectively. The slight differeces, compared with the &lt;span class=&#34;math inline&#34;&gt;\(\bf \LaTeX\)&lt;/span&gt; syntax, are the way we assign labels to expressions. Instead of using &lt;code&gt;\label{foo}&lt;/code&gt;, in blogdown (bookdown), it is recommend to use the syntax &lt;code&gt;(\#eq:foo)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Following are two simple examples. Use&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;\begin{equation}
+  f(k) = \binom{n}{k} p^k(1-p)^{n-k}
+  (\#eq:binom)
+\end{equation}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;to produce&lt;/p&gt;
+&lt;span class=&#34;math display&#34; id=&#34;eq:binom&#34;&gt;\[\begin{equation}
+  f(k) = \binom{n}{k} p^k(1-p)^{n-k}
+  \tag{1}
+\end{equation}\]&lt;/span&gt;
+&lt;p&gt;Similarly, we can use &amp;amp; to algin equations.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;\begin{align}
+&amp;amp; f(x;\mu,\sigma) = \frac{1}{\sqrt{2\pi}}\exp(\frac{1}{2\sigma^2}(x-\mu)^2) (\#eq:gaussian)\\
+&amp;amp; f(x;\lambda) = \lambda e^{-\lambda}I(x&amp;gt;0) (\#eq:exp)
+\end{align}&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&#34;math display&#34; id=&#34;eq:exp&#34; id=&#34;eq:gaussian&#34;&gt;\[\begin{align}
+&amp;amp; f(x;\mu,\sigma) = \frac{1}{\sqrt{2\pi}}\exp(\frac{1}{2\sigma^2}(x-\mu)^2) \tag{2}\\
+&amp;amp; f(x;\lambda) = \lambda e^{-\lambda}I(x&amp;gt;0) \tag{3}
+\end{align}\]&lt;/span&gt;
+&lt;p&gt;For HTML output, bookdown can only number the equations with labels. Please make sure equations without labels are not numbered by either using the &lt;code&gt;equation*&lt;/code&gt; environment or adding &lt;code&gt;\nonumber&lt;/code&gt; or &lt;code&gt;\notag&lt;/code&gt; to your equations. The same rules apply to other math environments, such as eqnarray, gather, align, and so on (e.g., you can use the align* environment).&lt;/p&gt;
+&lt;p&gt;To refer to a equation, please use &lt;code&gt;\@ref(eq:label)&lt;/code&gt;. For example,&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;\@ref(eq:binom)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;can produce its index &lt;a href=&#34;#eq:binom&#34;&gt;(1)&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Person Re-Identification System For Mobile Devices</title>
+      <link>/publication/person-re-identification/</link>
+      <pubDate>Tue, 01 Sep 2015 00:00:00 +0800</pubDate>
+      
+      <guid>/publication/person-re-identification/</guid>
+      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mobile visual clothing search</title>
+      <link>/publication/clothing-search/</link>
+      <pubDate>Mon, 01 Jul 2013 00:00:00 +0800</pubDate>
+      
+      <guid>/publication/clothing-search/</guid>
+      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

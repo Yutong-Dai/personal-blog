@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.41" />
+  <meta name="author" content="Yutong Dai">
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="Motivation Solution Slicing Basic linear algebra operations    Motivation Recently, I have to deal with matrices with sparsity structures. If I coerce them using the as.matrix function, they consume my RAM wildly. So I turn to the package SparseM for possible solutions.
+What I want to do are,
+Performe basic linear algebra operations on sparse matrices, mainly including multiplication, transpose, and etc. Slice rows or columns by their indices.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/en/play-with-sparse-matrix/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="hsl((9,62%,53%))">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Yutong Dai">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Yutong Dai">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/en/play-with-sparse-matrix/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Yutong Dai">
+  <meta property="og:url" content="/post/en/play-with-sparse-matrix/">
+  <meta property="og:title" content="Play with Sparse Matrix | Yutong Dai">
+  <meta property="og:description" content="Motivation Solution Slicing Basic linear algebra operations    Motivation Recently, I have to deal with matrices with sparsity structures. If I coerce them using the as.matrix function, they consume my RAM wildly. So I turn to the package SparseM for possible solutions.
+What I want to do are,
+Performe basic linear algebra operations on sparse matrices, mainly including multiplication, transpose, and etc. Slice rows or columns by their indices.">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2018-06-01T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2018-06-01T00:00:00&#43;00:00">
+  
+
+  
+  
+
+  <title>Play with Sparse Matrix | Yutong Dai</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" class="dark">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/"><img src="/img/avatar.png" alt="Yutong Dai"></a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+            
+            <span>Posts</span>
+            
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            
+            <li class="nav-item">
+              <a href="/post/en/">
+                
+                <span>EN</span>
+                
+              </a>
+            </li>
+            
+            <li class="nav-item">
+              <a href="/post/zh/">
+                
+                <span>中文</span>
+                
+              </a>
+            </li>
+            
+          </ul>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#gallery">
+            
+            <span>Gallery</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/static/files/pdf/resume.pdf">
+            
+            <span>Resume</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Play with Sparse Matrix</h1>
+    
+    <h3 class="author">Yutong Dai</h3>
+    
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2018-06-01 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      2018-06-01
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Yutong Dai">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/r-programming/">R-Programming</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Play%20with%20Sparse%20Matrix&amp;url=%2fpost%2fen%2fplay-with-sparse-matrix%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fen%2fplay-with-sparse-matrix%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fen%2fplay-with-sparse-matrix%2f&amp;title=Play%20with%20Sparse%20Matrix"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fen%2fplay-with-sparse-matrix%2f&amp;title=Play%20with%20Sparse%20Matrix"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Play%20with%20Sparse%20Matrix&amp;body=%2fpost%2fen%2fplay-with-sparse-matrix%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <div id="TOC">
+<ul>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#solution">Solution</a><ul>
+<li><a href="#slicing">Slicing</a></li>
+<li><a href="#basic-linear-algebra-operations">Basic linear algebra operations</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
+<p>Recently, I have to deal with matrices with sparsity structures. If I coerce them using the <code>as.matrix</code> function, they consume my RAM wildly. So I turn to the package <a href="http://www.econ.uiuc.edu/~roger/research/sparse/SparseM.pdf">SparseM</a> for possible solutions.</p>
+<p>What I want to do are,</p>
+<ol style="list-style-type: decimal">
+<li>Performe basic linear algebra operations on sparse matrices, mainly including multiplication, transpose, and etc.</li>
+<li>Slice rows or columns by their indices.</li>
+</ol>
+<p>The package <code>SparseM</code> can perfectly fulfill my needs.</p>
+</div>
+<div id="solution" class="section level1">
+<h1>Solution</h1>
+<pre class="r"><code>set.seed(1234)
+A &lt;- matrix(rnorm(16), ncol=4, nrow=4)
+A[A &lt; 0] &lt;- 0
+A</code></pre>
+<pre><code>##           [,1]      [,2] [,3]       [,4]
+## [1,] 0.0000000 0.4291247    0 0.00000000
+## [2,] 0.2774292 0.5060559    0 0.06445882
+## [3,] 1.0844412 0.0000000    0 0.95949406
+## [4,] 0.0000000 0.0000000    0 0.00000000</code></pre>
+<p>We reformat A in <code>csr</code> form:</p>
+<pre class="r"><code>suppressMessages(library(SparseM)) 
+A.csr &lt;- as.matrix.csr(A)
+A.csr</code></pre>
+<pre><code>## An object of class &quot;matrix.csr&quot;
+## Slot &quot;ra&quot;:
+## [1] 0.42912469 0.27742924 0.50605589 0.06445882 1.08444118 0.95949406
+## 
+## Slot &quot;ja&quot;:
+## [1] 2 1 2 4 1 4
+## 
+## Slot &quot;ia&quot;:
+## [1] 1 2 5 7 7
+## 
+## Slot &quot;dimension&quot;:
+## [1] 4 4</code></pre>
+<blockquote>
+<blockquote>
+<p>ra: a real array of non-zero elements containing the non-zero elements of A, stored in row order. Thus, if i &lt; j, all elements of row i precede elements from row j. The order of elements within the rows is immaterial.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>ja: an integer array of non-zero elements containing the column indices of the elements stored in ra.</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>ia: an integer array of n+1 elements containing pointers to the beginning of each row in the arrays ra and ja. Thus ia[i] indicates the position in the arrays ra and ja where the ith row begins. The last (n + 1)st element of ia indicates where the n + 1 row would start, if it existed.</p>
+</blockquote>
+</blockquote>
+<div id="slicing" class="section level2">
+<h2>Slicing</h2>
+<pre class="r"><code>A.csr[,1:2]</code></pre>
+<pre><code>## An object of class &quot;matrix.csr&quot;
+## Slot &quot;ra&quot;:
+## [1] 0.4291247 0.2774292 0.5060559 1.0844412
+## 
+## Slot &quot;ja&quot;:
+## [1] 2 1 2 1
+## 
+## Slot &quot;ia&quot;:
+## [1] 1 2 4 5 5
+## 
+## Slot &quot;dimension&quot;:
+## [1] 4 2</code></pre>
+<pre class="r"><code>as.matrix(A.csr[,1:2])</code></pre>
+<pre><code>##           [,1]      [,2]
+## [1,] 0.0000000 0.4291247
+## [2,] 0.2774292 0.5060559
+## [3,] 1.0844412 0.0000000
+## [4,] 0.0000000 0.0000000</code></pre>
+<pre class="r"><code>A.csr[, -1]</code></pre>
+<pre><code>## An object of class &quot;matrix.csr&quot;
+## Slot &quot;ra&quot;:
+## [1] 0.42912469 0.50605589 0.06445882 0.95949406
+## 
+## Slot &quot;ja&quot;:
+## [1] 1 1 3 3
+## 
+## Slot &quot;ia&quot;:
+## [1] 1 2 4 5 5
+## 
+## Slot &quot;dimension&quot;:
+## [1] 4 3</code></pre>
+<pre class="r"><code>as.matrix(A.csr[, -1])</code></pre>
+<pre><code>##           [,1] [,2]       [,3]
+## [1,] 0.4291247    0 0.00000000
+## [2,] 0.5060559    0 0.06445882
+## [3,] 0.0000000    0 0.95949406
+## [4,] 0.0000000    0 0.00000000</code></pre>
+</div>
+<div id="basic-linear-algebra-operations" class="section level2">
+<h2>Basic linear algebra operations</h2>
+<pre class="r"><code>t(A.csr)</code></pre>
+<pre><code>## An object of class &quot;matrix.csr&quot;
+## Slot &quot;ra&quot;:
+## [1] 0.27742924 1.08444118 0.42912469 0.50605589 0.06445882 0.95949406
+## 
+## Slot &quot;ja&quot;:
+## [1] 2 3 1 2 2 3
+## 
+## Slot &quot;ia&quot;:
+## [1] 1 3 5 5 7
+## 
+## Slot &quot;dimension&quot;:
+## [1] 4 4</code></pre>
+<pre class="r"><code>as.matrix(A.csr %*% c(1,2,3,4))</code></pre>
+<pre><code>##           [,1]
+## [1,] 0.8582494
+## [2,] 1.5473763
+## [3,] 4.9224174
+## [4,] 0.0000000</code></pre>
+<pre class="r"><code>A %*% c(1,2,3,4)</code></pre>
+<pre><code>##           [,1]
+## [1,] 0.8582494
+## [2,] 1.5473763
+## [3,] 4.9224174
+## [4,] 0.0000000</code></pre>
+<p>We can even visualize its sparse structure:</p>
+<pre class="r"><code>set.seed(1234)
+A &lt;- matrix(rnorm(2000), ncol=50, nrow=40)
+A[abs(A) &lt; 0.7] &lt;- 0
+image(as.matrix.csr(A))</code></pre>
+<p><img src="/post/EN/2018-06-01-play-with-sparse-matrix_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/r-tricks/">R-tricks</a>
+  
+</div>
+
+
+
+
+    
+    
+    <div class="article-widget">
+      <div class="hr-light"></div>
+      <h3>Related</h3>
+      <ul>
+        
+        <li><a href="/post/en/get-data-from-website/">Get Data from Website</a></li>
+        
+      </ul>
+    </div>
+    
+
+    
+    <div class="article-widget">
+      <div class="post-nav">
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/post/en/get-data-from-website/" rel="prev">Get Data from Website</a>
+  </div>
+  
+</div>
+
+    </div>
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/tex.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML" integrity="sha512-tOav5w1OjvsSJzePRtt2uQPFwBoHt1VZcUq8l8nm5284LEKE9FSJBQryzMBzHxY5P0zRdNqEcpLIRVYFNgu1jw==" crossorigin="anonymous"></script>
+    
+    
+
+  </body>
+</html>
+

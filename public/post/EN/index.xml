@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Yutong Dai</title>
+    <link>/post/en/</link>
+    <description>Recent content in Posts on Yutong Dai</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="/post/en/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Play with Sparse Matrix</title>
+      <link>/post/en/play-with-sparse-matrix/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/play-with-sparse-matrix/</guid>
+      <description>Motivation Solution Slicing Basic linear algebra operations    Motivation Recently, I have to deal with matrices with sparsity structures. If I coerce them using the as.matrix function, they consume my RAM wildly. So I turn to the package SparseM for possible solutions.
+What I want to do are,
+Performe basic linear algebra operations on sparse matrices, mainly including multiplication, transpose, and etc. Slice rows or columns by their indices.</description>
+    </item>
+    
+    <item>
+      <title>Get Data from Website</title>
+      <link>/post/en/get-data-from-website/</link>
+      <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/get-data-from-website/</guid>
+      <description>Motivation Solutions Download Uncompress data files Load libsvm format data Complete Code    Motivation I’m using the datasets libsvm to do some numerical experiments. The sizes of datasets, like epsilon1, are of severalGBs. So it is hard to play with the data on my desktop. I am lucky to run the experiments on a server. So my workflow is:
+Download datasets on the server. Preprocess datastes. Run experiments.</description>
+    </item>
+    
+    <item>
+      <title>Bookdown Syntax</title>
+      <link>/post/en/bookdown-syntax/</link>
+      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/bookdown-syntax/</guid>
+      <description>Math Equations with labels    Following contents are adapeted from Yihui Xie’s bookdown
+ Math Equations with labels My personal preference is to use algin and equation for long or complicated and simple expressions respectively. The slight differeces, compared with the \(\bf \LaTeX\) syntax, are the way we assign labels to expressions. Instead of using \label{foo}, in blogdown (bookdown), it is recommend to use the syntax (\#eq:foo).</description>
+    </item>
+    
+  </channel>
+</rss>

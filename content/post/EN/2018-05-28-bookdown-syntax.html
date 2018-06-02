@@ -1,0 +1,52 @@
+---
+title: Bookdown Syntax
+author: Yutong Dai
+date: '2018-05-28'
+categories:
+  - R-writing
+tags:
+  - bookdown
+slug: bookdown-syntax
+output:
+  blogdown::html_page:
+    toc: yes
+summary: Introduce basic `bookdown` syntax for scientific articles.
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#math-equations-with-labels">Math Equations with labels</a></li>
+</ul>
+</div>
+
+<blockquote>
+<p>Following contents are adapeted from Yihui Xie’s <a href="https://bookdown.org/yihui/bookdown/components.html">bookdown</a></p>
+</blockquote>
+<div id="math-equations-with-labels" class="section level1">
+<h1>Math Equations with labels</h1>
+<p>My personal preference is to use <code>algin</code> and <code>equation</code> for long or complicated and simple expressions respectively. The slight differeces, compared with the <span class="math inline">\(\bf \LaTeX\)</span> syntax, are the way we assign labels to expressions. Instead of using <code>\label{foo}</code>, in blogdown (bookdown), it is recommend to use the syntax <code>(\#eq:foo)</code>.</p>
+<p>Following are two simple examples. Use</p>
+<pre><code>\begin{equation}
+  f(k) = \binom{n}{k} p^k(1-p)^{n-k}
+  (\#eq:binom)
+\end{equation}</code></pre>
+<p>to produce</p>
+<span class="math display" id="eq:binom">\[\begin{equation}
+  f(k) = \binom{n}{k} p^k(1-p)^{n-k}
+  \tag{1}
+\end{equation}\]</span>
+<p>Similarly, we can use &amp; to algin equations.</p>
+<pre><code>\begin{align}
+&amp; f(x;\mu,\sigma) = \frac{1}{\sqrt{2\pi}}\exp(\frac{1}{2\sigma^2}(x-\mu)^2) (\#eq:gaussian)\\
+&amp; f(x;\lambda) = \lambda e^{-\lambda}I(x&gt;0) (\#eq:exp)
+\end{align}</code></pre>
+<span class="math display" id="eq:exp" id="eq:gaussian">\[\begin{align}
+&amp; f(x;\mu,\sigma) = \frac{1}{\sqrt{2\pi}}\exp(\frac{1}{2\sigma^2}(x-\mu)^2) \tag{2}\\
+&amp; f(x;\lambda) = \lambda e^{-\lambda}I(x&gt;0) \tag{3}
+\end{align}\]</span>
+<p>For HTML output, bookdown can only number the equations with labels. Please make sure equations without labels are not numbered by either using the <code>equation*</code> environment or adding <code>\nonumber</code> or <code>\notag</code> to your equations. The same rules apply to other math environments, such as eqnarray, gather, align, and so on (e.g., you can use the align* environment).</p>
+<p>To refer to a equation, please use <code>\@ref(eq:label)</code>. For example,</p>
+<pre><code>\@ref(eq:binom)</code></pre>
+<p>can produce its index <a href="#eq:binom">(1)</a>.</p>
+</div>
