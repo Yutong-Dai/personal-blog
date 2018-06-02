@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Yutong Dai on Yutong Dai</title>
+    <title>Yutong Dai | 戴宇童 on Yutong Dai | 戴宇童</title>
     <link>/</link>
-    <description>Recent content in Yutong Dai on Yutong Dai</description>
+    <description>Recent content in Yutong Dai | 戴宇童 on Yutong Dai | 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -64,19 +64,13 @@ A.csr&lt;/code&gt;&lt;/pre&gt;
 ## Slot &amp;quot;dimension&amp;quot;:
 ## [1] 4 4&lt;/code&gt;&lt;/pre&gt;
 &lt;blockquote&gt;
-&lt;blockquote&gt;
 &lt;p&gt;ra: a real array of non-zero elements containing the non-zero elements of A, stored in row order. Thus, if i &amp;lt; j, all elements of row i precede elements from row j. The order of elements within the rows is immaterial.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;ja: an integer array of non-zero elements containing the column indices of the elements stored in ra.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;ia: an integer array of n+1 elements containing pointers to the beginning of each row in the arrays ra and ja. Thus ia[i] indicates the position in the arrays ra and ja where the ith row begins. The last (n + 1)st element of ia indicates where the n + 1 row would start, if it existed.&lt;/p&gt;
-&lt;/blockquote&gt;
 &lt;/blockquote&gt;
 &lt;div id=&#34;slicing&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Slicing&lt;/h2&gt;
@@ -163,7 +157,7 @@ image(as.matrix.csr(A))&lt;/code&gt;&lt;/pre&gt;
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/chinese-test/</guid>
-      <description>&lt;p&gt;这是一个中文测试。&lt;/p&gt;
+      <description>&lt;p&gt;这是一个中文测试,成功了&lt;/p&gt;
 </description>
     </item>
     
@@ -316,26 +310,6 @@ image(as.matrix.csr(A))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;\@ref(eq:binom)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;can produce its index &lt;a href=&#34;#eq:binom&#34;&gt;(1)&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>A Person Re-Identification System For Mobile Devices</title>
-      <link>/publication/person-re-identification/</link>
-      <pubDate>Tue, 01 Sep 2015 00:00:00 +0800</pubDate>
-      
-      <guid>/publication/person-re-identification/</guid>
-      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Mobile visual clothing search</title>
-      <link>/publication/clothing-search/</link>
-      <pubDate>Mon, 01 Jul 2013 00:00:00 +0800</pubDate>
-      
-      <guid>/publication/clothing-search/</guid>
-      <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
     

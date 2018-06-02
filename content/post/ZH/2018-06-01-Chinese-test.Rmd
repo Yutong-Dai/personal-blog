@@ -3,6 +3,7 @@ title: 中文测试
 author: Yutong Dai
 date: '2018-06-01'
 slug: Chinese-test
+draft: true
 categories:
   - R-Programming
 tags:
@@ -13,4 +14,4 @@ output:
 summary: 中文测试
 ---
 
-这是一个中文测试。
+这是一个中文测试,成功了

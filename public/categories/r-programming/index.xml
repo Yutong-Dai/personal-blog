@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>R-Programming on Yutong Dai</title>
+    <title>R-Programming on Yutong Dai | 戴宇童</title>
     <link>/categories/r-programming/</link>
-    <description>Recent content in R-Programming on Yutong Dai</description>
+    <description>Recent content in R-Programming on Yutong Dai | 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -29,7 +29,7 @@ Performe basic linear algebra operations on sparse matrices, mainly including mu
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/chinese-test/</guid>
-      <description>这是一个中文测试。</description>
+      <description>这是一个中文测试,成功了</description>
     </item>
     
     <item>
