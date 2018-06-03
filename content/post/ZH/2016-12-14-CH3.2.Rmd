@@ -1,0 +1,205 @@
+---
+title: "Lagrange乘子理论(2)"
+author: Yutong Dai
+date: '2016-12-14'
+categories:
+  - convex optimization
+tags:
+  - Lagrange乘子
+slug: lag2
+output:
+  blogdown::html_page:
+    toc: yes
+summary: 该系列posts是笔者学习Dimitri .P Bertsekas所写的 Nonlinear Programming 2ed 中文版时整理的笔记。第三章Lagrange乘子理论内容涉及到等式约束优化问题及不等式约束优化问题。本文讨论不等式约束优化问题中的KKT条件。
+---
+
+## 不等式约束优化问题
+
+本节我们考虑优化问题
+
+$$
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+$$
+
+其中 $f: R^n\;\vert \rightarrow R$,  $h_i: R^n\;\vert \rightarrow R$,$g_j: R^n\;\vert \rightarrow R$均是连续可微的。为了记号简洁性，我们引入向量值函数$h=(h_1,...,h_m)^T$,即$h: R^n\;\vert \rightarrow R^m$与$g=(g_1,...,g_r)^T$,即$g: R^n\;\vert \rightarrow R^r$。 从而约束条件变为了 $h(x)=0,g(x)\leq 0$
+
+###  Karush-Kuhn-Tucker 必要条件
+
+#### 直观分析
+一个直观的想法是，我们尽可能的扔掉一些不等式约束。事实上，若一些不等式约束不起作用（即局部最小值点在约束集的内部取得），则这些不等式约束可以忽略。举个简单的例子，考虑如下的岭回归问题
+
+$$
+\mathop{min}_\beta\qquad  \vert \vert Y-X\beta\vert \vert ^2\\
+\text{subject to:}\quad  \vert \vert \beta\vert \vert \leq t
+$$
+
+当$t$足够大时，则该不等式约束不起作用（见下图）。从而我们引出**积极的不等式约束集**的概念。
+![Snip20161218_3](http://ogfa13jyv.bkt.clouddn.com/Snip20161218_3.png)
+
+
+对任意任意的可行点$x$, **积极的不等式约束集**定义为：
+
+$$A(x)=\{j\big\vert g_j(x)=0, j=1,2,...,r\}$$
+
+如果$j\notin A(x)$，则我们称第j个约束是非积极地。
+
+正如上面所讨论的，若$x^*$是优化问题的局部最小值点，那么也是该问题去掉了非积极约束后新问题的局部最小值点。（下图还是以岭回归为例做一个简要说明，表明非等式约束条件不起作用。）
+![Snip20161218_4](http://ogfa13jyv.bkt.clouddn.com/Snip20161218_4.png)
+
+#### KKT 必要条件
+下面我们来严格的叙述下上述的结论，首先给出一个不等式版本的**正则性条件**：
+称一个可行解$$x^*$$是正则的，若在该点梯度构成的向量组 $$\{h_i(x^*),g_j(x^*)\big\vert  i=1,2,...,m j\in A(x^*)\}$$ 线性无关
+
+*KKT 必要性条件*
+假设$$x^*$$是满足下面问题的局部最小值点且是正则的， 
+
+$$
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+$$
+
+其中 $f: R^n\;\vert \rightarrow R$,  $h_i: R^n\;\vert \rightarrow R$,$g_j: R^n\;\vert \rightarrow R$均是连续可微的。那么存在唯一的Lagrange乘子$$\lambda^*=(\lambda_1^*,...,\lambda_m^*),\mu^*=(\mu_1^*,...,\mu_r^*)$$使得Lagrange函数$L(x,\lambda,\mu)=f(x)+\lambda^Th(x)+\mu^Th(x)$关于$x$的偏导数为0,即
+
+$$
+\nabla_x L(x^*,\lambda^*,\mu^*)=0\\
+\mu_j\geq 0\quad j=1,...,r\\
+\mu_j=0\quad j\notin A(x^*)
+$$
+
+其中$A(x^*)$是积极的不等式约束集。如果进一步$f,h,g$二次连续可微，则对所有满足
+
+$$y^T\nabla h_i(x^*)=0,\forall i=1,2..,m\qquad \nabla y^Tg_j(x^*)=0,j\in A(x^*)$$
+
+的y，我们都有
+
+$$y^T\nabla^2_{xx} L(x^*,\lambda^*,\mu^*)y\geq 0 $$
+
+**Remark**
+
+1. 关于$\mu_j\geq 0$有如下几何解释
+	![Snip20161219_6](http://ogfa13jyv.bkt.clouddn.com/Snip20161219_6.png)
+2. 在实际使用该定理的时候，我们利用一阶必要性条件
+	
+	$$
+\nabla_x L(x^*,\lambda^*,\mu^*)=0\\
+	$$
+
+	找到待选点。然后再检查每个不等式是不是积极约束。
+	![Snip20161219_7](http://ogfa13jyv.bkt.clouddn.com/Snip20161219_7.png)
+	![Snip20161219_8](http://ogfa13jyv.bkt.clouddn.com/Snip20161219_8.png)
+
+3. 我们称$$\mu_j=0\quad j\notin A(x^*)$$或者等价的$$\mu_j^*g_j(x^*)=0$$为互补松弛条件。
+
+#### 转换为等式约束处理
+换个角度看待我们的优化问题，如果我们引入一系列的辅助变量，则可以利用第一节提到的等式约束最优性条件。具体做法是引入辅助变量$z_1,...,z_r$并考虑如下优化问题
+
+$$
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)+z_j^2=0, j=1,2,...,r
+$$
+
+若$$x^*$$是原问题的局部最小值，那么$$(x^*,z^*)$$是该问题的局部最小值，其中$$z^*=(z_1^*,...,z_r^*)$$且$$z_j^*=\sqrt{-g_j(x^*)}$$。显然当$$x^*$$是原问题的正则点当且仅当$$(x^*,z^*)$$是该问题的正则点。对于该问题我们利用等式约束版本的一阶最优性条件，我们有
+
+$$
+\nabla_x L(x^*,\lambda^*,\mu^*)=0 \qquad\qquad\\
+2\mu_j^*z_j^*=0,\quad j=1,2,...,r
+$$
+
+由于对于$j\notin A(x^*)$，有$z_j^*>0$,故最后一族等式等价于
+
+$$\mu_j^*=0,\quad j\notin A(x^*)$$
+
+到此，为了证明KKT的必要性条件，我们还要证明$\mu_j\geq 0$以及二阶必要性条件。首先利用等式约束的二阶必要性条件，我们有
+
+$$
+(x,z)^T
+\begin{pmatrix}
+\nabla_{xx}^2L(x^*,\lambda^*,\mu^*) &      0                &     0            & \dots     &         0\\
+                            0                               & 2\mu_1^*       &     0            & \dots     &         0\\
+                            0                               &       0               &  2\mu_2^* & \dots     &         0\\
+                            \vdots                       &   \vdots           &   \vdots     &  \vdots  &  \vdots\\
+                            0                               &       0               &      0           &  \dots   &  2\mu_r^*\\
+\end{pmatrix}
+\begin{pmatrix}
+x\\
+z
+\end{pmatrix}\geq 0\qquad (++)
+$$
+
+其中$x\in R^n,z\in R^r$满足
+
+$$x^T\nabla h_i(x^*)=0\quad x^T\nabla g_j(x^*)+2z_j^*z_j=0\quad i=1,...,m,j=1,..,r$$
+
+选取满足如下的$(x,z)$
+
+$$
+z_j=\begin{cases}
+		\qquad 0\quad,  j\in A(x^*)\\
+		-\frac{x^T\nabla g_j(x^*)}{2z_j^*},j\notin A(x^*)
+	\end{cases}\\
+x^T\nabla h_i(x^*)=0\quad x^T\nabla g_j(x^*)=0
+$$
+
+
+* 容易检验，这样定义的$(x,z_j)$满足$$x^T\nabla g_j(x^*)+2z_j^*z_j=0$$
+* 由$z_j$定义以及$$\mu_j^*=0,j\notin A(x^*)$$,则对所有的$j$,我们有$$\mu_j^*z_j=0$$.
+
+将上述定义的$(x,z)$代入(++)即可证明:
+
+$$x^T\nabla_{xx}^2L(x^*,\lambda^*,\mu^*)x\geq 0$$
+
+至于待证的$\mu_j\geq 0$，只需考虑$j\in A(x^*)$的情形,这时定义$(x,z)$如下:$x=0,z_j\neq 0$对任意$k\neq j$,$z_k=0$。
+
+* 该定义满足$$x^T\nabla g_j(x^*)+2z_j^*z_j=0$$
+* 利用(++)得到$$\mu_j\geq 0,\forall j\in A(x^*)$$
+
+### 充分条件
+#### 二阶充分条件
+ 假定$f: R^n\;\vert \rightarrow R$,  $h_i: R^n\;\vert \rightarrow R$,$g_j: R^n\;\vert \rightarrow R$均是连续且二次可微的,并且$$x^*\in R^n,\lambda^*\in R^m,\mu^*\in R^r$$满足
+ 
+$$
+\nabla_x (x^*,\lambda^*,\mu^*)=0 \qquad  h(x^*)=0 \qquad g(x^*)\leq 0\\
+\mu_j^*> 0, j\in A(x^*) \quad \mu_j^*=0,j\notin A(x^*)\\
+y^T\nabla_{xx}^2L(x^*,\lambda^*,\mu^*)y\geq 0 \qquad\qquad\quad
+$$
+
+其中$y\neq 0$并且使得
+
+$$y^T\nabla h_i(x^*)=0,\forall i=1,...,m \quad y^T\nabla g_j(x^*)=0,\forall j\in A(x^*)$$
+
+那么$$x^*$$是$f$满足约束条件下的严格局部最小值点。
+
+**Remark**
+
+1. 定理的证明可以将不等式约束换成等式约束，然后利用等式约束版本的二阶充分性条件即可证明。
+2. 条件$$\mu_j^*> 0, j\in A(x^*)$$被称作**严格的互补松弛条件**
+
+#### 一般充分条件
+
+到目前为止，我们讨论的二阶条件都需要二阶导数存在的假设，在研究无约束优化问题时，我们知道一阶最优性条件加上凸性即可保证最优解的充分性。带约束的问题，也存在类似的定理。事实上，我们甚至不需要凸性以及可微性的假设，而只需要一个最小化Lagrange函数的条件。
+
+**一般充分性条件**
+
+考虑如下优化问题
+
+$$
+\text{minimize}\; f(x)\qquad\quad\qquad \\
+\text{subject to}\; x\in X \qquad\qquad\\
+\qquad\qquad\qquad g_j(x)\leq0, j=1,2,...,r
+$$
+
+其中$f,g_j$定义在$$R^n$$上的实值函数,$X$是给定的$$R^n$$的子集。假设$$x^*$$是该问题的一个可行解,$$\mu^*=(\mu_1^*,...,\mu_r^*)$$是给定的向量，并且满足:
+
+$$
+\mu_j\geq 0\quad j=1,...,r\\
+\mu_j=0\quad j\notin A(x^*)
+$$
+
+而且$$x^*$$是Lagrange函数$L(x,\mu^*)$在$X$上的最小值，则$$x^*$$是该问题的全局最小值。
+![Snip20161219_13](http://ogfa13jyv.bkt.clouddn.com/Snip20161219_13.png)
+
+

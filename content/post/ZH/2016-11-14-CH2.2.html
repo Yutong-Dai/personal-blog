@@ -1,0 +1,108 @@
+---
+title: "约束优化(2)"
+author: Yutong Dai
+date: '2016-11-14'
+categories:
+  - convex optimization
+tags:
+  - 约束优化
+slug: con2
+output:
+  blogdown::html_page:
+    toc: yes
+summary: 该系列posts是笔者学习Dimitri .P Bertsekas所写的 Nonlinear Programming 2ed 中文版时整理的笔记。第二章带约束优化内容涉及到约束优化问题的最优性条件与可行方向法求解凸集上的优化问题。本文讨论可行方向法求解凸集上的优化问题。
+---
+
+
+<div id="TOC">
+<ul>
+<li><a>可行方向法</a><ul>
+<li><a>下降方向</a></li>
+<li><a>步长准则</a></li>
+<li><a>寻找初始可行点</a></li>
+<li><a>收敛性</a></li>
+<li><a href="#case">Case：条件梯度法</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div class="section level2">
+<h2>可行方向法</h2>
+<p>下面我们讨论，如何求解第一节中提到的优化问题。</p>
+<p><span class="math display">\[\mathop{min}_{x\in X}\qquad f(x)\]</span></p>
+<p>其中</p>
+<ul>
+<li>X是非空、闭凸集</li>
+<li>函数 <span class="math inline">\(f\)</span> 是连续可微的</li>
+</ul>
+<p>我们这里讨论的方法平行于不带约束的优化问题：即沿着函数下降的方向产生一个可行点列<span class="math inline">\(\{x_k\}\)</span>。</p>
+<div class="section level3">
+<h3>下降方向</h3>
+<ul>
+<li><p>可行方向：给定可行点 <span class="math inline">\(x\)</span>, 在<span class="math inline">\(x\)</span>处的一个可行方向是指一个向量<span class="math inline">\(d\)</span>,对所有充分小的正数<span class="math inline">\(a\)</span>,成立<span class="math inline">\(ad+x\in X\)</span></p></li>
+<li><p>可行方向法： 从初始可行方向开始，然后按照类似梯度方法的形式产生下述迭代列:</p>
+<p><span class="math display">\[x_{k+1}=x_k+a_kd_k\]</span></p>
+<p>其中<span class="math inline">\(\{d_k\}\)</span>既是可行方向，也是下降方向，即</p>
+<p><span class="math display">\[\forall k, \nabla f(x_k)^Td_k\leq 0\]</span></p>
+<p>同时<span class="math inline">\(a_k\)</span>是正的步长，使得有</p>
+<p><span class="math display">\[x_k+a_kd_k\in X\\ f(x_k+a_kd_k)&lt; f(x_k)\]</span></p></li>
+</ul>
+<p><strong>Remark</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>为了保证产生的迭代序列都是可行点，我们要求<span class="math inline">\(x_k+ad_k\in X\)</span>, 因此存在异于<span class="math inline">\(x_k\)</span>的点<span class="math inline">\(\bar x_k\in X\)</span>,使得<span class="math inline">\(x_k+ad_k=\bar x_k\)</span>,因此我们可以改写<span class="math inline">\(d_k=r(\bar x_k-x_k)\)</span>,进而我们改写迭代式为</p>
+<p><span class="math display">\[x_{k+1}=x_k+a_k(\bar x_k-x_k)\]</span></p>
+<p>其中对于所有的k，<span class="math inline">\(a_k\in (0,1],\bar x_k\in X\)</span>。 限制<span class="math inline">\(a_k\in (0,1]\)</span>， 是为了保证<span class="math inline">\(x_{k+1}\)</span>在<span class="math inline">\(x_k\)</span>与<span class="math inline">\(\bar x_{k}\)</span>的连线上，进而利用<span class="math inline">\(X\)</span>的凸性保证<span class="math inline">\(x_{k+1}\in X\)</span></p></li>
+<li><p>按照改写方式产生的序列<span class="math inline">\(\{x_k\}\)</span>中的点<span class="math inline">\(x_k\)</span>如果不是驻点，则一定能够找到<span class="math inline">\(\bar x_k\in X\)</span>满足</p>
+<p><span class="math display">\[(\bar x_k-x_k)\nabla f(x_k)&lt;0\]</span></p></li>
+</ol>
+<p>在后面的分析中，我们总是假设可行方向形如<span class="math inline">\(d_k=\bar x_k-x_k\)</span>。因此，可行方向法可以看做是交替寻找合适的<span class="math inline">\(\bar x_k\)</span>与<span class="math inline">\(a_k\)</span>的算法。</p>
+</div>
+<div class="section level3">
+<h3>步长准则</h3>
+<p><strong>有限最小化准则</strong></p>
+<p><span class="math display">\[a_k=\mathop{argmin}_{a\in [0,1]} f(x_k+a(\bar x_k-x_k))\]</span></p>
+<p><strong>Armijo准则</strong></p>
+<p>给定<span class="math inline">\(\beta&gt;0,\sigma&gt;0\)</span>,其中<span class="math inline">\(\beta\in (0,1),\sigma\in (0,1)\)</span>,并且假设<span class="math inline">\(a_k=\beta^{m_k}\)</span>，其中<span class="math inline">\(m_k\)</span>是使得下式成立的第一个非负整数<span class="math inline">\(m\)</span>,</p>
+<p><span class="math display">\[f(x_k)-f(x_k+\beta^{m}(\bar x_k-x_k))\geq -\sigma\beta^m\nabla f(x_k)(\bar x_k-x_k)\]</span></p>
+</div>
+<div class="section level3">
+<h3>寻找初始可行点</h3>
+<p>我们考虑利用人造变量的方法构造初始可行点, 我们要求该人工变量非负并且在目标函数中具有很大的惩罚系数，从而保证去在最优解中为0。特别地，我们考虑两类约束问题:</p>
+<p>第一类，等式约束:</p>
+<p><span class="math display">\[\mathop{min}\;f(x) \qquad\qquad\qquad\qquad\qquad\qquad\qquad\\
+subject\; to\; a_i^Tx=b_i\qquad i=1,2,..,m,\quad x\geq 0
+\]</span></p>
+<p>其中<span class="math inline">\(a_i\)</span>和<span class="math inline">\(b_i\)</span>分别是<span class="math inline">\(R^n\)</span>中的向量和给定的常数。于是上述问题可以被如下问题所替代，</p>
+<p><span class="math display">\[\mathop{min}\;f(x)+cy \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\\
+subject\; to\; a_i^Tx+(b_i-\sum_{j=1}^na_{i,j})y=b_i\qquad i=1,2,..,m,\quad x,y\geq 0\]</span></p>
+<p>其中c是一个很大的惩罚系数，<span class="math inline">\(a_{i,j}\)</span>是<span class="math inline">\(a_i\)</span>的第j个分量。向量<span class="math inline">\((x_0,y_0)=(\bf{1_n},1)\)</span>是一个可行解。</p>
+<p>第二类，不等式约束:</p>
+<p><span class="math display">\[\mathop{min}\; f(x)\qquad\qquad\qquad\qquad\qquad\qquad\qquad\\
+subject\; to\; a_i^Tx\leq b_i\qquad  i=1,2,..,m,\quad x\geq 0
+\]</span></p>
+<p>同样可以转化成</p>
+<p><span class="math display">\[\mathop{min}\; f(x)+cy \qquad\qquad\qquad\qquad\qquad\qquad\qquad\\
+subject\; to\; a_i^Tx-y\leq b_i\qquad i=1,2,..,m,\quad x,y\geq 0\]</span></p>
+<p>其中c是一个很大的惩罚系数。对原问题任何不可行的向量<span class="math inline">\(x_0\)</span>,向量<span class="math inline">\((x_0,y_0)\)</span>均是新问题的可行解，其中</p>
+<p><span class="math display">\[y_0=\mathop{max}_{i}\{a_i^Tx_0-b_i\}\]</span></p>
+</div>
+<div class="section level3">
+<h3>收敛性</h3>
+<p>可行方向法的收敛性分析在最小化步长准则或者Armijo准则下，和Chapter1中的梯度方法分析是平行的。同样我们假设方向序列<span class="math inline">\(\{d_k=\bar x_k-x_k\}\)</span>与迭代序列<span class="math inline">\(\{x_k\}\)</span>是梯度相关的。我们有如下结论</p>
+<p>设<span class="math inline">\(\{x_k\}\)</span>是由可行方法<span class="math inline">\(x_{k+1}=x_{k}+a_kd_k\)</span>产生的序列,假设<span class="math inline">\(\{d_k\}\)</span>是梯度相关的并且<span class="math inline">\(a_k\)</span>的选取是根据Armijo准则或者最小化准则选取的，那么<span class="math inline">\(\{x_k\}\)</span>的每一个极限点(若存在)都是驻点。</p>
+</div>
+<div id="case" class="section level3">
+<h3>Case：条件梯度法</h3>
+<div class="section level4">
+<h4>方法</h4>
+<p>为了找到合适的<span class="math inline">\(\bar x_k\)</span>,满足<span class="math inline">\(\nabla f(x_k)^T(\bar x_k-x_k)&lt; 0\)</span>， 在前面的讨论中，当<span class="math inline">\(X\)</span>是紧集时，我们知道这样的<span class="math inline">\(\bar x_k\)</span>是一定存在的，并且为了使得函数下降得尽可能多，我们考虑如下子优化问题</p>
+<p><span class="math display">\[\mathop{min}_{x\in X}\nabla f(x_k)^T(x-x_k)\]</span></p>
+<p>利用该问题的最优解 <span class="math inline">\(\bar x_k=\mathop{agrmin}_{x\in X} \nabla f(x_k)^T(x-x_k)\)</span> 可以得到新的下降方向。</p>
+<p><strong>Remark</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>该优化问题的几何直观非常明确，就是寻找<span class="math inline">\(\bar x_{k}\)</span>在当前迭代带点<span class="math inline">\(x_k\)</span>的负梯度方向<span class="math inline">\(-\nabla f(x_k)\)</span>投影最长的点。 <img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161121_3.png" /></p></li>
+<li><p>考虑计算的实用性，我们总是希望该优化问题比原问题求解更加容易。一个典型的例子是，当<span class="math inline">\(f\)</span>是非线性函数，<span class="math inline">\(X\)</span>为线性等式及不等式构成的约束的时候，该子问题是线性规划，容易求解。</p></li>
+</ol>
+</div>
+</div>
+</div>

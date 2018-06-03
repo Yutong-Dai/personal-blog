@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>约束优化 on Yutong Dai | 戴宇童</title>
+    <link>/tags/%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96/</link>
+    <description>Recent content in 约束优化 on Yutong Dai | 戴宇童</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Mon, 14 Nov 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>约束优化(2)</title>
+      <link>/post/zh/con2/</link>
+      <pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/con2/</guid>
+      <description>可行方向法 下降方向 步长准则 寻找初始可行点 收敛性 Case：条件梯度法 可行方向法 下面我们讨论，如何求解第一节中提到的优化问题。 \[\mathop{min}_{x\in X}\qquad f(x)\] 其中 X是非空</description>
+    </item>
+    
+    <item>
+      <title>约束优化(1)</title>
+      <link>/post/zh/con1/</link>
+      <pubDate>Mon, 07 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/con1/</guid>
+      <description>约束优化问题 最优解的存在性 最优解的充要条件 凸集上的投影 这一章我们考虑带约束的优化问题 \[\mathop{min}_{x\in X}\qquad f(x)\] 其中 X是非空凸集 函数 \(f\) 是连续可微的 另外我们称\(X</description>
+    </item>
+    
+  </channel>
+</rss>

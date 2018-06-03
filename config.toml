@@ -35,6 +35,7 @@ defaultContentLanguageInSubdir = false
 # Get last modified date for content from Git?
 enableGitInfo = true
 
+post = "/:year/:month/:slug"
 [outputs]
   home = [ "HTML", "CSS", "RSS" ]
   section = [ "HTML", "RSS" ]
@@ -265,18 +266,8 @@ enableGitInfo = true
 [[menu.main]]
   name = "Posts"  
   identifier = "posts"
-  #url = "#post"
   weight = 2
-
-[[menu.main]]
-  name = "EN"
-  parent = "posts"
-  url = "/post/EN/"
-
-[[menu.main]]
-  name = "中文"
-  parent = "posts"
-  url = "/post/ZH/"
+  url = "#posts"
 
 [[menu.main]]
   name = "Projects"
@@ -290,8 +281,13 @@ enableGitInfo = true
 
 [[menu.main]]
   name = "Resume"
-  url = "./static/files/pdf/resume.pdf"
+  url = "./files/pdf/resume.pdf"
   weight = 5
+
+[[menu.main]]
+  name = "Resources"
+  url = "#resources"
+  weight = 6
   
 #[[menu.main]]
   #name = "Publications"

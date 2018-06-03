@@ -13,12 +13,93 @@
     
     
     <item>
-      <title>中文测试</title>
-      <link>/post/zh/chinese-test/</link>
-      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      <title>Lagrange乘子理论(3)</title>
+      <link>/post/zh/lag3/</link>
+      <pubDate>Wed, 21 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/zh/chinese-test/</guid>
-      <description>这是一个中文测试,成功了</description>
+      <guid>/post/zh/lag3/</guid>
+      <description>Beyond KKT Fritz-John 最优性条件 从Fritz-John 条件到 KKT 条件 凸集约束的情形 Beyond KKT 在前面的讨论中，我们看到最优点的正则性对Lagrange乘子的存在性是必</description>
+    </item>
+    
+    <item>
+      <title>Lagrange乘子理论(2)</title>
+      <link>/post/zh/lag2/</link>
+      <pubDate>Wed, 14 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/lag2/</guid>
+      <description>不等式约束优化问题 Karush-Kuhn-Tucker 必要条件 充分条件 不等式约束优化问题 本节我们考虑优化问题 \[ \text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\ \text{subject to}\; h_i(x)=0,i=1,2,...,m\\ \qquad\qquad g_j(x)\leq 0, j=1,2,...,r \] 其中 \(f: R^n\;\vert \rightarrow R\), \(h_i: R^n\;\vert \rightarrow R\),\(g_j: R^n\;\vert \rightarrow R\)均是连续可微的</description>
+    </item>
+    
+    <item>
+      <title>Lagrange乘子理论(1)</title>
+      <link>/post/zh/lag1/</link>
+      <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/lag1/</guid>
+      <description>等式约束优化问题 最优解的必要条件 最优解充分条件 通过引入一些辅助变量，即Lagrange乘子，我们可以利用他们： 描述最优解的特性 灵敏度分析 对自</description>
+    </item>
+    
+    <item>
+      <title>约束优化(2)</title>
+      <link>/post/zh/con2/</link>
+      <pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/con2/</guid>
+      <description>可行方向法 下降方向 步长准则 寻找初始可行点 收敛性 Case：条件梯度法 可行方向法 下面我们讨论，如何求解第一节中提到的优化问题。 \[\mathop{min}_{x\in X}\qquad f(x)\] 其中 X是非空</description>
+    </item>
+    
+    <item>
+      <title>约束优化(1)</title>
+      <link>/post/zh/con1/</link>
+      <pubDate>Mon, 07 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/con1/</guid>
+      <description>约束优化问题 最优解的存在性 最优解的充要条件 凸集上的投影 这一章我们考虑带约束的优化问题 \[\mathop{min}_{x\in X}\qquad f(x)\] 其中 X是非空凸集 函数 \(f\) 是连续可微的 另外我们称\(X</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(5)</title>
+      <link>/post/zh/uncon5/</link>
+      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon5/</guid>
+      <description>共轭方向法 共轭方向法求解二次问题 共轭方向法求解非二次问题 共轭方向法 在前面的讨论中我们看到了，由于最速下降法在矩阵条件数大的情况下，收敛速率可</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(4)</title>
+      <link>/post/zh/uncon4/</link>
+      <pubDate>Wed, 26 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon4/</guid>
+      <description>牛顿法与其变形 局部收敛性 全局收敛性 Gauss-Newtown 法 牛顿法与其变形 之前我们讨论了梯度方法的收敛性与收敛速率。我们知道最速下降法是梯度方法中迭代形式最简单，</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(3)</title>
+      <link>/post/zh/uncon3/</link>
+      <pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon3/</guid>
+      <description>收敛性分析 极限点的存在性问题 迭代终止条件 收敛性结论 收敛速率分析 局部分析方法 Case Study-二次函数情形 Case Study-非二次函数与奇异的情形 收敛</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(2)</title>
+      <link>/post/zh/uncon2/</link>
+      <pubDate>Wed, 28 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon2/</guid>
+      <description>梯度方法 直观分析 下降方向 步长准则 梯度方法 \[outline\begin{cases} 下降方向选择\begin{cases} 最速下降\\ 牛顿法\\ \end{cases}\\\\ 步长的选择\begin{cases}</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(1)</title>
+      <link>/post/zh/uncon1/</link>
+      <pubDate>Wed, 21 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon1/</guid>
+      <description>最优性条件 最优解的存在性 最优性条件的直观分析 为什么需要最优性条件 最优性条件 我们讨论最优性条件的最直接的目的是为了知道满足什么样条件的点就是满</description>
     </item>
     
   </channel>

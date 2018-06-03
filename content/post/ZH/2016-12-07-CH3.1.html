@@ -1,0 +1,146 @@
+---
+title: "Lagrange乘子理论(1)"
+author: Yutong Dai
+date: '2016-12-07'
+categories:
+  - convex optimization
+tags:
+  - Lagrange乘子
+slug: lag1
+output:
+  blogdown::html_page:
+    toc: yes
+summary: 该系列posts是笔者学习Dimitri .P Bertsekas所写的 Nonlinear Programming 2ed 中文版时整理的笔记。第三章Lagrange乘子理论内容涉及到等式约束优化问题及不等式约束优化问题。本文讨论等式约束优化问题。
+---
+
+
+<div id="TOC">
+<ul>
+<li><a>等式约束优化问题</a><ul>
+<li><a>最优解的必要条件</a></li>
+<li><a>最优解充分条件</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>通过引入一些辅助变量，即Lagrange乘子，我们可以利用他们：</p>
+<ul>
+<li>描述最优解的特性</li>
+<li>灵敏度分析</li>
+<li>对自变量变化引起的目标函数的一阶导数进行定量描述</li>
+</ul>
+<p>本章将沿着<code>惩罚法</code>和<code>可行方向法</code>两个角度进行讨论。</p>
+<div class="section level2">
+<h2>等式约束优化问题</h2>
+<div class="section level3">
+<h3>最优解的必要条件</h3>
+<p>本节我们考虑优化问题：</p>
+<p><span class="math display">\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\]</span></p>
+<p>其中 <span class="math inline">\(f: R^n\;\vert \rightarrow R\)</span>, <span class="math inline">\(h_i: R^n\;\vert \rightarrow R\)</span>均是连续可微的。为了记号简洁性，我们引入向量值函数<span class="math inline">\(h=(h_1,...,h_m)^T\)</span>,即<span class="math inline">\(h: R^n\;\vert \rightarrow R^m\)</span>。 从而约束条件变为了 <span class="math inline">\(h(x)=0\)</span></p>
+<p>Lagrange 理论解决上述优化问题的办法是，通过引入Lagrange乘子<span class="math inline">\(\lambda=(\lambda_1,...,\lambda_m)^T\)</span>，构造Lagrange函数</p>
+<p><span class="math display">\[L(x,\lambda)=f(x)+\lambda^T h(x)\]</span></p>
+<p>转而考察<span class="math inline">\(L(x,\lambda)\)</span>。该理论指出，对给定的局部最小值点$x_* <span class="math inline">\(，存在向量\)</span>_* $满足</p>
+<p><span class="math display">\[\nabla f(x_* )+{\lambda_* }^T\nabla h(x_* )=0\]</span></p>
+<p>这个方程有两种解释:</p>
+<ul>
+<li>目标函数的梯度<span class="math inline">\(\nabla f(x_* )\)</span>属于<span class="math inline">\(\{\nabla h_1(x_* ),...,\nabla h_m(x_* )\}\)</span>这个向量组张成的n维线性子空间里；</li>
+<li><p>目标函数的梯度<span class="math inline">\(\nabla f(x_* )\)</span>正交于一阶可行变分子空间，即</p>
+<p><span class="math display">\[V(x_* )=\{\Delta x=x-x_* \vert  (x-x_* )^T\nabla h_i(x_* )=0,i=1,2..,m\}\]</span></p>
+<p>注意到，<span class="math inline">\(\forall \Delta x\in V(x_* )\)</span>, <span class="math inline">\(\nabla h(x_* ) \Delta x=0\)</span>，从而结合上式，我们有<span class="math inline">\(\Delta x^T\nabla f(x_* )=0\)</span>。</p>
+<p><strong>Remark</strong></p>
+<ol style="list-style-type: decimal">
+<li>一阶可行变分子空间中的元素是使得<span class="math inline">\(h(x)\)</span>的一阶近似，<span class="math inline">\(h(x_* )+\nabla h(x)\Delta x\)</span>，在<span class="math inline">\(x+\Delta x\)</span>取值同样为0的元素构成的集合。这是对约束条件<span class="math inline">\(h(.)\)</span>的性质刻画。</li>
+<li>这里<span class="math inline">\(V(x_* )\)</span>的作用类似于带约束优化问题的约束集。在Chapter2中，最优解得$x_* <span class="math inline">\(满足的必要条件\)</span>xX<span class="math inline">\(为(\)</span>X$是约束集)</li>
+</ol>
+<p><span class="math display">\[\nabla f(x_* )(x-x_* )\geq 0\]</span></p>
+<p>这里<span class="math inline">\(\Delta x^T\nabla f(x_* )=0\)</span>与上述结论是相似的，同样也类似于Chapter1中提到的一阶“零梯度条件”<span class="math inline">\(\nabla f(x_* )=0\)</span></p></li>
+</ul>
+<p>下面给出<code>Lagrange乘子定理</code>的严格表述</p>
+<p>如果 $x_* <span class="math inline">\(是\)</span>f$在 <span class="math inline">\(h(x)=0\)</span>约束条件下的局部最小值点，且假定梯度向量组<span class="math inline">\(\{\nabla h_1(x_* ),...,\nabla h_m(x_* )\}\)</span>,线性无关，那么存在唯一的向量$_* $使得</p>
+<p><span class="math display">\[\nabla f(x_* )+{\lambda_* }^T\nabla h(x)=0\qquad (一阶条件)\]</span></p>
+<p>进一步，如果<span class="math inline">\(f,h\)</span>二次可微，那么有，对任意<span class="math inline">\(\Delta x\in V(x_* )\)</span>,</p>
+<p><span class="math display">\[\Delta x^T\big(\nabla f(x_* )+{\lambda_* }^T\nabla h(x_* )\big)\Delta x\in V(x_* )\geq 0\qquad (二阶条件)\]</span></p>
+<p><strong>Remark</strong></p>
+<ol style="list-style-type: decimal">
+<li>我们称可行向量<span class="math inline">\(x\)</span>为正则的，若约束函数梯度<span class="math inline">\(\{\nabla h_1(x),...,\nabla h_m(x)\}\)</span>线性无关。</li>
+<li>对应于一阶可行变分子空间，我们还要引入<code>真正可行变分集</code>这个概念。从一阶可行变分子空间的定义不难看出<span class="math inline">\(V(x_* )=\{\Delta x\vert \nabla h(x_* )\Delta x=0\}\)</span>。假设<span class="math inline">\(x_* \in R^n\)</span>,且通常假设<span class="math inline">\(m\leq n\)</span>，则<span class="math inline">\(V(x_* )\)</span>是一个线性方程组的解空间，该空间的维数为<span class="math inline">\(n-r( \nabla h(x_* ))\geq n-m\)</span>。当$x_* <span class="math inline">\(满足正则条件式，我们就称\)</span>V(x_* )$为真正可行变分集。</li>
+<li><p>存在反例表明，在非正则的局部最小值点处的Lagrange乘子可以不存在。 <img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_2.png" alt="Snip20161201_2" /></p>
+<p><strong>Remark</strong> 从一阶可行变分子空间的角度看，由于一阶变分子空间<span class="math inline">\(V(x_* )=\{(0,y_2)\vert y_2\in R\}\)</span>的维数为1，但是真正可行变分集<span class="math inline">\(\{(y_1,y_2)\vert y_1=y_2=0\}\)</span>的维数为0，因此一阶变分子空间比正真可行变分集具有更高的维数。由Lagrange理论指出，$x_* <span class="math inline">\(的最优性只能保证\)</span>f(x_* )<span class="math inline">\(正交于可行变分集，但是要使得Lagrange乘子存在，\)</span>f(x_* )<span class="math inline">\(正交于一阶变分子空间。故当\)</span>{h_1(x),…,h_m(x)}$线性无关时，两个变分集合是相等的。</p></li>
+<li><p>当约束条件是线性约束时，比如<span class="math inline">\(AX=0\)</span>，则即使没有<span class="math inline">\(\{\nabla h_1(x_* ),...,\nabla h_m(x_* )\}\)</span>线性无关也可成立，即不需要$x_* $正则的正则性,具体讨论见<code>消元法</code>这一小节。</p></li>
+</ol>
+<p>对于该理论，我们有两种证明的方法，他们都是基于将有约束的优化问题化为无约束的优化问题，但是思路不同</p>
+<ul>
+<li>惩罚法：通过对违反约束的情况进行很高的惩罚，从而不必考虑约束条件。通过列出这些带惩罚项的无约束问题的最优性条件，同时让惩罚项的增加趋于无穷大时，可以得到Lagrange乘子定理;</li>
+<li>消元法：把约束条件看做一个n个未知数m个方程的线性方程组(n&gt;m)，将m个变量表示成n-m个变量的函数形式，从而化成无约束的优化问题，进而利用一阶、二阶必要性条件，也可以得到Lagrange乘子定理。</li>
+</ul>
+<div class="section level4">
+<h4>惩罚法</h4>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_4.png" alt="Snip20161201_4" />
+<p class="caption">Snip20161201_4</p>
+</div>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_6.png" alt="Snip20161201_6" />
+<p class="caption">Snip20161201_6</p>
+</div>
+</div>
+<div class="section level4">
+<h4>消元法</h4>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_7.png" alt="Snip20161201_7" />
+<p class="caption">Snip20161201_7</p>
+</div>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_8.png" alt="Snip20161201_8" />
+<p class="caption">Snip20161201_8</p>
+</div>
+<p><strong>Remark</strong></p>
+<p>上述讨论说明了，在线性约束条件下，Lagrange乘子定理只是要求定义在<span class="math inline">\(n-m\)</span>维空间上的无约束问题(3.12)的“零梯度性”和“Hessian阵半正定性”。</p>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_9.png" alt="Snip20161201_9" />
+<p class="caption">Snip20161201_9</p>
+</div>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_10.png" alt="Snip20161201_10" />
+<p class="caption">Snip20161201_10</p>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3>最优解充分条件</h3>
+<p>利用一阶必要性条件选出来的点，有可能是局部最小值，局部最大值点乃至其他点，加上二阶必要条件可以缩小备选点。但是我们有必要给出判断局部最小点的充分条件。</p>
+<p>【二阶充分条件】 假定<span class="math inline">\(f\)</span>和<span class="math inline">\(h\)</span>是二阶可微函数，并且<span class="math inline">\(x_* \in R^n,\lambda_* \in R^m\)</span>满足</p>
+<p><span class="math display">\[
+ \nabla_x L(x_* ,\lambda_* )=0,\nabla_\lambda L(x_* ,\lambda_* )=0\\
+ x^T\nabla_{xx} L(x_* ,\lambda_* )x&gt;0\quad 对所有满足\nabla h(x_* )x^T=0的非零x
+ \]</span> 则$x_* <span class="math inline">\(是\)</span>f<span class="math inline">\(满足约束\)</span>h(x)=0<span class="math inline">\(的严格局部最小值点，并且存在\)</span>,&gt;0<span class="math inline">\(使得对任意满足\)</span>h(x)=0,x-x_* <span class="math inline">\(的\)</span>x$成立</p>
+<p><span class="math display">\[f(x)-f(x_* )\geq \frac{\gamma}{2}\vert \vert x-x_* \vert \vert ^2\]</span></p>
+<p><strong>Remark</strong></p>
+<p>该充分条件并不需要$x_* $的正则性。</p>
+<p>对于该命题，我们打算采取两种方法来证明，一是augmented Lagrange方法，二是可行方向法。</p>
+<ul>
+<li><p>augmented Lagrange方法的思想在于，通过引入augmented Lagrange函数，</p>
+<p><span class="math display">\[L_c(x,\lambda)=f(x)+\lambda^Th(x)+\frac{c}{2}\vert \vert h(x)\vert \vert ^2\]</span></p>
+<p>使得带约束的原问题</p>
+<p><span class="math display">\[\mathop{min}_{h(x)=0} f(x)\]</span></p>
+<p>与新问题问题</p>
+<p><span class="math display">\[\mathop{min}_{h(x)=0} f(x)+\frac{c}{2}\vert \vert h(x)\vert \vert ^2\]</span></p>
+有相同的局部最优解。</li>
+<li><p>可行方向法的思想在于，利用反正法，假设存在一系列比$x_* $更优的点，通过这些点构造方向导出矛盾。</p></li>
+</ul>
+<div id="augmented-lagrange" class="section level4">
+<h4>augmented Lagrange方法</h4>
+<p><img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161208_1.png" alt="Snip20161208_1" /> <img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161208_2.png" alt="Snip20161208_2" /></p>
+</div>
+<div class="section level4">
+<h4>可行方向法</h4>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161208_3.png" alt="Snip20161208_3" />
+<p class="caption">Snip20161208_3</p>
+</div>
+</div>
+</div>
+</div>

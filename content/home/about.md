@@ -30,4 +30,4 @@ weight = 1
 
 # Biography
 
-I am a M.S. student in Statistics at the University of Illinois at Urbana-Champaign. Also, I work part-time as a Data Science Intern at Bud Analytics Lab affliliated to Anheuser-Busch InBev, a lab in Urabana focused on data analytics, developing data research and innovation to solve problems ranging from assortment optimization, social media, and market trends to large-scale data initiatives.
+I am a M.S. student in Statistics at the University of Illinois at Urbana-Champaign. Also, I work part-time as a Data Science Intern at Bud Analytics Lab affliliated to Anheuser-Busch InBev,focused on developing data research and innovation.

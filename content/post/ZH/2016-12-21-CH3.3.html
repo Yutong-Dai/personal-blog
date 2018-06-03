@@ -1,0 +1,231 @@
+---
+title: "Lagrange乘子理论(3)"
+author: Yutong Dai
+date: '2016-12-21'
+categories:
+  - convex optimization
+tags:
+  - Lagrange乘子
+slug: lag3
+output:
+  blogdown::html_page:
+    toc: yes
+summary: 该系列posts是笔者学习Dimitri .P Bertsekas所写的 Nonlinear Programming 2ed 中文版时整理的笔记。第三章Lagrange乘子理论内容涉及到等式约束优化问题及不等式约束优化问题。本文讨论不等式约束优化问题中的KKT条件的延伸Fritz John条件。
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#beyond-kkt">Beyond KKT</a><ul>
+<li><a href="#fritz-john-">Fritz-John 最优性条件</a></li>
+<li><a href="#fritz-john--kkt-">从Fritz-John 条件到 KKT 条件</a></li>
+<li><a>凸集约束的情形</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div id="beyond-kkt" class="section level2">
+<h2>Beyond KKT</h2>
+<p>在前面的讨论中，我们看到最优点的正则性对Lagrange乘子的存在性是必不可少的。</p>
+<p>下面我们要讨论一个问题，如果我们把正则性拿掉，需要补充什么条件才可以保证存在乘子（不一定是Lagrange乘子）满足类似的性质呢。</p>
+<div id="fritz-john-" class="section level3">
+<h3>Fritz-John 最优性条件</h3>
+<p>假设$x^* $是满足下面问题的局部最小值点，</p>
+<p><span class="math display">\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+\]</span></p>
+<p>其中 <span class="math inline">\(f: R^n\;\vert \rightarrow R\)</span>, <span class="math inline">\(h_i: R^n\;\vert \rightarrow R\)</span>,<span class="math inline">\(g_j: R^n\;\vert \rightarrow R\)</span>均是连续可微的。那么存在唯一的标量<span class="math inline">\(\mu_0^* 和\)</span>乘子<span class="math inline">\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)</span>满足如下条件:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\mu_0^* \nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)</span></li>
+<li><span class="math inline">\(\mu_j\geq 0\quad j=0,...,r\)</span></li>
+<li><span class="math inline">\(\mu_0^* ,\lambda_1^* ,...,\lambda_m^* ,\mu_1^* ,...,\mu_r^* \text{不全为0}\)</span></li>
+<li><span class="math inline">\(\text{在}x^* \text{的每个领域上都存在一点x使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&gt;0\)</span></li>
+</ol>
+<p><strong>Remark</strong></p>
+<ol style="list-style-type: decimal">
+<li><p>该命题的证明可以参考用惩罚法证明等式约束情况下的Lagrange最优性定理。即构造函数列</p>
+<p><span class="math display">\[F_k(x)=f(x)+\frac{k}{2}\sum_{i=1}^m h_i(x)+\frac{k}{2}\sum_{j=1}^r(g^+_j(x))^2+\frac{1}{2}\vert \vert x-x^* \vert \vert ^2\]</span></p>
+<p>然后考虑优化问题</p>
+<p><span class="math display">\[
+\text{minimize} F_k(x)\\
+\text{subject to} x\in S
+\]</span></p>
+<p>其中<span class="math inline">\(S=\{x\vert \vert \vert x-x^* \vert \vert \leq \epsilon\},\epsilon&gt;0\)</span></p></li>
+<li><p><code>条件4</code>蕴含了互补松弛条件【<span class="math inline">\(\mu_j^* g_j(x)=0\)</span>】。这是因为当<span class="math inline">\(\mu_j^* \neq 0\)</span>时，由条件4我们有<span class="math inline">\(g_j(x)&gt;0\)</span>，再利用<span class="math inline">\(g_j(x)\)</span>的连续性，我们知道<span class="math inline">\(g_j(x^* )=0\)</span>,即条件4可以推出较弱的互补松弛条件。并且条件4缩小了满足Fritz-John条件候选乘子的范围。</p></li>
+</ol>
+</div>
+<div id="fritz-john--kkt-" class="section level3">
+<h3>从Fritz-John 条件到 KKT 条件</h3>
+<p>设$x^* <span class="math inline">\(是问题的局部最优值点，注意到只要能够证明到不存在\)</span>_j^* =0<span class="math inline">\(使得Fritz-John 中的条件1-4成立，则我们可以保证\)</span>_0<sup>* &gt;0<span class="math inline">\(，进一步得到了以\)</span></sup>* /_0<sup>* ,</sup>* /_0^* <span class="math inline">\(为Lagrange乘子的KKT条件。不失一般性，我们可以只讨论\)</span>_0^* =0,_0^* =1<span class="math inline">\(的两种情形【对于\)</span>_0^* &gt;0<span class="math inline">\(的情形只需等式两边同时除以\)</span>_0^* <span class="math inline">\(】，下面几个命题告诉我们在什么情况下可以够保证不存在\)</span>_j^* =0$使得Fritz-John 条件中的条件1-4成立。</p>
+<div class="section level4">
+<h4>正则性假设</h4>
+<p>假设$x^* $是满足正则性的下述问题的局部最小值点</p>
+<p><span class="math display">\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+\]</span></p>
+<p>其中 <span class="math inline">\(f: R^n\;\vert \rightarrow R\)</span>, <span class="math inline">\(h_i: R^n\;\vert \rightarrow R\)</span>,<span class="math inline">\(g_j: R^n\;\vert \rightarrow R\)</span>均是连续可微的。那么存在唯一的Lagrange乘子<span class="math inline">\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)</span>满足如下条件:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)</span></li>
+<li><span class="math inline">\(\mu_j\geq 0\quad j=0,...,r\)</span></li>
+<li><span class="math inline">\(\text{在}x^* \text{的每个领域上都存在一点x使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&gt;0\)</span></li>
+</ol>
+<p><code>proof</code></p>
+<p>由$x^* <span class="math inline">\(的正则性，我们知道对于不全为0的\)</span>_1^* ,…,_m^* ,_1^* ,…,_r^* $下式不成立</p>
+<p><span class="math display">\[\sum_{i=1}^m\lambda^* _i\nabla h_i(x^* )+\sum_{j=1}^r \mu_jg_j(x^* )=0\]</span></p>
+<p>故当<span class="math inline">\(\mu_0^* =0\)</span>时，Fritz John条件1不成立。因此可以取<span class="math inline">\(\mu_0^* =1\)</span>，并且由$x^* $的最优性，我们有</p>
+<p><span class="math display">\[\nabla f(x^* )+\sum_{i=1}^m\lambda^* _i\nabla h_i(x^* )+\sum_{j=1}^r \mu_jg_j(x^* )=0\]</span></p>
+<p>条件2与3是直接从Fritz John条件中得到的。</p>
+</div>
+<div class="section level4">
+<h4>线性等式约束和凹不等式约束假设</h4>
+<p>假设$x^* $是满足下述问题的局部最小值点</p>
+<p><span class="math display">\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+\]</span></p>
+<p>其中 <span class="math inline">\(f: R^n\;\vert \rightarrow R\)</span>, <span class="math inline">\(h_i: R^n\;\vert \rightarrow R\)</span>,<span class="math inline">\(g_j: R^n\;\vert \rightarrow R\)</span>均是连续可微的。假设所有<span class="math inline">\(h_i\)</span>是线性函数，<span class="math inline">\(g_j\)</span>是凹函数。那么存在唯一的Lagrange乘子<span class="math inline">\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)</span>满足如下条件:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)</span></li>
+<li><span class="math inline">\(\mu_j\geq 0\quad j=0,...,r\)</span></li>
+<li><span class="math inline">\(\text{在}x^* \text{的每个领域上都存在一点x使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&gt;0\)</span></li>
+</ol>
+<p><code>proof</code></p>
+<p>首先我们假设<span class="math inline">\(\mu_0^* =0\)</span>。对任意<span class="math inline">\(x\)</span>将<span class="math inline">\(h_i(x),g_j(x)\)</span>分别在$x^* $展开到一阶，即</p>
+<p><span class="math display">\[
+h_i(x)=h_i(x^* )+\nabla h_i(x^* )^T(x-x^* )\quad i=1,2,...,m \\
+g_j(x)\leq g_i(x)^* +\nabla g_i(x^* )^T(x-x^* )\quad i=1,2,...,m 
+\]</span></p>
+<p>对上式关于<span class="math inline">\(i,j\)</span>求和得到</p>
+<p><span class="math display">\[
+\sum_{i=1}^m \lambda_i^* h_i(x)+\sum_{j=1}^r\mu_j^* g_j(x)\leq  \sum_{i=1}^m \lambda_i^* h_i(x^* )+\sum_{j=1}^r\mu_j^* g_j(x^* )+(x-x^* )^T\big(\sum_{i=1}^m \lambda_i^*  \nabla h_i(x^* )+\sum_{j=1}^r\mu_j^*  \nabla g_j(x^* )\big)\leq 0\quad (****)
+\]</span></p>
+<p>后面一个不等号成立是因为,由Fritz John条件1，</p>
+<p><span class="math display">\[\sum_{i=1}^m \lambda_i^*  \nabla h_i(x^* )+\sum_{j=1}^r\mu_j^*  \nabla g_j(x^* )=0\]</span></p>
+<p>同时由$x<sup>* <span class="math inline">\(的最优性，我们有\)</span>h_i(x</sup>* )=0,g_j(x^* )0$。</p>
+<p>由Fritz John 条件3，我们可以知道，当<span class="math inline">\(\mu_0^* =0\)</span>时，则<span class="math inline">\(\lambda_1^* ,...,\lambda_m^* ,\mu_1^* ,...,\mu_r^* \text{不全为0}\)</span>。利用Fritz John 条件3，对于那些使得<span class="math inline">\(\lambda_i\neq ,\mu_j\neq 0\)</span>的<span class="math inline">\(i,j\)</span>,存在<span class="math inline">\(x_0\)</span>满足<span class="math inline">\(\lambda_ih_i(x_0)&gt;0,\mu_jg_j(x_0)&gt;0\)</span>，进而有</p>
+<p><span class="math display">\[\sum_{i=1}^m \lambda_i^* h_i(x_0)+\sum_{j=1}^r\mu_j^* g_j(x_0)&gt;0\]</span></p>
+<p>从而与（****）式矛盾。</p>
+</div>
+<div id="constraint-qualification" class="section level4">
+<h4>Constraint Qualification</h4>
+<p>假设$x^* $是满足下述问题的局部最小值点</p>
+<p><span class="math display">\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+\]</span></p>
+<p>其中 <span class="math inline">\(f: R^n\;\vert \rightarrow R\)</span>, <span class="math inline">\(h_i: R^n\;\vert \rightarrow R\)</span>,<span class="math inline">\(g_j: R^n\;\vert \rightarrow R\)</span>均是连续可微的。假设<span class="math inline">\(\{\nabla h_i(x^* )\}\)</span>线性无关，而且存在向量<span class="math inline">\(d\)</span>使得 <span class="math inline">\(\forall i\)</span>以及<span class="math inline">\(\forall j\in A(x^* )\)</span></p>
+<p><span class="math display">\[d^T\nabla h_i(x^* )&gt;0 \qquad d^T\nabla g_j(x^* )&lt;0 \]</span></p>
+<p>那么存在唯一的Lagrange乘子<span class="math inline">\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)</span>满足如下条件:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)</span></li>
+<li><span class="math inline">\(\mu_j\geq 0\quad j=0,...,r\)</span></li>
+<li><span class="math inline">\(\text{在}x^* \text{的每个领域上都存在一点x使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&gt;0\)</span></li>
+</ol>
+<p><code>proof</code></p>
+<p>考虑满足Fritz John条件的乘子 $_0^* ,_1^* ,…,_m^* ,_1^* ,…,_r^* <span class="math inline">\(，以及假设\)</span>_0^* =0$。则有</p>
+<p><span class="math display">\[\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\]</span></p>
+<p>由于$_1^* ,…,_m^* ,_1^* ,…,_r<sup>* <span class="math inline">\(不全为0。我们断言至少存在一个\)</span>jA(x</sup>* )<span class="math inline">\(使得\)</span>_j<sup>* &gt;0<span class="math inline">\(【否则与\)</span>{h_i(x</sup>* )}$线性无关矛盾】。因此有</p>
+<p><span class="math display">\[d^T\big(\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )\big)&lt;0\]</span></p>
+<p>从而矛盾，因此有<span class="math inline">\(\mu_0^* =1\)</span>。</p>
+<p><strong>Remark</strong></p>
+<p>注意命题中<span class="math inline">\(d\)</span>的存在想问题，可以转换为更容易验证的假设，即对任意<span class="math inline">\(j\in A(x^* )\)</span>存在<span class="math inline">\(d_j\)</span>满足</p>
+<p><span class="math display">\[
+\forall i, d_j^T\nabla h_i(x^* )=0\\
+\nabla d_j^Tg_j(x^* )&lt;0 \qquad \nabla d_{\bar j}^Tg_{\bar j}(x^* )\leq 0 \quad \bar j \notin A(x^* )
+\]</span></p>
+<p>取<span class="math inline">\(d=\sum_{j \in A(x^* )} d_j\)</span>即可。</p>
+</div>
+<div class="section level4">
+<h4>凸不等式约束</h4>
+<p>假设$x^* $是满足下述问题的局部最小值点</p>
+<p><span class="math display">\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+\]</span></p>
+<p>其中 <span class="math inline">\(f: R^n\;\vert \rightarrow R\)</span>, <span class="math inline">\(h_i: R^n\;\vert \rightarrow R\)</span>,<span class="math inline">\(g_j: R^n\;\vert \rightarrow R\)</span>均是连续可微的。假设所有<span class="math inline">\(h_i\)</span>是线性函数，<span class="math inline">\(g_j\)</span>是凸函数。如果存在可行解<span class="math inline">\(\bar x\)</span>，使得</p>
+<p><span class="math display">\[g_j(\bar x)&lt;0,\forall j\in A(x^* )\]</span></p>
+<p>那么存在唯一的Lagrange乘子<span class="math inline">\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)</span>满足如下条件:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(\nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)</span></li>
+<li><span class="math inline">\(\mu_j\geq 0\quad j=0,...,r\)</span></li>
+<li><span class="math inline">\(\text{在}x^* \text{的每个领域上都存在一点x使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&gt;0\)</span></li>
+</ol>
+<p><code>Proof</code></p>
+<p>考虑到<span class="math inline">\(h_i(x)\)</span>的线性性，不失一般性，我们总可以假设<span class="math inline">\(\{\nabla h_i(x)\}\)</span>线性无关【否则将对应的乘子设为0，从而获得一组线性无关的约束】。利用<span class="math inline">\(g_j(x)\)</span>的凸性</p>
+<p><span class="math display">\[0&gt;g_j(\bar x)&gt;g_j(x^* )+(\bar x-x^* )^T\nabla g_j(x^* )=(\bar x-x^* )^T\nabla g_j(x^* )\quad \forall j\in A(x^* )\]</span></p>
+<p>由<span class="math inline">\(\bar x\)</span>的可行性，</p>
+<p><span class="math display">\[0=h_i(\bar x)=h_i(x^* )+(\bar x-x^* )^T\nabla h_i(x^* )=(\bar x-x^* )^T\nabla h_i(x^* )\]</span></p>
+<p>令$d=x-x^* $，结合Constraint Qualification命题即的。</p>
+</div>
+</div>
+<div class="section level3">
+<h3>凸集约束的情形</h3>
+<p><strong>凸集约束下的 Fritz-John 最优性条件</strong></p>
+<p>假设$x^* $是满足下面问题的局部最小值点，</p>
+<p><span class="math display">\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r\\
+x\in X \qquad
+\]</span></p>
+<p>其中 <span class="math inline">\(f: R^n\;\vert \rightarrow R\)</span>, <span class="math inline">\(h_i: R^n\;\vert \rightarrow R\)</span>,<span class="math inline">\(g_j: R^n\;\vert \rightarrow R\)</span>均是连续可微的,X是一个闭凸集。那么存在唯一的标量<span class="math inline">\(\mu_0^* 和\)</span>乘子<span class="math inline">\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)</span>满足如下条件:</p>
+<ol style="list-style-type: decimal">
+<li>对任意<span class="math inline">\(x\in X\)</span>,<span class="math inline">\(\mu_0^* \nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)</span></li>
+<li><span class="math inline">\(\mu_j\geq 0\quad j=0,...,r\)</span></li>
+<li><span class="math inline">\(\mu_0^* ,\lambda_1^* ,...,\lambda_m^* ,\mu_1^* ,...,\mu_r^* \text{不全为0}\)</span></li>
+<li><span class="math inline">\(\text{在}x^* \text{的每个领域上N都存在一点}x\in X\cap N\text{使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&gt;0\)</span></li>
+</ol>
+<p>不难看出除了第一个条件其它条件都是Fritz-John 最优性条件的平行结果；而第一个条件平行于凸集约束的最优性条件。</p>
+<p><strong>凸集约束下的 Constraint Qualification</strong></p>
+<p>假设$x^* $是满足下面问题的局部最小值点，</p>
+<p><span class="math display">\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r\\
+x\in X \qquad
+\]</span></p>
+<p>其中 <span class="math inline">\(f: R^n\;\vert \rightarrow R\)</span>, <span class="math inline">\(h_i: R^n\;\vert \rightarrow R\)</span>,<span class="math inline">\(g_j: R^n\;\vert \rightarrow R\)</span>均是连续可微的,X是一个闭凸集。并且满足下面两个条件:</p>
+<ol style="list-style-type: decimal">
+<li><p>不存在非零向量<span class="math inline">\(\lambda =(\lambda_1,...,\lambda_m)\)</span>使得</p>
+<p><span class="math display">\[(x-x^* )^T\big(\sum_{i=1}^m\lambda_i^* \nabla h_i(x^* )\big)\quad \forall x\in X\]</span></p></li>
+<li><p>在$x^* <span class="math inline">\(处存在可行方向\)</span>d$满足</p>
+<p><span class="math display">\[d^T\nabla h_i(x^* )&gt;0 \qquad d^T\nabla g_j(x^* )&lt;0 \]</span></p></li>
+</ol>
+<p>那么存在唯一的标量<span class="math inline">\(\mu_0^* 和\)</span>乘子<span class="math inline">\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)</span>满足如下条件:</p>
+<ol style="list-style-type: decimal">
+<li>对任意<span class="math inline">\(x\in X\)</span>,<span class="math inline">\(\mu_0^* \nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)</span></li>
+<li><span class="math inline">\(\mu_j\geq 0\quad j=0,...,r\)</span></li>
+<li><span class="math inline">\(\mu_0^* ,\lambda_1^* ,...,\lambda_m^* ,\mu_1^* ,...,\mu_r^* \text{不全为0}\)</span></li>
+<li><span class="math inline">\(\text{在}x^* \text{的每个领域上N都存在一点}x\in X\cap N\text{使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&gt;0\)</span></li>
+</ol>
+<p><strong>凸集约束下的凸不等式约束</strong></p>
+<p>假设$x^* $是满足下面问题的局部最小值点，</p>
+<p><span class="math display">\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r\\
+x\in X \qquad
+\]</span></p>
+<p>其中 <span class="math inline">\(f: R^n\;\vert \rightarrow R\)</span>, <span class="math inline">\(h_i: R^n\;\vert \rightarrow R\)</span>,<span class="math inline">\(g_j: R^n\;\vert \rightarrow R\)</span>均是连续可微的,X是一个闭凸集。假设所有<span class="math inline">\(h_i\)</span>是线性函数，<span class="math inline">\(g_j\)</span>是凸函数，并且满足下面两个条件:</p>
+<ol style="list-style-type: decimal">
+<li><p>不存在非零向量<span class="math inline">\(\lambda =(\lambda_1,...,\lambda_m)\)</span>使得</p>
+<p><span class="math display">\[(x-x^* )^T\big(\sum_{i=1}^m\lambda_i^* \nabla h_i(x^* )\big)\quad \forall x\in X\]</span></p></li>
+<li><p>如果存在可行解<span class="math inline">\(\bar x\)</span>，使得</p>
+<p><span class="math display">\[g_j(\bar x)&lt;0,\forall j\in A(x^* )\]</span></p></li>
+</ol>
+<p>那么存在唯一的标量<span class="math inline">\(\mu_0^* 和\)</span>乘子<span class="math inline">\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)</span>满足如下条件:</p>
+<ol style="list-style-type: decimal">
+<li>对任意<span class="math inline">\(x\in X\)</span>,<span class="math inline">\(\mu_0^* \nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)</span></li>
+<li><span class="math inline">\(\mu_j\geq 0\quad j=0,...,r\)</span></li>
+<li><span class="math inline">\(\mu_0^* ,\lambda_1^* ,...,\lambda_m^* ,\mu_1^* ,...,\mu_r^* \text{不全为0}\)</span></li>
+<li><span class="math inline">\(\text{在}x^* \text{的每个领域上N都存在一点}x\in X\cap N\text{使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&gt;0\)</span></li>
+</ol>
+</div>
+</div>

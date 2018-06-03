@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>无约束优化 on Yutong Dai | 戴宇童</title>
+    <link>/tags/%E6%97%A0%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96/</link>
+    <description>Recent content in 无约束优化 on Yutong Dai | 戴宇童</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 02 Nov 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/%E6%97%A0%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>无约束优化(5)</title>
+      <link>/post/zh/uncon5/</link>
+      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon5/</guid>
+      <description>共轭方向法 共轭方向法求解二次问题 共轭方向法求解非二次问题 共轭方向法 在前面的讨论中我们看到了，由于最速下降法在矩阵条件数大的情况下，收敛速率可</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(4)</title>
+      <link>/post/zh/uncon4/</link>
+      <pubDate>Wed, 26 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon4/</guid>
+      <description>牛顿法与其变形 局部收敛性 全局收敛性 Gauss-Newtown 法 牛顿法与其变形 之前我们讨论了梯度方法的收敛性与收敛速率。我们知道最速下降法是梯度方法中迭代形式最简单，</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(3)</title>
+      <link>/post/zh/uncon3/</link>
+      <pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon3/</guid>
+      <description>收敛性分析 极限点的存在性问题 迭代终止条件 收敛性结论 收敛速率分析 局部分析方法 Case Study-二次函数情形 Case Study-非二次函数与奇异的情形 收敛</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(2)</title>
+      <link>/post/zh/uncon2/</link>
+      <pubDate>Wed, 28 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon2/</guid>
+      <description>梯度方法 直观分析 下降方向 步长准则 梯度方法 \[outline\begin{cases} 下降方向选择\begin{cases} 最速下降\\ 牛顿法\\ \end{cases}\\\\ 步长的选择\begin{cases}</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(1)</title>
+      <link>/post/zh/uncon1/</link>
+      <pubDate>Wed, 21 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon1/</guid>
+      <description>最优性条件 最优解的存在性 最优性条件的直观分析 为什么需要最优性条件 最优性条件 我们讨论最优性条件的最直接的目的是为了知道满足什么样条件的点就是满</description>
+    </item>
+    
+  </channel>
+</rss>

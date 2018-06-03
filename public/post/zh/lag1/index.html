@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.41" />
+  <meta name="author" content="Yutong Dai">
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="等式约束优化问题 最优解的必要条件 最优解充分条件 通过引入一些辅助变量，即Lagrange乘子，我们可以利用他们： 描述最优解的特性 灵敏度分析 对自">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/zh/lag1/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="hsl((9,62%,53%))">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Yutong Dai | 戴宇童">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Yutong Dai | 戴宇童">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/zh/lag1/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Yutong Dai | 戴宇童">
+  <meta property="og:url" content="/post/zh/lag1/">
+  <meta property="og:title" content="Lagrange乘子理论(1) | Yutong Dai | 戴宇童">
+  <meta property="og:description" content="等式约束优化问题 最优解的必要条件 最优解充分条件 通过引入一些辅助变量，即Lagrange乘子，我们可以利用他们： 描述最优解的特性 灵敏度分析 对自">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2016-12-07T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2016-12-07T00:00:00&#43;00:00">
+  
+
+  
+  
+
+  <title>Lagrange乘子理论(1) | Yutong Dai | 戴宇童</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" class="dark">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/"><img src="/img/avatar.png" alt="Yutong Dai | 戴宇童"></a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#gallery">
+            
+            <span>Gallery</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/files/pdf/resume.pdf">
+            
+            <span>Resume</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#resources">
+            
+            <span>Resources</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Lagrange乘子理论(1)</h1>
+    
+    <h3 class="author">Yutong Dai</h3>
+    
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+    <time datetime="2016-12-07 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      2016-12-07
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Yutong Dai">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/convex-optimization/">convex optimization</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Lagrange%e4%b9%98%e5%ad%90%e7%90%86%e8%ae%ba%281%29&amp;url=%2fpost%2fzh%2flag1%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fzh%2flag1%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fzh%2flag1%2f&amp;title=Lagrange%e4%b9%98%e5%ad%90%e7%90%86%e8%ae%ba%281%29"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fzh%2flag1%2f&amp;title=Lagrange%e4%b9%98%e5%ad%90%e7%90%86%e8%ae%ba%281%29"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Lagrange%e4%b9%98%e5%ad%90%e7%90%86%e8%ae%ba%281%29&amp;body=%2fpost%2fzh%2flag1%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <div id="TOC">
+<ul>
+<li><a>等式约束优化问题</a><ul>
+<li><a>最优解的必要条件</a></li>
+<li><a>最优解充分条件</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p>通过引入一些辅助变量，即Lagrange乘子，我们可以利用他们：</p>
+<ul>
+<li>描述最优解的特性</li>
+<li>灵敏度分析</li>
+<li>对自变量变化引起的目标函数的一阶导数进行定量描述</li>
+</ul>
+<p>本章将沿着<code>惩罚法</code>和<code>可行方向法</code>两个角度进行讨论。</p>
+<div class="section level2">
+<h2>等式约束优化问题</h2>
+<div class="section level3">
+<h3>最优解的必要条件</h3>
+<p>本节我们考虑优化问题：</p>
+<p><span class="math display">\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\]</span></p>
+<p>其中 <span class="math inline">\(f: R^n\;\vert \rightarrow R\)</span>, <span class="math inline">\(h_i: R^n\;\vert \rightarrow R\)</span>均是连续可微的。为了记号简洁性，我们引入向量值函数<span class="math inline">\(h=(h_1,...,h_m)^T\)</span>,即<span class="math inline">\(h: R^n\;\vert \rightarrow R^m\)</span>。 从而约束条件变为了 <span class="math inline">\(h(x)=0\)</span></p>
+<p>Lagrange 理论解决上述优化问题的办法是，通过引入Lagrange乘子<span class="math inline">\(\lambda=(\lambda_1,...,\lambda_m)^T\)</span>，构造Lagrange函数</p>
+<p><span class="math display">\[L(x,\lambda)=f(x)+\lambda^T h(x)\]</span></p>
+<p>转而考察<span class="math inline">\(L(x,\lambda)\)</span>。该理论指出，对给定的局部最小值点$x_* <span class="math inline">\(，存在向量\)</span>_* $满足</p>
+<p><span class="math display">\[\nabla f(x_* )+{\lambda_* }^T\nabla h(x_* )=0\]</span></p>
+<p>这个方程有两种解释:</p>
+<ul>
+<li>目标函数的梯度<span class="math inline">\(\nabla f(x_* )\)</span>属于<span class="math inline">\(\{\nabla h_1(x_* ),...,\nabla h_m(x_* )\}\)</span>这个向量组张成的n维线性子空间里；</li>
+<li><p>目标函数的梯度<span class="math inline">\(\nabla f(x_* )\)</span>正交于一阶可行变分子空间，即</p>
+<p><span class="math display">\[V(x_* )=\{\Delta x=x-x_* \vert  (x-x_* )^T\nabla h_i(x_* )=0,i=1,2..,m\}\]</span></p>
+<p>注意到，<span class="math inline">\(\forall \Delta x\in V(x_* )\)</span>, <span class="math inline">\(\nabla h(x_* ) \Delta x=0\)</span>，从而结合上式，我们有<span class="math inline">\(\Delta x^T\nabla f(x_* )=0\)</span>。</p>
+<p><strong>Remark</strong></p>
+<ol style="list-style-type: decimal">
+<li>一阶可行变分子空间中的元素是使得<span class="math inline">\(h(x)\)</span>的一阶近似，<span class="math inline">\(h(x_* )+\nabla h(x)\Delta x\)</span>，在<span class="math inline">\(x+\Delta x\)</span>取值同样为0的元素构成的集合。这是对约束条件<span class="math inline">\(h(.)\)</span>的性质刻画。</li>
+<li>这里<span class="math inline">\(V(x_* )\)</span>的作用类似于带约束优化问题的约束集。在Chapter2中，最优解得$x_* <span class="math inline">\(满足的必要条件\)</span>xX<span class="math inline">\(为(\)</span>X$是约束集)</li>
+</ol>
+<p><span class="math display">\[\nabla f(x_* )(x-x_* )\geq 0\]</span></p>
+<p>这里<span class="math inline">\(\Delta x^T\nabla f(x_* )=0\)</span>与上述结论是相似的，同样也类似于Chapter1中提到的一阶“零梯度条件”<span class="math inline">\(\nabla f(x_* )=0\)</span></p></li>
+</ul>
+<p>下面给出<code>Lagrange乘子定理</code>的严格表述</p>
+<p>如果 $x_* <span class="math inline">\(是\)</span>f$在 <span class="math inline">\(h(x)=0\)</span>约束条件下的局部最小值点，且假定梯度向量组<span class="math inline">\(\{\nabla h_1(x_* ),...,\nabla h_m(x_* )\}\)</span>,线性无关，那么存在唯一的向量$_* $使得</p>
+<p><span class="math display">\[\nabla f(x_* )+{\lambda_* }^T\nabla h(x)=0\qquad (一阶条件)\]</span></p>
+<p>进一步，如果<span class="math inline">\(f,h\)</span>二次可微，那么有，对任意<span class="math inline">\(\Delta x\in V(x_* )\)</span>,</p>
+<p><span class="math display">\[\Delta x^T\big(\nabla f(x_* )+{\lambda_* }^T\nabla h(x_* )\big)\Delta x\in V(x_* )\geq 0\qquad (二阶条件)\]</span></p>
+<p><strong>Remark</strong></p>
+<ol style="list-style-type: decimal">
+<li>我们称可行向量<span class="math inline">\(x\)</span>为正则的，若约束函数梯度<span class="math inline">\(\{\nabla h_1(x),...,\nabla h_m(x)\}\)</span>线性无关。</li>
+<li>对应于一阶可行变分子空间，我们还要引入<code>真正可行变分集</code>这个概念。从一阶可行变分子空间的定义不难看出<span class="math inline">\(V(x_* )=\{\Delta x\vert \nabla h(x_* )\Delta x=0\}\)</span>。假设<span class="math inline">\(x_* \in R^n\)</span>,且通常假设<span class="math inline">\(m\leq n\)</span>，则<span class="math inline">\(V(x_* )\)</span>是一个线性方程组的解空间，该空间的维数为<span class="math inline">\(n-r( \nabla h(x_* ))\geq n-m\)</span>。当$x_* <span class="math inline">\(满足正则条件式，我们就称\)</span>V(x_* )$为真正可行变分集。</li>
+<li><p>存在反例表明，在非正则的局部最小值点处的Lagrange乘子可以不存在。 <img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_2.png" alt="Snip20161201_2" /></p>
+<p><strong>Remark</strong> 从一阶可行变分子空间的角度看，由于一阶变分子空间<span class="math inline">\(V(x_* )=\{(0,y_2)\vert y_2\in R\}\)</span>的维数为1，但是真正可行变分集<span class="math inline">\(\{(y_1,y_2)\vert y_1=y_2=0\}\)</span>的维数为0，因此一阶变分子空间比正真可行变分集具有更高的维数。由Lagrange理论指出，$x_* <span class="math inline">\(的最优性只能保证\)</span>f(x_* )<span class="math inline">\(正交于可行变分集，但是要使得Lagrange乘子存在，\)</span>f(x_* )<span class="math inline">\(正交于一阶变分子空间。故当\)</span>{h_1(x),…,h_m(x)}$线性无关时，两个变分集合是相等的。</p></li>
+<li><p>当约束条件是线性约束时，比如<span class="math inline">\(AX=0\)</span>，则即使没有<span class="math inline">\(\{\nabla h_1(x_* ),...,\nabla h_m(x_* )\}\)</span>线性无关也可成立，即不需要$x_* $正则的正则性,具体讨论见<code>消元法</code>这一小节。</p></li>
+</ol>
+<p>对于该理论，我们有两种证明的方法，他们都是基于将有约束的优化问题化为无约束的优化问题，但是思路不同</p>
+<ul>
+<li>惩罚法：通过对违反约束的情况进行很高的惩罚，从而不必考虑约束条件。通过列出这些带惩罚项的无约束问题的最优性条件，同时让惩罚项的增加趋于无穷大时，可以得到Lagrange乘子定理;</li>
+<li>消元法：把约束条件看做一个n个未知数m个方程的线性方程组(n&gt;m)，将m个变量表示成n-m个变量的函数形式，从而化成无约束的优化问题，进而利用一阶、二阶必要性条件，也可以得到Lagrange乘子定理。</li>
+</ul>
+<div class="section level4">
+<h4>惩罚法</h4>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_4.png" alt="Snip20161201_4" />
+<p class="caption">Snip20161201_4</p>
+</div>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_6.png" alt="Snip20161201_6" />
+<p class="caption">Snip20161201_6</p>
+</div>
+</div>
+<div class="section level4">
+<h4>消元法</h4>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_7.png" alt="Snip20161201_7" />
+<p class="caption">Snip20161201_7</p>
+</div>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_8.png" alt="Snip20161201_8" />
+<p class="caption">Snip20161201_8</p>
+</div>
+<p><strong>Remark</strong></p>
+<p>上述讨论说明了，在线性约束条件下，Lagrange乘子定理只是要求定义在<span class="math inline">\(n-m\)</span>维空间上的无约束问题(3.12)的“零梯度性”和“Hessian阵半正定性”。</p>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_9.png" alt="Snip20161201_9" />
+<p class="caption">Snip20161201_9</p>
+</div>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161201_10.png" alt="Snip20161201_10" />
+<p class="caption">Snip20161201_10</p>
+</div>
+</div>
+</div>
+<div class="section level3">
+<h3>最优解充分条件</h3>
+<p>利用一阶必要性条件选出来的点，有可能是局部最小值，局部最大值点乃至其他点，加上二阶必要条件可以缩小备选点。但是我们有必要给出判断局部最小点的充分条件。</p>
+<p>【二阶充分条件】 假定<span class="math inline">\(f\)</span>和<span class="math inline">\(h\)</span>是二阶可微函数，并且<span class="math inline">\(x_* \in R^n,\lambda_* \in R^m\)</span>满足</p>
+<p><span class="math display">\[
+ \nabla_x L(x_* ,\lambda_* )=0,\nabla_\lambda L(x_* ,\lambda_* )=0\\
+ x^T\nabla_{xx} L(x_* ,\lambda_* )x&gt;0\quad 对所有满足\nabla h(x_* )x^T=0的非零x
+ \]</span> 则$x_* <span class="math inline">\(是\)</span>f<span class="math inline">\(满足约束\)</span>h(x)=0<span class="math inline">\(的严格局部最小值点，并且存在\)</span>,&gt;0<span class="math inline">\(使得对任意满足\)</span>h(x)=0,x-x_* <span class="math inline">\(的\)</span>x$成立</p>
+<p><span class="math display">\[f(x)-f(x_* )\geq \frac{\gamma}{2}\vert \vert x-x_* \vert \vert ^2\]</span></p>
+<p><strong>Remark</strong></p>
+<p>该充分条件并不需要$x_* $的正则性。</p>
+<p>对于该命题，我们打算采取两种方法来证明，一是augmented Lagrange方法，二是可行方向法。</p>
+<ul>
+<li><p>augmented Lagrange方法的思想在于，通过引入augmented Lagrange函数，</p>
+<p><span class="math display">\[L_c(x,\lambda)=f(x)+\lambda^Th(x)+\frac{c}{2}\vert \vert h(x)\vert \vert ^2\]</span></p>
+<p>使得带约束的原问题</p>
+<p><span class="math display">\[\mathop{min}_{h(x)=0} f(x)\]</span></p>
+<p>与新问题问题</p>
+<p><span class="math display">\[\mathop{min}_{h(x)=0} f(x)+\frac{c}{2}\vert \vert h(x)\vert \vert ^2\]</span></p>
+有相同的局部最优解。</li>
+<li><p>可行方向法的思想在于，利用反正法，假设存在一系列比$x_* $更优的点，通过这些点构造方向导出矛盾。</p></li>
+</ul>
+<div id="augmented-lagrange" class="section level4">
+<h4>augmented Lagrange方法</h4>
+<p><img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161208_1.png" alt="Snip20161208_1" /> <img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161208_2.png" alt="Snip20161208_2" /></p>
+</div>
+<div class="section level4">
+<h4>可行方向法</h4>
+<div class="figure">
+<img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161208_3.png" alt="Snip20161208_3" />
+<p class="caption">Snip20161208_3</p>
+</div>
+</div>
+</div>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/lagrange%E4%B9%98%E5%AD%90/">Lagrange乘子</a>
+  
+</div>
+
+
+
+
+    
+    
+
+    
+    <div class="article-widget">
+      <div class="post-nav">
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/post/zh/lag2/" rel="next">Lagrange乘子理论(2)</a>
+  </div>
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/post/zh/con2/" rel="prev">约束优化(2)</a>
+  </div>
+  
+</div>
+
+    </div>
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/tex.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML" integrity="sha512-tOav5w1OjvsSJzePRtt2uQPFwBoHt1VZcUq8l8nm5284LEKE9FSJBQryzMBzHxY5P0zRdNqEcpLIRVYFNgu1jw==" crossorigin="anonymous"></script>
+    
+    
+
+  </body>
+</html>
+

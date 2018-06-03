@@ -18,7 +18,7 @@
       <pubDate>Wed, 20 Apr 2016 00:00:00 +0800</pubDate>
       
       <guid>/home/about/</guid>
-      <description>Biography I am a M.S. student in Statistics at the University of Illinois at Urbana-Champaign. Also, I work part-time as a Data Science Intern at Bud Analytics Lab affliliated to Anheuser-Busch InBev, a lab in Urabana focused on data analytics, developing data research and innovation to solve problems ranging from assortment optimization, social media, and market trends to large-scale data initiatives.</description>
+      <description>Biography I am a M.S. student in Statistics at the University of Illinois at Urbana-Champaign. Also, I work part-time as a Data Science Intern at Bud Analytics Lab affliliated to Anheuser-Busch InBev,focused on developing data research and innovation.</description>
     </item>
     
     <item>
@@ -46,6 +46,17 @@
       
       <guid>/home/gallery/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Resources</title>
+      <link>/home/resources/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0800</pubDate>
+      
+      <guid>/home/resources/</guid>
+      <description> Mathematical Statistics Lecture Notes @UIUC
+ Self-modified templates for LaTeX and R Markdown
+  </description>
     </item>
     
     <item>

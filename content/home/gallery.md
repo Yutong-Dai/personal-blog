@@ -13,7 +13,7 @@ subtitle = ""
 weight = 4
 
 folder = "gallery"
-view = 0
+view = 1
 
 filter_default = 0
 

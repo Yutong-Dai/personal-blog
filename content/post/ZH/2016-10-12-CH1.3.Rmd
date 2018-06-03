@@ -1,0 +1,305 @@
+---
+title: "无约束优化(3)"
+author: Yutong Dai
+date: '2016-10-12'
+categories:
+  - convex optimization
+tags:
+  - 无约束优化
+slug: uncon3
+output:
+  blogdown::html_page:
+    toc: yes
+summary: 该系列posts是笔者学习Dimitri .P Bertsekas所写的 Nonlinear Programming 2ed 中文版时整理的笔记。第一章无约束优化内容涉及到最优性条件、梯度方法、牛顿法与变形以及共轭方向法。本文讨论梯度方法的收敛性与收敛速率的问题。
+---
+
+
+
+## 收敛性分析
+
+梯度方法是利用当前迭代点的局部信息进行，与函数本身的全局性质无关，从而该方法容易被各种局部最小值点吸引（一阶导数为0的点），在下面的吸引定理(capture theorem)中我们可以看到梯度方法最好的情况也只是收敛到驻点。因此针对非凸的问题我们必须尝试从不同的起始点运行梯度方法，才可能得到一些可行的结果。
+
+### 极限点的存在性问题
+
+
+1. 一般的，梯度方法产生的迭代序列$\{x_k\}$完全可能不存在极限点。事实上，如果$f(x)$不存在最小值点，那么一般来说迭代序列$\{x_k\}$是无界的
+2. 若水平集$$S_{x_0}=\{x \vert f(x)\leq f(x_0)\}$$是有界的，并选合适的步长$a_k$保证每一步函数值在下降，那么$\{x_k\}$总是包含在$S_{x_0}$内的，从而有界，进而有收敛的子列。
+3. 即使$\{x_k\}$是有界的，也不能保证该序列收敛到唯一的极限点，幸运地是孤立的局部最小值点（存在开球使得该点是球内部的唯一驻点）可以吸引大多梯度方法产生的序列。
+4. 考虑最速下降法产生的迭代序列$x_{k+1}=x_{k}+a_k\nabla f(x_k)$, 其中$f$是凸函数且至少有一最小值点，并且对所有的x，y存在L>0,满足 
+	
+	$$\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L\vert \vert x-y\vert \vert$$ 
+	
+	当步长$a_k$满足下列两个条件中的一个时，$\{x_k\}$收敛到$f$的一个最小值点。
+	* a) $\epsilon\leq a_k\leq \frac{2-\epsilon}{L};\forall k$
+	* b）$a_k\rightarrow 0$ 且 $\sum_{k=0}^{+\infty} a_k=0$
+
+5. 如果存在多个全局最小值点的连通集，理论上$\{x_k\}$可以有多个极限点。
+
+ **梯度相关(gradient related)**
+
+ 考虑梯度方法$x_{k+1}=x_{k}+a_kd_k$产生的序列$\{x_k,d_k\}$，我们称方向序列$\{d_k\}$与$\{d_k\}$是序列相关的，若对任何收敛于*非驻点*的子列$$\{x_{k}\}_{k \in \kappa}$$，相应的子列$$\{d_{k}\}_{k \in \kappa}$$都是*有界的*，且满足 
+ 
+ $$\limsup_{k\rightarrow +\infty,{k \in \kappa}} \nabla f(x_{k})'d_{k}<0$$
+
+1. 为什么要考虑梯度相关？
+	事实上，梯度相关可以保证对于那些不趋于驻点的$x_k$，对应的$d_k$与$\nabla f(x_k)$的不会趋于正交，从而保证算法不会陷在某一非驻点附近.
+
+2. 怎样验证梯度相关的条件满足？
+	
+	* 有界特征值条件： 若 $d_k=-D_k \nabla f(x_k)$, 其中$D_k$正定，且存在$c_1,c_2>0$ 使得对任意$z\in\scr{R}^n,k=0,1,2...$成立
+ $c_1\vert \vert z\vert \vert ^2\leq z'D_kz\leq c_2\vert \vert z\vert \vert ^2$	
+ 
+ * 有界特征值条件推广形式： 若 $d_k=-D_k \nabla f(x_k)$, 其中$D_k$正定，且存在$c_1,c_2>0,p_1,p_2\geq 0$, 使得使得对任意$z\in\scr{R}^n,k=0,1,2...$成立 $c_1\vert \vert \nabla f(x_k)\vert \vert ^{p_1}\vert \vert z\vert \vert ^2\leq z'D_kz\leq c_2\vert \vert \nabla f(x_k)\vert \vert ^{p_2}\vert \vert z\vert \vert ^2$
+ 
+ * 存在$c_1,c_2>0,p_1,p_2\geq 0$,使得对任意$k=0,1,2...$成立 $c_1\vert \vert \nabla f(x_k)\vert \vert ^{p_1}\leq -\nabla f(x_k)'d_k$以及 $\vert \vert d_k\vert \vert \leq  c_2\vert \vert \nabla f(x_k)\vert \vert ^{p_2}$
+
+如果$\{d_k\}$是梯度相关的，在一定条件下我们可以保证由梯度方法产生的$\{x_k\}$是收敛到驻点的，具体讨论详见`收敛性结论`小节。
+
+### 迭代终止条件
+
+一般来说梯度方法不会在有限步收敛，所有我们需要设置一个迭代终止准则使得在算法停止时我们的解以一定精度逼近至少一个局部最小值。常用的准则有：
+
+1. 当梯度范数充分小时，$\vert \vert \nabla f(x_k)\vert \vert \leq \epsilon$，停止迭代
+	* 修正形式： $\frac{\vert \vert \nabla f(x_k)\vert \vert }{\nabla f(x_0)}\leq \epsilon$
+
+2. 假设下降方向包含了优化变量的相对缩放比例，那么当$\vert \vert d_k\vert \vert \leq \epsilon$，停止迭代
+
+**Remark**
+
+1. 当$\nabla^2 f(x)$正定时，条件$\vert \vert \nabla f(x_k)\vert \vert \leq \epsilon$给出了当前解与局部最小值点距离的上界。
+
+### 收敛性结论
+
+证明下述的收敛性结论的主要思想是，在每次迭代中，目标函数都得到了改进，并且基于我们的假设，这种改进在非驻点附近是实质性的，即存在非零改进下界。我们总是认为算法不会收敛到一个非驻点,不然目标函数累计改进量将达到无穷。
+
+
+#### **【Armijo准则下的收敛性】**
+ 设$\{x_k\}$是由梯度方法$x_{k+1}=x_{k}+a_kd_k$产生的序列,假设$\{d_k\}$是梯度相关的并且$a_k$的选取是根据Armijo准则选取的，那么$\{x_k\}$的每一个极限点(若存在)都是驻点
+
+**Remark:**
+
+1. 该命题证明了梯度方法构造的的迭代序列的极限点（若存在）则为驻点。
+2. 从命题证明过程中我们可以知道：对于任何步长准则，只要对目标函数值得改进大于Armijo准则得到的改进，就能保证构造的迭代列是收敛的。因此**最小化准则**，**有限最小化准则**选取的步长都可以保证迭代序列的极限点（若存在）则为驻点
+
+#### **【固定步长的收敛性】**
+
+设$\{x_k\}$是由梯度方法$x_{k+1}=x_{k}+a_kd_k$产生的序列,假设$\{d_k\}$是梯度相关的并且$a_k$的选取是根据固定步长准则选取的。假设对于某个常数$L>0$有
+
+$$Lipschitz\; continuity\; condition:\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L\vert \vert x-y\vert \vert \; \forall x,y\in \scr{R}^n$$
+
+并且成立$\forall k, d_k\neq 0$ 以及
+
+$$ \exists \epsilon>0, s.t.\;\epsilon\leq a_k\leq (2-\epsilon)\bar{a}_k$$
+
+其中$\bar{a}_k=\frac{\vert \nabla f(x_k)d_k\vert }{L\vert \vert d_k\vert \vert ^2}$. 那么$\{x_k\}$的每一个极限点(若存在)都是驻点.
+
+**Remark:**
+
+1. 仅仅要求$\{d_k\}$是梯度相关的是不能保证$\epsilon$的存在性，因为梯度相关只是对$\{d_k\}$的有界子列的局部性假设。但是幸运的是，前文提及的三个保证$\{d_k\}$梯度相关的条件，均可以保证$ \exists \epsilon>0, s.t.\;\epsilon\leq a_k\leq (2-\epsilon)\bar{a}_k$。比如若条件：**存在$c_1,c_2>0$,使得对任意$k=0,1,2...$成立 $c_1\vert \vert \nabla f(x_k)\vert \vert ^{2}\leq -\nabla f(x_k)'d_k$以及 $\vert \vert d_k\vert \vert ^2\leq  c_2\vert \vert \nabla f(x_k)\vert \vert ^{2}$**满足，那么只要对所有的k，成立$\exists \epsilon_0 \leq a_k\leq \frac{c_1(2-\epsilon_0)}{Lc_2}$则条件
+
+	$$ \exists \epsilon>0, s.t.\;\epsilon\leq a_k\leq (2-\epsilon)\bar{a}_k$$
+	
+	成立。
+
+2. 命题中一阶导数$\nabla f(x)$的Lipschitz连续性（Lipschitz continuity condition）对该命题十分重要，它限制了函数变化程度（曲率）所在的方向都不大于 L。我们可以证明，如果$f$是二次可微的并且$\nabla^2 f(x)$在$\scr{R}^n$上有界，则Lipschitz连续性可以得到保障。但是比较难过的是，很多函数即使二阶可微，也不能保证其二阶Hessian阵有界。
+3.  Lipschitz连续性在一定程度上可以弱化：对每一个有界集$A\subset \scr{R}^n$都存在常数$L_A$满足
+
+	$$\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L_A\vert \vert x-y\vert \vert \; \forall x,y\in A$$
+	
+	* 水平集$\{x\vert f(x)\leq c\},c\in\scr{R}$是有界的，且$f$是二阶连续可微的，则$\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L_A\vert \vert x-y\vert \vert \; \forall x,y\in A$总是满足的
+	
+	* 若 $A=\{x\vert f(x)\leq f(x_0)\}$是有界的，且步长依赖于初始点$x_0$，那么 Lipschitz连续性总能被满足。
+
+4. 具体应用中Lipschitz常数是很难估计的，所以满足$\epsilon\leq a_k\leq (2-\epsilon)\bar{a}_k$的步长$a_k$是未知的。
+
+#### **【缩减步长的收敛性】**
+设$\{x_k\}$是由梯度方法$x_{k+1}=x_{k}+a_kd_k$产生的序列,假设对于某个常数$L>0$有
+
+$$Lipschitz\; continuity\; condition:\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L\vert \vert x-y\vert \vert \; \forall x,y\in \scr{R}^n$$
+
+存在$c_1,c_2>0$,使得对任意$k=0,1,2...$成立 $c_1\vert \vert \nabla f(x_k)\vert \vert ^{2}\leq -\nabla f(x_k)'d_k$以及 $\vert \vert d_k\vert \vert ^2\leq  c_2\vert \vert \nabla f(x_k)\vert \vert ^{2}$.同时有 $a_k\rightarrow 0,\sum_{k=1}^{+\infty}a_k=\infty$则，一定是下述情况之一
+
+*  $f(x_k)\rightarrow -\infty$ 
+*   $\{f(x_k)\}$收敛于一个有限值，$\nabla f(x_k)\rightarrow 0$, $\{x_k\}$的每个极限点都是$f$的驻点
+
+**Remark:**
+
+1. 该命题的假设条件并不能保证初始迭代能够使目标函数下降。但是当步长充分小后，如满足$\exists \epsilon_0 \leq a_k\leq \frac{c_1(2-\epsilon_0)}{Lc_2}$，就能保证迭代过程中目标函数下降。此时只要保证了$\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L\vert \vert x-y\vert \vert $对于所有A中元素集合成立即可保证收敛性，其中$A=\{x\vert f(x)\leq f(x_0)\}$。
+
+####  **【吸引定理】**
+ 设$f$是一个连续可微函数，$\{x_k\}$是保证函数下降,即 $f(x_{k+1})\leq f(x_k)$，且通过$x_{k+1}=x_{k}+a_kd_k$产生的序列，同时$\{x_k\}$的每个收敛点都是$f$的驻点。
+
+假设存在标量$s>0,c>0$满足对于所有的k，成立$a_k\leq s\;\; \vert \vert d_k\vert \vert \leq c\vert \vert \nabla f(x_k)\vert \vert $
+
+令$x_* $是$f$的局部最小值点，同时也是在某一开集中$f$唯一的驻点，那么存在一个包含$x_* $的开集$S$满足: 存在$\bar k\geq 0$满足$x_{\bar k}\in S$，那么对于一切 $k>\bar k$成立$x_k\in S$且$x_k\rightarrow x_* $.
+
+**Remark:**
+
+1. 条件：存在标量$s>0,c>0$满足对于所有的k，$a_k\leq s$以及 $f(x_{k+1})\leq f(x_k)$对于Armijo准则和最小化准则，有限最小化准则都是满足的。对于固定步长准则，缩减步长准则，当满足 $f(x_{k+1})\leq f(x_k)$时，$a_k\leq s$也是满足的。
+2. 如果$d_k=-D_k\nabla f(x_k)$且$D_k$特征值有上界则$\vert \vert d_k\vert \vert \leq c\vert \vert \nabla f(x_k)\vert \vert $也是满足的
+3. 该命题解释了为什么梯度方法产生的序列在实际应用中倾向于某个唯一的极限点，因为孤立的局部最小值点可以很好地吸引梯度方法。
+
+## 收敛速率分析
+
+收敛速率的刻画方法一般有三种
+
+1. 计算复杂： 尝试估计
+2. 信息复杂度
+3. 局部分析：只关注最优解在邻域内的表现。具体来说是在局部最小值的附近利用二次函数来近似目标函数，从而很好的预测不同算法在接近非奇异局部最小值时的表现。然而这种方法没法表示算法在最初迭代时的收敛速率（虽然在实际中，初步几次迭代收敛的较快，只在极限点附近才慢下来）。然而局部分析不适用与两类问题
+	 * 涉及奇异的局部最小值点的问题
+	 * 需要多次迭代才能达到适用局部分析方法的最优解近邻的问题
+
+### 局部分析方法
+
+这种方法我们只关注序列$\{x_k\} $收敛到唯一$x_* $的情形。一般来说，我们通过*偏差函数*e(x),$e:\scr{R}^n\rightarrow \scr{R}$来刻画。常用的偏差函数有
+
+* $e(x)=\vert \vert x-x_* \vert \vert $
+* $e(x)=\vert f(x)-f(x_* )\vert $
+
+这种局部的分析是渐进的，着重刻画了偏差序列$\{e(x_k)\}$的尾部收敛速率。我们定义如下三种收敛速率：
+
+1. 如果存在$\beta\in (0,1)$和$q>0$，使得对任意$k$成立$e(x_k)\leq q\beta^k$，则称序列$\{e(x_k)\}$*线性收敛*
+2. 如果对任意$\beta\in (0,1)$，存在$q$，使得对任意$k$成立$e(x_k)\leq q\beta^k$，则称序列$\{e(x_k)\}$*超线性收敛*
+3. 如果对存在$\beta\in (0,1)$，$q>0,p>1$,使得对任意$k$成立$e(x_k)\leq q\beta^{p^k}$，则称序列$\{e(x_k)\}$*至少p阶超线性收敛*。$p=2$时称为*二阶收敛*
+
+**Remark**
+
+1. 如果存在$\beta\in (0,1)$有
+
+	$$\limsup_{k\rightarrow +\infty}\frac{e(x_{k+1})}{e(x_{k})}\leq \beta$$
+
+	则可以推出线性收敛
+
+2. 如果任意$\beta\in (0,1)$有
+
+	$$\limsup_{k\rightarrow +\infty}\frac{e(x_{k+1})}{e(x_{k})}=0$$
+	
+	则可以推出超线性收敛
+3. 满足条件
+
+	$$\limsup_{k\rightarrow +\infty}\frac{e(x_{k+1})}{e(x_{k})^p}\leq \infty$$
+	
+	则可以推出$p$阶超线性收敛
+4. 实际中大多数算法产生的是线性收敛或者超线性收敛序列的，尤其是算法收敛到非奇异的局部最小值时。
+
+
+### Case Study-二次函数情形
+
+#### 最速下降方法的收敛速率分析 
+![quadratiquadratic](http://ogfa13jyv.bkt.clouddn.com/14763620608369.jpg)
+
+	
+![figforquadratic](http://ogfa13jyv.bkt.clouddn.com/14763630947077.jpg)
+
+**Remark** 最速下降是线性收敛速率
+
+> 【二次函数最速下降法的收敛速率结论】
+> 考虑二次函数$f(x)=\frac{1}{2}x'Qx$其中$Q$是对称正定矩阵。设$\{x_k\}$是由最速下降方法$x_{k+1}=x_{k}-a_k\nabla f(x_k)$产生的序列，其中$a_k$是按照线性最小化准则$$a_k=\mathop{argmin}_{a\geq 0} f(x_k-a\nabla f(x_k))$$选取的,那么对于所有的k我们有$$\frac{f(x_{k+1})}{f(x_{k})}\leq \left(\frac{M-m}{M+m}\right)^2$$其中$M,m$分别是Q的最大、最小特征值。
+
+**Remark** 
+
+1. 从不等式$\frac{f(x_{k+1})}{f(x_{k})}\leq \left(\frac{M-m}{M+m}\right)^2$我们可以看出迭代过程中，两次值变化会被$\left(\frac{M-m}{M+m}\right)^2$给限制住。自然地，对于M和m很相差很大的情形，那么函数下降得就会很少，从而导致收敛速率降低。从几何（二维）上来解释上述情况即为:二次函数的等值面可以看成椭球.图中椭圆族的长轴方向与短轴方向分别对应是最小特征值和最大特征[具体讨论可以参考Linear Algebra and Its Applications 4th Edition by Gilbert Strang p357-p358]。如果M远大于m则会出现非常扁的椭圆,于是搜索路径会变成锯齿状的样子。
+
+	![oval](http://ogfa13jyv.bkt.clouddn.com/14768782699369.jpg)
+
+
+#### 梯度下降方法的收敛速率分析 
+
+考虑比最速下降算法更一般的算法$x_{k+1}=x_{k}-a_kD_k\nabla f(x_k)$,其中$D_k$是对称正定的。本质上来说这是把利用$D_k$给坐标系作了一个旋转。因此也可以看作是scaled version of the steepest decent。事实上只需令$S=D_k^{\frac{1}{2}}，y=SX$在y空间里
+$$\mathop{min}_y h(y)=f(Sy)\; y\in\mathscr{R}^n$$
+
+![](http://ogfa13jyv.bkt.clouddn.com/14768837339663.jpg)
+
+
+**Remark**
+
+1. 选取$D_k^{1/2}$接近Hessian阵$Q$逆的平方根的好处在于，可以改善条件数过大的毛病，避免出现了锯齿状的搜索路径。
+2. 从牛顿方法的搜索方向选取我们不难看出$D_k=H_k^{-1}$，于是强行得到了一个单位阵，从而才可以保证牛顿法在收敛点附近搜索速率是超线性的，这从式1.43可以得到直观但不严密的解释。
+3. 对角线缩放最速下降，取$D_k$为对角阵，且对角元近似为$f(x_k)$对角元的倒数, 即$$(D_k)_{i,i}=\left(\frac{\partial^2 f(x_k)}{(\partial x_i)^2}\right)^{-1}$$，其思想是类似的也是为了改变病态现象。只要$(D_k)_{i,i}$是正的，则算法同样适用于非二次问题，虽然不能保证提高下降速度，但是可以取得较好的实际效果。
+
+### Case Study-非二次函数与奇异的情形
+
+#### 非二次函数
+
+![](http://ogfa13jyv.bkt.clouddn.com/14768849329079.jpg)
+
+**Remark**
+
+1. 收敛速率
+	![](http://ogfa13jyv.bkt.clouddn.com/14768849982074.jpg)
+
+2. 上述算法的思想在于，利用$D_k$去修正正定Hessian阵的病态问题，但是一但函数并不二阶可导或者在迭代点附近无正定的Hessian阵，则结论均失效。
+
+ 【类牛顿法的超线性收敛速率结论】
+ 假设f二阶连续可微，考虑由梯度算法$x_{k+1}=x_{k}+a_kd_k$产生的序列$\{x_k\}$并作出以下两类假设:
+ 
+ 1)关于迭代列的假设：
+ 
+ $$x_k\rightarrow x_* \quad \nabla f(x_* )=0\quad \nabla^2f(x_* )正定\quad f(x_k)\neq 0 \; for\; all\; k$$
+ 
+ 2)关于下降方的假设：
+ 
+ $$\lim_{k\rightarrow +\infty}\frac{\vert \vert d_k+(\nabla^2 f(x_* ))^{-1}\nabla f(x_k)\vert \vert }{\vert \vert \nabla f(x_k)\vert \vert }=0$$
+ 
+ 按照Armijo准则选取步长$a_k$。那么当初始步长s=1，$\sigma<\frac{1}{2}$时，我们有
+ 
+ $$\lim_{k\rightarrow +\infty}\frac{\vert \vert x_{k+1}-x_* \vert \vert }{\vert \vert x_{k}-x_* \vert \vert }=0$$
+ 
+ 而且存在$\bar k$， 当$k>\bar k$后，我们可以始终取$a_k$为初始步长，即当$k>\bar k$后，$a_k=s=1\quad$
+
+**Remark**
+
+1. 该定理表明选取步长为1的牛顿法，如果初始点选择得很好的话将可以获得超线性的收敛速率。
+2. 基于该定理和吸引定理我们知道：基于Armijo准则的类牛顿法可以收敛到局部最小值点。
+
+
+#### 奇异
+
+现在考虑在局部最小值点或者附近的Hessian阵要么不存在或者不正定的情况。即在局部最小值$$x_*$$附近的沿着单位方向$d$的$f$导数$$\nabla f(x_*)$$(陈纪修 数学分析下册 140 定理12.1.1):
+
+* 变化太慢 
+
+	$$\lim_{a\rightarrow 0}\frac{\nabla f(x_* +ad)^Td-\nabla f(x_* )^Td}{a}=0$$
+
+* 变化太快 
+
+	$$\lim_{a\rightarrow 0}\frac{\nabla f(x_* +ad)^Td-\nabla f(x_* )^Td}{a}=\infty$$
+
+
+**Example**
+
+![Snip20161020_30-w623](http://ogfa13jyv.bkt.clouddn.com/Snip20161020_30.png)
+
+在全局最小值点附近沿着d=(0,1)则会出现斜率变化太快的情形，沿着d=(1,0)则会出现变化太缓慢的情形。
+
+一般来说，对于这类问题反而采用最速下降的方法会取得比较好的效果。另外一个常用的方法是修正重球方法。
+
+![Snip20161020_31](http://ogfa13jyv.bkt.clouddn.com/Snip20161020_31.png)
+
+**Remark**
+
+一般认为重球算法不容易陷入较"浅"的局部最小值点，因此会取得较好的效果。
+
+**奇异问题的收敛速率分析**
+
+【收敛速率慢于线性的情形】
+
+ 假设目标函数$f$是凸函数，最小值是$f_* $且存在正数L，满足
+
+ $$\vert\vert \nabla f(x)-\nabla f(y)\vert\vert \leq L \vert\vert x-y \vert\vert \; \forall x,y\in R^n$$
+
+ 考虑梯度算法$x_{k+1}=x_{k}+a_Kd_k$，其中步长$a_k$是按照最小化准则选取的，$\{d_k\}$是梯度相关的，且存在$c>0$对任意k，有
+ 
+ $$\nabla f(x_k)d_k\leq -c \vert \vert \nabla f(x_k)\vert \vert \vert \vert d_k\vert \vert $$
+ 
+ 假设$f$的全局最小值点组成的集合是非空有界集合，那么
+
+ $$f(x_k)-f_* =o(1/k)$$
+
+or equivalently,
+
+$$ \lim_{k\rightarrow +\infty}\frac{f(x_k)-f_* }{k} =0 $$
+
+**Remark**
+
+1. 该结论适用于最速下降法产生的序列，其中步长是固定步长准则选取的。

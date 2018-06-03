@@ -152,16 +152,6 @@ image(as.matrix.csr(A))&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>中文测试</title>
-      <link>/post/zh/chinese-test/</link>
-      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/zh/chinese-test/</guid>
-      <description>&lt;p&gt;这是一个中文测试,成功了&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Get Data from Website</title>
       <link>/post/en/get-data-from-website/</link>
       <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
@@ -311,6 +301,1781 @@ image(as.matrix.csr(A))&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;can produce its index &lt;a href=&#34;#eq:binom&#34;&gt;(1)&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Lagrange乘子理论(3)</title>
+      <link>/post/zh/lag3/</link>
+      <pubDate>Wed, 21 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/lag3/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#beyond-kkt&#34;&gt;Beyond KKT&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#fritz-john-&#34;&gt;Fritz-John 最优性条件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#fritz-john--kkt-&#34;&gt;从Fritz-John 条件到 KKT 条件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;凸集约束的情形&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;beyond-kkt&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Beyond KKT&lt;/h2&gt;
+&lt;p&gt;在前面的讨论中，我们看到最优点的正则性对Lagrange乘子的存在性是必不可少的。&lt;/p&gt;
+&lt;p&gt;下面我们要讨论一个问题，如果我们把正则性拿掉，需要补充什么条件才可以保证存在乘子（不一定是Lagrange乘子）满足类似的性质呢。&lt;/p&gt;
+&lt;div id=&#34;fritz-john-&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Fritz-John 最优性条件&lt;/h3&gt;
+&lt;p&gt;假设$x^* $是满足下面问题的局部最小值点，&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(f: R^n\;\vert \rightarrow R\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(h_i: R^n\;\vert \rightarrow R\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(g_j: R^n\;\vert \rightarrow R\)&lt;/span&gt;均是连续可微的。那么存在唯一的标量&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* 和\)&lt;/span&gt;乘子&lt;span class=&#34;math inline&#34;&gt;\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)&lt;/span&gt;满足如下条件:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* \nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_j\geq 0\quad j=0,...,r\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* ,\lambda_1^* ,...,\lambda_m^* ,\mu_1^* ,...,\mu_r^* \text{不全为0}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{在}x^* \text{的每个领域上都存在一点x使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&amp;gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&amp;gt;0\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;该命题的证明可以参考用惩罚法证明等式约束情况下的Lagrange最优性定理。即构造函数列&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[F_k(x)=f(x)+\frac{k}{2}\sum_{i=1}^m h_i(x)+\frac{k}{2}\sum_{j=1}^r(g^+_j(x))^2+\frac{1}{2}\vert \vert x-x^* \vert \vert ^2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;然后考虑优化问题&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize} F_k(x)\\
+\text{subject to} x\in S
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(S=\{x\vert \vert \vert x-x^* \vert \vert \leq \epsilon\},\epsilon&amp;gt;0\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;条件4&lt;/code&gt;蕴含了互补松弛条件【&lt;span class=&#34;math inline&#34;&gt;\(\mu_j^* g_j(x)=0\)&lt;/span&gt;】。这是因为当&lt;span class=&#34;math inline&#34;&gt;\(\mu_j^* \neq 0\)&lt;/span&gt;时，由条件4我们有&lt;span class=&#34;math inline&#34;&gt;\(g_j(x)&amp;gt;0\)&lt;/span&gt;，再利用&lt;span class=&#34;math inline&#34;&gt;\(g_j(x)\)&lt;/span&gt;的连续性，我们知道&lt;span class=&#34;math inline&#34;&gt;\(g_j(x^* )=0\)&lt;/span&gt;,即条件4可以推出较弱的互补松弛条件。并且条件4缩小了满足Fritz-John条件候选乘子的范围。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;fritz-john--kkt-&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;从Fritz-John 条件到 KKT 条件&lt;/h3&gt;
+&lt;p&gt;设$x^* &lt;span class=&#34;math inline&#34;&gt;\(是问题的局部最优值点，注意到只要能够证明到不存在\)&lt;/span&gt;_j^* =0&lt;span class=&#34;math inline&#34;&gt;\(使得Fritz-John 中的条件1-4成立，则我们可以保证\)&lt;/span&gt;_0&lt;sup&gt;* &amp;gt;0&lt;span class=&#34;math inline&#34;&gt;\(，进一步得到了以\)&lt;/span&gt;&lt;/sup&gt;* /_0&lt;sup&gt;* ,&lt;/sup&gt;* /_0^* &lt;span class=&#34;math inline&#34;&gt;\(为Lagrange乘子的KKT条件。不失一般性，我们可以只讨论\)&lt;/span&gt;_0^* =0,_0^* =1&lt;span class=&#34;math inline&#34;&gt;\(的两种情形【对于\)&lt;/span&gt;_0^* &amp;gt;0&lt;span class=&#34;math inline&#34;&gt;\(的情形只需等式两边同时除以\)&lt;/span&gt;_0^* &lt;span class=&#34;math inline&#34;&gt;\(】，下面几个命题告诉我们在什么情况下可以够保证不存在\)&lt;/span&gt;_j^* =0$使得Fritz-John 条件中的条件1-4成立。&lt;/p&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;正则性假设&lt;/h4&gt;
+&lt;p&gt;假设$x^* $是满足正则性的下述问题的局部最小值点&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(f: R^n\;\vert \rightarrow R\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(h_i: R^n\;\vert \rightarrow R\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(g_j: R^n\;\vert \rightarrow R\)&lt;/span&gt;均是连续可微的。那么存在唯一的Lagrange乘子&lt;span class=&#34;math inline&#34;&gt;\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)&lt;/span&gt;满足如下条件:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_j\geq 0\quad j=0,...,r\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{在}x^* \text{的每个领域上都存在一点x使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&amp;gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&amp;gt;0\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;proof&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;由$x^* &lt;span class=&#34;math inline&#34;&gt;\(的正则性，我们知道对于不全为0的\)&lt;/span&gt;_1^* ,…,_m^* ,_1^* ,…,_r^* $下式不成立&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\sum_{i=1}^m\lambda^* _i\nabla h_i(x^* )+\sum_{j=1}^r \mu_jg_j(x^* )=0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;故当&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* =0\)&lt;/span&gt;时，Fritz John条件1不成立。因此可以取&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* =1\)&lt;/span&gt;，并且由$x^* $的最优性，我们有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla f(x^* )+\sum_{i=1}^m\lambda^* _i\nabla h_i(x^* )+\sum_{j=1}^r \mu_jg_j(x^* )=0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;条件2与3是直接从Fritz John条件中得到的。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;线性等式约束和凹不等式约束假设&lt;/h4&gt;
+&lt;p&gt;假设$x^* $是满足下述问题的局部最小值点&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(f: R^n\;\vert \rightarrow R\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(h_i: R^n\;\vert \rightarrow R\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(g_j: R^n\;\vert \rightarrow R\)&lt;/span&gt;均是连续可微的。假设所有&lt;span class=&#34;math inline&#34;&gt;\(h_i\)&lt;/span&gt;是线性函数，&lt;span class=&#34;math inline&#34;&gt;\(g_j\)&lt;/span&gt;是凹函数。那么存在唯一的Lagrange乘子&lt;span class=&#34;math inline&#34;&gt;\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)&lt;/span&gt;满足如下条件:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_j\geq 0\quad j=0,...,r\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{在}x^* \text{的每个领域上都存在一点x使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&amp;gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&amp;gt;0\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;proof&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;首先我们假设&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* =0\)&lt;/span&gt;。对任意&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;将&lt;span class=&#34;math inline&#34;&gt;\(h_i(x),g_j(x)\)&lt;/span&gt;分别在$x^* $展开到一阶，即&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+h_i(x)=h_i(x^* )+\nabla h_i(x^* )^T(x-x^* )\quad i=1,2,...,m \\
+g_j(x)\leq g_i(x)^* +\nabla g_i(x^* )^T(x-x^* )\quad i=1,2,...,m 
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;对上式关于&lt;span class=&#34;math inline&#34;&gt;\(i,j\)&lt;/span&gt;求和得到&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\sum_{i=1}^m \lambda_i^* h_i(x)+\sum_{j=1}^r\mu_j^* g_j(x)\leq  \sum_{i=1}^m \lambda_i^* h_i(x^* )+\sum_{j=1}^r\mu_j^* g_j(x^* )+(x-x^* )^T\big(\sum_{i=1}^m \lambda_i^*  \nabla h_i(x^* )+\sum_{j=1}^r\mu_j^*  \nabla g_j(x^* )\big)\leq 0\quad (****)
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;后面一个不等号成立是因为,由Fritz John条件1，&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\sum_{i=1}^m \lambda_i^*  \nabla h_i(x^* )+\sum_{j=1}^r\mu_j^*  \nabla g_j(x^* )=0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;同时由$x&lt;sup&gt;* &lt;span class=&#34;math inline&#34;&gt;\(的最优性，我们有\)&lt;/span&gt;h_i(x&lt;/sup&gt;* )=0,g_j(x^* )0$。&lt;/p&gt;
+&lt;p&gt;由Fritz John 条件3，我们可以知道，当&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* =0\)&lt;/span&gt;时，则&lt;span class=&#34;math inline&#34;&gt;\(\lambda_1^* ,...,\lambda_m^* ,\mu_1^* ,...,\mu_r^* \text{不全为0}\)&lt;/span&gt;。利用Fritz John 条件3，对于那些使得&lt;span class=&#34;math inline&#34;&gt;\(\lambda_i\neq ,\mu_j\neq 0\)&lt;/span&gt;的&lt;span class=&#34;math inline&#34;&gt;\(i,j\)&lt;/span&gt;,存在&lt;span class=&#34;math inline&#34;&gt;\(x_0\)&lt;/span&gt;满足&lt;span class=&#34;math inline&#34;&gt;\(\lambda_ih_i(x_0)&amp;gt;0,\mu_jg_j(x_0)&amp;gt;0\)&lt;/span&gt;，进而有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\sum_{i=1}^m \lambda_i^* h_i(x_0)+\sum_{j=1}^r\mu_j^* g_j(x_0)&amp;gt;0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;从而与（****）式矛盾。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;constraint-qualification&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Constraint Qualification&lt;/h4&gt;
+&lt;p&gt;假设$x^* $是满足下述问题的局部最小值点&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(f: R^n\;\vert \rightarrow R\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(h_i: R^n\;\vert \rightarrow R\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(g_j: R^n\;\vert \rightarrow R\)&lt;/span&gt;均是连续可微的。假设&lt;span class=&#34;math inline&#34;&gt;\(\{\nabla h_i(x^* )\}\)&lt;/span&gt;线性无关，而且存在向量&lt;span class=&#34;math inline&#34;&gt;\(d\)&lt;/span&gt;使得 &lt;span class=&#34;math inline&#34;&gt;\(\forall i\)&lt;/span&gt;以及&lt;span class=&#34;math inline&#34;&gt;\(\forall j\in A(x^* )\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d^T\nabla h_i(x^* )&amp;gt;0 \qquad d^T\nabla g_j(x^* )&amp;lt;0 \]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;那么存在唯一的Lagrange乘子&lt;span class=&#34;math inline&#34;&gt;\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)&lt;/span&gt;满足如下条件:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_j\geq 0\quad j=0,...,r\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{在}x^* \text{的每个领域上都存在一点x使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&amp;gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&amp;gt;0\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;proof&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;考虑满足Fritz John条件的乘子 $_0^* ,_1^* ,…,_m^* ,_1^* ,…,_r^* &lt;span class=&#34;math inline&#34;&gt;\(，以及假设\)&lt;/span&gt;_0^* =0$。则有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;由于$_1^* ,…,_m^* ,_1^* ,…,_r&lt;sup&gt;* &lt;span class=&#34;math inline&#34;&gt;\(不全为0。我们断言至少存在一个\)&lt;/span&gt;jA(x&lt;/sup&gt;* )&lt;span class=&#34;math inline&#34;&gt;\(使得\)&lt;/span&gt;_j&lt;sup&gt;* &amp;gt;0&lt;span class=&#34;math inline&#34;&gt;\(【否则与\)&lt;/span&gt;{h_i(x&lt;/sup&gt;* )}$线性无关矛盾】。因此有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d^T\big(\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )\big)&amp;lt;0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;从而矛盾，因此有&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* =1\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;注意命题中&lt;span class=&#34;math inline&#34;&gt;\(d\)&lt;/span&gt;的存在想问题，可以转换为更容易验证的假设，即对任意&lt;span class=&#34;math inline&#34;&gt;\(j\in A(x^* )\)&lt;/span&gt;存在&lt;span class=&#34;math inline&#34;&gt;\(d_j\)&lt;/span&gt;满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\forall i, d_j^T\nabla h_i(x^* )=0\\
+\nabla d_j^Tg_j(x^* )&amp;lt;0 \qquad \nabla d_{\bar j}^Tg_{\bar j}(x^* )\leq 0 \quad \bar j \notin A(x^* )
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;取&lt;span class=&#34;math inline&#34;&gt;\(d=\sum_{j \in A(x^* )} d_j\)&lt;/span&gt;即可。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;凸不等式约束&lt;/h4&gt;
+&lt;p&gt;假设$x^* $是满足下述问题的局部最小值点&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(f: R^n\;\vert \rightarrow R\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(h_i: R^n\;\vert \rightarrow R\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(g_j: R^n\;\vert \rightarrow R\)&lt;/span&gt;均是连续可微的。假设所有&lt;span class=&#34;math inline&#34;&gt;\(h_i\)&lt;/span&gt;是线性函数，&lt;span class=&#34;math inline&#34;&gt;\(g_j\)&lt;/span&gt;是凸函数。如果存在可行解&lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;，使得&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[g_j(\bar x)&amp;lt;0,\forall j\in A(x^* )\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;那么存在唯一的Lagrange乘子&lt;span class=&#34;math inline&#34;&gt;\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)&lt;/span&gt;满足如下条件:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_j\geq 0\quad j=0,...,r\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{在}x^* \text{的每个领域上都存在一点x使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&amp;gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&amp;gt;0\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;Proof&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;考虑到&lt;span class=&#34;math inline&#34;&gt;\(h_i(x)\)&lt;/span&gt;的线性性，不失一般性，我们总可以假设&lt;span class=&#34;math inline&#34;&gt;\(\{\nabla h_i(x)\}\)&lt;/span&gt;线性无关【否则将对应的乘子设为0，从而获得一组线性无关的约束】。利用&lt;span class=&#34;math inline&#34;&gt;\(g_j(x)\)&lt;/span&gt;的凸性&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[0&amp;gt;g_j(\bar x)&amp;gt;g_j(x^* )+(\bar x-x^* )^T\nabla g_j(x^* )=(\bar x-x^* )^T\nabla g_j(x^* )\quad \forall j\in A(x^* )\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;由&lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;的可行性，&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[0=h_i(\bar x)=h_i(x^* )+(\bar x-x^* )^T\nabla h_i(x^* )=(\bar x-x^* )^T\nabla h_i(x^* )\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;令$d=x-x^* $，结合Constraint Qualification命题即的。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;凸集约束的情形&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;凸集约束下的 Fritz-John 最优性条件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;假设$x^* $是满足下面问题的局部最小值点，&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r\\
+x\in X \qquad
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(f: R^n\;\vert \rightarrow R\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(h_i: R^n\;\vert \rightarrow R\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(g_j: R^n\;\vert \rightarrow R\)&lt;/span&gt;均是连续可微的,X是一个闭凸集。那么存在唯一的标量&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* 和\)&lt;/span&gt;乘子&lt;span class=&#34;math inline&#34;&gt;\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)&lt;/span&gt;满足如下条件:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;对任意&lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* \nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_j\geq 0\quad j=0,...,r\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* ,\lambda_1^* ,...,\lambda_m^* ,\mu_1^* ,...,\mu_r^* \text{不全为0}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{在}x^* \text{的每个领域上N都存在一点}x\in X\cap N\text{使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&amp;gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&amp;gt;0\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;不难看出除了第一个条件其它条件都是Fritz-John 最优性条件的平行结果；而第一个条件平行于凸集约束的最优性条件。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;凸集约束下的 Constraint Qualification&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;假设$x^* $是满足下面问题的局部最小值点，&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r\\
+x\in X \qquad
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(f: R^n\;\vert \rightarrow R\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(h_i: R^n\;\vert \rightarrow R\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(g_j: R^n\;\vert \rightarrow R\)&lt;/span&gt;均是连续可微的,X是一个闭凸集。并且满足下面两个条件:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;不存在非零向量&lt;span class=&#34;math inline&#34;&gt;\(\lambda =(\lambda_1,...,\lambda_m)\)&lt;/span&gt;使得&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x-x^* )^T\big(\sum_{i=1}^m\lambda_i^* \nabla h_i(x^* )\big)\quad \forall x\in X\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在$x^* &lt;span class=&#34;math inline&#34;&gt;\(处存在可行方向\)&lt;/span&gt;d$满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d^T\nabla h_i(x^* )&amp;gt;0 \qquad d^T\nabla g_j(x^* )&amp;lt;0 \]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;那么存在唯一的标量&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* 和\)&lt;/span&gt;乘子&lt;span class=&#34;math inline&#34;&gt;\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)&lt;/span&gt;满足如下条件:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;对任意&lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* \nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_j\geq 0\quad j=0,...,r\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* ,\lambda_1^* ,...,\lambda_m^* ,\mu_1^* ,...,\mu_r^* \text{不全为0}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{在}x^* \text{的每个领域上N都存在一点}x\in X\cap N\text{使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&amp;gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&amp;gt;0\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;凸集约束下的凸不等式约束&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;假设$x^* $是满足下面问题的局部最小值点，&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r\\
+x\in X \qquad
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(f: R^n\;\vert \rightarrow R\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(h_i: R^n\;\vert \rightarrow R\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(g_j: R^n\;\vert \rightarrow R\)&lt;/span&gt;均是连续可微的,X是一个闭凸集。假设所有&lt;span class=&#34;math inline&#34;&gt;\(h_i\)&lt;/span&gt;是线性函数，&lt;span class=&#34;math inline&#34;&gt;\(g_j\)&lt;/span&gt;是凸函数，并且满足下面两个条件:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;不存在非零向量&lt;span class=&#34;math inline&#34;&gt;\(\lambda =(\lambda_1,...,\lambda_m)\)&lt;/span&gt;使得&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x-x^* )^T\big(\sum_{i=1}^m\lambda_i^* \nabla h_i(x^* )\big)\quad \forall x\in X\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如果存在可行解&lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;，使得&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[g_j(\bar x)&amp;lt;0,\forall j\in A(x^* )\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;那么存在唯一的标量&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* 和\)&lt;/span&gt;乘子&lt;span class=&#34;math inline&#34;&gt;\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)&lt;/span&gt;满足如下条件:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;对任意&lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* \nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_j\geq 0\quad j=0,...,r\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu_0^* ,\lambda_1^* ,...,\lambda_m^* ,\mu_1^* ,...,\mu_r^* \text{不全为0}\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\text{在}x^* \text{的每个领域上N都存在一点}x\in X\cap N\text{使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&amp;gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&amp;gt;0\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Lagrange乘子理论(2)</title>
+      <link>/post/zh/lag2/</link>
+      <pubDate>Wed, 14 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/lag2/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;不等式约束优化问题&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#karush-kuhn-tucker-&#34;&gt;Karush-Kuhn-Tucker 必要条件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;充分条件&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;section level2&#34;&gt;
+&lt;h2&gt;不等式约束优化问题&lt;/h2&gt;
+&lt;p&gt;本节我们考虑优化问题&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(f: R^n\;\vert \rightarrow R\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(h_i: R^n\;\vert \rightarrow R\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(g_j: R^n\;\vert \rightarrow R\)&lt;/span&gt;均是连续可微的。为了记号简洁性，我们引入向量值函数&lt;span class=&#34;math inline&#34;&gt;\(h=(h_1,...,h_m)^T\)&lt;/span&gt;,即&lt;span class=&#34;math inline&#34;&gt;\(h: R^n\;\vert \rightarrow R^m\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(g=(g_1,...,g_r)^T\)&lt;/span&gt;,即&lt;span class=&#34;math inline&#34;&gt;\(g: R^n\;\vert \rightarrow R^r\)&lt;/span&gt;。 从而约束条件变为了 &lt;span class=&#34;math inline&#34;&gt;\(h(x)=0,g(x)\leq 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;div id=&#34;karush-kuhn-tucker-&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Karush-Kuhn-Tucker 必要条件&lt;/h3&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;直观分析&lt;/h4&gt;
+&lt;p&gt;一个直观的想法是，我们尽可能的扔掉一些不等式约束。事实上，若一些不等式约束不起作用（即局部最小值点在约束集的内部取得），则这些不等式约束可以忽略。举个简单的例子，考虑如下的岭回归问题&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\mathop{min}_\beta\qquad  \vert \vert Y-X\beta\vert \vert ^2\\
+\text{subject to:}\quad  \vert \vert \beta\vert \vert \leq t
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;当&lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;足够大时，则该不等式约束不起作用（见下图）。从而我们引出&lt;strong&gt;积极的不等式约束集&lt;/strong&gt;的概念。 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161218_3.png&#34; alt=&#34;Snip20161218_3&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;对任意任意的可行点&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;, &lt;strong&gt;积极的不等式约束集&lt;/strong&gt;定义为：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[A(x)=\{j\big\vert g_j(x)=0, j=1,2,...,r\}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;如果&lt;span class=&#34;math inline&#34;&gt;\(j\notin A(x)\)&lt;/span&gt;，则我们称第j个约束是非积极地。&lt;/p&gt;
+&lt;p&gt;正如上面所讨论的，若&lt;span class=&#34;math inline&#34;&gt;\(x^*\)&lt;/span&gt;是优化问题的局部最小值点，那么也是该问题去掉了非积极约束后新问题的局部最小值点。（下图还是以岭回归为例做一个简要说明，表明非等式约束条件不起作用。） &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161218_4.png&#34; alt=&#34;Snip20161218_4&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;kkt-&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;KKT 必要条件&lt;/h4&gt;
+&lt;p&gt;下面我们来严格的叙述下上述的结论，首先给出一个不等式版本的&lt;strong&gt;正则性条件&lt;/strong&gt;： 称一个可行解&lt;span class=&#34;math display&#34;&gt;\[x^*\]&lt;/span&gt;是正则的，若在该点梯度构成的向量组 &lt;span class=&#34;math display&#34;&gt;\[\{h_i(x^*),g_j(x^*)\big\vert  i=1,2,...,m j\in A(x^*)\}\]&lt;/span&gt; 线性无关&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;KKT 必要性条件&lt;/em&gt; 假设&lt;span class=&#34;math display&#34;&gt;\[x^*\]&lt;/span&gt;是满足下面问题的局部最小值点且是正则的，&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)\leq 0, j=1,2,...,r
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(f: R^n\;\vert \rightarrow R\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(h_i: R^n\;\vert \rightarrow R\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(g_j: R^n\;\vert \rightarrow R\)&lt;/span&gt;均是连续可微的。那么存在唯一的Lagrange乘子&lt;span class=&#34;math display&#34;&gt;\[\lambda^*=(\lambda_1^*,...,\lambda_m^*),\mu^*=(\mu_1^*,...,\mu_r^*)\]&lt;/span&gt;使得Lagrange函数&lt;span class=&#34;math inline&#34;&gt;\(L(x,\lambda,\mu)=f(x)+\lambda^Th(x)+\mu^Th(x)\)&lt;/span&gt;关于&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;的偏导数为0,即&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\nabla_x L(x^*,\lambda^*,\mu^*)=0\\
+\mu_j\geq 0\quad j=1,...,r\\
+\mu_j=0\quad j\notin A(x^*)
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(A(x^*)\)&lt;/span&gt;是积极的不等式约束集。如果进一步&lt;span class=&#34;math inline&#34;&gt;\(f,h,g\)&lt;/span&gt;二次连续可微，则对所有满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[y^T\nabla h_i(x^*)=0,\forall i=1,2..,m\qquad \nabla y^Tg_j(x^*)=0,j\in A(x^*)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;的y，我们都有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[y^T\nabla^2_{xx} L(x^*,\lambda^*,\mu^*)y\geq 0 \]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;关于&lt;span class=&#34;math inline&#34;&gt;\(\mu_j\geq 0\)&lt;/span&gt;有如下几何解释 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161219_6.png&#34; alt=&#34;Snip20161219_6&#34; /&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;在实际使用该定理的时候，我们利用一阶必要性条件&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\nabla_x L(x^*,\lambda^*,\mu^*)=0\\
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;找到待选点。然后再检查每个不等式是不是积极约束。 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161219_7.png&#34; alt=&#34;Snip20161219_7&#34; /&gt; &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161219_8.png&#34; alt=&#34;Snip20161219_8&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;我们称&lt;span class=&#34;math display&#34;&gt;\[\mu_j=0\quad j\notin A(x^*)\]&lt;/span&gt;或者等价的&lt;span class=&#34;math display&#34;&gt;\[\mu_j^*g_j(x^*)=0\]&lt;/span&gt;为互补松弛条件。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;转换为等式约束处理&lt;/h4&gt;
+&lt;p&gt;换个角度看待我们的优化问题，如果我们引入一系列的辅助变量，则可以利用第一节提到的等式约束最优性条件。具体做法是引入辅助变量&lt;span class=&#34;math inline&#34;&gt;\(z_1,...,z_r\)&lt;/span&gt;并考虑如下优化问题&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\qquad\qquad g_j(x)+z_j^2=0, j=1,2,...,r
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;若&lt;span class=&#34;math display&#34;&gt;\[x^*\]&lt;/span&gt;是原问题的局部最小值，那么&lt;span class=&#34;math display&#34;&gt;\[(x^*,z^*)\]&lt;/span&gt;是该问题的局部最小值，其中&lt;span class=&#34;math display&#34;&gt;\[z^*=(z_1^*,...,z_r^*)\]&lt;/span&gt;且&lt;span class=&#34;math display&#34;&gt;\[z_j^*=\sqrt{-g_j(x^*)}\]&lt;/span&gt;。显然当&lt;span class=&#34;math display&#34;&gt;\[x^*\]&lt;/span&gt;是原问题的正则点当且仅当&lt;span class=&#34;math display&#34;&gt;\[(x^*,z^*)\]&lt;/span&gt;是该问题的正则点。对于该问题我们利用等式约束版本的一阶最优性条件，我们有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\nabla_x L(x^*,\lambda^*,\mu^*)=0 \qquad\qquad\\
+2\mu_j^*z_j^*=0,\quad j=1,2,...,r
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;由于对于&lt;span class=&#34;math inline&#34;&gt;\(j\notin A(x^*)\)&lt;/span&gt;，有&lt;span class=&#34;math inline&#34;&gt;\(z_j^*&amp;gt;0\)&lt;/span&gt;,故最后一族等式等价于&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mu_j^*=0,\quad j\notin A(x^*)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;到此，为了证明KKT的必要性条件，我们还要证明&lt;span class=&#34;math inline&#34;&gt;\(\mu_j\geq 0\)&lt;/span&gt;以及二阶必要性条件。首先利用等式约束的二阶必要性条件，我们有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+(x,z)^T
+\begin{pmatrix}
+\nabla_{xx}^2L(x^*,\lambda^*,\mu^*) &amp;amp;      0                &amp;amp;     0            &amp;amp; \dots     &amp;amp;         0\\
+                            0                               &amp;amp; 2\mu_1^*       &amp;amp;     0            &amp;amp; \dots     &amp;amp;         0\\
+                            0                               &amp;amp;       0               &amp;amp;  2\mu_2^* &amp;amp; \dots     &amp;amp;         0\\
+                            \vdots                       &amp;amp;   \vdots           &amp;amp;   \vdots     &amp;amp;  \vdots  &amp;amp;  \vdots\\
+                            0                               &amp;amp;       0               &amp;amp;      0           &amp;amp;  \dots   &amp;amp;  2\mu_r^*\\
+\end{pmatrix}
+\begin{pmatrix}
+x\\
+z
+\end{pmatrix}\geq 0\qquad (++)
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(x\in R^n,z\in R^r\)&lt;/span&gt;满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x^T\nabla h_i(x^*)=0\quad x^T\nabla g_j(x^*)+2z_j^*z_j=0\quad i=1,...,m,j=1,..,r\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;选取满足如下的&lt;span class=&#34;math inline&#34;&gt;\((x,z)\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+z_j=\begin{cases}
+        \qquad 0\quad,  j\in A(x^*)\\
+        -\frac{x^T\nabla g_j(x^*)}{2z_j^*},j\notin A(x^*)
+    \end{cases}\\
+x^T\nabla h_i(x^*)=0\quad x^T\nabla g_j(x^*)=0
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;容易检验，这样定义的&lt;span class=&#34;math inline&#34;&gt;\((x,z_j)\)&lt;/span&gt;满足&lt;span class=&#34;math display&#34;&gt;\[x^T\nabla g_j(x^*)+2z_j^*z_j=0\]&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;由&lt;span class=&#34;math inline&#34;&gt;\(z_j\)&lt;/span&gt;定义以及&lt;span class=&#34;math display&#34;&gt;\[\mu_j^*=0,j\notin A(x^*)\]&lt;/span&gt;,则对所有的&lt;span class=&#34;math inline&#34;&gt;\(j\)&lt;/span&gt;,我们有&lt;span class=&#34;math display&#34;&gt;\[\mu_j^*z_j=0\]&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;将上述定义的&lt;span class=&#34;math inline&#34;&gt;\((x,z)\)&lt;/span&gt;代入(++)即可证明:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x^T\nabla_{xx}^2L(x^*,\lambda^*,\mu^*)x\geq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;至于待证的&lt;span class=&#34;math inline&#34;&gt;\(\mu_j\geq 0\)&lt;/span&gt;，只需考虑&lt;span class=&#34;math inline&#34;&gt;\(j\in A(x^*)\)&lt;/span&gt;的情形,这时定义&lt;span class=&#34;math inline&#34;&gt;\((x,z)\)&lt;/span&gt;如下:&lt;span class=&#34;math inline&#34;&gt;\(x=0,z_j\neq 0\)&lt;/span&gt;对任意&lt;span class=&#34;math inline&#34;&gt;\(k\neq j\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(z_k=0\)&lt;/span&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;该定义满足&lt;span class=&#34;math display&#34;&gt;\[x^T\nabla g_j(x^*)+2z_j^*z_j=0\]&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;利用(++)得到&lt;span class=&#34;math display&#34;&gt;\[\mu_j\geq 0,\forall j\in A(x^*)\]&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;充分条件&lt;/h3&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;二阶充分条件&lt;/h4&gt;
+&lt;p&gt;假定&lt;span class=&#34;math inline&#34;&gt;\(f: R^n\;\vert \rightarrow R\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(h_i: R^n\;\vert \rightarrow R\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(g_j: R^n\;\vert \rightarrow R\)&lt;/span&gt;均是连续且二次可微的,并且&lt;span class=&#34;math display&#34;&gt;\[x^*\in R^n,\lambda^*\in R^m,\mu^*\in R^r\]&lt;/span&gt;满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\nabla_x (x^*,\lambda^*,\mu^*)=0 \qquad  h(x^*)=0 \qquad g(x^*)\leq 0\\
+\mu_j^*&amp;gt; 0, j\in A(x^*) \quad \mu_j^*=0,j\notin A(x^*)\\
+y^T\nabla_{xx}^2L(x^*,\lambda^*,\mu^*)y\geq 0 \qquad\qquad\quad
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(y\neq 0\)&lt;/span&gt;并且使得&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[y^T\nabla h_i(x^*)=0,\forall i=1,...,m \quad y^T\nabla g_j(x^*)=0,\forall j\in A(x^*)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;那么&lt;span class=&#34;math display&#34;&gt;\[x^*\]&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;满足约束条件下的严格局部最小值点。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;定理的证明可以将不等式约束换成等式约束，然后利用等式约束版本的二阶充分性条件即可证明。&lt;/li&gt;
+&lt;li&gt;条件&lt;span class=&#34;math display&#34;&gt;\[\mu_j^*&amp;gt; 0, j\in A(x^*)\]&lt;/span&gt;被称作&lt;strong&gt;严格的互补松弛条件&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;一般充分条件&lt;/h4&gt;
+&lt;p&gt;到目前为止，我们讨论的二阶条件都需要二阶导数存在的假设，在研究无约束优化问题时，我们知道一阶最优性条件加上凸性即可保证最优解的充分性。带约束的问题，也存在类似的定理。事实上，我们甚至不需要凸性以及可微性的假设，而只需要一个最小化Lagrange函数的条件。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一般充分性条件&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;考虑如下优化问题&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\quad\qquad \\
+\text{subject to}\; x\in X \qquad\qquad\\
+\qquad\qquad\qquad g_j(x)\leq0, j=1,2,...,r
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(f,g_j\)&lt;/span&gt;定义在&lt;span class=&#34;math display&#34;&gt;\[R^n\]&lt;/span&gt;上的实值函数,&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;是给定的&lt;span class=&#34;math display&#34;&gt;\[R^n\]&lt;/span&gt;的子集。假设&lt;span class=&#34;math display&#34;&gt;\[x^*\]&lt;/span&gt;是该问题的一个可行解,&lt;span class=&#34;math display&#34;&gt;\[\mu^*=(\mu_1^*,...,\mu_r^*)\]&lt;/span&gt;是给定的向量，并且满足:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\mu_j\geq 0\quad j=1,...,r\\
+\mu_j=0\quad j\notin A(x^*)
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;而且&lt;span class=&#34;math display&#34;&gt;\[x^*\]&lt;/span&gt;是Lagrange函数&lt;span class=&#34;math inline&#34;&gt;\(L(x,\mu^*)\)&lt;/span&gt;在&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的最小值，则&lt;span class=&#34;math display&#34;&gt;\[x^*\]&lt;/span&gt;是该问题的全局最小值。 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161219_13.png&#34; alt=&#34;Snip20161219_13&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Lagrange乘子理论(1)</title>
+      <link>/post/zh/lag1/</link>
+      <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/lag1/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;等式约束优化问题&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;最优解的必要条件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;最优解充分条件&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;通过引入一些辅助变量，即Lagrange乘子，我们可以利用他们：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;描述最优解的特性&lt;/li&gt;
+&lt;li&gt;灵敏度分析&lt;/li&gt;
+&lt;li&gt;对自变量变化引起的目标函数的一阶导数进行定量描述&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本章将沿着&lt;code&gt;惩罚法&lt;/code&gt;和&lt;code&gt;可行方向法&lt;/code&gt;两个角度进行讨论。&lt;/p&gt;
+&lt;div class=&#34;section level2&#34;&gt;
+&lt;h2&gt;等式约束优化问题&lt;/h2&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;最优解的必要条件&lt;/h3&gt;
+&lt;p&gt;本节我们考虑优化问题：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\
+\text{subject to}\; h_i(x)=0,i=1,2,...,m\\
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(f: R^n\;\vert \rightarrow R\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(h_i: R^n\;\vert \rightarrow R\)&lt;/span&gt;均是连续可微的。为了记号简洁性，我们引入向量值函数&lt;span class=&#34;math inline&#34;&gt;\(h=(h_1,...,h_m)^T\)&lt;/span&gt;,即&lt;span class=&#34;math inline&#34;&gt;\(h: R^n\;\vert \rightarrow R^m\)&lt;/span&gt;。 从而约束条件变为了 &lt;span class=&#34;math inline&#34;&gt;\(h(x)=0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Lagrange 理论解决上述优化问题的办法是，通过引入Lagrange乘子&lt;span class=&#34;math inline&#34;&gt;\(\lambda=(\lambda_1,...,\lambda_m)^T\)&lt;/span&gt;，构造Lagrange函数&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[L(x,\lambda)=f(x)+\lambda^T h(x)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;转而考察&lt;span class=&#34;math inline&#34;&gt;\(L(x,\lambda)\)&lt;/span&gt;。该理论指出，对给定的局部最小值点$x_* &lt;span class=&#34;math inline&#34;&gt;\(，存在向量\)&lt;/span&gt;_* $满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla f(x_* )+{\lambda_* }^T\nabla h(x_* )=0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;这个方程有两种解释:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;目标函数的梯度&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )\)&lt;/span&gt;属于&lt;span class=&#34;math inline&#34;&gt;\(\{\nabla h_1(x_* ),...,\nabla h_m(x_* )\}\)&lt;/span&gt;这个向量组张成的n维线性子空间里；&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;目标函数的梯度&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )\)&lt;/span&gt;正交于一阶可行变分子空间，即&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[V(x_* )=\{\Delta x=x-x_* \vert  (x-x_* )^T\nabla h_i(x_* )=0,i=1,2..,m\}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;注意到，&lt;span class=&#34;math inline&#34;&gt;\(\forall \Delta x\in V(x_* )\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\nabla h(x_* ) \Delta x=0\)&lt;/span&gt;，从而结合上式，我们有&lt;span class=&#34;math inline&#34;&gt;\(\Delta x^T\nabla f(x_* )=0\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;一阶可行变分子空间中的元素是使得&lt;span class=&#34;math inline&#34;&gt;\(h(x)\)&lt;/span&gt;的一阶近似，&lt;span class=&#34;math inline&#34;&gt;\(h(x_* )+\nabla h(x)\Delta x\)&lt;/span&gt;，在&lt;span class=&#34;math inline&#34;&gt;\(x+\Delta x\)&lt;/span&gt;取值同样为0的元素构成的集合。这是对约束条件&lt;span class=&#34;math inline&#34;&gt;\(h(.)\)&lt;/span&gt;的性质刻画。&lt;/li&gt;
+&lt;li&gt;这里&lt;span class=&#34;math inline&#34;&gt;\(V(x_* )\)&lt;/span&gt;的作用类似于带约束优化问题的约束集。在Chapter2中，最优解得$x_* &lt;span class=&#34;math inline&#34;&gt;\(满足的必要条件\)&lt;/span&gt;xX&lt;span class=&#34;math inline&#34;&gt;\(为(\)&lt;/span&gt;X$是约束集)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla f(x_* )(x-x_* )\geq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;这里&lt;span class=&#34;math inline&#34;&gt;\(\Delta x^T\nabla f(x_* )=0\)&lt;/span&gt;与上述结论是相似的，同样也类似于Chapter1中提到的一阶“零梯度条件”&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )=0\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下面给出&lt;code&gt;Lagrange乘子定理&lt;/code&gt;的严格表述&lt;/p&gt;
+&lt;p&gt;如果 $x_* &lt;span class=&#34;math inline&#34;&gt;\(是\)&lt;/span&gt;f$在 &lt;span class=&#34;math inline&#34;&gt;\(h(x)=0\)&lt;/span&gt;约束条件下的局部最小值点，且假定梯度向量组&lt;span class=&#34;math inline&#34;&gt;\(\{\nabla h_1(x_* ),...,\nabla h_m(x_* )\}\)&lt;/span&gt;,线性无关，那么存在唯一的向量$_* $使得&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla f(x_* )+{\lambda_* }^T\nabla h(x)=0\qquad (一阶条件)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;进一步，如果&lt;span class=&#34;math inline&#34;&gt;\(f,h\)&lt;/span&gt;二次可微，那么有，对任意&lt;span class=&#34;math inline&#34;&gt;\(\Delta x\in V(x_* )\)&lt;/span&gt;,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\Delta x^T\big(\nabla f(x_* )+{\lambda_* }^T\nabla h(x_* )\big)\Delta x\in V(x_* )\geq 0\qquad (二阶条件)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;我们称可行向量&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;为正则的，若约束函数梯度&lt;span class=&#34;math inline&#34;&gt;\(\{\nabla h_1(x),...,\nabla h_m(x)\}\)&lt;/span&gt;线性无关。&lt;/li&gt;
+&lt;li&gt;对应于一阶可行变分子空间，我们还要引入&lt;code&gt;真正可行变分集&lt;/code&gt;这个概念。从一阶可行变分子空间的定义不难看出&lt;span class=&#34;math inline&#34;&gt;\(V(x_* )=\{\Delta x\vert \nabla h(x_* )\Delta x=0\}\)&lt;/span&gt;。假设&lt;span class=&#34;math inline&#34;&gt;\(x_* \in R^n\)&lt;/span&gt;,且通常假设&lt;span class=&#34;math inline&#34;&gt;\(m\leq n\)&lt;/span&gt;，则&lt;span class=&#34;math inline&#34;&gt;\(V(x_* )\)&lt;/span&gt;是一个线性方程组的解空间，该空间的维数为&lt;span class=&#34;math inline&#34;&gt;\(n-r( \nabla h(x_* ))\geq n-m\)&lt;/span&gt;。当$x_* &lt;span class=&#34;math inline&#34;&gt;\(满足正则条件式，我们就称\)&lt;/span&gt;V(x_* )$为真正可行变分集。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;存在反例表明，在非正则的局部最小值点处的Lagrange乘子可以不存在。 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161201_2.png&#34; alt=&#34;Snip20161201_2&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt; 从一阶可行变分子空间的角度看，由于一阶变分子空间&lt;span class=&#34;math inline&#34;&gt;\(V(x_* )=\{(0,y_2)\vert y_2\in R\}\)&lt;/span&gt;的维数为1，但是真正可行变分集&lt;span class=&#34;math inline&#34;&gt;\(\{(y_1,y_2)\vert y_1=y_2=0\}\)&lt;/span&gt;的维数为0，因此一阶变分子空间比正真可行变分集具有更高的维数。由Lagrange理论指出，$x_* &lt;span class=&#34;math inline&#34;&gt;\(的最优性只能保证\)&lt;/span&gt;f(x_* )&lt;span class=&#34;math inline&#34;&gt;\(正交于可行变分集，但是要使得Lagrange乘子存在，\)&lt;/span&gt;f(x_* )&lt;span class=&#34;math inline&#34;&gt;\(正交于一阶变分子空间。故当\)&lt;/span&gt;{h_1(x),…,h_m(x)}$线性无关时，两个变分集合是相等的。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;当约束条件是线性约束时，比如&lt;span class=&#34;math inline&#34;&gt;\(AX=0\)&lt;/span&gt;，则即使没有&lt;span class=&#34;math inline&#34;&gt;\(\{\nabla h_1(x_* ),...,\nabla h_m(x_* )\}\)&lt;/span&gt;线性无关也可成立，即不需要$x_* $正则的正则性,具体讨论见&lt;code&gt;消元法&lt;/code&gt;这一小节。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;对于该理论，我们有两种证明的方法，他们都是基于将有约束的优化问题化为无约束的优化问题，但是思路不同&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;惩罚法：通过对违反约束的情况进行很高的惩罚，从而不必考虑约束条件。通过列出这些带惩罚项的无约束问题的最优性条件，同时让惩罚项的增加趋于无穷大时，可以得到Lagrange乘子定理;&lt;/li&gt;
+&lt;li&gt;消元法：把约束条件看做一个n个未知数m个方程的线性方程组(n&amp;gt;m)，将m个变量表示成n-m个变量的函数形式，从而化成无约束的优化问题，进而利用一阶、二阶必要性条件，也可以得到Lagrange乘子定理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;惩罚法&lt;/h4&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161201_4.png&#34; alt=&#34;Snip20161201_4&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161201_4&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161201_6.png&#34; alt=&#34;Snip20161201_6&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161201_6&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;消元法&lt;/h4&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161201_7.png&#34; alt=&#34;Snip20161201_7&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161201_7&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161201_8.png&#34; alt=&#34;Snip20161201_8&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161201_8&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;上述讨论说明了，在线性约束条件下，Lagrange乘子定理只是要求定义在&lt;span class=&#34;math inline&#34;&gt;\(n-m\)&lt;/span&gt;维空间上的无约束问题(3.12)的“零梯度性”和“Hessian阵半正定性”。&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161201_9.png&#34; alt=&#34;Snip20161201_9&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161201_9&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161201_10.png&#34; alt=&#34;Snip20161201_10&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161201_10&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;最优解充分条件&lt;/h3&gt;
+&lt;p&gt;利用一阶必要性条件选出来的点，有可能是局部最小值，局部最大值点乃至其他点，加上二阶必要条件可以缩小备选点。但是我们有必要给出判断局部最小点的充分条件。&lt;/p&gt;
+&lt;p&gt;【二阶充分条件】 假定&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(h\)&lt;/span&gt;是二阶可微函数，并且&lt;span class=&#34;math inline&#34;&gt;\(x_* \in R^n,\lambda_* \in R^m\)&lt;/span&gt;满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+ \nabla_x L(x_* ,\lambda_* )=0,\nabla_\lambda L(x_* ,\lambda_* )=0\\
+ x^T\nabla_{xx} L(x_* ,\lambda_* )x&amp;gt;0\quad 对所有满足\nabla h(x_* )x^T=0的非零x
+ \]&lt;/span&gt; 则$x_* &lt;span class=&#34;math inline&#34;&gt;\(是\)&lt;/span&gt;f&lt;span class=&#34;math inline&#34;&gt;\(满足约束\)&lt;/span&gt;h(x)=0&lt;span class=&#34;math inline&#34;&gt;\(的严格局部最小值点，并且存在\)&lt;/span&gt;,&amp;gt;0&lt;span class=&#34;math inline&#34;&gt;\(使得对任意满足\)&lt;/span&gt;h(x)=0,x-x_* &lt;span class=&#34;math inline&#34;&gt;\(的\)&lt;/span&gt;x$成立&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x)-f(x_* )\geq \frac{\gamma}{2}\vert \vert x-x_* \vert \vert ^2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;该充分条件并不需要$x_* $的正则性。&lt;/p&gt;
+&lt;p&gt;对于该命题，我们打算采取两种方法来证明，一是augmented Lagrange方法，二是可行方向法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;augmented Lagrange方法的思想在于，通过引入augmented Lagrange函数，&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[L_c(x,\lambda)=f(x)+\lambda^Th(x)+\frac{c}{2}\vert \vert h(x)\vert \vert ^2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;使得带约束的原问题&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{h(x)=0} f(x)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;与新问题问题&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{h(x)=0} f(x)+\frac{c}{2}\vert \vert h(x)\vert \vert ^2\]&lt;/span&gt;&lt;/p&gt;
+有相同的局部最优解。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;可行方向法的思想在于，利用反正法，假设存在一系列比$x_* $更优的点，通过这些点构造方向导出矛盾。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;augmented-lagrange&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;augmented Lagrange方法&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161208_1.png&#34; alt=&#34;Snip20161208_1&#34; /&gt; &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161208_2.png&#34; alt=&#34;Snip20161208_2&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;可行方向法&lt;/h4&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161208_3.png&#34; alt=&#34;Snip20161208_3&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161208_3&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Convergence Analysis for Bloock Coordinate Decent Algorithm and Powell&#39;s Examples</title>
+      <link>/post/en/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</link>
+      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#problem-description&#34;&gt;Problem description&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#notations&#34;&gt;Notations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#assumption&#34;&gt;Assumption&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#algorithm&#34;&gt;Algorithm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#convergence-analysis&#34;&gt;Convergence Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#powells-example&#34;&gt;Powell’s example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#r-codes-for-numerical-experiments&#34;&gt;R codes for numerical experiments&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We mainly focus on the convergence of Block coordinate decent with exact minimization, whose block update strategy employs Gauss-Seidel manner. And then use Powell’s example to see what will happen if some conditions are not met.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Reference: 1. Dimitri .P Bertsekas, Nonlinear Programming 2ed 2. Powell ,1973, ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div id=&#34;problem-description&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Problem description&lt;/h1&gt;
+&lt;div id=&#34;notations&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Notations&lt;/h2&gt;
+&lt;p&gt;We want to solve the problem:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\quad f(x)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where X is a Cartesian product of closed convex sets $X_1,…,X_m:X=_{i=1}^n X_i $&lt;/p&gt;
+&lt;p&gt;We assume that &lt;span class=&#34;math inline&#34;&gt;\(X_i\)&lt;/span&gt; is a closed convex subset of &lt;span class=&#34;math inline&#34;&gt;\(R^{n_i}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(n=\sum_{i=1}^m n_i\)&lt;/span&gt;. The vector is partitioned into &lt;span class=&#34;math inline&#34;&gt;\(m\)&lt;/span&gt; block(s) such that &lt;span class=&#34;math inline&#34;&gt;\(x_i \in X^{n_i}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;We denote &lt;span class=&#34;math inline&#34;&gt;\(\nabla_i f\)&lt;/span&gt; as the gradient of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; with respect to component &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;assumption&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Assumption&lt;/h2&gt;
+&lt;p&gt;We shall assume that for every &lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(i=1,2,...m\)&lt;/span&gt; the optimization problem&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{\xi\in X_i}\quad f(x_1,...,x_{i-1},\xi,x_{i+1,....,x_m})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;has &lt;strong&gt;at least one solution&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;algorithm&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;The Gauss-Seidel method, generates the next iterate &lt;span class=&#34;math inline&#34;&gt;\(x^{k+1}=(x^{k+1}_1,...,x^{k+1}_m)\)&lt;/span&gt;, given the current the iterate &lt;span class=&#34;math inline&#34;&gt;\(x^{k}=(x^{k}_1,...,x^{k}_m)\)&lt;/span&gt;, according to the iteration&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x^{k+1}_i=\mathop{argmin}_{\xi\in X_i}\quad f(x_1^{k+1},...,x^{k+1}_{i-1},\xi,x^k_{i+1},...,x_m^k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;convergence-analysis&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Convergence Analysis&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;Theorem&lt;/code&gt; Suppose that &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; is &lt;strong&gt;continuously differentiable&lt;/strong&gt; over the set &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; defined as above. Furthermore, suppose that for each &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt;,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x_1,...,x_{i-1},\xi,x_{i+1,....,x_m})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;viewed as a function of &lt;span class=&#34;math inline&#34;&gt;\(\xi\)&lt;/span&gt;, attains a unique minimum &lt;span class=&#34;math inline&#34;&gt;\(\bar x_i\)&lt;/span&gt; over &lt;span class=&#34;math inline&#34;&gt;\(X_i\)&lt;/span&gt; and is monotonically non-increasing in the interval from &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; to &lt;span class=&#34;math inline&#34;&gt;\(\bar \xi\)&lt;/span&gt;. Let &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt; be the sequence generated by the block coordinate method with Gauss-Seidel manner. Then, every limit point of &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt; is a stationary point.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PROOF&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Let&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[z_i^k=(x_1^{k+1},...,x_i^{k+1},x_{i+1}^k,...,x_m^k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;By the nature of this algorithm, for all &lt;span class=&#34;math inline&#34;&gt;\(k\geq 0\)&lt;/span&gt;, we have following inequality&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x^k)\geq f(z_1^k)\geq f(z_2^k)\geq ...\geq f(z_{m-1}^k)\geq f(x^{k+1}) \quad (*)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Since &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}in X\)&lt;/span&gt;, we can assume &lt;span class=&#34;math inline&#34;&gt;\(\{x^{k_j}\}\)&lt;/span&gt; is the subsequence that converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x=(\bar x_1,..,\bar x_m)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Now we want prove that &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; is the stationary point of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;From (*), we know that&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(z_1^{k_j})\leq f(x_1,x_2^{k_j},..., x_m^{k_j})\qquad \forall x_1\in X_1\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(j\rightarrow +\infty\)&lt;/span&gt;, we derive&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(\bar x)\leq f(x_1,\bar x_2,..., \bar x_m)\overset \Delta = h(x_1)\qquad \forall x_1\in X_1\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;which implies that &lt;span class=&#34;math inline&#34;&gt;\(\bar x_i\)&lt;/span&gt; is the minima of &lt;span class=&#34;math inline&#34;&gt;\(h(x_1)\)&lt;/span&gt; on &lt;span class=&#34;math inline&#34;&gt;\(X_1\)&lt;/span&gt;. Using the optimality over a convex set, we conclude that&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[h&amp;#39;(\bar x_1)(\bar x_1 -x_1)\geq 0 \Leftrightarrow (x_1-\bar x_1)^T\nabla_1f(\bar x_1)\geq 0\qquad x_1\in X_1\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;At this stage, if we can prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_j}\}\)&lt;/span&gt; converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;, we can show that&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ (x_2-\bar x_2)^T\nabla_2 f(\bar x_2)\geq 0\qquad x_2\in X_2\]&lt;/span&gt;, since&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(z_1^{k_j})=f(x_1^{k_j+1},x_2^{k_j},x_3^{k_j},...,x_m^{k_j})\leq f(x_1^{k_j+1},x_2,x_3^{k_j},...,x_m^{k_j})\qquad x_2\in X_2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(j\rightarrow +\infty\)&lt;/span&gt;, we derive&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(\bar x)\leq f(\bar x_1,\bar x_2,\bar x_3,..., \bar x_m)\qquad \forall x_2\in X_2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x_2-\bar x_2)^T\nabla_2f(\bar x_2)\geq 0\qquad x_2\in X_2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;(Note: Although &lt;span class=&#34;math inline&#34;&gt;\(x_1^{k_j+1}\)&lt;/span&gt; may not in the sequence &lt;span class=&#34;math inline&#34;&gt;\(\{x_1^{k_t}\}_{t\geq 1}\)&lt;/span&gt; ,which convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar x_1\)&lt;/span&gt;, but &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_j}\}\)&lt;/span&gt; converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;, so its component &lt;span class=&#34;math inline&#34;&gt;\(x_1^{k_j+1}\)&lt;/span&gt; converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x_1\)&lt;/span&gt;).&lt;/p&gt;
+&lt;p&gt;Furthermore, if we prove that for &lt;span class=&#34;math inline&#34;&gt;\(i=1,2,...,m-1\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\}\)&lt;/span&gt; convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;, then we have&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x_i-\bar x_i)^T\nabla_i\;f(\bar x_i)\geq 0\qquad x_i\in X_i\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;And thus &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; is a stationary point, since &lt;span class=&#34;math inline&#34;&gt;\((x-\bar x)^T\nabla f(\bar x)\geq 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;By far, it remains to prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\}\quad,\forall i\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;. First,we try to prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_1}\}\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Assume the contrary that $r&lt;sup&gt;{k_j}=z_1&lt;/sup&gt;{k_j}-x^{k_j}$ doesn’t convergence to 0. Let &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}=(z_1^{k_j}-x^{k_j})/r^{k_j}\)&lt;/span&gt;. Thus, &lt;span class=&#34;math inline&#34;&gt;\(z_1^{k_j}=x^{k_j}+r^{k_j}s_1^{k_j}\)&lt;/span&gt; , &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert r_{k_j}\vert \vert =1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; differs from 0 only along the first block-component. Since &lt;span class=&#34;math inline&#34;&gt;\(\{s_1^{k_j}\}\)&lt;/span&gt; belong to a compact set and therefore without loss of generality, we assume &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar s_1\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Since &lt;span class=&#34;math inline&#34;&gt;\(r^{k_j}&amp;gt;0\)&lt;/span&gt;,we can find a &lt;span class=&#34;math inline&#34;&gt;\(\epsilon\in (0,1)\)&lt;/span&gt;, such that &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}+\epsilon s_1^{k_j}\)&lt;/span&gt; lies on the segment joining &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}+s_1^{k_j}=z_1^{k_j}\)&lt;/span&gt;. Using the non-increasing property of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;,we derive,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(z_1^{k_j})\leq f(x^{k_j}+\epsilon s_1^{k_j}) \leq f(x^{k_j})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Again, using (*), we conclude&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x^{k_{j+1}})\leq f(z_1^{k_j})\leq f(x^{k_j}+\epsilon s_1^{k_j}) \leq f(x^{k_j})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(j\rightarrow +\infty\)&lt;/span&gt;, we derive &lt;span class=&#34;math inline&#34;&gt;\(f(\bar x)=f(\bar x+\epsilon \bar s_1)\)&lt;/span&gt;, which contradicts the hypothesis that &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; is uniquely minimized when viewed as a function of the first block component. This contradiction establishes that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_1}\}\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Similarly, let $r_t&lt;sup&gt;{k_j}=z_t&lt;/sup&gt;{k_j}-z_{t-1}^{k_j}$ for &lt;span class=&#34;math inline&#34;&gt;\(t=2,3,...,m-1\)&lt;/span&gt; and using the same technique shown above, we finally prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\},\quad \forall i\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;powells-example&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Powell’s example&lt;/h1&gt;
+&lt;p&gt;In &lt;em&gt;ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS&lt;/em&gt;, Power actually gives three examples that sequences generated by the algorithm discussed above do not convergence to stationary points once some hypothesis are not met.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The first example is straightforward, However, the remarkable properties of this example can be destroyed by making a small perturbation to the starting vector &lt;span class=&#34;math inline&#34;&gt;\(x^0\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The second example is not sensitive to either small changes in the initial data or to small errors introduced during the iterative process, for example computer rounding errors.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The third example suggests that a function that is infinitely differentiable that also causes an endless loop in the iterative minimization method.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We here only presents the first example. Consider the following function&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x,y,z)=-(xy+yz+zx)+(x-1)_+^2+(-x-1)_+^2+(y-1)_+^2+(-y-1)_+^2+(z-1)_+^2+(-z-1)_+^2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x-c)_+^2=\begin{cases}0,x-c&amp;lt; 0\\ (x-c)^2,x-c\geq 0\end{cases}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Given the starting point &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e,1+\frac{1}{2}e,-1-\frac{1}{4}e)\)&lt;/span&gt; and use block coordinate decent algorithm,and we update the variable in a manner of &lt;span class=&#34;math inline&#34;&gt;\(x\rightarrow y\rightarrow z\rightarrow x ...\)&lt;/span&gt; with&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}^{**}\leftarrow sign(y_k+z_k)[1+\frac{1}{2}\vert y_k+z_k\vert ]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[y_{k+1}^{**}\leftarrow sign(x_{k+1}+z_k)[1+\frac{1}{2}\vert x_{k+1}+z_k\vert ]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[z_{k+1}^{**}\leftarrow sign(x_{k+1}+y_{k+1})[1+\frac{1}{2}\vert x_{k+1}+y_{k+1}\vert ]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;We here present the first six steps of this case&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;cycle/totall iteration&lt;/th&gt;
+&lt;th&gt;x&lt;/th&gt;
+&lt;th&gt;y&lt;/th&gt;
+&lt;th&gt;z&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1/1&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{8}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+$e $&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{4}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;1/2&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{8}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{16}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{4}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1/3&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{8}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{16}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{32}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2/4&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{64}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{16}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{32}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;2/5&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{64}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{128}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{32}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2/6&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{64}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{128}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{256}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;3/7&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{512}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{128}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{256}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This result implies that the sequence obtained by this algorithm can not converge to one single point since &lt;span class=&#34;math inline&#34;&gt;\(x-coordinate\)&lt;/span&gt; change its sign as the even cycle and odd cycle alternate. Situations are similar for &lt;span class=&#34;math inline&#34;&gt;\(y-coordinate\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(z-coordinate\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;But &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt; has six sub-sequences which convergence to (1,1,-1), (1,-1,-1), (1,-1,1), (-1,-1,1),(-1,-1,1),(-1,1,1),(-1,1,-1) respectively.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14748787199151.jpg&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;A hint to derive the update formula:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x\leftarrow sign(y+z)[1+\frac{1}{2}(y+z)]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Indeed, derivates of &lt;span class=&#34;math inline&#34;&gt;\((x-1)_+^2\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\((-x-1)_+^2\)&lt;/span&gt; are as follows respecively&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{d(x-1)_+^2}{dx}=\begin{cases}2(x-1),x\geq 1\\0,x&amp;lt;1\end{cases}\quad 
+    \frac{d(-x-1)_+^2}{dx}=\begin{cases}2(-x-1),x\leq -1\\0,x&amp;gt;-1\end{cases}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;So for the univariate optimization problem, setting the derivate of &lt;span class=&#34;math inline&#34;&gt;\(g(x)=f(x,y,z)\)&lt;/span&gt; to zero, we conclude&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x,y,x)}{\partial x}=0\Rightarrow 
+\begin{cases}x\geq 1: x=1+\frac{1}{2}(y+z)\\-1&amp;lt; x&amp;lt;1: -(y+z)=0\\x\leq -1:x=-1+\frac{1}{2}(y+z) \end{cases}\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The gradient of &lt;span class=&#34;math inline&#34;&gt;\(f(x,y,z)\)&lt;/span&gt; on this cyclic path, is &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x,y,z)=(-y-z,-x-z,-x-y)\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x,y,z)\vert \vert _1=2\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;This example is unstable with respect to small perturbations. Small changes in the starting point &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e,1+\frac{1}{2}e,-1-\frac{1}{4}e)\)&lt;/span&gt; or smal errors in the numbers that are computed during the calculation will destroy the cyclic behavior.&lt;/p&gt;
+&lt;p&gt;It’s s clear the choice of perturbations &lt;span class=&#34;math inline&#34;&gt;\(e\)&lt;/span&gt; plays a key role. Say, &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e_1,1+e_2,-1-e_3)\)&lt;/span&gt; and we have &lt;span class=&#34;math inline&#34;&gt;\(e_k=\frac{1}{2}(e_{k-2}- e_{k-1})\)&lt;/span&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;cycle/totall iteration&lt;/th&gt;
+&lt;th&gt;x&lt;/th&gt;
+&lt;th&gt;y&lt;/th&gt;
+&lt;th&gt;z&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1/1&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_4\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_3\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;1/2&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_4\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_5\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_3\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1/3&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_4\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_5\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_6\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2/4&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_7\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_5\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_6\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;2/5&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_7\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_8\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_6\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2/6&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_7\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_8\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_9\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;To preserve the cyclic behavior , we have to make sure that &lt;span class=&#34;math inline&#34;&gt;\(e_{k-2}&amp;gt;e_{k-1}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;And in practice, when we do some numerical tests, we shall find that, this theoretically-existed endless loop actual breaks down due to the rounding errors. A brief illustration is given below. In this experiment, loop ends at the 52 steps.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161117_13.png&#34; alt=&#34;Snip20161117_13&#34; /&gt; &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161117_14.png&#34; alt=&#34;Snip20161117_14&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161117_15.png&#34; alt=&#34;Snip20161117_15&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161117_15&lt;/p&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;As&lt;br /&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x,y,x)}{\partial x}=0\Rightarrow 
+\begin{cases}x\geq 1: x=1+\frac{1}{2}(y+z)\\-1&amp;lt; x&amp;lt;1: -(y+z)=0\\x\leq -1:x=-1+\frac{1}{2}(y+z) \end{cases}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;suggests that, when &lt;span class=&#34;math inline&#34;&gt;\(-1&amp;lt;x&amp;lt;1\)&lt;/span&gt;, the choice of &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; is arbitrary and we set &lt;span class=&#34;math inline&#34;&gt;\(x^*=0\)&lt;/span&gt; in the case above. So the uniqueness requirement is violated. It turns out that the six vertices are even not the stationary points.&lt;/p&gt;
+&lt;p&gt;For example, at point &lt;span class=&#34;math inline&#34;&gt;\(\bar x=(1,1,-1)\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(\bar x)=(0,0,-2)\)&lt;/span&gt; and for any ponit &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; in the unit cubic &lt;span class=&#34;math inline&#34;&gt;\((x-\bar x)^T\nabla f(\bar x)\leq 0\)&lt;/span&gt;. Say, &lt;span class=&#34;math inline&#34;&gt;\(x=(0.9,0.9,-0.9)\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\((x-\bar x)^T\nabla f(\bar x)=-0.2&amp;lt;0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Actually, as in the proof of &lt;code&gt;Theorem&lt;/code&gt;, we prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_j}\}\)&lt;/span&gt; converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; is the limit point of &lt;span class=&#34;math inline&#34;&gt;\(\{x^{k_j}\}\)&lt;/span&gt;. But in this example, the limit point of &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_j}\}\)&lt;/span&gt; is (1,1,-1) while the limit point of &lt;span class=&#34;math inline&#34;&gt;\(\{x^{k_j}\}\)&lt;/span&gt; is either (-1,1,-1) or (1,-1,1). So the requirement of uniqueness is not met.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;r-codes-for-numerical-experiments&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;R codes for numerical experiments&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;####################
+### Function for test ###
+####################
+
+PowellE1&amp;lt;-function(xstart,cycles,fig=T){
+  #######function part ##############
+  UpdateCycle&amp;lt;-function(x){
+    Sign&amp;lt;-function(x){
+      if (x&amp;gt;0){
+        return(1)
+      }else{
+        if (x&amp;lt;0){
+          return(-1)
+        }else{
+          return(0)
+        }
+      }
+    }
+    x.new&amp;lt;-c()
+    x.new[1]&amp;lt;-Sign(x[2]+x[3])*(1+0.5*abs(x[2]+x[3]))
+    x.new[2]&amp;lt;-Sign(x.new[1]+x[3])*(1+0.5*abs(x.new[1]+x[3]))
+    x.new[3]&amp;lt;-Sign(x.new[1]+x.new[2])*(1+0.5*abs(x.new[1]+x.new[2]))
+    cycle&amp;lt;-matrix(c(x.new[1],x[2],x[3],x.new[1],x.new[2],x[3],x.new[1],x.new[2],x.new[3]),
+                  ncol=3,byrow=T)
+    return(cycle)
+  }
+  
+  fpowell&amp;lt;-function(x){
+    
+    PostivePart&amp;lt;-function(x){
+      ifelse(x&amp;gt;=0,x,0)
+    }
+    
+    fval&amp;lt;-(-(x[1]*x[2]+x[2]*x[3]+x[1]*x[3]))+
+      PostivePart(x[1]-1)^2+PostivePart(-x[1]-1)^2+
+      PostivePart(x[2]-1)^2+PostivePart(-x[2]-1)^2+
+      PostivePart(x[3]-1)^2+PostivePart(-x[3]-1)^2
+    return(fval)
+  }
+  ############ operation part ################
+  x.store&amp;lt;-matrix(ncol=3,nrow=cycles*3+1)
+  x.store[1,]&amp;lt;-xstart
+  for (i in seq_len(cycles)){
+    x.store[(3*i-1):(3*i+1),]&amp;lt;-UpdateCycle(x.store[3*i-2,])
+  }
+  x.store&amp;lt;-x.store[-1,]
+  fval&amp;lt;-rep(0,cycles*3)
+  
+  for(i in seq_len(cycles*3)){
+    fval[i]&amp;lt;-fpowell(x.store[i,])
+  }
+  fval&amp;lt;-as.matrix(fval)
+  
+  if (fig==T){
+    plot(fval,ylim=c(min(fval)-1,max(fval)+1),type=&amp;quot;l&amp;quot;,xlab=&amp;quot;Iterations&amp;quot;,ylab = &amp;quot;F value&amp;quot;)
+  }
+  r&amp;lt;-list()
+  r$x.iterate&amp;lt;-x.store
+  r$fval&amp;lt;-fval
+  return(r)
+}
+
+
+##################
+#### Test 1 ########
+##################
+
+
+perturb&amp;lt;-0.5
+xstart&amp;lt;-c(-1-perturb,1+0.5*perturb,-1-0.25*perturb)
+cycles&amp;lt;-20
+
+r&amp;lt;-PowellE1(xstart,cycles,fig=T)
+
+##################
+#### Test 2 ########
+##################
+
+perturb&amp;lt;-0.5
+xstart&amp;lt;-c(-1-perturb,1+0.5*perturb,-1-0.25*perturb)
+cycles&amp;lt;-20
+
+r&amp;lt;-PowellE1(xstart,cycles,fig=T)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2016-11-17-stationary-powell_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;##################
+#### Test 3 ########
+##################
+
+xstart&amp;lt;-c(3,2,1)
+cycles&amp;lt;-100
+
+r&amp;lt;-PowellE1(xstart,cycles,fig=T)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2016-11-17-stationary-powell_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>约束优化(2)</title>
+      <link>/post/zh/con2/</link>
+      <pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/con2/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;可行方向法&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;下降方向&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;步长准则&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;寻找初始可行点&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;收敛性&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#case&#34;&gt;Case：条件梯度法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;section level2&#34;&gt;
+&lt;h2&gt;可行方向法&lt;/h2&gt;
+&lt;p&gt;下面我们讨论，如何求解第一节中提到的优化问题。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\qquad f(x)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;X是非空、闭凸集&lt;/li&gt;
+&lt;li&gt;函数 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 是连续可微的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们这里讨论的方法平行于不带约束的优化问题：即沿着函数下降的方向产生一个可行点列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;。&lt;/p&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;下降方向&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;可行方向：给定可行点 &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;, 在&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;处的一个可行方向是指一个向量&lt;span class=&#34;math inline&#34;&gt;\(d\)&lt;/span&gt;,对所有充分小的正数&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;,成立&lt;span class=&#34;math inline&#34;&gt;\(ad+x\in X\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;可行方向法： 从初始可行方向开始，然后按照类似梯度方法的形式产生下述迭代列:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_k+a_kd_k\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;既是可行方向，也是下降方向，即&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\forall k, \nabla f(x_k)^Td_k\leq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;同时&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;是正的步长，使得有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_k+a_kd_k\in X\\ f(x_k+a_kd_k)&amp;lt; f(x_k)\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;为了保证产生的迭代序列都是可行点，我们要求&lt;span class=&#34;math inline&#34;&gt;\(x_k+ad_k\in X\)&lt;/span&gt;, 因此存在异于&lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt;的点&lt;span class=&#34;math inline&#34;&gt;\(\bar x_k\in X\)&lt;/span&gt;,使得&lt;span class=&#34;math inline&#34;&gt;\(x_k+ad_k=\bar x_k\)&lt;/span&gt;,因此我们可以改写&lt;span class=&#34;math inline&#34;&gt;\(d_k=r(\bar x_k-x_k)\)&lt;/span&gt;,进而我们改写迭代式为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_k+a_k(\bar x_k-x_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中对于所有的k，&lt;span class=&#34;math inline&#34;&gt;\(a_k\in (0,1],\bar x_k\in X\)&lt;/span&gt;。 限制&lt;span class=&#34;math inline&#34;&gt;\(a_k\in (0,1]\)&lt;/span&gt;， 是为了保证&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}\)&lt;/span&gt;在&lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(\bar x_{k}\)&lt;/span&gt;的连线上，进而利用&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;的凸性保证&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}\in X\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;按照改写方式产生的序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;中的点&lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt;如果不是驻点，则一定能够找到&lt;span class=&#34;math inline&#34;&gt;\(\bar x_k\in X\)&lt;/span&gt;满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(\bar x_k-x_k)\nabla f(x_k)&amp;lt;0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在后面的分析中，我们总是假设可行方向形如&lt;span class=&#34;math inline&#34;&gt;\(d_k=\bar x_k-x_k\)&lt;/span&gt;。因此，可行方向法可以看做是交替寻找合适的&lt;span class=&#34;math inline&#34;&gt;\(\bar x_k\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;的算法。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;步长准则&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;有限最小化准则&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[a_k=\mathop{argmin}_{a\in [0,1]} f(x_k+a(\bar x_k-x_k))\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Armijo准则&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;给定&lt;span class=&#34;math inline&#34;&gt;\(\beta&amp;gt;0,\sigma&amp;gt;0\)&lt;/span&gt;,其中&lt;span class=&#34;math inline&#34;&gt;\(\beta\in (0,1),\sigma\in (0,1)\)&lt;/span&gt;,并且假设&lt;span class=&#34;math inline&#34;&gt;\(a_k=\beta^{m_k}\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(m_k\)&lt;/span&gt;是使得下式成立的第一个非负整数&lt;span class=&#34;math inline&#34;&gt;\(m\)&lt;/span&gt;,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x_k)-f(x_k+\beta^{m}(\bar x_k-x_k))\geq -\sigma\beta^m\nabla f(x_k)(\bar x_k-x_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;寻找初始可行点&lt;/h3&gt;
+&lt;p&gt;我们考虑利用人造变量的方法构造初始可行点, 我们要求该人工变量非负并且在目标函数中具有很大的惩罚系数，从而保证去在最优解中为0。特别地，我们考虑两类约束问题:&lt;/p&gt;
+&lt;p&gt;第一类，等式约束:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}\;f(x) \qquad\qquad\qquad\qquad\qquad\qquad\qquad\\
+subject\; to\; a_i^Tx=b_i\qquad i=1,2,..,m,\quad x\geq 0
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(a_i\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt;分别是&lt;span class=&#34;math inline&#34;&gt;\(R^n\)&lt;/span&gt;中的向量和给定的常数。于是上述问题可以被如下问题所替代，&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}\;f(x)+cy \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\\
+subject\; to\; a_i^Tx+(b_i-\sum_{j=1}^na_{i,j})y=b_i\qquad i=1,2,..,m,\quad x,y\geq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中c是一个很大的惩罚系数，&lt;span class=&#34;math inline&#34;&gt;\(a_{i,j}\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(a_i\)&lt;/span&gt;的第j个分量。向量&lt;span class=&#34;math inline&#34;&gt;\((x_0,y_0)=(\bf{1_n},1)\)&lt;/span&gt;是一个可行解。&lt;/p&gt;
+&lt;p&gt;第二类，不等式约束:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}\; f(x)\qquad\qquad\qquad\qquad\qquad\qquad\qquad\\
+subject\; to\; a_i^Tx\leq b_i\qquad  i=1,2,..,m,\quad x\geq 0
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;同样可以转化成&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}\; f(x)+cy \qquad\qquad\qquad\qquad\qquad\qquad\qquad\\
+subject\; to\; a_i^Tx-y\leq b_i\qquad i=1,2,..,m,\quad x,y\geq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中c是一个很大的惩罚系数。对原问题任何不可行的向量&lt;span class=&#34;math inline&#34;&gt;\(x_0\)&lt;/span&gt;,向量&lt;span class=&#34;math inline&#34;&gt;\((x_0,y_0)\)&lt;/span&gt;均是新问题的可行解，其中&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[y_0=\mathop{max}_{i}\{a_i^Tx_0-b_i\}\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;收敛性&lt;/h3&gt;
+&lt;p&gt;可行方向法的收敛性分析在最小化步长准则或者Armijo准则下，和Chapter1中的梯度方法分析是平行的。同样我们假设方向序列&lt;span class=&#34;math inline&#34;&gt;\(\{d_k=\bar x_k-x_k\}\)&lt;/span&gt;与迭代序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是梯度相关的。我们有如下结论&lt;/p&gt;
+&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是由可行方法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列,假设&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是梯度相关的并且&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;的选取是根据Armijo准则或者最小化准则选取的，那么&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;的每一个极限点(若存在)都是驻点。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;case&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Case：条件梯度法&lt;/h3&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;方法&lt;/h4&gt;
+&lt;p&gt;为了找到合适的&lt;span class=&#34;math inline&#34;&gt;\(\bar x_k\)&lt;/span&gt;,满足&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_k)^T(\bar x_k-x_k)&amp;lt; 0\)&lt;/span&gt;， 在前面的讨论中，当&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;是紧集时，我们知道这样的&lt;span class=&#34;math inline&#34;&gt;\(\bar x_k\)&lt;/span&gt;是一定存在的，并且为了使得函数下降得尽可能多，我们考虑如下子优化问题&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\nabla f(x_k)^T(x-x_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;利用该问题的最优解 &lt;span class=&#34;math inline&#34;&gt;\(\bar x_k=\mathop{agrmin}_{x\in X} \nabla f(x_k)^T(x-x_k)\)&lt;/span&gt; 可以得到新的下降方向。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;该优化问题的几何直观非常明确，就是寻找&lt;span class=&#34;math inline&#34;&gt;\(\bar x_{k}\)&lt;/span&gt;在当前迭代带点&lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt;的负梯度方向&lt;span class=&#34;math inline&#34;&gt;\(-\nabla f(x_k)\)&lt;/span&gt;投影最长的点。 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161121_3.png&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;考虑计算的实用性，我们总是希望该优化问题比原问题求解更加容易。一个典型的例子是，当&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是非线性函数，&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;为线性等式及不等式构成的约束的时候，该子问题是线性规划，容易求解。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>约束优化(1)</title>
+      <link>/post/zh/con1/</link>
+      <pubDate>Mon, 07 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/con1/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;约束优化问题&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;最优解的存在性&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;最优解的充要条件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;凸集上的投影&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;这一章我们考虑带约束的优化问题&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\qquad f(x)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;X是非空凸集&lt;/li&gt;
+&lt;li&gt;函数 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 是连续可微的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;另外我们称&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;为可行域，里面的点&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;为可行解。&lt;/p&gt;
+&lt;div class=&#34;section level2&#34;&gt;
+&lt;h2&gt;约束优化问题&lt;/h2&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;最优解的存在性&lt;/h3&gt;
+&lt;p&gt;不像在无约束优化问题，在一定条件下我们可以使用Weisterass保证最优解的存在性，带约束的问题中往往不能满足这些条件。所幸的是Marguerite Frank and Philip Wolfe给出了如下定理：&lt;/p&gt;
+&lt;p&gt;If a quadratic function &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; is bounded below on a nonempty polyhedron &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;, then &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; attains its infimum on &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;. (That is, there exists a vector &lt;span class=&#34;math inline&#34;&gt;\(x_* \in X\)&lt;/span&gt; such that &lt;span class=&#34;math inline&#34;&gt;\(f(x_* )\leq f(x),\forall x\in X\)&lt;/span&gt;.)&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;形如&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x)=x^TQx+c^Tx+d\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;且只要求&lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt;是对称矩阵，不需要半正定。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;最优解的充要条件&lt;/h3&gt;
+&lt;p&gt;【最优解的一阶必要性条件】如果 $x_* $ 是 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 在 凸集&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的局部最小值点，那么&lt;span class=&#34;math inline&#34;&gt;\(\forall x\in X\)&lt;/span&gt;有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla f(x_* )(x-x_* )\geq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;【最优解的一阶充要条件】如果 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 是 凸集&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的凸函数，那么$x_* $ 是 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 在 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的全局最小值点&lt;span class=&#34;math inline&#34;&gt;\(\Leftrightarrow\)&lt;/span&gt;&lt;span class=&#34;math inline&#34;&gt;\(\forall x\in X\)&lt;/span&gt;有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla f(x_* )(x-x_* )\geq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;【最优解的二阶必要性条件】如果 $x_* $ 是二阶可微连续函数 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 在 凸集&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的局部最小值点，那么对一切满足&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )(x-x_* )\geq 0\)&lt;/span&gt;的&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;，有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x-x_* )^T\nabla^2 f(x_* )(x-x_* )\geq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;【最优解的二阶充分性条件】如果 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 是 凸集&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的二阶连续可导凸函数，且存在&lt;span class=&#34;math inline&#34;&gt;\(x_* \in X\)&lt;/span&gt;，使得对于任意的&lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )(x-x_* )\geq 0\)&lt;/span&gt;。若下面任意条件成立，则$x_* $是局部最小值点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;X是一个多面体，并且对于一切满足&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )(x-x_* )\geq 0\)&lt;/span&gt;及$xx_* &lt;span class=&#34;math inline&#34;&gt;\(的\)&lt;/span&gt;xX$，成立&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x-x_* )^T\nabla^2 f(x_* )(x-x_* )&amp;gt;0\]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;存在&lt;span class=&#34;math inline&#34;&gt;\(a&amp;gt;0\)&lt;/span&gt;，使得对于任意&lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt;,成立&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x-x_* )^T\nabla^2 f(x_* )(x-x_* )\geq a\vert \vert x-x_* \vert \vert ^2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;最优解的一阶必要性条件&lt;/code&gt;的几何解释: 在局部最小值点$x_* &lt;span class=&#34;math inline&#34;&gt;\(处的梯度\)&lt;/span&gt;f(x_* )&lt;span class=&#34;math inline&#34;&gt;\(与所有的可行变分，\)&lt;/span&gt;x-x_* ,xX$，的夹角都小于等于&lt;span class=&#34;math inline&#34;&gt;\(90^\circ\)&lt;/span&gt;。 特别当约束集 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 非凸时，最优性的必要条件不成立。 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161109_9.png&#34; alt=&#34;Snip20161109_9&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161109_11.png&#34; alt=&#34;Snip20161109_11&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;最优解的一阶充要条件&lt;/code&gt;中，运用了平行于Chapter 1中的结论，即：令 &lt;span class=&#34;math inline&#34;&gt;\(f:X\vert \rightarrow R\)&lt;/span&gt;为凸集 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的一个凸函数，则在 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;最小值点也是 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的全局最小值点。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;例: 带边界约束的优化问题&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;考虑带边界的优化问题&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\qquad f(x)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中可行域&lt;span class=&#34;math inline&#34;&gt;\(X=\{x\in R^n\vert a_i\leq x\leq b_i, i=1,2,..,n\}\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(a_i,b_i\)&lt;/span&gt;是给定的常数，下面分三种情况讨论：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;最小值点$x_* &lt;span class=&#34;math inline&#34;&gt;\(在下边界点处取到，即\)&lt;/span&gt;{x_* }_i=a_i$&lt;/p&gt;
+&lt;p&gt;利用最优解的一阶必要性条件，我们可以得到&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\sum_{i=1}^n \frac{\partial f(x_* )}{\partial x_i}(x_i-{x_* }_i) \geq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;固定&lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;, 构造如下的&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;: &lt;span class=&#34;math inline&#34;&gt;\(x_i=a_i+\delta_i\)&lt;/span&gt;,其中&lt;span class=&#34;math inline&#34;&gt;\(\delta_i&amp;gt;0\)&lt;/span&gt; ，且对一切&lt;span class=&#34;math inline&#34;&gt;\(j\neq i,x_j={x_* }_j\)&lt;/span&gt;。&lt;/p&gt;
+&lt;p&gt;则有&lt;span class=&#34;math inline&#34;&gt;\(\frac{\partial f(x_* )}{\partial x_i}\delta_i\geq 0\)&lt;/span&gt;，进而推出&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x_* )}{\partial x_i}\geq 0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;最小值点$x_* &lt;span class=&#34;math inline&#34;&gt;\(在上边界点处取到，即\)&lt;/span&gt;{x_* }_i=b_i$&lt;/p&gt;
+&lt;p&gt;与上例类似，只需取&lt;span class=&#34;math inline&#34;&gt;\(x_i=b_j-\delta_j\)&lt;/span&gt;,其中&lt;span class=&#34;math inline&#34;&gt;\(\delta_i&amp;gt;0\)&lt;/span&gt;, 易得&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x_* )}{\partial x_i}\leq 0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;最小值点$x_* &lt;span class=&#34;math inline&#34;&gt;\(在内部取到，即\)&lt;/span&gt;a_i &amp;lt;{x_* }&lt;em&gt;i &lt;b_i$
+
+固定$i$, 构造如下的$x$:    
+
+$$x_i={x_* }_i+\delta_i$$
+
+其中$\delta_i&gt;0&lt;span class=&#34;math inline&#34;&gt;\(且保证\)&lt;/span&gt;x_i ={x&lt;/em&gt;* }_i+_i&amp;lt;b_i&lt;span class=&#34;math inline&#34;&gt;\(.同时对一切\)&lt;/span&gt;ji$&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_j={x_* }_j\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;则有&lt;span class=&#34;math inline&#34;&gt;\(\frac{\partial f(x_* )}{\partial x_i }\geq 0\)&lt;/span&gt;; 如果构造&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_i={x_*}_i -\delta_i\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(\delta_i&amp;gt;0\)&lt;/span&gt;且保证&lt;span class=&#34;math inline&#34;&gt;\(x_i ={x_* }_i -\delta_i &amp;gt; a_i\)&lt;/span&gt;， 且对一切$ ji, x_j ={x*}_j $。则有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x_* )}{\partial x_i }\leq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;综上可得&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x_* )}{\partial x_i}=0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;凸集上的投影&lt;/h3&gt;
+&lt;p&gt;现在考虑一个有很强直观几何意义的优化问题&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\qquad \vert \vert z-x\vert \vert ^2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(z\in R^n\)&lt;/span&gt;。从几何上理解这个问题就是，在&lt;span class=&#34;math inline&#34;&gt;\(R^n\)&lt;/span&gt;的子集&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;中找到一个点&lt;span class=&#34;math inline&#34;&gt;\(x_* \in X\)&lt;/span&gt;，使得$x_* &lt;span class=&#34;math inline&#34;&gt;\(与\)&lt;/span&gt;z$在欧式距离意义下最近，我们称这个优化问题为投影问题&lt;/p&gt;
+&lt;p&gt;为了解决这个，优化问题，我们引入下面这个定理&lt;/p&gt;
+&lt;p&gt;【投影定理】设&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(R^n\)&lt;/span&gt;的非空闭凸子集：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;【存在性命题】对每一&lt;span class=&#34;math inline&#34;&gt;\(z\in R^n\)&lt;/span&gt;，存在唯一的&lt;span class=&#34;math inline&#34;&gt;\(x_* \in X\)&lt;/span&gt;，使得对一切$xX,z-x&lt;span class=&#34;math inline&#34;&gt;\(达到最小。我们称\)&lt;/span&gt;x_* &lt;span class=&#34;math inline&#34;&gt;\(为\)&lt;/span&gt;z&lt;span class=&#34;math inline&#34;&gt;\(在\)&lt;/span&gt;X&lt;span class=&#34;math inline&#34;&gt;\(上的投影，用\)&lt;/span&gt;[z]^+$表示。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;【判定条件】给定&lt;span class=&#34;math inline&#34;&gt;\(z\in R^n\)&lt;/span&gt;，一个向量$x_* &lt;span class=&#34;math inline&#34;&gt;\(等于\)&lt;/span&gt;[z]^+&lt;span class=&#34;math inline&#34;&gt;\(当且仅当对一切\)&lt;/span&gt;xX$&lt;/p&gt;
+&lt;span class=&#34;math display&#34;&gt;\[(z-x_* )(x-x_* )\leq 0\]&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;当&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;是一个子空间时，一个向量$x_* &lt;span class=&#34;math inline&#34;&gt;\(等于\)&lt;/span&gt;[z]^+&lt;span class=&#34;math inline&#34;&gt;\(当且仅当\)&lt;/span&gt;z-x_* &lt;span class=&#34;math inline&#34;&gt;\(正交于\)&lt;/span&gt;X&lt;span class=&#34;math inline&#34;&gt;\(,即对一切\)&lt;/span&gt;xX$&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x^T(z-x_* )=0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;判定条件&lt;/code&gt;的几何解释&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161110_4.png&#34; alt=&#34;Snip20161110_4&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161110_4&lt;/p&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;子空间情形的几何解释&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/projection.png&#34; alt=&#34;projection&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;projection&lt;/p&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;例子：等式约束的二次问题&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161110_6.png&#34; alt=&#34;Snip20161110_6&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161110_6&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(5)</title>
+      <link>/post/zh/uncon5/</link>
+      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon5/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;共轭方向法&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;共轭方向法求解二次问题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;共轭方向法求解非二次问题&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;section level2&#34;&gt;
+&lt;h2&gt;共轭方向法&lt;/h2&gt;
+&lt;p&gt;在前面的讨论中我们看到了，由于最速下降法在矩阵条件数大的情况下，收敛速率可以非常缓慢；牛顿法虽然在非奇异驻点附近收敛速率很快，但是计算复杂度较高。因此我们提出了共轭方向法（conjugate direction methods）来改进该问题。&lt;/p&gt;
+&lt;p&gt;首先给出共轭的概念与简单性质&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;定义： 给定一个n维的正定矩阵&lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt;，我们说非零向量组&lt;span class=&#34;math inline&#34;&gt;\(d_1,...,d_k\)&lt;/span&gt;是Q-共轭(Q-conjugate)的，如果任意&lt;span class=&#34;math inline&#34;&gt;\(i\neq j\)&lt;/span&gt;成立&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_i^TQd_j=0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;性质： 如果非零向量组&lt;span class=&#34;math inline&#34;&gt;\(d_1,...,d_k\)&lt;/span&gt;是Q-共轭，则它们是线性无关的&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt; 其实Q-共轭可以看作是在另一坐标系下的的正交。因为，若设&lt;span class=&#34;math inline&#34;&gt;\(Q=A^TA\)&lt;/span&gt;,则有&lt;span class=&#34;math inline&#34;&gt;\((Ad_i)^T(Ad_j)=0\)&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;共轭方向法求解二次问题&lt;/h3&gt;
+&lt;p&gt;对于一个给定含有n个Q-共轭方向&lt;span class=&#34;math display&#34;&gt;\[\{d_0,d_1,...,d_{n-1}\}\]&lt;/span&gt;，以及无约束二次函数最小化问题&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x} f(x)=\frac{1}{2}x&amp;#39;Qx-b&amp;#39;x\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;相应的共轭法为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}+a_kd_k\;k=0,1,...,n-1\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(x_0\)&lt;/span&gt;是任意的初始向量，&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;是按照最小步长准则给出的，即&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[a_k=\mathop{argmin}_{a} g(a)=f(x_k+ad_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;求解方程 &lt;span class=&#34;math inline&#34;&gt;\(g&amp;#39;(a)=d_k^T\nabla (x_k+a_kd_k)=0\)&lt;/span&gt;【原问题是凸的，故可以使用一阶最优性条件】,可以给出每一步长&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[a_k=\frac{d_k^T(b-Qx_k)}{d_k^TQd_k}\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;从代数的观点来看，共轭方向法的本质是：&lt;strong&gt;在逐渐扩张的线性流形上逐步极小化目标函数&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;,而经过n步扩张后的线性流形将包含&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的全局最小值点&lt;/strong&gt;，即对每一个k（k=0,1,2,..,n-1）&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=\mathop{argmin}_{x\in M_k}\quad f(x)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math display&#34;&gt;\[M_K=\{x_0+v\vert v\in span\{d_0,d_1,..d_k\}\}\]&lt;/span&gt;。因为我们可以证明该优化问题求解出来的&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}\)&lt;/span&gt;就是更新公式产生的那个&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}\)&lt;/span&gt;。特别地，在证明过程中，我们顺便得到&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_i^T\nabla f(x_{k+1})=0\quad \forall i=0,1,2,...,k\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;从几何的观点来看，共轭方向法实质：&lt;strong&gt;在n维空间中，逐渐沿着n个正交方向，极小化目标函数&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;&lt;/strong&gt;。具体来讲，当&lt;span class=&#34;math inline&#34;&gt;\(b=0, Q=I\)&lt;/span&gt;时，这时&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的等值面是同心球，我们沿着n个正交方向（比如坐标轴方向）逐次极小化&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;便可以的达到球心。如果&lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt;是一般的正定矩阵，可以通过尺度变换，令&lt;span class=&#34;math inline&#34;&gt;\(y=Q^{1/2}x\)&lt;/span&gt;则极小化&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{1}{2}x&amp;#39;Qx\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;等价于极小化&lt;span class=&#34;math inline&#34;&gt;\(\vert \vert y\vert \vert ^2\)&lt;/span&gt;。如果&lt;span class=&#34;math inline&#34;&gt;\(w_0.w_1,..w_{n-1}\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(R^n\)&lt;/span&gt;中的一组非零正交方向算法最多在n步后终止。利用&lt;span class=&#34;math inline&#34;&gt;\(x=Q^{-1/2}y\)&lt;/span&gt;即可求解原问题。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161031_3.png&#34; alt=&#34;Snip20161031_3&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161031_3&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;q-&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Q-共轭方向的生成&lt;/h4&gt;
+&lt;p&gt;对于任意给定的线性无关向量组&lt;span class=&#34;math display&#34;&gt;\[\{\xi_0,\xi_1,...,\xi_k\}\]&lt;/span&gt;，利用Gram-Schmidt方法，可以构建一组相互Q-共轭的方向&lt;span class=&#34;math display&#34;&gt;\[\{d_0,d_1,...,d_k\}\]&lt;/span&gt;，使得对于所有的&lt;span class=&#34;math inline&#34;&gt;\(i=0,...,k\)&lt;/span&gt;满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[span\{\xi_0,\xi_1,...,\xi_i\}=span\{d_0,d_1,...,d_i\} \qquad(1.147)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161102_3.png&#34; alt=&#34;Snip20161102_3&#34; /&gt; &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161102_4.png&#34; alt=&#34;Snip20161102_4&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;共轭梯度法&lt;/h4&gt;
+&lt;p&gt;该方法是基于在第k步的梯度方向&lt;span class=&#34;math inline&#34;&gt;\(g_k=\nabla f(x_k)\)&lt;/span&gt;,来生成共轭方向&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;。具体来说是：&lt;/p&gt;
+&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(\xi_0=-g_0\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(d_0=\xi_0\)&lt;/span&gt; 假设已经得到了k-1个共轭方向&lt;span class=&#34;math display&#34;&gt;\[\{d_0,d_1,...,d_{k-1}\}\]&lt;/span&gt;，利用Gram-Schimidt方法对向量组&lt;span class=&#34;math display&#34;&gt;\[\{-g_k,d_0,...,d_{k-1}\}\]&lt;/span&gt;执行（1.149）和（1.151）式得到共轭方向&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-g_k+\sum_{i=1}^{k-1}\frac{g_k&amp;#39;Qd_i}{d_i&amp;#39;Qd_i}d_i\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;利用最小化步长准则选取步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;，从而构造迭代列&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_k+a_kd_k\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;若&lt;span class=&#34;math inline&#34;&gt;\(g_0\neq0\)&lt;/span&gt;,算法在终止之前所有生成的梯度&lt;span class=&#34;math inline&#34;&gt;\(g_k\)&lt;/span&gt;是线性无关的。这是由&lt;em&gt;共轭方向本质上是在逐渐扩张的线性流形上逐步极小化目标函数&lt;/em&gt;这一原理保证的。事实上若在第k步，算法未终止，&lt;span class=&#34;math inline&#34;&gt;\(\forall i=0,1,...,k-1\)&lt;/span&gt;我们有&lt;span class=&#34;math inline&#34;&gt;\(d_i^Tg_k=0\quad\)&lt;/span&gt;。而&lt;span class=&#34;math display&#34;&gt;\[span \{d_0,d_1,...,d_{k-1}\}= span \{g_0,g_1,...,g_{k-1}\}\]&lt;/span&gt;，故&lt;span class=&#34;math inline&#34;&gt;\(\forall i=0,1,...,k-1\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[g_i^Tg_k=0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;由于最多能够n个线性无关的梯度方向，故至多迭代n次后，梯度为零，且算法会帮助找到某个全局最小值。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;共轭梯度法之所以有用是因为，看似计算十分复杂的共轭方向&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;的生成公式&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-g_k+\sum_{i=1}^{k-1}\frac{g_k&amp;#39;Qd_i}{d_i&amp;#39;Qd_i}d_i\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;可以化简为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-g_k+\frac{g_k&amp;#39;g_k}{g_{k-1}&amp;#39;g_{k-1}}d_{k-1}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;【证明可以参见Dimitri .P Bertsekas, Nonlinear Programming 2ed中文版p105 命题1.6.1】&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;显然当&lt;span class=&#34;math inline&#34;&gt;\(d_k=0\)&lt;/span&gt;时，算法也会结束。但是利用3的结论，我们可以知道只有当&lt;span class=&#34;math inline&#34;&gt;\(g_k=0\)&lt;/span&gt;时才有&lt;span class=&#34;math inline&#34;&gt;\(d_k=0\)&lt;/span&gt;。利用反正法，若&lt;span class=&#34;math inline&#34;&gt;\(d_k=0,g_k\neq 0\)&lt;/span&gt;，我们有&lt;span class=&#34;math inline&#34;&gt;\(g_k=\frac{g_k&amp;#39;g_k}{g_{k-1}&amp;#39;g_{k-1}}d_{k-1}\)&lt;/span&gt;，这与1中&lt;span class=&#34;math inline&#34;&gt;\(g_k\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(d_{k-1}\)&lt;/span&gt;的正交性矛盾了。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;共轭方向法求解非二次问题&lt;/h3&gt;
+&lt;p&gt;共轭方向法同样可以运用在非二次问题中，即直接将针对二次问题的算法平行的移植过来。&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_x \quad f(x)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Algorithm&lt;/code&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}+a_kd_k\;k=0,1,...,n-1\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(x_0\)&lt;/span&gt;是任意的初始向量，&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;是按照最小步长准则给出的，即&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[a_k=\mathop{argmin}_{a} g(a)=f(x_k+ad_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;是按照下式给出的&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-g_k+\beta_kd_{k-1}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中常用的&lt;span class=&#34;math inline&#34;&gt;\(\beta_k\)&lt;/span&gt;计算方式为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\beta_{k}=\frac{\nabla^T f(x_k)\big(\nabla f(x_k)-\nabla f(x_{k-1})\big)}{\nabla^T f(x_{k-1})\nabla f(x_{k-1})}\]&lt;/span&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;选取&lt;span class=&#34;math inline&#34;&gt;\(\beta_k\)&lt;/span&gt;的直观想法是来自求解二次问题时，共轭方向的生成公式&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-g_k+\frac{g_k&amp;#39;g_k}{g_{k-1}&amp;#39;g_{k-1}}d_{k-1}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;由于&lt;span class=&#34;math inline&#34;&gt;\(g_k&amp;#39;g_{k-1}=0\)&lt;/span&gt;，故上式又等价于&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-g_k+\frac{g_k&amp;#39;(g_k-g_{k-1})}{g_{k-1}&amp;#39;g_{k-1}}d_{k-1}\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(d_k=-g_k+\beta_kd_{k-1}\)&lt;/span&gt; 是一个下降方向，即有&lt;span class=&#34;math inline&#34;&gt;\(d^T_{k}\nabla f(x_k)&amp;lt;0\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;proof:&lt;/em&gt; 在二次问题中讨论中我们证明了，按照线性最小化方式选择步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;以及用共轭方向&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;更新&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}\)&lt;/span&gt;的方式能够保证&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_i^T\nabla f(x_{k+1})=0\quad \forall i=0,1,2,...,k\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;于是我们有&lt;span class=&#34;math inline&#34;&gt;\(d_{k-1}^T\nabla f(x_{k})=0\)&lt;/span&gt;，从而&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d^T_{k}\nabla f(x_k)=-\vert \vert \nabla f(x_k)\vert \vert ^2+\beta_kd_{k-1}^T\nabla f(x_{k})=-\vert \vert \nabla f(x_k)\vert \vert ^2&amp;lt;0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;这样选取&lt;span class=&#34;math inline&#34;&gt;\(\beta_k\)&lt;/span&gt;的目的在于，目标函数中存在的二次项和不精确的一维线搜索会破坏我们搜索方向&lt;span class=&#34;math display&#34;&gt;\[\{d_k\}\]&lt;/span&gt;的共轭性，并且会出现&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_k)\)&lt;/span&gt;近似正交的情形。一旦&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_k)\)&lt;/span&gt;近似正交&lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x_k)\vert \vert ^2\)&lt;/span&gt;近似等于0。如果&lt;span class=&#34;math inline&#34;&gt;\(\beta_k\)&lt;/span&gt;更新公式选成&lt;span class=&#34;math inline&#34;&gt;\(\beta_{k}=\frac{\nabla^T f(x_k)\big(\nabla f(x_k)\big)}{\nabla^T f(x_{k-1})\nabla f(x_{k-1})}\)&lt;/span&gt;，则&lt;span class=&#34;math inline&#34;&gt;\(\beta_k\)&lt;/span&gt;就接近0，于是&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}\)&lt;/span&gt;便近似等于&lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt;,导致迭代算法被卡住。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;另外&lt;br /&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161102_6.png&#34; alt=&#34;Snip20161102_6&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(4)</title>
+      <link>/post/zh/uncon4/</link>
+      <pubDate>Wed, 26 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon4/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;牛顿法与其变形&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;局部收敛性&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;全局收敛性&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#gauss-newtown-&#34;&gt;Gauss-Newtown 法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;section level2&#34;&gt;
+&lt;h2&gt;牛顿法与其变形&lt;/h2&gt;
+&lt;p&gt;之前我们讨论了梯度方法的收敛性与收敛速率。我们知道最速下降法是梯度方法中迭代形式最简单，但是收敛速率最慢的算法。另一个极端是牛顿法，它在一定情况下它是梯度算法中收敛速率最快的算法，但是相应的迭代算法会比较复杂，因为要计算Hessian阵的逆。&lt;/p&gt;
+&lt;p&gt;如前面所讨论的牛顿法方向的选取方式&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-(\nabla^2 f(x_k))^{-1}\nabla f(x_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;保证了其尺度变化不变性(scaling-free)。 即: 考虑线性变化&lt;span class=&#34;math inline&#34;&gt;\(x=Sy\)&lt;/span&gt;，则在变量y空间中用牛顿法极小化&lt;span class=&#34;math inline&#34;&gt;\(f(S^{-1}x)\)&lt;/span&gt;生成的序列&lt;span class=&#34;math inline&#34;&gt;\(y_{k+1}=y_k+a_kd_k\)&lt;/span&gt;与在变量x空间用牛顿法极小化&lt;span class=&#34;math inline&#34;&gt;\(f(x)\)&lt;/span&gt;生成的序列&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_k+a_kd_k\)&lt;/span&gt;存在关系&lt;span class=&#34;math inline&#34;&gt;\(x_k=Sy_k\)&lt;/span&gt;。这种尺度变化不变性是最速下降法所不具备的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;纯牛顿法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;由【类牛顿法的超线性收敛速率结论】我们知道，在非奇异的局部最小值点附近，当Hessian阵正定时，只需选取步长s=1。因此即将收敛时，算法的跌带形式为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}-(\nabla^2f(x_k))^{-1}\nabla f(x_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;该算法称为纯牛顿法。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;在远离局部最小值时，有可能出现&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hessian阵奇异&lt;/li&gt;
+&lt;li&gt;Hessian阵非正定导致&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;不是下降方向&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因此，对于牛顿法我们要进行下面的两个讨论&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;局部收敛性：刻画标准牛顿方法在非奇异局部最小值附近的性能&lt;/li&gt;
+&lt;li&gt;全局收敛性： 当起始点离所有局部最小值点都很远的时候，为了保证算法收敛且能够达到局部最小值点，需要对牛顿法进行变形。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;局部收敛性&lt;/h3&gt;
+&lt;p&gt;鉴于我们已经讨论过纯牛顿法的收敛性，这里我们就提出更为一般的牛顿法的收敛性结论。&lt;/p&gt;
+&lt;p&gt;考虑含有n个未知数，n个方程的约束系统&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[g(x)=0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(g:R^n\vert \rightarrow R^n\)&lt;/span&gt; 是一个连续可微的函数。 求解该问题的迭代算法为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_k-(\nabla g(x)_k)^{-1}g(x_k))\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;其实该问题可以看做n元方程组的求解问题。因此我们可以得到更一般的Newton-Raphson算法。该迭代式的导出的直观想法与梯度方法十分类似&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x)\approx f(x_0)+(x-x_0)^T\nabla f(x_0)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;于是求解&lt;span class=&#34;math inline&#34;&gt;\(g(x)=0\)&lt;/span&gt;近似与求解&lt;span class=&#34;math inline&#34;&gt;\(f(x_0)+(x-x_0)^T\nabla f(x_0)=0\)&lt;/span&gt;，进而得到迭代关系式。 2. 若&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x)=g(x)\)&lt;/span&gt;则上述牛顿法就是我们所说的纯牛顿法。但是一般来说可微的向量值函数&lt;span class=&#34;math inline&#34;&gt;\(g\)&lt;/span&gt;不一定是某个函数的梯度。特别的，&lt;span class=&#34;math inline&#34;&gt;\(g\)&lt;/span&gt;是某个函数&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的梯度当且仅当对所有的x，&lt;span class=&#34;math inline&#34;&gt;\(\nabla g(x)\)&lt;/span&gt;是对称矩阵。 3. 该算法是超线性收敛的。【证明可以参见Dimitri .P Bertsekas, Nonlinear Programming 2ed中文版p68】 4. 更一般的结论 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14769767590504.jpg&#34; /&gt; &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14769767820494.jpg&#34; /&gt;&lt;/p&gt;
+&lt;ol start=&#34;5&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;该算法的问题在于，我们不能够知道迭代初始点是否离局部最小值点足够近。事实上当初始点比较坏时，算法完全可能不收敛。 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161020_34.png&#34; alt=&#34;Snip20161020_34&#34; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;全局收敛性&lt;/h3&gt;
+&lt;p&gt;正如我们之前所讨论的，纯牛顿法在解&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;无约束的最小化问题会遇到以下问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\((\nabla^2 f(x_k))^{-1}\)&lt;/span&gt;的逆不存在。比如&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是线性函数，当&lt;span class=&#34;math inline&#34;&gt;\(f(x)=C&amp;#39;x\)&lt;/span&gt;时&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x_k)=0\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;纯牛顿法不能保证函数在每一步下降，即出现&lt;span class=&#34;math inline&#34;&gt;\(f(x_{k+1})f(x_k)\)&lt;/span&gt;的情形&lt;/li&gt;
+&lt;li&gt;从更一般的牛顿法的迭代形式可以看出，我们纯牛顿法只是在试图解决&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x)=0\)&lt;/span&gt;的问题，因此算法可能会在局部最大值点附近。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;于是我们需要对牛顿法作出一些修正。比如给Hessian阵&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x_k)\)&lt;/span&gt;加一个对角阵扰动的扰动&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x_k)+\Omega_k\)&lt;/span&gt;使得其正定从而可逆。比如改进的Cholesky分解法，于是衍生出了牛顿法的变形&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;gauss-newtown-&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Gauss-Newtown 法&lt;/h3&gt;
+&lt;p&gt;考虑极小化&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{2}\vert \vert g(x)\vert \vert ^2\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(g: R^n\vert \rightarrow R^m\)&lt;/span&gt;的专门方法：Gauss-Newtown法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;考虑&lt;span class=&#34;math inline&#34;&gt;\(g(x)\)&lt;/span&gt;的线性逼近&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\tilde{g}(x,x_k)=g(x_k)+(x-x_k)&amp;#39;\nabla g(x_k)\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;极小化&lt;span class=&#34;math inline&#34;&gt;\(\tilde{g}(x,x_k)\)&lt;/span&gt;得到&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}\)&lt;/span&gt;，即&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=\mathop{argmin}_{x}\frac{1}{2}\vert \vert \tilde{g}(x,x_k)\vert \vert ^2\overset{*}=x_{k}-\big(\nabla g(x_k)\nabla^T g(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;检验 &lt;span class=&#34;math inline&#34;&gt;\(\overset{*}=\)&lt;/span&gt; 成立，只用对&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{2}\vert \vert \tilde{g}(x,x_k)\vert \vert ^2\)&lt;/span&gt;关于&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;求导，并设为零即可。&lt;/li&gt;
+&lt;li&gt;当&lt;span class=&#34;math inline&#34;&gt;\(g\)&lt;/span&gt;是一个线性函数的时候，比如线性回归模型&lt;span class=&#34;math inline&#34;&gt;\(g(\beta)=Y-X\beta\)&lt;/span&gt;，迭代一步即可收敛。因为&lt;span class=&#34;math inline&#34;&gt;\(\tilde{g}(x,x_k)\)&lt;/span&gt;不再是&lt;span class=&#34;math inline&#34;&gt;\(g(x)\)&lt;/span&gt;的线性逼近，而就是&lt;span class=&#34;math inline&#34;&gt;\(g(x)\)&lt;/span&gt;的恒等变换。关于&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;极小化&lt;span class=&#34;math inline&#34;&gt;\(\tilde{g}(x,x_k)\)&lt;/span&gt;等价于原问题。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;算法收敛性&lt;/h4&gt;
+&lt;p&gt;下降方向&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-\big(\nabla g(x_k)\nabla^T g(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;在&lt;span class=&#34;math inline&#34;&gt;\(\nabla g(x_k)\nabla^T g(x_k)\)&lt;/span&gt;奇异时，算法会出现问题。为了解决这个问题，同时提高算法在奇异点附近的迭代收敛性，我们一般会修正下降方向为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-\big(\nabla g(x_k)\nabla^T g(x_k)+\Delta_k\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(\Delta_k\)&lt;/span&gt;为对角阵，且正定（Levenberg-Marquatdt提出&lt;span class=&#34;math inline&#34;&gt;\(\Delta_k=\lambda I,\lambda\)&lt;/span&gt;为一正数）并根据一定准则选择下降步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;，从而有更新公式&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}-a_k\big(\nabla g(x_k)\nabla^T g(x_k)+\Delta_k\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;通过这些&lt;span class=&#34;math inline&#34;&gt;\(\Delta_k\)&lt;/span&gt;的选取方式，可以保证&lt;span class=&#34;math display&#34;&gt;\[\{d_k\}\]&lt;/span&gt;是梯度相关的，比如我们再用Armijo准则选择合适的步长，则算法一定是收敛的（因为此时可以看成是特殊的梯度法）。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;与牛顿法的关系&lt;/h4&gt;
+&lt;p&gt;两种算法十分接近，Gauss-Newtown法本质上是牺牲收敛速度来避免复杂的二阶项计算。事实上，考虑&lt;span class=&#34;math inline&#34;&gt;\(g\)&lt;/span&gt;的每个分量&lt;span class=&#34;math inline&#34;&gt;\(g_i\)&lt;/span&gt;是标量的情形，则目标函数&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{2}\vert \vert g(x)\vert \vert ^2\)&lt;/span&gt;的Hessian阵为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla g(x_k)\nabla^T g(x_k)+\sum_{i=1}^m \nabla^2 g_i(x_k)g_i(x_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;于是牛顿法的更新公式为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}-\big(\nabla g(x_k)\nabla^T g(x_k)+\sum_{i=1}^m \nabla^2 g_i(x_k)g_i(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;而Gauss-Newtown法的更新公式为&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}-\big(\nabla g(x_k)\nabla^T g(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;如果被忽略的二阶项在收敛点附近值很小，自然Gauss-Newtown法的速率是令人满意的。&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(3)</title>
+      <link>/post/zh/uncon3/</link>
+      <pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon3/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;收敛性分析&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;极限点的存在性问题&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;迭代终止条件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;收敛性结论&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;收敛速率分析&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;局部分析方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#case-study-&#34;&gt;Case Study-二次函数情形&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#case-study-&#34;&gt;Case Study-非二次函数与奇异的情形&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;section level2&#34;&gt;
+&lt;h2&gt;收敛性分析&lt;/h2&gt;
+&lt;p&gt;梯度方法是利用当前迭代点的局部信息进行，与函数本身的全局性质无关，从而该方法容易被各种局部最小值点吸引（一阶导数为0的点），在下面的吸引定理(capture theorem)中我们可以看到梯度方法最好的情况也只是收敛到驻点。因此针对非凸的问题我们必须尝试从不同的起始点运行梯度方法，才可能得到一些可行的结果。&lt;/p&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;极限点的存在性问题&lt;/h3&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;一般的，梯度方法产生的迭代序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;完全可能不存在极限点。事实上，如果&lt;span class=&#34;math inline&#34;&gt;\(f(x)\)&lt;/span&gt;不存在最小值点，那么一般来说迭代序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是无界的&lt;/li&gt;
+&lt;li&gt;若水平集&lt;span class=&#34;math display&#34;&gt;\[S_{x_0}=\{x \vert f(x)\leq f(x_0)\}\]&lt;/span&gt;是有界的，并选合适的步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;保证每一步函数值在下降，那么&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;总是包含在&lt;span class=&#34;math inline&#34;&gt;\(S_{x_0}\)&lt;/span&gt;内的，从而有界，进而有收敛的子列。&lt;/li&gt;
+&lt;li&gt;即使&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是有界的，也不能保证该序列收敛到唯一的极限点，幸运地是孤立的局部最小值点（存在开球使得该点是球内部的唯一驻点）可以吸引大多梯度方法产生的序列。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;考虑最速下降法产生的迭代序列&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_k\nabla f(x_k)\)&lt;/span&gt;, 其中&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是凸函数且至少有一最小值点，并且对所有的x，y存在L&amp;gt;0,满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L\vert \vert x-y\vert \vert\]&lt;/span&gt;&lt;/p&gt;
+当步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;满足下列两个条件中的一个时，&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;收敛到&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的一个最小值点。
+&lt;ul&gt;
+&lt;li&gt;&lt;ol style=&#34;list-style-type: lower-alpha&#34;&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon\leq a_k\leq \frac{2-\epsilon}{L};\forall k\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;li&gt;b）&lt;span class=&#34;math inline&#34;&gt;\(a_k\rightarrow 0\)&lt;/span&gt; 且 &lt;span class=&#34;math inline&#34;&gt;\(\sum_{k=0}^{+\infty} a_k=0\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如果存在多个全局最小值点的连通集，理论上&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;可以有多个极限点。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;梯度相关(gradient related)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;考虑梯度方法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k,d_k\}\)&lt;/span&gt;，我们称方向序列&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是序列相关的，若对任何收敛于&lt;em&gt;非驻点&lt;/em&gt;的子列&lt;span class=&#34;math display&#34;&gt;\[\{x_{k}\}_{k \in \kappa}\]&lt;/span&gt;，相应的子列&lt;span class=&#34;math display&#34;&gt;\[\{d_{k}\}_{k \in \kappa}\]&lt;/span&gt;都是&lt;em&gt;有界的&lt;/em&gt;，且满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\limsup_{k\rightarrow +\infty,{k \in \kappa}} \nabla f(x_{k})&amp;#39;d_{k}&amp;lt;0\]&lt;/span&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;为什么要考虑梯度相关？ 事实上，梯度相关可以保证对于那些不趋于驻点的&lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt;，对应的&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_k)\)&lt;/span&gt;的不会趋于正交，从而保证算法不会陷在某一非驻点附近.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;怎样验证梯度相关的条件满足？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;有界特征值条件： 若 &lt;span class=&#34;math inline&#34;&gt;\(d_k=-D_k \nabla f(x_k)\)&lt;/span&gt;, 其中&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;正定，且存在&lt;span class=&#34;math inline&#34;&gt;\(c_1,c_2&amp;gt;0\)&lt;/span&gt; 使得对任意&lt;span class=&#34;math inline&#34;&gt;\(z\in\scr{R}^n,k=0,1,2...\)&lt;/span&gt;成立 &lt;span class=&#34;math inline&#34;&gt;\(c_1\vert \vert z\vert \vert ^2\leq z&amp;#39;D_kz\leq c_2\vert \vert z\vert \vert ^2\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;有界特征值条件推广形式： 若 &lt;span class=&#34;math inline&#34;&gt;\(d_k=-D_k \nabla f(x_k)\)&lt;/span&gt;, 其中&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;正定，且存在&lt;span class=&#34;math inline&#34;&gt;\(c_1,c_2&amp;gt;0,p_1,p_2\geq 0\)&lt;/span&gt;, 使得使得对任意&lt;span class=&#34;math inline&#34;&gt;\(z\in\scr{R}^n,k=0,1,2...\)&lt;/span&gt;成立 &lt;span class=&#34;math inline&#34;&gt;\(c_1\vert \vert \nabla f(x_k)\vert \vert ^{p_1}\vert \vert z\vert \vert ^2\leq z&amp;#39;D_kz\leq c_2\vert \vert \nabla f(x_k)\vert \vert ^{p_2}\vert \vert z\vert \vert ^2\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;存在&lt;span class=&#34;math inline&#34;&gt;\(c_1,c_2&amp;gt;0,p_1,p_2\geq 0\)&lt;/span&gt;,使得对任意&lt;span class=&#34;math inline&#34;&gt;\(k=0,1,2...\)&lt;/span&gt;成立 &lt;span class=&#34;math inline&#34;&gt;\(c_1\vert \vert \nabla f(x_k)\vert \vert ^{p_1}\leq -\nabla f(x_k)&amp;#39;d_k\)&lt;/span&gt;以及 &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert d_k\vert \vert \leq c_2\vert \vert \nabla f(x_k)\vert \vert ^{p_2}\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是梯度相关的，在一定条件下我们可以保证由梯度方法产生的&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是收敛到驻点的，具体讨论详见&lt;code&gt;收敛性结论&lt;/code&gt;小节。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;迭代终止条件&lt;/h3&gt;
+&lt;p&gt;一般来说梯度方法不会在有限步收敛，所有我们需要设置一个迭代终止准则使得在算法停止时我们的解以一定精度逼近至少一个局部最小值。常用的准则有：&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;当梯度范数充分小时，&lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x_k)\vert \vert \leq \epsilon\)&lt;/span&gt;，停止迭代
+&lt;ul&gt;
+&lt;li&gt;修正形式： &lt;span class=&#34;math inline&#34;&gt;\(\frac{\vert \vert \nabla f(x_k)\vert \vert }{\nabla f(x_0)}\leq \epsilon\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;假设下降方向包含了优化变量的相对缩放比例，那么当&lt;span class=&#34;math inline&#34;&gt;\(\vert \vert d_k\vert \vert \leq \epsilon\)&lt;/span&gt;，停止迭代&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;当&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x)\)&lt;/span&gt;正定时，条件&lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x_k)\vert \vert \leq \epsilon\)&lt;/span&gt;给出了当前解与局部最小值点距离的上界。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;收敛性结论&lt;/h3&gt;
+&lt;p&gt;证明下述的收敛性结论的主要思想是，在每次迭代中，目标函数都得到了改进，并且基于我们的假设，这种改进在非驻点附近是实质性的，即存在非零改进下界。我们总是认为算法不会收敛到一个非驻点,不然目标函数累计改进量将达到无穷。&lt;/p&gt;
+&lt;div id=&#34;armijo&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;strong&gt;【Armijo准则下的收敛性】&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是由梯度方法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列,假设&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是梯度相关的并且&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;的选取是根据Armijo准则选取的，那么&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;的每一个极限点(若存在)都是驻点&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;该命题证明了梯度方法构造的的迭代序列的极限点（若存在）则为驻点。&lt;/li&gt;
+&lt;li&gt;从命题证明过程中我们可以知道：对于任何步长准则，只要对目标函数值得改进大于Armijo准则得到的改进，就能保证构造的迭代列是收敛的。因此&lt;strong&gt;最小化准则&lt;/strong&gt;，&lt;strong&gt;有限最小化准则&lt;/strong&gt;选取的步长都可以保证迭代序列的极限点（若存在）则为驻点&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;strong&gt;【固定步长的收敛性】&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是由梯度方法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列,假设&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是梯度相关的并且&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;的选取是根据固定步长准则选取的。假设对于某个常数&lt;span class=&#34;math inline&#34;&gt;\(L&amp;gt;0\)&lt;/span&gt;有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[Lipschitz\; continuity\; condition:\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L\vert \vert x-y\vert \vert \; \forall x,y\in \scr{R}^n\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;并且成立&lt;span class=&#34;math inline&#34;&gt;\(\forall k, d_k\neq 0\)&lt;/span&gt; 以及&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \exists \epsilon&amp;gt;0, s.t.\;\epsilon\leq a_k\leq (2-\epsilon)\bar{a}_k\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(\bar{a}_k=\frac{\vert \nabla f(x_k)d_k\vert }{L\vert \vert d_k\vert \vert ^2}\)&lt;/span&gt;. 那么&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;的每一个极限点(若存在)都是驻点.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;仅仅要求&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是梯度相关的是不能保证&lt;span class=&#34;math inline&#34;&gt;\(\epsilon\)&lt;/span&gt;的存在性，因为梯度相关只是对&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;的有界子列的局部性假设。但是幸运的是，前文提及的三个保证&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;梯度相关的条件，均可以保证$ &amp;gt;0, s.t.;a_k(2-){a}_k&lt;span class=&#34;math inline&#34;&gt;\(。比如若条件：**存在\)&lt;/span&gt;c_1,c_2&amp;gt;0&lt;span class=&#34;math inline&#34;&gt;\(,使得对任意\)&lt;/span&gt;k=0,1,2…$成立 &lt;span class=&#34;math inline&#34;&gt;\(c_1\vert \vert \nabla f(x_k)\vert \vert ^{2}\leq -\nabla f(x_k)&amp;#39;d_k\)&lt;/span&gt;以及 &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert d_k\vert \vert ^2\leq c_2\vert \vert \nabla f(x_k)\vert \vert ^{2}\)&lt;/span&gt;**满足，那么只要对所有的k，成立&lt;span class=&#34;math inline&#34;&gt;\(\exists \epsilon_0 \leq a_k\leq \frac{c_1(2-\epsilon_0)}{Lc_2}\)&lt;/span&gt;则条件&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \exists \epsilon&amp;gt;0, s.t.\;\epsilon\leq a_k\leq (2-\epsilon)\bar{a}_k\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;成立。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;命题中一阶导数&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x)\)&lt;/span&gt;的Lipschitz连续性（Lipschitz continuity condition）对该命题十分重要，它限制了函数变化程度（曲率）所在的方向都不大于 L。我们可以证明，如果&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是二次可微的并且&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x)\)&lt;/span&gt;在&lt;span class=&#34;math inline&#34;&gt;\(\scr{R}^n\)&lt;/span&gt;上有界，则Lipschitz连续性可以得到保障。但是比较难过的是，很多函数即使二阶可微，也不能保证其二阶Hessian阵有界。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Lipschitz连续性在一定程度上可以弱化：对每一个有界集&lt;span class=&#34;math inline&#34;&gt;\(A\subset \scr{R}^n\)&lt;/span&gt;都存在常数&lt;span class=&#34;math inline&#34;&gt;\(L_A\)&lt;/span&gt;满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L_A\vert \vert x-y\vert \vert \; \forall x,y\in A\]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;水平集&lt;span class=&#34;math inline&#34;&gt;\(\{x\vert f(x)\leq c\},c\in\scr{R}\)&lt;/span&gt;是有界的，且&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是二阶连续可微的，则&lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L_A\vert \vert x-y\vert \vert \; \forall x,y\in A\)&lt;/span&gt;总是满足的&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;若 &lt;span class=&#34;math inline&#34;&gt;\(A=\{x\vert f(x)\leq f(x_0)\}\)&lt;/span&gt;是有界的，且步长依赖于初始点&lt;span class=&#34;math inline&#34;&gt;\(x_0\)&lt;/span&gt;，那么 Lipschitz连续性总能被满足。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;具体应用中Lipschitz常数是很难估计的，所以满足&lt;span class=&#34;math inline&#34;&gt;\(\epsilon\leq a_k\leq (2-\epsilon)\bar{a}_k\)&lt;/span&gt;的步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;是未知的。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;strong&gt;【缩减步长的收敛性】&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是由梯度方法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列,假设对于某个常数&lt;span class=&#34;math inline&#34;&gt;\(L&amp;gt;0\)&lt;/span&gt;有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[Lipschitz\; continuity\; condition:\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L\vert \vert x-y\vert \vert \; \forall x,y\in \scr{R}^n\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;存在&lt;span class=&#34;math inline&#34;&gt;\(c_1,c_2&amp;gt;0\)&lt;/span&gt;,使得对任意&lt;span class=&#34;math inline&#34;&gt;\(k=0,1,2...\)&lt;/span&gt;成立 &lt;span class=&#34;math inline&#34;&gt;\(c_1\vert \vert \nabla f(x_k)\vert \vert ^{2}\leq -\nabla f(x_k)&amp;#39;d_k\)&lt;/span&gt;以及 &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert d_k\vert \vert ^2\leq c_2\vert \vert \nabla f(x_k)\vert \vert ^{2}\)&lt;/span&gt;.同时有 &lt;span class=&#34;math inline&#34;&gt;\(a_k\rightarrow 0,\sum_{k=1}^{+\infty}a_k=\infty\)&lt;/span&gt;则，一定是下述情况之一&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(f(x_k)\rightarrow -\infty\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\{f(x_k)\}\)&lt;/span&gt;收敛于一个有限值，&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_k)\rightarrow 0\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;的每个极限点都是&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的驻点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Remark:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;该命题的假设条件并不能保证初始迭代能够使目标函数下降。但是当步长充分小后，如满足&lt;span class=&#34;math inline&#34;&gt;\(\exists \epsilon_0 \leq a_k\leq \frac{c_1(2-\epsilon_0)}{Lc_2}\)&lt;/span&gt;，就能保证迭代过程中目标函数下降。此时只要保证了$f(x) -f(y)Lx-y&lt;span class=&#34;math inline&#34;&gt;\(对于所有A中元素集合成立即可保证收敛性，其中\)&lt;/span&gt;A={xf(x)f(x_0)}$。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;strong&gt;【吸引定理】&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是一个连续可微函数，&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是保证函数下降,即 &lt;span class=&#34;math inline&#34;&gt;\(f(x_{k+1})\leq f(x_k)\)&lt;/span&gt;，且通过&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列，同时&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;的每个收敛点都是&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的驻点。&lt;/p&gt;
+&lt;p&gt;假设存在标量&lt;span class=&#34;math inline&#34;&gt;\(s&amp;gt;0,c&amp;gt;0\)&lt;/span&gt;满足对于所有的k，成立$a_ks;; d_kcf(x_k)$&lt;/p&gt;
+&lt;p&gt;令$x_* &lt;span class=&#34;math inline&#34;&gt;\(是\)&lt;/span&gt;f&lt;span class=&#34;math inline&#34;&gt;\(的局部最小值点，同时也是在某一开集中\)&lt;/span&gt;f&lt;span class=&#34;math inline&#34;&gt;\(唯一的驻点，那么存在一个包含\)&lt;/span&gt;x_* &lt;span class=&#34;math inline&#34;&gt;\(的开集\)&lt;/span&gt;S&lt;span class=&#34;math inline&#34;&gt;\(满足: 存在\)&lt;/span&gt;k0&lt;span class=&#34;math inline&#34;&gt;\(满足\)&lt;/span&gt;x_{k}S$，那么对于一切 &lt;span class=&#34;math inline&#34;&gt;\(k&amp;gt;\bar k\)&lt;/span&gt;成立&lt;span class=&#34;math inline&#34;&gt;\(x_k\in S\)&lt;/span&gt;且$x_kx_* $.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;条件：存在标量&lt;span class=&#34;math inline&#34;&gt;\(s&amp;gt;0,c&amp;gt;0\)&lt;/span&gt;满足对于所有的k，&lt;span class=&#34;math inline&#34;&gt;\(a_k\leq s\)&lt;/span&gt;以及 &lt;span class=&#34;math inline&#34;&gt;\(f(x_{k+1})\leq f(x_k)\)&lt;/span&gt;对于Armijo准则和最小化准则，有限最小化准则都是满足的。对于固定步长准则，缩减步长准则，当满足 &lt;span class=&#34;math inline&#34;&gt;\(f(x_{k+1})\leq f(x_k)\)&lt;/span&gt;时，&lt;span class=&#34;math inline&#34;&gt;\(a_k\leq s\)&lt;/span&gt;也是满足的。&lt;/li&gt;
+&lt;li&gt;如果&lt;span class=&#34;math inline&#34;&gt;\(d_k=-D_k\nabla f(x_k)\)&lt;/span&gt;且&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;特征值有上界则$d_kcf(x_k)$也是满足的&lt;/li&gt;
+&lt;li&gt;该命题解释了为什么梯度方法产生的序列在实际应用中倾向于某个唯一的极限点，因为孤立的局部最小值点可以很好地吸引梯度方法。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level2&#34;&gt;
+&lt;h2&gt;收敛速率分析&lt;/h2&gt;
+&lt;p&gt;收敛速率的刻画方法一般有三种&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;计算复杂： 尝试估计&lt;/li&gt;
+&lt;li&gt;信息复杂度&lt;/li&gt;
+&lt;li&gt;局部分析：只关注最优解在邻域内的表现。具体来说是在局部最小值的附近利用二次函数来近似目标函数，从而很好的预测不同算法在接近非奇异局部最小值时的表现。然而这种方法没法表示算法在最初迭代时的收敛速率（虽然在实际中，初步几次迭代收敛的较快，只在极限点附近才慢下来）。然而局部分析不适用与两类问题
+&lt;ul&gt;
+&lt;li&gt;涉及奇异的局部最小值点的问题&lt;/li&gt;
+&lt;li&gt;需要多次迭代才能达到适用局部分析方法的最优解近邻的问题&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;局部分析方法&lt;/h3&gt;
+&lt;p&gt;这种方法我们只关注序列${x_k} &lt;span class=&#34;math inline&#34;&gt;\(收敛到唯一\)&lt;/span&gt;x_* &lt;span class=&#34;math inline&#34;&gt;\(的情形。一般来说，我们通过*偏差函数*e(x),\)&lt;/span&gt;e:^n$来刻画。常用的偏差函数有&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$e(x)=x-x_* $&lt;/li&gt;
+&lt;li&gt;$e(x)=f(x)-f(x_* )$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种局部的分析是渐进的，着重刻画了偏差序列&lt;span class=&#34;math inline&#34;&gt;\(\{e(x_k)\}\)&lt;/span&gt;的尾部收敛速率。我们定义如下三种收敛速率：&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;如果存在&lt;span class=&#34;math inline&#34;&gt;\(\beta\in (0,1)\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(q&amp;gt;0\)&lt;/span&gt;，使得对任意&lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt;成立&lt;span class=&#34;math inline&#34;&gt;\(e(x_k)\leq q\beta^k\)&lt;/span&gt;，则称序列&lt;span class=&#34;math inline&#34;&gt;\(\{e(x_k)\}\)&lt;/span&gt;&lt;em&gt;线性收敛&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;如果对任意&lt;span class=&#34;math inline&#34;&gt;\(\beta\in (0,1)\)&lt;/span&gt;，存在&lt;span class=&#34;math inline&#34;&gt;\(q\)&lt;/span&gt;，使得对任意&lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt;成立&lt;span class=&#34;math inline&#34;&gt;\(e(x_k)\leq q\beta^k\)&lt;/span&gt;，则称序列&lt;span class=&#34;math inline&#34;&gt;\(\{e(x_k)\}\)&lt;/span&gt;&lt;em&gt;超线性收敛&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;如果对存在&lt;span class=&#34;math inline&#34;&gt;\(\beta\in (0,1)\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(q&amp;gt;0,p&amp;gt;1\)&lt;/span&gt;,使得对任意&lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt;成立&lt;span class=&#34;math inline&#34;&gt;\(e(x_k)\leq q\beta^{p^k}\)&lt;/span&gt;，则称序列&lt;span class=&#34;math inline&#34;&gt;\(\{e(x_k)\}\)&lt;/span&gt;&lt;em&gt;至少p阶超线性收敛&lt;/em&gt;。&lt;span class=&#34;math inline&#34;&gt;\(p=2\)&lt;/span&gt;时称为&lt;em&gt;二阶收敛&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;如果存在&lt;span class=&#34;math inline&#34;&gt;\(\beta\in (0,1)\)&lt;/span&gt;有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\limsup_{k\rightarrow +\infty}\frac{e(x_{k+1})}{e(x_{k})}\leq \beta\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;则可以推出线性收敛&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;如果任意&lt;span class=&#34;math inline&#34;&gt;\(\beta\in (0,1)\)&lt;/span&gt;有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\limsup_{k\rightarrow +\infty}\frac{e(x_{k+1})}{e(x_{k})}=0\]&lt;/span&gt;&lt;/p&gt;
+则可以推出超线性收敛&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;满足条件&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\limsup_{k\rightarrow +\infty}\frac{e(x_{k+1})}{e(x_{k})^p}\leq \infty\]&lt;/span&gt;&lt;/p&gt;
+则可以推出&lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;阶超线性收敛&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;实际中大多数算法产生的是线性收敛或者超线性收敛序列的，尤其是算法收敛到非奇异的局部最小值时。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;case-study-&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Case Study-二次函数情形&lt;/h3&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;最速下降方法的收敛速率分析&lt;/h4&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14763620608369.jpg&#34; alt=&#34;quadratiquadratic&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;quadratiquadratic&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14763630947077.jpg&#34; alt=&#34;figforquadratic&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;figforquadratic&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt; 最速下降是线性收敛速率&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;【二次函数最速下降法的收敛速率结论】 考虑二次函数&lt;span class=&#34;math inline&#34;&gt;\(f(x)=\frac{1}{2}x&amp;#39;Qx\)&lt;/span&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt;是对称正定矩阵。设&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是由最速下降方法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}-a_k\nabla f(x_k)\)&lt;/span&gt;产生的序列，其中&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;是按照线性最小化准则&lt;span class=&#34;math display&#34;&gt;\[a_k=\mathop{argmin}_{a\geq 0} f(x_k-a\nabla f(x_k))\]&lt;/span&gt;选取的,那么对于所有的k我们有&lt;span class=&#34;math display&#34;&gt;\[\frac{f(x_{k+1})}{f(x_{k})}\leq \left(\frac{M-m}{M+m}\right)^2\]&lt;/span&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(M,m\)&lt;/span&gt;分别是Q的最大、最小特征值。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;从不等式&lt;span class=&#34;math inline&#34;&gt;\(\frac{f(x_{k+1})}{f(x_{k})}\leq \left(\frac{M-m}{M+m}\right)^2\)&lt;/span&gt;我们可以看出迭代过程中，两次值变化会被&lt;span class=&#34;math inline&#34;&gt;\(\left(\frac{M-m}{M+m}\right)^2\)&lt;/span&gt;给限制住。自然地，对于M和m很相差很大的情形，那么函数下降得就会很少，从而导致收敛速率降低。从几何（二维）上来解释上述情况即为:二次函数的等值面可以看成椭球.图中椭圆族的长轴方向与短轴方向分别对应是最小特征值和最大特征[具体讨论可以参考Linear Algebra and Its Applications 4th Edition by Gilbert Strang p357-p358]。如果M远大于m则会出现非常扁的椭圆,于是搜索路径会变成锯齿状的样子。&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14768782699369.jpg&#34; alt=&#34;oval&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;oval&lt;/p&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;梯度下降方法的收敛速率分析&lt;/h4&gt;
+&lt;p&gt;考虑比最速下降算法更一般的算法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}-a_kD_k\nabla f(x_k)\)&lt;/span&gt;,其中&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;是对称正定的。本质上来说这是把利用&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;给坐标系作了一个旋转。因此也可以看作是scaled version of the steepest decent。事实上只需令&lt;span class=&#34;math inline&#34;&gt;\(S=D_k^{\frac{1}{2}}，y=SX\)&lt;/span&gt;在y空间里 &lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_y h(y)=f(Sy)\; y\in\mathscr{R}^n\]&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14768837339663.jpg&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;选取&lt;span class=&#34;math inline&#34;&gt;\(D_k^{1/2}\)&lt;/span&gt;接近Hessian阵&lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt;逆的平方根的好处在于，可以改善条件数过大的毛病，避免出现了锯齿状的搜索路径。&lt;/li&gt;
+&lt;li&gt;从牛顿方法的搜索方向选取我们不难看出&lt;span class=&#34;math inline&#34;&gt;\(D_k=H_k^{-1}\)&lt;/span&gt;，于是强行得到了一个单位阵，从而才可以保证牛顿法在收敛点附近搜索速率是超线性的，这从式1.43可以得到直观但不严密的解释。&lt;/li&gt;
+&lt;li&gt;对角线缩放最速下降，取&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;为对角阵，且对角元近似为&lt;span class=&#34;math inline&#34;&gt;\(f(x_k)\)&lt;/span&gt;对角元的倒数, 即&lt;span class=&#34;math display&#34;&gt;\[(D_k)_{i,i}=\left(\frac{\partial^2 f(x_k)}{(\partial x_i)^2}\right)^{-1}\]&lt;/span&gt;，其思想是类似的也是为了改变病态现象。只要&lt;span class=&#34;math inline&#34;&gt;\((D_k)_{i,i}\)&lt;/span&gt;是正的，则算法同样适用于非二次问题，虽然不能保证提高下降速度，但是可以取得较好的实际效果。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;case-study-&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Case Study-非二次函数与奇异的情形&lt;/h3&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;非二次函数&lt;/h4&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14768849329079.jpg&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;收敛速率 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14768849982074.jpg&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;上述算法的思想在于，利用&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;去修正正定Hessian阵的病态问题，但是一但函数并不二阶可导或者在迭代点附近无正定的Hessian阵，则结论均失效。&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;【类牛顿法的超线性收敛速率结论】 假设f二阶连续可微，考虑由梯度算法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;并作出以下两类假设:&lt;/p&gt;
+&lt;p&gt;1)关于迭代列的假设：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_k\rightarrow x_* \quad \nabla f(x_* )=0\quad \nabla^2f(x_* )正定\quad f(x_k)\neq 0 \; for\; all\; k\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;2)关于下降方的假设：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lim_{k\rightarrow +\infty}\frac{\vert \vert d_k+(\nabla^2 f(x_* ))^{-1}\nabla f(x_k)\vert \vert }{\vert \vert \nabla f(x_k)\vert \vert }=0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;按照Armijo准则选取步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;。那么当初始步长s=1，&lt;span class=&#34;math inline&#34;&gt;\(\sigma&amp;lt;\frac{1}{2}\)&lt;/span&gt;时，我们有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lim_{k\rightarrow +\infty}\frac{\vert \vert x_{k+1}-x_* \vert \vert }{\vert \vert x_{k}-x_* \vert \vert }=0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;而且存在&lt;span class=&#34;math inline&#34;&gt;\(\bar k\)&lt;/span&gt;， 当&lt;span class=&#34;math inline&#34;&gt;\(k&amp;gt;\bar k\)&lt;/span&gt;后，我们可以始终取&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;为初始步长，即当&lt;span class=&#34;math inline&#34;&gt;\(k&amp;gt;\bar k\)&lt;/span&gt;后，&lt;span class=&#34;math inline&#34;&gt;\(a_k=s=1\quad\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;该定理表明选取步长为1的牛顿法，如果初始点选择得很好的话将可以获得超线性的收敛速率。&lt;/li&gt;
+&lt;li&gt;基于该定理和吸引定理我们知道：基于Armijo准则的类牛顿法可以收敛到局部最小值点。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;奇异&lt;/h4&gt;
+&lt;p&gt;现在考虑在局部最小值点或者附近的Hessian阵要么不存在或者不正定的情况。即在局部最小值&lt;span class=&#34;math display&#34;&gt;\[x_*\]&lt;/span&gt;附近的沿着单位方向&lt;span class=&#34;math inline&#34;&gt;\(d\)&lt;/span&gt;的&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;导数&lt;span class=&#34;math display&#34;&gt;\[\nabla f(x_*)\]&lt;/span&gt;(陈纪修 数学分析下册 140 定理12.1.1):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;变化太慢&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lim_{a\rightarrow 0}\frac{\nabla f(x_* +ad)^Td-\nabla f(x_* )^Td}{a}=0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;变化太快&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lim_{a\rightarrow 0}\frac{\nabla f(x_* +ad)^Td-\nabla f(x_* )^Td}{a}=\infty\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161020_30.png&#34; alt=&#34;Snip20161020_30-w623&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161020_30-w623&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;在全局最小值点附近沿着d=(0,1)则会出现斜率变化太快的情形，沿着d=(1,0)则会出现变化太缓慢的情形。&lt;/p&gt;
+&lt;p&gt;一般来说，对于这类问题反而采用最速下降的方法会取得比较好的效果。另外一个常用的方法是修正重球方法。&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161020_31.png&#34; alt=&#34;Snip20161020_31&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Snip20161020_31&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;一般认为重球算法不容易陷入较“浅”的局部最小值点，因此会取得较好的效果。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;奇异问题的收敛速率分析&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;【收敛速率慢于线性的情形】&lt;/p&gt;
+&lt;p&gt;假设目标函数&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是凸函数，最小值是$f_* $且存在正数L，满足&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\vert\vert \nabla f(x)-\nabla f(y)\vert\vert \leq L \vert\vert x-y \vert\vert \; \forall x,y\in R^n\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;考虑梯度算法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_Kd_k\)&lt;/span&gt;，其中步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;是按照最小化准则选取的，&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是梯度相关的，且存在&lt;span class=&#34;math inline&#34;&gt;\(c&amp;gt;0\)&lt;/span&gt;对任意k，有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla f(x_k)d_k\leq -c \vert \vert \nabla f(x_k)\vert \vert \vert \vert d_k\vert \vert \]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;假设&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的全局最小值点组成的集合是非空有界集合，那么&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x_k)-f_* =o(1/k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;or equivalently,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \lim_{k\rightarrow +\infty}\frac{f(x_k)-f_* }{k} =0 \]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;该结论适用于最速下降法产生的序列，其中步长是固定步长准则选取的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(2)</title>
+      <link>/post/zh/uncon2/</link>
+      <pubDate>Wed, 28 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon2/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;梯度方法&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;直观分析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;下降方向&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;步长准则&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;section level2&#34;&gt;
+&lt;h2&gt;梯度方法&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[outline\begin{cases}
+下降方向选择\begin{cases}
+            最速下降\\
+            牛顿法\\
+            \end{cases}\\\\
+步长的选择\begin{cases}
+            固定步长准则\\
+            缩减步长准则\\
+            最小化准则\\
+            Armijo准则
+            \end{cases}\\\\
+收敛性分析\begin{cases}
+            极限点的存在性问题\\
+            迭代终止条件\\
+            收敛性结论
+            \end{cases}\\
+收敛速率分析
+\end{cases}\]&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;直观分析&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;下降方向&lt;/h3&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;最速下降&lt;/h4&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;牛顿法&lt;/h4&gt;
+&lt;p&gt;修正的牛顿法&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;步长准则&lt;/h3&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;最小化准则&lt;/h4&gt;
+&lt;/div&gt;
+&lt;div id=&#34;armijo&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Armijo准则&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是连续可微函数, &lt;span class=&#34;math inline&#34;&gt;\(\sigma,\beta,s\)&lt;/span&gt;是固定的标量，其中&lt;span class=&#34;math inline&#34;&gt;\(0&amp;lt;\beta&amp;lt;1\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(0&amp;lt;\sigma&amp;lt;1\)&lt;/span&gt;,令&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k=\beta^{m_k}s\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(m_k\)&lt;/span&gt;是满足下式的第一个非负整数m &lt;span class=&#34;math display&#34;&gt;\[f(x_{k+1})\leq f(x_k)+\sigma\alpha_kd_k^T\nabla f(x_k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;准则的直观解释。考虑f(x_{k+1})在&lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt;处的一阶Taylor 展开 &lt;span class=&#34;math display&#34;&gt;\[f(x_{k}+\alpha_kd_k)=f(x_k)+\alpha_kd_k^T\nabla f(x_k)+o(\alpha_k)\]&lt;/span&gt; 由下降条件知道&lt;span class=&#34;math inline&#34;&gt;\(d_k^T\nabla f(x_k)&amp;lt;0\)&lt;/span&gt;而当&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k\rightarrow 0\)&lt;/span&gt;时总是存在&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k\)&lt;/span&gt;使得&lt;span class=&#34;math inline&#34;&gt;\(f(x_{k}+\alpha_kd_k)\leq f(x_k)+\alpha_kd_k^T\nabla f(x_k)\)&lt;/span&gt;成立&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma\)&lt;/span&gt;保证满足准则的&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k\)&lt;/span&gt;可以更快的找到(&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k\)&lt;/span&gt;是从递减序列&lt;span class=&#34;math inline&#34;&gt;\(\{\beta^ms\}_{m=1}^{+\infty}\)&lt;/span&gt;中寻找的).因此通常&lt;span class=&#34;math inline&#34;&gt;\(\sigma\in[10^{-5},10^{-1}]\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt;是收缩因子保证步长初始步长s可以在必要时刻减小&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;Expansion&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(F_c(x)=f(x)+cp(x)\)&lt;/span&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(c&amp;gt;0\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(f(x)\)&lt;/span&gt;是连续可微函数，&lt;span class=&#34;math inline&#34;&gt;\(p(x)\)&lt;/span&gt;是非光滑的惩罚项。我们想要极小化&lt;span class=&#34;math inline&#34;&gt;\(F_c(x)\)&lt;/span&gt;，那么我们可以用梯度方法进行求解。具体来说&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;寻找下降方法&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(H_k\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x_k)\)&lt;/span&gt;的正定近似 &lt;span class=&#34;math display&#34;&gt;\[d_k=\mathop{argmin}_d \nabla f(x_k)^Td+\frac{1}{2}d^TH_kd+cp(x_k+d)\]&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Armijo rule寻找步长&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(0&amp;lt;\beta&amp;lt;1\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(0&amp;lt;\sigma&amp;lt;1\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(0\leq\gamma&amp;lt;1\)&lt;/span&gt;令&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k=\beta^{m_k}s\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(m_k\)&lt;/span&gt;是满足下式的第一个非负整数m &lt;span class=&#34;math display&#34;&gt;\[F_c(x_k+\alpha_kd_k)\leq F_c(x_k)+\sigma\alpha_k\Delta_k\]&lt;/span&gt; 其中&lt;span class=&#34;math inline&#34;&gt;\(\Delta_k=d_k^T\nabla f(x_k)+\gamma d_k^TH_kd_K+cp(x_k+d_k)-cp(x_k)\)&lt;/span&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;: Paul Tseng et al(2007)证明了在一定条件下&lt;span class=&#34;math inline&#34;&gt;\(\Delta_k&amp;lt;0\)&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;固定步长准则&lt;/h4&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level4&#34;&gt;
+&lt;h4&gt;缩减步长准则&lt;/h4&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>无约束优化(1)</title>
+      <link>/post/zh/uncon1/</link>
+      <pubDate>Wed, 21 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/uncon1/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;最优性条件&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a&gt;最优解的存在性&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;最优性条件的直观分析&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a&gt;为什么需要最优性条件&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&#34;section level2&#34;&gt;
+&lt;h2&gt;最优性条件&lt;/h2&gt;
+&lt;p&gt;我们讨论最优性条件的最直接的目的是为了知道满足什么样条件的点就是满足最小化问题的最优解。&lt;/p&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;最优解的存在性&lt;/h3&gt;
+&lt;p&gt;很多情况下函数的全局极小值点很可能不存在，所以我们有必要讨论最优解的存在性问题。为说明这个问题，我们需要引入一些概念和Weistrass定理。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;【下半连续(lower semicontinuous)】 实值函数&lt;span class=&#34;math inline&#34;&gt;\(f: X \vert \rightarrow R\)&lt;/span&gt;被称作在&lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt;处下半连续的，若对于每一个收敛到&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;的序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\subset X\)&lt;/span&gt;，都有&lt;span class=&#34;math inline&#34;&gt;\(\liminf_{k\rightarrow +\infty} f(x_k)\geq f(x)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;【强制(coercive)】 函数&lt;span class=&#34;math inline&#34;&gt;\(f: X \vert \rightarrow R\)&lt;/span&gt;被称作是强制的，如果对于每一个满足 &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert x_k\vert \vert \rightarrow +\infty\)&lt;/span&gt;的序列序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\subset X\)&lt;/span&gt;，都有&lt;span class=&#34;math inline&#34;&gt;\(\lim_{k\rightarrow +\infty} f(x_k)=\infty\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;【Weierstrass定理】令&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;为&lt;span class=&#34;math inline&#34;&gt;\(R^n\)&lt;/span&gt;的非空子集，&lt;span class=&#34;math inline&#34;&gt;\(f: X \vert \rightarrow R\)&lt;/span&gt;在 X的所有点处下半连续。当下面三个条件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;X是紧集（闭且有界）&lt;/li&gt;
+&lt;li&gt;X是闭集且 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 是强制的&lt;/li&gt;
+&lt;li&gt;存在一个标量&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;，使得截集&lt;span class=&#34;math inline&#34;&gt;\(\{x\in X\vert f(x)\leq a\}\)&lt;/span&gt;为非空紧集&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;中的任何一个满足时，&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 在 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的最小值点的集合为非空紧集。&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过Weierstrass定理我们知道，在无约束的问题中由于定义域是全空间，自然条件：X是紧集（闭且有界）是不能满足的。但是当 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;性质足够好的时候我们可以保证存在全局最小值点。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;最优性条件的直观分析&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;下面都是直观分析，所有推导并不严谨，但是结果确实是可以被严格证明的。具体证明可以参考 Dimitri .P Bertsekas, Nonlinear Programming 2ed 中文版p10-p11&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果目标函数可微，我们可以考虑用Taylor展式去分析函数在可微点以及其领域的变化情况。假设$x_* &lt;span class=&#34;math inline&#34;&gt;\(是局部最小值点，考虑一个扰动\)&lt;/span&gt;x_* +x$, 利用Taylor展式可以得到一个线性近似&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x_* +\Delta x)-f(x_* )\approx  (\Delta x)^T\nabla f(x_* )\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;由于$x_* $是局部最小值点，则近似的有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(\Delta x)^T\nabla f(x_* )=\sum_{i=1}^n \frac{\partial f(x_* )}{\partial x_i}\Delta x_i \geq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;取对i=1,2,…,n，取&lt;span class=&#34;math inline&#34;&gt;\(\Delta x=ae_i\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(e_i\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(R^n\)&lt;/span&gt;的单位向量且&lt;span class=&#34;math inline&#34;&gt;\(a&amp;gt;0\)&lt;/span&gt;，代入上式，则对所有的i，&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x_* )}{\partial x_i}\geq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;同样取&lt;span class=&#34;math inline&#34;&gt;\(\Delta x=-ae_i\)&lt;/span&gt;,代入上式，则对所有的i，&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x_* )}{\partial x_i}\leq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;于是得到 &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )=0\)&lt;/span&gt;，这个被称为&lt;em&gt;一阶最优性条件&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;进一步我们用二阶Taylor展式去刻画函数值的变化则有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x_* +\Delta x)-f(x_* )\approx  (\Delta x)^T\nabla f(x_* )+\frac{1}{2} (\Delta x)^T \nabla^2 f(x_* ) \Delta x\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;同样的，由于$x_* $是局部最小值点，则近似的有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(\Delta x)^T\nabla f(x_* )+\frac{1}{2} (\Delta x)^T \nabla^2 f(x_* ) \Delta x\geq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;当一阶最优性条件满足时，进一步有&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{1}{2} (\Delta x)^T \nabla^2 f(x_* ) \Delta x\geq 0\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;于是推出&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x_* )\)&lt;/span&gt;半正定，这个被称为&lt;em&gt;二阶最优性条件&lt;/em&gt;。&lt;/p&gt;
+&lt;p&gt;特别的，如果&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是凸函数，那么一阶最优性条件 &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )=0\)&lt;/span&gt;也是最优性的充分条件。但是如果凸性不满足，则不成立。比如，&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161109_6.png&#34; alt=&#34;Illustration: violation of the convexity.&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;Illustration: violation of the convexity.&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;我们以定理的形式总结下上面讨论的内容，具体的证明略去，掌握想法最重要。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;【最优性的必要条件】 令$x_* $为 &lt;span class=&#34;math inline&#34;&gt;\(f:R^n\vert \rightarrow R\)&lt;/span&gt;的无约束局部最小值点，并且假设 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;在开集 &lt;span class=&#34;math inline&#34;&gt;\(S\)&lt;/span&gt;上连续可微，&lt;span class=&#34;math inline&#34;&gt;\(x_* \in S\)&lt;/span&gt;,那么有&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )=0\)&lt;/span&gt;。如果&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;在开集 &lt;span class=&#34;math inline&#34;&gt;\(S\)&lt;/span&gt;上二阶连续可微，则有&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x_* )\)&lt;/span&gt;半正定。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt; 注意这里需要 &lt;span class=&#34;math inline&#34;&gt;\(S\)&lt;/span&gt; 是开集，这一条件会导致无约束的最优性条件和带约束的最优性条件产生区别。因为这时 候最优点是内点，具体我们还会在Chapter 2里面讨论。&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;【最优性的充分条件】 令 &lt;span class=&#34;math inline&#34;&gt;\(f:X\vert \rightarrow R\)&lt;/span&gt;为开集 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的一个二阶可微函数，假设向量&lt;span class=&#34;math inline&#34;&gt;\(x_* \in S\)&lt;/span&gt;满足条件&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )=0,\nabla^2 f(x_* )\)&lt;/span&gt;正定。那么$x_* $是 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 的严格无约束局部最小值点。特别，存在标量&lt;span class=&#34;math inline&#34;&gt;\(a,\epsilon\)&lt;/span&gt; 使得&lt;span class=&#34;math inline&#34;&gt;\(\forall x\in \{x\vert \vert \vert x-x_* \vert \vert &amp;lt;\epsilon\}\)&lt;/span&gt;,成立&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x)\geq f(x_* )+\frac{a}{2} \vert \vert x-x_* \vert \vert ^2\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;特别的凸函数有更加好的性质，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;【凸函数的最优性条件】 令 &lt;span class=&#34;math inline&#34;&gt;\(f:X\vert \rightarrow R\)&lt;/span&gt;为凸集 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的一个凸函数。则
+&lt;ul&gt;
+&lt;li&gt;在 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;最小值点也是 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的全局最小值点，如果 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 是严格凸的，那么至多存在&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的一个全局最小值点。&lt;/li&gt;
+&lt;li&gt;如果 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 是开集， 那么向量 &lt;span class=&#34;math inline&#34;&gt;\(x_* \in X\)&lt;/span&gt;是 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;在 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的全局最优解得充要条件是 &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )=0\)&lt;/span&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class=&#34;section level3&#34;&gt;
+&lt;h3&gt;为什么需要最优性条件&lt;/h3&gt;
+&lt;p&gt;一般来说，在解决最优化问题时，我们可以利用一阶最优性条件，找到一切满足 &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x)=0\)&lt;/span&gt;的解， 对这些解，逐点检查二阶导数&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x)\)&lt;/span&gt;是否正定，如果存在某个解使得二阶导数正定，则其为唯一全局最小值点。然而需要指出的是，往往求解&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x)=0\)&lt;/span&gt;是非常复杂的。除非考虑迭代求解算法，否则最优性条件的有效性并不明显。&lt;/p&gt;
+&lt;p&gt;但是从另外一个角度看，很多寻找最小值点的算法，通过判断当前解是否是满足各种最优性条件来判断当前解是否是最优解，并且达到最优解算法停止。另外，充分条件在分析算法收敛速度中发挥了重要作用。&lt;/p&gt;
+&lt;p&gt;（该小节完）&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Sketch of Fruits</title>
+      <link>/gallery/mango/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0800</pubDate>
+      
+      <guid>/gallery/mango/</guid>
+      <description></description>
     </item>
     
   </channel>

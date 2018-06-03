@@ -1,0 +1,161 @@
+---
+title: "无约束优化(5)"
+author: Yutong Dai
+date: '2016-11-02'
+categories:
+  - convex optimization
+tags:
+  - 无约束优化
+slug: uncon5
+output:
+  blogdown::html_page:
+    toc: yes
+summary: 该系列posts是笔者学习Dimitri .P Bertsekas所写的 Nonlinear Programming 2ed 中文版时整理的笔记。第一章无约束优化内容涉及到最优性条件、梯度方法、牛顿法与变形以及共轭方向法。本文讨论共轭方向法。
+---
+
+## 共轭方向法
+
+在前面的讨论中我们看到了，由于最速下降法在矩阵条件数大的情况下，收敛速率可以非常缓慢；牛顿法虽然在非奇异驻点附近收敛速率很快，但是计算复杂度较高。因此我们提出了共轭方向法（conjugate direction methods）来改进该问题。
+
+首先给出共轭的概念与简单性质
+
+* 定义： 给定一个n维的正定矩阵$Q$，我们说非零向量组$d_1,...,d_k$是Q-共轭(Q-conjugate)的，如果任意$i\neq j$成立
+	
+	$$d_i^TQd_j=0$$
+
+* 性质： 如果非零向量组$d_1,...,d_k$是Q-共轭，则它们是线性无关的
+
+**Remark**
+其实Q-共轭可以看作是在另一坐标系下的的正交。因为，若设$Q=A^TA$,则有$(Ad_i)^T(Ad_j)=0$
+
+### 共轭方向法求解二次问题
+
+对于一个给定含有n个Q-共轭方向$$\{d_0,d_1,...,d_{n-1}\}$$，以及无约束二次函数最小化问题
+
+$$\mathop{min}_{x} f(x)=\frac{1}{2}x'Qx-b'x$$
+
+相应的共轭法为 
+
+$$x_{k+1}=x_{k}+a_kd_k\;k=0,1,...,n-1$$
+
+其中$x_0$是任意的初始向量，$a_k$是按照最小步长准则给出的，即
+
+$$a_k=\mathop{argmin}_{a} g(a)=f(x_k+ad_k)$$
+
+**Remark**
+
+1. 求解方程 $g'(a)=d_k^T\nabla (x_k+a_kd_k)=0$【原问题是凸的，故可以使用一阶最优性条件】,可以给出每一步长
+	
+	$$a_k=\frac{d_k^T(b-Qx_k)}{d_k^TQd_k}$$
+
+2. 从代数的观点来看，共轭方向法的本质是：**在逐渐扩张的线性流形上逐步极小化目标函数$f$,而经过n步扩张后的线性流形将包含$f$的全局最小值点**，即对每一个k（k=0,1,2,..,n-1）
+	
+	$$x_{k+1}=\mathop{argmin}_{x\in M_k}\quad f(x)$$
+	
+	其中$$M_K=\{x_0+v\vert v\in span\{d_0,d_1,..d_k\}\}$$。因为我们可以证明该优化问题求解出来的$x_{k+1}$就是更新公式产生的那个$x_{k+1}$。特别地，在证明过程中，我们顺便得到
+
+	$$d_i^T\nabla f(x_{k+1})=0\quad \forall i=0,1,2,...,k$$
+
+3. 从几何的观点来看，共轭方向法实质：**在n维空间中，逐渐沿着n个正交方向，极小化目标函数$f$**。具体来讲，当$b=0, Q=I$时，这时$f$的等值面是同心球，我们沿着n个正交方向（比如坐标轴方向）逐次极小化$f$便可以的达到球心。如果$Q$是一般的正定矩阵，可以通过尺度变换，令$y=Q^{1/2}x$则极小化
+
+	$$\frac{1}{2}x'Qx$$
+
+	等价于极小化$\vert \vert y\vert \vert ^2$。如果$w_0.w_1,..w_{n-1}$是$R^n$中的一组非零正交方向算法最多在n步后终止。利用$x=Q^{-1/2}y$即可求解原问题。
+	
+![Snip20161031_3](http://ogfa13jyv.bkt.clouddn.com/Snip20161031_3.png)
+
+#### Q-共轭方向的生成
+
+对于任意给定的线性无关向量组$$\{\xi_0,\xi_1,...,\xi_k\}$$，利用Gram-Schmidt方法，可以构建一组相互Q-共轭的方向$$\{d_0,d_1,...,d_k\}$$，使得对于所有的$i=0,...,k$满足
+
+$$span\{\xi_0,\xi_1,...,\xi_i\}=span\{d_0,d_1,...,d_i\} \qquad(1.147)$$
+
+![Snip20161102_3](http://ogfa13jyv.bkt.clouddn.com/Snip20161102_3.png)
+![Snip20161102_4](http://ogfa13jyv.bkt.clouddn.com/Snip20161102_4.png)
+
+#### 共轭梯度法
+
+该方法是基于在第k步的梯度方向$g_k=\nabla f(x_k)$,来生成共轭方向$d_k$。具体来说是：
+
+设$\xi_0=-g_0$, $d_0=\xi_0$
+假设已经得到了k-1个共轭方向$$\{d_0,d_1,...,d_{k-1}\}$$，利用Gram-Schimidt方法对向量组$$\{-g_k,d_0,...,d_{k-1}\}$$执行（1.149）和（1.151）式得到共轭方向
+
+$$d_k=-g_k+\sum_{i=1}^{k-1}\frac{g_k'Qd_i}{d_i'Qd_i}d_i$$
+
+利用最小化步长准则选取步长$a_k$，从而构造迭代列
+
+$$x_{k+1}=x_k+a_kd_k$$
+
+**Remark**
+
+1. 若$g_0\neq0$,算法在终止之前所有生成的梯度$g_k$是线性无关的。这是由*共轭方向本质上是在逐渐扩张的线性流形上逐步极小化目标函数*这一原理保证的。事实上若在第k步，算法未终止，$\forall i=0,1,...,k-1$我们有$d_i^Tg_k=0\quad$。而$$span \{d_0,d_1,...,d_{k-1}\}= span \{g_0,g_1,...,g_{k-1}\}$$，故$\forall i=0,1,...,k-1$
+	
+	$$g_i^Tg_k=0$$
+
+2. 由于最多能够n个线性无关的梯度方向，故至多迭代n次后，梯度为零，且算法会帮助找到某个全局最小值。
+
+3. 共轭梯度法之所以有用是因为，看似计算十分复杂的共轭方向$d_k$的生成公式
+	
+	$$d_k=-g_k+\sum_{i=1}^{k-1}\frac{g_k'Qd_i}{d_i'Qd_i}d_i$$
+	
+	可以化简为
+	
+	$$d_k=-g_k+\frac{g_k'g_k}{g_{k-1}'g_{k-1}}d_{k-1}$$
+	
+	【证明可以参见Dimitri .P Bertsekas, Nonlinear Programming 2ed中文版p105 命题1.6.1】
+
+4. 显然当$d_k=0$时，算法也会结束。但是利用3的结论，我们可以知道只有当$g_k=0$时才有$d_k=0$。利用反正法，若$d_k=0,g_k\neq 0$，我们有$g_k=\frac{g_k'g_k}{g_{k-1}'g_{k-1}}d_{k-1}$，这与1中$g_k$与$d_{k-1}$的正交性矛盾了。
+
+
+### 共轭方向法求解非二次问题
+
+共轭方向法同样可以运用在非二次问题中，即直接将针对二次问题的算法平行的移植过来。
+
+ $$\mathop{min}_x \quad f(x)$$
+
+`Algorithm`
+
+---
+ 	 
+$$x_{k+1}=x_{k}+a_kd_k\;k=0,1,...,n-1$$
+
+其中$x_0$是任意的初始向量，$a_k$是按照最小步长准则给出的，即
+	
+$$a_k=\mathop{argmin}_{a} g(a)=f(x_k+ad_k)$$
+	
+$d_k$是按照下式给出的
+	
+$$d_k=-g_k+\beta_kd_{k-1}$$
+	
+其中常用的$\beta_k$计算方式为
+	
+$$\beta_{k}=\frac{\nabla^T f(x_k)\big(\nabla f(x_k)-\nabla f(x_{k-1})\big)}{\nabla^T f(x_{k-1})\nabla f(x_{k-1})}$$
+
+---
+
+**Remark**
+
+1. 选取$\beta_k$的直观想法是来自求解二次问题时，共轭方向的生成公式
+	
+	$$d_k=-g_k+\frac{g_k'g_k}{g_{k-1}'g_{k-1}}d_{k-1}$$
+	
+	由于$g_k'g_{k-1}=0$，故上式又等价于
+	
+	$$d_k=-g_k+\frac{g_k'(g_k-g_{k-1})}{g_{k-1}'g_{k-1}}d_{k-1}$$
+
+2. 	$d_k=-g_k+\beta_kd_{k-1}$ 是一个下降方向，即有$d^T_{k}\nabla f(x_k)<0$.
+	
+	*proof:*	在二次问题中讨论中我们证明了，按照线性最小化方式选择步长$a_k$以及用共轭方向$d_k$更新$x_{k+1}$的方式能够保证
+	
+	$$d_i^T\nabla f(x_{k+1})=0\quad \forall i=0,1,2,...,k$$
+	
+	于是我们有$d_{k-1}^T\nabla f(x_{k})=0$，从而
+	
+	$$d^T_{k}\nabla f(x_k)=-\vert \vert \nabla f(x_k)\vert \vert ^2+\beta_kd_{k-1}^T\nabla f(x_{k})=-\vert \vert \nabla f(x_k)\vert \vert ^2<0$$
+
+3. 这样选取$\beta_k$的目的在于，目标函数中存在的二次项和不精确的一维线搜索会破坏我们搜索方向$$\{d_k\}$$的共轭性，并且会出现$d_k$与$\nabla f(x_k)$近似正交的情形。一旦$d_k$与$\nabla f(x_k)$近似正交$\vert \vert \nabla f(x_k)\vert \vert ^2$近似等于0。如果$\beta_k$更新公式选成$\beta_{k}=\frac{\nabla^T f(x_k)\big(\nabla f(x_k)\big)}{\nabla^T f(x_{k-1})\nabla f(x_{k-1})}$，则$\beta_k$就接近0，于是$x_{k+1}$便近似等于$x_k$,导致迭代算法被卡住。
+
+2. 另外	
+![Snip20161102_6](http://ogfa13jyv.bkt.clouddn.com/Snip20161102_6.png)
+
+

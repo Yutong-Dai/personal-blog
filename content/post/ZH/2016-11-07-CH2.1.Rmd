@@ -1,0 +1,161 @@
+---
+title: "约束优化(1)"
+author: Yutong Dai
+date: '2016-11-07'
+categories:
+  - convex optimization
+tags:
+  - 约束优化
+slug: con1
+output:
+  blogdown::html_page:
+    toc: yes
+summary: 该系列posts是笔者学习Dimitri .P Bertsekas所写的 Nonlinear Programming 2ed 中文版时整理的笔记。第二章带约束优化内容涉及到约束优化问题的最优性条件与可行方向法求解凸集上的优化问题。本文讨论约束优化问题的最优性条件。
+---
+
+
+这一章我们考虑带约束的优化问题
+
+
+$$\mathop{min}_{x\in X}\qquad f(x)$$
+
+其中
+
+* X是非空凸集
+* 函数 $f$ 是连续可微的
+
+另外我们称$X$为可行域，里面的点$x$为可行解。 
+
+
+## 约束优化问题
+
+### 最优解的存在性
+
+不像在无约束优化问题，在一定条件下我们可以使用Weisterass保证最优解的存在性，带约束的问题中往往不能满足这些条件。所幸的是Marguerite Frank and Philip Wolfe给出了如下定理：
+
+If a quadratic function $f$ is bounded below on a nonempty polyhedron $X$, then $f$ attains its infimum on $X$. (That is, there exists a vector $x_* \in X$ such that $f(x_* )\leq f(x),\forall x\in X$.)
+
+其中$f$形如
+
+$$f(x)=x^TQx+c^Tx+d$$
+
+且只要求$Q$是对称矩阵，不需要半正定。
+
+### 最优解的充要条件
+
+
+ 【最优解的一阶必要性条件】如果 $x_* $ 是 $f$ 在 凸集$X$ 上的局部最小值点，那么$\forall x\in X$有 
+
+ $$\nabla f(x_* )(x-x_* )\geq 0$$
+
+ 【最优解的一阶充要条件】如果 $f$ 是 凸集$X$ 上的凸函数，那么$x_* $ 是 $f$ 在 $X$ 上的全局最小值点$\Leftrightarrow$$\forall x\in X$有 
+ 
+  $$\nabla f(x_* )(x-x_* )\geq 0$$
+ 
+ 【最优解的二阶必要性条件】如果 $x_* $ 是二阶可微连续函数 $f$ 在 凸集$X$ 上的局部最小值点，那么对一切满足$\nabla f(x_* )(x-x_* )\geq 0$的$x$，有
+ 
+ $$(x-x_* )^T\nabla^2 f(x_* )(x-x_* )\geq 0$$
+ 
+ 【最优解的二阶充分性条件】如果 $f$ 是 凸集$X$ 上的二阶连续可导凸函数，且存在$x_* \in X$，使得对于任意的$x\in X$，$\nabla f(x_* )(x-x_* )\geq 0$。若下面任意条件成立，则$x_* $是局部最小值点：
+
+  * X是一个多面体，并且对于一切满足$\nabla f(x_* )(x-x_* )\geq 0$及$x\neq x_* $的$x\in X$，成立
+ 
+ $$(x-x_* )^T\nabla^2 f(x_* )(x-x_* )>0$$
+
+ * 存在$a>0$，使得对于任意$x\in X$,成立
+ 	
+ $$(x-x_* )^T\nabla^2 f(x_* )(x-x_* )\geq a\vert \vert x-x_* \vert \vert ^2$$
+
+**Remark**
+
+1. `最优解的一阶必要性条件`的几何解释:  在局部最小值点$x_* $处的梯度$\nabla f(x_* )$与所有的可行变分，$x-x_* ,x\in X$，的夹角都小于等于$90^\circ$。 特别当约束集 $X$ 非凸时，最优性的必要条件不成立。
+	![Snip20161109_9](http://ogfa13jyv.bkt.clouddn.com/Snip20161109_9.png)	
+	![Snip20161109_11](http://ogfa13jyv.bkt.clouddn.com/Snip20161109_11.png)
+
+
+2. `最优解的一阶充要条件`中，运用了平行于Chapter 1中的结论，即：令 $f:X\vert \rightarrow R$为凸集 $X$ 上的一个凸函数，则在 $X$上的 $f$最小值点也是 $X$上的全局最小值点。
+
+
+**例: 带边界约束的优化问题**
+
+考虑带边界的优化问题
+
+$$\mathop{min}_{x\in X}\qquad f(x)$$
+
+其中可行域$X=\{x\in R^n\vert  a_i\leq x\leq b_i, i=1,2,..,n\}$, $a_i,b_i$是给定的常数，下面分三种情况讨论：
+
+* 最小值点$x_* $在下边界点处取到，即${x_* }_i=a_i$
+	
+	利用最优解的一阶必要性条件，我们可以得到
+	
+	$$\sum_{i=1}^n \frac{\partial f(x_* )}{\partial x_i}(x_i-{x_* }_i) \geq 0$$
+	
+	固定$i$, 构造如下的$x$: $x_i=a_i+\delta_i$,其中$\delta_i>0$ ，且对一切$j\neq i,x_j={x_* }_j$。
+	
+	则有$\frac{\partial f(x_* )}{\partial x_i}\delta_i\geq 0$，进而推出
+	
+	$$\frac{\partial f(x_* )}{\partial x_i}\geq 0$$
+
+* 最小值点$x_* $在上边界点处取到，即${x_* }_i=b_i$
+	
+	与上例类似，只需取$x_i=b_j-\delta_j$,其中$\delta_i>0$, 易得
+	
+	$$\frac{\partial f(x_* )}{\partial x_i}\leq 0$$
+
+* 最小值点$x_* $在内部取到，即$a_i <{x_* }_i <b_i$
+
+	固定$i$, 构造如下的$x$: 	
+	
+	$$x_i={x_* }_i+\delta_i$$
+	
+	其中$\delta_i>0$且保证$x_i ={x_* }_i+\delta_i<b_i$.同时对一切$j\neq i$ 
+	
+	$$x_j={x_* }_j$$
+	
+	则有$\frac{\partial f(x_* )}{\partial x_i }\geq 0$; 如果构造$x$为
+	
+	$$x_i={x_*}_i -\delta_i$$
+	
+	其中$\delta_i>0$且保证$x_i ={x_* }_i -\delta_i > a_i$， 且对一切$ j\neq i, x_j ={x*}_j $。则有
+	
+	$$\frac{\partial f(x_* )}{\partial x_i }\leq 0$$ 
+	
+	综上可得
+		
+	$$\frac{\partial f(x_* )}{\partial x_i}=0$$
+
+
+
+### 凸集上的投影
+
+现在考虑一个有很强直观几何意义的优化问题
+
+$$\mathop{min}_{x\in X}\qquad \vert \vert z-x\vert \vert ^2$$
+
+其中 $z\in R^n$。从几何上理解这个问题就是，在$R^n$的子集$X$中找到一个点$x_* \in X$，使得$x_* $与$z$在欧式距离意义下最近，我们称这个优化问题为投影问题
+
+为了解决这个，优化问题，我们引入下面这个定理
+
+ 【投影定理】设$X$是$R^n$的非空闭凸子集：
+
+ * 【存在性命题】对每一$z\in R^n$，存在唯一的$x_* \in X$，使得对一切$x\in X,\vert \vert z-x\vert \vert $达到最小。我们称$x_* $为$z$在$X$上的投影，用$[z]^+$表示。
+ * 【判定条件】给定$z\in R^n$，一个向量$x_* $等于$[z]^+$当且仅当对一切$x\in X$
+ 
+ 	$$(z-x_* )(x-x_* )\leq 0$$
+ * 当$X$是一个子空间时，一个向量$x_* $等于$[z]^+$当且仅当$z-x_* $正交于$X$,即对一切$x\in X$
+ 
+ $$x^T(z-x_* )=0$$
+
+**Remark**
+
+1. `判定条件`的几何解释
+
+	![Snip20161110_4](http://ogfa13jyv.bkt.clouddn.com/Snip20161110_4.png)
+
+2. 子空间情形的几何解释
+
+	![projection](http://ogfa13jyv.bkt.clouddn.com/projection.png)
+
+**例子：等式约束的二次问题**
+
+![Snip20161110_6](http://ogfa13jyv.bkt.clouddn.com/Snip20161110_6.png)

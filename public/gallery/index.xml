@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Galleries on Yutong Dai | 戴宇童</title>
+    <link>/gallery/</link>
+    <description>Recent content in Galleries on Yutong Dai | 戴宇童</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="/gallery/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sketch of Fruits</title>
+      <link>/gallery/mango/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0800</pubDate>
+      
+      <guid>/gallery/mango/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sketch of Plants</title>
+      <link>/gallery/plants/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0800</pubDate>
+      
+      <guid>/gallery/plants/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

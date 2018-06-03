@@ -1,0 +1,110 @@
+---
+title: "无约束优化(4)"
+author: Yutong Dai
+date: '2016-10-26'
+categories:
+  - convex optimization
+tags:
+  - 无约束优化
+slug: uncon4
+output:
+  blogdown::html_page:
+    toc: yes
+summary: 该系列posts是笔者学习Dimitri .P Bertsekas所写的 Nonlinear Programming 2ed 中文版时整理的笔记。第一章无约束优化内容涉及到最优性条件、梯度方法、牛顿法与变形以及共轭方向法。本文讨论牛顿法与其变形。
+---
+
+
+<div id="TOC">
+<ul>
+<li><a>牛顿法与其变形</a><ul>
+<li><a>局部收敛性</a></li>
+<li><a>全局收敛性</a></li>
+<li><a href="#gauss-newtown-">Gauss-Newtown 法</a></li>
+</ul></li>
+</ul>
+</div>
+
+<div class="section level2">
+<h2>牛顿法与其变形</h2>
+<p>之前我们讨论了梯度方法的收敛性与收敛速率。我们知道最速下降法是梯度方法中迭代形式最简单，但是收敛速率最慢的算法。另一个极端是牛顿法，它在一定情况下它是梯度算法中收敛速率最快的算法，但是相应的迭代算法会比较复杂，因为要计算Hessian阵的逆。</p>
+<p>如前面所讨论的牛顿法方向的选取方式</p>
+<p><span class="math display">\[d_k=-(\nabla^2 f(x_k))^{-1}\nabla f(x_k)\]</span></p>
+<p>保证了其尺度变化不变性(scaling-free)。 即: 考虑线性变化<span class="math inline">\(x=Sy\)</span>，则在变量y空间中用牛顿法极小化<span class="math inline">\(f(S^{-1}x)\)</span>生成的序列<span class="math inline">\(y_{k+1}=y_k+a_kd_k\)</span>与在变量x空间用牛顿法极小化<span class="math inline">\(f(x)\)</span>生成的序列<span class="math inline">\(x_{k+1}=x_k+a_kd_k\)</span>存在关系<span class="math inline">\(x_k=Sy_k\)</span>。这种尺度变化不变性是最速下降法所不具备的。</p>
+<p><strong>纯牛顿法</strong></p>
+<p>由【类牛顿法的超线性收敛速率结论】我们知道，在非奇异的局部最小值点附近，当Hessian阵正定时，只需选取步长s=1。因此即将收敛时，算法的跌带形式为</p>
+<p><span class="math display">\[x_{k+1}=x_{k}-(\nabla^2f(x_k))^{-1}\nabla f(x_k)\]</span></p>
+<p>该算法称为纯牛顿法。</p>
+<p><strong>Remark</strong></p>
+<p>在远离局部最小值时，有可能出现</p>
+<ul>
+<li>Hessian阵奇异</li>
+<li>Hessian阵非正定导致<span class="math inline">\(d_k\)</span>不是下降方向</li>
+</ul>
+<p>因此，对于牛顿法我们要进行下面的两个讨论</p>
+<ul>
+<li>局部收敛性：刻画标准牛顿方法在非奇异局部最小值附近的性能</li>
+<li>全局收敛性： 当起始点离所有局部最小值点都很远的时候，为了保证算法收敛且能够达到局部最小值点，需要对牛顿法进行变形。</li>
+</ul>
+<div class="section level3">
+<h3>局部收敛性</h3>
+<p>鉴于我们已经讨论过纯牛顿法的收敛性，这里我们就提出更为一般的牛顿法的收敛性结论。</p>
+<p>考虑含有n个未知数，n个方程的约束系统</p>
+<p><span class="math display">\[g(x)=0\]</span></p>
+<p>其中<span class="math inline">\(g:R^n\vert \rightarrow R^n\)</span> 是一个连续可微的函数。 求解该问题的迭代算法为</p>
+<p><span class="math display">\[x_{k+1}=x_k-(\nabla g(x)_k)^{-1}g(x_k))\]</span></p>
+<p><strong>Remark</strong></p>
+<ol style="list-style-type: decimal">
+<li>其实该问题可以看做n元方程组的求解问题。因此我们可以得到更一般的Newton-Raphson算法。该迭代式的导出的直观想法与梯度方法十分类似</li>
+</ol>
+<p><span class="math display">\[f(x)\approx f(x_0)+(x-x_0)^T\nabla f(x_0)\]</span></p>
+<p>于是求解<span class="math inline">\(g(x)=0\)</span>近似与求解<span class="math inline">\(f(x_0)+(x-x_0)^T\nabla f(x_0)=0\)</span>，进而得到迭代关系式。 2. 若<span class="math inline">\(\nabla f(x)=g(x)\)</span>则上述牛顿法就是我们所说的纯牛顿法。但是一般来说可微的向量值函数<span class="math inline">\(g\)</span>不一定是某个函数的梯度。特别的，<span class="math inline">\(g\)</span>是某个函数<span class="math inline">\(f\)</span>的梯度当且仅当对所有的x，<span class="math inline">\(\nabla g(x)\)</span>是对称矩阵。 3. 该算法是超线性收敛的。【证明可以参见Dimitri .P Bertsekas, Nonlinear Programming 2ed中文版p68】 4. 更一般的结论 <img src="http://ogfa13jyv.bkt.clouddn.com/14769767590504.jpg" /> <img src="http://ogfa13jyv.bkt.clouddn.com/14769767820494.jpg" /></p>
+<ol start="5" style="list-style-type: decimal">
+<li>该算法的问题在于，我们不能够知道迭代初始点是否离局部最小值点足够近。事实上当初始点比较坏时，算法完全可能不收敛。 <img src="http://ogfa13jyv.bkt.clouddn.com/Snip20161020_34.png" alt="Snip20161020_34" /></li>
+</ol>
+</div>
+<div class="section level3">
+<h3>全局收敛性</h3>
+<p>正如我们之前所讨论的，纯牛顿法在解<span class="math inline">\(f\)</span>无约束的最小化问题会遇到以下问题：</p>
+<ul>
+<li><span class="math inline">\((\nabla^2 f(x_k))^{-1}\)</span>的逆不存在。比如<span class="math inline">\(f\)</span>是线性函数，当<span class="math inline">\(f(x)=C&#39;x\)</span>时<span class="math inline">\(\nabla^2 f(x_k)=0\)</span></li>
+<li>纯牛顿法不能保证函数在每一步下降，即出现<span class="math inline">\(f(x_{k+1})f(x_k)\)</span>的情形</li>
+<li>从更一般的牛顿法的迭代形式可以看出，我们纯牛顿法只是在试图解决<span class="math inline">\(\nabla f(x)=0\)</span>的问题，因此算法可能会在局部最大值点附近。</li>
+</ul>
+<p>于是我们需要对牛顿法作出一些修正。比如给Hessian阵<span class="math inline">\(\nabla^2 f(x_k)\)</span>加一个对角阵扰动的扰动<span class="math inline">\(\nabla^2 f(x_k)+\Omega_k\)</span>使得其正定从而可逆。比如改进的Cholesky分解法，于是衍生出了牛顿法的变形</p>
+</div>
+<div id="gauss-newtown-" class="section level3">
+<h3>Gauss-Newtown 法</h3>
+<p>考虑极小化<span class="math inline">\(\frac{1}{2}\vert \vert g(x)\vert \vert ^2\)</span>，其中<span class="math inline">\(g: R^n\vert \rightarrow R^m\)</span>的专门方法：Gauss-Newtown法。</p>
+<ul>
+<li><p>考虑<span class="math inline">\(g(x)\)</span>的线性逼近</p>
+<p><span class="math display">\[\tilde{g}(x,x_k)=g(x_k)+(x-x_k)&#39;\nabla g(x_k)\]</span></p></li>
+<li><p>极小化<span class="math inline">\(\tilde{g}(x,x_k)\)</span>得到<span class="math inline">\(x_{k+1}\)</span>，即</p>
+<p><span class="math display">\[x_{k+1}=\mathop{argmin}_{x}\frac{1}{2}\vert \vert \tilde{g}(x,x_k)\vert \vert ^2\overset{*}=x_{k}-\big(\nabla g(x_k)\nabla^T g(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]</span></p></li>
+</ul>
+<p><strong>Remark</strong></p>
+<ol style="list-style-type: decimal">
+<li>检验 <span class="math inline">\(\overset{*}=\)</span> 成立，只用对<span class="math inline">\(\frac{1}{2}\vert \vert \tilde{g}(x,x_k)\vert \vert ^2\)</span>关于<span class="math inline">\(x\)</span>求导，并设为零即可。</li>
+<li>当<span class="math inline">\(g\)</span>是一个线性函数的时候，比如线性回归模型<span class="math inline">\(g(\beta)=Y-X\beta\)</span>，迭代一步即可收敛。因为<span class="math inline">\(\tilde{g}(x,x_k)\)</span>不再是<span class="math inline">\(g(x)\)</span>的线性逼近，而就是<span class="math inline">\(g(x)\)</span>的恒等变换。关于<span class="math inline">\(x\)</span>极小化<span class="math inline">\(\tilde{g}(x,x_k)\)</span>等价于原问题。</li>
+</ol>
+<div class="section level4">
+<h4>算法收敛性</h4>
+<p>下降方向</p>
+<p><span class="math display">\[d_k=-\big(\nabla g(x_k)\nabla^T g(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]</span></p>
+<p>在<span class="math inline">\(\nabla g(x_k)\nabla^T g(x_k)\)</span>奇异时，算法会出现问题。为了解决这个问题，同时提高算法在奇异点附近的迭代收敛性，我们一般会修正下降方向为</p>
+<p><span class="math display">\[d_k=-\big(\nabla g(x_k)\nabla^T g(x_k)+\Delta_k\big)^{-1}\nabla g(x_k)g(x_k)\]</span></p>
+<p>其中<span class="math inline">\(\Delta_k\)</span>为对角阵，且正定（Levenberg-Marquatdt提出<span class="math inline">\(\Delta_k=\lambda I,\lambda\)</span>为一正数）并根据一定准则选择下降步长<span class="math inline">\(a_k\)</span>，从而有更新公式</p>
+<p><span class="math display">\[x_{k+1}=x_{k}-a_k\big(\nabla g(x_k)\nabla^T g(x_k)+\Delta_k\big)^{-1}\nabla g(x_k)g(x_k)\]</span></p>
+<p>通过这些<span class="math inline">\(\Delta_k\)</span>的选取方式，可以保证<span class="math display">\[\{d_k\}\]</span>是梯度相关的，比如我们再用Armijo准则选择合适的步长，则算法一定是收敛的（因为此时可以看成是特殊的梯度法）。</p>
+</div>
+<div class="section level4">
+<h4>与牛顿法的关系</h4>
+<p>两种算法十分接近，Gauss-Newtown法本质上是牺牲收敛速度来避免复杂的二阶项计算。事实上，考虑<span class="math inline">\(g\)</span>的每个分量<span class="math inline">\(g_i\)</span>是标量的情形，则目标函数<span class="math inline">\(\frac{1}{2}\vert \vert g(x)\vert \vert ^2\)</span>的Hessian阵为</p>
+<p><span class="math display">\[\nabla g(x_k)\nabla^T g(x_k)+\sum_{i=1}^m \nabla^2 g_i(x_k)g_i(x_k)\]</span></p>
+<p>于是牛顿法的更新公式为</p>
+<p><span class="math display">\[x_{k+1}=x_{k}-\big(\nabla g(x_k)\nabla^T g(x_k)+\sum_{i=1}^m \nabla^2 g_i(x_k)g_i(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]</span></p>
+<p>而Gauss-Newtown法的更新公式为</p>
+<p><span class="math display">\[x_{k+1}=x_{k}-\big(\nabla g(x_k)\nabla^T g(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]</span></p>
+<p>如果被忽略的二阶项在收敛点附近值很小，自然Gauss-Newtown法的速率是令人满意的。</p>
+</div>
+</div>
+</div>

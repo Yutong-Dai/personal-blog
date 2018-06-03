@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lagrange乘子 on Yutong Dai | 戴宇童</title>
+    <link>/tags/lagrange%E4%B9%98%E5%AD%90/</link>
+    <description>Recent content in Lagrange乘子 on Yutong Dai | 戴宇童</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Wed, 21 Dec 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/lagrange%E4%B9%98%E5%AD%90/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Lagrange乘子理论(3)</title>
+      <link>/post/zh/lag3/</link>
+      <pubDate>Wed, 21 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/lag3/</guid>
+      <description>Beyond KKT Fritz-John 最优性条件 从Fritz-John 条件到 KKT 条件 凸集约束的情形 Beyond KKT 在前面的讨论中，我们看到最优点的正则性对Lagrange乘子的存在性是必</description>
+    </item>
+    
+    <item>
+      <title>Lagrange乘子理论(2)</title>
+      <link>/post/zh/lag2/</link>
+      <pubDate>Wed, 14 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/lag2/</guid>
+      <description>不等式约束优化问题 Karush-Kuhn-Tucker 必要条件 充分条件 不等式约束优化问题 本节我们考虑优化问题 \[ \text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\ \text{subject to}\; h_i(x)=0,i=1,2,...,m\\ \qquad\qquad g_j(x)\leq 0, j=1,2,...,r \] 其中 \(f: R^n\;\vert \rightarrow R\), \(h_i: R^n\;\vert \rightarrow R\),\(g_j: R^n\;\vert \rightarrow R\)均是连续可微的</description>
+    </item>
+    
+    <item>
+      <title>Lagrange乘子理论(1)</title>
+      <link>/post/zh/lag1/</link>
+      <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/zh/lag1/</guid>
+      <description>等式约束优化问题 最优解的必要条件 最优解充分条件 通过引入一些辅助变量，即Lagrange乘子，我们可以利用他们： 描述最优解的特性 灵敏度分析 对自</description>
+    </item>
+    
+  </channel>
+</rss>
