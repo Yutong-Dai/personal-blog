@@ -9,7 +9,7 @@ title = "Sketch of Fruits"
 summary = "Sketches of mangos."
 
 # Optional image to display on homepage (relative to `static/img/` folder).
-image_preview = ""
+image_preview = "https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/img/gallery-pics/sketch/mango/mango.jpg"
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["machine-learning", "deep-learning"]`
