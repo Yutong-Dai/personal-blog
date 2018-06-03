@@ -9,7 +9,7 @@ title = "Sketch of Plants"
 summary = "Sketches of some plants."
 
 # Optional image to display on homepage (relative to `static/img/` folder).
-image_preview = "./static/img/gallery-pics/sketch/plants/flower.jpg"
+image_preview = ""
 
 # Tags: can be used for filtering projects.
 # Example: `tags = ["machine-learning", "deep-learning"]`
