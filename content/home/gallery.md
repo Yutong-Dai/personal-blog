@@ -23,11 +23,11 @@ filter_default = 0
 
 [[filter]]
     name = "Recipes"
-    tag = ".recipes"
+    tag = ".Recipes"
 
 [[filter]]
     name = "Pictures"
-    tag = ".pictures"
+    tag = ".Pictures"
 
 +++
 
