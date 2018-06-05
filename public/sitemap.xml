@@ -32,6 +32,15 @@
     
     <url>
     
+      <loc>/post/en/explore-the-linear-mixed-effect-model/</loc>
+      <lastmod>2018-06-04T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/academic/</loc>
       <lastmod>2018-06-02T13:05:31+08:00</lastmod>
     </url>
@@ -224,6 +233,16 @@
     
     <url>
     
+      <loc>/tags/lme/</loc>
+      <lastmod>2018-06-04T00:00:00+00:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/tags/lagrange%E4%B9%98%E5%AD%90/</loc>
       <lastmod>2018-06-03T12:54:22+08:00</lastmod>
       <priority>0</priority>
@@ -304,6 +323,16 @@
     
       <loc>/categories/r-writing/</loc>
       <lastmod>2018-06-02T13:05:31+08:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/categories/statistics/</loc>
+      <lastmod>2018-06-04T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     

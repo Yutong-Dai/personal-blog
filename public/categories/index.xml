@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Categories on Yutong Dai | 戴宇童</title>
+    <title>Categories on Yutong Dai / 戴宇童</title>
     <link>/categories/</link>
-    <description>Recent content in Categories on Yutong Dai | 戴宇童</description>
+    <description>Recent content in Categories on Yutong Dai / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -44,6 +44,15 @@
       <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/categories/r-writing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Statistics</title>
+      <link>/categories/statistics/</link>
+      <pubDate>Fri, 16 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/statistics/</guid>
       <description></description>
     </item>
     

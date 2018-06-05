@@ -1,0 +1,3875 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme" content="hugo-academic">
+  <meta name="generator" content="Hugo 0.41" />
+  <meta name="author" content="Yutong Dai">
+
+  
+  
+  
+  
+    
+      
+    
+  
+  <meta name="description" content="Why Ramdom Effect Models One-way classification with Rail example Rail Data Modeling Fitting the model with the package nlme Diagnostic  Two-way classification: A Randomized Block Design egroStool: No Replications Modeling Choose the contrasts  Replications Extensions for interaction terms  Linear Models incorporate Random Effects Random Intercept Prediciton  Nested Classification Factors Split-plot    References: Pinheiro, J. C., &amp; Bates, D. (2009). Mixed-Effects Models in S and S-PLUS.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/en/explore-the-linear-mixed-effect-model/">
+
+  
+
+
+  
+
+  
+  
+  <meta name="theme-color" content="hsl((9,62%,53%))">
+  
+  
+  
+  
+    
+  
+  
+    
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css">
+    
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-6MXa8B6uaO18Hid6blRMetEIoPqHf7Ux1tnyIQdpt9qI5OACx7C+O3IVTr98vwGnlcg0LOLa02i9Y1HpVhlfiw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+  
+  
+  
+  
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7cRoboto:400,400italic,700%7cRoboto&#43;Mono">
+  
+  <link rel="stylesheet" href="/styles.css">
+  
+
+  
+
+  
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Yutong Dai / 戴宇童">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Yutong Dai / 戴宇童">
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/en/explore-the-linear-mixed-effect-model/">
+
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="Yutong Dai / 戴宇童">
+  <meta property="og:url" content="/post/en/explore-the-linear-mixed-effect-model/">
+  <meta property="og:title" content="Explore the Linear Mixed Effect Model | Yutong Dai / 戴宇童">
+  <meta property="og:description" content="Why Ramdom Effect Models One-way classification with Rail example Rail Data Modeling Fitting the model with the package nlme Diagnostic  Two-way classification: A Randomized Block Design egroStool: No Replications Modeling Choose the contrasts  Replications Extensions for interaction terms  Linear Models incorporate Random Effects Random Intercept Prediciton  Nested Classification Factors Split-plot    References: Pinheiro, J. C., &amp; Bates, D. (2009). Mixed-Effects Models in S and S-PLUS.">
+  <meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2018-03-16T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2018-06-04T00:00:00&#43;00:00">
+  
+
+  
+  
+
+  <title>Explore the Linear Mixed Effect Model | Yutong Dai / 戴宇童</title>
+
+</head>
+<body id="top" data-spy="scroll" data-target="#toc" data-offset="71" class="dark">
+
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="navbar-header">
+      
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target=".navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/"><img src="/img/avatar.png" alt="Yutong Dai / 戴宇童"></a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse">
+
+      
+      
+      <ul class="nav navbar-nav navbar-right">
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#posts">
+            
+            <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#projects">
+            
+            <span>Projects</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#gallery">
+            
+            <span>Gallery</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/files/pdf/resume.pdf">
+            
+            <span>Resume</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+        
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a href="/#resources">
+            
+            <span>Resources</span>
+            
+          </a>
+        </li>
+
+        
+        
+      
+
+      
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+<article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+  <div class="article-container">
+    <h1 itemprop="name">Explore the Linear Mixed Effect Model</h1>
+    
+    <h3 class="author">Yutong Dai</h3>
+    
+
+    
+
+<div class="article-metadata">
+
+  <span class="article-date">
+    
+        Last updated on
+    
+    <time datetime="2018-03-16 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
+      2018-06-04
+    </time>
+  </span>
+  <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Yutong Dai">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    14 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fa fa-folder"></i>
+    
+    <a href="/categories/statistics/">Statistics</a
+    >
+    
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Explore%20the%20Linear%20Mixed%20Effect%20Model&amp;url=%2fpost%2fen%2fexplore-the-linear-mixed-effect-model%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fen%2fexplore-the-linear-mixed-effect-model%2f"
+         target="_blank" rel="noopener">
+        <i class="fa fa-facebook"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fen%2fexplore-the-linear-mixed-effect-model%2f&amp;title=Explore%20the%20Linear%20Mixed%20Effect%20Model"
+         target="_blank" rel="noopener">
+        <i class="fa fa-linkedin"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fen%2fexplore-the-linear-mixed-effect-model%2f&amp;title=Explore%20the%20Linear%20Mixed%20Effect%20Model"
+         target="_blank" rel="noopener">
+        <i class="fa fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Explore%20the%20Linear%20Mixed%20Effect%20Model&amp;body=%2fpost%2fen%2fexplore-the-linear-mixed-effect-model%2f">
+        <i class="fa fa-envelope"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+
+    <div class="article-style" itemprop="articleBody">
+      <script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#why-ramdom-effect-models">Why Ramdom Effect Models</a></li>
+<li><a href="#one-way-classification-with-rail-example">One-way classification with <code>Rail</code> example</a><ul>
+<li><a href="#rail-data"><code>Rail</code> Data</a></li>
+<li><a href="#modeling">Modeling</a></li>
+<li><a href="#fitting-the-model-with-the-package-nlme">Fitting the model with the package <code>nlme</code></a></li>
+<li><a href="#diagnostic">Diagnostic</a></li>
+</ul></li>
+<li><a href="#two-way-classification-a-randomized-block-design">Two-way classification: A Randomized Block Design</a><ul>
+<li><a href="#egrostool-no-replications"><code>egroStool</code>: No Replications</a></li>
+<li><a href="#modeling-1">Modeling</a><ul>
+<li><a href="#choose-the-contrasts">Choose the contrasts</a></li>
+</ul></li>
+<li><a href="#replications">Replications</a></li>
+<li><a href="#extensions-for-interaction-terms">Extensions for interaction terms</a></li>
+</ul></li>
+<li><a href="#linear-models-incorporate-random-effects">Linear Models incorporate Random Effects</a><ul>
+<li><a href="#random-intercept">Random Intercept</a></li>
+<li><a href="#prediciton">Prediciton</a></li>
+</ul></li>
+<li><a href="#nested-classification-factors">Nested Classification Factors</a></li>
+<li><a href="#split-plot">Split-plot</a></li>
+</ul>
+</div>
+
+<blockquote>
+<p>References: Pinheiro, J. C., &amp; Bates, D. (2009). Mixed-Effects Models in S and S-PLUS. <em>Statistics and Computing</em>, Springer.</p>
+</blockquote>
+<div id="why-ramdom-effect-models" class="section level1">
+<h1>Why Ramdom Effect Models</h1>
+<p>Compared with the linear fixed effect models, the advantages of modeling data with linear mixed-effect models (MLE) are:</p>
+<ol style="list-style-type: decimal">
+<li><p>Rather than models the specific type of sample of <em>levels</em> from the <strong>factor</strong> of interest, e.g <em>Rail tyep I</em> and <em>Rail type II</em> sampled from all possible types of the <strong>Rail</strong>, LME models the factor from the population perspective.</p></li>
+<li><p>Provide an estimate of the between-level variability.</p></li>
+<li><p>Prevent the model complexity (# of parameters) increases linearly with the increase with # of levels.</p></li>
+</ol>
+</div>
+<div id="one-way-classification-with-rail-example" class="section level1">
+<h1>One-way classification with <code>Rail</code> example</h1>
+<div id="rail-data" class="section level2">
+<h2><code>Rail</code> Data</h2>
+<pre class="r"><code>suppressMessages(library(nlme))
+suppressMessages(library(kableExtra))
+knitr::kable(t(Rail)) %&gt;%  kable_styling(&quot;striped&quot;, &quot;hover&quot;) %&gt;%
+  scroll_box(width = &quot;100%&quot;, height = &quot;100%&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:100%; overflow-x: scroll; width:100%; ">
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+1
+</th>
+<th style="text-align:left;">
+2
+</th>
+<th style="text-align:left;">
+3
+</th>
+<th style="text-align:left;">
+4
+</th>
+<th style="text-align:left;">
+5
+</th>
+<th style="text-align:left;">
+6
+</th>
+<th style="text-align:left;">
+7
+</th>
+<th style="text-align:left;">
+8
+</th>
+<th style="text-align:left;">
+9
+</th>
+<th style="text-align:left;">
+10
+</th>
+<th style="text-align:left;">
+11
+</th>
+<th style="text-align:left;">
+12
+</th>
+<th style="text-align:left;">
+13
+</th>
+<th style="text-align:left;">
+14
+</th>
+<th style="text-align:left;">
+15
+</th>
+<th style="text-align:left;">
+16
+</th>
+<th style="text-align:left;">
+17
+</th>
+<th style="text-align:left;">
+18
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Rail
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+travel
+</td>
+<td style="text-align:left;">
+55
+</td>
+<td style="text-align:left;">
+53
+</td>
+<td style="text-align:left;">
+54
+</td>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:left;">
+37
+</td>
+<td style="text-align:left;">
+32
+</td>
+<td style="text-align:left;">
+78
+</td>
+<td style="text-align:left;">
+91
+</td>
+<td style="text-align:left;">
+85
+</td>
+<td style="text-align:left;">
+92
+</td>
+<td style="text-align:left;">
+100
+</td>
+<td style="text-align:left;">
+96
+</td>
+<td style="text-align:left;">
+49
+</td>
+<td style="text-align:left;">
+51
+</td>
+<td style="text-align:left;">
+50
+</td>
+<td style="text-align:left;">
+80
+</td>
+<td style="text-align:left;">
+85
+</td>
+<td style="text-align:left;">
+83
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="r"><code>plot(Rail)</code></pre>
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="modeling" class="section level2">
+<h2>Modeling</h2>
+<p><strong>Model and assumptions</strong> <span class="math display">\[
+y_{ij} = \mu + b_i + \epsilon_{ij} 
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(b_i \sim N(0,\sigma_b^2)\)</span>;</p></li>
+<li><p><span class="math inline">\(\epsilon_{ij} \sim N(0,\sigma^2)\)</span>.</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>parameters</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\mu\)</span></td>
+<td>population mean</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(b_i\)</span></td>
+<td>deviation of the i-th type of rail from the population</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sigma_b^2\)</span></td>
+<td>between-rail variability</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\epsilon_{ij}\)</span></td>
+<td>noise</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sigma^2\)</span></td>
+<td>within-rail variability</td>
+</tr>
+</tbody>
+</table>
+<p>Note <strong>this is a balcance design.</strong></p>
+</div>
+<div id="fitting-the-model-with-the-package-nlme" class="section level2">
+<h2>Fitting the model with the package <code>nlme</code></h2>
+<pre class="r"><code>rail_data &lt;- Rail
+lm.random &lt;- lme(fixed = travel~1, data=rail_data, random = ~1 | Rail)
+# fixed = travel~1: only the intercept is the fixed effect
+# random = ~1 | Rail: there is a single random effect for each group and the grouping is given by the Rail
+summary(lm.random)</code></pre>
+<pre><code>## Linear mixed-effects model fit by REML
+##  Data: rail_data 
+##       AIC      BIC   logLik
+##   128.177 130.6766 -61.0885
+## 
+## Random effects:
+##  Formula: ~1 | Rail
+##         (Intercept) Residual
+## StdDev:    24.80547 4.020779
+## 
+## Fixed effects: travel ~ 1 
+##             Value Std.Error DF  t-value p-value
+## (Intercept)  66.5  10.17104 12 6.538173       0
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -1.61882658 -0.28217671  0.03569328  0.21955784  1.61437744 
+## 
+## Number of Observations: 18
+## Number of Groups: 6</code></pre>
+<ul>
+<li><span class="math inline">\(\hat\mu =\)</span> 66.5</li>
+<li><span class="math inline">\(\hat\sigma_b^2=24.80547\)</span></li>
+<li><span class="math inline">\(\hat\sigma^2=\)</span> 4.0207794</li>
+</ul>
+</div>
+<div id="diagnostic" class="section level2">
+<h2>Diagnostic</h2>
+<p><strong>Confidence Intervals on parameters</strong>:</p>
+<pre class="r"><code>intervals(lm.random)</code></pre>
+<pre><code>## Approximate 95% confidence intervals
+## 
+##  Fixed effects:
+##                lower est.    upper
+## (Intercept) 44.33921 66.5 88.66079
+## attr(,&quot;label&quot;)
+## [1] &quot;Fixed effects:&quot;
+## 
+##  Random Effects:
+##   Level: Rail 
+##                    lower     est.    upper
+## sd((Intercept)) 13.27434 24.80547 46.35341
+## 
+##  Within-group standard error:
+##    lower     est.    upper 
+## 2.695007 4.020779 5.998747</code></pre>
+<p>The estimation of <span class="math inline">\(\mu,\sigma_b,\sigma\)</span> are really raw and imprecise.</p>
+<p><strong>ANOVA of the fixed effect:</strong></p>
+<pre class="r"><code>anova(lm.random)</code></pre>
+<pre><code>##             numDF denDF F-value p-value
+## (Intercept)     1    12 42.7477  &lt;.0001</code></pre>
+</div>
+</div>
+<div id="two-way-classification-a-randomized-block-design" class="section level1">
+<h1>Two-way classification: A Randomized Block Design</h1>
+<p>For block design, we have two types of factors, one is called <em>experimental</em> factor for fixed effects while the other is called <em>blocking</em> factor for the random effects.</p>
+<div id="egrostool-no-replications" class="section level2">
+<h2><code>egroStool</code>: No Replications</h2>
+<p>We want to make inferences subjects and types of stools are blocking factors.</p>
+<pre class="r"><code>knitr::kable(t(ergoStool)) %&gt;% kable_styling(&quot;striped&quot;, &quot;hover&quot;) %&gt;%
+  scroll_box(width = &quot;100%&quot;, height = &quot;100%&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:100%; overflow-x: scroll; width:100%; ">
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+1
+</th>
+<th style="text-align:left;">
+2
+</th>
+<th style="text-align:left;">
+3
+</th>
+<th style="text-align:left;">
+4
+</th>
+<th style="text-align:left;">
+5
+</th>
+<th style="text-align:left;">
+6
+</th>
+<th style="text-align:left;">
+7
+</th>
+<th style="text-align:left;">
+8
+</th>
+<th style="text-align:left;">
+9
+</th>
+<th style="text-align:left;">
+10
+</th>
+<th style="text-align:left;">
+11
+</th>
+<th style="text-align:left;">
+12
+</th>
+<th style="text-align:left;">
+13
+</th>
+<th style="text-align:left;">
+14
+</th>
+<th style="text-align:left;">
+15
+</th>
+<th style="text-align:left;">
+16
+</th>
+<th style="text-align:left;">
+17
+</th>
+<th style="text-align:left;">
+18
+</th>
+<th style="text-align:left;">
+19
+</th>
+<th style="text-align:left;">
+20
+</th>
+<th style="text-align:left;">
+21
+</th>
+<th style="text-align:left;">
+22
+</th>
+<th style="text-align:left;">
+23
+</th>
+<th style="text-align:left;">
+24
+</th>
+<th style="text-align:left;">
+25
+</th>
+<th style="text-align:left;">
+26
+</th>
+<th style="text-align:left;">
+27
+</th>
+<th style="text-align:left;">
+28
+</th>
+<th style="text-align:left;">
+29
+</th>
+<th style="text-align:left;">
+30
+</th>
+<th style="text-align:left;">
+31
+</th>
+<th style="text-align:left;">
+32
+</th>
+<th style="text-align:left;">
+33
+</th>
+<th style="text-align:left;">
+34
+</th>
+<th style="text-align:left;">
+35
+</th>
+<th style="text-align:left;">
+36
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+effort
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Type
+</td>
+<td style="text-align:left;">
+T1
+</td>
+<td style="text-align:left;">
+T2
+</td>
+<td style="text-align:left;">
+T3
+</td>
+<td style="text-align:left;">
+T4
+</td>
+<td style="text-align:left;">
+T1
+</td>
+<td style="text-align:left;">
+T2
+</td>
+<td style="text-align:left;">
+T3
+</td>
+<td style="text-align:left;">
+T4
+</td>
+<td style="text-align:left;">
+T1
+</td>
+<td style="text-align:left;">
+T2
+</td>
+<td style="text-align:left;">
+T3
+</td>
+<td style="text-align:left;">
+T4
+</td>
+<td style="text-align:left;">
+T1
+</td>
+<td style="text-align:left;">
+T2
+</td>
+<td style="text-align:left;">
+T3
+</td>
+<td style="text-align:left;">
+T4
+</td>
+<td style="text-align:left;">
+T1
+</td>
+<td style="text-align:left;">
+T2
+</td>
+<td style="text-align:left;">
+T3
+</td>
+<td style="text-align:left;">
+T4
+</td>
+<td style="text-align:left;">
+T1
+</td>
+<td style="text-align:left;">
+T2
+</td>
+<td style="text-align:left;">
+T3
+</td>
+<td style="text-align:left;">
+T4
+</td>
+<td style="text-align:left;">
+T1
+</td>
+<td style="text-align:left;">
+T2
+</td>
+<td style="text-align:left;">
+T3
+</td>
+<td style="text-align:left;">
+T4
+</td>
+<td style="text-align:left;">
+T1
+</td>
+<td style="text-align:left;">
+T2
+</td>
+<td style="text-align:left;">
+T3
+</td>
+<td style="text-align:left;">
+T4
+</td>
+<td style="text-align:left;">
+T1
+</td>
+<td style="text-align:left;">
+T2
+</td>
+<td style="text-align:left;">
+T3
+</td>
+<td style="text-align:left;">
+T4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Subject
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+9
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<pre class="r"><code>plot(ergoStool)</code></pre>
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="modeling-1" class="section level2">
+<h2>Modeling</h2>
+<p><strong>Model and assumptions:</strong> <span class="math display">\[
+y_{ij} = \beta_j + b_i + \epsilon_{ij} 
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(b_i \sim N(0,\sigma_b^2)\)</span>;</p></li>
+<li><p><span class="math inline">\(\epsilon_{ij} \sim N(0,\sigma^2)\)</span>.</p></li>
+</ul>
+<table style="width:11%;">
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>parameters</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\beta_j\)</span></td>
+<td>experimental factor (researchers are interested in)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(b_i\)</span></td>
+<td>blocking factor (source of variablity that is not of the primary interest)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sigma_b^2\)</span></td>
+<td>between-rail variability</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\epsilon_{ij}\)</span></td>
+<td>noise</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sigma^2\)</span></td>
+<td>within-rail variability</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Note <strong>this is a balcance design</strong></li>
+</ul>
+<div id="choose-the-contrasts" class="section level3">
+<h3>Choose the contrasts</h3>
+<pre class="r"><code>ergoStool %&gt;% filter(Subject == &quot;1&quot;) %&gt;% model.matrix(effort ~ Type, .)</code></pre>
+<pre><code>## Warning: package &#39;bindrcpp&#39; was built under R version 3.4.4</code></pre>
+<pre><code>##   (Intercept) TypeT2 TypeT3 TypeT4
+## 1           1      0      0      0
+## 2           1      1      0      0
+## 3           1      0      1      0
+## 4           1      0      0      1
+## attr(,&quot;assign&quot;)
+## [1] 0 1 1 1
+## attr(,&quot;contrasts&quot;)
+## attr(,&quot;contrasts&quot;)$Type
+## [1] &quot;contr.treatment&quot;</code></pre>
+<pre class="r"><code>lmod.random &lt;- lme(effort ~ Type, data = ergoStool, random = ~1 | Subject)
+summary(lmod.random)</code></pre>
+<pre><code>## Linear mixed-effects model fit by REML
+##  Data: ergoStool 
+##        AIC      BIC    logLik
+##   133.1308 141.9252 -60.56539
+## 
+## Random effects:
+##  Formula: ~1 | Subject
+##         (Intercept) Residual
+## StdDev:    1.332465 1.100295
+## 
+## Fixed effects: effort ~ Type 
+##                Value Std.Error DF   t-value p-value
+## (Intercept) 8.555556 0.5760123 24 14.853079  0.0000
+## TypeT2      3.888889 0.5186838 24  7.497610  0.0000
+## TypeT3      2.222222 0.5186838 24  4.284348  0.0003
+## TypeT4      0.666667 0.5186838 24  1.285304  0.2110
+##  Correlation: 
+##        (Intr) TypeT2 TypeT3
+## TypeT2 -0.45               
+## TypeT3 -0.45   0.50        
+## TypeT4 -0.45   0.50   0.50 
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -1.80200345 -0.64316591  0.05783115  0.70099706  1.63142054 
+## 
+## Number of Observations: 36
+## Number of Groups: 9</code></pre>
+<ul>
+<li><span class="math inline">\(\hat\beta_1=\)</span>intercept: reference level(TypeT1);</li>
+<li><span class="math inline">\(\hat\beta_i=\)</span> (TypeTi) i=2,3,4</li>
+</ul>
+<p><strong>Significance Tests for fixed effects</strong> <span class="math inline">\(\beta_2=\beta_3=\beta_4=0\)</span></p>
+<pre class="r"><code>anova(lmod.random)</code></pre>
+<pre><code>##             numDF denDF  F-value p-value
+## (Intercept)     1    24 455.0075  &lt;.0001
+## Type            3    24  22.3556  &lt;.0001</code></pre>
+<p><span class="math inline">\(P(F_{3,24} &gt; 22.3556)&lt;.0001\)</span>, there are significance variation within the each type of stools.</p>
+<p><strong>Diagnostic</strong></p>
+<pre class="r"><code>intervals(lmod.random)</code></pre>
+<pre><code>## Approximate 95% confidence intervals
+## 
+##  Fixed effects:
+##                  lower      est.    upper
+## (Intercept)  7.3667247 8.5555556 9.744386
+## TypeT2       2.8183781 3.8888889 4.959400
+## TypeT3       1.1517114 2.2222222 3.292733
+## TypeT4      -0.4038442 0.6666667 1.737177
+## attr(,&quot;label&quot;)
+## [1] &quot;Fixed effects:&quot;
+## 
+##  Random Effects:
+##   Level: Subject 
+##                    lower     est.    upper
+## sd((Intercept)) 0.749509 1.332465 2.368835
+## 
+##  Within-group standard error:
+##     lower      est.     upper 
+## 0.8292494 1.1002946 1.4599324</code></pre>
+<pre class="r"><code>plot(lmod.random,
+     form = resid(., type=&quot;p&quot;) ~ fitted(.) | Subject,
+     abline = 0)</code></pre>
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+</div>
+<div id="replications" class="section level2">
+<h2>Replications</h2>
+<p><strong>With replications, we are able to access the interactions between the experimental and blocking effects!!</strong></p>
+<pre class="r"><code>Machines %&gt;% {plot.experiment(.$score,.$Machine,.$Worker,
+                lab.x = &quot;Score&quot;, lab.y = &quot;Worker&quot;, lab.experimental = &quot;Machine&quot;)}</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;ggplot2&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     vars</code></pre>
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><strong>Model without interaction</strong> <span class="math display">\[
+y_{ijk} = \beta_j + b_i + \epsilon_{ijk} 
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\beta_j\)</span> type factor; (experimental factor: researchers are interested in)</p></li>
+<li><p><span class="math inline">\(b_i\)</span> subject factor; (blocking factor: source of variablity that is not of the primary interest); <span class="math inline">\(b_i \sim N(0,\sigma_b^2)\)</span>;</p></li>
+<li><p><span class="math inline">\(\epsilon_{ijk}\)</span> random error; <span class="math inline">\(\epsilon_{ijk} \sim N(0,\sigma^2)\)</span>.</p></li>
+<li><p>Note <strong>this is a balcance design</strong></p></li>
+</ul>
+<pre class="r"><code>lmod.random &lt;- lme(score ~ Machine, data = Machines, random = ~1 | Worker)
+lmod.random</code></pre>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: Machines 
+##   Log-restricted-likelihood: -143.4391
+##   Fixed: score ~ Machine 
+## (Intercept)    MachineB    MachineC 
+##   52.355556    7.966667   13.916667 
+## 
+## Random effects:
+##  Formula: ~1 | Worker
+##         (Intercept) Residual
+## StdDev:    5.146552 3.161647
+## 
+## Number of Observations: 54
+## Number of Groups: 6</code></pre>
+<p><strong>Model with interaction</strong> <span class="math display">\[
+y_{ijk} = \beta_j + b_i + b_{ij} + \epsilon_{ijk} 
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(\beta_j\)</span> type factor; (experimental factor: researchers are interested in)</p></li>
+<li><p><span class="math inline">\(b_i\)</span> subject factor; (blocking factor: source of variablity that is not of the primary interest); <span class="math inline">\(b_i \sim N(0,\sigma_1^2)\)</span>;</p></li>
+<li><p><span class="math inline">\(b_{ij}\)</span> interaction effects between experimental factor and blocking factor; since blocking factor is random, the interaction should also be random; <span class="math inline">\(b_{ij} \sim N(0,\sigma_2^2)\)</span>;</p></li>
+<li><p><span class="math inline">\(\epsilon_{ijk}\)</span> random error; <span class="math inline">\(\epsilon_{ijk} \sim N(0,\sigma^2)\)</span>.</p></li>
+<li><p>Note <strong>this is a balcance design</strong></p></li>
+</ul>
+<pre class="r"><code>lmod.random.interact &lt;- lme(score ~ Machine, data = Machines, random = ~1 | Worker/Machine)
+lmod.random.interact</code></pre>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: Machines 
+##   Log-restricted-likelihood: -107.8438
+##   Fixed: score ~ Machine 
+## (Intercept)    MachineB    MachineC 
+##   52.355556    7.966667   13.916667 
+## 
+## Random effects:
+##  Formula: ~1 | Worker
+##         (Intercept)
+## StdDev:     4.78105
+## 
+##  Formula: ~1 | Machine %in% Worker
+##         (Intercept)  Residual
+## StdDev:    3.729532 0.9615771
+## 
+## Number of Observations: 54
+## Number of Groups: 
+##              Worker Machine %in% Worker 
+##                   6                  18</code></pre>
+<p><strong>Model Selection</strong></p>
+<p><span class="math display">\[H_0: \text{the restricted model} \qquad H_A: \text{the general model}\]</span></p>
+<pre class="r"><code>anova(lmod.random,lmod.random.interact)</code></pre>
+<pre><code>##                      Model df      AIC      BIC    logLik   Test  L.Ratio
+## lmod.random              1  5 296.8782 306.5373 -143.4391                
+## lmod.random.interact     2  6 227.6876 239.2785 -107.8438 1 vs 2 71.19063
+##                      p-value
+## lmod.random                 
+## lmod.random.interact  &lt;.0001</code></pre>
+<p><span class="math inline">\(LR=2[\log(L_A)-\log(L_0)] \sim \chi^2_{df_A -df_0}\)</span></p>
+</div>
+<div id="extensions-for-interaction-terms" class="section level2">
+<h2>Extensions for interaction terms</h2>
+<pre class="r"><code>Machines %&gt;% filter(Worker == &quot;1&quot;) %&gt;% {plot.experiment(.$score,.$Machine,.$Worker,
+                lab.x = &quot;Score&quot;, lab.y = &quot;Worker&quot;, lab.experimental = &quot;Machine&quot;)}</code></pre>
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>For each worker, say, Worker 1, we previously assume</p>
+<p><span class="math display">\[
+y_{1jk} = \beta_j + b_1 + b_{1j} + \epsilon_{1jk} 
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(b_1 \sim N(0,\sigma_1^2)\)</span>;</p></li>
+<li><p><span class="math inline">\(b_{1j} \sim N(0,\sigma_2^2)\)</span>;</p></li>
+<li><p><span class="math inline">\(\epsilon_{1jk} \sim N(0,\sigma^2)\)</span>.</p></li>
+</ul>
+<p>We assume <span class="math inline">\(b_{1j}\)</span> iid <span class="math inline">\(N(0,\sigma_2^2)\)</span>, but from the graph above, it seems that it’s not plausible. We can turn to more general variacne structures.</p>
+<p><span class="math display">\[
+\bf{y_{1}} = X_1\beta + Z_1b_1 + \epsilon_{1}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\({\bf{b_1}} \sim N_3(0,\Phi)\)</span>;</p></li>
+<li><p><span class="math inline">\({\bf{\epsilon_{1}}} \sim N(0,\sigma^2I_3)\)</span>.</p></li>
+</ul>
+<pre class="r"><code>lmod.random.interact.general &lt;- lme(score ~ Machine, Machines, random = ~ Machine -1 | Worker)
+lmod.random.interact.general</code></pre>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: Machines 
+##   Log-restricted-likelihood: -104.1556
+##   Fixed: score ~ Machine 
+## (Intercept)    MachineB    MachineC 
+##   52.355556    7.966667   13.916667 
+## 
+## Random effects:
+##  Formula: ~Machine - 1 | Worker
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##          StdDev    Corr         
+## MachineA 4.0792807 MachnA MachnB
+## MachineB 8.6252908 0.803        
+## MachineC 4.3894795 0.623  0.771 
+## Residual 0.9615766              
+## 
+## Number of Observations: 54
+## Number of Groups: 6</code></pre>
+<p><strong>Model Selection</strong></p>
+<pre class="r"><code>anova(lmod.random, lmod.random.interact, lmod.random.interact.general)</code></pre>
+<pre><code>##                              Model df      AIC      BIC    logLik   Test
+## lmod.random                      1  5 296.8782 306.5373 -143.4391       
+## lmod.random.interact             2  6 227.6876 239.2785 -107.8438 1 vs 2
+## lmod.random.interact.general     3 10 228.3112 247.6295 -104.1556 2 vs 3
+##                               L.Ratio p-value
+## lmod.random                                  
+## lmod.random.interact         71.19063  &lt;.0001
+## lmod.random.interact.general  7.37635  0.1173</code></pre>
+<p>There’s no evidence to support more general model.</p>
+</div>
+</div>
+<div id="linear-models-incorporate-random-effects" class="section level1">
+<h1>Linear Models incorporate Random Effects</h1>
+<pre class="r"><code>OrthFe &lt;- Orthodont %&gt;% filter(Sex == &quot;Female&quot;)
+knitr::kable(t(OrthFe))</code></pre>
+<table>
+<tbody>
+<tr>
+<td style="text-align:left;">
+distance
+</td>
+<td style="text-align:left;">
+21.0
+</td>
+<td style="text-align:left;">
+20.0
+</td>
+<td style="text-align:left;">
+21.5
+</td>
+<td style="text-align:left;">
+23.0
+</td>
+<td style="text-align:left;">
+21.0
+</td>
+<td style="text-align:left;">
+21.5
+</td>
+<td style="text-align:left;">
+24.0
+</td>
+<td style="text-align:left;">
+25.5
+</td>
+<td style="text-align:left;">
+20.5
+</td>
+<td style="text-align:left;">
+24.0
+</td>
+<td style="text-align:left;">
+24.5
+</td>
+<td style="text-align:left;">
+26.0
+</td>
+<td style="text-align:left;">
+23.5
+</td>
+<td style="text-align:left;">
+24.5
+</td>
+<td style="text-align:left;">
+25.0
+</td>
+<td style="text-align:left;">
+26.5
+</td>
+<td style="text-align:left;">
+21.5
+</td>
+<td style="text-align:left;">
+23.0
+</td>
+<td style="text-align:left;">
+22.5
+</td>
+<td style="text-align:left;">
+23.5
+</td>
+<td style="text-align:left;">
+20.0
+</td>
+<td style="text-align:left;">
+21.0
+</td>
+<td style="text-align:left;">
+21.0
+</td>
+<td style="text-align:left;">
+22.5
+</td>
+<td style="text-align:left;">
+21.5
+</td>
+<td style="text-align:left;">
+22.5
+</td>
+<td style="text-align:left;">
+23.0
+</td>
+<td style="text-align:left;">
+25.0
+</td>
+<td style="text-align:left;">
+23.0
+</td>
+<td style="text-align:left;">
+23.0
+</td>
+<td style="text-align:left;">
+23.5
+</td>
+<td style="text-align:left;">
+24.0
+</td>
+<td style="text-align:left;">
+20.0
+</td>
+<td style="text-align:left;">
+21.0
+</td>
+<td style="text-align:left;">
+22.0
+</td>
+<td style="text-align:left;">
+21.5
+</td>
+<td style="text-align:left;">
+16.5
+</td>
+<td style="text-align:left;">
+19.0
+</td>
+<td style="text-align:left;">
+19.0
+</td>
+<td style="text-align:left;">
+19.5
+</td>
+<td style="text-align:left;">
+24.5
+</td>
+<td style="text-align:left;">
+25.0
+</td>
+<td style="text-align:left;">
+28.0
+</td>
+<td style="text-align:left;">
+28.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+age
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+14
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Subject
+</td>
+<td style="text-align:left;">
+F01
+</td>
+<td style="text-align:left;">
+F01
+</td>
+<td style="text-align:left;">
+F01
+</td>
+<td style="text-align:left;">
+F01
+</td>
+<td style="text-align:left;">
+F02
+</td>
+<td style="text-align:left;">
+F02
+</td>
+<td style="text-align:left;">
+F02
+</td>
+<td style="text-align:left;">
+F02
+</td>
+<td style="text-align:left;">
+F03
+</td>
+<td style="text-align:left;">
+F03
+</td>
+<td style="text-align:left;">
+F03
+</td>
+<td style="text-align:left;">
+F03
+</td>
+<td style="text-align:left;">
+F04
+</td>
+<td style="text-align:left;">
+F04
+</td>
+<td style="text-align:left;">
+F04
+</td>
+<td style="text-align:left;">
+F04
+</td>
+<td style="text-align:left;">
+F05
+</td>
+<td style="text-align:left;">
+F05
+</td>
+<td style="text-align:left;">
+F05
+</td>
+<td style="text-align:left;">
+F05
+</td>
+<td style="text-align:left;">
+F06
+</td>
+<td style="text-align:left;">
+F06
+</td>
+<td style="text-align:left;">
+F06
+</td>
+<td style="text-align:left;">
+F06
+</td>
+<td style="text-align:left;">
+F07
+</td>
+<td style="text-align:left;">
+F07
+</td>
+<td style="text-align:left;">
+F07
+</td>
+<td style="text-align:left;">
+F07
+</td>
+<td style="text-align:left;">
+F08
+</td>
+<td style="text-align:left;">
+F08
+</td>
+<td style="text-align:left;">
+F08
+</td>
+<td style="text-align:left;">
+F08
+</td>
+<td style="text-align:left;">
+F09
+</td>
+<td style="text-align:left;">
+F09
+</td>
+<td style="text-align:left;">
+F09
+</td>
+<td style="text-align:left;">
+F09
+</td>
+<td style="text-align:left;">
+F10
+</td>
+<td style="text-align:left;">
+F10
+</td>
+<td style="text-align:left;">
+F10
+</td>
+<td style="text-align:left;">
+F10
+</td>
+<td style="text-align:left;">
+F11
+</td>
+<td style="text-align:left;">
+F11
+</td>
+<td style="text-align:left;">
+F11
+</td>
+<td style="text-align:left;">
+F11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sex
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+<td style="text-align:left;">
+Female
+</td>
+</tr>
+</tbody>
+</table>
+<div id="random-intercept" class="section level2">
+<h2>Random Intercept</h2>
+<p><span class="math display">\[
+\bf{y_{i}} = X_i\beta + Z_ib_i + \epsilon_{i}
+\]</span></p>
+<pre class="r"><code>lmod.OrthFe &lt;- lme(distance ~ age, data=OrthFe, random = ~ 1 | Subject)
+lmod.OrthFe</code></pre>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: OrthFe 
+##   Log-restricted-likelihood: -70.60916
+##   Fixed: distance ~ age 
+## (Intercept)         age 
+##  17.3727273   0.4795455 
+## 
+## Random effects:
+##  Formula: ~1 | Subject
+##         (Intercept)  Residual
+## StdDev:     2.06847 0.7800331
+## 
+## Number of Observations: 44
+## Number of Groups: 11</code></pre>
+</div>
+<div id="prediciton" class="section level2">
+<h2>Prediciton</h2>
+<pre class="r"><code>knitr::kable(t(random.effects(lmod.OrthFe)))</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+F10
+</th>
+<th style="text-align:right;">
+F09
+</th>
+<th style="text-align:right;">
+F06
+</th>
+<th style="text-align:right;">
+F01
+</th>
+<th style="text-align:right;">
+F05
+</th>
+<th style="text-align:right;">
+F07
+</th>
+<th style="text-align:right;">
+F02
+</th>
+<th style="text-align:right;">
+F08
+</th>
+<th style="text-align:right;">
+F03
+</th>
+<th style="text-align:right;">
+F04
+</th>
+<th style="text-align:right;">
+F11
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+-4.005329
+</td>
+<td style="text-align:right;">
+-1.470449
+</td>
+<td style="text-align:right;">
+-1.470449
+</td>
+<td style="text-align:right;">
+-1.229032
+</td>
+<td style="text-align:right;">
+-0.021947
+</td>
+<td style="text-align:right;">
+0.3401786
+</td>
+<td style="text-align:right;">
+0.3401786
+</td>
+<td style="text-align:right;">
+0.7023042
+</td>
+<td style="text-align:right;">
+1.06443
+</td>
+<td style="text-align:right;">
+2.150807
+</td>
+<td style="text-align:right;">
+3.599309
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="nested-classification-factors" class="section level1">
+<h1>Nested Classification Factors</h1>
+<pre class="r"><code>knitr::kable(t(Pixel))</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+1
+</th>
+<th style="text-align:left;">
+2
+</th>
+<th style="text-align:left;">
+3
+</th>
+<th style="text-align:left;">
+4
+</th>
+<th style="text-align:left;">
+5
+</th>
+<th style="text-align:left;">
+6
+</th>
+<th style="text-align:left;">
+7
+</th>
+<th style="text-align:left;">
+8
+</th>
+<th style="text-align:left;">
+9
+</th>
+<th style="text-align:left;">
+10
+</th>
+<th style="text-align:left;">
+11
+</th>
+<th style="text-align:left;">
+12
+</th>
+<th style="text-align:left;">
+13
+</th>
+<th style="text-align:left;">
+14
+</th>
+<th style="text-align:left;">
+15
+</th>
+<th style="text-align:left;">
+16
+</th>
+<th style="text-align:left;">
+17
+</th>
+<th style="text-align:left;">
+18
+</th>
+<th style="text-align:left;">
+19
+</th>
+<th style="text-align:left;">
+20
+</th>
+<th style="text-align:left;">
+21
+</th>
+<th style="text-align:left;">
+22
+</th>
+<th style="text-align:left;">
+23
+</th>
+<th style="text-align:left;">
+24
+</th>
+<th style="text-align:left;">
+25
+</th>
+<th style="text-align:left;">
+26
+</th>
+<th style="text-align:left;">
+27
+</th>
+<th style="text-align:left;">
+28
+</th>
+<th style="text-align:left;">
+29
+</th>
+<th style="text-align:left;">
+30
+</th>
+<th style="text-align:left;">
+31
+</th>
+<th style="text-align:left;">
+32
+</th>
+<th style="text-align:left;">
+33
+</th>
+<th style="text-align:left;">
+34
+</th>
+<th style="text-align:left;">
+35
+</th>
+<th style="text-align:left;">
+36
+</th>
+<th style="text-align:left;">
+37
+</th>
+<th style="text-align:left;">
+38
+</th>
+<th style="text-align:left;">
+39
+</th>
+<th style="text-align:left;">
+40
+</th>
+<th style="text-align:left;">
+41
+</th>
+<th style="text-align:left;">
+42
+</th>
+<th style="text-align:left;">
+43
+</th>
+<th style="text-align:left;">
+44
+</th>
+<th style="text-align:left;">
+45
+</th>
+<th style="text-align:left;">
+46
+</th>
+<th style="text-align:left;">
+47
+</th>
+<th style="text-align:left;">
+48
+</th>
+<th style="text-align:left;">
+49
+</th>
+<th style="text-align:left;">
+50
+</th>
+<th style="text-align:left;">
+51
+</th>
+<th style="text-align:left;">
+52
+</th>
+<th style="text-align:left;">
+53
+</th>
+<th style="text-align:left;">
+54
+</th>
+<th style="text-align:left;">
+55
+</th>
+<th style="text-align:left;">
+56
+</th>
+<th style="text-align:left;">
+57
+</th>
+<th style="text-align:left;">
+58
+</th>
+<th style="text-align:left;">
+59
+</th>
+<th style="text-align:left;">
+60
+</th>
+<th style="text-align:left;">
+61
+</th>
+<th style="text-align:left;">
+62
+</th>
+<th style="text-align:left;">
+63
+</th>
+<th style="text-align:left;">
+64
+</th>
+<th style="text-align:left;">
+65
+</th>
+<th style="text-align:left;">
+66
+</th>
+<th style="text-align:left;">
+67
+</th>
+<th style="text-align:left;">
+68
+</th>
+<th style="text-align:left;">
+69
+</th>
+<th style="text-align:left;">
+70
+</th>
+<th style="text-align:left;">
+71
+</th>
+<th style="text-align:left;">
+72
+</th>
+<th style="text-align:left;">
+73
+</th>
+<th style="text-align:left;">
+74
+</th>
+<th style="text-align:left;">
+75
+</th>
+<th style="text-align:left;">
+76
+</th>
+<th style="text-align:left;">
+77
+</th>
+<th style="text-align:left;">
+78
+</th>
+<th style="text-align:left;">
+79
+</th>
+<th style="text-align:left;">
+80
+</th>
+<th style="text-align:left;">
+81
+</th>
+<th style="text-align:left;">
+82
+</th>
+<th style="text-align:left;">
+83
+</th>
+<th style="text-align:left;">
+84
+</th>
+<th style="text-align:left;">
+85
+</th>
+<th style="text-align:left;">
+86
+</th>
+<th style="text-align:left;">
+87
+</th>
+<th style="text-align:left;">
+88
+</th>
+<th style="text-align:left;">
+89
+</th>
+<th style="text-align:left;">
+90
+</th>
+<th style="text-align:left;">
+91
+</th>
+<th style="text-align:left;">
+92
+</th>
+<th style="text-align:left;">
+93
+</th>
+<th style="text-align:left;">
+94
+</th>
+<th style="text-align:left;">
+95
+</th>
+<th style="text-align:left;">
+96
+</th>
+<th style="text-align:left;">
+97
+</th>
+<th style="text-align:left;">
+98
+</th>
+<th style="text-align:left;">
+99
+</th>
+<th style="text-align:left;">
+100
+</th>
+<th style="text-align:left;">
+101
+</th>
+<th style="text-align:left;">
+102
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Dog
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Side
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+R
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+<td style="text-align:left;">
+L
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+day
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pixel
+</td>
+<td style="text-align:left;">
+1045.8
+</td>
+<td style="text-align:left;">
+1044.5
+</td>
+<td style="text-align:left;">
+1042.9
+</td>
+<td style="text-align:left;">
+1050.4
+</td>
+<td style="text-align:left;">
+1045.2
+</td>
+<td style="text-align:left;">
+1038.9
+</td>
+<td style="text-align:left;">
+1039.8
+</td>
+<td style="text-align:left;">
+1041.8
+</td>
+<td style="text-align:left;">
+1045.6
+</td>
+<td style="text-align:left;">
+1051.0
+</td>
+<td style="text-align:left;">
+1054.1
+</td>
+<td style="text-align:left;">
+1052.7
+</td>
+<td style="text-align:left;">
+1062.0
+</td>
+<td style="text-align:left;">
+1050.8
+</td>
+<td style="text-align:left;">
+1039.8
+</td>
+<td style="text-align:left;">
+1082.9
+</td>
+<td style="text-align:left;">
+1091.1
+</td>
+<td style="text-align:left;">
+1088.5
+</td>
+<td style="text-align:left;">
+1099.4
+</td>
+<td style="text-align:left;">
+1086.8
+</td>
+<td style="text-align:left;">
+1073.6
+</td>
+<td style="text-align:left;">
+1034.1
+</td>
+<td style="text-align:left;">
+1090.7
+</td>
+<td style="text-align:left;">
+1126.4
+</td>
+<td style="text-align:left;">
+1108.8
+</td>
+<td style="text-align:left;">
+1122.5
+</td>
+<td style="text-align:left;">
+1100.7
+</td>
+<td style="text-align:left;">
+1102.2
+</td>
+<td style="text-align:left;">
+1124.4
+</td>
+<td style="text-align:left;">
+1128.2
+</td>
+<td style="text-align:left;">
+1124.1
+</td>
+<td style="text-align:left;">
+1126.7
+</td>
+<td style="text-align:left;">
+1109.9
+</td>
+<td style="text-align:left;">
+1094.2
+</td>
+<td style="text-align:left;">
+1084.1
+</td>
+<td style="text-align:left;">
+1093.9
+</td>
+<td style="text-align:left;">
+1082.7
+</td>
+<td style="text-align:left;">
+1076.1
+</td>
+<td style="text-align:left;">
+1151.3
+</td>
+<td style="text-align:left;">
+1160.3
+</td>
+<td style="text-align:left;">
+1139.7
+</td>
+<td style="text-align:left;">
+1133.2
+</td>
+<td style="text-align:left;">
+1077.5
+</td>
+<td style="text-align:left;">
+1085.9
+</td>
+<td style="text-align:left;">
+1100.8
+</td>
+<td style="text-align:left;">
+1083.4
+</td>
+<td style="text-align:left;">
+1068.2
+</td>
+<td style="text-align:left;">
+1064.0
+</td>
+<td style="text-align:left;">
+1095.0
+</td>
+<td style="text-align:left;">
+1094.7
+</td>
+<td style="text-align:left;">
+1081.4
+</td>
+<td style="text-align:left;">
+1040.9
+</td>
+<td style="text-align:left;">
+1054.1
+</td>
+<td style="text-align:left;">
+1051.9
+</td>
+<td style="text-align:left;">
+1054.1
+</td>
+<td style="text-align:left;">
+1051.3
+</td>
+<td style="text-align:left;">
+1051.4
+</td>
+<td style="text-align:left;">
+1046.1
+</td>
+<td style="text-align:left;">
+1053.6
+</td>
+<td style="text-align:left;">
+1052.9
+</td>
+<td style="text-align:left;">
+1053.6
+</td>
+<td style="text-align:left;">
+1057.1
+</td>
+<td style="text-align:left;">
+1064.0
+</td>
+<td style="text-align:left;">
+1065.3
+</td>
+<td style="text-align:left;">
+1053.4
+</td>
+<td style="text-align:left;">
+1043.9
+</td>
+<td style="text-align:left;">
+1069.0
+</td>
+<td style="text-align:left;">
+1082.5
+</td>
+<td style="text-align:left;">
+1077.7
+</td>
+<td style="text-align:left;">
+1073.5
+</td>
+<td style="text-align:left;">
+1076.4
+</td>
+<td style="text-align:left;">
+1053.8
+</td>
+<td style="text-align:left;">
+1039.9
+</td>
+<td style="text-align:left;">
+1114.1
+</td>
+<td style="text-align:left;">
+1111.5
+</td>
+<td style="text-align:left;">
+1100.3
+</td>
+<td style="text-align:left;">
+1124.0
+</td>
+<td style="text-align:left;">
+1113.2
+</td>
+<td style="text-align:left;">
+1077.0
+</td>
+<td style="text-align:left;">
+1114.7
+</td>
+<td style="text-align:left;">
+1117.6
+</td>
+<td style="text-align:left;">
+1128.2
+</td>
+<td style="text-align:left;">
+1130.5
+</td>
+<td style="text-align:left;">
+1102.2
+</td>
+<td style="text-align:left;">
+1106.0
+</td>
+<td style="text-align:left;">
+1121.5
+</td>
+<td style="text-align:left;">
+1115.5
+</td>
+<td style="text-align:left;">
+1105.2
+</td>
+<td style="text-align:left;">
+1092.8
+</td>
+<td style="text-align:left;">
+1129.7
+</td>
+<td style="text-align:left;">
+1136.2
+</td>
+<td style="text-align:left;">
+1108.5
+</td>
+<td style="text-align:left;">
+1094.3
+</td>
+<td style="text-align:left;">
+1098.8
+</td>
+<td style="text-align:left;">
+1103.6
+</td>
+<td style="text-align:left;">
+1106.8
+</td>
+<td style="text-align:left;">
+1105.0
+</td>
+<td style="text-align:left;">
+1097.2
+</td>
+<td style="text-align:left;">
+1099.5
+</td>
+<td style="text-align:left;">
+1132.3
+</td>
+<td style="text-align:left;">
+1154.5
+</td>
+<td style="text-align:left;">
+1161.1
+</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>plot(Pixel)</code></pre>
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><strong>Model</strong></p>
+<p><span class="math display">\[
+y_{ijk} = \beta_1 + \beta_2 d_{ik} + b_{i,1} + b_{i,2}d_{i,k} + b_{ij} + \epsilon_{ijk}
+\]</span></p>
+<pre class="r"><code>lmod.nested &lt;- lme(fixed = pixel ~ day + I(day^2), data=Pixel, random = 
+                     list(Dog = ~ day, Side = ~ 1))
+summary(lmod.nested)</code></pre>
+<pre><code>## Linear mixed-effects model fit by REML
+##  Data: Pixel 
+##        AIC      BIC    logLik
+##   841.2102 861.9712 -412.6051
+## 
+## Random effects:
+##  Formula: ~day | Dog
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev   Corr  
+## (Intercept) 28.36990 (Intr)
+## day          1.84375 -0.555
+## 
+##  Formula: ~1 | Side %in% Dog
+##         (Intercept) Residual
+## StdDev:    16.82431 8.989606
+## 
+## Fixed effects: pixel ~ day + I(day^2) 
+##                 Value Std.Error DF   t-value p-value
+## (Intercept) 1073.3391 10.171686 80 105.52225       0
+## day            6.1296  0.879321 80   6.97083       0
+## I(day^2)      -0.3674  0.033945 80 -10.82179       0
+##  Correlation: 
+##          (Intr) day   
+## day      -0.517       
+## I(day^2)  0.186 -0.668
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -2.8290572 -0.4491811  0.0255493  0.5572163  2.7519651 
+## 
+## Number of Observations: 102
+## Number of Groups: 
+##           Dog Side %in% Dog 
+##            10            20</code></pre>
+<pre class="r"><code>plot(augPred(lmod.nested))</code></pre>
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<pre class="r"><code>lmod.nested.res1 &lt;- lme(fixed = pixel ~ day + I(day^2), data=Pixel, random = ~ day|Dog)
+summary(lmod.nested.res1)</code></pre>
+<pre><code>## Linear mixed-effects model fit by REML
+##  Data: Pixel 
+##        AIC      BIC    logLik
+##   884.5196 902.6854 -435.2598
+## 
+## Random effects:
+##  Formula: ~day | Dog
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev    Corr  
+## (Intercept) 29.883240 (Intr)
+## day          1.754207 -0.489
+## Residual    14.056243       
+## 
+## Fixed effects: pixel ~ day + I(day^2) 
+##                 Value Std.Error DF   t-value p-value
+## (Intercept) 1072.9283 10.445666 90 102.71516       0
+## day            6.0889  1.146997 90   5.30856       0
+## I(day^2)      -0.3568  0.052210 90  -6.83314       0
+##  Correlation: 
+##          (Intr) day   
+## day      -0.541       
+## I(day^2)  0.286 -0.799
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.85494002 -0.53431941 -0.01425967  0.56188163  2.81513852 
+## 
+## Number of Observations: 102
+## Number of Groups: 10</code></pre>
+<pre class="r"><code>anova(lmod.nested.res1, lmod.nested)</code></pre>
+<pre><code>##                  Model df      AIC      BIC    logLik   Test L.Ratio
+## lmod.nested.res1     1  7 884.5196 902.6854 -435.2598               
+## lmod.nested          2  8 841.2102 861.9712 -412.6051 1 vs 2 45.3094
+##                  p-value
+## lmod.nested.res1        
+## lmod.nested       &lt;.0001</code></pre>
+<pre class="r"><code>lmod.nested.res2 &lt;- lme(fixed = pixel ~ day + I(day^2), data=Pixel, 
+                        random = ~ 1|Dog/Side)
+anova(lmod.nested.res2, lmod.nested)</code></pre>
+<pre><code>##                  Model df      AIC      BIC    logLik   Test  L.Ratio
+## lmod.nested.res2     1  6 876.8390 892.4098 -432.4195                
+## lmod.nested          2  8 841.2102 861.9712 -412.6051 1 vs 2 39.62885
+##                  p-value
+## lmod.nested.res2        
+## lmod.nested       &lt;.0001</code></pre>
+</div>
+<div id="split-plot" class="section level1">
+<h1>Split-plot</h1>
+<pre class="r"><code>plot(Oats,inner=Oats$Variety)</code></pre>
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="btn btn-primary btn-outline" href="/tags/lme/">LME</a>
+  
+</div>
+
+
+
+
+    
+    
+
+    
+    <div class="article-widget">
+      <div class="post-nav">
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/post/en/bookdown-syntax/" rel="next">Bookdown Syntax</a>
+  </div>
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/post/en/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/" rel="prev">Convergence Analysis for Bloock Coordinate Decent Algorithm and Powell&#39;s Examples</a>
+  </div>
+  
+</div>
+
+    </div>
+    
+
+    
+
+
+  </div>
+</article>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="powered-by">
+
+      &copy; 2018 &middot; 
+
+      Powered by the
+      <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+      <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+      <span class="pull-right" aria-hidden="true">
+        <a href="#" id="back_to_top">
+          <span class="button_icon">
+            <i class="fa fa-chevron-up fa-2x"></i>
+          </span>
+        </a>
+      </span>
+
+    </p>
+  </div>
+</footer>
+
+
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close btn-large" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cite</h4>
+      </div>
+      <div>
+        <pre><code class="modal-body tex"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary btn-outline js-copy-cite" href="#" target="_blank">
+          <i class="fa fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-primary btn-outline js-download-cite" href="#" target="_blank">
+          <i class="fa fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+    
+
+    
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha512-3P8rXCuGJdNZOnUx/03c1jOTnMn3rP63nBip5gOP2qmUh5YAdVAvFZ1E+QLZZbC1rtMrQb+mah3AfYW11RUrWA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.3/imagesloaded.pkgd.min.js" integrity="sha512-umsR78NN0D23AzgoZ11K7raBD+R6hqKojyBZs1w8WvYlsI+QuKRGBx3LFCwhatzBunCjDuJpDHwxD13sLMbpRA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha512-iztkobsvnjKfAtTNdHkGVjAYTrrtlC7mGp/54c40wowO7LhURYl3gVzzcEqGl/qKXQltJ2HwMrdLcNUdo+N/RQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.4/isotope.pkgd.min.js" integrity="sha512-VDBOIlDbuC4VWxGJNmuFRQ0Li0SKkDpmGyuhAG5LTDLd/dJ/S0WMVxriR2Y+CyPL5gzjpN4f/6iqWVBJlht0tQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+    
+    
+    <script src="/js/hugo-academic.js"></script>
+    
+
+    
+    
+      
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+      
+
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/tex.min.js"></script>
+      
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+      
+
+      
+
+      <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS_CHTML" integrity="sha512-tOav5w1OjvsSJzePRtt2uQPFwBoHt1VZcUq8l8nm5284LEKE9FSJBQryzMBzHxY5P0zRdNqEcpLIRVYFNgu1jw==" crossorigin="anonymous"></script>
+    
+    
+
+  </body>
+</html>
+

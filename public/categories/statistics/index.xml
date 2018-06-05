@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Statistics on Yutong Dai / 戴宇童</title>
+    <link>/categories/statistics/</link>
+    <description>Recent content in Statistics on Yutong Dai / 戴宇童</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Fri, 16 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Explore the Linear Mixed Effect Model</title>
+      <link>/post/en/explore-the-linear-mixed-effect-model/</link>
+      <pubDate>Fri, 16 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/explore-the-linear-mixed-effect-model/</guid>
+      <description>Why Ramdom Effect Models One-way classification with Rail example Rail Data Modeling Fitting the model with the package nlme Diagnostic  Two-way classification: A Randomized Block Design egroStool: No Replications Modeling Choose the contrasts  Replications Extensions for interaction terms  Linear Models incorporate Random Effects Random Intercept Prediciton  Nested Classification Factors Split-plot    References: Pinheiro, J. C., &amp;amp; Bates, D. (2009). Mixed-Effects Models in S and S-PLUS.</description>
+    </item>
+    
+  </channel>
+</rss>

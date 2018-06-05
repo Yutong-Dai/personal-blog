@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Yutong Dai | 戴宇童 on Yutong Dai | 戴宇童</title>
+    <title>Yutong Dai / 戴宇童 on Yutong Dai / 戴宇童</title>
     <link>/</link>
-    <description>Recent content in Yutong Dai | 戴宇童 on Yutong Dai | 戴宇童</description>
+    <description>Recent content in Yutong Dai / 戴宇童 on Yutong Dai / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -299,6 +299,3408 @@ image(as.matrix.csr(A))&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To refer to a equation, please use &lt;code&gt;\@ref(eq:label)&lt;/code&gt;. For example,&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;\@ref(eq:binom)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;can produce its index &lt;a href=&#34;#eq:binom&#34;&gt;(1)&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Explore the Linear Mixed Effect Model</title>
+      <link>/post/en/explore-the-linear-mixed-effect-model/</link>
+      <pubDate>Fri, 16 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/explore-the-linear-mixed-effect-model/</guid>
+      <description>&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#why-ramdom-effect-models&#34;&gt;Why Ramdom Effect Models&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#one-way-classification-with-rail-example&#34;&gt;One-way classification with &lt;code&gt;Rail&lt;/code&gt; example&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#rail-data&#34;&gt;&lt;code&gt;Rail&lt;/code&gt; Data&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#modeling&#34;&gt;Modeling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#fitting-the-model-with-the-package-nlme&#34;&gt;Fitting the model with the package &lt;code&gt;nlme&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#diagnostic&#34;&gt;Diagnostic&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#two-way-classification-a-randomized-block-design&#34;&gt;Two-way classification: A Randomized Block Design&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#egrostool-no-replications&#34;&gt;&lt;code&gt;egroStool&lt;/code&gt;: No Replications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#modeling-1&#34;&gt;Modeling&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#choose-the-contrasts&#34;&gt;Choose the contrasts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#replications&#34;&gt;Replications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#extensions-for-interaction-terms&#34;&gt;Extensions for interaction terms&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#linear-models-incorporate-random-effects&#34;&gt;Linear Models incorporate Random Effects&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#random-intercept&#34;&gt;Random Intercept&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#prediciton&#34;&gt;Prediciton&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#nested-classification-factors&#34;&gt;Nested Classification Factors&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#split-plot&#34;&gt;Split-plot&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;References: Pinheiro, J. C., &amp;amp; Bates, D. (2009). Mixed-Effects Models in S and S-PLUS. &lt;em&gt;Statistics and Computing&lt;/em&gt;, Springer.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div id=&#34;why-ramdom-effect-models&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Why Ramdom Effect Models&lt;/h1&gt;
+&lt;p&gt;Compared with the linear fixed effect models, the advantages of modeling data with linear mixed-effect models (MLE) are:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;Rather than models the specific type of sample of &lt;em&gt;levels&lt;/em&gt; from the &lt;strong&gt;factor&lt;/strong&gt; of interest, e.g &lt;em&gt;Rail tyep I&lt;/em&gt; and &lt;em&gt;Rail type II&lt;/em&gt; sampled from all possible types of the &lt;strong&gt;Rail&lt;/strong&gt;, LME models the factor from the population perspective.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Provide an estimate of the between-level variability.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Prevent the model complexity (# of parameters) increases linearly with the increase with # of levels.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;one-way-classification-with-rail-example&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;One-way classification with &lt;code&gt;Rail&lt;/code&gt; example&lt;/h1&gt;
+&lt;div id=&#34;rail-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;code&gt;Rail&lt;/code&gt; Data&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;suppressMessages(library(nlme))
+suppressMessages(library(kableExtra))
+knitr::kable(t(Rail)) %&amp;gt;%  kable_styling(&amp;quot;striped&amp;quot;, &amp;quot;hover&amp;quot;) %&amp;gt;%
+  scroll_box(width = &amp;quot;100%&amp;quot;, height = &amp;quot;100%&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:100%; overflow-x: scroll; width:100%; &#34;&gt;
+&lt;table class=&#34;table table-striped&#34; style=&#34;margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+16
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+17
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+18
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Rail
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+travel
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+55
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+53
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+54
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+26
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+37
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+78
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+91
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+85
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+92
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+100
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+96
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+49
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+51
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+80
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+85
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+83
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(Rail)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;modeling&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Modeling&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Model and assumptions&lt;/strong&gt; &lt;span class=&#34;math display&#34;&gt;\[
+y_{ij} = \mu + b_i + \epsilon_{ij} 
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i \sim N(0,\sigma_b^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ij} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;parameters&lt;/th&gt;
+&lt;th&gt;explanation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;population mean&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;deviation of the i-th type of rail from the population&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma_b^2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;between-rail variability&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ij}\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;noise&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma^2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;within-rail variability&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Note &lt;strong&gt;this is a balcance design.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;fitting-the-model-with-the-package-nlme&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Fitting the model with the package &lt;code&gt;nlme&lt;/code&gt;&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;rail_data &amp;lt;- Rail
+lm.random &amp;lt;- lme(fixed = travel~1, data=rail_data, random = ~1 | Rail)
+# fixed = travel~1: only the intercept is the fixed effect
+# random = ~1 | Rail: there is a single random effect for each group and the grouping is given by the Rail
+summary(lm.random)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##  Data: rail_data 
+##       AIC      BIC   logLik
+##   128.177 130.6766 -61.0885
+## 
+## Random effects:
+##  Formula: ~1 | Rail
+##         (Intercept) Residual
+## StdDev:    24.80547 4.020779
+## 
+## Fixed effects: travel ~ 1 
+##             Value Std.Error DF  t-value p-value
+## (Intercept)  66.5  10.17104 12 6.538173       0
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -1.61882658 -0.28217671  0.03569328  0.21955784  1.61437744 
+## 
+## Number of Observations: 18
+## Number of Groups: 6&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\mu =\)&lt;/span&gt; 66.5&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\sigma_b^2=24.80547\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\sigma^2=\)&lt;/span&gt; 4.0207794&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;diagnostic&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Diagnostic&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Confidence Intervals on parameters&lt;/strong&gt;:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;intervals(lm.random)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Approximate 95% confidence intervals
+## 
+##  Fixed effects:
+##                lower est.    upper
+## (Intercept) 44.33921 66.5 88.66079
+## attr(,&amp;quot;label&amp;quot;)
+## [1] &amp;quot;Fixed effects:&amp;quot;
+## 
+##  Random Effects:
+##   Level: Rail 
+##                    lower     est.    upper
+## sd((Intercept)) 13.27434 24.80547 46.35341
+## 
+##  Within-group standard error:
+##    lower     est.    upper 
+## 2.695007 4.020779 5.998747&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The estimation of &lt;span class=&#34;math inline&#34;&gt;\(\mu,\sigma_b,\sigma\)&lt;/span&gt; are really raw and imprecise.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ANOVA of the fixed effect:&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova(lm.random)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##             numDF denDF F-value p-value
+## (Intercept)     1    12 42.7477  &amp;lt;.0001&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;two-way-classification-a-randomized-block-design&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Two-way classification: A Randomized Block Design&lt;/h1&gt;
+&lt;p&gt;For block design, we have two types of factors, one is called &lt;em&gt;experimental&lt;/em&gt; factor for fixed effects while the other is called &lt;em&gt;blocking&lt;/em&gt; factor for the random effects.&lt;/p&gt;
+&lt;div id=&#34;egrostool-no-replications&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;code&gt;egroStool&lt;/code&gt;: No Replications&lt;/h2&gt;
+&lt;p&gt;We want to make inferences subjects and types of stools are blocking factors.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;knitr::kable(t(ergoStool)) %&amp;gt;% kable_styling(&amp;quot;striped&amp;quot;, &amp;quot;hover&amp;quot;) %&amp;gt;%
+  scroll_box(width = &amp;quot;100%&amp;quot;, height = &amp;quot;100%&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:100%; overflow-x: scroll; width:100%; &#34;&gt;
+&lt;table class=&#34;table table-striped&#34; style=&#34;margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+16
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+17
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+18
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+19
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+20
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+23
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+25
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+26
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+28
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+29
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+30
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+31
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+32
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+33
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+34
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+36
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+effort
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Type
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+T4
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Subject
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(ergoStool)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;modeling-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Modeling&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Model and assumptions:&lt;/strong&gt; &lt;span class=&#34;math display&#34;&gt;\[
+y_{ij} = \beta_j + b_i + \epsilon_{ij} 
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i \sim N(0,\sigma_b^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ij} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table style=&#34;width:11%;&#34;&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;parameters&lt;/th&gt;
+&lt;th&gt;explanation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;experimental factor (researchers are interested in)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;blocking factor (source of variablity that is not of the primary interest)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma_b^2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;between-rail variability&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ij}\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;noise&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma^2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;within-rail variability&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;Note &lt;strong&gt;this is a balcance design&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;choose-the-contrasts&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Choose the contrasts&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ergoStool %&amp;gt;% filter(Subject == &amp;quot;1&amp;quot;) %&amp;gt;% model.matrix(effort ~ Type, .)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: package &amp;#39;bindrcpp&amp;#39; was built under R version 3.4.4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   (Intercept) TypeT2 TypeT3 TypeT4
+## 1           1      0      0      0
+## 2           1      1      0      0
+## 3           1      0      1      0
+## 4           1      0      0      1
+## attr(,&amp;quot;assign&amp;quot;)
+## [1] 0 1 1 1
+## attr(,&amp;quot;contrasts&amp;quot;)
+## attr(,&amp;quot;contrasts&amp;quot;)$Type
+## [1] &amp;quot;contr.treatment&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.random &amp;lt;- lme(effort ~ Type, data = ergoStool, random = ~1 | Subject)
+summary(lmod.random)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##  Data: ergoStool 
+##        AIC      BIC    logLik
+##   133.1308 141.9252 -60.56539
+## 
+## Random effects:
+##  Formula: ~1 | Subject
+##         (Intercept) Residual
+## StdDev:    1.332465 1.100295
+## 
+## Fixed effects: effort ~ Type 
+##                Value Std.Error DF   t-value p-value
+## (Intercept) 8.555556 0.5760123 24 14.853079  0.0000
+## TypeT2      3.888889 0.5186838 24  7.497610  0.0000
+## TypeT3      2.222222 0.5186838 24  4.284348  0.0003
+## TypeT4      0.666667 0.5186838 24  1.285304  0.2110
+##  Correlation: 
+##        (Intr) TypeT2 TypeT3
+## TypeT2 -0.45               
+## TypeT3 -0.45   0.50        
+## TypeT4 -0.45   0.50   0.50 
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -1.80200345 -0.64316591  0.05783115  0.70099706  1.63142054 
+## 
+## Number of Observations: 36
+## Number of Groups: 9&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\beta_1=\)&lt;/span&gt;intercept: reference level(TypeT1);&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\beta_i=\)&lt;/span&gt; (TypeTi) i=2,3,4&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Significance Tests for fixed effects&lt;/strong&gt; &lt;span class=&#34;math inline&#34;&gt;\(\beta_2=\beta_3=\beta_4=0\)&lt;/span&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova(lmod.random)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##             numDF denDF  F-value p-value
+## (Intercept)     1    24 455.0075  &amp;lt;.0001
+## Type            3    24  22.3556  &amp;lt;.0001&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(P(F_{3,24} &amp;gt; 22.3556)&amp;lt;.0001\)&lt;/span&gt;, there are significance variation within the each type of stools.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Diagnostic&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;intervals(lmod.random)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Approximate 95% confidence intervals
+## 
+##  Fixed effects:
+##                  lower      est.    upper
+## (Intercept)  7.3667247 8.5555556 9.744386
+## TypeT2       2.8183781 3.8888889 4.959400
+## TypeT3       1.1517114 2.2222222 3.292733
+## TypeT4      -0.4038442 0.6666667 1.737177
+## attr(,&amp;quot;label&amp;quot;)
+## [1] &amp;quot;Fixed effects:&amp;quot;
+## 
+##  Random Effects:
+##   Level: Subject 
+##                    lower     est.    upper
+## sd((Intercept)) 0.749509 1.332465 2.368835
+## 
+##  Within-group standard error:
+##     lower      est.     upper 
+## 0.8292494 1.1002946 1.4599324&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(lmod.random,
+     form = resid(., type=&amp;quot;p&amp;quot;) ~ fitted(.) | Subject,
+     abline = 0)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;replications&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Replications&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;With replications, we are able to access the interactions between the experimental and blocking effects!!&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;Machines %&amp;gt;% {plot.experiment(.$score,.$Machine,.$Worker,
+                lab.x = &amp;quot;Score&amp;quot;, lab.y = &amp;quot;Worker&amp;quot;, lab.experimental = &amp;quot;Machine&amp;quot;)}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Loading required package: ggplot2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Attaching package: &amp;#39;ggplot2&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## The following object is masked from &amp;#39;package:dplyr&amp;#39;:
+## 
+##     vars&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Model without interaction&lt;/strong&gt; &lt;span class=&#34;math display&#34;&gt;\[
+y_{ijk} = \beta_j + b_i + \epsilon_{ijk} 
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt; type factor; (experimental factor: researchers are interested in)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt; subject factor; (blocking factor: source of variablity that is not of the primary interest); &lt;span class=&#34;math inline&#34;&gt;\(b_i \sim N(0,\sigma_b^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk}\)&lt;/span&gt; random error; &lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Note &lt;strong&gt;this is a balcance design&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.random &amp;lt;- lme(score ~ Machine, data = Machines, random = ~1 | Worker)
+lmod.random&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##   Data: Machines 
+##   Log-restricted-likelihood: -143.4391
+##   Fixed: score ~ Machine 
+## (Intercept)    MachineB    MachineC 
+##   52.355556    7.966667   13.916667 
+## 
+## Random effects:
+##  Formula: ~1 | Worker
+##         (Intercept) Residual
+## StdDev:    5.146552 3.161647
+## 
+## Number of Observations: 54
+## Number of Groups: 6&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Model with interaction&lt;/strong&gt; &lt;span class=&#34;math display&#34;&gt;\[
+y_{ijk} = \beta_j + b_i + b_{ij} + \epsilon_{ijk} 
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt; type factor; (experimental factor: researchers are interested in)&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt; subject factor; (blocking factor: source of variablity that is not of the primary interest); &lt;span class=&#34;math inline&#34;&gt;\(b_i \sim N(0,\sigma_1^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_{ij}\)&lt;/span&gt; interaction effects between experimental factor and blocking factor; since blocking factor is random, the interaction should also be random; &lt;span class=&#34;math inline&#34;&gt;\(b_{ij} \sim N(0,\sigma_2^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk}\)&lt;/span&gt; random error; &lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Note &lt;strong&gt;this is a balcance design&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.random.interact &amp;lt;- lme(score ~ Machine, data = Machines, random = ~1 | Worker/Machine)
+lmod.random.interact&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##   Data: Machines 
+##   Log-restricted-likelihood: -107.8438
+##   Fixed: score ~ Machine 
+## (Intercept)    MachineB    MachineC 
+##   52.355556    7.966667   13.916667 
+## 
+## Random effects:
+##  Formula: ~1 | Worker
+##         (Intercept)
+## StdDev:     4.78105
+## 
+##  Formula: ~1 | Machine %in% Worker
+##         (Intercept)  Residual
+## StdDev:    3.729532 0.9615771
+## 
+## Number of Observations: 54
+## Number of Groups: 
+##              Worker Machine %in% Worker 
+##                   6                  18&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Model Selection&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[H_0: \text{the restricted model} \qquad H_A: \text{the general model}\]&lt;/span&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova(lmod.random,lmod.random.interact)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                      Model df      AIC      BIC    logLik   Test  L.Ratio
+## lmod.random              1  5 296.8782 306.5373 -143.4391                
+## lmod.random.interact     2  6 227.6876 239.2785 -107.8438 1 vs 2 71.19063
+##                      p-value
+## lmod.random                 
+## lmod.random.interact  &amp;lt;.0001&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(LR=2[\log(L_A)-\log(L_0)] \sim \chi^2_{df_A -df_0}\)&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;extensions-for-interaction-terms&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Extensions for interaction terms&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;Machines %&amp;gt;% filter(Worker == &amp;quot;1&amp;quot;) %&amp;gt;% {plot.experiment(.$score,.$Machine,.$Worker,
+                lab.x = &amp;quot;Score&amp;quot;, lab.y = &amp;quot;Worker&amp;quot;, lab.experimental = &amp;quot;Machine&amp;quot;)}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;For each worker, say, Worker 1, we previously assume&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+y_{1jk} = \beta_j + b_1 + b_{1j} + \epsilon_{1jk} 
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_1 \sim N(0,\sigma_1^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_{1j} \sim N(0,\sigma_2^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{1jk} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We assume &lt;span class=&#34;math inline&#34;&gt;\(b_{1j}\)&lt;/span&gt; iid &lt;span class=&#34;math inline&#34;&gt;\(N(0,\sigma_2^2)\)&lt;/span&gt;, but from the graph above, it seems that it’s not plausible. We can turn to more general variacne structures.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\bf{y_{1}} = X_1\beta + Z_1b_1 + \epsilon_{1}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\({\bf{b_1}} \sim N_3(0,\Phi)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\({\bf{\epsilon_{1}}} \sim N(0,\sigma^2I_3)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.random.interact.general &amp;lt;- lme(score ~ Machine, Machines, random = ~ Machine -1 | Worker)
+lmod.random.interact.general&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##   Data: Machines 
+##   Log-restricted-likelihood: -104.1556
+##   Fixed: score ~ Machine 
+## (Intercept)    MachineB    MachineC 
+##   52.355556    7.966667   13.916667 
+## 
+## Random effects:
+##  Formula: ~Machine - 1 | Worker
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##          StdDev    Corr         
+## MachineA 4.0792807 MachnA MachnB
+## MachineB 8.6252908 0.803        
+## MachineC 4.3894795 0.623  0.771 
+## Residual 0.9615766              
+## 
+## Number of Observations: 54
+## Number of Groups: 6&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Model Selection&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova(lmod.random, lmod.random.interact, lmod.random.interact.general)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                              Model df      AIC      BIC    logLik   Test
+## lmod.random                      1  5 296.8782 306.5373 -143.4391       
+## lmod.random.interact             2  6 227.6876 239.2785 -107.8438 1 vs 2
+## lmod.random.interact.general     3 10 228.3112 247.6295 -104.1556 2 vs 3
+##                               L.Ratio p-value
+## lmod.random                                  
+## lmod.random.interact         71.19063  &amp;lt;.0001
+## lmod.random.interact.general  7.37635  0.1173&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There’s no evidence to support more general model.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;linear-models-incorporate-random-effects&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Linear Models incorporate Random Effects&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;OrthFe &amp;lt;- Orthodont %&amp;gt;% filter(Sex == &amp;quot;Female&amp;quot;)
+knitr::kable(t(OrthFe))&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+distance
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+20.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+25.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+20.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+26.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+25.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+26.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+20.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+25.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+20.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+16.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+19.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+19.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+19.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+25.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+28.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+28.0
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+age
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Subject
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F03
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F03
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F03
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F03
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F04
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F04
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F04
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F04
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F06
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F06
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F06
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F06
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F07
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F07
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F07
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F07
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F09
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F09
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F09
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F09
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+F11
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Sex
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Female
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div id=&#34;random-intercept&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Random Intercept&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\bf{y_{i}} = X_i\beta + Z_ib_i + \epsilon_{i}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.OrthFe &amp;lt;- lme(distance ~ age, data=OrthFe, random = ~ 1 | Subject)
+lmod.OrthFe&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##   Data: OrthFe 
+##   Log-restricted-likelihood: -70.60916
+##   Fixed: distance ~ age 
+## (Intercept)         age 
+##  17.3727273   0.4795455 
+## 
+## Random effects:
+##  Formula: ~1 | Subject
+##         (Intercept)  Residual
+## StdDev:     2.06847 0.7800331
+## 
+## Number of Observations: 44
+## Number of Groups: 11&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;prediciton&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Prediciton&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;knitr::kable(t(random.effects(lmod.OrthFe)))&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F10
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F09
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F06
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F01
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F05
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F07
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F02
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F08
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F03
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F04
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+F11
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+(Intercept)
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+-4.005329
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+-1.470449
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+-1.470449
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+-1.229032
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+-0.021947
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.3401786
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.3401786
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+0.7023042
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1.06443
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2.150807
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.599309
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;nested-classification-factors&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Nested Classification Factors&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;knitr::kable(t(Pixel))&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+16
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+17
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+18
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+19
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+20
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+23
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+25
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+26
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+28
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+29
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+30
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+31
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+32
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+33
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+34
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+36
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+37
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+38
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+39
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+40
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+41
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+42
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+43
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+44
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+45
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+46
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+47
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+48
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+49
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+50
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+51
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+52
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+53
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+54
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+55
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+56
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+57
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+58
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+59
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+60
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+61
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+62
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+63
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+64
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+65
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+66
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+67
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+68
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+69
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+70
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+71
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+72
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+73
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+74
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+75
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+76
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+77
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+78
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+79
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+80
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+81
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+82
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+83
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+84
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+85
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+86
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+87
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+88
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+89
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+90
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+91
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+92
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+93
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+94
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+95
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+96
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+97
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+98
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+99
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+100
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+101
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+102
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Dog
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Side
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+R
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+L
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+day
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+pixel
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1045.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1044.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1042.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1050.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1045.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1038.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1039.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1041.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1045.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1051.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1054.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1052.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1062.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1050.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1039.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1082.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1091.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1088.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1099.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1086.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1073.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1034.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1090.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1126.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1108.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1122.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1100.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1102.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1124.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1128.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1124.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1126.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1109.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1094.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1084.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1093.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1082.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1076.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1151.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1160.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1139.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1133.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1077.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1085.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1100.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1083.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1068.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1064.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1095.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1094.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1081.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1040.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1054.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1051.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1054.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1051.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1051.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1046.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1053.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1052.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1053.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1057.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1064.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1065.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1053.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1043.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1069.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1082.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1077.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1073.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1076.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1053.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1039.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1114.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1111.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1100.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1124.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1113.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1077.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1114.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1117.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1128.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1130.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1102.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1106.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1121.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1115.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1105.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1092.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1129.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1136.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1108.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1094.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1098.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1103.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1106.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1105.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1097.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1099.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1132.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1154.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1161.1
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(Pixel)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Model&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+y_{ijk} = \beta_1 + \beta_2 d_{ik} + b_{i,1} + b_{i,2}d_{i,k} + b_{ij} + \epsilon_{ijk}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.nested &amp;lt;- lme(fixed = pixel ~ day + I(day^2), data=Pixel, random = 
+                     list(Dog = ~ day, Side = ~ 1))
+summary(lmod.nested)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##  Data: Pixel 
+##        AIC      BIC    logLik
+##   841.2102 861.9712 -412.6051
+## 
+## Random effects:
+##  Formula: ~day | Dog
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev   Corr  
+## (Intercept) 28.36990 (Intr)
+## day          1.84375 -0.555
+## 
+##  Formula: ~1 | Side %in% Dog
+##         (Intercept) Residual
+## StdDev:    16.82431 8.989606
+## 
+## Fixed effects: pixel ~ day + I(day^2) 
+##                 Value Std.Error DF   t-value p-value
+## (Intercept) 1073.3391 10.171686 80 105.52225       0
+## day            6.1296  0.879321 80   6.97083       0
+## I(day^2)      -0.3674  0.033945 80 -10.82179       0
+##  Correlation: 
+##          (Intr) day   
+## day      -0.517       
+## I(day^2)  0.186 -0.668
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -2.8290572 -0.4491811  0.0255493  0.5572163  2.7519651 
+## 
+## Number of Observations: 102
+## Number of Groups: 
+##           Dog Side %in% Dog 
+##            10            20&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(augPred(lmod.nested))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.nested.res1 &amp;lt;- lme(fixed = pixel ~ day + I(day^2), data=Pixel, random = ~ day|Dog)
+summary(lmod.nested.res1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##  Data: Pixel 
+##        AIC      BIC    logLik
+##   884.5196 902.6854 -435.2598
+## 
+## Random effects:
+##  Formula: ~day | Dog
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev    Corr  
+## (Intercept) 29.883240 (Intr)
+## day          1.754207 -0.489
+## Residual    14.056243       
+## 
+## Fixed effects: pixel ~ day + I(day^2) 
+##                 Value Std.Error DF   t-value p-value
+## (Intercept) 1072.9283 10.445666 90 102.71516       0
+## day            6.0889  1.146997 90   5.30856       0
+## I(day^2)      -0.3568  0.052210 90  -6.83314       0
+##  Correlation: 
+##          (Intr) day   
+## day      -0.541       
+## I(day^2)  0.286 -0.799
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.85494002 -0.53431941 -0.01425967  0.56188163  2.81513852 
+## 
+## Number of Observations: 102
+## Number of Groups: 10&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova(lmod.nested.res1, lmod.nested)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                  Model df      AIC      BIC    logLik   Test L.Ratio
+## lmod.nested.res1     1  7 884.5196 902.6854 -435.2598               
+## lmod.nested          2  8 841.2102 861.9712 -412.6051 1 vs 2 45.3094
+##                  p-value
+## lmod.nested.res1        
+## lmod.nested       &amp;lt;.0001&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.nested.res2 &amp;lt;- lme(fixed = pixel ~ day + I(day^2), data=Pixel, 
+                        random = ~ 1|Dog/Side)
+anova(lmod.nested.res2, lmod.nested)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                  Model df      AIC      BIC    logLik   Test  L.Ratio
+## lmod.nested.res2     1  6 876.8390 892.4098 -432.4195                
+## lmod.nested          2  8 841.2102 861.9712 -412.6051 1 vs 2 39.62885
+##                  p-value
+## lmod.nested.res2        
+## lmod.nested       &amp;lt;.0001&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;split-plot&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Split-plot&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(Oats,inner=Oats$Variety)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-31-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
@@ -2066,18 +5468,6 @@ $$x_i={x_* }_i+\delta_i$$
 &lt;p&gt;（该小节完）&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Sketch of Fruits</title>
-      <link>/gallery/mango/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0800</pubDate>
-      
-      <guid>/gallery/mango/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/img/gallery-pics/sketch/mango/mango.jpg&#34; alt=&#34;芒果&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/img/gallery-pics/sketch/mango/jump.jpg&#34; alt=&#34;跳水&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     

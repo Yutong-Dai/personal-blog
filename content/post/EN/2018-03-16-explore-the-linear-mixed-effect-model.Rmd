@@ -1,0 +1,368 @@
+---
+title: Explore the Linear Mixed Effect Model
+author: Yutong Dai
+date: '2018-03-16'
+lastmod: '2018-06-04'
+slug: explore-the-linear-mixed-effect-model
+categories:
+  - Statistics
+tags:
+  - LME
+output:
+  blogdown::html_page:
+    toc: yes
+summary: "Basic concepts and R commands to play with LME."
+header-includes:
+  - \newcommand{\iid}{\overset{iid}\sim}
+  - \usepackage{bm}
+  - \newcommand{\bX}{\bm{X}}
+---
+
+> References: Pinheiro, J. C., & Bates, D. (2009). Mixed-Effects Models in S and S-PLUS. *Statistics and Computing*, Springer. 
+
+```{r, echo=FALSE}
+suppressWarnings(suppressMessages(library(dplyr))) 
+plot.experiment <- function(response, experimental, blocking, lab.x=NULL, lab.y=NULL, lab.experimental=NULL, jitter=FALSE){
+  require(ggplot2)
+  df <- data.frame(response,experimental,blocking)
+  if (jitter) {
+    p <- ggplot(df, aes(x=response, y=blocking, colour=experimental, shape=experimental)) + 
+      geom_point(position = position_jitter(w = diff(range(response)) * 0.05, h = 0))}else{
+        p <- ggplot(df, aes(x=response, y=blocking, colour=experimental, shape=experimental)) +
+          geom_point()
+      }
+  if (!is.null(lab.x)) {p <- p + xlab(lab.x)}
+  if (!is.null(lab.y)) {p <- p + ylab(lab.y)}
+  if (is.null(lab.experimental)) {
+    p <- p + guides(colour=guide_legend(title=NULL), shape=guide_legend(title=NULL)) 
+  }else{
+   p <- p + guides(colour=guide_legend(title=lab.experimental), shape=guide_legend(title=lab.experimental))
+  }
+  p + theme(legend.position="top")
+}
+```
+# Why Ramdom Effect Models
+
+Compared with the linear fixed effect models, the advantages of modeling data with linear mixed-effect models (MLE) are:
+
+1. Rather than models the specific type of sample of *levels* from the **factor** of interest, e.g *Rail tyep I* and *Rail type II* sampled from all possible types of the **Rail**, LME models the factor from the population perspective.
+
+2. Provide an estimate of the between-level variability.
+
+3. Prevent the model complexity (\# of parameters) increases linearly with the increase with \# of levels.
+
+# One-way classification with `Rail` example
+
+## `Rail` Data
+```{r}
+suppressMessages(library(nlme))
+suppressMessages(library(kableExtra))
+knitr::kable(t(Rail)) %>%  kable_styling("striped", "hover") %>%
+  scroll_box(width = "100%", height = "100%")
+```
+
+```{r}
+plot(Rail)
+```
+
+## Modeling
+
+**Model and assumptions** 
+$$
+y_{ij} = \mu + b_i + \epsilon_{ij} 
+$$
+
+* $b_i \sim N(0,\sigma_b^2)$;
+
+* $\epsilon_{ij} \sim N(0,\sigma^2)$.
+
+| parameters | explanation  |
+| --- | --- |
+| $\mu$ | population mean |
+|$b_i$|deviation of the i-th type of rail from the population|
+|$\sigma_b^2$|between-rail variability|
+|$\epsilon_{ij}$|noise|
+|$\sigma^2$|within-rail variability|
+
+Note **this is a balcance design.**
+
+## Fitting the model with the package `nlme`
+
+```{r}
+rail_data <- Rail
+lm.random <- lme(fixed = travel~1, data=rail_data, random = ~1 | Rail)
+# fixed = travel~1: only the intercept is the fixed effect
+# random = ~1 | Rail: there is a single random effect for each group and the grouping is given by the Rail
+summary(lm.random)
+```
+
+
+
+* $\hat\mu =$ `r lm.random$coefficients$fixed[1]`
+* $\hat\sigma_b^2=24.80547$
+* $\hat\sigma^2=$ `r lm.random$sigma`
+
+## Diagnostic 
+
+**Confidence Intervals on parameters**:
+
+```{r}
+intervals(lm.random)
+```
+The estimation of $\mu,\sigma_b,\sigma$ are really raw and imprecise.
+
+**ANOVA of the fixed effect:**
+```{r}
+anova(lm.random)
+```
+
+# Two-way classification: A Randomized Block Design
+
+For block design, we have two types of factors, one is called *experimental* factor for fixed effects while the other is called *blocking* factor for the random effects.
+
+## `egroStool`: No Replications
+
+We want to make inferences subjects and types of stools are blocking factors.
+
+```{r}
+knitr::kable(t(ergoStool)) %>% kable_styling("striped", "hover") %>%
+  scroll_box(width = "100%", height = "100%")
+```
+
+```{r}
+plot(ergoStool)
+```
+
+
+## Modeling
+
+**Model and assumptions:**
+$$
+y_{ij} = \beta_j + b_i + \epsilon_{ij} 
+$$
+
+* $b_i \sim N(0,\sigma_b^2)$;
+
+* $\epsilon_{ij} \sim N(0,\sigma^2)$.
+
+| parameters | explanation  |
+| --- | --- |
+| $\beta_j$| experimental factor (researchers are interested in)|
+|$b_i$|blocking factor (source of variablity that is not of the primary interest)|
+|$\sigma_b^2$|between-rail variability|
+|$\epsilon_{ij}$|noise|
+|$\sigma^2$|within-rail variability|
+
+* Note **this is a balcance design**
+
+### Choose the contrasts
+```{r}
+ergoStool %>% filter(Subject == "1") %>% model.matrix(effort ~ Type, .)
+```
+
+```{r}
+lmod.random <- lme(effort ~ Type, data = ergoStool, random = ~1 | Subject)
+summary(lmod.random)
+```
+
+* $\hat\beta_1=$intercept: reference level(TypeT1);
+* $\hat\beta_i=$ (TypeTi) i=2,3,4
+
+**Significance Tests for fixed effects** $\beta_2=\beta_3=\beta_4=0$
+
+```{r}
+anova(lmod.random)
+```
+
+$P(F_{3,24} > 22.3556)<.0001$, there are significance variation within the each type of stools.
+
+**Diagnostic**
+
+```{r}
+intervals(lmod.random)
+```
+
+```{r}
+plot(lmod.random,
+     form = resid(., type="p") ~ fitted(.) | Subject,
+     abline = 0)
+```
+
+## Replications
+
+**With replications, we are able to access the interactions between the experimental and blocking effects!!**
+
+```{r}
+Machines %>% {plot.experiment(.$score,.$Machine,.$Worker,
+                lab.x = "Score", lab.y = "Worker", lab.experimental = "Machine")}
+```
+
+**Model without interaction**
+$$
+y_{ijk} = \beta_j + b_i + \epsilon_{ijk} 
+$$
+
+* $\beta_j$ type factor; (experimental factor: researchers are interested in)
+
+* $b_i$ subject factor; (blocking factor: source of variablity that is not of the primary interest); $b_i \sim N(0,\sigma_b^2)$;
+
+* $\epsilon_{ijk}$ random error; $\epsilon_{ijk} \sim N(0,\sigma^2)$.
+
+* Note **this is a balcance design**
+
+
+
+```{r}
+lmod.random <- lme(score ~ Machine, data = Machines, random = ~1 | Worker)
+lmod.random
+```
+
+**Model with interaction**
+$$
+y_{ijk} = \beta_j + b_i + b_{ij} + \epsilon_{ijk} 
+$$
+
+* $\beta_j$ type factor; (experimental factor: researchers are interested in)
+
+* $b_i$ subject factor; (blocking factor: source of variablity that is not of the primary interest); $b_i \sim N(0,\sigma_1^2)$;
+
+* $b_{ij}$ interaction effects between experimental factor and blocking factor; since blocking factor is random, the interaction should also be random; $b_{ij} \sim N(0,\sigma_2^2)$;
+
+* $\epsilon_{ijk}$ random error; $\epsilon_{ijk} \sim N(0,\sigma^2)$.
+
+* Note **this is a balcance design**
+
+
+
+```{r}
+lmod.random.interact <- lme(score ~ Machine, data = Machines, random = ~1 | Worker/Machine)
+lmod.random.interact
+```
+
+**Model Selection**
+
+$$H_0: \text{the restricted model} \qquad H_A: \text{the general model}$$
+
+```{r}
+anova(lmod.random,lmod.random.interact)
+```
+
+$LR=2[\log(L_A)-\log(L_0)] \sim \chi^2_{df_A -df_0}$
+
+## Extensions for interaction terms
+
+```{r}
+Machines %>% filter(Worker == "1") %>% {plot.experiment(.$score,.$Machine,.$Worker,
+                lab.x = "Score", lab.y = "Worker", lab.experimental = "Machine")}
+```
+
+For each worker, say, Worker 1, we previously assume
+
+$$
+y_{1jk} = \beta_j + b_1 + b_{1j} + \epsilon_{1jk} 
+$$
+
+
+*  $b_1 \sim N(0,\sigma_1^2)$;
+
+*  $b_{1j} \sim N(0,\sigma_2^2)$;
+
+* $\epsilon_{1jk} \sim N(0,\sigma^2)$.
+
+We assume $b_{1j}$ iid $N(0,\sigma_2^2)$, but from the graph above, it seems that it's not plausible. We can turn to more general variacne structures.
+
+$$
+\bf{y_{1}} = X_1\beta + Z_1b_1 + \epsilon_{1}
+$$
+
+*  ${\bf{b_1}} \sim N_3(0,\Phi)$;
+
+* ${\bf{\epsilon_{1}}} \sim N(0,\sigma^2I_3)$.
+
+
+```{r}
+lmod.random.interact.general <- lme(score ~ Machine, Machines, random = ~ Machine -1 | Worker)
+lmod.random.interact.general
+```
+
+**Model Selection**
+
+```{r}
+anova(lmod.random, lmod.random.interact, lmod.random.interact.general)
+```
+
+There's no evidence to support more general model.
+
+# Linear Models incorporate Random Effects
+
+```{r}
+OrthFe <- Orthodont %>% filter(Sex == "Female")
+knitr::kable(t(OrthFe))
+```
+## Random Intercept
+
+$$
+\bf{y_{i}} = X_i\beta + Z_ib_i + \epsilon_{i}
+$$
+
+
+```{r}
+lmod.OrthFe <- lme(distance ~ age, data=OrthFe, random = ~ 1 | Subject)
+lmod.OrthFe
+```
+
+## Prediciton
+
+```{r}
+knitr::kable(t(random.effects(lmod.OrthFe)))
+```
+
+# Nested Classification Factors
+```{r}
+knitr::kable(t(Pixel))
+```
+
+```{r}
+plot(Pixel)
+```
+
+
+**Model**
+
+$$
+y_{ijk} = \beta_1 + \beta_2 d_{ik} + b_{i,1} + b_{i,2}d_{i,k} + b_{ij} + \epsilon_{ijk}
+$$
+
+```{r}
+lmod.nested <- lme(fixed = pixel ~ day + I(day^2), data=Pixel, random = 
+                     list(Dog = ~ day, Side = ~ 1))
+summary(lmod.nested)
+```
+
+```{r}
+plot(augPred(lmod.nested))
+```
+
+```{r}
+lmod.nested.res1 <- lme(fixed = pixel ~ day + I(day^2), data=Pixel, random = ~ day|Dog)
+summary(lmod.nested.res1)
+```
+
+```{r}
+anova(lmod.nested.res1, lmod.nested)
+```
+
+
+```{r}
+lmod.nested.res2 <- lme(fixed = pixel ~ day + I(day^2), data=Pixel, 
+                        random = ~ 1|Dog/Side)
+anova(lmod.nested.res2, lmod.nested)
+```
+
+
+# Split-plot
+
+```{r}
+plot(Oats,inner=Oats$Variety)
+```
+

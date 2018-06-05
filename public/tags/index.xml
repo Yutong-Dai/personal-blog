@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Yutong Dai | 戴宇童</title>
+    <title>Tags on Yutong Dai / 戴宇童</title>
     <link>/tags/</link>
-    <description>Recent content in Tags on Yutong Dai | 戴宇童</description>
+    <description>Recent content in Tags on Yutong Dai / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -27,6 +27,15 @@
       <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/bookdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LME</title>
+      <link>/tags/lme/</link>
+      <pubDate>Fri, 16 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/lme/</guid>
       <description></description>
     </item>
     
