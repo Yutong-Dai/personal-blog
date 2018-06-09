@@ -17,7 +17,7 @@
       
     
   
-  <meta name="description" content="Why Ramdom Effect Models One-way classification with Rail example Rail Data Modeling Fitting the model with the package nlme Diagnostic  Two-way classification: A Randomized Block Design egroStool: No Replications Modeling Choose the contrasts  Replications Extensions for interaction terms  Linear Models incorporate Random Effects Random Intercept Prediciton  Nested Classification Factors Split-plot    References: Pinheiro, J. C., &amp; Bates, D. (2009). Mixed-Effects Models in S and S-PLUS.">
+  <meta name="description" content="Why Ramdom Effect Models One-way classification with Rail example Rail Data Modeling Fitting the model with the package nlme Diagnostic  Two-way classification: A Randomized Block Design egroStool: No Replications Modeling Diagnostic  Machines: Replications Modeling Model Selection  Extensions for interaction terms  ANCOVA with random effects: Orthodont Modeling: Random Intercept Modeling: Random Intercept Predicitons  Nested Classification Factors: Pixel Modeling  Split-plot    References: Pinheiro, J.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/en/explore-the-linear-mixed-effect-model/">
@@ -74,12 +74,12 @@
   <meta property="og:site_name" content="Yutong Dai / 戴宇童">
   <meta property="og:url" content="/post/en/explore-the-linear-mixed-effect-model/">
   <meta property="og:title" content="Explore the Linear Mixed Effect Model | Yutong Dai / 戴宇童">
-  <meta property="og:description" content="Why Ramdom Effect Models One-way classification with Rail example Rail Data Modeling Fitting the model with the package nlme Diagnostic  Two-way classification: A Randomized Block Design egroStool: No Replications Modeling Choose the contrasts  Replications Extensions for interaction terms  Linear Models incorporate Random Effects Random Intercept Prediciton  Nested Classification Factors Split-plot    References: Pinheiro, J. C., &amp; Bates, D. (2009). Mixed-Effects Models in S and S-PLUS.">
+  <meta property="og:description" content="Why Ramdom Effect Models One-way classification with Rail example Rail Data Modeling Fitting the model with the package nlme Diagnostic  Two-way classification: A Randomized Block Design egroStool: No Replications Modeling Diagnostic  Machines: Replications Modeling Model Selection  Extensions for interaction terms  ANCOVA with random effects: Orthodont Modeling: Random Intercept Modeling: Random Intercept Predicitons  Nested Classification Factors: Pixel Modeling  Split-plot    References: Pinheiro, J.">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2018-03-16T00:00:00&#43;00:00">
   
-  <meta property="article:modified_time" content="2018-06-04T00:00:00&#43;00:00">
+  <meta property="article:modified_time" content="2018-06-05T13:21:28&#43;08:00">
   
 
   
@@ -258,7 +258,7 @@
         Last updated on
     
     <time datetime="2018-03-16 00:00:00 &#43;0000 UTC" itemprop="datePublished dateModified">
-      2018-06-04
+      2018-06-05
     </time>
   </span>
   <span itemscope itemprop="author publisher" itemtype="http://schema.org/Person">
@@ -268,7 +268,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    14 min read
+    19 min read
   </span>
   
 
@@ -349,18 +349,24 @@
 <li><a href="#diagnostic">Diagnostic</a></li>
 </ul></li>
 <li><a href="#two-way-classification-a-randomized-block-design">Two-way classification: A Randomized Block Design</a><ul>
-<li><a href="#egrostool-no-replications"><code>egroStool</code>: No Replications</a></li>
-<li><a href="#modeling-1">Modeling</a><ul>
-<li><a href="#choose-the-contrasts">Choose the contrasts</a></li>
+<li><a href="#egrostool-no-replications"><code>egroStool</code>: No Replications</a><ul>
+<li><a href="#modeling-1">Modeling</a></li>
+<li><a href="#diagnostic-1">Diagnostic</a></li>
 </ul></li>
-<li><a href="#replications">Replications</a></li>
+<li><a href="#machines-replications"><code>Machines</code>: Replications</a><ul>
+<li><a href="#modeling-2">Modeling</a></li>
+<li><a href="#model-selection">Model Selection</a></li>
+</ul></li>
 <li><a href="#extensions-for-interaction-terms">Extensions for interaction terms</a></li>
 </ul></li>
-<li><a href="#linear-models-incorporate-random-effects">Linear Models incorporate Random Effects</a><ul>
-<li><a href="#random-intercept">Random Intercept</a></li>
-<li><a href="#prediciton">Prediciton</a></li>
+<li><a href="#ancova-with-random-effects-orthodont">ANCOVA with random effects: <code>Orthodont</code></a><ul>
+<li><a href="#modeling-random-intercept">Modeling: Random Intercept</a></li>
+<li><a href="#modeling-random-intercept-1">Modeling: Random Intercept</a></li>
+<li><a href="#predicitons">Predicitons</a></li>
 </ul></li>
-<li><a href="#nested-classification-factors">Nested Classification Factors</a></li>
+<li><a href="#nested-classification-factors-pixel">Nested Classification Factors: <code>Pixel</code></a><ul>
+<li><a href="#modeling-3">Modeling</a></li>
+</ul></li>
 <li><a href="#split-plot">Split-plot</a></li>
 </ul>
 </div>
@@ -594,24 +600,23 @@ y_{ij} = \mu + b_i + \epsilon_{ij}
 <td>population mean</td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(b_i\)</span></td>
-<td>deviation of the i-th type of rail from the population</td>
-</tr>
-<tr class="odd">
 <td><span class="math inline">\(\sigma_b^2\)</span></td>
 <td>between-rail variability</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><span class="math inline">\(\epsilon_{ij}\)</span></td>
 <td>noise</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><span class="math inline">\(\sigma^2\)</span></td>
 <td>within-rail variability</td>
 </tr>
 </tbody>
 </table>
-<p>Note <strong>this is a balcance design.</strong></p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(b_i\)</span> represents the deviation of the i-th type of rail from the population, it is not a parameter.</li>
+<li>Note <strong>this is a balcance design.</strong></li>
+</ol>
 </div>
 <div id="fitting-the-model-with-the-package-nlme" class="section level2">
 <h2>Fitting the model with the package <code>nlme</code></h2>
@@ -1142,9 +1147,8 @@ Subject
 </div>
 <pre class="r"><code>plot(ergoStool)</code></pre>
 <p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-</div>
-<div id="modeling-1" class="section level2">
-<h2>Modeling</h2>
+<div id="modeling-1" class="section level3">
+<h3>Modeling</h3>
 <p><strong>Model and assumptions:</strong> <span class="math display">\[
 y_{ij} = \beta_j + b_i + \epsilon_{ij} 
 \]</span></p>
@@ -1152,11 +1156,7 @@ y_{ij} = \beta_j + b_i + \epsilon_{ij}
 <li><p><span class="math inline">\(b_i \sim N(0,\sigma_b^2)\)</span>;</p></li>
 <li><p><span class="math inline">\(\epsilon_{ij} \sim N(0,\sigma^2)\)</span>.</p></li>
 </ul>
-<table style="width:11%;">
-<colgroup>
-<col width="5%" />
-<col width="5%" />
-</colgroup>
+<table>
 <thead>
 <tr class="header">
 <th>parameters</th>
@@ -1169,18 +1169,14 @@ y_{ij} = \beta_j + b_i + \epsilon_{ij}
 <td>experimental factor (researchers are interested in)</td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\(b_i\)</span></td>
-<td>blocking factor (source of variablity that is not of the primary interest)</td>
-</tr>
-<tr class="odd">
 <td><span class="math inline">\(\sigma_b^2\)</span></td>
 <td>between-rail variability</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><span class="math inline">\(\epsilon_{ij}\)</span></td>
 <td>noise</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><span class="math inline">\(\sigma^2\)</span></td>
 <td>within-rail variability</td>
 </tr>
@@ -1189,8 +1185,8 @@ y_{ij} = \beta_j + b_i + \epsilon_{ij}
 <ul>
 <li>Note <strong>this is a balcance design</strong></li>
 </ul>
-<div id="choose-the-contrasts" class="section level3">
-<h3>Choose the contrasts</h3>
+<div id="choose-the-contrasts" class="section level4">
+<h4>Choose the contrasts</h4>
 <pre class="r"><code>ergoStool %&gt;% filter(Subject == &quot;1&quot;) %&gt;% model.matrix(effort ~ Type, .)</code></pre>
 <pre><code>## Warning: package &#39;bindrcpp&#39; was built under R version 3.4.4</code></pre>
 <pre><code>##   (Intercept) TypeT2 TypeT3 TypeT4
@@ -1235,7 +1231,7 @@ summary(lmod.random)</code></pre>
 ## Number of Groups: 9</code></pre>
 <ul>
 <li><span class="math inline">\(\hat\beta_1=\)</span>intercept: reference level(TypeT1);</li>
-<li><span class="math inline">\(\hat\beta_i=\)</span> (TypeTi) i=2,3,4</li>
+<li><span class="math inline">\(\hat\beta_i=\)</span> (TypeTi) + intercept i=2,3,4</li>
 </ul>
 <p><strong>Significance Tests for fixed effects</strong> <span class="math inline">\(\beta_2=\beta_3=\beta_4=0\)</span></p>
 <pre class="r"><code>anova(lmod.random)</code></pre>
@@ -1243,7 +1239,10 @@ summary(lmod.random)</code></pre>
 ## (Intercept)     1    24 455.0075  &lt;.0001
 ## Type            3    24  22.3556  &lt;.0001</code></pre>
 <p><span class="math inline">\(P(F_{3,24} &gt; 22.3556)&lt;.0001\)</span>, there are significance variation within the each type of stools.</p>
-<p><strong>Diagnostic</strong></p>
+</div>
+</div>
+<div id="diagnostic-1" class="section level3">
+<h3>Diagnostic</h3>
 <pre class="r"><code>intervals(lmod.random)</code></pre>
 <pre><code>## Approximate 95% confidence intervals
 ## 
@@ -1270,61 +1269,812 @@ summary(lmod.random)</code></pre>
 <p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 </div>
 </div>
-<div id="replications" class="section level2">
-<h2>Replications</h2>
+<div id="machines-replications" class="section level2">
+<h2><code>Machines</code>: Replications</h2>
 <p><strong>With replications, we are able to access the interactions between the experimental and blocking effects!!</strong></p>
+<pre class="r"><code>knitr::kable(t(Machines)) %&gt;% kable_styling(&quot;striped&quot;, &quot;hover&quot;) %&gt;%
+  scroll_box(width = &quot;100%&quot;, height = &quot;100%&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:100%; overflow-x: scroll; width:100%; ">
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+1
+</th>
+<th style="text-align:left;">
+2
+</th>
+<th style="text-align:left;">
+3
+</th>
+<th style="text-align:left;">
+4
+</th>
+<th style="text-align:left;">
+5
+</th>
+<th style="text-align:left;">
+6
+</th>
+<th style="text-align:left;">
+7
+</th>
+<th style="text-align:left;">
+8
+</th>
+<th style="text-align:left;">
+9
+</th>
+<th style="text-align:left;">
+10
+</th>
+<th style="text-align:left;">
+11
+</th>
+<th style="text-align:left;">
+12
+</th>
+<th style="text-align:left;">
+13
+</th>
+<th style="text-align:left;">
+14
+</th>
+<th style="text-align:left;">
+15
+</th>
+<th style="text-align:left;">
+16
+</th>
+<th style="text-align:left;">
+17
+</th>
+<th style="text-align:left;">
+18
+</th>
+<th style="text-align:left;">
+19
+</th>
+<th style="text-align:left;">
+20
+</th>
+<th style="text-align:left;">
+21
+</th>
+<th style="text-align:left;">
+22
+</th>
+<th style="text-align:left;">
+23
+</th>
+<th style="text-align:left;">
+24
+</th>
+<th style="text-align:left;">
+25
+</th>
+<th style="text-align:left;">
+26
+</th>
+<th style="text-align:left;">
+27
+</th>
+<th style="text-align:left;">
+28
+</th>
+<th style="text-align:left;">
+29
+</th>
+<th style="text-align:left;">
+30
+</th>
+<th style="text-align:left;">
+31
+</th>
+<th style="text-align:left;">
+32
+</th>
+<th style="text-align:left;">
+33
+</th>
+<th style="text-align:left;">
+34
+</th>
+<th style="text-align:left;">
+35
+</th>
+<th style="text-align:left;">
+36
+</th>
+<th style="text-align:left;">
+37
+</th>
+<th style="text-align:left;">
+38
+</th>
+<th style="text-align:left;">
+39
+</th>
+<th style="text-align:left;">
+40
+</th>
+<th style="text-align:left;">
+41
+</th>
+<th style="text-align:left;">
+42
+</th>
+<th style="text-align:left;">
+43
+</th>
+<th style="text-align:left;">
+44
+</th>
+<th style="text-align:left;">
+45
+</th>
+<th style="text-align:left;">
+46
+</th>
+<th style="text-align:left;">
+47
+</th>
+<th style="text-align:left;">
+48
+</th>
+<th style="text-align:left;">
+49
+</th>
+<th style="text-align:left;">
+50
+</th>
+<th style="text-align:left;">
+51
+</th>
+<th style="text-align:left;">
+52
+</th>
+<th style="text-align:left;">
+53
+</th>
+<th style="text-align:left;">
+54
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Worker
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Machine
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:left;">
+C
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+score
+</td>
+<td style="text-align:left;">
+52.0
+</td>
+<td style="text-align:left;">
+52.8
+</td>
+<td style="text-align:left;">
+53.1
+</td>
+<td style="text-align:left;">
+51.8
+</td>
+<td style="text-align:left;">
+52.8
+</td>
+<td style="text-align:left;">
+53.1
+</td>
+<td style="text-align:left;">
+60.0
+</td>
+<td style="text-align:left;">
+60.2
+</td>
+<td style="text-align:left;">
+58.4
+</td>
+<td style="text-align:left;">
+51.1
+</td>
+<td style="text-align:left;">
+52.3
+</td>
+<td style="text-align:left;">
+50.3
+</td>
+<td style="text-align:left;">
+50.9
+</td>
+<td style="text-align:left;">
+51.8
+</td>
+<td style="text-align:left;">
+51.4
+</td>
+<td style="text-align:left;">
+46.4
+</td>
+<td style="text-align:left;">
+44.8
+</td>
+<td style="text-align:left;">
+49.2
+</td>
+<td style="text-align:left;">
+62.1
+</td>
+<td style="text-align:left;">
+62.6
+</td>
+<td style="text-align:left;">
+64.0
+</td>
+<td style="text-align:left;">
+59.7
+</td>
+<td style="text-align:left;">
+60.0
+</td>
+<td style="text-align:left;">
+59.0
+</td>
+<td style="text-align:left;">
+68.6
+</td>
+<td style="text-align:left;">
+65.8
+</td>
+<td style="text-align:left;">
+69.7
+</td>
+<td style="text-align:left;">
+63.2
+</td>
+<td style="text-align:left;">
+62.8
+</td>
+<td style="text-align:left;">
+62.2
+</td>
+<td style="text-align:left;">
+64.8
+</td>
+<td style="text-align:left;">
+65.0
+</td>
+<td style="text-align:left;">
+65.4
+</td>
+<td style="text-align:left;">
+43.7
+</td>
+<td style="text-align:left;">
+44.2
+</td>
+<td style="text-align:left;">
+43.0
+</td>
+<td style="text-align:left;">
+67.5
+</td>
+<td style="text-align:left;">
+67.2
+</td>
+<td style="text-align:left;">
+66.9
+</td>
+<td style="text-align:left;">
+61.5
+</td>
+<td style="text-align:left;">
+61.7
+</td>
+<td style="text-align:left;">
+62.3
+</td>
+<td style="text-align:left;">
+70.8
+</td>
+<td style="text-align:left;">
+70.6
+</td>
+<td style="text-align:left;">
+71.0
+</td>
+<td style="text-align:left;">
+64.1
+</td>
+<td style="text-align:left;">
+66.2
+</td>
+<td style="text-align:left;">
+64.0
+</td>
+<td style="text-align:left;">
+72.1
+</td>
+<td style="text-align:left;">
+72.0
+</td>
+<td style="text-align:left;">
+71.1
+</td>
+<td style="text-align:left;">
+62.0
+</td>
+<td style="text-align:left;">
+61.4
+</td>
+<td style="text-align:left;">
+60.5
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <pre class="r"><code>Machines %&gt;% {plot.experiment(.$score,.$Machine,.$Worker,
                 lab.x = &quot;Score&quot;, lab.y = &quot;Worker&quot;, lab.experimental = &quot;Machine&quot;)}</code></pre>
-<pre><code>## Loading required package: ggplot2</code></pre>
-<pre><code>## 
-## Attaching package: &#39;ggplot2&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     vars</code></pre>
-<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
-<p><strong>Model without interaction</strong> <span class="math display">\[
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div id="modeling-2" class="section level3">
+<h3>Modeling</h3>
+<p><strong>Model and assumptions - without interactions:</strong></p>
+<p><span class="math display">\[
 y_{ijk} = \beta_j + b_i + \epsilon_{ijk} 
 \]</span></p>
 <ul>
-<li><p><span class="math inline">\(\beta_j\)</span> type factor; (experimental factor: researchers are interested in)</p></li>
-<li><p><span class="math inline">\(b_i\)</span> subject factor; (blocking factor: source of variablity that is not of the primary interest); <span class="math inline">\(b_i \sim N(0,\sigma_b^2)\)</span>;</p></li>
-<li><p><span class="math inline">\(\epsilon_{ijk}\)</span> random error; <span class="math inline">\(\epsilon_{ijk} \sim N(0,\sigma^2)\)</span>.</p></li>
-<li><p>Note <strong>this is a balcance design</strong></p></li>
+<li><p><span class="math inline">\(b_i \sim N(0,\sigma_b^2)\)</span>;</p></li>
+<li><p><span class="math inline">\(\epsilon_{ijk} \sim N(0,\sigma^2)\)</span>.</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>parameters</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\beta_j\)</span></td>
+<td>experimental factor (researchers are interested in)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sigma_b^2\)</span></td>
+<td>between-rail variability</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\epsilon_{ijk}\)</span></td>
+<td>noise</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sigma^2\)</span></td>
+<td>within-rail variability</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Note <strong>this is a balcance design</strong></li>
 </ul>
 <pre class="r"><code>lmod.random &lt;- lme(score ~ Machine, data = Machines, random = ~1 | Worker)
-lmod.random</code></pre>
+summary(lmod.random)</code></pre>
 <pre><code>## Linear mixed-effects model fit by REML
-##   Data: Machines 
-##   Log-restricted-likelihood: -143.4391
-##   Fixed: score ~ Machine 
-## (Intercept)    MachineB    MachineC 
-##   52.355556    7.966667   13.916667 
+##  Data: Machines 
+##        AIC      BIC    logLik
+##   296.8782 306.5373 -143.4391
 ## 
 ## Random effects:
 ##  Formula: ~1 | Worker
 ##         (Intercept) Residual
 ## StdDev:    5.146552 3.161647
 ## 
+## Fixed effects: score ~ Machine 
+##                Value Std.Error DF  t-value p-value
+## (Intercept) 52.35556  2.229312 46 23.48507       0
+## MachineB     7.96667  1.053883 46  7.55935       0
+## MachineC    13.91667  1.053883 46 13.20514       0
+##  Correlation: 
+##          (Intr) MachnB
+## MachineB -0.236       
+## MachineC -0.236  0.500
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -2.7248806 -0.5232891  0.1327564  0.6513056  1.7559058 
+## 
 ## Number of Observations: 54
 ## Number of Groups: 6</code></pre>
-<p><strong>Model with interaction</strong> <span class="math display">\[
+<p><strong>Model and assumptions - with interactions</strong> <span class="math display">\[
 y_{ijk} = \beta_j + b_i + b_{ij} + \epsilon_{ijk} 
 \]</span></p>
 <ul>
-<li><p><span class="math inline">\(\beta_j\)</span> type factor; (experimental factor: researchers are interested in)</p></li>
-<li><p><span class="math inline">\(b_i\)</span> subject factor; (blocking factor: source of variablity that is not of the primary interest); <span class="math inline">\(b_i \sim N(0,\sigma_1^2)\)</span>;</p></li>
-<li><p><span class="math inline">\(b_{ij}\)</span> interaction effects between experimental factor and blocking factor; since blocking factor is random, the interaction should also be random; <span class="math inline">\(b_{ij} \sim N(0,\sigma_2^2)\)</span>;</p></li>
-<li><p><span class="math inline">\(\epsilon_{ijk}\)</span> random error; <span class="math inline">\(\epsilon_{ijk} \sim N(0,\sigma^2)\)</span>.</p></li>
-<li><p>Note <strong>this is a balcance design</strong></p></li>
+<li><p><span class="math inline">\(b_i \sim N(0,\sigma_1^2)\)</span>;</p></li>
+<li><p><span class="math inline">\(b_{ij} \sim N(0,\sigma_2^2)\)</span>;</p></li>
+<li><p><span class="math inline">\(\epsilon_{ijk} \sim N(0,\sigma^2)\)</span>.</p></li>
 </ul>
-<pre class="r"><code>lmod.random.interact &lt;- lme(score ~ Machine, data = Machines, random = ~1 | Worker/Machine)
-lmod.random.interact</code></pre>
+<table style="width:11%;">
+<colgroup>
+<col width="5%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>parameters</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\beta_j\)</span></td>
+<td>experimental factor (researchers are interested in)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(b_i\)</span></td>
+<td>blocking factor (source of variablity that is not of the primary interest)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(b_{ij}\)</span></td>
+<td>interaction effects between experimental factor and blocking factor</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sigma_b^2\)</span></td>
+<td>between-rail variability</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\epsilon_{ijk}\)</span></td>
+<td>noise</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sigma^2\)</span></td>
+<td>within-rail variability</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Note <strong>this is a balcance design.</strong></li>
+</ul>
+<pre class="r"><code># Worker/Machine: Modeling two levels of random effects, Worker and Machine within Worker
+lmod.random.interact &lt;- lme(score ~ Machine, data = Machines, random = ~1 | Worker/Machine)
+summary(lmod.random.interact)</code></pre>
 <pre><code>## Linear mixed-effects model fit by REML
-##   Data: Machines 
-##   Log-restricted-likelihood: -107.8438
-##   Fixed: score ~ Machine 
-## (Intercept)    MachineB    MachineC 
-##   52.355556    7.966667   13.916667 
+##  Data: Machines 
+##        AIC      BIC    logLik
+##   227.6876 239.2785 -107.8438
 ## 
 ## Random effects:
 ##  Formula: ~1 | Worker
@@ -1335,11 +2085,28 @@ lmod.random.interact</code></pre>
 ##         (Intercept)  Residual
 ## StdDev:    3.729532 0.9615771
 ## 
+## Fixed effects: score ~ Machine 
+##                Value Std.Error DF   t-value p-value
+## (Intercept) 52.35556  2.485828 36 21.061613  0.0000
+## MachineB     7.96667  2.176972 10  3.659518  0.0044
+## MachineC    13.91667  2.176972 10  6.392672  0.0001
+##  Correlation: 
+##          (Intr) MachnB
+## MachineB -0.438       
+## MachineC -0.438  0.500
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.26958675 -0.54846580 -0.01070594  0.43936568  2.54005792 
+## 
 ## Number of Observations: 54
 ## Number of Groups: 
 ##              Worker Machine %in% Worker 
 ##                   6                  18</code></pre>
-<p><strong>Model Selection</strong></p>
+<p><span class="math inline">\(\beta_1 =52.36\)</span>, <span class="math inline">\(\beta_2 = 52.36 + 7.97\)</span>, … <span class="math inline">\(\sigma_1 = 4.78105\)</span>, <span class="math inline">\(\sigma_2 =3.729532\)</span>, <span class="math inline">\(\sigma = 0.9615771\)</span>.</p>
+</div>
+<div id="model-selection" class="section level3">
+<h3>Model Selection</h3>
 <p><span class="math display">\[H_0: \text{the restricted model} \qquad H_A: \text{the general model}\]</span></p>
 <pre class="r"><code>anova(lmod.random,lmod.random.interact)</code></pre>
 <pre><code>##                      Model df      AIC      BIC    logLik   Test  L.Ratio
@@ -1349,13 +2116,15 @@ lmod.random.interact</code></pre>
 ## lmod.random                 
 ## lmod.random.interact  &lt;.0001</code></pre>
 <p><span class="math inline">\(LR=2[\log(L_A)-\log(L_0)] \sim \chi^2_{df_A -df_0}\)</span></p>
+<p>The likelihood ratio test suggests that model with interatcions are preferred.</p>
+</div>
 </div>
 <div id="extensions-for-interaction-terms" class="section level2">
 <h2>Extensions for interaction terms</h2>
 <pre class="r"><code>Machines %&gt;% filter(Worker == &quot;1&quot;) %&gt;% {plot.experiment(.$score,.$Machine,.$Worker,
                 lab.x = &quot;Score&quot;, lab.y = &quot;Worker&quot;, lab.experimental = &quot;Machine&quot;)}</code></pre>
-<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<p>For each worker, say, Worker 1, we previously assume</p>
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>For each worker, say Worker 1, we previously assume</p>
 <p><span class="math display">\[
 y_{1jk} = \beta_j + b_1 + b_{1j} + \epsilon_{1jk} 
 \]</span></p>
@@ -1372,14 +2141,47 @@ y_{1jk} = \beta_j + b_1 + b_{1j} + \epsilon_{1jk}
 <li><p><span class="math inline">\({\bf{b_1}} \sim N_3(0,\Phi)\)</span>;</p></li>
 <li><p><span class="math inline">\({\bf{\epsilon_{1}}} \sim N(0,\sigma^2I_3)\)</span>.</p></li>
 </ul>
+<p>To fit this model, we need to specify the <span class="math inline">\(X_1\)</span> and <span class="math inline">\(Z_1\)</span>.</p>
+<pre class="r"><code># fixed effect X_1
+Machines %&gt;% filter(Worker == &quot;1&quot;) %&gt;% {model.matrix( score ~ Machine, .)}</code></pre>
+<pre><code>##   (Intercept) MachineB MachineC
+## 1           1        0        0
+## 2           1        0        0
+## 3           1        0        0
+## 4           1        1        0
+## 5           1        1        0
+## 6           1        1        0
+## 7           1        0        1
+## 8           1        0        1
+## 9           1        0        1
+## attr(,&quot;assign&quot;)
+## [1] 0 1 1
+## attr(,&quot;contrasts&quot;)
+## attr(,&quot;contrasts&quot;)$Machine
+## [1] &quot;contr.treatment&quot;</code></pre>
+<pre class="r"><code># fixed effect Z_1
+Machines %&gt;% filter(Worker == &quot;1&quot;) %&gt;% {model.matrix(  score ~ Machine - 1, .)}</code></pre>
+<pre><code>##   MachineA MachineB MachineC
+## 1        1        0        0
+## 2        1        0        0
+## 3        1        0        0
+## 4        0        1        0
+## 5        0        1        0
+## 6        0        1        0
+## 7        0        0        1
+## 8        0        0        1
+## 9        0        0        1
+## attr(,&quot;assign&quot;)
+## [1] 1 1 1
+## attr(,&quot;contrasts&quot;)
+## attr(,&quot;contrasts&quot;)$Machine
+## [1] &quot;contr.treatment&quot;</code></pre>
 <pre class="r"><code>lmod.random.interact.general &lt;- lme(score ~ Machine, Machines, random = ~ Machine -1 | Worker)
-lmod.random.interact.general</code></pre>
+summary(lmod.random.interact.general)</code></pre>
 <pre><code>## Linear mixed-effects model fit by REML
-##   Data: Machines 
-##   Log-restricted-likelihood: -104.1556
-##   Fixed: score ~ Machine 
-## (Intercept)    MachineB    MachineC 
-##   52.355556    7.966667   13.916667 
+##  Data: Machines 
+##        AIC      BIC    logLik
+##   228.3112 247.6295 -104.1556
 ## 
 ## Random effects:
 ##  Formula: ~Machine - 1 | Worker
@@ -1389,6 +2191,20 @@ lmod.random.interact.general</code></pre>
 ## MachineB 8.6252908 0.803        
 ## MachineC 4.3894795 0.623  0.771 
 ## Residual 0.9615766              
+## 
+## Fixed effects: score ~ Machine 
+##                Value Std.Error DF   t-value p-value
+## (Intercept) 52.35556  1.680711 46 31.150834  0.0000
+## MachineB     7.96667  2.420851 46  3.290854  0.0019
+## MachineC    13.91667  1.540100 46  9.036211  0.0000
+##  Correlation: 
+##          (Intr) MachnB
+## MachineB  0.463       
+## MachineC -0.374  0.301
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.39354008 -0.51377575  0.02690829  0.47245472  2.53338699 
 ## 
 ## Number of Observations: 54
 ## Number of Groups: 6</code></pre>
@@ -1405,11 +2221,13 @@ lmod.random.interact.general</code></pre>
 <p>There’s no evidence to support more general model.</p>
 </div>
 </div>
-<div id="linear-models-incorporate-random-effects" class="section level1">
-<h1>Linear Models incorporate Random Effects</h1>
+<div id="ancova-with-random-effects-orthodont" class="section level1">
+<h1>ANCOVA with random effects: <code>Orthodont</code></h1>
 <pre class="r"><code>OrthFe &lt;- Orthodont %&gt;% filter(Sex == &quot;Female&quot;)
-knitr::kable(t(OrthFe))</code></pre>
-<table>
+knitr::kable(t(OrthFe)) %&gt;% kable_styling(&quot;striped&quot;, &quot;hover&quot;) %&gt;%
+  scroll_box(width = &quot;100%&quot;, height = &quot;100%&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:100%; overflow-x: scroll; width:100%; ">
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <tbody>
 <tr>
 <td style="text-align:left;">
@@ -1961,32 +2779,118 @@ Female
 </tr>
 </tbody>
 </table>
-<div id="random-intercept" class="section level2">
-<h2>Random Intercept</h2>
+</div>
+<div id="modeling-random-intercept" class="section level3">
+<h3>Modeling: Random Intercept</h3>
+<p><strong>Model and assumptions:</strong></p>
 <p><span class="math display">\[
 \bf{y_{i}} = X_i\beta + Z_ib_i + \epsilon_{i}
 \]</span></p>
+<ul>
+<li><p><span class="math inline">\(b_i \sim N(0,\sigma^2)\)</span>;</p></li>
+<li><p><span class="math inline">\(\epsilon_{i} \sim N(0,\sigma^2I)\)</span>.</p></li>
+</ul>
+<p>For example,</p>
+<pre class="r"><code># fixed effect X_1
+OrthFe  %&gt;% filter(Subject == &quot;F01&quot;) %&gt;% {model.matrix( distance ~ age, .)}</code></pre>
+<pre><code>##   (Intercept) age
+## 1           1   8
+## 2           1  10
+## 3           1  12
+## 4           1  14
+## attr(,&quot;assign&quot;)
+## [1] 0 1</code></pre>
+<pre class="r"><code># random effect Z_1
+OrthFe  %&gt;% filter(Subject == &quot;F01&quot;) %&gt;% {model.matrix(  distance ~ 1, .)}</code></pre>
+<pre><code>##   (Intercept)
+## 1           1
+## 2           1
+## 3           1
+## 4           1
+## attr(,&quot;assign&quot;)
+## [1] 0</code></pre>
 <pre class="r"><code>lmod.OrthFe &lt;- lme(distance ~ age, data=OrthFe, random = ~ 1 | Subject)
-lmod.OrthFe</code></pre>
+summary(lmod.OrthFe)</code></pre>
 <pre><code>## Linear mixed-effects model fit by REML
-##   Data: OrthFe 
-##   Log-restricted-likelihood: -70.60916
-##   Fixed: distance ~ age 
-## (Intercept)         age 
-##  17.3727273   0.4795455 
+##  Data: OrthFe 
+##        AIC     BIC    logLik
+##   149.2183 156.169 -70.60916
 ## 
 ## Random effects:
 ##  Formula: ~1 | Subject
 ##         (Intercept)  Residual
 ## StdDev:     2.06847 0.7800331
 ## 
+## Fixed effects: distance ~ age 
+##                 Value Std.Error DF   t-value p-value
+## (Intercept) 17.372727 0.8587419 32 20.230440       0
+## age          0.479545 0.0525898 32  9.118598       0
+##  Correlation: 
+##     (Intr)
+## age -0.674
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -2.2736479 -0.7090164  0.1728237  0.4122128  1.6325181 
+## 
 ## Number of Observations: 44
 ## Number of Groups: 11</code></pre>
 </div>
-<div id="prediciton" class="section level2">
-<h2>Prediciton</h2>
-<pre class="r"><code>knitr::kable(t(random.effects(lmod.OrthFe)))</code></pre>
-<table>
+<div id="modeling-random-intercept-1" class="section level3">
+<h3>Modeling: Random Intercept</h3>
+<p><strong>Model and assumptions:</strong></p>
+<p><span class="math display">\[
+\bf{y_{i}} = X_i\beta + Z_i{\bf b_i} + \epsilon_{i}
+\]</span></p>
+<ul>
+<li><p><span class="math inline">\(b_i \sim N_2(0,\Phi)\)</span>;</p></li>
+<li><p><span class="math inline">\(\epsilon_{i} \sim N(0,\sigma^2I)\)</span>.</p></li>
+</ul>
+<p><strong>Here</strong> <span class="math inline">\(b_i=(b_{i1},b_{i2})\)</span> and <span class="math inline">\(Z_i\)</span> is identical to <span class="math inline">\(X_i\)</span>.</p>
+<pre class="r"><code>lmod.OrthFe.slope &lt;- lme(distance ~ age, data=OrthFe, random = ~ age | Subject)
+summary(lmod.OrthFe.slope)</code></pre>
+<pre><code>## Linear mixed-effects model fit by REML
+##  Data: OrthFe 
+##        AIC      BIC    logLik
+##   149.4287 159.8547 -68.71435
+## 
+## Random effects:
+##  Formula: ~age | Subject
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev    Corr  
+## (Intercept) 1.8841866 (Intr)
+## age         0.1609278 -0.354
+## Residual    0.6682746       
+## 
+## Fixed effects: distance ~ age 
+##                 Value Std.Error DF   t-value p-value
+## (Intercept) 17.372727 0.7606027 32 22.840737       0
+## age          0.479545 0.0662140 32  7.242353       0
+##  Correlation: 
+##     (Intr)
+## age -0.637
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -1.85438224 -0.46784889  0.06779759  0.42976634  1.59215840 
+## 
+## Number of Observations: 44
+## Number of Groups: 11</code></pre>
+<pre class="r"><code>anova(lmod.OrthFe, lmod.OrthFe.slope)</code></pre>
+<pre><code>##                   Model df      AIC      BIC    logLik   Test  L.Ratio
+## lmod.OrthFe           1  4 149.2183 156.1690 -70.60916                
+## lmod.OrthFe.slope     2  6 149.4287 159.8547 -68.71435 1 vs 2 3.789622
+##                   p-value
+## lmod.OrthFe              
+## lmod.OrthFe.slope  0.1503</code></pre>
+<p>This result implies there’s no explicit evidence to support the random slope model.</p>
+</div>
+<div id="predicitons" class="section level2">
+<h2>Predicitons</h2>
+<pre class="r"><code> knitr::kable(t(random.effects(lmod.OrthFe)))  %&gt;% kable_styling(&quot;striped&quot;, &quot;hover&quot;) %&gt;%
+  scroll_box(width = &quot;100%&quot;, height = &quot;100%&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:100%; overflow-x: scroll; width:100%; ">
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -2069,10 +2973,13 @@ F11
 </table>
 </div>
 </div>
-<div id="nested-classification-factors" class="section level1">
-<h1>Nested Classification Factors</h1>
-<pre class="r"><code>knitr::kable(t(Pixel))</code></pre>
-<table>
+</div>
+<div id="nested-classification-factors-pixel" class="section level1">
+<h1>Nested Classification Factors: <code>Pixel</code></h1>
+<pre class="r"><code>knitr::kable(t(Pixel)) %&gt;% kable_styling(&quot;striped&quot;, &quot;hover&quot;) %&gt;%
+  scroll_box(width = &quot;100%&quot;, height = &quot;100%&quot;)</code></pre>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:100%; overflow-x: scroll; width:100%; ">
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -3632,14 +4539,74 @@ pixel
 </tr>
 </tbody>
 </table>
+</div>
 <pre class="r"><code>plot(Pixel)</code></pre>
-<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
-<p><strong>Model</strong></p>
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<div id="modeling-3" class="section level2">
+<h2>Modeling</h2>
+<p><strong>Model and assumptions</strong></p>
 <p><span class="math display">\[
-y_{ijk} = \beta_1 + \beta_2 d_{ik} + b_{i,1} + b_{i,2}d_{i,k} + b_{ij} + \epsilon_{ijk}
+y_{ijk} = \beta_1 + \beta_2 d_{ik} + b_{i1} + b_{i2}d_{i,k} + b_{ij} + \epsilon_{ijk}
 \]</span></p>
+<ul>
+<li></li>
+<li><span class="math inline">\(\epsilon_{ijk} \sim N(0,\sigma^2)\)</span>.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>parameters</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\beta_1\)</span></td>
+<td>intercept</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\beta_2\)</span></td>
+<td>slope</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sigma_b^2\)</span></td>
+<td>between-rail variability</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\epsilon_{ijk}\)</span></td>
+<td>noise</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\sigma^2\)</span></td>
+<td>within-rail variability</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr class="header">
+<th>observation</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(y_{ijk}\)</span></td>
+<td>the k-th observation on the i-th dog’s j-th side</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(d_{ik}\)</span></td>
+<td>k-th obsservation on i-th dog</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><span class="math inline">\(b_{i1}\)</span>: random shift on intercept</li>
+<li><span class="math inline">\(b_{i2}\)</span>: random shift on slope</li>
+<li><span class="math inline">\(b_{ij}\)</span>: random shift on intercept for <code>side</code> within <code>dog</code></li>
+</ul>
 <pre class="r"><code>lmod.nested &lt;- lme(fixed = pixel ~ day + I(day^2), data=Pixel, random = 
-                     list(Dog = ~ day, Side = ~ 1))
+                     list(Dog = pixel ~ day, Side = pixel ~ 1))
 summary(lmod.nested)</code></pre>
 <pre><code>## Linear mixed-effects model fit by REML
 ##  Data: Pixel 
@@ -3647,13 +4614,13 @@ summary(lmod.nested)</code></pre>
 ##   841.2102 861.9712 -412.6051
 ## 
 ## Random effects:
-##  Formula: ~day | Dog
+##  Formula: pixel ~ day | Dog
 ##  Structure: General positive-definite, Log-Cholesky parametrization
 ##             StdDev   Corr  
 ## (Intercept) 28.36990 (Intr)
 ## day          1.84375 -0.555
 ## 
-##  Formula: ~1 | Side %in% Dog
+##  Formula: pixel ~ 1 | Side %in% Dog
 ##         (Intercept) Residual
 ## StdDev:    16.82431 8.989606
 ## 
@@ -3675,8 +4642,32 @@ summary(lmod.nested)</code></pre>
 ## Number of Groups: 
 ##           Dog Side %in% Dog 
 ##            10            20</code></pre>
+<pre class="r"><code>intervals(lmod.nested)</code></pre>
+<pre><code>## Approximate 95% confidence intervals
+## 
+##  Fixed effects:
+##                    lower         est.        upper
+## (Intercept) 1053.0968388 1073.3391382 1093.5814376
+## day            4.3796925    6.1295971    7.8795016
+## I(day^2)      -0.4349038   -0.3673503   -0.2997967
+## attr(,&quot;label&quot;)
+## [1] &quot;Fixed effects:&quot;
+## 
+##  Random Effects:
+##   Level: Dog 
+##                           lower       est.      upper
+## sd((Intercept))      15.9292099 28.3699038 50.5267650
+## sd(day)               1.0814073  1.8437505  3.1435110
+## cor((Intercept),day) -0.8943751 -0.5547222  0.1906591
+##   Level: Side 
+##                    lower     est.    upper
+## sd((Intercept)) 10.41733 16.82431 27.17176
+## 
+##  Within-group standard error:
+##     lower      est.     upper 
+##  7.634529  8.989606 10.585199</code></pre>
 <pre class="r"><code>plot(augPred(lmod.nested))</code></pre>
-<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <pre class="r"><code>lmod.nested.res1 &lt;- lme(fixed = pixel ~ day + I(day^2), data=Pixel, random = ~ day|Dog)
 summary(lmod.nested.res1)</code></pre>
 <pre><code>## Linear mixed-effects model fit by REML
@@ -3725,10 +4716,11 @@ anova(lmod.nested.res2, lmod.nested)</code></pre>
 ## lmod.nested.res2        
 ## lmod.nested       &lt;.0001</code></pre>
 </div>
+</div>
 <div id="split-plot" class="section level1">
 <h1>Split-plot</h1>
 <pre class="r"><code>plot(Oats,inner=Oats$Variety)</code></pre>
-<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
 
     </div>

@@ -11,6 +11,15 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>The structure of grouped data</title>
+      <link>/post/en/the-structure-of-grouped-data/</link>
+      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/the-structure-of-grouped-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Play with Sparse Matrix</title>
       <link>/post/en/play-with-sparse-matrix/</link>
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
@@ -152,7 +161,7 @@ image(as.matrix.csr(A))&lt;/code&gt;&lt;/pre&gt;
     </item>
     
     <item>
-      <title>Get Data from Website</title>
+      <title>Get Data from the Website</title>
       <link>/post/en/get-data-from-website/</link>
       <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
       
@@ -321,18 +330,24 @@ image(as.matrix.csr(A))&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&#34;#diagnostic&#34;&gt;Diagnostic&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#two-way-classification-a-randomized-block-design&#34;&gt;Two-way classification: A Randomized Block Design&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#egrostool-no-replications&#34;&gt;&lt;code&gt;egroStool&lt;/code&gt;: No Replications&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#modeling-1&#34;&gt;Modeling&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#choose-the-contrasts&#34;&gt;Choose the contrasts&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#egrostool-no-replications&#34;&gt;&lt;code&gt;egroStool&lt;/code&gt;: No Replications&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#modeling-1&#34;&gt;Modeling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#diagnostic-1&#34;&gt;Diagnostic&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#replications&#34;&gt;Replications&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#machines-replications&#34;&gt;&lt;code&gt;Machines&lt;/code&gt;: Replications&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#modeling-2&#34;&gt;Modeling&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#model-selection&#34;&gt;Model Selection&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#extensions-for-interaction-terms&#34;&gt;Extensions for interaction terms&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#linear-models-incorporate-random-effects&#34;&gt;Linear Models incorporate Random Effects&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#random-intercept&#34;&gt;Random Intercept&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#prediciton&#34;&gt;Prediciton&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#ancova-with-random-effects-orthodont&#34;&gt;ANCOVA with random effects: &lt;code&gt;Orthodont&lt;/code&gt;&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#modeling-random-intercept&#34;&gt;Modeling: Random Intercept&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#modeling-random-intercept-1&#34;&gt;Modeling: Random Intercept&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#predicitons&#34;&gt;Predicitons&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#nested-classification-factors&#34;&gt;Nested Classification Factors&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#nested-classification-factors-pixel&#34;&gt;Nested Classification Factors: &lt;code&gt;Pixel&lt;/code&gt;&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#modeling-3&#34;&gt;Modeling&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#split-plot&#34;&gt;Split-plot&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -566,24 +581,23 @@ y_{ij} = \mu + b_i + \epsilon_{ij}
 &lt;td&gt;population mean&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
-&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt;&lt;/td&gt;
-&lt;td&gt;deviation of the i-th type of rail from the population&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
 &lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma_b^2\)&lt;/span&gt;&lt;/td&gt;
 &lt;td&gt;between-rail variability&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ij}\)&lt;/span&gt;&lt;/td&gt;
 &lt;td&gt;noise&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
+&lt;tr class=&#34;even&#34;&gt;
 &lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma^2\)&lt;/span&gt;&lt;/td&gt;
 &lt;td&gt;within-rail variability&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;Note &lt;strong&gt;this is a balcance design.&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt; represents the deviation of the i-th type of rail from the population, it is not a parameter.&lt;/li&gt;
+&lt;li&gt;Note &lt;strong&gt;this is a balcance design.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/div&gt;
 &lt;div id=&#34;fitting-the-model-with-the-package-nlme&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Fitting the model with the package &lt;code&gt;nlme&lt;/code&gt;&lt;/h2&gt;
@@ -1114,9 +1128,8 @@ Subject
 &lt;/div&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(ergoStool)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;modeling-1&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Modeling&lt;/h2&gt;
+&lt;div id=&#34;modeling-1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Modeling&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;Model and assumptions:&lt;/strong&gt; &lt;span class=&#34;math display&#34;&gt;\[
 y_{ij} = \beta_j + b_i + \epsilon_{ij} 
 \]&lt;/span&gt;&lt;/p&gt;
@@ -1124,11 +1137,7 @@ y_{ij} = \beta_j + b_i + \epsilon_{ij}
 &lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i \sim N(0,\sigma_b^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ij} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;table style=&#34;width:11%;&#34;&gt;
-&lt;colgroup&gt;
-&lt;col width=&#34;5%&#34; /&gt;
-&lt;col width=&#34;5%&#34; /&gt;
-&lt;/colgroup&gt;
+&lt;table&gt;
 &lt;thead&gt;
 &lt;tr class=&#34;header&#34;&gt;
 &lt;th&gt;parameters&lt;/th&gt;
@@ -1141,18 +1150,14 @@ y_{ij} = \beta_j + b_i + \epsilon_{ij}
 &lt;td&gt;experimental factor (researchers are interested in)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
-&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt;&lt;/td&gt;
-&lt;td&gt;blocking factor (source of variablity that is not of the primary interest)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
 &lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma_b^2\)&lt;/span&gt;&lt;/td&gt;
 &lt;td&gt;between-rail variability&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
+&lt;tr class=&#34;odd&#34;&gt;
 &lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ij}\)&lt;/span&gt;&lt;/td&gt;
 &lt;td&gt;noise&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
+&lt;tr class=&#34;even&#34;&gt;
 &lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma^2\)&lt;/span&gt;&lt;/td&gt;
 &lt;td&gt;within-rail variability&lt;/td&gt;
 &lt;/tr&gt;
@@ -1161,8 +1166,8 @@ y_{ij} = \beta_j + b_i + \epsilon_{ij}
 &lt;ul&gt;
 &lt;li&gt;Note &lt;strong&gt;this is a balcance design&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div id=&#34;choose-the-contrasts&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Choose the contrasts&lt;/h3&gt;
+&lt;div id=&#34;choose-the-contrasts&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;Choose the contrasts&lt;/h4&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ergoStool %&amp;gt;% filter(Subject == &amp;quot;1&amp;quot;) %&amp;gt;% model.matrix(effort ~ Type, .)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Warning: package &amp;#39;bindrcpp&amp;#39; was built under R version 3.4.4&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##   (Intercept) TypeT2 TypeT3 TypeT4
@@ -1207,7 +1212,7 @@ summary(lmod.random)&lt;/code&gt;&lt;/pre&gt;
 ## Number of Groups: 9&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\beta_1=\)&lt;/span&gt;intercept: reference level(TypeT1);&lt;/li&gt;
-&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\beta_i=\)&lt;/span&gt; (TypeTi) i=2,3,4&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\hat\beta_i=\)&lt;/span&gt; (TypeTi) + intercept i=2,3,4&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;Significance Tests for fixed effects&lt;/strong&gt; &lt;span class=&#34;math inline&#34;&gt;\(\beta_2=\beta_3=\beta_4=0\)&lt;/span&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova(lmod.random)&lt;/code&gt;&lt;/pre&gt;
@@ -1215,7 +1220,10 @@ summary(lmod.random)&lt;/code&gt;&lt;/pre&gt;
 ## (Intercept)     1    24 455.0075  &amp;lt;.0001
 ## Type            3    24  22.3556  &amp;lt;.0001&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(P(F_{3,24} &amp;gt; 22.3556)&amp;lt;.0001\)&lt;/span&gt;, there are significance variation within the each type of stools.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Diagnostic&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;diagnostic-1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Diagnostic&lt;/h3&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;intervals(lmod.random)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Approximate 95% confidence intervals
 ## 
@@ -1242,61 +1250,812 @@ summary(lmod.random)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id=&#34;replications&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Replications&lt;/h2&gt;
+&lt;div id=&#34;machines-replications&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;code&gt;Machines&lt;/code&gt;: Replications&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;With replications, we are able to access the interactions between the experimental and blocking effects!!&lt;/strong&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;knitr::kable(t(Machines)) %&amp;gt;% kable_styling(&amp;quot;striped&amp;quot;, &amp;quot;hover&amp;quot;) %&amp;gt;%
+  scroll_box(width = &amp;quot;100%&amp;quot;, height = &amp;quot;100%&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:100%; overflow-x: scroll; width:100%; &#34;&gt;
+&lt;table class=&#34;table table-striped&#34; style=&#34;margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+16
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+17
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+18
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+19
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+20
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+23
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+25
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+26
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+28
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+29
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+30
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+31
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+32
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+33
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+34
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+36
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+37
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+38
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+39
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+40
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+41
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+42
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+43
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+44
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+45
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+46
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+47
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+48
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+49
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+50
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+51
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+52
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+53
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+54
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Worker
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Machine
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+A
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+B
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+C
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+score
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+52.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+52.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+53.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+51.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+52.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+53.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+60.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+60.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+58.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+51.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+52.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+50.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+50.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+51.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+51.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+46.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+44.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+49.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+62.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+62.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+64.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+59.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+60.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+59.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+68.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+65.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+69.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+63.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+62.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+62.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+64.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+65.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+65.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+43.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+44.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+43.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+67.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+67.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+66.9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+61.5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+61.7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+62.3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+70.8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+70.6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+71.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+64.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+66.2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+64.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+72.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+71.1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+62.0
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+61.4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+60.5
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;Machines %&amp;gt;% {plot.experiment(.$score,.$Machine,.$Worker,
                 lab.x = &amp;quot;Score&amp;quot;, lab.y = &amp;quot;Worker&amp;quot;, lab.experimental = &amp;quot;Machine&amp;quot;)}&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Loading required package: ggplot2&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## 
-## Attaching package: &amp;#39;ggplot2&amp;#39;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## The following object is masked from &amp;#39;package:dplyr&amp;#39;:
-## 
-##     vars&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Model without interaction&lt;/strong&gt; &lt;span class=&#34;math display&#34;&gt;\[
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-15-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;modeling-2&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Modeling&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Model and assumptions - without interactions:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
 y_{ijk} = \beta_j + b_i + \epsilon_{ijk} 
 \]&lt;/span&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt; type factor; (experimental factor: researchers are interested in)&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt; subject factor; (blocking factor: source of variablity that is not of the primary interest); &lt;span class=&#34;math inline&#34;&gt;\(b_i \sim N(0,\sigma_b^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk}\)&lt;/span&gt; random error; &lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Note &lt;strong&gt;this is a balcance design&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i \sim N(0,\sigma_b^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;parameters&lt;/th&gt;
+&lt;th&gt;explanation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;experimental factor (researchers are interested in)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma_b^2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;between-rail variability&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk}\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;noise&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma^2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;within-rail variability&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;Note &lt;strong&gt;this is a balcance design&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.random &amp;lt;- lme(score ~ Machine, data = Machines, random = ~1 | Worker)
-lmod.random&lt;/code&gt;&lt;/pre&gt;
+summary(lmod.random)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
-##   Data: Machines 
-##   Log-restricted-likelihood: -143.4391
-##   Fixed: score ~ Machine 
-## (Intercept)    MachineB    MachineC 
-##   52.355556    7.966667   13.916667 
+##  Data: Machines 
+##        AIC      BIC    logLik
+##   296.8782 306.5373 -143.4391
 ## 
 ## Random effects:
 ##  Formula: ~1 | Worker
 ##         (Intercept) Residual
 ## StdDev:    5.146552 3.161647
 ## 
+## Fixed effects: score ~ Machine 
+##                Value Std.Error DF  t-value p-value
+## (Intercept) 52.35556  2.229312 46 23.48507       0
+## MachineB     7.96667  1.053883 46  7.55935       0
+## MachineC    13.91667  1.053883 46 13.20514       0
+##  Correlation: 
+##          (Intr) MachnB
+## MachineB -0.236       
+## MachineC -0.236  0.500
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -2.7248806 -0.5232891  0.1327564  0.6513056  1.7559058 
+## 
 ## Number of Observations: 54
 ## Number of Groups: 6&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;Model with interaction&lt;/strong&gt; &lt;span class=&#34;math display&#34;&gt;\[
+&lt;p&gt;&lt;strong&gt;Model and assumptions - with interactions&lt;/strong&gt; &lt;span class=&#34;math display&#34;&gt;\[
 y_{ijk} = \beta_j + b_i + b_{ij} + \epsilon_{ijk} 
 \]&lt;/span&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt; type factor; (experimental factor: researchers are interested in)&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt; subject factor; (blocking factor: source of variablity that is not of the primary interest); &lt;span class=&#34;math inline&#34;&gt;\(b_i \sim N(0,\sigma_1^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_{ij}\)&lt;/span&gt; interaction effects between experimental factor and blocking factor; since blocking factor is random, the interaction should also be random; &lt;span class=&#34;math inline&#34;&gt;\(b_{ij} \sim N(0,\sigma_2^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk}\)&lt;/span&gt; random error; &lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Note &lt;strong&gt;this is a balcance design&lt;/strong&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i \sim N(0,\sigma_1^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_{ij} \sim N(0,\sigma_2^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.random.interact &amp;lt;- lme(score ~ Machine, data = Machines, random = ~1 | Worker/Machine)
-lmod.random.interact&lt;/code&gt;&lt;/pre&gt;
+&lt;table style=&#34;width:11%;&#34;&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;5%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;parameters&lt;/th&gt;
+&lt;th&gt;explanation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta_j\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;experimental factor (researchers are interested in)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;blocking factor (source of variablity that is not of the primary interest)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_{ij}\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;interaction effects between experimental factor and blocking factor&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma_b^2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;between-rail variability&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk}\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;noise&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma^2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;within-rail variability&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;Note &lt;strong&gt;this is a balcance design.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# Worker/Machine: Modeling two levels of random effects, Worker and Machine within Worker
+lmod.random.interact &amp;lt;- lme(score ~ Machine, data = Machines, random = ~1 | Worker/Machine)
+summary(lmod.random.interact)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
-##   Data: Machines 
-##   Log-restricted-likelihood: -107.8438
-##   Fixed: score ~ Machine 
-## (Intercept)    MachineB    MachineC 
-##   52.355556    7.966667   13.916667 
+##  Data: Machines 
+##        AIC      BIC    logLik
+##   227.6876 239.2785 -107.8438
 ## 
 ## Random effects:
 ##  Formula: ~1 | Worker
@@ -1307,11 +2066,28 @@ lmod.random.interact&lt;/code&gt;&lt;/pre&gt;
 ##         (Intercept)  Residual
 ## StdDev:    3.729532 0.9615771
 ## 
+## Fixed effects: score ~ Machine 
+##                Value Std.Error DF   t-value p-value
+## (Intercept) 52.35556  2.485828 36 21.061613  0.0000
+## MachineB     7.96667  2.176972 10  3.659518  0.0044
+## MachineC    13.91667  2.176972 10  6.392672  0.0001
+##  Correlation: 
+##          (Intr) MachnB
+## MachineB -0.438       
+## MachineC -0.438  0.500
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.26958675 -0.54846580 -0.01070594  0.43936568  2.54005792 
+## 
 ## Number of Observations: 54
 ## Number of Groups: 
 ##              Worker Machine %in% Worker 
 ##                   6                  18&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;Model Selection&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta_1 =52.36\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\beta_2 = 52.36 + 7.97\)&lt;/span&gt;, … &lt;span class=&#34;math inline&#34;&gt;\(\sigma_1 = 4.78105\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\sigma_2 =3.729532\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\sigma = 0.9615771\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;model-selection&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Model Selection&lt;/h3&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[H_0: \text{the restricted model} \qquad H_A: \text{the general model}\]&lt;/span&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova(lmod.random,lmod.random.interact)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##                      Model df      AIC      BIC    logLik   Test  L.Ratio
@@ -1321,13 +2097,15 @@ lmod.random.interact&lt;/code&gt;&lt;/pre&gt;
 ## lmod.random                 
 ## lmod.random.interact  &amp;lt;.0001&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(LR=2[\log(L_A)-\log(L_0)] \sim \chi^2_{df_A -df_0}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The likelihood ratio test suggests that model with interatcions are preferred.&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;extensions-for-interaction-terms&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Extensions for interaction terms&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;Machines %&amp;gt;% filter(Worker == &amp;quot;1&amp;quot;) %&amp;gt;% {plot.experiment(.$score,.$Machine,.$Worker,
                 lab.x = &amp;quot;Score&amp;quot;, lab.y = &amp;quot;Worker&amp;quot;, lab.experimental = &amp;quot;Machine&amp;quot;)}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;For each worker, say, Worker 1, we previously assume&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;For each worker, say Worker 1, we previously assume&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
 y_{1jk} = \beta_j + b_1 + b_{1j} + \epsilon_{1jk} 
 \]&lt;/span&gt;&lt;/p&gt;
@@ -1344,14 +2122,47 @@ y_{1jk} = \beta_j + b_1 + b_{1j} + \epsilon_{1jk}
 &lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\({\bf{b_1}} \sim N_3(0,\Phi)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\({\bf{\epsilon_{1}}} \sim N(0,\sigma^2I_3)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;To fit this model, we need to specify the &lt;span class=&#34;math inline&#34;&gt;\(X_1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(Z_1\)&lt;/span&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# fixed effect X_1
+Machines %&amp;gt;% filter(Worker == &amp;quot;1&amp;quot;) %&amp;gt;% {model.matrix( score ~ Machine, .)}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   (Intercept) MachineB MachineC
+## 1           1        0        0
+## 2           1        0        0
+## 3           1        0        0
+## 4           1        1        0
+## 5           1        1        0
+## 6           1        1        0
+## 7           1        0        1
+## 8           1        0        1
+## 9           1        0        1
+## attr(,&amp;quot;assign&amp;quot;)
+## [1] 0 1 1
+## attr(,&amp;quot;contrasts&amp;quot;)
+## attr(,&amp;quot;contrasts&amp;quot;)$Machine
+## [1] &amp;quot;contr.treatment&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# fixed effect Z_1
+Machines %&amp;gt;% filter(Worker == &amp;quot;1&amp;quot;) %&amp;gt;% {model.matrix(  score ~ Machine - 1, .)}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   MachineA MachineB MachineC
+## 1        1        0        0
+## 2        1        0        0
+## 3        1        0        0
+## 4        0        1        0
+## 5        0        1        0
+## 6        0        1        0
+## 7        0        0        1
+## 8        0        0        1
+## 9        0        0        1
+## attr(,&amp;quot;assign&amp;quot;)
+## [1] 1 1 1
+## attr(,&amp;quot;contrasts&amp;quot;)
+## attr(,&amp;quot;contrasts&amp;quot;)$Machine
+## [1] &amp;quot;contr.treatment&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.random.interact.general &amp;lt;- lme(score ~ Machine, Machines, random = ~ Machine -1 | Worker)
-lmod.random.interact.general&lt;/code&gt;&lt;/pre&gt;
+summary(lmod.random.interact.general)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
-##   Data: Machines 
-##   Log-restricted-likelihood: -104.1556
-##   Fixed: score ~ Machine 
-## (Intercept)    MachineB    MachineC 
-##   52.355556    7.966667   13.916667 
+##  Data: Machines 
+##        AIC      BIC    logLik
+##   228.3112 247.6295 -104.1556
 ## 
 ## Random effects:
 ##  Formula: ~Machine - 1 | Worker
@@ -1361,6 +2172,20 @@ lmod.random.interact.general&lt;/code&gt;&lt;/pre&gt;
 ## MachineB 8.6252908 0.803        
 ## MachineC 4.3894795 0.623  0.771 
 ## Residual 0.9615766              
+## 
+## Fixed effects: score ~ Machine 
+##                Value Std.Error DF   t-value p-value
+## (Intercept) 52.35556  1.680711 46 31.150834  0.0000
+## MachineB     7.96667  2.420851 46  3.290854  0.0019
+## MachineC    13.91667  1.540100 46  9.036211  0.0000
+##  Correlation: 
+##          (Intr) MachnB
+## MachineB  0.463       
+## MachineC -0.374  0.301
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.39354008 -0.51377575  0.02690829  0.47245472  2.53338699 
 ## 
 ## Number of Observations: 54
 ## Number of Groups: 6&lt;/code&gt;&lt;/pre&gt;
@@ -1377,11 +2202,13 @@ lmod.random.interact.general&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;There’s no evidence to support more general model.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id=&#34;linear-models-incorporate-random-effects&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Linear Models incorporate Random Effects&lt;/h1&gt;
+&lt;div id=&#34;ancova-with-random-effects-orthodont&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;ANCOVA with random effects: &lt;code&gt;Orthodont&lt;/code&gt;&lt;/h1&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;OrthFe &amp;lt;- Orthodont %&amp;gt;% filter(Sex == &amp;quot;Female&amp;quot;)
-knitr::kable(t(OrthFe))&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
+knitr::kable(t(OrthFe)) %&amp;gt;% kable_styling(&amp;quot;striped&amp;quot;, &amp;quot;hover&amp;quot;) %&amp;gt;%
+  scroll_box(width = &amp;quot;100%&amp;quot;, height = &amp;quot;100%&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:100%; overflow-x: scroll; width:100%; &#34;&gt;
+&lt;table class=&#34;table table-striped&#34; style=&#34;margin-left: auto; margin-right: auto;&#34;&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
@@ -1933,32 +2760,118 @@ Female
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;div id=&#34;random-intercept&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Random Intercept&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;modeling-random-intercept&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Modeling: Random Intercept&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Model and assumptions:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
 \bf{y_{i}} = X_i\beta + Z_ib_i + \epsilon_{i}
 \]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i \sim N(0,\sigma^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{i} \sim N(0,\sigma^2I)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For example,&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# fixed effect X_1
+OrthFe  %&amp;gt;% filter(Subject == &amp;quot;F01&amp;quot;) %&amp;gt;% {model.matrix( distance ~ age, .)}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   (Intercept) age
+## 1           1   8
+## 2           1  10
+## 3           1  12
+## 4           1  14
+## attr(,&amp;quot;assign&amp;quot;)
+## [1] 0 1&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# random effect Z_1
+OrthFe  %&amp;gt;% filter(Subject == &amp;quot;F01&amp;quot;) %&amp;gt;% {model.matrix(  distance ~ 1, .)}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   (Intercept)
+## 1           1
+## 2           1
+## 3           1
+## 4           1
+## attr(,&amp;quot;assign&amp;quot;)
+## [1] 0&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.OrthFe &amp;lt;- lme(distance ~ age, data=OrthFe, random = ~ 1 | Subject)
-lmod.OrthFe&lt;/code&gt;&lt;/pre&gt;
+summary(lmod.OrthFe)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
-##   Data: OrthFe 
-##   Log-restricted-likelihood: -70.60916
-##   Fixed: distance ~ age 
-## (Intercept)         age 
-##  17.3727273   0.4795455 
+##  Data: OrthFe 
+##        AIC     BIC    logLik
+##   149.2183 156.169 -70.60916
 ## 
 ## Random effects:
 ##  Formula: ~1 | Subject
 ##         (Intercept)  Residual
 ## StdDev:     2.06847 0.7800331
 ## 
+## Fixed effects: distance ~ age 
+##                 Value Std.Error DF   t-value p-value
+## (Intercept) 17.372727 0.8587419 32 20.230440       0
+## age          0.479545 0.0525898 32  9.118598       0
+##  Correlation: 
+##     (Intr)
+## age -0.674
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -2.2736479 -0.7090164  0.1728237  0.4122128  1.6325181 
+## 
 ## Number of Observations: 44
 ## Number of Groups: 11&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id=&#34;prediciton&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Prediciton&lt;/h2&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;knitr::kable(t(random.effects(lmod.OrthFe)))&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
+&lt;div id=&#34;modeling-random-intercept-1&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Modeling: Random Intercept&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Model and assumptions:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+\bf{y_{i}} = X_i\beta + Z_i{\bf b_i} + \epsilon_{i}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_i \sim N_2(0,\Phi)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{i} \sim N(0,\sigma^2I)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Here&lt;/strong&gt; &lt;span class=&#34;math inline&#34;&gt;\(b_i=(b_{i1},b_{i2})\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(Z_i\)&lt;/span&gt; is identical to &lt;span class=&#34;math inline&#34;&gt;\(X_i\)&lt;/span&gt;.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.OrthFe.slope &amp;lt;- lme(distance ~ age, data=OrthFe, random = ~ age | Subject)
+summary(lmod.OrthFe.slope)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##  Data: OrthFe 
+##        AIC      BIC    logLik
+##   149.4287 159.8547 -68.71435
+## 
+## Random effects:
+##  Formula: ~age | Subject
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev    Corr  
+## (Intercept) 1.8841866 (Intr)
+## age         0.1609278 -0.354
+## Residual    0.6682746       
+## 
+## Fixed effects: distance ~ age 
+##                 Value Std.Error DF   t-value p-value
+## (Intercept) 17.372727 0.7606027 32 22.840737       0
+## age          0.479545 0.0662140 32  7.242353       0
+##  Correlation: 
+##     (Intr)
+## age -0.637
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -1.85438224 -0.46784889  0.06779759  0.42976634  1.59215840 
+## 
+## Number of Observations: 44
+## Number of Groups: 11&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova(lmod.OrthFe, lmod.OrthFe.slope)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                   Model df      AIC      BIC    logLik   Test  L.Ratio
+## lmod.OrthFe           1  4 149.2183 156.1690 -70.60916                
+## lmod.OrthFe.slope     2  6 149.4287 159.8547 -68.71435 1 vs 2 3.789622
+##                   p-value
+## lmod.OrthFe              
+## lmod.OrthFe.slope  0.1503&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This result implies there’s no explicit evidence to support the random slope model.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;predicitons&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Predicitons&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt; knitr::kable(t(random.effects(lmod.OrthFe)))  %&amp;gt;% kable_styling(&amp;quot;striped&amp;quot;, &amp;quot;hover&amp;quot;) %&amp;gt;%
+  scroll_box(width = &amp;quot;100%&amp;quot;, height = &amp;quot;100%&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:100%; overflow-x: scroll; width:100%; &#34;&gt;
+&lt;table class=&#34;table table-striped&#34; style=&#34;margin-left: auto; margin-right: auto;&#34;&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th style=&#34;text-align:left;&#34;&gt;
@@ -2041,10 +2954,13 @@ F11
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id=&#34;nested-classification-factors&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Nested Classification Factors&lt;/h1&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;knitr::kable(t(Pixel))&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;nested-classification-factors-pixel&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Nested Classification Factors: &lt;code&gt;Pixel&lt;/code&gt;&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;knitr::kable(t(Pixel)) %&amp;gt;% kable_styling(&amp;quot;striped&amp;quot;, &amp;quot;hover&amp;quot;) %&amp;gt;%
+  scroll_box(width = &amp;quot;100%&amp;quot;, height = &amp;quot;100%&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div style=&#34;border: 1px solid #ddd; padding: 5px; overflow-y: scroll; height:100%; overflow-x: scroll; width:100%; &#34;&gt;
+&lt;table class=&#34;table table-striped&#34; style=&#34;margin-left: auto; margin-right: auto;&#34;&gt;
 &lt;thead&gt;
 &lt;tr&gt;
 &lt;th style=&#34;text-align:left;&#34;&gt;
@@ -3604,14 +4520,74 @@ pixel
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/div&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(Pixel)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-25-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Model&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-32-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;modeling-3&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Modeling&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Model and assumptions&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
-y_{ijk} = \beta_1 + \beta_2 d_{ik} + b_{i,1} + b_{i,2}d_{i,k} + b_{ij} + \epsilon_{ijk}
+y_{ijk} = \beta_1 + \beta_2 d_{ik} + b_{i1} + b_{i2}d_{i,k} + b_{ij} + \epsilon_{ijk}
 \]&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;parameters&lt;/th&gt;
+&lt;th&gt;explanation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta_1\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;intercept&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta_2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;slope&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma_b^2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;between-rail variability&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk}\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;noise&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma^2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;within-rail variability&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;observation&lt;/th&gt;
+&lt;th&gt;explanation&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(y_{ijk}\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;the k-th observation on the i-th dog’s j-th side&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;&lt;span class=&#34;math inline&#34;&gt;\(d_{ik}\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;k-th obsservation on i-th dog&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_{i1}\)&lt;/span&gt;: random shift on intercept&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_{i2}\)&lt;/span&gt;: random shift on slope&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_{ij}\)&lt;/span&gt;: random shift on intercept for &lt;code&gt;side&lt;/code&gt; within &lt;code&gt;dog&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.nested &amp;lt;- lme(fixed = pixel ~ day + I(day^2), data=Pixel, random = 
-                     list(Dog = ~ day, Side = ~ 1))
+                     list(Dog = pixel ~ day, Side = pixel ~ 1))
 summary(lmod.nested)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
 ##  Data: Pixel 
@@ -3619,13 +4595,13 @@ summary(lmod.nested)&lt;/code&gt;&lt;/pre&gt;
 ##   841.2102 861.9712 -412.6051
 ## 
 ## Random effects:
-##  Formula: ~day | Dog
+##  Formula: pixel ~ day | Dog
 ##  Structure: General positive-definite, Log-Cholesky parametrization
 ##             StdDev   Corr  
 ## (Intercept) 28.36990 (Intr)
 ## day          1.84375 -0.555
 ## 
-##  Formula: ~1 | Side %in% Dog
+##  Formula: pixel ~ 1 | Side %in% Dog
 ##         (Intercept) Residual
 ## StdDev:    16.82431 8.989606
 ## 
@@ -3647,8 +4623,32 @@ summary(lmod.nested)&lt;/code&gt;&lt;/pre&gt;
 ## Number of Groups: 
 ##           Dog Side %in% Dog 
 ##            10            20&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;intervals(lmod.nested)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Approximate 95% confidence intervals
+## 
+##  Fixed effects:
+##                    lower         est.        upper
+## (Intercept) 1053.0968388 1073.3391382 1093.5814376
+## day            4.3796925    6.1295971    7.8795016
+## I(day^2)      -0.4349038   -0.3673503   -0.2997967
+## attr(,&amp;quot;label&amp;quot;)
+## [1] &amp;quot;Fixed effects:&amp;quot;
+## 
+##  Random Effects:
+##   Level: Dog 
+##                           lower       est.      upper
+## sd((Intercept))      15.9292099 28.3699038 50.5267650
+## sd(day)               1.0814073  1.8437505  3.1435110
+## cor((Intercept),day) -0.8943751 -0.5547222  0.1906591
+##   Level: Side 
+##                    lower     est.    upper
+## sd((Intercept)) 10.41733 16.82431 27.17176
+## 
+##  Within-group standard error:
+##     lower      est.     upper 
+##  7.634529  8.989606 10.585199&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(augPred(lmod.nested))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-27-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-35-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;lmod.nested.res1 &amp;lt;- lme(fixed = pixel ~ day + I(day^2), data=Pixel, random = ~ day|Dog)
 summary(lmod.nested.res1)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
@@ -3697,11 +4697,32 @@ anova(lmod.nested.res2, lmod.nested)&lt;/code&gt;&lt;/pre&gt;
 ## lmod.nested.res2        
 ## lmod.nested       &amp;lt;.0001&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 &lt;div id=&#34;split-plot&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Split-plot&lt;/h1&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(Oats,inner=Oats$Variety)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-31-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-03-16-explore-the-linear-mixed-effect-model_files/figure-html/unnamed-chunk-39-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Real Estate Market Data Analysis</title>
+      <link>/project/boston-housing/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
+      
+      <guid>/project/boston-housing/</guid>
+      <description>&lt;p&gt;In this project, we&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Develope data products to help Airbnb hosts to determine listing prices using Sparse Regression and RandomForest&lt;/li&gt;
+&lt;li&gt;Researched how amenities and geolocation in uence listing prices&lt;/li&gt;
+&lt;li&gt;Designed a User Interface for customers to gain insight into Airbnb rental markets in Boston&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://mediaspace.illinois.edu/media/t/1_3yvpnzqn&#34; target=&#34;_blank&#34;&gt;Video Presentation&lt;/a&gt; and &lt;a href=&#34;https://yutongdai.shinyapps.io/shinyapp/&#34; target=&#34;_blank&#34;&gt;Rshiny App Demo&lt;/a&gt; are also provided.&lt;/p&gt;
+
+&lt;iframe id=&#34;kmsembed-1_3yvpnzqn&#34; width=&#34;640&#34; height=&#34;394&#34; src=&#34;https://mediaspace.illinois.edu/embed/secure/iframe/entryId/1_3yvpnzqn/uiConfId/26883701&#34; class=&#34;kmsembed&#34; allowfullscreen webkitallowfullscreen mozAllowFullScreen allow=&#34;autoplay *; fullscreen *; encrypted-media *&#34; frameborder=&#34;0&#34; title=&#34;Kaltura Player&#34;&gt;&lt;/iframe&gt;
 </description>
     </item>
     
@@ -5294,178 +6315,6 @@ $$x_i={x_* }_i+\delta_i$$
 &lt;li&gt;该结论适用于最速下降法产生的序列，其中步长是固定步长准则选取的。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>无约束优化(2)</title>
-      <link>/post/zh/uncon2/</link>
-      <pubDate>Wed, 28 Sep 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/post/zh/uncon2/</guid>
-      <description>&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;梯度方法&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;直观分析&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a&gt;下降方向&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a&gt;步长准则&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div class=&#34;section level2&#34;&gt;
-&lt;h2&gt;梯度方法&lt;/h2&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[outline\begin{cases}
-下降方向选择\begin{cases}
-            最速下降\\
-            牛顿法\\
-            \end{cases}\\\\
-步长的选择\begin{cases}
-            固定步长准则\\
-            缩减步长准则\\
-            最小化准则\\
-            Armijo准则
-            \end{cases}\\\\
-收敛性分析\begin{cases}
-            极限点的存在性问题\\
-            迭代终止条件\\
-            收敛性结论
-            \end{cases}\\
-收敛速率分析
-\end{cases}\]&lt;/span&gt;&lt;/p&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;直观分析&lt;/h3&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;下降方向&lt;/h3&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;最速下降&lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;牛顿法&lt;/h4&gt;
-&lt;p&gt;修正的牛顿法&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;步长准则&lt;/h3&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;最小化准则&lt;/h4&gt;
-&lt;/div&gt;
-&lt;div id=&#34;armijo&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;Armijo准则&lt;/h4&gt;
-&lt;blockquote&gt;
-&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是连续可微函数, &lt;span class=&#34;math inline&#34;&gt;\(\sigma,\beta,s\)&lt;/span&gt;是固定的标量，其中&lt;span class=&#34;math inline&#34;&gt;\(0&amp;lt;\beta&amp;lt;1\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(0&amp;lt;\sigma&amp;lt;1\)&lt;/span&gt;,令&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k=\beta^{m_k}s\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(m_k\)&lt;/span&gt;是满足下式的第一个非负整数m &lt;span class=&#34;math display&#34;&gt;\[f(x_{k+1})\leq f(x_k)+\sigma\alpha_kd_k^T\nabla f(x_k)\]&lt;/span&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;准则的直观解释。考虑f(x_{k+1})在&lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt;处的一阶Taylor 展开 &lt;span class=&#34;math display&#34;&gt;\[f(x_{k}+\alpha_kd_k)=f(x_k)+\alpha_kd_k^T\nabla f(x_k)+o(\alpha_k)\]&lt;/span&gt; 由下降条件知道&lt;span class=&#34;math inline&#34;&gt;\(d_k^T\nabla f(x_k)&amp;lt;0\)&lt;/span&gt;而当&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k\rightarrow 0\)&lt;/span&gt;时总是存在&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k\)&lt;/span&gt;使得&lt;span class=&#34;math inline&#34;&gt;\(f(x_{k}+\alpha_kd_k)\leq f(x_k)+\alpha_kd_k^T\nabla f(x_k)\)&lt;/span&gt;成立&lt;/li&gt;
-&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sigma\)&lt;/span&gt;保证满足准则的&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k\)&lt;/span&gt;可以更快的找到(&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k\)&lt;/span&gt;是从递减序列&lt;span class=&#34;math inline&#34;&gt;\(\{\beta^ms\}_{m=1}^{+\infty}\)&lt;/span&gt;中寻找的).因此通常&lt;span class=&#34;math inline&#34;&gt;\(\sigma\in[10^{-5},10^{-1}]\)&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt;是收缩因子保证步长初始步长s可以在必要时刻减小&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;Expansion&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(F_c(x)=f(x)+cp(x)\)&lt;/span&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(c&amp;gt;0\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(f(x)\)&lt;/span&gt;是连续可微函数，&lt;span class=&#34;math inline&#34;&gt;\(p(x)\)&lt;/span&gt;是非光滑的惩罚项。我们想要极小化&lt;span class=&#34;math inline&#34;&gt;\(F_c(x)\)&lt;/span&gt;，那么我们可以用梯度方法进行求解。具体来说&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;寻找下降方法&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(H_k\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x_k)\)&lt;/span&gt;的正定近似 &lt;span class=&#34;math display&#34;&gt;\[d_k=\mathop{argmin}_d \nabla f(x_k)^Td+\frac{1}{2}d^TH_kd+cp(x_k+d)\]&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;Armijo rule寻找步长&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k\)&lt;/span&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(0&amp;lt;\beta&amp;lt;1\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(0&amp;lt;\sigma&amp;lt;1\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(0\leq\gamma&amp;lt;1\)&lt;/span&gt;令&lt;span class=&#34;math inline&#34;&gt;\(\alpha_k=\beta^{m_k}s\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(m_k\)&lt;/span&gt;是满足下式的第一个非负整数m &lt;span class=&#34;math display&#34;&gt;\[F_c(x_k+\alpha_kd_k)\leq F_c(x_k)+\sigma\alpha_k\Delta_k\]&lt;/span&gt; 其中&lt;span class=&#34;math inline&#34;&gt;\(\Delta_k=d_k^T\nabla f(x_k)+\gamma d_k^TH_kd_K+cp(x_k+d_k)-cp(x_k)\)&lt;/span&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;: Paul Tseng et al(2007)证明了在一定条件下&lt;span class=&#34;math inline&#34;&gt;\(\Delta_k&amp;lt;0\)&lt;/span&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;固定步长准则&lt;/h4&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;缩减步长准则&lt;/h4&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>无约束优化(1)</title>
-      <link>/post/zh/uncon1/</link>
-      <pubDate>Wed, 21 Sep 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/post/zh/uncon1/</guid>
-      <description>&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;最优性条件&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;最优解的存在性&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a&gt;最优性条件的直观分析&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a&gt;为什么需要最优性条件&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div class=&#34;section level2&#34;&gt;
-&lt;h2&gt;最优性条件&lt;/h2&gt;
-&lt;p&gt;我们讨论最优性条件的最直接的目的是为了知道满足什么样条件的点就是满足最小化问题的最优解。&lt;/p&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;最优解的存在性&lt;/h3&gt;
-&lt;p&gt;很多情况下函数的全局极小值点很可能不存在，所以我们有必要讨论最优解的存在性问题。为说明这个问题，我们需要引入一些概念和Weistrass定理。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;【下半连续(lower semicontinuous)】 实值函数&lt;span class=&#34;math inline&#34;&gt;\(f: X \vert \rightarrow R\)&lt;/span&gt;被称作在&lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt;处下半连续的，若对于每一个收敛到&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;的序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\subset X\)&lt;/span&gt;，都有&lt;span class=&#34;math inline&#34;&gt;\(\liminf_{k\rightarrow +\infty} f(x_k)\geq f(x)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;【强制(coercive)】 函数&lt;span class=&#34;math inline&#34;&gt;\(f: X \vert \rightarrow R\)&lt;/span&gt;被称作是强制的，如果对于每一个满足 &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert x_k\vert \vert \rightarrow +\infty\)&lt;/span&gt;的序列序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\subset X\)&lt;/span&gt;，都有&lt;span class=&#34;math inline&#34;&gt;\(\lim_{k\rightarrow +\infty} f(x_k)=\infty\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;【Weierstrass定理】令&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;为&lt;span class=&#34;math inline&#34;&gt;\(R^n\)&lt;/span&gt;的非空子集，&lt;span class=&#34;math inline&#34;&gt;\(f: X \vert \rightarrow R\)&lt;/span&gt;在 X的所有点处下半连续。当下面三个条件&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;X是紧集（闭且有界）&lt;/li&gt;
-&lt;li&gt;X是闭集且 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 是强制的&lt;/li&gt;
-&lt;li&gt;存在一个标量&lt;span class=&#34;math inline&#34;&gt;\(a\)&lt;/span&gt;，使得截集&lt;span class=&#34;math inline&#34;&gt;\(\{x\in X\vert f(x)\leq a\}\)&lt;/span&gt;为非空紧集&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;中的任何一个满足时，&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 在 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的最小值点的集合为非空紧集。&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;通过Weierstrass定理我们知道，在无约束的问题中由于定义域是全空间，自然条件：X是紧集（闭且有界）是不能满足的。但是当 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;性质足够好的时候我们可以保证存在全局最小值点。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;最优性条件的直观分析&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;下面都是直观分析，所有推导并不严谨，但是结果确实是可以被严格证明的。具体证明可以参考 Dimitri .P Bertsekas, Nonlinear Programming 2ed 中文版p10-p11&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;如果目标函数可微，我们可以考虑用Taylor展式去分析函数在可微点以及其领域的变化情况。假设$x_* &lt;span class=&#34;math inline&#34;&gt;\(是局部最小值点，考虑一个扰动\)&lt;/span&gt;x_* +x$, 利用Taylor展式可以得到一个线性近似&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x_* +\Delta x)-f(x_* )\approx  (\Delta x)^T\nabla f(x_* )\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;由于$x_* $是局部最小值点，则近似的有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(\Delta x)^T\nabla f(x_* )=\sum_{i=1}^n \frac{\partial f(x_* )}{\partial x_i}\Delta x_i \geq 0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;取对i=1,2,…,n，取&lt;span class=&#34;math inline&#34;&gt;\(\Delta x=ae_i\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(e_i\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(R^n\)&lt;/span&gt;的单位向量且&lt;span class=&#34;math inline&#34;&gt;\(a&amp;gt;0\)&lt;/span&gt;，代入上式，则对所有的i，&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x_* )}{\partial x_i}\geq 0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;同样取&lt;span class=&#34;math inline&#34;&gt;\(\Delta x=-ae_i\)&lt;/span&gt;,代入上式，则对所有的i，&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x_* )}{\partial x_i}\leq 0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;于是得到 &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )=0\)&lt;/span&gt;，这个被称为&lt;em&gt;一阶最优性条件&lt;/em&gt;。&lt;/p&gt;
-&lt;p&gt;进一步我们用二阶Taylor展式去刻画函数值的变化则有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x_* +\Delta x)-f(x_* )\approx  (\Delta x)^T\nabla f(x_* )+\frac{1}{2} (\Delta x)^T \nabla^2 f(x_* ) \Delta x\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;同样的，由于$x_* $是局部最小值点，则近似的有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(\Delta x)^T\nabla f(x_* )+\frac{1}{2} (\Delta x)^T \nabla^2 f(x_* ) \Delta x\geq 0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;当一阶最优性条件满足时，进一步有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{1}{2} (\Delta x)^T \nabla^2 f(x_* ) \Delta x\geq 0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;于是推出&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x_* )\)&lt;/span&gt;半正定，这个被称为&lt;em&gt;二阶最优性条件&lt;/em&gt;。&lt;/p&gt;
-&lt;p&gt;特别的，如果&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是凸函数，那么一阶最优性条件 &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )=0\)&lt;/span&gt;也是最优性的充分条件。但是如果凸性不满足，则不成立。比如，&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161109_6.png&#34; alt=&#34;Illustration: violation of the convexity.&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;Illustration: violation of the convexity.&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;我们以定理的形式总结下上面讨论的内容，具体的证明略去，掌握想法最重要。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;【最优性的必要条件】 令$x_* $为 &lt;span class=&#34;math inline&#34;&gt;\(f:R^n\vert \rightarrow R\)&lt;/span&gt;的无约束局部最小值点，并且假设 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;在开集 &lt;span class=&#34;math inline&#34;&gt;\(S\)&lt;/span&gt;上连续可微，&lt;span class=&#34;math inline&#34;&gt;\(x_* \in S\)&lt;/span&gt;,那么有&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )=0\)&lt;/span&gt;。如果&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;在开集 &lt;span class=&#34;math inline&#34;&gt;\(S\)&lt;/span&gt;上二阶连续可微，则有&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x_* )\)&lt;/span&gt;半正定。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt; 注意这里需要 &lt;span class=&#34;math inline&#34;&gt;\(S\)&lt;/span&gt; 是开集，这一条件会导致无约束的最优性条件和带约束的最优性条件产生区别。因为这时 候最优点是内点，具体我们还会在Chapter 2里面讨论。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;【最优性的充分条件】 令 &lt;span class=&#34;math inline&#34;&gt;\(f:X\vert \rightarrow R\)&lt;/span&gt;为开集 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的一个二阶可微函数，假设向量&lt;span class=&#34;math inline&#34;&gt;\(x_* \in S\)&lt;/span&gt;满足条件&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )=0,\nabla^2 f(x_* )\)&lt;/span&gt;正定。那么$x_* $是 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 的严格无约束局部最小值点。特别，存在标量&lt;span class=&#34;math inline&#34;&gt;\(a,\epsilon\)&lt;/span&gt; 使得&lt;span class=&#34;math inline&#34;&gt;\(\forall x\in \{x\vert \vert \vert x-x_* \vert \vert &amp;lt;\epsilon\}\)&lt;/span&gt;,成立&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x)\geq f(x_* )+\frac{a}{2} \vert \vert x-x_* \vert \vert ^2\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;特别的凸函数有更加好的性质，&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;【凸函数的最优性条件】 令 &lt;span class=&#34;math inline&#34;&gt;\(f:X\vert \rightarrow R\)&lt;/span&gt;为凸集 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的一个凸函数。则
-&lt;ul&gt;
-&lt;li&gt;在 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;最小值点也是 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的全局最小值点，如果 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 是严格凸的，那么至多存在&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的一个全局最小值点。&lt;/li&gt;
-&lt;li&gt;如果 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 是开集， 那么向量 &lt;span class=&#34;math inline&#34;&gt;\(x_* \in X\)&lt;/span&gt;是 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;在 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的全局最优解得充要条件是 &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )=0\)&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;为什么需要最优性条件&lt;/h3&gt;
-&lt;p&gt;一般来说，在解决最优化问题时，我们可以利用一阶最优性条件，找到一切满足 &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x)=0\)&lt;/span&gt;的解， 对这些解，逐点检查二阶导数&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x)\)&lt;/span&gt;是否正定，如果存在某个解使得二阶导数正定，则其为唯一全局最小值点。然而需要指出的是，往往求解&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x)=0\)&lt;/span&gt;是非常复杂的。除非考虑迭代求解算法，否则最优性条件的有效性并不明显。&lt;/p&gt;
-&lt;p&gt;但是从另外一个角度看，很多寻找最小值点的算法，通过判断当前解是否是满足各种最优性条件来判断当前解是否是最优解，并且达到最优解算法停止。另外，充分条件在分析算法收敛速度中发挥了重要作用。&lt;/p&gt;
-&lt;p&gt;（该小节完）&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>

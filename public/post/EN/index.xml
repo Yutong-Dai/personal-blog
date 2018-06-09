@@ -13,6 +13,15 @@
     
     
     <item>
+      <title>The structure of grouped data</title>
+      <link>/post/en/the-structure-of-grouped-data/</link>
+      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/the-structure-of-grouped-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Play with Sparse Matrix</title>
       <link>/post/en/play-with-sparse-matrix/</link>
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
@@ -24,7 +33,7 @@ Performe basic linear algebra operations on sparse matrices, mainly including mu
     </item>
     
     <item>
-      <title>Get Data from Website</title>
+      <title>Get Data from the Website</title>
       <link>/post/en/get-data-from-website/</link>
       <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
       
@@ -49,7 +58,7 @@ Download datasets on the server. Preprocess datastes. Run experiments.</descript
       <pubDate>Fri, 16 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/en/explore-the-linear-mixed-effect-model/</guid>
-      <description>Why Ramdom Effect Models One-way classification with Rail example Rail Data Modeling Fitting the model with the package nlme Diagnostic  Two-way classification: A Randomized Block Design egroStool: No Replications Modeling Choose the contrasts  Replications Extensions for interaction terms  Linear Models incorporate Random Effects Random Intercept Prediciton  Nested Classification Factors Split-plot    References: Pinheiro, J. C., &amp;amp; Bates, D. (2009). Mixed-Effects Models in S and S-PLUS.</description>
+      <description>Why Ramdom Effect Models One-way classification with Rail example Rail Data Modeling Fitting the model with the package nlme Diagnostic  Two-way classification: A Randomized Block Design egroStool: No Replications Modeling Diagnostic  Machines: Replications Modeling Model Selection  Extensions for interaction terms  ANCOVA with random effects: Orthodont Modeling: Random Intercept Modeling: Random Intercept Predicitons  Nested Classification Factors: Pixel Modeling  Split-plot    References: Pinheiro, J.</description>
     </item>
     
     <item>

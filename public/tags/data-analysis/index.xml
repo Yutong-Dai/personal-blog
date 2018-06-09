@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data-analysis on Yutong Dai / 戴宇童</title>
+    <link>/tags/data-analysis/</link>
+    <description>Recent content in Data-analysis on Yutong Dai / 戴宇童</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018</copyright>
+    <lastBuildDate>Sun, 10 Dec 2017 00:00:00 +0800</lastBuildDate>
+    
+	<atom:link href="/tags/data-analysis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Real Estate Market Data Analysis</title>
+      <link>/project/boston-housing/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
+      
+      <guid>/project/boston-housing/</guid>
+      <description>In this project, we
+ Develope data products to help Airbnb hosts to determine listing prices using Sparse Regression and RandomForest Researched how amenities and geolocation in uence listing prices Designed a User Interface for customers to gain insight into Airbnb rental markets in Boston  The Video Presentation and Rshiny App Demo are also provided.
+ </description>
+    </item>
+    
+  </channel>
+</rss>
