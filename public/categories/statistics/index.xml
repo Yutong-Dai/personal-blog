@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Fri, 08 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 12 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Fitting Linear Mixed Models</title>
+      <link>/post/en/fitting-linear-mixed-models/</link>
+      <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/fitting-linear-mixed-models/</guid>
+      <description>Decide the random-effects covariance structure Case-Study IGF-I    Decide the random-effects covariance structure Use function lmList to have an idea of
+which random-effects to include, and what the covariance structure to use.  library(nlme) # centering x to remove the correlation between intercept and slope orth.list &amp;lt;- lmList( distance ~ I(age-11) | Subject, data = Orthodont) # 1-id/2: significance level to identify the outlier pairs(orth.list, id = 0.</description>
+    </item>
     
     <item>
       <title>The structure of grouped data</title>

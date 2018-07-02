@@ -1,0 +1,110 @@
+---
+title: Fitting Linear Mixed Models
+author: Yutong Dai
+date: '2018-06-12'
+slug: fitting-linear-mixed-models
+draft: yes
+categories:
+  - Statistics
+tags:
+  - LME
+output:
+  blogdown::html_page:
+    toc: yes
+summary: ~
+---
+
+# Decide the random-effects covariance structure
+
+Use function `lmList` to have an idea of
+
+1. which random-effects to include, and
+2. what the covariance structure to use.
+
+```{r}
+library(nlme)
+# centering x to remove the correlation between intercept and slope
+orth.list <- lmList( distance ~ I(age-11) | Subject, data = Orthodont)
+# 1-id/2: significance level to identify the outlier
+pairs(orth.list, id = 0.01, adj = -0.5)
+```
+
+# Case-Study
+
+```{r}
+orth.lme <- lme(distance ~ I(age-11), Orthodont, ~I(age-11) | Subject)
+summary(orth.lme)
+```
+```{r}
+head(fitted(orth.lme, level = 0:1), 4)
+```
+
+**A quick explanation for the deriviation of fixed and subject.**
+Our model is built as 
+
+$$
+y_{ij} = (\beta_0 + b_{i,1}) + (\beta_1 + b_{i,2})x_{ij} + \epsilon_{ij}
+$$
+
+For `fixed` column, the fitted values are on the population level, that is
+$$\hat y_{ij}=\hat\beta_0 + \hat\beta_1x_{ij}.$$
+For example, for `subject:M01` at `age:8`, the fitted value is $24.023148 + 0.660185 \times (8-11) = 22.04259$.
+
+For `Subject` column, the fitted values are on the each subject level, that is
+$$\hat y_{ij}=(\hat\beta_0+\hat b_{i,1}) + (\hat\beta_1+\hat b_{i,2})x_{ij}.$$
+
+For example, for `subject:M01` at `age:8`, the fitted value is $27.44726  +  0.8758702 \times (8-11) = 24.81965$, where $(\hat\beta_0+\hat b_{i,1})$ and $(\hat\beta_1+\hat b_{i,2})$ are derived from
+
+```{r}
+coef(orth.lme,level=1)[rownames(coef(orth.lme,level=1)) == "M01",]
+```
+
+The $\hat b_{i,1}$ and $\hat b_{i,2}$ are derived from
+
+```{r}
+random.effects(orth.lme)[rownames(coef(orth.lme,level=1)) == "M01",]
+```
+
+
+```{r}
+orth.lme.gender <- update(orth.lme, fixed = distance ~ I(age-11) * Sex)
+summary(orth.lme.gender)
+```
+
+```{r}
+fitted(orth.lme.gender, level = 0:1)
+```
+
+```{r}
+orth.lm.gender <- lm( distance ~ Sex * I(age - 11), Orthodont)
+summary(orth.lm.gender)
+```
+
+```{r}
+anova(orth.lme.gender, orth.lm.gender)
+```
+### IGF-I
+
+```{r}
+library(kableExtra)
+knitr::kable(t(IGF)) %>% kable_styling("striped")  
+```
+
+```{r}
+plot(IGF)
+```
+
+```{r}
+IGF.lmod <- lm(conc ~ age, data=IGF)
+summary(IGF.lmod)
+```
+
+```{r}
+IGF.lme.general <- lme(conc~age, data=IGF, random=list(Lot=pdSymm(~age)))
+# Note lme(conc~age, data=IGF, random= ~ age | Lot) fails <https://stackoverflow.com/questions/7923387/error-with-nlme>
+summary(IGF.lme.general)
+```
+```{r}
+IGF.lme.diag <- lme(conc~age, data=IGF, random=list(Lot=pdDiag(~age)))
+summary(IGF.lme.diag)
+```

@@ -239,9 +239,10 @@ $$
 
 * $\epsilon_{ijk} \sim N(0,\sigma^2)$.
 
+
 | parameters | explanation  |
-| --- | --- |
-| $\beta_j$| experimental factor (researchers are interested in)|
+| ----- | ------ |
+|$\beta_j$| experimental factor (researchers are interested in)|
 |$b_i$|blocking factor (source of variablity that is not of the primary interest)|
 |$b_{ij}$ |interaction effects between experimental factor and blocking factor|
 |$\sigma_b^2$|between-rail variability|
@@ -417,7 +418,6 @@ $$
 y_{ijk} = \beta_1 + \beta_2 d_{ik} + b_{i1} + b_{i2}d_{i,k} + b_{ij} + \epsilon_{ijk}
 $$
 
-* 
 
 * $\epsilon_{ijk} \sim N(0,\sigma^2)$.
 

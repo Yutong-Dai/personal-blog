@@ -5,8 +5,17 @@
     
     <url>
     
+      <loc>/post/en/fitting-linear-mixed-models/</loc>
+      <lastmod>2018-06-12T00:00:00+00:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/post/en/the-structure-of-grouped-data/</loc>
-      <lastmod>2018-06-08T00:00:00+00:00</lastmod>
+      <lastmod>2018-06-09T22:21:59+08:00</lastmod>
     </url>
     
   
@@ -24,7 +33,7 @@
     <url>
     
       <loc>/post/en/get-data-from-website/</loc>
-      <lastmod>2018-06-02T13:05:31+08:00</lastmod>
+      <lastmod>2018-06-09T22:21:59+08:00</lastmod>
     </url>
     
   
@@ -42,7 +51,7 @@
     <url>
     
       <loc>/post/en/explore-the-linear-mixed-effect-model/</loc>
-      <lastmod>2018-06-05T13:21:28+08:00</lastmod>
+      <lastmod>2018-06-09T22:21:59+08:00</lastmod>
     </url>
     
   
@@ -51,7 +60,7 @@
     <url>
     
       <loc>/project/boston-housing/</loc>
-      <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+      <lastmod>2018-06-09T22:21:59+08:00</lastmod>
     </url>
     
   
@@ -242,7 +251,7 @@
     <url>
     
       <loc>/tags/data-analysis/</loc>
-      <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+      <lastmod>2018-06-09T22:21:59+08:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -262,7 +271,7 @@
     <url>
     
       <loc>/tags/lme/</loc>
-      <lastmod>2018-06-08T00:00:00+00:00</lastmod>
+      <lastmod>2018-06-12T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -321,7 +330,7 @@
     <url>
     
       <loc>/project/</loc>
-      <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+      <lastmod>2018-06-09T22:21:59+08:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -370,7 +379,7 @@
     <url>
     
       <loc>/categories/statistics/</loc>
-      <lastmod>2018-06-08T00:00:00+00:00</lastmod>
+      <lastmod>2018-06-12T00:00:00+00:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -390,7 +399,7 @@
     <url>
     
       <loc>/</loc>
-      <lastmod>2018-06-03T12:54:22+08:00</lastmod>
+      <lastmod>2018-06-09T22:21:59+08:00</lastmod>
       <priority>0</priority>
     </url>
     

@@ -7,8 +7,3221 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 -0500</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Fitting Linear Mixed Models</title>
+      <link>/post/en/fitting-linear-mixed-models/</link>
+      <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/fitting-linear-mixed-models/</guid>
+      <description>&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#decide-the-random-effects-covariance-structure&#34;&gt;Decide the random-effects covariance structure&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#case-study&#34;&gt;Case-Study&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#igf-i&#34;&gt;IGF-I&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;decide-the-random-effects-covariance-structure&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Decide the random-effects covariance structure&lt;/h1&gt;
+&lt;p&gt;Use function &lt;code&gt;lmList&lt;/code&gt; to have an idea of&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;which random-effects to include, and&lt;/li&gt;
+&lt;li&gt;what the covariance structure to use.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(nlme)
+# centering x to remove the correlation between intercept and slope
+orth.list &amp;lt;- lmList( distance ~ I(age-11) | Subject, data = Orthodont)
+# 1-id/2: significance level to identify the outlier
+pairs(orth.list, id = 0.01, adj = -0.5)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-06-12-fitting-linear-mixed-models_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;case-study&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Case-Study&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;orth.lme &amp;lt;- lme(distance ~ I(age-11), Orthodont, ~I(age-11) | Subject)
+summary(orth.lme)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##  Data: Orthodont 
+##        AIC      BIC    logLik
+##   454.6367 470.6173 -221.3183
+## 
+## Random effects:
+##  Formula: ~I(age - 11) | Subject
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev    Corr  
+## (Intercept) 2.1343289 (Intr)
+## I(age - 11) 0.2264278 0.503 
+## Residual    1.3100402       
+## 
+## Fixed effects: distance ~ I(age - 11) 
+##                 Value Std.Error DF  t-value p-value
+## (Intercept) 24.023148 0.4296601 80 55.91198       0
+## I(age - 11)  0.660185 0.0712533 80  9.26533       0
+##  Correlation: 
+##             (Intr)
+## I(age - 11) 0.294 
+## 
+## Standardized Within-Group Residuals:
+##          Min           Q1          Med           Q3          Max 
+## -3.223106910 -0.493760892  0.007316481  0.472151223  3.916031726 
+## 
+## Number of Observations: 108
+## Number of Groups: 27&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;head(fitted(orth.lme, level = 0:1), 4)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##      fixed  Subject
+## 1 22.04259 24.81965
+## 2 23.36296 26.57139
+## 3 24.68333 28.32313
+## 4 26.00370 30.07487&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;A quick explanation for the deriviation of fixed and subject.&lt;/strong&gt; Our model is built as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+y_{ij} = (\beta_0 + b_{i,1}) + (\beta_1 + b_{i,2})x_{ij} + \epsilon_{ij}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;For &lt;code&gt;fixed&lt;/code&gt; column, the fitted values are on the population level, that is &lt;span class=&#34;math display&#34;&gt;\[\hat y_{ij}=\hat\beta_0 + \hat\beta_1x_{ij}.\]&lt;/span&gt; For example, for &lt;code&gt;subject:M01&lt;/code&gt; at &lt;code&gt;age:8&lt;/code&gt;, the fitted value is &lt;span class=&#34;math inline&#34;&gt;\(24.023148 + 0.660185 \times (8-11) = 22.04259\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;For &lt;code&gt;Subject&lt;/code&gt; column, the fitted values are on the each subject level, that is &lt;span class=&#34;math display&#34;&gt;\[\hat y_{ij}=(\hat\beta_0+\hat b_{i,1}) + (\hat\beta_1+\hat b_{i,2})x_{ij}.\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;For example, for &lt;code&gt;subject:M01&lt;/code&gt; at &lt;code&gt;age:8&lt;/code&gt;, the fitted value is &lt;span class=&#34;math inline&#34;&gt;\(27.44726 + 0.8758702 \times (8-11) = 24.81965\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\((\hat\beta_0+\hat b_{i,1})\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\((\hat\beta_1+\hat b_{i,2})\)&lt;/span&gt; are derived from&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;coef(orth.lme,level=1)[rownames(coef(orth.lme,level=1)) == &amp;quot;M01&amp;quot;,]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     (Intercept) I(age - 11)
+## M01    27.44726   0.8758702&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;span class=&#34;math inline&#34;&gt;\(\hat b_{i,1}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\hat b_{i,2}\)&lt;/span&gt; are derived from&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;random.effects(orth.lme)[rownames(coef(orth.lme,level=1)) == &amp;quot;M01&amp;quot;,]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##     (Intercept) I(age - 11)
+## M01    3.424112    0.215685&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;orth.lme.gender &amp;lt;- update(orth.lme, fixed = distance ~ I(age-11) * Sex)
+summary(orth.lme.gender)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##  Data: Orthodont 
+##        AIC      BIC    logLik
+##   448.5817 469.7368 -216.2908
+## 
+## Random effects:
+##  Formula: ~I(age - 11) | Subject
+##  Structure: General positive-definite, Log-Cholesky parametrization
+##             StdDev    Corr  
+## (Intercept) 1.8303267 (Intr)
+## I(age - 11) 0.1803454 0.206 
+## Residual    1.3100397       
+## 
+## Fixed effects: distance ~ I(age - 11) + Sex + I(age - 11):Sex 
+##                           Value Std.Error DF  t-value p-value
+## (Intercept)           24.968750 0.4860007 79 51.37596  0.0000
+## I(age - 11)            0.784375 0.0859995 79  9.12069  0.0000
+## SexFemale             -2.321023 0.7614168 25 -3.04829  0.0054
+## I(age - 11):SexFemale -0.304830 0.1347353 79 -2.26243  0.0264
+##  Correlation: 
+##                       (Intr) I(g-11) SexFml
+## I(age - 11)            0.102               
+## SexFemale             -0.638 -0.065        
+## I(age - 11):SexFemale -0.065 -0.638   0.102
+## 
+## Standardized Within-Group Residuals:
+##          Min           Q1          Med           Q3          Max 
+## -3.168078484 -0.385939134  0.007103929  0.445154686  3.849463230 
+## 
+## Number of Observations: 108
+## Number of Groups: 27&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;fitted(orth.lme.gender, level = 0:1)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##        fixed  Subject
+## 1   22.61562 24.84572
+## 2   24.18437 26.57649
+## 3   25.75312 28.30725
+## 4   27.32187 30.03802
+## 5   22.61562 21.27478
+## 6   24.18437 22.79641
+## 7   25.75312 24.31803
+## 8   27.32187 25.83966
+## 9   22.61562 22.03311
+## 10  24.18437 23.56449
+## 11  25.75312 25.09588
+## 12  27.32187 26.62726
+## 13  22.61562 24.46451
+## 14  24.18437 25.75133
+## 15  25.75312 27.03814
+## 16  27.32187 28.32495
+## 17  22.61562 20.90249
+## 18  24.18437 22.45429
+## 19  25.75312 24.00610
+## 20  27.32187 25.55790
+## 21  22.61562 23.88527
+## 22  24.18437 25.43272
+## 23  25.75312 26.98017
+## 24  27.32187 28.52762
+## 25  22.61562 21.57351
+## 26  24.18437 23.11840
+## 27  25.75312 24.66330
+## 28  27.32187 26.20819
+## 29  22.61562 21.99187
+## 30  24.18437 23.31291
+## 31  25.75312 24.63395
+## 32  27.32187 25.95500
+## 33  22.61562 22.60752
+## 34  24.18437 24.28229
+## 35  25.75312 25.95705
+## 36  27.32187 27.63182
+## 37  22.61562 26.47272
+## 38  24.18437 28.14284
+## 39  25.75312 29.81295
+## 40  27.32187 31.48307
+## 41  22.61562 21.81724
+## 42  24.18437 23.10495
+## 43  25.75312 24.39267
+## 44  27.32187 25.68038
+## 45  22.61562 21.84919
+## 46  24.18437 23.51420
+## 47  25.75312 25.17920
+## 48  27.32187 26.84421
+## 49  22.61562 21.15031
+## 50  24.18437 23.32308
+## 51  25.75312 25.49584
+## 52  27.32187 27.66861
+## 53  22.61562 22.72716
+## 54  24.18437 24.15480
+## 55  25.75312 25.58244
+## 56  27.32187 27.01008
+## 57  22.61562 23.13140
+## 58  24.18437 24.90616
+## 59  25.75312 26.68091
+## 60  27.32187 28.45567
+## 61  22.61562 21.12319
+## 62  24.18437 22.51465
+## 63  25.75312 23.90610
+## 64  27.32187 25.29756
+## 65  21.20909 20.20973
+## 66  22.16818 21.07931
+## 67  23.12727 21.94889
+## 68  24.08636 22.81848
+## 69  21.20909 21.27124
+## 70  22.16818 22.41092
+## 71  23.12727 23.55060
+## 72  24.08636 24.69027
+## 73  21.20909 21.86869
+## 74  22.16818 23.05491
+## 75  23.12727 24.24113
+## 76  24.08636 25.42735
+## 77  21.20909 23.09591
+## 78  22.16818 24.11142
+## 79  23.12727 25.12694
+## 80  24.08636 26.14246
+## 81  21.20909 21.34035
+## 82  22.16818 22.18951
+## 83  23.12727 23.03868
+## 84  24.08636 23.88784
+## 85  21.20909 19.99832
+## 86  22.16818 20.86130
+## 87  23.12727 21.72427
+## 88  24.08636 22.58725
+## 89  21.20909 21.45516
+## 90  22.16818 22.46121
+## 91  23.12727 23.46727
+## 92  24.08636 24.47333
+## 93  21.20909 22.04815
+## 94  22.16818 22.86368
+## 95  23.12727 23.67921
+## 96  24.08636 24.49475
+## 97  21.20909 20.07189
+## 98  22.16818 20.88141
+## 99  23.12727 21.69094
+## 100 24.08636 22.50047
+## 101 21.20909 17.72334
+## 102 22.16818 18.55704
+## 103 23.12727 19.39073
+## 104 24.08636 20.22443
+## 105 21.20909 24.21723
+## 106 22.16818 25.37929
+## 107 23.12727 26.54134
+## 108 24.08636 27.70339&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;orth.lm.gender &amp;lt;- lm( distance ~ Sex * I(age - 11), Orthodont)
+summary(orth.lm.gender)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Call:
+## lm(formula = distance ~ Sex * I(age - 11), data = Orthodont)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.6156 -1.3219 -0.1682  1.3299  5.2469 
+## 
+## Coefficients:
+##                       Estimate Std. Error t value Pr(&amp;gt;|t|)    
+## (Intercept)            24.9687     0.2821  88.504  &amp;lt; 2e-16 ***
+## SexFemale              -2.3210     0.4420  -5.251 8.05e-07 ***
+## I(age - 11)             0.7844     0.1262   6.217 1.07e-08 ***
+## SexFemale:I(age - 11)  -0.3048     0.1977  -1.542    0.126    
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
+## 
+## Residual standard error: 2.257 on 104 degrees of freedom
+## Multiple R-squared:  0.4227, Adjusted R-squared:  0.4061 
+## F-statistic: 25.39 on 3 and 104 DF,  p-value: 2.108e-12&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;anova(orth.lme.gender, orth.lm.gender)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning in anova.lme(orth.lme.gender, orth.lm.gender): fitted objects with
+## different fixed effects. REML comparisons are not meaningful.&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##                 Model df      AIC      BIC    logLik   Test  L.Ratio
+## orth.lme.gender     1  8 448.5817 469.7368 -216.2908                
+## orth.lm.gender      2  5 493.5591 506.7811 -241.7796 1 vs 2 50.97746
+##                 p-value
+## orth.lme.gender        
+## orth.lm.gender   &amp;lt;.0001&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;igf-i&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;IGF-I&lt;/h3&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(kableExtra)
+knitr::kable(t(IGF)) %&amp;gt;% kable_styling(&amp;quot;striped&amp;quot;)  &lt;/code&gt;&lt;/pre&gt;
+&lt;table class=&#34;table table-striped&#34; style=&#34;margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+16
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+17
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+18
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+19
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+20
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+23
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+25
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+26
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+28
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+29
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+30
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+31
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+32
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+33
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+34
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+36
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+37
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+38
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+39
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+40
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+41
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+42
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+43
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+44
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+45
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+46
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+47
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+48
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+49
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+50
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+51
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+52
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+53
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+54
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+55
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+56
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+57
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+58
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+59
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+60
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+61
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+62
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+63
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+64
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+65
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+66
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+67
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+68
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+69
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+70
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+71
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+72
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+73
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+74
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+75
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+76
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+77
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+78
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+79
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+80
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+81
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+82
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+83
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+84
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+85
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+86
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+87
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+88
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+89
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+90
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+91
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+92
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+93
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+94
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+95
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+96
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+97
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+98
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+99
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+100
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+101
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+102
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+103
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+104
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+105
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+106
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+107
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+108
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+109
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+110
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+111
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+112
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+113
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+114
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+115
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+116
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+117
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+118
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+119
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+120
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+121
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+122
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+123
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+124
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+125
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+126
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+127
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+128
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+129
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+130
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+131
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+132
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+133
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+134
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+135
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+136
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+137
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+138
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+139
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+140
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+141
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+142
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+143
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+144
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+145
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+146
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+147
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+148
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+149
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+150
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+151
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+152
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+153
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+154
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+155
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+156
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+157
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+158
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+159
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+160
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+161
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+162
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+163
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+164
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+165
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+166
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+167
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+168
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+169
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+170
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+171
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+172
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+173
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+174
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+175
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+176
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+177
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+178
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+179
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+180
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+181
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+182
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+183
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+184
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+185
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+186
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+187
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+188
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+189
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+190
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+191
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+192
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+193
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+194
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+195
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+196
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+197
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+198
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+199
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+200
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+201
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+202
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+203
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+204
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+205
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+206
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+207
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+208
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+209
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+210
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+211
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+212
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+213
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+214
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+215
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+216
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+217
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+218
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+219
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+220
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+221
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+222
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+223
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+224
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+225
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+226
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+227
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+228
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+229
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+230
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+231
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+232
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+233
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+234
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+235
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+236
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+237
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Lot
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+age
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+28
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+28
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+30
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+36
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+36
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+36
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+41
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+42
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+42
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+43
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+18
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+26
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+38
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+40
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+42
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+45
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+46
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+47
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+28
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+28
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+28
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+29
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+30
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+30
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+33
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+36
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+37
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+41
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+42
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+43
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+44
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+47
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+47
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+48
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+49
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+19
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+19
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+20
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+20
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+26
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+17
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+29
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+30
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+37
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+37
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+37
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+37
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+42
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+43
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+44
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+44
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+45
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+48
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+16
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+17
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+17
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+18
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+22
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+23
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+24
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+26
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+29
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+31
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+31
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+36
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+37
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+38
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+38
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+39
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+42
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+43
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+43
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+45
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+45
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+45
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+45
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+47
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+7
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+19
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+20
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+26
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+26
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+29
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+29
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+29
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+30
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+33
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+35
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+36
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+40
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+41
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+11
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+13
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+conc
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.90
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.68
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.94
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.19
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.18
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.67
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.88
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.24
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.88
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.40
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.59
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.77
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.57
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.86
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.87
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.65
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.93
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.33
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.99
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3.38
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.44
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.24
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.39
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.48
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.23
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.77
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.06
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.33
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.78
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.85
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.94
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.43
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.66
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.62
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.53
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.20
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.30
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.09
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.78
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.66
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.07
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.45
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.76
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.81
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.92
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3.30
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.88
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.91
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+0.86
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.40
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.94
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.42
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.40
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.68
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.71
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9.55
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.94
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.17
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+8.14
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.51
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.31
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.81
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.26
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.72
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3.99
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.87
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.92
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.13
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.30
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.97
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.98
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.68
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.33
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.76
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.31
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.66
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.52
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.48
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.63
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.38
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.78
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9.34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.58
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.19
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.44
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.31
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.71
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.67
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.65
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.23
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.98
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.84
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.84
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.53
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.85
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.47
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.49
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.43
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.29
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.63
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.18
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.17
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.98
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.38
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3.76
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.63
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.12
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.53
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.67
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.55
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.62
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.58
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.41
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.84
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.83
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.36
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.81
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.35
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.46
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.09
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.78
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.44
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.67
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.98
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.56
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.83
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.27
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.90
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.94
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.78
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.42
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.42
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.38
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.55
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.81
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.62
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.08
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.80
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.32
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.95
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.44
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.48
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.26
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.21
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.65
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.62
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.15
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.71
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.38
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.34
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.10
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.69
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.02
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9.74
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+9.60
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.58
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.94
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.66
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.23
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.62
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.53
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.45
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.63
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.01
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.43
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.17
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.57
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.82
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.84
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.55
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.17
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.36
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.47
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.57
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.36
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.93
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.49
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+3.25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.53
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.91
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.74
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.95
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.07
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.54
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.29
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.59
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.66
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.69
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.18
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.19
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.35
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.28
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.47
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.55
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.75
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.41
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.65
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.25
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.81
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.71
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+4.95
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+6.00
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.74
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.68
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.83
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.30
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+5.63
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot(IGF)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/EN/2018-06-12-fitting-linear-mixed-models_files/figure-html/unnamed-chunk-11-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;IGF.lmod &amp;lt;- lm(conc ~ age, data=IGF)
+summary(IGF.lmod)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## Call:
+## lm(formula = conc ~ age, data = IGF)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.4877 -0.3736 -0.0091  0.2577  4.4144 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&amp;gt;|t|)    
+## (Intercept)  5.3510594  0.1037341   51.58   &amp;lt;2e-16 ***
+## age         -0.0006692  0.0039425   -0.17    0.865    
+## ---
+## Signif. codes:  0 &amp;#39;***&amp;#39; 0.001 &amp;#39;**&amp;#39; 0.01 &amp;#39;*&amp;#39; 0.05 &amp;#39;.&amp;#39; 0.1 &amp;#39; &amp;#39; 1
+## 
+## Residual standard error: 0.8327 on 235 degrees of freedom
+## Multiple R-squared:  0.0001226,  Adjusted R-squared:  -0.004132 
+## F-statistic: 0.02882 on 1 and 235 DF,  p-value: 0.8654&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;IGF.lme.general &amp;lt;- lme(conc~age, data=IGF, random=list(Lot=pdSymm(~age)))
+# Note lme(conc~age, data=IGF, random= ~ age | Lot) fails &amp;lt;https://stackoverflow.com/questions/7923387/error-with-nlme&amp;gt;
+summary(IGF.lme.general)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##  Data: IGF 
+##        AIC      BIC    logLik
+##   606.3662 627.1237 -297.1831
+## 
+## Random effects:
+##  Formula: ~age | Lot
+##  Structure: General positive-definite
+##             StdDev     Corr  
+## (Intercept) 0.08251248 (Intr)
+## age         0.00809218 -1    
+## Residual    0.82062771       
+## 
+## Fixed effects: conc ~ age 
+##                 Value  Std.Error  DF  t-value p-value
+## (Intercept)  5.374974 0.10748847 226 50.00513  0.0000
+## age         -0.002535 0.00504434 226 -0.50255  0.6158
+##  Correlation: 
+##     (Intr)
+## age -0.818
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -5.43068351 -0.40522899 -0.03980665  0.36652519  5.21477600 
+## 
+## Number of Observations: 237
+## Number of Groups: 10&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;IGF.lme.diag &amp;lt;- lme(conc~age, data=IGF, random=list(Lot=pdDiag(~age)))
+summary(IGF.lme.diag)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Linear mixed-effects model fit by REML
+##  Data: IGF 
+##        AIC      BIC    logLik
+##   604.8006 622.0985 -297.4003
+## 
+## Random effects:
+##  Formula: ~age | Lot
+##  Structure: Diagonal
+##          (Intercept)         age  Residual
+## StdDev: 3.622081e-05 0.005372173 0.8218034
+## 
+## Fixed effects: conc ~ age 
+##                 Value  Std.Error  DF  t-value p-value
+## (Intercept)  5.369037 0.10378887 226 51.73037  0.0000
+## age         -0.001930 0.00457021 226 -0.42233  0.6732
+##  Correlation: 
+##     (Intr)
+## age -0.768
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -5.50939808 -0.41468591 -0.02726379  0.34697775  5.22750187 
+## 
+## Number of Observations: 237
+## Number of Groups: 10&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>The structure of grouped data</title>
@@ -2008,10 +5221,10 @@ y_{ijk} = \beta_j + b_i + b_{ij} + \epsilon_{ijk}
 &lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(b_{ij} \sim N(0,\sigma_2^2)\)&lt;/span&gt;;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;table style=&#34;width:11%;&#34;&gt;
+&lt;table style=&#34;width:18%;&#34;&gt;
 &lt;colgroup&gt;
-&lt;col width=&#34;5%&#34; /&gt;
-&lt;col width=&#34;5%&#34; /&gt;
+&lt;col width=&#34;8%&#34; /&gt;
+&lt;col width=&#34;9%&#34; /&gt;
 &lt;/colgroup&gt;
 &lt;thead&gt;
 &lt;tr class=&#34;header&#34;&gt;
@@ -4530,7 +7743,6 @@ pixel
 y_{ijk} = \beta_1 + \beta_2 d_{ik} + b_{i1} + b_{i2}d_{i,k} + b_{ij} + \epsilon_{ijk}
 \]&lt;/span&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon_{ijk} \sim N(0,\sigma^2)\)&lt;/span&gt;.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;table&gt;
@@ -4709,7 +7921,7 @@ anova(lmod.nested.res2, lmod.nested)&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Real Estate Market Data Analysis</title>
       <link>/project/boston-housing/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
       
       <guid>/project/boston-housing/</guid>
       <description>&lt;p&gt;In this project, we&lt;/p&gt;
@@ -6032,288 +9244,6 @@ $$x_i={x_* }_i+\delta_i$$
 &lt;p&gt;而Gauss-Newtown法的更新公式为&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}-\big(\nabla g(x_k)\nabla^T g(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;如果被忽略的二阶项在收敛点附近值很小，自然Gauss-Newtown法的速率是令人满意的。&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>无约束优化(3)</title>
-      <link>/post/zh/uncon3/</link>
-      <pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/post/zh/uncon3/</guid>
-      <description>&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;收敛性分析&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;极限点的存在性问题&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a&gt;迭代终止条件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a&gt;收敛性结论&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a&gt;收敛速率分析&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;局部分析方法&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#case-study-&#34;&gt;Case Study-二次函数情形&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#case-study-&#34;&gt;Case Study-非二次函数与奇异的情形&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div class=&#34;section level2&#34;&gt;
-&lt;h2&gt;收敛性分析&lt;/h2&gt;
-&lt;p&gt;梯度方法是利用当前迭代点的局部信息进行，与函数本身的全局性质无关，从而该方法容易被各种局部最小值点吸引（一阶导数为0的点），在下面的吸引定理(capture theorem)中我们可以看到梯度方法最好的情况也只是收敛到驻点。因此针对非凸的问题我们必须尝试从不同的起始点运行梯度方法，才可能得到一些可行的结果。&lt;/p&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;极限点的存在性问题&lt;/h3&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;一般的，梯度方法产生的迭代序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;完全可能不存在极限点。事实上，如果&lt;span class=&#34;math inline&#34;&gt;\(f(x)\)&lt;/span&gt;不存在最小值点，那么一般来说迭代序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是无界的&lt;/li&gt;
-&lt;li&gt;若水平集&lt;span class=&#34;math display&#34;&gt;\[S_{x_0}=\{x \vert f(x)\leq f(x_0)\}\]&lt;/span&gt;是有界的，并选合适的步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;保证每一步函数值在下降，那么&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;总是包含在&lt;span class=&#34;math inline&#34;&gt;\(S_{x_0}\)&lt;/span&gt;内的，从而有界，进而有收敛的子列。&lt;/li&gt;
-&lt;li&gt;即使&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是有界的，也不能保证该序列收敛到唯一的极限点，幸运地是孤立的局部最小值点（存在开球使得该点是球内部的唯一驻点）可以吸引大多梯度方法产生的序列。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;考虑最速下降法产生的迭代序列&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_k\nabla f(x_k)\)&lt;/span&gt;, 其中&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是凸函数且至少有一最小值点，并且对所有的x，y存在L&amp;gt;0,满足&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L\vert \vert x-y\vert \vert\]&lt;/span&gt;&lt;/p&gt;
-当步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;满足下列两个条件中的一个时，&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;收敛到&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的一个最小值点。
-&lt;ul&gt;
-&lt;li&gt;&lt;ol style=&#34;list-style-type: lower-alpha&#34;&gt;
-&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon\leq a_k\leq \frac{2-\epsilon}{L};\forall k\)&lt;/span&gt;&lt;/li&gt;
-&lt;/ol&gt;&lt;/li&gt;
-&lt;li&gt;b）&lt;span class=&#34;math inline&#34;&gt;\(a_k\rightarrow 0\)&lt;/span&gt; 且 &lt;span class=&#34;math inline&#34;&gt;\(\sum_{k=0}^{+\infty} a_k=0\)&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;如果存在多个全局最小值点的连通集，理论上&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;可以有多个极限点。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;梯度相关(gradient related)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;考虑梯度方法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k,d_k\}\)&lt;/span&gt;，我们称方向序列&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是序列相关的，若对任何收敛于&lt;em&gt;非驻点&lt;/em&gt;的子列&lt;span class=&#34;math display&#34;&gt;\[\{x_{k}\}_{k \in \kappa}\]&lt;/span&gt;，相应的子列&lt;span class=&#34;math display&#34;&gt;\[\{d_{k}\}_{k \in \kappa}\]&lt;/span&gt;都是&lt;em&gt;有界的&lt;/em&gt;，且满足&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\limsup_{k\rightarrow +\infty,{k \in \kappa}} \nabla f(x_{k})&amp;#39;d_{k}&amp;lt;0\]&lt;/span&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;&lt;p&gt;为什么要考虑梯度相关？ 事实上，梯度相关可以保证对于那些不趋于驻点的&lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt;，对应的&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_k)\)&lt;/span&gt;的不会趋于正交，从而保证算法不会陷在某一非驻点附近.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;怎样验证梯度相关的条件满足？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;有界特征值条件： 若 &lt;span class=&#34;math inline&#34;&gt;\(d_k=-D_k \nabla f(x_k)\)&lt;/span&gt;, 其中&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;正定，且存在&lt;span class=&#34;math inline&#34;&gt;\(c_1,c_2&amp;gt;0\)&lt;/span&gt; 使得对任意&lt;span class=&#34;math inline&#34;&gt;\(z\in\scr{R}^n,k=0,1,2...\)&lt;/span&gt;成立 &lt;span class=&#34;math inline&#34;&gt;\(c_1\vert \vert z\vert \vert ^2\leq z&amp;#39;D_kz\leq c_2\vert \vert z\vert \vert ^2\)&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;有界特征值条件推广形式： 若 &lt;span class=&#34;math inline&#34;&gt;\(d_k=-D_k \nabla f(x_k)\)&lt;/span&gt;, 其中&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;正定，且存在&lt;span class=&#34;math inline&#34;&gt;\(c_1,c_2&amp;gt;0,p_1,p_2\geq 0\)&lt;/span&gt;, 使得使得对任意&lt;span class=&#34;math inline&#34;&gt;\(z\in\scr{R}^n,k=0,1,2...\)&lt;/span&gt;成立 &lt;span class=&#34;math inline&#34;&gt;\(c_1\vert \vert \nabla f(x_k)\vert \vert ^{p_1}\vert \vert z\vert \vert ^2\leq z&amp;#39;D_kz\leq c_2\vert \vert \nabla f(x_k)\vert \vert ^{p_2}\vert \vert z\vert \vert ^2\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;存在&lt;span class=&#34;math inline&#34;&gt;\(c_1,c_2&amp;gt;0,p_1,p_2\geq 0\)&lt;/span&gt;,使得对任意&lt;span class=&#34;math inline&#34;&gt;\(k=0,1,2...\)&lt;/span&gt;成立 &lt;span class=&#34;math inline&#34;&gt;\(c_1\vert \vert \nabla f(x_k)\vert \vert ^{p_1}\leq -\nabla f(x_k)&amp;#39;d_k\)&lt;/span&gt;以及 &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert d_k\vert \vert \leq c_2\vert \vert \nabla f(x_k)\vert \vert ^{p_2}\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;如果&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是梯度相关的，在一定条件下我们可以保证由梯度方法产生的&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是收敛到驻点的，具体讨论详见&lt;code&gt;收敛性结论&lt;/code&gt;小节。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;迭代终止条件&lt;/h3&gt;
-&lt;p&gt;一般来说梯度方法不会在有限步收敛，所有我们需要设置一个迭代终止准则使得在算法停止时我们的解以一定精度逼近至少一个局部最小值。常用的准则有：&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;当梯度范数充分小时，&lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x_k)\vert \vert \leq \epsilon\)&lt;/span&gt;，停止迭代
-&lt;ul&gt;
-&lt;li&gt;修正形式： &lt;span class=&#34;math inline&#34;&gt;\(\frac{\vert \vert \nabla f(x_k)\vert \vert }{\nabla f(x_0)}\leq \epsilon\)&lt;/span&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;假设下降方向包含了优化变量的相对缩放比例，那么当&lt;span class=&#34;math inline&#34;&gt;\(\vert \vert d_k\vert \vert \leq \epsilon\)&lt;/span&gt;，停止迭代&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;当&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x)\)&lt;/span&gt;正定时，条件&lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x_k)\vert \vert \leq \epsilon\)&lt;/span&gt;给出了当前解与局部最小值点距离的上界。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;收敛性结论&lt;/h3&gt;
-&lt;p&gt;证明下述的收敛性结论的主要思想是，在每次迭代中，目标函数都得到了改进，并且基于我们的假设，这种改进在非驻点附近是实质性的，即存在非零改进下界。我们总是认为算法不会收敛到一个非驻点,不然目标函数累计改进量将达到无穷。&lt;/p&gt;
-&lt;div id=&#34;armijo&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;&lt;strong&gt;【Armijo准则下的收敛性】&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是由梯度方法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列,假设&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是梯度相关的并且&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;的选取是根据Armijo准则选取的，那么&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;的每一个极限点(若存在)都是驻点&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remark:&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;该命题证明了梯度方法构造的的迭代序列的极限点（若存在）则为驻点。&lt;/li&gt;
-&lt;li&gt;从命题证明过程中我们可以知道：对于任何步长准则，只要对目标函数值得改进大于Armijo准则得到的改进，就能保证构造的迭代列是收敛的。因此&lt;strong&gt;最小化准则&lt;/strong&gt;，&lt;strong&gt;有限最小化准则&lt;/strong&gt;选取的步长都可以保证迭代序列的极限点（若存在）则为驻点&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;&lt;strong&gt;【固定步长的收敛性】&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是由梯度方法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列,假设&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是梯度相关的并且&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;的选取是根据固定步长准则选取的。假设对于某个常数&lt;span class=&#34;math inline&#34;&gt;\(L&amp;gt;0\)&lt;/span&gt;有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[Lipschitz\; continuity\; condition:\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L\vert \vert x-y\vert \vert \; \forall x,y\in \scr{R}^n\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;并且成立&lt;span class=&#34;math inline&#34;&gt;\(\forall k, d_k\neq 0\)&lt;/span&gt; 以及&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \exists \epsilon&amp;gt;0, s.t.\;\epsilon\leq a_k\leq (2-\epsilon)\bar{a}_k\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(\bar{a}_k=\frac{\vert \nabla f(x_k)d_k\vert }{L\vert \vert d_k\vert \vert ^2}\)&lt;/span&gt;. 那么&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;的每一个极限点(若存在)都是驻点.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remark:&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;&lt;p&gt;仅仅要求&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是梯度相关的是不能保证&lt;span class=&#34;math inline&#34;&gt;\(\epsilon\)&lt;/span&gt;的存在性，因为梯度相关只是对&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;的有界子列的局部性假设。但是幸运的是，前文提及的三个保证&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;梯度相关的条件，均可以保证$ &amp;gt;0, s.t.;a_k(2-){a}_k&lt;span class=&#34;math inline&#34;&gt;\(。比如若条件：**存在\)&lt;/span&gt;c_1,c_2&amp;gt;0&lt;span class=&#34;math inline&#34;&gt;\(,使得对任意\)&lt;/span&gt;k=0,1,2…$成立 &lt;span class=&#34;math inline&#34;&gt;\(c_1\vert \vert \nabla f(x_k)\vert \vert ^{2}\leq -\nabla f(x_k)&amp;#39;d_k\)&lt;/span&gt;以及 &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert d_k\vert \vert ^2\leq c_2\vert \vert \nabla f(x_k)\vert \vert ^{2}\)&lt;/span&gt;**满足，那么只要对所有的k，成立&lt;span class=&#34;math inline&#34;&gt;\(\exists \epsilon_0 \leq a_k\leq \frac{c_1(2-\epsilon_0)}{Lc_2}\)&lt;/span&gt;则条件&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \exists \epsilon&amp;gt;0, s.t.\;\epsilon\leq a_k\leq (2-\epsilon)\bar{a}_k\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;成立。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;命题中一阶导数&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x)\)&lt;/span&gt;的Lipschitz连续性（Lipschitz continuity condition）对该命题十分重要，它限制了函数变化程度（曲率）所在的方向都不大于 L。我们可以证明，如果&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是二次可微的并且&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x)\)&lt;/span&gt;在&lt;span class=&#34;math inline&#34;&gt;\(\scr{R}^n\)&lt;/span&gt;上有界，则Lipschitz连续性可以得到保障。但是比较难过的是，很多函数即使二阶可微，也不能保证其二阶Hessian阵有界。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Lipschitz连续性在一定程度上可以弱化：对每一个有界集&lt;span class=&#34;math inline&#34;&gt;\(A\subset \scr{R}^n\)&lt;/span&gt;都存在常数&lt;span class=&#34;math inline&#34;&gt;\(L_A\)&lt;/span&gt;满足&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L_A\vert \vert x-y\vert \vert \; \forall x,y\in A\]&lt;/span&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;水平集&lt;span class=&#34;math inline&#34;&gt;\(\{x\vert f(x)\leq c\},c\in\scr{R}\)&lt;/span&gt;是有界的，且&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是二阶连续可微的，则&lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L_A\vert \vert x-y\vert \vert \; \forall x,y\in A\)&lt;/span&gt;总是满足的&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;若 &lt;span class=&#34;math inline&#34;&gt;\(A=\{x\vert f(x)\leq f(x_0)\}\)&lt;/span&gt;是有界的，且步长依赖于初始点&lt;span class=&#34;math inline&#34;&gt;\(x_0\)&lt;/span&gt;，那么 Lipschitz连续性总能被满足。&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;具体应用中Lipschitz常数是很难估计的，所以满足&lt;span class=&#34;math inline&#34;&gt;\(\epsilon\leq a_k\leq (2-\epsilon)\bar{a}_k\)&lt;/span&gt;的步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;是未知的。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;&lt;strong&gt;【缩减步长的收敛性】&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是由梯度方法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列,假设对于某个常数&lt;span class=&#34;math inline&#34;&gt;\(L&amp;gt;0\)&lt;/span&gt;有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[Lipschitz\; continuity\; condition:\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L\vert \vert x-y\vert \vert \; \forall x,y\in \scr{R}^n\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;存在&lt;span class=&#34;math inline&#34;&gt;\(c_1,c_2&amp;gt;0\)&lt;/span&gt;,使得对任意&lt;span class=&#34;math inline&#34;&gt;\(k=0,1,2...\)&lt;/span&gt;成立 &lt;span class=&#34;math inline&#34;&gt;\(c_1\vert \vert \nabla f(x_k)\vert \vert ^{2}\leq -\nabla f(x_k)&amp;#39;d_k\)&lt;/span&gt;以及 &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert d_k\vert \vert ^2\leq c_2\vert \vert \nabla f(x_k)\vert \vert ^{2}\)&lt;/span&gt;.同时有 &lt;span class=&#34;math inline&#34;&gt;\(a_k\rightarrow 0,\sum_{k=1}^{+\infty}a_k=\infty\)&lt;/span&gt;则，一定是下述情况之一&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(f(x_k)\rightarrow -\infty\)&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\{f(x_k)\}\)&lt;/span&gt;收敛于一个有限值，&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_k)\rightarrow 0\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;的每个极限点都是&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的驻点&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Remark:&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;该命题的假设条件并不能保证初始迭代能够使目标函数下降。但是当步长充分小后，如满足&lt;span class=&#34;math inline&#34;&gt;\(\exists \epsilon_0 \leq a_k\leq \frac{c_1(2-\epsilon_0)}{Lc_2}\)&lt;/span&gt;，就能保证迭代过程中目标函数下降。此时只要保证了$f(x) -f(y)Lx-y&lt;span class=&#34;math inline&#34;&gt;\(对于所有A中元素集合成立即可保证收敛性，其中\)&lt;/span&gt;A={xf(x)f(x_0)}$。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;&lt;strong&gt;【吸引定理】&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是一个连续可微函数，&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是保证函数下降,即 &lt;span class=&#34;math inline&#34;&gt;\(f(x_{k+1})\leq f(x_k)\)&lt;/span&gt;，且通过&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列，同时&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;的每个收敛点都是&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的驻点。&lt;/p&gt;
-&lt;p&gt;假设存在标量&lt;span class=&#34;math inline&#34;&gt;\(s&amp;gt;0,c&amp;gt;0\)&lt;/span&gt;满足对于所有的k，成立$a_ks;; d_kcf(x_k)$&lt;/p&gt;
-&lt;p&gt;令$x_* &lt;span class=&#34;math inline&#34;&gt;\(是\)&lt;/span&gt;f&lt;span class=&#34;math inline&#34;&gt;\(的局部最小值点，同时也是在某一开集中\)&lt;/span&gt;f&lt;span class=&#34;math inline&#34;&gt;\(唯一的驻点，那么存在一个包含\)&lt;/span&gt;x_* &lt;span class=&#34;math inline&#34;&gt;\(的开集\)&lt;/span&gt;S&lt;span class=&#34;math inline&#34;&gt;\(满足: 存在\)&lt;/span&gt;k0&lt;span class=&#34;math inline&#34;&gt;\(满足\)&lt;/span&gt;x_{k}S$，那么对于一切 &lt;span class=&#34;math inline&#34;&gt;\(k&amp;gt;\bar k\)&lt;/span&gt;成立&lt;span class=&#34;math inline&#34;&gt;\(x_k\in S\)&lt;/span&gt;且$x_kx_* $.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remark:&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;条件：存在标量&lt;span class=&#34;math inline&#34;&gt;\(s&amp;gt;0,c&amp;gt;0\)&lt;/span&gt;满足对于所有的k，&lt;span class=&#34;math inline&#34;&gt;\(a_k\leq s\)&lt;/span&gt;以及 &lt;span class=&#34;math inline&#34;&gt;\(f(x_{k+1})\leq f(x_k)\)&lt;/span&gt;对于Armijo准则和最小化准则，有限最小化准则都是满足的。对于固定步长准则，缩减步长准则，当满足 &lt;span class=&#34;math inline&#34;&gt;\(f(x_{k+1})\leq f(x_k)\)&lt;/span&gt;时，&lt;span class=&#34;math inline&#34;&gt;\(a_k\leq s\)&lt;/span&gt;也是满足的。&lt;/li&gt;
-&lt;li&gt;如果&lt;span class=&#34;math inline&#34;&gt;\(d_k=-D_k\nabla f(x_k)\)&lt;/span&gt;且&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;特征值有上界则$d_kcf(x_k)$也是满足的&lt;/li&gt;
-&lt;li&gt;该命题解释了为什么梯度方法产生的序列在实际应用中倾向于某个唯一的极限点，因为孤立的局部最小值点可以很好地吸引梯度方法。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level2&#34;&gt;
-&lt;h2&gt;收敛速率分析&lt;/h2&gt;
-&lt;p&gt;收敛速率的刻画方法一般有三种&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;计算复杂： 尝试估计&lt;/li&gt;
-&lt;li&gt;信息复杂度&lt;/li&gt;
-&lt;li&gt;局部分析：只关注最优解在邻域内的表现。具体来说是在局部最小值的附近利用二次函数来近似目标函数，从而很好的预测不同算法在接近非奇异局部最小值时的表现。然而这种方法没法表示算法在最初迭代时的收敛速率（虽然在实际中，初步几次迭代收敛的较快，只在极限点附近才慢下来）。然而局部分析不适用与两类问题
-&lt;ul&gt;
-&lt;li&gt;涉及奇异的局部最小值点的问题&lt;/li&gt;
-&lt;li&gt;需要多次迭代才能达到适用局部分析方法的最优解近邻的问题&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;局部分析方法&lt;/h3&gt;
-&lt;p&gt;这种方法我们只关注序列${x_k} &lt;span class=&#34;math inline&#34;&gt;\(收敛到唯一\)&lt;/span&gt;x_* &lt;span class=&#34;math inline&#34;&gt;\(的情形。一般来说，我们通过*偏差函数*e(x),\)&lt;/span&gt;e:^n$来刻画。常用的偏差函数有&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$e(x)=x-x_* $&lt;/li&gt;
-&lt;li&gt;$e(x)=f(x)-f(x_* )$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这种局部的分析是渐进的，着重刻画了偏差序列&lt;span class=&#34;math inline&#34;&gt;\(\{e(x_k)\}\)&lt;/span&gt;的尾部收敛速率。我们定义如下三种收敛速率：&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;如果存在&lt;span class=&#34;math inline&#34;&gt;\(\beta\in (0,1)\)&lt;/span&gt;和&lt;span class=&#34;math inline&#34;&gt;\(q&amp;gt;0\)&lt;/span&gt;，使得对任意&lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt;成立&lt;span class=&#34;math inline&#34;&gt;\(e(x_k)\leq q\beta^k\)&lt;/span&gt;，则称序列&lt;span class=&#34;math inline&#34;&gt;\(\{e(x_k)\}\)&lt;/span&gt;&lt;em&gt;线性收敛&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;如果对任意&lt;span class=&#34;math inline&#34;&gt;\(\beta\in (0,1)\)&lt;/span&gt;，存在&lt;span class=&#34;math inline&#34;&gt;\(q\)&lt;/span&gt;，使得对任意&lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt;成立&lt;span class=&#34;math inline&#34;&gt;\(e(x_k)\leq q\beta^k\)&lt;/span&gt;，则称序列&lt;span class=&#34;math inline&#34;&gt;\(\{e(x_k)\}\)&lt;/span&gt;&lt;em&gt;超线性收敛&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;如果对存在&lt;span class=&#34;math inline&#34;&gt;\(\beta\in (0,1)\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(q&amp;gt;0,p&amp;gt;1\)&lt;/span&gt;,使得对任意&lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt;成立&lt;span class=&#34;math inline&#34;&gt;\(e(x_k)\leq q\beta^{p^k}\)&lt;/span&gt;，则称序列&lt;span class=&#34;math inline&#34;&gt;\(\{e(x_k)\}\)&lt;/span&gt;&lt;em&gt;至少p阶超线性收敛&lt;/em&gt;。&lt;span class=&#34;math inline&#34;&gt;\(p=2\)&lt;/span&gt;时称为&lt;em&gt;二阶收敛&lt;/em&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;&lt;p&gt;如果存在&lt;span class=&#34;math inline&#34;&gt;\(\beta\in (0,1)\)&lt;/span&gt;有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\limsup_{k\rightarrow +\infty}\frac{e(x_{k+1})}{e(x_{k})}\leq \beta\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;则可以推出线性收敛&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;如果任意&lt;span class=&#34;math inline&#34;&gt;\(\beta\in (0,1)\)&lt;/span&gt;有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\limsup_{k\rightarrow +\infty}\frac{e(x_{k+1})}{e(x_{k})}=0\]&lt;/span&gt;&lt;/p&gt;
-则可以推出超线性收敛&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;满足条件&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\limsup_{k\rightarrow +\infty}\frac{e(x_{k+1})}{e(x_{k})^p}\leq \infty\]&lt;/span&gt;&lt;/p&gt;
-则可以推出&lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;阶超线性收敛&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;实际中大多数算法产生的是线性收敛或者超线性收敛序列的，尤其是算法收敛到非奇异的局部最小值时。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div id=&#34;case-study-&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Case Study-二次函数情形&lt;/h3&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;最速下降方法的收敛速率分析&lt;/h4&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14763620608369.jpg&#34; alt=&#34;quadratiquadratic&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;quadratiquadratic&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14763630947077.jpg&#34; alt=&#34;figforquadratic&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;figforquadratic&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt; 最速下降是线性收敛速率&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;【二次函数最速下降法的收敛速率结论】 考虑二次函数&lt;span class=&#34;math inline&#34;&gt;\(f(x)=\frac{1}{2}x&amp;#39;Qx\)&lt;/span&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt;是对称正定矩阵。设&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;是由最速下降方法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}-a_k\nabla f(x_k)\)&lt;/span&gt;产生的序列，其中&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;是按照线性最小化准则&lt;span class=&#34;math display&#34;&gt;\[a_k=\mathop{argmin}_{a\geq 0} f(x_k-a\nabla f(x_k))\]&lt;/span&gt;选取的,那么对于所有的k我们有&lt;span class=&#34;math display&#34;&gt;\[\frac{f(x_{k+1})}{f(x_{k})}\leq \left(\frac{M-m}{M+m}\right)^2\]&lt;/span&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(M,m\)&lt;/span&gt;分别是Q的最大、最小特征值。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;&lt;p&gt;从不等式&lt;span class=&#34;math inline&#34;&gt;\(\frac{f(x_{k+1})}{f(x_{k})}\leq \left(\frac{M-m}{M+m}\right)^2\)&lt;/span&gt;我们可以看出迭代过程中，两次值变化会被&lt;span class=&#34;math inline&#34;&gt;\(\left(\frac{M-m}{M+m}\right)^2\)&lt;/span&gt;给限制住。自然地，对于M和m很相差很大的情形，那么函数下降得就会很少，从而导致收敛速率降低。从几何（二维）上来解释上述情况即为:二次函数的等值面可以看成椭球.图中椭圆族的长轴方向与短轴方向分别对应是最小特征值和最大特征[具体讨论可以参考Linear Algebra and Its Applications 4th Edition by Gilbert Strang p357-p358]。如果M远大于m则会出现非常扁的椭圆,于是搜索路径会变成锯齿状的样子。&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14768782699369.jpg&#34; alt=&#34;oval&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;oval&lt;/p&gt;
-&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;梯度下降方法的收敛速率分析&lt;/h4&gt;
-&lt;p&gt;考虑比最速下降算法更一般的算法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}-a_kD_k\nabla f(x_k)\)&lt;/span&gt;,其中&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;是对称正定的。本质上来说这是把利用&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;给坐标系作了一个旋转。因此也可以看作是scaled version of the steepest decent。事实上只需令&lt;span class=&#34;math inline&#34;&gt;\(S=D_k^{\frac{1}{2}}，y=SX\)&lt;/span&gt;在y空间里 &lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_y h(y)=f(Sy)\; y\in\mathscr{R}^n\]&lt;/span&gt;&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14768837339663.jpg&#34; /&gt;
-
-&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;选取&lt;span class=&#34;math inline&#34;&gt;\(D_k^{1/2}\)&lt;/span&gt;接近Hessian阵&lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt;逆的平方根的好处在于，可以改善条件数过大的毛病，避免出现了锯齿状的搜索路径。&lt;/li&gt;
-&lt;li&gt;从牛顿方法的搜索方向选取我们不难看出&lt;span class=&#34;math inline&#34;&gt;\(D_k=H_k^{-1}\)&lt;/span&gt;，于是强行得到了一个单位阵，从而才可以保证牛顿法在收敛点附近搜索速率是超线性的，这从式1.43可以得到直观但不严密的解释。&lt;/li&gt;
-&lt;li&gt;对角线缩放最速下降，取&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;为对角阵，且对角元近似为&lt;span class=&#34;math inline&#34;&gt;\(f(x_k)\)&lt;/span&gt;对角元的倒数, 即&lt;span class=&#34;math display&#34;&gt;\[(D_k)_{i,i}=\left(\frac{\partial^2 f(x_k)}{(\partial x_i)^2}\right)^{-1}\]&lt;/span&gt;，其思想是类似的也是为了改变病态现象。只要&lt;span class=&#34;math inline&#34;&gt;\((D_k)_{i,i}\)&lt;/span&gt;是正的，则算法同样适用于非二次问题，虽然不能保证提高下降速度，但是可以取得较好的实际效果。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;case-study-&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Case Study-非二次函数与奇异的情形&lt;/h3&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;非二次函数&lt;/h4&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14768849329079.jpg&#34; /&gt;
-
-&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;&lt;p&gt;收敛速率 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14768849982074.jpg&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;上述算法的思想在于，利用&lt;span class=&#34;math inline&#34;&gt;\(D_k\)&lt;/span&gt;去修正正定Hessian阵的病态问题，但是一但函数并不二阶可导或者在迭代点附近无正定的Hessian阵，则结论均失效。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;【类牛顿法的超线性收敛速率结论】 假设f二阶连续可微，考虑由梯度算法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_kd_k\)&lt;/span&gt;产生的序列&lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt;并作出以下两类假设:&lt;/p&gt;
-&lt;p&gt;1)关于迭代列的假设：&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_k\rightarrow x_* \quad \nabla f(x_* )=0\quad \nabla^2f(x_* )正定\quad f(x_k)\neq 0 \; for\; all\; k\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;2)关于下降方的假设：&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lim_{k\rightarrow +\infty}\frac{\vert \vert d_k+(\nabla^2 f(x_* ))^{-1}\nabla f(x_k)\vert \vert }{\vert \vert \nabla f(x_k)\vert \vert }=0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;按照Armijo准则选取步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;。那么当初始步长s=1，&lt;span class=&#34;math inline&#34;&gt;\(\sigma&amp;lt;\frac{1}{2}\)&lt;/span&gt;时，我们有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lim_{k\rightarrow +\infty}\frac{\vert \vert x_{k+1}-x_* \vert \vert }{\vert \vert x_{k}-x_* \vert \vert }=0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;而且存在&lt;span class=&#34;math inline&#34;&gt;\(\bar k\)&lt;/span&gt;， 当&lt;span class=&#34;math inline&#34;&gt;\(k&amp;gt;\bar k\)&lt;/span&gt;后，我们可以始终取&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;为初始步长，即当&lt;span class=&#34;math inline&#34;&gt;\(k&amp;gt;\bar k\)&lt;/span&gt;后，&lt;span class=&#34;math inline&#34;&gt;\(a_k=s=1\quad\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;该定理表明选取步长为1的牛顿法，如果初始点选择得很好的话将可以获得超线性的收敛速率。&lt;/li&gt;
-&lt;li&gt;基于该定理和吸引定理我们知道：基于Armijo准则的类牛顿法可以收敛到局部最小值点。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;奇异&lt;/h4&gt;
-&lt;p&gt;现在考虑在局部最小值点或者附近的Hessian阵要么不存在或者不正定的情况。即在局部最小值&lt;span class=&#34;math display&#34;&gt;\[x_*\]&lt;/span&gt;附近的沿着单位方向&lt;span class=&#34;math inline&#34;&gt;\(d\)&lt;/span&gt;的&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;导数&lt;span class=&#34;math display&#34;&gt;\[\nabla f(x_*)\]&lt;/span&gt;(陈纪修 数学分析下册 140 定理12.1.1):&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;变化太慢&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lim_{a\rightarrow 0}\frac{\nabla f(x_* +ad)^Td-\nabla f(x_* )^Td}{a}=0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;变化太快&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\lim_{a\rightarrow 0}\frac{\nabla f(x_* +ad)^Td-\nabla f(x_* )^Td}{a}=\infty\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161020_30.png&#34; alt=&#34;Snip20161020_30-w623&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;Snip20161020_30-w623&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;在全局最小值点附近沿着d=(0,1)则会出现斜率变化太快的情形，沿着d=(1,0)则会出现变化太缓慢的情形。&lt;/p&gt;
-&lt;p&gt;一般来说，对于这类问题反而采用最速下降的方法会取得比较好的效果。另外一个常用的方法是修正重球方法。&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161020_31.png&#34; alt=&#34;Snip20161020_31&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;Snip20161020_31&lt;/p&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;一般认为重球算法不容易陷入较“浅”的局部最小值点，因此会取得较好的效果。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;奇异问题的收敛速率分析&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;【收敛速率慢于线性的情形】&lt;/p&gt;
-&lt;p&gt;假设目标函数&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是凸函数，最小值是$f_* $且存在正数L，满足&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\vert\vert \nabla f(x)-\nabla f(y)\vert\vert \leq L \vert\vert x-y \vert\vert \; \forall x,y\in R^n\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;考虑梯度算法&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_{k}+a_Kd_k\)&lt;/span&gt;，其中步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;是按照最小化准则选取的，&lt;span class=&#34;math inline&#34;&gt;\(\{d_k\}\)&lt;/span&gt;是梯度相关的，且存在&lt;span class=&#34;math inline&#34;&gt;\(c&amp;gt;0\)&lt;/span&gt;对任意k，有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla f(x_k)d_k\leq -c \vert \vert \nabla f(x_k)\vert \vert \vert \vert d_k\vert \vert \]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;假设&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的全局最小值点组成的集合是非空有界集合，那么&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x_k)-f_* =o(1/k)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;or equivalently,&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \lim_{k\rightarrow +\infty}\frac{f(x_k)-f_* }{k} =0 \]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;该结论适用于最速下降法产生的序列，其中步长是固定步长准则选取的。&lt;/li&gt;
-&lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
