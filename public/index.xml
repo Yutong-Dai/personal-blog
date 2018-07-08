@@ -11,6 +11,179 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Decision Tree: How to find the path from the root to the desired terminal node</title>
+      <link>/post/en/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</link>
+      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/en/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</guid>
+      <description>&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#prepare-a-fitted-random-forest&#34;&gt;Prepare a fitted random forest&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#find-the-path-to-desired-terminal-node&#34;&gt;Find the path to desired terminal node&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#collect-paths-in-the-random-forest&#34;&gt;Collect Paths in the random forest&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#summarize-the-decison-region&#34;&gt;Summarize the decison region&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;prepare-a-fitted-random-forest&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Prepare a fitted random forest&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;import random
+import pandas as pd
+from sklearn.ensemble.forest import RandomForestRegressor
+from sklearn import tree
+data = pd.DataFrame({&amp;quot;Y&amp;quot;:[1,5,3,4,3,4,2], &amp;quot;X_1&amp;quot;:[&amp;quot;red&amp;quot;, &amp;quot;blue&amp;quot;, &amp;quot;blue&amp;quot;, &amp;quot;red&amp;quot;,&amp;quot;red&amp;quot;,&amp;quot;blue&amp;quot;, &amp;quot;red&amp;quot;],
+                    &amp;quot;X_2&amp;quot;:[18.4, 7.5, 9.3, 3.7, 5.2, 3.2, 5.2]})
+data = pd.get_dummies(data)
+X = data.drop([&amp;quot;Y&amp;quot;], axis=1)
+y = data[&amp;quot;Y&amp;quot;]
+rf = RandomForestRegressor(n_estimators = 10, random_state = 1234)
+rf.fit(X, y)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;output:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;RandomForestRegressor(bootstrap=True, criterion=&amp;#39;mse&amp;#39;, max_depth=None,
+           max_features=&amp;#39;auto&amp;#39;, max_leaf_nodes=None,
+           min_impurity_decrease=0.0, min_impurity_split=None,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, n_estimators=10, n_jobs=1,
+           oob_score=False, random_state=1234, verbose=0, warm_start=False)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;find-the-path-to-desired-terminal-node&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Find the path to desired terminal node&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;import pydotplus
+import re 
+def return_node_path_to_max_prediction(onetree, verbose=True):
+    &amp;quot;&amp;quot;&amp;quot;
+    @input: a tree from the sklearn randomforest
+    @output: the node path to maxmium terminal node
+        [[split_node_1], [split_node_2], ...]
+        [splite_node_1] = [var_index, cutoff, direction]
+    &amp;quot;&amp;quot;&amp;quot;
+    if verbose:
+        print(&amp;quot;Generating Tree Graph, it may take a while...&amp;quot;)
+    dot_data = tree.export_graphviz(onetree,
+                                    out_file = None,
+                                    filled   = True,
+                                    rounded  = True,
+                                    special_characters = True)  
+    graph = pydotplus.graph_from_dot_data(dot_data)
+    graph_ = {}
+    for edge in graph.get_edge_list():
+        graph_[edge.get_source()] = edge.get_destination()
+    # find all terminal node
+    terminal_node = {}
+    non_decimal = re.compile(r&amp;#39;[^\d.]+&amp;#39;)
+    for node in graph.get_node_list():
+        if node.get_name() not in graph_:
+            if node.get_name() not in [&amp;quot;node&amp;quot;, &amp;quot;edge&amp;quot;]:
+                value = node.get_label()
+                value = re.sub(r&amp;#39;.*v&amp;#39;, &amp;#39;v&amp;#39;, value)
+                terminal_node[node.get_name()] = float(non_decimal.sub(&amp;#39;&amp;#39;, value))
+    # find the path down to the terminal with maximum predition value
+    flag = True
+    destination = max(terminal_node, key=terminal_node.get)
+    edge_list = graph.get_edge_list()
+    node_list = graph.get_node_list()
+    split_node = []
+    while flag:
+        myedge = [edge for edge in edge_list  if edge.get_destination() == destination][0]
+        if int(myedge.get_destination()) - int(myedge.get_source()) &amp;gt; 1:
+            direction = &amp;quot;Right&amp;quot;
+        else:
+            direction = &amp;quot;Left&amp;quot;
+        
+        mynode = [node for node in node_list if node.get_name() == myedge.get_source()][0]
+        var_val = re.findall(r&amp;quot;[-+]?\d*\.\d+|\d+&amp;quot;, mynode.get_label())[:2]
+        # record the growing path:
+        #  var_val[0]: Index of variable participating in splitting
+        #  var_val[1]: cutoff point of the splitting
+        #  direction: If Right, means greater than var_val[1]; 
+        #             If Left, means no greater than var_val[1]
+        split_node.append([int(var_val[0]),float(var_val[1]),direction])
+        if verbose:
+            print(myedge.get_destination() + &amp;quot;&amp;lt;-&amp;quot; + myedge.get_source() + 
+                  &amp;quot;: Split at Variable X&amp;quot; + var_val[0] + &amp;quot;; The cutoff is &amp;quot; + var_val[1] + 
+                 &amp;quot;; Turn &amp;quot; + direction)
+        destination = myedge.get_source()
+        if destination == &amp;quot;0&amp;quot;:
+            flag = False
+        
+    return [*reversed(split_node)]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Test:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;return_node_path_to_max_prediction(rf[1], verbose=True)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Outputs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Generating Tree Graph, it may take a while...
+3&amp;lt;-1: Split at Variable X0; The cutoff is 5.6; Turn Right
+1&amp;lt;-0: Split at Variable X0; The cutoff is 12.95; Turn Left&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From the output above, we know the path from the root to the desired terminal node is :&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Root[X0(&amp;lt;= 12.95)] -&amp;gt; X0 (&amp;gt;=5.6) -&amp;gt; Terminal Node&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;collect-paths-in-the-random-forest&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Collect Paths in the random forest&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;def collect_path(rf, verbose=True):
+    n_tree = len(rf)
+    result = []
+    for i in range(n_tree):
+        if verbose:
+            print(&amp;quot;Construct the %s tree graph out of %s trees&amp;quot; %(i+1, n_tree))
+        result.append(return_node_path_to_max_prediction(rf.estimators_[i], verbose=False))
+    return result&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Test:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;result = collect_path(rf)
+print(result)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Outputs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Construct the 1 tree graph out of 10 trees
+Construct the 2 tree graph out of 10 trees
+Construct the 3 tree graph out of 10 trees
+Construct the 4 tree graph out of 10 trees
+Construct the 5 tree graph out of 10 trees
+Construct the 6 tree graph out of 10 trees
+Construct the 7 tree graph out of 10 trees
+Construct the 8 tree graph out of 10 trees
+Construct the 9 tree graph out of 10 trees
+Construct the 10 tree graph out of 10 trees
+[[[0, 4.2, &amp;#39;Left&amp;#39;]], [[0, 12.95, &amp;#39;Left&amp;#39;], [0, 5.6, &amp;#39;Right&amp;#39;]], [[1, 0.5, &amp;#39;Right&amp;#39;], [0, 8.4, &amp;#39;Left&amp;#39;]], [[0, 13.85, &amp;#39;Left&amp;#39;], [0, 8.4, &amp;#39;Left&amp;#39;], [1, 0.5, &amp;#39;Right&amp;#39;]], [[0, 8.4, &amp;#39;Left&amp;#39;], [0, 6.35, &amp;#39;Right&amp;#39;]], [[0, 12.95, &amp;#39;Left&amp;#39;], [0, 5.6, &amp;#39;Right&amp;#39;]], [[2, 0.5, &amp;#39;Left&amp;#39;], [0, 5.35, &amp;#39;Right&amp;#39;]], [[1, 0.5, &amp;#39;Right&amp;#39;], [0, 5.35, &amp;#39;Right&amp;#39;]], [[0, 13.85, &amp;#39;Left&amp;#39;], [1, 0.5, &amp;#39;Right&amp;#39;], [0, 8.4, &amp;#39;Left&amp;#39;], [0, 5.35, &amp;#39;Right&amp;#39;]], [[0, 13.85, &amp;#39;Left&amp;#39;], [0, 6.35, &amp;#39;Right&amp;#39;], [0, 8.4, &amp;#39;Left&amp;#39;]]]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summarize-the-decison-region&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Summarize the decison region&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;def summarize_region(result, features):
+    decision_region = {k: [[] for _ in range(2)] for k in features}
+    for i in range(len(result)):
+        for j in range(len(result[i])):
+            if result[i][j][2] == &amp;quot;Left&amp;quot;:
+                 decision_region[features[result[i][j][0]]][0].append(result[i][j][1])
+            else:
+                decision_region[features[result[i][j][0]]][1].append(result[i][j][1]) 
+    
+    decision_region_ = {}
+    for k in features:
+        try:
+            upper_bound = min(decision_region[k][0])
+        except ValueError:
+            upper_bound = &amp;quot;Unknown&amp;quot;
+        try:
+            lower_bound = max(decision_region[k][1])
+        except ValueError:
+            lower_bound = &amp;quot;Unknown&amp;quot;
+        decision_region_[k] = [lower_bound, upper_bound]
+        
+    value_to_remove = [&amp;#39;Unknown&amp;#39;, &amp;#39;Unknown&amp;#39;]
+    decision_region_ = {key: value for key, value in decision_region_.items() if value != value_to_remove}
+    value_to_remove = [0.5, 0.5]
+    decision_region_ = {key: value for key, value in decision_region_.items() if value != value_to_remove}
+    
+    return (decision_region_)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Test:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;features = X.columns
+summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Outputs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{&amp;#39;X_1_blue&amp;#39;: [0.5, &amp;#39;Unknown&amp;#39;], &amp;#39;X_1_red&amp;#39;: [&amp;#39;Unknown&amp;#39;, 0.5], &amp;#39;X_2&amp;#39;: [6.35, 4.2]}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From the output above, we know that the decision region:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{blue} * [6.35, 4.2]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But it seems that the region &lt;strong&gt;[6.35, 4.2]&lt;/strong&gt; is not reasonable due to the poorly generated data. But it may happens in some situations, which may require us to come up with new ways to ensemble these terminal nodes.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Fitting Linear Mixed Models</title>
       <link>/post/en/fitting-linear-mixed-models/</link>
       <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
@@ -9142,109 +9315,6 @@ $$x_i={x_* }_i+\delta_i$$
 &lt;li&gt;&lt;p&gt;另外&lt;br /&gt;
 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161102_6.png&#34; alt=&#34;Snip20161102_6&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>无约束优化(4)</title>
-      <link>/post/zh/uncon4/</link>
-      <pubDate>Wed, 26 Oct 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/post/zh/uncon4/</guid>
-      <description>&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;牛顿法与其变形&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;局部收敛性&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a&gt;全局收敛性&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#gauss-newtown-&#34;&gt;Gauss-Newtown 法&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div class=&#34;section level2&#34;&gt;
-&lt;h2&gt;牛顿法与其变形&lt;/h2&gt;
-&lt;p&gt;之前我们讨论了梯度方法的收敛性与收敛速率。我们知道最速下降法是梯度方法中迭代形式最简单，但是收敛速率最慢的算法。另一个极端是牛顿法，它在一定情况下它是梯度算法中收敛速率最快的算法，但是相应的迭代算法会比较复杂，因为要计算Hessian阵的逆。&lt;/p&gt;
-&lt;p&gt;如前面所讨论的牛顿法方向的选取方式&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-(\nabla^2 f(x_k))^{-1}\nabla f(x_k)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;保证了其尺度变化不变性(scaling-free)。 即: 考虑线性变化&lt;span class=&#34;math inline&#34;&gt;\(x=Sy\)&lt;/span&gt;，则在变量y空间中用牛顿法极小化&lt;span class=&#34;math inline&#34;&gt;\(f(S^{-1}x)\)&lt;/span&gt;生成的序列&lt;span class=&#34;math inline&#34;&gt;\(y_{k+1}=y_k+a_kd_k\)&lt;/span&gt;与在变量x空间用牛顿法极小化&lt;span class=&#34;math inline&#34;&gt;\(f(x)\)&lt;/span&gt;生成的序列&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}=x_k+a_kd_k\)&lt;/span&gt;存在关系&lt;span class=&#34;math inline&#34;&gt;\(x_k=Sy_k\)&lt;/span&gt;。这种尺度变化不变性是最速下降法所不具备的。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;纯牛顿法&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;由【类牛顿法的超线性收敛速率结论】我们知道，在非奇异的局部最小值点附近，当Hessian阵正定时，只需选取步长s=1。因此即将收敛时，算法的跌带形式为&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}-(\nabla^2f(x_k))^{-1}\nabla f(x_k)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;该算法称为纯牛顿法。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;在远离局部最小值时，有可能出现&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Hessian阵奇异&lt;/li&gt;
-&lt;li&gt;Hessian阵非正定导致&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;不是下降方向&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;因此，对于牛顿法我们要进行下面的两个讨论&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;局部收敛性：刻画标准牛顿方法在非奇异局部最小值附近的性能&lt;/li&gt;
-&lt;li&gt;全局收敛性： 当起始点离所有局部最小值点都很远的时候，为了保证算法收敛且能够达到局部最小值点，需要对牛顿法进行变形。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;局部收敛性&lt;/h3&gt;
-&lt;p&gt;鉴于我们已经讨论过纯牛顿法的收敛性，这里我们就提出更为一般的牛顿法的收敛性结论。&lt;/p&gt;
-&lt;p&gt;考虑含有n个未知数，n个方程的约束系统&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[g(x)=0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(g:R^n\vert \rightarrow R^n\)&lt;/span&gt; 是一个连续可微的函数。 求解该问题的迭代算法为&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_k-(\nabla g(x)_k)^{-1}g(x_k))\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;其实该问题可以看做n元方程组的求解问题。因此我们可以得到更一般的Newton-Raphson算法。该迭代式的导出的直观想法与梯度方法十分类似&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x)\approx f(x_0)+(x-x_0)^T\nabla f(x_0)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;于是求解&lt;span class=&#34;math inline&#34;&gt;\(g(x)=0\)&lt;/span&gt;近似与求解&lt;span class=&#34;math inline&#34;&gt;\(f(x_0)+(x-x_0)^T\nabla f(x_0)=0\)&lt;/span&gt;，进而得到迭代关系式。 2. 若&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x)=g(x)\)&lt;/span&gt;则上述牛顿法就是我们所说的纯牛顿法。但是一般来说可微的向量值函数&lt;span class=&#34;math inline&#34;&gt;\(g\)&lt;/span&gt;不一定是某个函数的梯度。特别的，&lt;span class=&#34;math inline&#34;&gt;\(g\)&lt;/span&gt;是某个函数&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的梯度当且仅当对所有的x，&lt;span class=&#34;math inline&#34;&gt;\(\nabla g(x)\)&lt;/span&gt;是对称矩阵。 3. 该算法是超线性收敛的。【证明可以参见Dimitri .P Bertsekas, Nonlinear Programming 2ed中文版p68】 4. 更一般的结论 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14769767590504.jpg&#34; /&gt; &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/14769767820494.jpg&#34; /&gt;&lt;/p&gt;
-&lt;ol start=&#34;5&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;该算法的问题在于，我们不能够知道迭代初始点是否离局部最小值点足够近。事实上当初始点比较坏时，算法完全可能不收敛。 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161020_34.png&#34; alt=&#34;Snip20161020_34&#34; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;全局收敛性&lt;/h3&gt;
-&lt;p&gt;正如我们之前所讨论的，纯牛顿法在解&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;无约束的最小化问题会遇到以下问题：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\((\nabla^2 f(x_k))^{-1}\)&lt;/span&gt;的逆不存在。比如&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是线性函数，当&lt;span class=&#34;math inline&#34;&gt;\(f(x)=C&amp;#39;x\)&lt;/span&gt;时&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x_k)=0\)&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;纯牛顿法不能保证函数在每一步下降，即出现&lt;span class=&#34;math inline&#34;&gt;\(f(x_{k+1})f(x_k)\)&lt;/span&gt;的情形&lt;/li&gt;
-&lt;li&gt;从更一般的牛顿法的迭代形式可以看出，我们纯牛顿法只是在试图解决&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x)=0\)&lt;/span&gt;的问题，因此算法可能会在局部最大值点附近。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;于是我们需要对牛顿法作出一些修正。比如给Hessian阵&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x_k)\)&lt;/span&gt;加一个对角阵扰动的扰动&lt;span class=&#34;math inline&#34;&gt;\(\nabla^2 f(x_k)+\Omega_k\)&lt;/span&gt;使得其正定从而可逆。比如改进的Cholesky分解法，于是衍生出了牛顿法的变形&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;gauss-newtown-&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Gauss-Newtown 法&lt;/h3&gt;
-&lt;p&gt;考虑极小化&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{2}\vert \vert g(x)\vert \vert ^2\)&lt;/span&gt;，其中&lt;span class=&#34;math inline&#34;&gt;\(g: R^n\vert \rightarrow R^m\)&lt;/span&gt;的专门方法：Gauss-Newtown法。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;考虑&lt;span class=&#34;math inline&#34;&gt;\(g(x)\)&lt;/span&gt;的线性逼近&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\tilde{g}(x,x_k)=g(x_k)+(x-x_k)&amp;#39;\nabla g(x_k)\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;极小化&lt;span class=&#34;math inline&#34;&gt;\(\tilde{g}(x,x_k)\)&lt;/span&gt;得到&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}\)&lt;/span&gt;，即&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=\mathop{argmin}_{x}\frac{1}{2}\vert \vert \tilde{g}(x,x_k)\vert \vert ^2\overset{*}=x_{k}-\big(\nabla g(x_k)\nabla^T g(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;检验 &lt;span class=&#34;math inline&#34;&gt;\(\overset{*}=\)&lt;/span&gt; 成立，只用对&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{2}\vert \vert \tilde{g}(x,x_k)\vert \vert ^2\)&lt;/span&gt;关于&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;求导，并设为零即可。&lt;/li&gt;
-&lt;li&gt;当&lt;span class=&#34;math inline&#34;&gt;\(g\)&lt;/span&gt;是一个线性函数的时候，比如线性回归模型&lt;span class=&#34;math inline&#34;&gt;\(g(\beta)=Y-X\beta\)&lt;/span&gt;，迭代一步即可收敛。因为&lt;span class=&#34;math inline&#34;&gt;\(\tilde{g}(x,x_k)\)&lt;/span&gt;不再是&lt;span class=&#34;math inline&#34;&gt;\(g(x)\)&lt;/span&gt;的线性逼近，而就是&lt;span class=&#34;math inline&#34;&gt;\(g(x)\)&lt;/span&gt;的恒等变换。关于&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;极小化&lt;span class=&#34;math inline&#34;&gt;\(\tilde{g}(x,x_k)\)&lt;/span&gt;等价于原问题。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;算法收敛性&lt;/h4&gt;
-&lt;p&gt;下降方向&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-\big(\nabla g(x_k)\nabla^T g(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;在&lt;span class=&#34;math inline&#34;&gt;\(\nabla g(x_k)\nabla^T g(x_k)\)&lt;/span&gt;奇异时，算法会出现问题。为了解决这个问题，同时提高算法在奇异点附近的迭代收敛性，我们一般会修正下降方向为&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-\big(\nabla g(x_k)\nabla^T g(x_k)+\Delta_k\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(\Delta_k\)&lt;/span&gt;为对角阵，且正定（Levenberg-Marquatdt提出&lt;span class=&#34;math inline&#34;&gt;\(\Delta_k=\lambda I,\lambda\)&lt;/span&gt;为一正数）并根据一定准则选择下降步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;，从而有更新公式&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}-a_k\big(\nabla g(x_k)\nabla^T g(x_k)+\Delta_k\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;通过这些&lt;span class=&#34;math inline&#34;&gt;\(\Delta_k\)&lt;/span&gt;的选取方式，可以保证&lt;span class=&#34;math display&#34;&gt;\[\{d_k\}\]&lt;/span&gt;是梯度相关的，比如我们再用Armijo准则选择合适的步长，则算法一定是收敛的（因为此时可以看成是特殊的梯度法）。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;与牛顿法的关系&lt;/h4&gt;
-&lt;p&gt;两种算法十分接近，Gauss-Newtown法本质上是牺牲收敛速度来避免复杂的二阶项计算。事实上，考虑&lt;span class=&#34;math inline&#34;&gt;\(g\)&lt;/span&gt;的每个分量&lt;span class=&#34;math inline&#34;&gt;\(g_i\)&lt;/span&gt;是标量的情形，则目标函数&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{2}\vert \vert g(x)\vert \vert ^2\)&lt;/span&gt;的Hessian阵为&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla g(x_k)\nabla^T g(x_k)+\sum_{i=1}^m \nabla^2 g_i(x_k)g_i(x_k)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;于是牛顿法的更新公式为&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}-\big(\nabla g(x_k)\nabla^T g(x_k)+\sum_{i=1}^m \nabla^2 g_i(x_k)g_i(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;而Gauss-Newtown法的更新公式为&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}-\big(\nabla g(x_k)\nabla^T g(x_k)\big)^{-1}\nabla g(x_k)g(x_k)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;如果被忽略的二阶项在收敛点附近值很小，自然Gauss-Newtown法的速率是令人满意的。&lt;/p&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>
