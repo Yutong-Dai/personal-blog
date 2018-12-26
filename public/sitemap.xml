@@ -6,7 +6,7 @@
     <url>
     
       <loc>/post/en/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</loc>
-      <lastmod>2018-07-07T00:00:00+00:00</lastmod>
+      <lastmod>2018-07-07T23:24:50-05:00</lastmod>
     </url>
     
   
@@ -70,6 +70,15 @@
     
       <loc>/project/boston-housing/</loc>
       <lastmod>2018-06-09T22:21:59+08:00</lastmod>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/project/show-and-tell/</loc>
+      <lastmod>2017-12-10T00:00:00-05:00</lastmod>
     </url>
     
   
@@ -240,6 +249,16 @@
     
     <url>
     
+      <loc>/tags/cnn/</loc>
+      <lastmod>2017-12-10T00:00:00-05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/categories/</loc>
       <priority>0</priority>
     </url>
@@ -269,6 +288,16 @@
     
     <url>
     
+      <loc>/tags/deep-learning/</loc>
+      <lastmod>2017-12-10T00:00:00-05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
       <loc>/gallery/</loc>
       <lastmod>2018-06-03T13:34:26+08:00</lastmod>
       <priority>0</priority>
@@ -281,6 +310,16 @@
     
       <loc>/tags/lme/</loc>
       <lastmod>2018-07-01T23:27:52-05:00</lastmod>
+      <priority>0</priority>
+    </url>
+    
+  
+    
+    
+    <url>
+    
+      <loc>/tags/lstm/</loc>
+      <lastmod>2017-12-10T00:00:00-05:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -358,7 +397,7 @@
     <url>
     
       <loc>/categories/python-programming/</loc>
-      <lastmod>2018-07-07T00:00:00+00:00</lastmod>
+      <lastmod>2018-07-07T23:24:50-05:00</lastmod>
       <priority>0</priority>
     </url>
     
@@ -398,7 +437,7 @@
     <url>
     
       <loc>/tags/randomforest/</loc>
-      <lastmod>2018-07-07T00:00:00+00:00</lastmod>
+      <lastmod>2018-07-07T23:24:50-05:00</lastmod>
       <priority>0</priority>
     </url>
     

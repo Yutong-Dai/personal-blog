@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 10 Dec 2017 00:00:00 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 10 Dec 2017 00:00:00 -0500</lastBuildDate>
     
 	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,9 +15,20 @@
     <item>
       <title>Real Estate Market Data Analysis</title>
       <link>/project/boston-housing/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
       
       <guid>/project/boston-housing/</guid>
+      <description>In this project, we
+ Develope data products to help Airbnb hosts to determine listing prices using Sparse Regression and RandomForest Researched how amenities and geolocation in uence listing prices Designed a User Interface for customers to gain insight into Airbnb rental markets in Boston  The Video Presentation and Rshiny App Demo are also provided.
+ </description>
+    </item>
+    
+    <item>
+      <title>Show and Tell: A Neural Image Caption Generator</title>
+      <link>/project/show-and-tell/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
+      
+      <guid>/project/show-and-tell/</guid>
       <description>In this project, we
  Develope data products to help Airbnb hosts to determine listing prices using Sparse Regression and RandomForest Researched how amenities and geolocation in uence listing prices Designed a User Interface for customers to gain insight into Airbnb rental markets in Boston  The Video Presentation and Rshiny App Demo are also provided.
  </description>

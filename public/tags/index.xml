@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 -0500</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Content tagged as &#39;Academic&#39;</title>
       <link>/tags/academic/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 -0500</pubDate>
       
       <guid>/tags/academic/</guid>
       <description>Here is a list of all the content that has been tagged as academic.</description>
@@ -31,11 +31,29 @@
     </item>
     
     <item>
+      <title>CNN</title>
+      <link>/tags/cnn/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
+      
+      <guid>/tags/cnn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Data-analysis</title>
       <link>/tags/data-analysis/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
       
       <guid>/tags/data-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep-learning</title>
+      <link>/tags/deep-learning/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
+      
+      <guid>/tags/deep-learning/</guid>
       <description></description>
     </item>
     
@@ -45,6 +63,15 @@
       <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/lme/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LSTM</title>
+      <link>/tags/lstm/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
+      
+      <guid>/tags/lstm/</guid>
       <description></description>
     </item>
     
@@ -60,7 +87,7 @@
     <item>
       <title>Pictures</title>
       <link>/tags/pictures/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 -0500</pubDate>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 -0400</pubDate>
       
       <guid>/tags/pictures/</guid>
       <description></description>

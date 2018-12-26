@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 -0400</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
@@ -8094,9 +8094,29 @@ anova(lmod.nested.res2, lmod.nested)&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Real Estate Market Data Analysis</title>
       <link>/project/boston-housing/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
       
       <guid>/project/boston-housing/</guid>
+      <description>&lt;p&gt;In this project, we&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Develope data products to help Airbnb hosts to determine listing prices using Sparse Regression and RandomForest&lt;/li&gt;
+&lt;li&gt;Researched how amenities and geolocation in uence listing prices&lt;/li&gt;
+&lt;li&gt;Designed a User Interface for customers to gain insight into Airbnb rental markets in Boston&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://mediaspace.illinois.edu/media/t/1_3yvpnzqn&#34; target=&#34;_blank&#34;&gt;Video Presentation&lt;/a&gt; and &lt;a href=&#34;https://yutongdai.shinyapps.io/shinyapp/&#34; target=&#34;_blank&#34;&gt;Rshiny App Demo&lt;/a&gt; are also provided.&lt;/p&gt;
+
+&lt;iframe id=&#34;kmsembed-1_3yvpnzqn&#34; width=&#34;640&#34; height=&#34;394&#34; src=&#34;https://mediaspace.illinois.edu/embed/secure/iframe/entryId/1_3yvpnzqn/uiConfId/26883701&#34; class=&#34;kmsembed&#34; allowfullscreen webkitallowfullscreen mozAllowFullScreen allow=&#34;autoplay *; fullscreen *; encrypted-media *&#34; frameborder=&#34;0&#34; title=&#34;Kaltura Player&#34;&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Show and Tell: A Neural Image Caption Generator</title>
+      <link>/project/show-and-tell/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
+      
+      <guid>/project/show-and-tell/</guid>
       <description>&lt;p&gt;In this project, we&lt;/p&gt;
 
 &lt;ul&gt;
@@ -9205,116 +9225,6 @@ $$x_i={x_* }_i+\delta_i$$
 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161110_6.png&#34; alt=&#34;Snip20161110_6&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;Snip20161110_6&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>无约束优化(5)</title>
-      <link>/post/zh/uncon5/</link>
-      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/post/zh/uncon5/</guid>
-      <description>&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;共轭方向法&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;共轭方向法求解二次问题&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a&gt;共轭方向法求解非二次问题&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;div class=&#34;section level2&#34;&gt;
-&lt;h2&gt;共轭方向法&lt;/h2&gt;
-&lt;p&gt;在前面的讨论中我们看到了，由于最速下降法在矩阵条件数大的情况下，收敛速率可以非常缓慢；牛顿法虽然在非奇异驻点附近收敛速率很快，但是计算复杂度较高。因此我们提出了共轭方向法（conjugate direction methods）来改进该问题。&lt;/p&gt;
-&lt;p&gt;首先给出共轭的概念与简单性质&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;定义： 给定一个n维的正定矩阵&lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt;，我们说非零向量组&lt;span class=&#34;math inline&#34;&gt;\(d_1,...,d_k\)&lt;/span&gt;是Q-共轭(Q-conjugate)的，如果任意&lt;span class=&#34;math inline&#34;&gt;\(i\neq j\)&lt;/span&gt;成立&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_i^TQd_j=0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;性质： 如果非零向量组&lt;span class=&#34;math inline&#34;&gt;\(d_1,...,d_k\)&lt;/span&gt;是Q-共轭，则它们是线性无关的&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt; 其实Q-共轭可以看作是在另一坐标系下的的正交。因为，若设&lt;span class=&#34;math inline&#34;&gt;\(Q=A^TA\)&lt;/span&gt;,则有&lt;span class=&#34;math inline&#34;&gt;\((Ad_i)^T(Ad_j)=0\)&lt;/span&gt;&lt;/p&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;共轭方向法求解二次问题&lt;/h3&gt;
-&lt;p&gt;对于一个给定含有n个Q-共轭方向&lt;span class=&#34;math display&#34;&gt;\[\{d_0,d_1,...,d_{n-1}\}\]&lt;/span&gt;，以及无约束二次函数最小化问题&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x} f(x)=\frac{1}{2}x&amp;#39;Qx-b&amp;#39;x\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;相应的共轭法为&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}+a_kd_k\;k=0,1,...,n-1\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(x_0\)&lt;/span&gt;是任意的初始向量，&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;是按照最小步长准则给出的，即&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[a_k=\mathop{argmin}_{a} g(a)=f(x_k+ad_k)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;&lt;p&gt;求解方程 &lt;span class=&#34;math inline&#34;&gt;\(g&amp;#39;(a)=d_k^T\nabla (x_k+a_kd_k)=0\)&lt;/span&gt;【原问题是凸的，故可以使用一阶最优性条件】,可以给出每一步长&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[a_k=\frac{d_k^T(b-Qx_k)}{d_k^TQd_k}\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;从代数的观点来看，共轭方向法的本质是：&lt;strong&gt;在逐渐扩张的线性流形上逐步极小化目标函数&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;,而经过n步扩张后的线性流形将包含&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的全局最小值点&lt;/strong&gt;，即对每一个k（k=0,1,2,..,n-1）&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=\mathop{argmin}_{x\in M_k}\quad f(x)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其中&lt;span class=&#34;math display&#34;&gt;\[M_K=\{x_0+v\vert v\in span\{d_0,d_1,..d_k\}\}\]&lt;/span&gt;。因为我们可以证明该优化问题求解出来的&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}\)&lt;/span&gt;就是更新公式产生的那个&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}\)&lt;/span&gt;。特别地，在证明过程中，我们顺便得到&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_i^T\nabla f(x_{k+1})=0\quad \forall i=0,1,2,...,k\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;从几何的观点来看，共轭方向法实质：&lt;strong&gt;在n维空间中，逐渐沿着n个正交方向，极小化目标函数&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;&lt;/strong&gt;。具体来讲，当&lt;span class=&#34;math inline&#34;&gt;\(b=0, Q=I\)&lt;/span&gt;时，这时&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;的等值面是同心球，我们沿着n个正交方向（比如坐标轴方向）逐次极小化&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;便可以的达到球心。如果&lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt;是一般的正定矩阵，可以通过尺度变换，令&lt;span class=&#34;math inline&#34;&gt;\(y=Q^{1/2}x\)&lt;/span&gt;则极小化&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{1}{2}x&amp;#39;Qx\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;等价于极小化&lt;span class=&#34;math inline&#34;&gt;\(\vert \vert y\vert \vert ^2\)&lt;/span&gt;。如果&lt;span class=&#34;math inline&#34;&gt;\(w_0.w_1,..w_{n-1}\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(R^n\)&lt;/span&gt;中的一组非零正交方向算法最多在n步后终止。利用&lt;span class=&#34;math inline&#34;&gt;\(x=Q^{-1/2}y\)&lt;/span&gt;即可求解原问题。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161031_3.png&#34; alt=&#34;Snip20161031_3&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;Snip20161031_3&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;q-&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;Q-共轭方向的生成&lt;/h4&gt;
-&lt;p&gt;对于任意给定的线性无关向量组&lt;span class=&#34;math display&#34;&gt;\[\{\xi_0,\xi_1,...,\xi_k\}\]&lt;/span&gt;，利用Gram-Schmidt方法，可以构建一组相互Q-共轭的方向&lt;span class=&#34;math display&#34;&gt;\[\{d_0,d_1,...,d_k\}\]&lt;/span&gt;，使得对于所有的&lt;span class=&#34;math inline&#34;&gt;\(i=0,...,k\)&lt;/span&gt;满足&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[span\{\xi_0,\xi_1,...,\xi_i\}=span\{d_0,d_1,...,d_i\} \qquad(1.147)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161102_3.png&#34; alt=&#34;Snip20161102_3&#34; /&gt; &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161102_4.png&#34; alt=&#34;Snip20161102_4&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level4&#34;&gt;
-&lt;h4&gt;共轭梯度法&lt;/h4&gt;
-&lt;p&gt;该方法是基于在第k步的梯度方向&lt;span class=&#34;math inline&#34;&gt;\(g_k=\nabla f(x_k)\)&lt;/span&gt;,来生成共轭方向&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;。具体来说是：&lt;/p&gt;
-&lt;p&gt;设&lt;span class=&#34;math inline&#34;&gt;\(\xi_0=-g_0\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(d_0=\xi_0\)&lt;/span&gt; 假设已经得到了k-1个共轭方向&lt;span class=&#34;math display&#34;&gt;\[\{d_0,d_1,...,d_{k-1}\}\]&lt;/span&gt;，利用Gram-Schimidt方法对向量组&lt;span class=&#34;math display&#34;&gt;\[\{-g_k,d_0,...,d_{k-1}\}\]&lt;/span&gt;执行（1.149）和（1.151）式得到共轭方向&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-g_k+\sum_{i=1}^{k-1}\frac{g_k&amp;#39;Qd_i}{d_i&amp;#39;Qd_i}d_i\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;利用最小化步长准则选取步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;，从而构造迭代列&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_k+a_kd_k\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;&lt;p&gt;若&lt;span class=&#34;math inline&#34;&gt;\(g_0\neq0\)&lt;/span&gt;,算法在终止之前所有生成的梯度&lt;span class=&#34;math inline&#34;&gt;\(g_k\)&lt;/span&gt;是线性无关的。这是由&lt;em&gt;共轭方向本质上是在逐渐扩张的线性流形上逐步极小化目标函数&lt;/em&gt;这一原理保证的。事实上若在第k步，算法未终止，&lt;span class=&#34;math inline&#34;&gt;\(\forall i=0,1,...,k-1\)&lt;/span&gt;我们有&lt;span class=&#34;math inline&#34;&gt;\(d_i^Tg_k=0\quad\)&lt;/span&gt;。而&lt;span class=&#34;math display&#34;&gt;\[span \{d_0,d_1,...,d_{k-1}\}= span \{g_0,g_1,...,g_{k-1}\}\]&lt;/span&gt;，故&lt;span class=&#34;math inline&#34;&gt;\(\forall i=0,1,...,k-1\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[g_i^Tg_k=0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;由于最多能够n个线性无关的梯度方向，故至多迭代n次后，梯度为零，且算法会帮助找到某个全局最小值。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;共轭梯度法之所以有用是因为，看似计算十分复杂的共轭方向&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;的生成公式&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-g_k+\sum_{i=1}^{k-1}\frac{g_k&amp;#39;Qd_i}{d_i&amp;#39;Qd_i}d_i\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;可以化简为&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-g_k+\frac{g_k&amp;#39;g_k}{g_{k-1}&amp;#39;g_{k-1}}d_{k-1}\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;【证明可以参见Dimitri .P Bertsekas, Nonlinear Programming 2ed中文版p105 命题1.6.1】&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;显然当&lt;span class=&#34;math inline&#34;&gt;\(d_k=0\)&lt;/span&gt;时，算法也会结束。但是利用3的结论，我们可以知道只有当&lt;span class=&#34;math inline&#34;&gt;\(g_k=0\)&lt;/span&gt;时才有&lt;span class=&#34;math inline&#34;&gt;\(d_k=0\)&lt;/span&gt;。利用反正法，若&lt;span class=&#34;math inline&#34;&gt;\(d_k=0,g_k\neq 0\)&lt;/span&gt;，我们有&lt;span class=&#34;math inline&#34;&gt;\(g_k=\frac{g_k&amp;#39;g_k}{g_{k-1}&amp;#39;g_{k-1}}d_{k-1}\)&lt;/span&gt;，这与1中&lt;span class=&#34;math inline&#34;&gt;\(g_k\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(d_{k-1}\)&lt;/span&gt;的正交性矛盾了。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;共轭方向法求解非二次问题&lt;/h3&gt;
-&lt;p&gt;共轭方向法同样可以运用在非二次问题中，即直接将针对二次问题的算法平行的移植过来。&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_x \quad f(x)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Algorithm&lt;/code&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}=x_{k}+a_kd_k\;k=0,1,...,n-1\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(x_0\)&lt;/span&gt;是任意的初始向量，&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;是按照最小步长准则给出的，即&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[a_k=\mathop{argmin}_{a} g(a)=f(x_k+ad_k)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;是按照下式给出的&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-g_k+\beta_kd_{k-1}\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其中常用的&lt;span class=&#34;math inline&#34;&gt;\(\beta_k\)&lt;/span&gt;计算方式为&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\beta_{k}=\frac{\nabla^T f(x_k)\big(\nabla f(x_k)-\nabla f(x_{k-1})\big)}{\nabla^T f(x_{k-1})\nabla f(x_{k-1})}\]&lt;/span&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;&lt;p&gt;选取&lt;span class=&#34;math inline&#34;&gt;\(\beta_k\)&lt;/span&gt;的直观想法是来自求解二次问题时，共轭方向的生成公式&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-g_k+\frac{g_k&amp;#39;g_k}{g_{k-1}&amp;#39;g_{k-1}}d_{k-1}\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;由于&lt;span class=&#34;math inline&#34;&gt;\(g_k&amp;#39;g_{k-1}=0\)&lt;/span&gt;，故上式又等价于&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_k=-g_k+\frac{g_k&amp;#39;(g_k-g_{k-1})}{g_{k-1}&amp;#39;g_{k-1}}d_{k-1}\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(d_k=-g_k+\beta_kd_{k-1}\)&lt;/span&gt; 是一个下降方向，即有&lt;span class=&#34;math inline&#34;&gt;\(d^T_{k}\nabla f(x_k)&amp;lt;0\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;proof:&lt;/em&gt; 在二次问题中讨论中我们证明了，按照线性最小化方式选择步长&lt;span class=&#34;math inline&#34;&gt;\(a_k\)&lt;/span&gt;以及用共轭方向&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;更新&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}\)&lt;/span&gt;的方式能够保证&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d_i^T\nabla f(x_{k+1})=0\quad \forall i=0,1,2,...,k\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;于是我们有&lt;span class=&#34;math inline&#34;&gt;\(d_{k-1}^T\nabla f(x_{k})=0\)&lt;/span&gt;，从而&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[d^T_{k}\nabla f(x_k)=-\vert \vert \nabla f(x_k)\vert \vert ^2+\beta_kd_{k-1}^T\nabla f(x_{k})=-\vert \vert \nabla f(x_k)\vert \vert ^2&amp;lt;0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;这样选取&lt;span class=&#34;math inline&#34;&gt;\(\beta_k\)&lt;/span&gt;的目的在于，目标函数中存在的二次项和不精确的一维线搜索会破坏我们搜索方向&lt;span class=&#34;math display&#34;&gt;\[\{d_k\}\]&lt;/span&gt;的共轭性，并且会出现&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_k)\)&lt;/span&gt;近似正交的情形。一旦&lt;span class=&#34;math inline&#34;&gt;\(d_k\)&lt;/span&gt;与&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_k)\)&lt;/span&gt;近似正交&lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x_k)\vert \vert ^2\)&lt;/span&gt;近似等于0。如果&lt;span class=&#34;math inline&#34;&gt;\(\beta_k\)&lt;/span&gt;更新公式选成&lt;span class=&#34;math inline&#34;&gt;\(\beta_{k}=\frac{\nabla^T f(x_k)\big(\nabla f(x_k)\big)}{\nabla^T f(x_{k-1})\nabla f(x_{k-1})}\)&lt;/span&gt;，则&lt;span class=&#34;math inline&#34;&gt;\(\beta_k\)&lt;/span&gt;就接近0，于是&lt;span class=&#34;math inline&#34;&gt;\(x_{k+1}\)&lt;/span&gt;便近似等于&lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt;,导致迭代算法被卡住。&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;另外&lt;br /&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161102_6.png&#34; alt=&#34;Snip20161102_6&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>
