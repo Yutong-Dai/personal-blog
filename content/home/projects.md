@@ -35,7 +35,8 @@ filter_default = 0
 [[filter]]
   name = "Data Analysis"
   tag = ".data-analysis"
-  
-
+[[filter]]
+  name = "Deep Learning"
+  tag = ".deep-learning"
 +++
 

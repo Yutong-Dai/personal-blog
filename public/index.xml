@@ -8117,17 +8117,44 @@ anova(lmod.nested.res2, lmod.nested)&lt;/code&gt;&lt;/pre&gt;
       <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
       
       <guid>/project/show-and-tell/</guid>
-      <description>&lt;p&gt;In this project, we&lt;/p&gt;
+      <description>&lt;p&gt;This is the deep learning course final project trying to reporduce the results reported in the paper, &lt;a href=&#34;https://arxiv.org/pdf/1411.4555.pdf&#34; target=&#34;_blank&#34;&gt;Show and Tell: A Neural Image Caption Generator&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;The model is trained on the &lt;a href=&#34;http://cocodataset.org/#home&#34; target=&#34;_blank&#34;&gt;MS coco2014 dataset&lt;/a&gt;. Our final result looks like&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/project-pics/caption-demo.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For code, UI, and report  please click &lt;a href=&#34;https://github.com/Rothdyt/Projects/tree/master/Show-and-tell&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Variational Gaussian Mixtures</title>
+      <link>/project/variational-inference/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
+      
+      <guid>/project/variational-inference/</guid>
+      <description>&lt;p&gt;This is the statistical computing course final project, trying to understand, reporduce and extend some results reported in the paper, &lt;a href=&#34;https://arxiv.org/pdf/1601.00670.pdf&#34; target=&#34;_blank&#34;&gt;Variational Inference: A Review for Statisticians&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Three datasets are used here, simulated data, &lt;a href=&#34;https://www.stat.cmu.edu/~larry/all-of-statistics/=data/faithful.dat&#34; target=&#34;_blank&#34;&gt;old faithful&lt;/a&gt; and &lt;a href=&#34;https://www.imageclef.org&#34; target=&#34;_blank&#34;&gt;imageCLEF&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Our final result looks like&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Develope data products to help Airbnb hosts to determine listing prices using Sparse Regression and RandomForest&lt;/li&gt;
-&lt;li&gt;Researched how amenities and geolocation in uence listing prices&lt;/li&gt;
-&lt;li&gt;Designed a User Interface for customers to gain insight into Airbnb rental markets in Boston&lt;/li&gt;
+&lt;li&gt;Simulated data&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;The &lt;a href=&#34;https://mediaspace.illinois.edu/media/t/1_3yvpnzqn&#34; target=&#34;_blank&#34;&gt;Video Presentation&lt;/a&gt; and &lt;a href=&#34;https://yutongdai.shinyapps.io/shinyapp/&#34; target=&#34;_blank&#34;&gt;Rshiny App Demo&lt;/a&gt; are also provided.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/project-pics/simulation.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 
-&lt;iframe id=&#34;kmsembed-1_3yvpnzqn&#34; width=&#34;640&#34; height=&#34;394&#34; src=&#34;https://mediaspace.illinois.edu/embed/secure/iframe/entryId/1_3yvpnzqn/uiConfId/26883701&#34; class=&#34;kmsembed&#34; allowfullscreen webkitallowfullscreen mozAllowFullScreen allow=&#34;autoplay *; fullscreen *; encrypted-media *&#34; frameborder=&#34;0&#34; title=&#34;Kaltura Player&#34;&gt;&lt;/iframe&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;old faithful
+&lt;img src=&#34;/img/project-pics/old_faithful.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;imageclef&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&#34;/img/project-pics/imageclef.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;For code and report please click &lt;a href=&#34;https://github.com/Rothdyt/Projects/tree/master/Show-and-tell&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -9100,130 +9127,6 @@ subject\; to\; a_i^Tx-y\leq b_i\qquad i=1,2,..,m,\quad x,y\geq 0\]&lt;/span&gt;&
 &lt;li&gt;&lt;p&gt;该优化问题的几何直观非常明确，就是寻找&lt;span class=&#34;math inline&#34;&gt;\(\bar x_{k}\)&lt;/span&gt;在当前迭代带点&lt;span class=&#34;math inline&#34;&gt;\(x_k\)&lt;/span&gt;的负梯度方向&lt;span class=&#34;math inline&#34;&gt;\(-\nabla f(x_k)\)&lt;/span&gt;投影最长的点。 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161121_3.png&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;考虑计算的实用性，我们总是希望该优化问题比原问题求解更加容易。一个典型的例子是，当&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;是非线性函数，&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;为线性等式及不等式构成的约束的时候，该子问题是线性规划，容易求解。&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>约束优化(1)</title>
-      <link>/post/zh/con1/</link>
-      <pubDate>Mon, 07 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/post/zh/con1/</guid>
-      <description>&lt;div id=&#34;TOC&#34;&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;约束优化问题&lt;/a&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a&gt;最优解的存在性&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a&gt;最优解的充要条件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a&gt;凸集上的投影&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;这一章我们考虑带约束的优化问题&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\qquad f(x)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其中&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;X是非空凸集&lt;/li&gt;
-&lt;li&gt;函数 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 是连续可微的&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;另外我们称&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;为可行域，里面的点&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;为可行解。&lt;/p&gt;
-&lt;div class=&#34;section level2&#34;&gt;
-&lt;h2&gt;约束优化问题&lt;/h2&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;最优解的存在性&lt;/h3&gt;
-&lt;p&gt;不像在无约束优化问题，在一定条件下我们可以使用Weisterass保证最优解的存在性，带约束的问题中往往不能满足这些条件。所幸的是Marguerite Frank and Philip Wolfe给出了如下定理：&lt;/p&gt;
-&lt;p&gt;If a quadratic function &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; is bounded below on a nonempty polyhedron &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;, then &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; attains its infimum on &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;. (That is, there exists a vector &lt;span class=&#34;math inline&#34;&gt;\(x_* \in X\)&lt;/span&gt; such that &lt;span class=&#34;math inline&#34;&gt;\(f(x_* )\leq f(x),\forall x\in X\)&lt;/span&gt;.)&lt;/p&gt;
-&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;形如&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x)=x^TQx+c^Tx+d\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;且只要求&lt;span class=&#34;math inline&#34;&gt;\(Q\)&lt;/span&gt;是对称矩阵，不需要半正定。&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;最优解的充要条件&lt;/h3&gt;
-&lt;p&gt;【最优解的一阶必要性条件】如果 $x_* $ 是 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 在 凸集&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的局部最小值点，那么&lt;span class=&#34;math inline&#34;&gt;\(\forall x\in X\)&lt;/span&gt;有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla f(x_* )(x-x_* )\geq 0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;【最优解的一阶充要条件】如果 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 是 凸集&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的凸函数，那么$x_* $ 是 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 在 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的全局最小值点&lt;span class=&#34;math inline&#34;&gt;\(\Leftrightarrow\)&lt;/span&gt;&lt;span class=&#34;math inline&#34;&gt;\(\forall x\in X\)&lt;/span&gt;有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\nabla f(x_* )(x-x_* )\geq 0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;【最优解的二阶必要性条件】如果 $x_* $ 是二阶可微连续函数 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 在 凸集&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的局部最小值点，那么对一切满足&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )(x-x_* )\geq 0\)&lt;/span&gt;的&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;，有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x-x_* )^T\nabla^2 f(x_* )(x-x_* )\geq 0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;【最优解的二阶充分性条件】如果 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; 是 凸集&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的二阶连续可导凸函数，且存在&lt;span class=&#34;math inline&#34;&gt;\(x_* \in X\)&lt;/span&gt;，使得对于任意的&lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt;，&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )(x-x_* )\geq 0\)&lt;/span&gt;。若下面任意条件成立，则$x_* $是局部最小值点：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;X是一个多面体，并且对于一切满足&lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x_* )(x-x_* )\geq 0\)&lt;/span&gt;及$xx_* &lt;span class=&#34;math inline&#34;&gt;\(的\)&lt;/span&gt;xX$，成立&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x-x_* )^T\nabla^2 f(x_* )(x-x_* )&amp;gt;0\]&lt;/span&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;存在&lt;span class=&#34;math inline&#34;&gt;\(a&amp;gt;0\)&lt;/span&gt;，使得对于任意&lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt;,成立&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x-x_* )^T\nabla^2 f(x_* )(x-x_* )\geq a\vert \vert x-x_* \vert \vert ^2\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;最优解的一阶必要性条件&lt;/code&gt;的几何解释: 在局部最小值点$x_* &lt;span class=&#34;math inline&#34;&gt;\(处的梯度\)&lt;/span&gt;f(x_* )&lt;span class=&#34;math inline&#34;&gt;\(与所有的可行变分，\)&lt;/span&gt;x-x_* ,xX$，的夹角都小于等于&lt;span class=&#34;math inline&#34;&gt;\(90^\circ\)&lt;/span&gt;。 特别当约束集 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 非凸时，最优性的必要条件不成立。 &lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161109_9.png&#34; alt=&#34;Snip20161109_9&#34; /&gt;&lt;br /&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161109_11.png&#34; alt=&#34;Snip20161109_11&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;最优解的一阶充要条件&lt;/code&gt;中，运用了平行于Chapter 1中的结论，即：令 &lt;span class=&#34;math inline&#34;&gt;\(f:X\vert \rightarrow R\)&lt;/span&gt;为凸集 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; 上的一个凸函数，则在 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的 &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;最小值点也是 &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;上的全局最小值点。&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;例: 带边界约束的优化问题&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;考虑带边界的优化问题&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\qquad f(x)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其中可行域&lt;span class=&#34;math inline&#34;&gt;\(X=\{x\in R^n\vert a_i\leq x\leq b_i, i=1,2,..,n\}\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(a_i,b_i\)&lt;/span&gt;是给定的常数，下面分三种情况讨论：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;最小值点$x_* &lt;span class=&#34;math inline&#34;&gt;\(在下边界点处取到，即\)&lt;/span&gt;{x_* }_i=a_i$&lt;/p&gt;
-&lt;p&gt;利用最优解的一阶必要性条件，我们可以得到&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\sum_{i=1}^n \frac{\partial f(x_* )}{\partial x_i}(x_i-{x_* }_i) \geq 0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;固定&lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;, 构造如下的&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;: &lt;span class=&#34;math inline&#34;&gt;\(x_i=a_i+\delta_i\)&lt;/span&gt;,其中&lt;span class=&#34;math inline&#34;&gt;\(\delta_i&amp;gt;0\)&lt;/span&gt; ，且对一切&lt;span class=&#34;math inline&#34;&gt;\(j\neq i,x_j={x_* }_j\)&lt;/span&gt;。&lt;/p&gt;
-&lt;p&gt;则有&lt;span class=&#34;math inline&#34;&gt;\(\frac{\partial f(x_* )}{\partial x_i}\delta_i\geq 0\)&lt;/span&gt;，进而推出&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x_* )}{\partial x_i}\geq 0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;最小值点$x_* &lt;span class=&#34;math inline&#34;&gt;\(在上边界点处取到，即\)&lt;/span&gt;{x_* }_i=b_i$&lt;/p&gt;
-&lt;p&gt;与上例类似，只需取&lt;span class=&#34;math inline&#34;&gt;\(x_i=b_j-\delta_j\)&lt;/span&gt;,其中&lt;span class=&#34;math inline&#34;&gt;\(\delta_i&amp;gt;0\)&lt;/span&gt;, 易得&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x_* )}{\partial x_i}\leq 0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;最小值点$x_* &lt;span class=&#34;math inline&#34;&gt;\(在内部取到，即\)&lt;/span&gt;a_i &amp;lt;{x_* }&lt;em&gt;i &lt;b_i$
-
-固定$i$, 构造如下的$x$:    
-
-$$x_i={x_* }_i+\delta_i$$
-
-其中$\delta_i&gt;0&lt;span class=&#34;math inline&#34;&gt;\(且保证\)&lt;/span&gt;x_i ={x&lt;/em&gt;* }_i+_i&amp;lt;b_i&lt;span class=&#34;math inline&#34;&gt;\(.同时对一切\)&lt;/span&gt;ji$&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_j={x_* }_j\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;则有&lt;span class=&#34;math inline&#34;&gt;\(\frac{\partial f(x_* )}{\partial x_i }\geq 0\)&lt;/span&gt;; 如果构造&lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;为&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_i={x_*}_i -\delta_i\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其中&lt;span class=&#34;math inline&#34;&gt;\(\delta_i&amp;gt;0\)&lt;/span&gt;且保证&lt;span class=&#34;math inline&#34;&gt;\(x_i ={x_* }_i -\delta_i &amp;gt; a_i\)&lt;/span&gt;， 且对一切$ ji, x_j ={x*}_j $。则有&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x_* )}{\partial x_i }\leq 0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;综上可得&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x_* )}{\partial x_i}=0\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class=&#34;section level3&#34;&gt;
-&lt;h3&gt;凸集上的投影&lt;/h3&gt;
-&lt;p&gt;现在考虑一个有很强直观几何意义的优化问题&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\qquad \vert \vert z-x\vert \vert ^2\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;其中 &lt;span class=&#34;math inline&#34;&gt;\(z\in R^n\)&lt;/span&gt;。从几何上理解这个问题就是，在&lt;span class=&#34;math inline&#34;&gt;\(R^n\)&lt;/span&gt;的子集&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;中找到一个点&lt;span class=&#34;math inline&#34;&gt;\(x_* \in X\)&lt;/span&gt;，使得$x_* &lt;span class=&#34;math inline&#34;&gt;\(与\)&lt;/span&gt;z$在欧式距离意义下最近，我们称这个优化问题为投影问题&lt;/p&gt;
-&lt;p&gt;为了解决这个，优化问题，我们引入下面这个定理&lt;/p&gt;
-&lt;p&gt;【投影定理】设&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;是&lt;span class=&#34;math inline&#34;&gt;\(R^n\)&lt;/span&gt;的非空闭凸子集：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;【存在性命题】对每一&lt;span class=&#34;math inline&#34;&gt;\(z\in R^n\)&lt;/span&gt;，存在唯一的&lt;span class=&#34;math inline&#34;&gt;\(x_* \in X\)&lt;/span&gt;，使得对一切$xX,z-x&lt;span class=&#34;math inline&#34;&gt;\(达到最小。我们称\)&lt;/span&gt;x_* &lt;span class=&#34;math inline&#34;&gt;\(为\)&lt;/span&gt;z&lt;span class=&#34;math inline&#34;&gt;\(在\)&lt;/span&gt;X&lt;span class=&#34;math inline&#34;&gt;\(上的投影，用\)&lt;/span&gt;[z]^+$表示。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;【判定条件】给定&lt;span class=&#34;math inline&#34;&gt;\(z\in R^n\)&lt;/span&gt;，一个向量$x_* &lt;span class=&#34;math inline&#34;&gt;\(等于\)&lt;/span&gt;[z]^+&lt;span class=&#34;math inline&#34;&gt;\(当且仅当对一切\)&lt;/span&gt;xX$&lt;/p&gt;
-&lt;span class=&#34;math display&#34;&gt;\[(z-x_* )(x-x_* )\leq 0\]&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;当&lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;是一个子空间时，一个向量$x_* &lt;span class=&#34;math inline&#34;&gt;\(等于\)&lt;/span&gt;[z]^+&lt;span class=&#34;math inline&#34;&gt;\(当且仅当\)&lt;/span&gt;z-x_* &lt;span class=&#34;math inline&#34;&gt;\(正交于\)&lt;/span&gt;X&lt;span class=&#34;math inline&#34;&gt;\(,即对一切\)&lt;/span&gt;xX$&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x^T(z-x_* )=0\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;判定条件&lt;/code&gt;的几何解释&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161110_4.png&#34; alt=&#34;Snip20161110_4&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;Snip20161110_4&lt;/p&gt;
-&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;子空间情形的几何解释&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/projection.png&#34; alt=&#34;projection&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;projection&lt;/p&gt;
-&lt;/div&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;例子：等式约束的二次问题&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;http://ogfa13jyv.bkt.clouddn.com/Snip20161110_6.png&#34; alt=&#34;Snip20161110_6&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;Snip20161110_6&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

@@ -23,5 +23,18 @@
  </description>
     </item>
     
+    <item>
+      <title>Variational Gaussian Mixtures</title>
+      <link>/project/variational-inference/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
+      
+      <guid>/project/variational-inference/</guid>
+      <description>This is the statistical computing course final project, trying to understand, reporduce and extend some results reported in the paper, Variational Inference: A Review for Statisticians.
+Three datasets are used here, simulated data, old faithful and imageCLEF.
+Our final result looks like
+ Simulated data   old faithful  imageclef
+  For code and report please click here.</description>
+    </item>
+    
   </channel>
 </rss>

@@ -29,9 +29,22 @@
       <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
       
       <guid>/project/show-and-tell/</guid>
-      <description>In this project, we
- Develope data products to help Airbnb hosts to determine listing prices using Sparse Regression and RandomForest Researched how amenities and geolocation in uence listing prices Designed a User Interface for customers to gain insight into Airbnb rental markets in Boston  The Video Presentation and Rshiny App Demo are also provided.
- </description>
+      <description>This is the deep learning course final project trying to reporduce the results reported in the paper, Show and Tell: A Neural Image Caption Generator.
+The model is trained on the MS coco2014 dataset. Our final result looks like
+For code, UI, and report please click here.</description>
+    </item>
+    
+    <item>
+      <title>Variational Gaussian Mixtures</title>
+      <link>/project/variational-inference/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
+      
+      <guid>/project/variational-inference/</guid>
+      <description>This is the statistical computing course final project, trying to understand, reporduce and extend some results reported in the paper, Variational Inference: A Review for Statisticians.
+Three datasets are used here, simulated data, old faithful and imageCLEF.
+Our final result looks like
+ Simulated data   old faithful  imageclef
+  For code and report please click here.</description>
     </item>
     
   </channel>
