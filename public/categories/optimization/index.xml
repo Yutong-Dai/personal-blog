@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Optimization on Yutong Dai / 戴宇童</title>
+    <title>optimization on Yutong Dai / 戴宇童</title>
     <link>/categories/optimization/</link>
-    <description>Recent content in Optimization on Yutong Dai / 戴宇童</description>
+    <description>Recent content in optimization on Yutong Dai / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -14,10 +14,10 @@
     
     <item>
       <title>Convergence Analysis for Bloock Coordinate Decent Algorithm and Powell&#39;s Examples</title>
-      <link>/post/en/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</link>
+      <link>/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</link>
       <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/en/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</guid>
+      <guid>/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</guid>
       <description>Problem description Notations Assumption Algorithm  Convergence Analysis Powell’s example R codes for numerical experiments   We mainly focus on the convergence of Block coordinate decent with exact minimization, whose block update strategy employs Gauss-Seidel manner. And then use Powell’s example to see what will happen if some conditions are not met.
  Reference: 1. Dimitri .P Bertsekas, Nonlinear Programming 2ed 2. Powell ,1973, ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS</description>
     </item>

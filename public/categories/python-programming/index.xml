@@ -14,10 +14,10 @@
     
     <item>
       <title>Decision Tree: How to find the path from the root to the desired terminal node</title>
-      <link>/post/en/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</link>
+      <link>/post/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/en/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</guid>
+      <guid>/post/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</guid>
       <description>Prepare a fitted random forest Find the path to desired terminal node Collect Paths in the random forest Summarize the decison region   Prepare a fitted random forest import random import pandas as pd from sklearn.ensemble.forest import RandomForestRegressor from sklearn import tree data = pd.DataFrame({&amp;quot;Y&amp;quot;:[1,5,3,4,3,4,2], &amp;quot;X_1&amp;quot;:[&amp;quot;red&amp;quot;, &amp;quot;blue&amp;quot;, &amp;quot;blue&amp;quot;, &amp;quot;red&amp;quot;,&amp;quot;red&amp;quot;,&amp;quot;blue&amp;quot;, &amp;quot;red&amp;quot;], &amp;quot;X_2&amp;quot;:[18.4, 7.5, 9.3, 3.7, 5.2, 3.2, 5.2]}) data = pd.get_dummies(data) X = data.drop([&amp;quot;Y&amp;quot;], axis=1) y = data[&amp;quot;Y&amp;quot;] rf = RandomForestRegressor(n_estimators = 10, random_state = 1234) rf.</description>
     </item>
     

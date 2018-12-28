@@ -18,7 +18,12 @@
       <pubDate>Wed, 21 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/lag3/</guid>
-      <description>Beyond KKT Fritz-John 最优性条件 从Fritz-John 条件到 KKT 条件 凸集约束的情形 Beyond KKT 在前面的讨论中，我们看到最优点的正则性对Lagrange乘子的存在性是必</description>
+      <description>Beyond KKT Fritz-John 最优性条件 从Fritz-John 条件到 KKT 条件 凸集约束的情形    Beyond KKT 在前面的讨论中，我们看到最优点的正则性对Lagrange乘子的存在性是必不可少的。
+下面我们要讨论一个问题，如果我们把正则性拿掉，需要补充什么条件才可以保证存在乘子（不一定是Lagrange乘子）满足类似的性质呢。
+Fritz-John 最优性条件 假设$x^* $是满足下面问题的局部最小值点，
+\[ \text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\ \text{subject to}\; h_i(x)=0,i=1,2,...,m\\ \qquad\qquad g_j(x)\leq 0, j=1,2,...,r \]
+其中 \(f: R^n\;\vert \rightarrow R\), \(h_i: R^n\;\vert \rightarrow R\),\(g_j: R^n\;\vert \rightarrow R\)均是连续可微的。那么存在唯一的标量\(\mu_0^* 和\)乘子\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)满足如下条件:
+\(\mu_0^* \nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\) \(\mu_j\geq 0\quad j=0,...,r\) \(\mu_0^* ,\lambda_1^* ,...,\lambda_m^* ,\mu_1^* ,...,\mu_r^* \text{不全为0}\) \(\text{在}x^* \text{的每个领域上都存在一点x使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&amp;gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&amp;gt;0\)  Remark</description>
     </item>
     
     <item>
@@ -27,7 +32,14 @@
       <pubDate>Wed, 14 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/lag2/</guid>
-      <description>不等式约束优化问题 Karush-Kuhn-Tucker 必要条件 充分条件 不等式约束优化问题 本节我们考虑优化问题 \[ \text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\ \text{subject to}\; h_i(x)=0,i=1,2,...,m\\ \qquad\qquad g_j(x)\leq 0, j=1,2,...,r \] 其中 \(f: R^n\;\vert \rightarrow R\), \(h_i: R^n\;\vert \rightarrow R\),\(g_j: R^n\;\vert \rightarrow R\)均是连续可微的</description>
+      <description>不等式约束优化问题 Karush-Kuhn-Tucker 必要条件 充分条件    不等式约束优化问题 本节我们考虑优化问题
+\[ \text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\ \text{subject to}\; h_i(x)=0,i=1,2,...,m\\ \qquad\qquad g_j(x)\leq 0, j=1,2,...,r \]
+其中 \(f: R^n\;\vert \rightarrow R\), \(h_i: R^n\;\vert \rightarrow R\),\(g_j: R^n\;\vert \rightarrow R\)均是连续可微的。为了记号简洁性，我们引入向量值函数\(h=(h_1,...,h_m)^T\),即\(h: R^n\;\vert \rightarrow R^m\)与\(g=(g_1,...,g_r)^T\),即\(g: R^n\;\vert \rightarrow R^r\)。 从而约束条件变为了 \(h(x)=0,g(x)\leq 0\)
+Karush-Kuhn-Tucker 必要条件 直观分析 一个直观的想法是，我们尽可能的扔掉一些不等式约束。事实上，若一些不等式约束不起作用（即局部最小值点在约束集的内部取得），则这些不等式约束可以忽略。举个简单的例子，考虑如下的岭回归问题
+\[ \mathop{min}_\beta\qquad \vert \vert Y-X\beta\vert \vert ^2\\ \text{subject to:}\quad \vert \vert \beta\vert \vert \leq t \]
+当\(t\)足够大时，则该不等式约束不起作用（见下图）。从而我们引出积极的不等式约束集的概念。 对任意任意的可行点\(x\), 积极的不等式约束集定义为：
+\[A(x)=\{j\big\vert g_j(x)=0, j=1,2,...,r\}\]
+如果\(j\notin A(x)\)，则我们称第j个约束是非积极地。</description>
     </item>
     
     <item>
@@ -36,7 +48,18 @@
       <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/lag1/</guid>
-      <description>等式约束优化问题 最优解的必要条件 最优解充分条件 通过引入一些辅助变量，即Lagrange乘子，我们可以利用他们： 描述最优解的特性 灵敏度分析 对自</description>
+      <description>等式约束优化问题 最优解的必要条件 最优解充分条件    通过引入一些辅助变量，即Lagrange乘子，我们可以利用他们：
+ 描述最优解的特性 灵敏度分析 对自变量变化引起的目标函数的一阶导数进行定量描述  本章将沿着惩罚法和可行方向法两个角度进行讨论。
+等式约束优化问题 最优解的必要条件 本节我们考虑优化问题：
+\[ \text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\ \text{subject to}\; h_i(x)=0,i=1,2,...,m\\ \]
+其中 \(f: R^n\;\vert \rightarrow R\), \(h_i: R^n\;\vert \rightarrow R\)均是连续可微的。为了记号简洁性，我们引入向量值函数\(h=(h_1,...,h_m)^T\),即\(h: R^n\;\vert \rightarrow R^m\)。 从而约束条件变为了 \(h(x)=0\)
+Lagrange 理论解决上述优化问题的办法是，通过引入Lagrange乘子\(\lambda=(\lambda_1,...,\lambda_m)^T\)，构造Lagrange函数
+\[L(x,\lambda)=f(x)+\lambda^T h(x)\]
+转而考察\(L(x,\lambda)\)。该理论指出，对给定的局部最小值点$x_* \(，存在向量\)_* $满足
+\[\nabla f(x_* )+{\lambda_* }^T\nabla h(x_* )=0\]
+这个方程有两种解释:
+ 目标函数的梯度\(\nabla f(x_* )\)属于\(\{\nabla h_1(x_* ),...,\nabla h_m(x_* )\}\)这个向量组张成的n维线性子空间里； 目标函数的梯度\(\nabla f(x_* )\)正交于一阶可行变分子空间，即
+\[V(x_* )=\{\Delta x=x-x_* \vert (x-x_* )^T\nabla h_i(x_* )=0,i=1,2.</description>
     </item>
     
     <item>
@@ -45,7 +68,22 @@
       <pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/con2/</guid>
-      <description>可行方向法 下降方向 步长准则 寻找初始可行点 收敛性 Case：条件梯度法 可行方向法 下面我们讨论，如何求解第一节中提到的优化问题。 \[\mathop{min}_{x\in X}\qquad f(x)\] 其中 X是非空</description>
+      <description>可行方向法 下降方向 步长准则 寻找初始可行点 收敛性 Case：条件梯度法    可行方向法 下面我们讨论，如何求解第一节中提到的优化问题。
+\[\mathop{min}_{x\in X}\qquad f(x)\]
+其中
+ X是非空、闭凸集 函数 \(f\) 是连续可微的  我们这里讨论的方法平行于不带约束的优化问题：即沿着函数下降的方向产生一个可行点列\(\{x_k\}\)。
+下降方向  可行方向：给定可行点 \(x\), 在\(x\)处的一个可行方向是指一个向量\(d\),对所有充分小的正数\(a\),成立\(ad+x\in X\)
+ 可行方向法： 从初始可行方向开始，然后按照类似梯度方法的形式产生下述迭代列:
+\[x_{k+1}=x_k+a_kd_k\]
+其中\(\{d_k\}\)既是可行方向，也是下降方向，即
+\[\forall k, \nabla f(x_k)^Td_k\leq 0\]
+同时\(a_k\)是正的步长，使得有
+\[x_k+a_kd_k\in X\\ f(x_k+a_kd_k)&amp;lt; f(x_k)\]
+  Remark
+为了保证产生的迭代序列都是可行点，我们要求\(x_k+ad_k\in X\), 因此存在异于\(x_k\)的点\(\bar x_k\in X\),使得\(x_k+ad_k=\bar x_k\),因此我们可以改写\(d_k=r(\bar x_k-x_k)\),进而我们改写迭代式为
+\[x_{k+1}=x_k+a_k(\bar x_k-x_k)\]
+其中对于所有的k，\(a_k\in (0,1],\bar x_k\in X\)。 限制\(a_k\in (0,1]\)， 是为了保证\(x_{k+1}\)在\(x_k\)与\(\bar x_{k}\)的连线上，进而利用\(X\)的凸性保证\(x_{k+1}\in X\)
+ 按照改写方式产生的序列\(\{x_k\}\)中的点\(x_k\)如果不是驻点，则一定能够找到\(\bar x_k\in X\)满足</description>
     </item>
     
     <item>
@@ -54,7 +92,16 @@
       <pubDate>Mon, 07 Nov 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/con1/</guid>
-      <description>约束优化问题 最优解的存在性 最优解的充要条件 凸集上的投影 这一章我们考虑带约束的优化问题 \[\mathop{min}_{x\in X}\qquad f(x)\] 其中 X是非空凸集 函数 \(f\) 是连续可微的 另外我们称\(X</description>
+      <description>约束优化问题 最优解的存在性 最优解的充要条件 凸集上的投影    这一章我们考虑带约束的优化问题
+\[\mathop{min}_{x\in X}\qquad f(x)\]
+其中
+ X是非空凸集 函数 \(f\) 是连续可微的  另外我们称\(X\)为可行域，里面的点\(x\)为可行解。
+约束优化问题 最优解的存在性 不像在无约束优化问题，在一定条件下我们可以使用Weisterass保证最优解的存在性，带约束的问题中往往不能满足这些条件。所幸的是Marguerite Frank and Philip Wolfe给出了如下定理：
+If a quadratic function \(f\) is bounded below on a nonempty polyhedron \(X\), then \(f\) attains its infimum on \(X\). (That is, there exists a vector \(x_* \in X\) such that \(f(x_* )\leq f(x),\forall x\in X\).)
+其中\(f\)形如
+\[f(x)=x^TQx+c^Tx+d\]
+且只要求\(Q\)是对称矩阵，不需要半正定。
+ 最优解的充要条件 【最优解的一阶必要性条件】如果 $x_* $ 是 \(f\) 在 凸集\(X\) 上的局部最小值点，那么\(\forall x\in X\)有</description>
     </item>
     
     <item>
@@ -63,7 +110,32 @@
       <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/uncon5/</guid>
-      <description>共轭方向法 共轭方向法求解二次问题 共轭方向法求解非二次问题 共轭方向法 在前面的讨论中我们看到了，由于最速下降法在矩阵条件数大的情况下，收敛速率可</description>
+      <description>共轭方向法 共轭方向法求解二次问题 共轭方向法求解非二次问题    共轭方向法 在前面的讨论中我们看到了，由于最速下降法在矩阵条件数大的情况下，收敛速率可以非常缓慢；牛顿法虽然在非奇异驻点附近收敛速率很快，但是计算复杂度较高。因此我们提出了共轭方向法（conjugate direction methods）来改进该问题。
+首先给出共轭的概念与简单性质
+ 定义： 给定一个n维的正定矩阵\(Q\)，我们说非零向量组\(d_1,...,d_k\)是Q-共轭(Q-conjugate)的，如果任意\(i\neq j\)成立
+\[d_i^TQd_j=0\]
+ 性质： 如果非零向量组\(d_1,...,d_k\)是Q-共轭，则它们是线性无关的
+  Remark 其实Q-共轭可以看作是在另一坐标系下的的正交。因为，若设\(Q=A^TA\),则有\((Ad_i)^T(Ad_j)=0\)
+共轭方向法求解二次问题 对于一个给定含有n个Q-共轭方向\[\{d_0,d_1,...,d_{n-1}\}\]，以及无约束二次函数最小化问题
+\[\mathop{min}_{x} f(x)=\frac{1}{2}x&amp;#39;Qx-b&amp;#39;x\]
+相应的共轭法为
+\[x_{k+1}=x_{k}+a_kd_k\;k=0,1,...,n-1\]
+其中\(x_0\)是任意的初始向量，\(a_k\)是按照最小步长准则给出的，即
+\[a_k=\mathop{argmin}_{a} g(a)=f(x_k+ad_k)\]
+Remark
+求解方程 \(g&amp;#39;(a)=d_k^T\nabla (x_k+a_kd_k)=0\)【原问题是凸的，故可以使用一阶最优性条件】,可以给出每一步长
+\[a_k=\frac{d_k^T(b-Qx_k)}{d_k^TQd_k}\]
+ 从代数的观点来看，共轭方向法的本质是：在逐渐扩张的线性流形上逐步极小化目标函数\(f\),而经过n步扩张后的线性流形将包含\(f\)的全局最小值点，即对每一个k（k=0,1,2,..,n-1）
+\[x_{k+1}=\mathop{argmin}_{x\in M_k}\quad f(x)\]
+其中\[M_K=\{x_0+v\vert v\in span\{d_0,d_1,..d_k\}\}\]。因为我们可以证明该优化问题求解出来的\(x_{k+1}\)就是更新公式产生的那个\(x_{k+1}\)。特别地，在证明过程中，我们顺便得到
+\[d_i^T\nabla f(x_{k+1})=0\quad \forall i=0,1,2,...,k\]
+ 从几何的观点来看，共轭方向法实质：在n维空间中，逐渐沿着n个正交方向，极小化目标函数\(f\)。具体来讲，当\(b=0, Q=I\)时，这时\(f\)的等值面是同心球，我们沿着n个正交方向（比如坐标轴方向）逐次极小化\(f\)便可以的达到球心。如果\(Q\)是一般的正定矩阵，可以通过尺度变换，令\(y=Q^{1/2}x\)则极小化
+\[\frac{1}{2}x&amp;#39;Qx\]
+等价于极小化\(\vert \vert y\vert \vert ^2\)。如果\(w_0.w_1,..w_{n-1}\)是\(R^n\)中的一组非零正交方向算法最多在n步后终止。利用\(x=Q^{-1/2}y\)即可求解原问题。
+  Snip20161031_3
+ Q-共轭方向的生成 对于任意给定的线性无关向量组\[\{\xi_0,\xi_1,...,\xi_k\}\]，利用Gram-Schmidt方法，可以构建一组相互Q-共轭的方向\[\{d_0,d_1,...,d_k\}\]，使得对于所有的\(i=0,...,k\)满足
+\[span\{\xi_0,\xi_1,...,\xi_i\}=span\{d_0,d_1,...,d_i\} \qquad(1.147)\]
+ 共轭梯度法 该方法是基于在第k步的梯度方向\(g_k=\nabla f(x_k)\),来生成共轭方向\(d_k\)。具体来说是：</description>
     </item>
     
     <item>
@@ -72,7 +144,25 @@
       <pubDate>Wed, 26 Oct 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/uncon4/</guid>
-      <description>牛顿法与其变形 局部收敛性 全局收敛性 Gauss-Newtown 法 牛顿法与其变形 之前我们讨论了梯度方法的收敛性与收敛速率。我们知道最速下降法是梯度方法中迭代形式最简单，</description>
+      <description>牛顿法与其变形 局部收敛性 全局收敛性 Gauss-Newtown 法    牛顿法与其变形 之前我们讨论了梯度方法的收敛性与收敛速率。我们知道最速下降法是梯度方法中迭代形式最简单，但是收敛速率最慢的算法。另一个极端是牛顿法，它在一定情况下它是梯度算法中收敛速率最快的算法，但是相应的迭代算法会比较复杂，因为要计算Hessian阵的逆。
+如前面所讨论的牛顿法方向的选取方式
+\[d_k=-(\nabla^2 f(x_k))^{-1}\nabla f(x_k)\]
+保证了其尺度变化不变性(scaling-free)。 即: 考虑线性变化\(x=Sy\)，则在变量y空间中用牛顿法极小化\(f(S^{-1}x)\)生成的序列\(y_{k+1}=y_k+a_kd_k\)与在变量x空间用牛顿法极小化\(f(x)\)生成的序列\(x_{k+1}=x_k+a_kd_k\)存在关系\(x_k=Sy_k\)。这种尺度变化不变性是最速下降法所不具备的。
+纯牛顿法
+由【类牛顿法的超线性收敛速率结论】我们知道，在非奇异的局部最小值点附近，当Hessian阵正定时，只需选取步长s=1。因此即将收敛时，算法的跌带形式为
+\[x_{k+1}=x_{k}-(\nabla^2f(x_k))^{-1}\nabla f(x_k)\]
+该算法称为纯牛顿法。
+Remark
+在远离局部最小值时，有可能出现
+ Hessian阵奇异 Hessian阵非正定导致\(d_k\)不是下降方向  因此，对于牛顿法我们要进行下面的两个讨论
+ 局部收敛性：刻画标准牛顿方法在非奇异局部最小值附近的性能 全局收敛性： 当起始点离所有局部最小值点都很远的时候，为了保证算法收敛且能够达到局部最小值点，需要对牛顿法进行变形。  局部收敛性 鉴于我们已经讨论过纯牛顿法的收敛性，这里我们就提出更为一般的牛顿法的收敛性结论。
+考虑含有n个未知数，n个方程的约束系统
+\[g(x)=0\]
+其中\(g:R^n\vert \rightarrow R^n\) 是一个连续可微的函数。 求解该问题的迭代算法为
+\[x_{k+1}=x_k-(\nabla g(x)_k)^{-1}g(x_k))\]
+Remark
+其实该问题可以看做n元方程组的求解问题。因此我们可以得到更一般的Newton-Raphson算法。该迭代式的导出的直观想法与梯度方法十分类似  \[f(x)\approx f(x_0)+(x-x_0)^T\nabla f(x_0)\]
+于是求解\(g(x)=0\)近似与求解\(f(x_0)+(x-x_0)^T\nabla f(x_0)=0\)，进而得到迭代关系式。 2. 若\(\nabla f(x)=g(x)\)则上述牛顿法就是我们所说的纯牛顿法。但是一般来说可微的向量值函数\(g\)不一定是某个函数的梯度。特别的，\(g\)是某个函数\(f\)的梯度当且仅当对所有的x，\(\nabla g(x)\)是对称矩阵。 3. 该算法是超线性收敛的。【证明可以参见Dimitri .P Bertsekas, Nonlinear Programming 2ed中文版p68】 4. 更一般的结论 该算法的问题在于，我们不能够知道迭代初始点是否离局部最小值点足够近。事实上当初始点比较坏时，算法完全可能不收敛。    全局收敛性 正如我们之前所讨论的，纯牛顿法在解\(f\)无约束的最小化问题会遇到以下问题：</description>
     </item>
     
     <item>
@@ -81,7 +171,13 @@
       <pubDate>Wed, 12 Oct 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/uncon3/</guid>
-      <description>收敛性分析 极限点的存在性问题 迭代终止条件 收敛性结论 收敛速率分析 局部分析方法 Case Study-二次函数情形 Case Study-非二次函数与奇异的情形 收敛</description>
+      <description>收敛性分析 极限点的存在性问题 迭代终止条件 收敛性结论  收敛速率分析 局部分析方法 Case Study-二次函数情形 Case Study-非二次函数与奇异的情形    收敛性分析 梯度方法是利用当前迭代点的局部信息进行，与函数本身的全局性质无关，从而该方法容易被各种局部最小值点吸引（一阶导数为0的点），在下面的吸引定理(capture theorem)中我们可以看到梯度方法最好的情况也只是收敛到驻点。因此针对非凸的问题我们必须尝试从不同的起始点运行梯度方法，才可能得到一些可行的结果。
+极限点的存在性问题 一般的，梯度方法产生的迭代序列\(\{x_k\}\)完全可能不存在极限点。事实上，如果\(f(x)\)不存在最小值点，那么一般来说迭代序列\(\{x_k\}\)是无界的 若水平集\[S_{x_0}=\{x \vert f(x)\leq f(x_0)\}\]是有界的，并选合适的步长\(a_k\)保证每一步函数值在下降，那么\(\{x_k\}\)总是包含在\(S_{x_0}\)内的，从而有界，进而有收敛的子列。 即使\(\{x_k\}\)是有界的，也不能保证该序列收敛到唯一的极限点，幸运地是孤立的局部最小值点（存在开球使得该点是球内部的唯一驻点）可以吸引大多梯度方法产生的序列。 考虑最速下降法产生的迭代序列\(x_{k+1}=x_{k}+a_k\nabla f(x_k)\), 其中\(f\)是凸函数且至少有一最小值点，并且对所有的x，y存在L&amp;gt;0,满足
+\[\vert \vert \nabla f(x) -\nabla f(y)\vert \vert \leq L\vert \vert x-y\vert \vert\]
+当步长\(a_k\)满足下列两个条件中的一个时，\(\{x_k\}\)收敛到\(f\)的一个最小值点。  \(\epsilon\leq a_k\leq \frac{2-\epsilon}{L};\forall k\)  b）\(a_k\rightarrow 0\) 且 \(\sum_{k=0}^{+\infty} a_k=0\)  如果存在多个全局最小值点的连通集，理论上\(\{x_k\}\)可以有多个极限点。
+  梯度相关(gradient related)
+考虑梯度方法\(x_{k+1}=x_{k}+a_kd_k\)产生的序列\(\{x_k,d_k\}\)，我们称方向序列\(\{d_k\}\)与\(\{d_k\}\)是序列相关的，若对任何收敛于非驻点的子列\[\{x_{k}\}_{k \in \kappa}\]，相应的子列\[\{d_{k}\}_{k \in \kappa}\]都是有界的，且满足
+\[\limsup_{k\rightarrow +\infty,{k \in \kappa}} \nabla f(x_{k})&amp;#39;d_{k}&amp;lt;0\]</description>
     </item>
     
     <item>
@@ -90,7 +186,13 @@
       <pubDate>Wed, 28 Sep 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/uncon2/</guid>
-      <description>梯度方法 直观分析 下降方向 步长准则 梯度方法 \[outline\begin{cases} 下降方向选择\begin{cases} 最速下降\\ 牛顿法\\ \end{cases}\\\\ 步长的选择\begin{cases}</description>
+      <description>梯度方法 直观分析 下降方向 步长准则    梯度方法 \[outline\begin{cases} 下降方向选择\begin{cases} 最速下降\\ 牛顿法\\ \end{cases}\\\\ 步长的选择\begin{cases} 固定步长准则\\ 缩减步长准则\\ 最小化准则\\ Armijo准则 \end{cases}\\\\ 收敛性分析\begin{cases} 极限点的存在性问题\\ 迭代终止条件\\ 收敛性结论 \end{cases}\\ 收敛速率分析 \end{cases}\]
+直观分析  下降方向 最速下降  牛顿法 修正的牛顿法
+  步长准则 最小化准则  Armijo准则  设\(f\)是连续可微函数, \(\sigma,\beta,s\)是固定的标量，其中\(0&amp;lt;\beta&amp;lt;1\)，\(0&amp;lt;\sigma&amp;lt;1\),令\(\alpha_k=\beta^{m_k}s\)，其中\(m_k\)是满足下式的第一个非负整数m \[f(x_{k+1})\leq f(x_k)+\sigma\alpha_kd_k^T\nabla f(x_k)\]
+ Remark
+准则的直观解释。考虑f(x_{k+1})在\(x_k\)处的一阶Taylor 展开 \[f(x_{k}+\alpha_kd_k)=f(x_k)+\alpha_kd_k^T\nabla f(x_k)+o(\alpha_k)\] 由下降条件知道\(d_k^T\nabla f(x_k)&amp;lt;0\)而当\(\alpha_k\rightarrow 0\)时总是存在\(\alpha_k\)使得\(f(x_{k}+\alpha_kd_k)\leq f(x_k)+\alpha_kd_k^T\nabla f(x_k)\)成立 \(\sigma\)保证满足准则的\(\alpha_k\)可以更快的找到(\(\alpha_k\)是从递减序列\(\{\beta^ms\}_{m=1}^{+\infty}\)中寻找的).因此通常\(\sigma\in[10^{-5},10^{-1}]\) \(\beta\)是收缩因子保证步长初始步长s可以在必要时刻减小  Expansion
+\(F_c(x)=f(x)+cp(x)\)其中\(c&amp;gt;0\)，\(f(x)\)是连续可微函数，\(p(x)\)是非光滑的惩罚项。我们想要极小化\(F_c(x)\)，那么我们可以用梯度方法进行求解。具体来说
+寻找下降方法\(d_k\)，其中\(H_k\)是\(\nabla^2 f(x_k)\)的正定近似 \[d_k=\mathop{argmin}_d \nabla f(x_k)^Td+\frac{1}{2}d^TH_kd+cp(x_k+d)\] Armijo rule寻找步长\(\alpha_k\)   \(0&amp;lt;\beta&amp;lt;1\)，\(0&amp;lt;\sigma&amp;lt;1\),\(0\leq\gamma&amp;lt;1\)令\(\alpha_k=\beta^{m_k}s\)，其中\(m_k\)是满足下式的第一个非负整数m \[F_c(x_k+\alpha_kd_k)\leq F_c(x_k)+\sigma\alpha_k\Delta_k\] 其中\(\Delta_k=d_k^T\nabla f(x_k)+\gamma d_k^TH_kd_K+cp(x_k+d_k)-cp(x_k)\)</description>
     </item>
     
     <item>
@@ -99,7 +201,14 @@
       <pubDate>Wed, 21 Sep 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/uncon1/</guid>
-      <description>最优性条件 最优解的存在性 最优性条件的直观分析 为什么需要最优性条件 最优性条件 我们讨论最优性条件的最直接的目的是为了知道满足什么样条件的点就是满</description>
+      <description>最优性条件 最优解的存在性 最优性条件的直观分析 为什么需要最优性条件    最优性条件 我们讨论最优性条件的最直接的目的是为了知道满足什么样条件的点就是满足最小化问题的最优解。
+最优解的存在性 很多情况下函数的全局极小值点很可能不存在，所以我们有必要讨论最优解的存在性问题。为说明这个问题，我们需要引入一些概念和Weistrass定理。
+ 【下半连续(lower semicontinuous)】 实值函数\(f: X \vert \rightarrow R\)被称作在\(x\in X\)处下半连续的，若对于每一个收敛到\(x\)的序列\(\{x_k\}\subset X\)，都有\(\liminf_{k\rightarrow +\infty} f(x_k)\geq f(x)\).
+ 【强制(coercive)】 函数\(f: X \vert \rightarrow R\)被称作是强制的，如果对于每一个满足 \(\vert \vert x_k\vert \vert \rightarrow +\infty\)的序列序列\(\{x_k\}\subset X\)，都有\(\lim_{k\rightarrow +\infty} f(x_k)=\infty\).
+ 【Weierstrass定理】令\(X\)为\(R^n\)的非空子集，\(f: X \vert \rightarrow R\)在 X的所有点处下半连续。当下面三个条件
+ X是紧集（闭且有界） X是闭集且 \(f\) 是强制的 存在一个标量\(a\)，使得截集\(\{x\in X\vert f(x)\leq a\}\)为非空紧集  中的任何一个满足时，\(f\) 在 \(X\)上的最小值点的集合为非空紧集。
+  通过Weierstrass定理我们知道，在无约束的问题中由于定义域是全空间，自然条件：X是紧集（闭且有界）是不能满足的。但是当 \(f\)性质足够好的时候我们可以保证存在全局最小值点。
+ 最优性条件的直观分析 下面都是直观分析，所有推导并不严谨，但是结果确实是可以被严格证明的。具体证明可以参考 Dimitri .</description>
     </item>
     
   </channel>

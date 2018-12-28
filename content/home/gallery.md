@@ -15,6 +15,8 @@ weight = 4
 folder = "gallery"
 view = 1
 
+widget_layout = 0
+flip_alt_rows = false
 filter_default = 0
 
 [[filter]]
@@ -22,12 +24,16 @@ filter_default = 0
     tag = "*"
 
 [[filter]]
-    name = "Recipes"
-    tag = ".Recipes"
+    name = "Sketches"
+    tag = "Sketches"
 
 [[filter]]
-    name = "Pictures"
-    tag = ".Pictures"
+    name = "Photos"
+    tag = "Photos"
+
+[[filter]]
+    name = "Videos"
+    tag = "Videos"
 
 +++
 

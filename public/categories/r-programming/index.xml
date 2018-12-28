@@ -14,10 +14,10 @@
     
     <item>
       <title>Play with Sparse Matrix</title>
-      <link>/post/en/play-with-sparse-matrix/</link>
+      <link>/post/play-with-sparse-matrix/</link>
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/en/play-with-sparse-matrix/</guid>
+      <guid>/post/play-with-sparse-matrix/</guid>
       <description>Motivation Solution Slicing Basic linear algebra operations    Motivation Recently, I have to deal with matrices with sparsity structures. If I coerce them using the as.matrix function, they consume my RAM wildly. So I turn to the package SparseM for possible solutions.
 What I want to do are,
 Performe basic linear algebra operations on sparse matrices, mainly including multiplication, transpose, and etc. Slice rows or columns by their indices.</description>
@@ -25,10 +25,10 @@ Performe basic linear algebra operations on sparse matrices, mainly including mu
     
     <item>
       <title>Get Data from the Website</title>
-      <link>/post/en/get-data-from-website/</link>
+      <link>/post/get-data-from-website/</link>
       <pubDate>Thu, 31 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/en/get-data-from-website/</guid>
+      <guid>/post/get-data-from-website/</guid>
       <description>Motivation Solutions Download Uncompress data files Load libsvm format data Complete Code    Motivation I’m using the datasets libsvm to do some numerical experiments. The sizes of datasets, like epsilon1, are of severalGBs. So it is hard to play with the data on my desktop. I am lucky to run the experiments on a server. So my workflow is:
 Download datasets on the server. Preprocess datastes. Run experiments.</description>
     </item>

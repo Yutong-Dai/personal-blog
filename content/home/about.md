@@ -19,10 +19,10 @@ weight = 1
 [[education.courses]]
   course = "MS in Statistics"
   institution = "University of Illinois at Urbana-Champaign"
-  year = "Present"
+  year = "2019"
 
 [[education.courses]]
-  course = "BS in Statistics (with honor)"
+  course = "BS in Statistics (with honors)"
   institution = "Sichuan University"
   year = 2017
  

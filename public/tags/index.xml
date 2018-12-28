@@ -22,15 +22,6 @@
     </item>
     
     <item>
-      <title>Bookdown</title>
-      <link>/tags/bookdown/</link>
-      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/bookdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>CNN</title>
       <link>/tags/cnn/</link>
       <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
@@ -40,7 +31,7 @@
     </item>
     
     <item>
-      <title>Data-analysis</title>
+      <title>Data Analysis</title>
       <link>/tags/data-analysis/</link>
       <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
       
@@ -49,7 +40,7 @@
     </item>
     
     <item>
-      <title>Deep-learning</title>
+      <title>Deep Learning</title>
       <link>/tags/deep-learning/</link>
       <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
       
@@ -76,20 +67,11 @@
     </item>
     
     <item>
-      <title>Lagrange乘子</title>
-      <link>/tags/lagrange%E4%B9%98%E5%AD%90/</link>
-      <pubDate>Wed, 21 Dec 2016 00:00:00 +0000</pubDate>
+      <title>NYC</title>
+      <link>/tags/nyc/</link>
+      <pubDate>Sun, 23 Dec 2018 00:00:00 -0500</pubDate>
       
-      <guid>/tags/lagrange%E4%B9%98%E5%AD%90/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pictures</title>
-      <link>/tags/pictures/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 -0400</pubDate>
-      
-      <guid>/tags/pictures/</guid>
+      <guid>/tags/nyc/</guid>
       <description></description>
     </item>
     
@@ -121,20 +103,29 @@
     </item>
     
     <item>
-      <title>无约束优化</title>
-      <link>/tags/%E6%97%A0%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96/</link>
-      <pubDate>Wed, 02 Nov 2016 00:00:00 +0000</pubDate>
+      <title>Sketches</title>
+      <link>/tags/sketches/</link>
+      <pubDate>Fri, 27 Apr 2018 00:00:00 -0400</pubDate>
       
-      <guid>/tags/%E6%97%A0%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96/</guid>
+      <guid>/tags/sketches/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>约束优化</title>
-      <link>/tags/%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96/</link>
-      <pubDate>Mon, 14 Nov 2016 00:00:00 +0000</pubDate>
+      <title>Videos</title>
+      <link>/tags/videos/</link>
+      <pubDate>Sun, 23 Dec 2018 00:00:00 -0500</pubDate>
       
-      <guid>/tags/%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96/</guid>
+      <guid>/tags/videos/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bookdown</title>
+      <link>/tags/bookdown/</link>
+      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/bookdown/</guid>
       <description></description>
     </item>
     

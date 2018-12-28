@@ -18,7 +18,12 @@
       <pubDate>Wed, 21 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/lag3/</guid>
-      <description>Beyond KKT Fritz-John 最优性条件 从Fritz-John 条件到 KKT 条件 凸集约束的情形 Beyond KKT 在前面的讨论中，我们看到最优点的正则性对Lagrange乘子的存在性是必</description>
+      <description>Beyond KKT Fritz-John 最优性条件 从Fritz-John 条件到 KKT 条件 凸集约束的情形    Beyond KKT 在前面的讨论中，我们看到最优点的正则性对Lagrange乘子的存在性是必不可少的。
+下面我们要讨论一个问题，如果我们把正则性拿掉，需要补充什么条件才可以保证存在乘子（不一定是Lagrange乘子）满足类似的性质呢。
+Fritz-John 最优性条件 假设$x^* $是满足下面问题的局部最小值点，
+\[ \text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\ \text{subject to}\; h_i(x)=0,i=1,2,...,m\\ \qquad\qquad g_j(x)\leq 0, j=1,2,...,r \]
+其中 \(f: R^n\;\vert \rightarrow R\), \(h_i: R^n\;\vert \rightarrow R\),\(g_j: R^n\;\vert \rightarrow R\)均是连续可微的。那么存在唯一的标量\(\mu_0^* 和\)乘子\(\lambda^* =(\lambda_1^* ,...,\lambda_m^* ),\mu^* =(\mu_1^* ,...,\mu_r^* )\)满足如下条件:
+\(\mu_0^* \nabla f(x^* )+\sum_{i=1}^m\lambda_i\nabla h_i(x^* )+\sum_{j=1}^r\mu_j\nabla g_j(x^* )=0\) \(\mu_j\geq 0\quad j=0,...,r\) \(\mu_0^* ,\lambda_1^* ,...,\lambda_m^* ,\mu_1^* ,...,\mu_r^* \text{不全为0}\) \(\text{在}x^* \text{的每个领域上都存在一点x使得对于所有不为0的}\lambda_i^* ,\text{有}\lambda_i^* h_i(x^* )&amp;gt;0;\text{对所有不为0的}\mu_j^* ,\text{有}\mu_j^* g_j(x)&amp;gt;0\)  Remark</description>
     </item>
     
     <item>
@@ -27,7 +32,14 @@
       <pubDate>Wed, 14 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/lag2/</guid>
-      <description>不等式约束优化问题 Karush-Kuhn-Tucker 必要条件 充分条件 不等式约束优化问题 本节我们考虑优化问题 \[ \text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\ \text{subject to}\; h_i(x)=0,i=1,2,...,m\\ \qquad\qquad g_j(x)\leq 0, j=1,2,...,r \] 其中 \(f: R^n\;\vert \rightarrow R\), \(h_i: R^n\;\vert \rightarrow R\),\(g_j: R^n\;\vert \rightarrow R\)均是连续可微的</description>
+      <description>不等式约束优化问题 Karush-Kuhn-Tucker 必要条件 充分条件    不等式约束优化问题 本节我们考虑优化问题
+\[ \text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\ \text{subject to}\; h_i(x)=0,i=1,2,...,m\\ \qquad\qquad g_j(x)\leq 0, j=1,2,...,r \]
+其中 \(f: R^n\;\vert \rightarrow R\), \(h_i: R^n\;\vert \rightarrow R\),\(g_j: R^n\;\vert \rightarrow R\)均是连续可微的。为了记号简洁性，我们引入向量值函数\(h=(h_1,...,h_m)^T\),即\(h: R^n\;\vert \rightarrow R^m\)与\(g=(g_1,...,g_r)^T\),即\(g: R^n\;\vert \rightarrow R^r\)。 从而约束条件变为了 \(h(x)=0,g(x)\leq 0\)
+Karush-Kuhn-Tucker 必要条件 直观分析 一个直观的想法是，我们尽可能的扔掉一些不等式约束。事实上，若一些不等式约束不起作用（即局部最小值点在约束集的内部取得），则这些不等式约束可以忽略。举个简单的例子，考虑如下的岭回归问题
+\[ \mathop{min}_\beta\qquad \vert \vert Y-X\beta\vert \vert ^2\\ \text{subject to:}\quad \vert \vert \beta\vert \vert \leq t \]
+当\(t\)足够大时，则该不等式约束不起作用（见下图）。从而我们引出积极的不等式约束集的概念。 对任意任意的可行点\(x\), 积极的不等式约束集定义为：
+\[A(x)=\{j\big\vert g_j(x)=0, j=1,2,...,r\}\]
+如果\(j\notin A(x)\)，则我们称第j个约束是非积极地。</description>
     </item>
     
     <item>
@@ -36,7 +48,18 @@
       <pubDate>Wed, 07 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>/post/zh/lag1/</guid>
-      <description>等式约束优化问题 最优解的必要条件 最优解充分条件 通过引入一些辅助变量，即Lagrange乘子，我们可以利用他们： 描述最优解的特性 灵敏度分析 对自</description>
+      <description>等式约束优化问题 最优解的必要条件 最优解充分条件    通过引入一些辅助变量，即Lagrange乘子，我们可以利用他们：
+ 描述最优解的特性 灵敏度分析 对自变量变化引起的目标函数的一阶导数进行定量描述  本章将沿着惩罚法和可行方向法两个角度进行讨论。
+等式约束优化问题 最优解的必要条件 本节我们考虑优化问题：
+\[ \text{minimize}\; f(x)\qquad\qquad\qquad\qquad\\ \text{subject to}\; h_i(x)=0,i=1,2,...,m\\ \]
+其中 \(f: R^n\;\vert \rightarrow R\), \(h_i: R^n\;\vert \rightarrow R\)均是连续可微的。为了记号简洁性，我们引入向量值函数\(h=(h_1,...,h_m)^T\),即\(h: R^n\;\vert \rightarrow R^m\)。 从而约束条件变为了 \(h(x)=0\)
+Lagrange 理论解决上述优化问题的办法是，通过引入Lagrange乘子\(\lambda=(\lambda_1,...,\lambda_m)^T\)，构造Lagrange函数
+\[L(x,\lambda)=f(x)+\lambda^T h(x)\]
+转而考察\(L(x,\lambda)\)。该理论指出，对给定的局部最小值点$x_* \(，存在向量\)_* $满足
+\[\nabla f(x_* )+{\lambda_* }^T\nabla h(x_* )=0\]
+这个方程有两种解释:
+ 目标函数的梯度\(\nabla f(x_* )\)属于\(\{\nabla h_1(x_* ),...,\nabla h_m(x_* )\}\)这个向量组张成的n维线性子空间里； 目标函数的梯度\(\nabla f(x_* )\)正交于一阶可行变分子空间，即
+\[V(x_* )=\{\Delta x=x-x_* \vert (x-x_* )^T\nabla h_i(x_* )=0,i=1,2.</description>
     </item>
     
   </channel>

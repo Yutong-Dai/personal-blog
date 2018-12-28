@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bookdown on Yutong Dai / 戴宇童</title>
+    <title>bookdown on Yutong Dai / 戴宇童</title>
     <link>/tags/bookdown/</link>
-    <description>Recent content in Bookdown on Yutong Dai / 戴宇童</description>
+    <description>Recent content in bookdown on Yutong Dai / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
@@ -14,10 +14,10 @@
     
     <item>
       <title>Bookdown Syntax</title>
-      <link>/post/en/bookdown-syntax/</link>
+      <link>/post/bookdown-syntax/</link>
       <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/en/bookdown-syntax/</guid>
+      <guid>/post/bookdown-syntax/</guid>
       <description>Math Equations with labels    Following contents are adapeted from Yihui Xie’s bookdown
  Math Equations with labels My personal preference is to use algin and equation for long or complicated and simple expressions respectively. The slight differeces, compared with the \(\bf \LaTeX\) syntax, are the way we assign labels to expressions. Instead of using \label{foo}, in blogdown (bookdown), it is recommend to use the syntax (\#eq:foo).</description>
     </item>

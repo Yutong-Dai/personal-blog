@@ -17,8 +17,15 @@ folder = "project"
 
 # View.
 # Customize how projects are displayed.
-# Legend: 0 = list, 1 = cards.
-view = 1
+# Legend: 0 = list, 1 = cards, 2 = showcase.
+view = 2
+
+# Widget layout
+# Legend: 0 = two columns (default), 1 = single column
+widget_layout = 0
+
+# For Showcase view, flip alternate rows?
+flip_alt_rows = false
 
 # Filter toolbar.
 
@@ -26,7 +33,8 @@ view = 1
 filter_default = 0
 
 # Add or remove as many filters (`[[filter]]` instances) as you like.
-# Use "*" tag to show all projects or an existing tag prefixed with "." to filter by specific tag.
+# To show all items, set `tag` to "*".
+# To filter by a specific tag, set `tag` to an existing tag name.
 # To remove toolbar, delete/comment all instances of `[[filter]]` below.
 [[filter]]
   name = "All"
@@ -34,9 +42,9 @@ filter_default = 0
 
 [[filter]]
   name = "Data Analysis"
-  tag = ".data-analysis"
+  tag = "Data Analysis"
 [[filter]]
   name = "Deep Learning"
-  tag = ".deep-learning"
+  tag = "Deep Learning"
 +++
 

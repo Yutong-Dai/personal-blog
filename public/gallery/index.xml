@@ -7,26 +7,27 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Wed, 27 Apr 2016 00:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 23 Dec 2018 00:00:00 -0500</lastBuildDate>
     
 	<atom:link href="/gallery/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Sketch of Fruits</title>
-      <link>/gallery/mango/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 -0400</pubDate>
+      <title>Trip to New York</title>
+      <link>/gallery/movies/</link>
+      <pubDate>Sun, 23 Dec 2018 00:00:00 -0500</pubDate>
       
-      <guid>/gallery/mango/</guid>
-      <description></description>
+      <guid>/gallery/movies/</guid>
+      <description> Manhattan 2018.12 I went to the New York for vacation. And this was the time I learned how to edit the video clips.
+ </description>
     </item>
     
     <item>
-      <title>Sketch of Plants</title>
-      <link>/gallery/plants/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 -0400</pubDate>
+      <title>Sketches</title>
+      <link>/gallery/sketches/</link>
+      <pubDate>Fri, 27 Apr 2018 00:00:00 -0400</pubDate>
       
-      <guid>/gallery/plants/</guid>
+      <guid>/gallery/sketches/</guid>
       <description></description>
     </item>
     
