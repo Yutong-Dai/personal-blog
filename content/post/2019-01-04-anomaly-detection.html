@@ -1,0 +1,78 @@
+---
+title: Anomaly Detection
+author: Yutong
+date: '2019-01-04'
+slug: anomaly-detection
+categories:
+  - Statistics
+tags:
+  - data-analysis
+image:
+  caption: ''
+  focal_point: ''
+---
+
+
+
+<div id="point-anomaly-detection---grubbs-test" class="section level1">
+<h1>Point Anomaly Detection - Grubbs’ test</h1>
+<p>Grubbs’ test<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> is commonly used technique to detect an outlier in <strong>univariate</strong> problem, where <strong>normality</strong> assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.</p>
+<p>The hypothesis test is defined as</p>
+<p><span class="math display">\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\]</span> For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as</p>
+<p><span class="math display">\[
+G = \frac{\max_i |X_i - \bar X|}{s},
+\]</span> where the <span class="math inline">\(\bar X\)</span> is the sample mean and <span class="math inline">\(s\)</span> is the sample deviation.</p>
+<p>Let’s look at one simulated example.</p>
+<pre class="r"><code>set.seed(123)
+simulated_data &lt;- rnorm(100, 0, 1)
+simulated_data_with_outliers &lt;- c(simulated_data, c(3.5, -3.7))
+# normality check
+shapiro.test(simulated_data_with_outliers)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  simulated_data_with_outliers
+## W = 0.9804, p-value = 0.1344</code></pre>
+<p>Shapiro-Wilk normality test impiles the data is normally distributed. Now, let’s performe the grubbs’ test.</p>
+<pre class="r"><code>library(outliers)
+grubbs.test(simulated_data_with_outliers, two.sided = TRUE)</code></pre>
+<pre><code>## 
+##  Grubbs test for one outlier
+## 
+## data:  simulated_data_with_outliers
+## G = 3.65380, U = 0.86651, p-value = 0.01626
+## alternative hypothesis: lowest value -3.7 is an outlier</code></pre>
+<p>The test result detecs the lowest value as an outlier.</p>
+<p>Let’s remove the -3.7 and performe the test again.</p>
+<pre class="r"><code>grubbs.test(head(simulated_data_with_outliers,101), two.sided = TRUE)</code></pre>
+<pre><code>## 
+##  Grubbs test for one outlier
+## 
+## data:  head(simulated_data_with_outliers, 101)
+## G = 3.48190, U = 0.87755, p-value = 0.03378
+## alternative hypothesis: highest value 3.5 is an outlier</code></pre>
+<p>Finally, let’s remove two outliers altogether.</p>
+<pre class="r"><code>grubbs.test(head(simulated_data_with_outliers,100), two.sided = TRUE)</code></pre>
+<pre><code>## 
+##  Grubbs test for one outlier
+## 
+## data:  head(simulated_data_with_outliers, 100)
+## G = 2.62880, U = 0.92949, p-value = 0.7584
+## alternative hypothesis: lowest value -2.30916887564081 is an outlier</code></pre>
+<p>This impiles there are no outliers.</p>
+<p>Grubbs’ test is useful for identify the outliers of a small amount one at a time, but not suitable to detect a group of outliers.</p>
+</div>
+<div id="collective-anomaly-detection" class="section level1">
+<h1>Collective Anomaly Detection</h1>
+<div id="anomaly-in-timeseries" class="section level2">
+<h2>Anomaly in timeseries</h2>
+<p><a href="/content/post/river.csv">download data</a> <a href="static/content/post/river.csv">download data</a></p>
+<pre class="r"><code>#  devtools::install_github(&quot;twitter/AnomalyDetection&quot;)</code></pre>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://en.wikipedia.org/wiki/Grubbs%27_test_for_outliers">https://en.wikipedia.org/wiki/Grubbs%27_test_for_outliers</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>

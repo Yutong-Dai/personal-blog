@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
@@ -17,10 +15,12 @@
   
     
   
-  <meta name="description" content="Statistics Master Student">
+  <meta name="description" content="Point Anomaly Detection - Grubbs’ test Grubbs’ test1 is commonly used technique to detect an outlier in univariate problem, where normality assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.
+The hypothesis test is defined as
+\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\] For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as">
 
   
-  <link rel="alternate" hreflang="en-us" href="/tags/">
+  <link rel="alternate" hreflang="en-us" href="/post/anomaly-detection/">
 
   
 
@@ -84,15 +84,15 @@
   
 
   
-  <link rel="alternate" href="/tags/index.xml" type="application/rss+xml" title="Yutong Dai / 戴宇童">
-  <link rel="feed" href="/tags/index.xml" type="application/rss+xml" title="Yutong Dai / 戴宇童">
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Yutong Dai / 戴宇童">
+  <link rel="feed" href="/index.xml" type="application/rss+xml" title="Yutong Dai / 戴宇童">
   
 
   <link rel="manifest" href="/site.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/tags/">
+  <link rel="canonical" href="/post/anomaly-detection/">
 
   
   
@@ -104,19 +104,23 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="Yutong Dai / 戴宇童">
-  <meta property="og:url" content="/tags/">
-  <meta property="og:title" content="Tags | Yutong Dai / 戴宇童">
-  <meta property="og:description" content="Statistics Master Student"><meta property="og:image" content="/img/portrait.jpg">
+  <meta property="og:url" content="/post/anomaly-detection/">
+  <meta property="og:title" content="Anomaly Detection | Yutong Dai / 戴宇童">
+  <meta property="og:description" content="Point Anomaly Detection - Grubbs’ test Grubbs’ test1 is commonly used technique to detect an outlier in univariate problem, where normality assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.
+The hypothesis test is defined as
+\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\] For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as"><meta property="og:image" content="/img/portrait.jpg">
   <meta property="og:locale" content="en-us">
   
-  <meta property="og:updated_time" content="2018-04-27T00:00:00-04:00">
+  <meta property="article:published_time" content="2019-01-04T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-01-04T00:00:00&#43;00:00">
   
 
   
 
   
 
-  <title>Tags | Yutong Dai / 戴宇童</title>
+  <title>Anomaly Detection | Yutong Dai / 戴宇童</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" class="dark">
@@ -273,7 +277,9 @@
 </nav>
 
 
+<article class="article" itemscope itemtype="http://schema.org/Article">
 
+  
 
 
 
@@ -290,65 +296,319 @@
 
   
   
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Anomaly Detection</h1>
+
+  
+
   
     
-  
-<div class="universal-wrapper pt-3">
-  <h1 itemprop="name">Tags</h1>
 
-  
-
-  
-</div>
-
-
-
-<div class="universal-wrapper">
-  
+<div class="article-metadata">
 
   
   
-  <div>
-    <h2><a href="/tags/sketches/">Sketches</a></h2>
-    <div class="article-style">
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/tags/videos/">Videos</a></h2>
-    <div class="article-style">
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/tags/bookdown/">bookdown</a></h2>
-    <div class="article-style">
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/tags/data-analysis/">data-analysis</a></h2>
-    <div class="article-style">
-      
-    </div>
-  </div>
+  <span itemscope itemprop="author" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Yutong Dai">
+  </span>
   
 
-  
-<nav>
-  <ul class="pagination justify-content-center">
+  <span class="article-date">
     
-    <li class="page-item"><a class="page-link" href="/tags/">&laquo;</a></li>
+    <meta content="2019-01-04 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+    <time datetime="2019-01-04 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+      2019-01-04
+    </time>
+  </span>
+  <span itemscope itemprop="publisher" itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Yutong Dai">
+  </span>
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder"></i>
     
+    <a href="/categories/statistics/">Statistics</a>
     
+  </span>
+  
+  
+
+  
+  
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=Anomaly%20Detection&amp;url=%2fpost%2fanomaly-detection%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u=%2fpost%2fanomaly-detection%2f"
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=%2fpost%2fanomaly-detection%2f&amp;title=Anomaly%20Detection"
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=%2fpost%2fanomaly-detection%2f&amp;title=Anomaly%20Detection"
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=Anomaly%20Detection&amp;body=%2fpost%2fanomaly-detection%2f">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
   </ul>
-</nav>
+</div>
 
+
+  
 
 </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+
+<div id="point-anomaly-detection---grubbs-test" class="section level1">
+<h1>Point Anomaly Detection - Grubbs’ test</h1>
+<p>Grubbs’ test<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> is commonly used technique to detect an outlier in <strong>univariate</strong> problem, where <strong>normality</strong> assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.</p>
+<p>The hypothesis test is defined as</p>
+<p><span class="math display">\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\]</span> For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as</p>
+<p><span class="math display">\[
+G = \frac{\max_i |X_i - \bar X|}{s},
+\]</span> where the <span class="math inline">\(\bar X\)</span> is the sample mean and <span class="math inline">\(s\)</span> is the sample deviation.</p>
+<p>Let’s look at one simulated example.</p>
+<pre class="r"><code>set.seed(123)
+simulated_data &lt;- rnorm(100, 0, 1)
+simulated_data_with_outliers &lt;- c(simulated_data, c(3.5, -3.7))
+# normality check
+shapiro.test(simulated_data_with_outliers)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  simulated_data_with_outliers
+## W = 0.9804, p-value = 0.1344</code></pre>
+<p>Shapiro-Wilk normality test impiles the data is normally distributed. Now, let’s performe the grubbs’ test.</p>
+<pre class="r"><code>library(outliers)
+grubbs.test(simulated_data_with_outliers, two.sided = TRUE)</code></pre>
+<pre><code>## 
+##  Grubbs test for one outlier
+## 
+## data:  simulated_data_with_outliers
+## G = 3.65380, U = 0.86651, p-value = 0.01626
+## alternative hypothesis: lowest value -3.7 is an outlier</code></pre>
+<p>The test result detecs the lowest value as an outlier.</p>
+<p>Let’s remove the -3.7 and performe the test again.</p>
+<pre class="r"><code>grubbs.test(head(simulated_data_with_outliers,101), two.sided = TRUE)</code></pre>
+<pre><code>## 
+##  Grubbs test for one outlier
+## 
+## data:  head(simulated_data_with_outliers, 101)
+## G = 3.48190, U = 0.87755, p-value = 0.03378
+## alternative hypothesis: highest value 3.5 is an outlier</code></pre>
+<p>Finally, let’s remove two outliers altogether.</p>
+<pre class="r"><code>grubbs.test(head(simulated_data_with_outliers,100), two.sided = TRUE)</code></pre>
+<pre><code>## 
+##  Grubbs test for one outlier
+## 
+## data:  head(simulated_data_with_outliers, 100)
+## G = 2.62880, U = 0.92949, p-value = 0.7584
+## alternative hypothesis: lowest value -2.30916887564081 is an outlier</code></pre>
+<p>This impiles there are no outliers.</p>
+<p>Grubbs’ test is useful for identify the outliers of a small amount one at a time, but not suitable to detect a group of outliers.</p>
+</div>
+<div id="collective-anomaly-detection" class="section level1">
+<h1>Collective Anomaly Detection</h1>
+<div id="anomaly-in-timeseries" class="section level2">
+<h2>Anomaly in timeseries</h2>
+<p><a href="/content/post/river.csv">download data</a> <a href="static/content/post/river.csv">download data</a></p>
+<pre class="r"><code>#  devtools::install_github(&quot;twitter/AnomalyDetection&quot;)</code></pre>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://en.wikipedia.org/wiki/Grubbs%27_test_for_outliers">https://en.wikipedia.org/wiki/Grubbs%27_test_for_outliers</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+    </div>
+
+    
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/data-analysis/">data-analysis</a>
+  
+</div>
+
+
+
+    
+
+
+
+
+
+
+<div class="media author-card" itemscope itemtype="http://schema.org/Person">
+  
+  <img class="portrait mr-3" src="/img/portrait.jpg" itemprop="image" alt="Avatar">
+  
+  <div class="media-body">
+    <h5 class="card-title" itemprop="name"><a href="/">Yutong Dai</a></h5>
+    <h6 class="card-subtitle">Statistics Master Student</h6>
+    
+    <ul class="network-icon" aria-hidden="true">
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      <li>
+        <a itemprop="sameAs" href="mailto:yutongd3@illinois.edu" >
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="//linkedin.com/in/yutongdai/" >
+          <i class="fab fa-linkedin"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+        
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="//github.com/rothdyt" >
+          <i class="fab fa-github"></i>
+        </a>
+      </li>
+      
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a itemprop="sameAs" href="/files/pdf/resume.pdf" >
+          <i class="ai ai-cv"></i>
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+
+
+    
+    
+
+    
+    <div class="article-widget">
+      <div class="post-nav">
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/post/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/" rel="prev">Decision Tree: How to find the path from the root to the desired terminal node</a>
+  </div>
+  
+</div>
+
+    </div>
+    
+
+    
+
+
+  </div>
+</article>
+
 <div class="container">
   <footer class="site-footer">
   
@@ -508,6 +768,4 @@
 
   </body>
 </html>
-
-
 

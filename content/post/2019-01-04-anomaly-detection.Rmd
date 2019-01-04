@@ -1,0 +1,74 @@
+---
+title: Anomaly Detection
+author: Yutong
+date: '2019-01-04'
+slug: anomaly-detection
+categories:
+  - Statistics
+tags:
+  - data-analysis
+image:
+  caption: ''
+  focal_point: ''
+---
+
+# Point Anomaly Detection - Grubbs' test
+
+Grubbs' test[^fn_grubb] is commonly used technique to detect an outlier in **univariate** problem, where **normality** assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.
+
+[^fn_grubb]: https://en.wikipedia.org/wiki/Grubbs%27_test_for_outliers
+
+The hypothesis test is defined as
+
+$$H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.$$
+For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as
+
+$$
+G = \frac{\max_i |X_i - \bar X|}{s},
+$$
+where the $\bar X$ is the sample mean and $s$ is the sample deviation.
+
+Let's look at one simulated example.
+
+```{r}
+set.seed(123)
+simulated_data <- rnorm(100, 0, 1)
+simulated_data_with_outliers <- c(simulated_data, c(3.5, -3.7))
+# normality check
+shapiro.test(simulated_data_with_outliers)
+```
+Shapiro-Wilk normality test impiles the data is normally distributed. Now, let's performe the grubbs' test.
+
+```{r}
+library(outliers)
+grubbs.test(simulated_data_with_outliers, two.sided = TRUE)
+```
+
+The test result detecs the lowest value as an outlier.
+
+Let's remove the -3.7 and performe the test again.
+
+```{r}
+grubbs.test(head(simulated_data_with_outliers,101), two.sided = TRUE)
+```
+
+Finally, let's remove two outliers altogether.
+
+```{r}
+grubbs.test(head(simulated_data_with_outliers,100), two.sided = TRUE)
+```
+This impiles there are no outliers.
+
+Grubbs' test is useful for identify the outliers of a small amount one at a time, but not suitable to detect a group of outliers.
+
+# Collective Anomaly Detection
+
+## Anomaly in timeseries
+
+[download data](/content/post/river.csv)
+[download data](static/content/post/river.csv)
+
+```{r}
+#  devtools::install_github("twitter/AnomalyDetection")
+```
+

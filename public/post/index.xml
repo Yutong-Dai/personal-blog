@@ -13,6 +13,17 @@
     
     
     <item>
+      <title>Anomaly Detection</title>
+      <link>/post/anomaly-detection/</link>
+      <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/anomaly-detection/</guid>
+      <description>Point Anomaly Detection - Grubbs’ test Grubbs’ test1 is commonly used technique to detect an outlier in univariate problem, where normality assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.
+The hypothesis test is defined as
+\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\] For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as</description>
+    </item>
+    
+    <item>
       <title>Decision Tree: How to find the path from the root to the desired terminal node</title>
       <link>/post/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
