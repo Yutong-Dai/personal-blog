@@ -63,12 +63,36 @@ Grubbs' test is useful for identify the outliers of a small amount one at a time
 
 # Collective Anomaly Detection
 
-## Anomaly in timeseries
+## Anomaly in timeseries - Seasonal Hybrid ESD algorithm
 
-[download data](/content/post/river.csv)
-[download data](static/content/post/river.csv)
+[download data](https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/river.csv)
 
 ```{r}
 #  devtools::install_github("twitter/AnomalyDetection")
+library(AnomalyDetection)
+river <- read.csv("../../static/files/river.csv")
+results <- AnomalyDetectionVec(river$nitrate, period=12, direction = 'both', plot = T)
 ```
+```{r}
+results$plot
+```
+
+## Distance-based Anomaly Detection
+
+# Global Anomaly - Largest Distance
+
+Intuitively, the larger distance the more likely the point would be an outlier.
+
+```{r}
+library(FNN)
+#furniture <- read.csv("../../static/files/post_data/furniture.csv")
+furniture_scaled <- data.frame(Height = scale(furniture$Height), Width = scale(furniture$Width))
+furniture_knn <- get.knn(furniture_scaled, k = 5)
+furniture_scaled$score_knn <- rowMeans(furniture_knn$nn.dist)
+largest_idx <- which.max(furniture_scaled$score_knn)
+plot(furniture_scaled$Height, furniture_scaled$Width, cex=sqrt(furniture_scaled$score_knn), pch=20)
+points(furniture_scaled$Height[largest_idx], furniture_scaled$Width[largest_idx], col="red", pch=20)
+```
+
+
 

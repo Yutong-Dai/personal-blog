@@ -64,10 +64,20 @@ grubbs.test(simulated_data_with_outliers, two.sided = TRUE)</code></pre>
 </div>
 <div id="collective-anomaly-detection" class="section level1">
 <h1>Collective Anomaly Detection</h1>
-<div id="anomaly-in-timeseries" class="section level2">
-<h2>Anomaly in timeseries</h2>
-<p><a href="/content/post/river.csv">download data</a> <a href="static/content/post/river.csv">download data</a></p>
-<pre class="r"><code>#  devtools::install_github(&quot;twitter/AnomalyDetection&quot;)</code></pre>
+<div id="anomaly-in-timeseries---seasonal-hybrid-esd-algorithm" class="section level2">
+<h2>Anomaly in timeseries - Seasonal Hybrid ESD algorithm</h2>
+<p><a href="https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/river.csv">download data</a></p>
+<pre class="r"><code>#  devtools::install_github(&quot;twitter/AnomalyDetection&quot;)
+library(AnomalyDetection)
+river &lt;- read.csv(&quot;../../static/files/river.csv&quot;)
+results &lt;- AnomalyDetectionVec(river$nitrate, period=12, direction = &#39;both&#39;, plot = T)</code></pre>
+<pre class="r"><code>results$plot</code></pre>
+<p><img src="/post/2019-01-04-anomaly-detection_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="distance-based-anomaly-detection" class="section level2">
+<h2>Distance-based Anomaly Detection</h2>
+<pre class="r"><code>library(FNN)</code></pre>
+<pre><code>## Warning: package &#39;FNN&#39; was built under R version 3.4.4</code></pre>
 </div>
 </div>
 <div class="footnotes">
