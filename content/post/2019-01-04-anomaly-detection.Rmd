@@ -65,27 +65,26 @@ Grubbs' test is useful for identify the outliers of a small amount one at a time
 
 ## Anomaly in timeseries - Seasonal Hybrid ESD algorithm
 
-[download data](https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/river.csv)
-
 ```{r}
 #  devtools::install_github("twitter/AnomalyDetection")
 library(AnomalyDetection)
-river <- read.csv("../../static/files/river.csv")
+river <- read.csv("https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/post_data/river.csv")
 results <- AnomalyDetectionVec(river$nitrate, period=12, direction = 'both', plot = T)
 ```
+
 ```{r}
 results$plot
 ```
 
 ## Distance-based Anomaly Detection
 
-# Global Anomaly - Largest Distance
+### Global Anomaly - Largest Distance
 
 Intuitively, the larger distance the more likely the point would be an outlier.
 
 ```{r}
 library(FNN)
-#furniture <- read.csv("../../static/files/post_data/furniture.csv")
+furniture <- read.csv("https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/post_data/furniture.csv")
 furniture_scaled <- data.frame(Height = scale(furniture$Height), Width = scale(furniture$Width))
 furniture_knn <- get.knn(furniture_scaled, k = 5)
 furniture_scaled$score_knn <- rowMeans(furniture_knn$nn.dist)
@@ -94,5 +93,74 @@ plot(furniture_scaled$Height, furniture_scaled$Width, cex=sqrt(furniture_scaled$
 points(furniture_scaled$Height[largest_idx], furniture_scaled$Width[largest_idx], col="red", pch=20)
 ```
 
+### Local Anomaly - LOF
+
+kNN is useful for finding global anomalies, but is less able to surface local outliers. 
+
+LOF is a ratio of densities:
+
+* LOF > 1 more likely to be anomalous LOF ≤ 1 less likely to be anomalous
+* Large LOF values indicate more isolated points
 
 
+```{r}
+library(dbscan)
+furniture_lof <- furniture[,2:3]
+furniture_lof$score_lof <- lof(scale(furniture_lof), k=5)
+largest_idx <- which.max(furniture_lof$score_lof)
+plot(furniture_lof$Height, furniture_lof$Width, cex=sqrt(furniture_lof$score_lof), pch=20)
+points(furniture_lof$Height[largest_idx], furniture_lof$Width[largest_idx], col="red", pch=20)
+```
+
+It's clear that, lof successfuly detects the local outlier.
+
+# Isolation Forest
+
+* Isolation Forest is built on the basis of decision trees; 
+* To grow a decision tree, at each node, a feature and a corresponding cutoff value are randomly selected;
+* Intuitively, outliers are less frequent than regular observations and are different from them in terms of values, so outliers should be identified closer to the root of the tree with fewer splits. We use isolation score to characterize this.
+
+## Isolation Score 
+
+We need some quatity to define the isolation score[^fn_isolation]
+
+* **Path Length**: $h(x)$ of a point $x$ is measured by the number of edges $x$ traverses an iTree from the root node until the traversal is terminated at an external node.
+* **Normalizing constant** $$c(n) = 2H(n − 1) − (2(n − 1)/n)$$, where $n$ is the number of samples to grow a tree and $H(i)$ is the harmonic number and it can be estimated by $ln(i) + 0.5772156649$ (Euler’s constant).
+
+The isolation score $s$ of an sample $x$ is defined as $$s(x,n)= 2^{-\frac{E(h(x))}{c(n)}},$$ where the $E()$ is the expectation of $h(x)$.
+
+[^fn_isolation]: Zhihua Zhou et al. https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/icdm08b.pdf
+
+* Interpreting the isolation score:
+
+  * Scores between 0 and 1
+  * Scores near 1 indicate anomalies (small path length)
+
+```{r}
+# devtools::install_github("Zelazny7/isofor")
+library(isofor)
+furniture <- read.csv("https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/post_data/furniture.csv")
+furniture <- data.frame(Height = furniture$Height, Width = furniture$Width)
+scores <- matrix(nrow=dim(furniture)[1])
+for (ntree in c(100, 200, 500)){
+  furniture_tree <- iForest(furniture, nt = ntree, phi=50)
+  scores <- cbind(scores, predict(furniture_tree, furniture)) 
+}
+plot(scores[,3], scores[,4], xlab = "200 tress", ylab="500 tress")
+abline(a=0,b=1)
+```
+
+This graph is used to assess wheter the number of trees is enough for the isolation score to converge. From the graph above, we know that 200 tress are enough for us to identify the anomalies.
+
+
+```{r}
+library(lattice)
+furniture_forest <- iForest(furniture, nt = 200, phi=50)
+h_seq <- seq(min(furniture$Height), max(furniture$Height), length.out = 20) 
+w_seq <- seq(min(furniture$Width), max(furniture$Width), length.out = 20)
+furniture_grid <- expand.grid(Width = w_seq, Height = h_seq)
+furniture_grid$score <- predict(furniture_forest, furniture_grid)
+contourplot(score ~ Height + Width, data = furniture_grid,region = TRUE)
+```
+
+This contour graph used to identify the anomaly regions.
