@@ -57,6 +57,11 @@
       
     
     
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css" crossorigin="anonymous">
+      
+    
 
     
 
@@ -102,7 +107,7 @@
   <meta property="og:description" content="Statistics Master Student"><meta property="og:image" content="/img/portrait.jpg">
   <meta property="og:locale" content="en-us">
   
-  <meta property="og:updated_time" content="2017-01-01T00:00:00-05:00">
+  <meta property="og:updated_time" content="2017-01-01T00:00:00-06:00">
   
 
   
@@ -174,9 +179,47 @@
         
 
         <li class="nav-item">
+          <a class="nav-link" href="/#about">
+            
+            <span>Home</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
           <a class="nav-link" href="/#posts">
             
             <span>Posts</span>
+            
+          </a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="/#publications">
+            
+            <span>Publications</span>
             
           </a>
         </li>
@@ -304,6 +347,9 @@
 
       
       
+        
+        
+      
 
       <div class="form-row mb-3">
         <div class="col-auto">
@@ -313,6 +359,10 @@
           <select class="pub-filters pubtype-select form-control form-control-sm" data-filter-group="pubtype">
             <option value="*">All</option>
             
+            <option value=".pubtype-2">
+              Journal article
+            </option>
+            
           </select>
         </div>
         <div class="col-auto">
@@ -320,11 +370,72 @@
             <option value="*">All</option>
             
             
+            
+            <option value=".year-2019">
+              2019
+            </option>
+            
+            
           </select>
         </div>
       </div>
 
       <div id="container-publications">
+        
+
+        
+          
+        
+
+        <div class="grid-sizer col-lg-12 isotope-item pubtype-2 year-2019">
+          
+            <div class="pub-list-item" style="margin-bottom: 1rem" itemscope itemtype="http://schema.org/CreativeWork">
+  <i class="far fa-file-alt pub-icon" aria-hidden="true"></i>
+  <span itemprop="author">
+    Dai, Yutong, Weng, Yang</span>.
+  <a href="/publication/psum/" itemprop="name">Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization (To appear.)</a>.
+  In <em>Journal of Systems Science and Complexity</em>, JSSC.,
+  2019.
+  <p>
+
+
+
+
+  
+  
+    
+  
+<a class="btn btn-outline-primary my-1 mr-1 btn-sm" href="https://github.com/Rothdyt/Projects/blob/master/Thesis-Collection/psum.pdf" target="_blank" rel="noopener">
+  Preprint
+</a>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p>
+</div>
+
+          
+        </div>
+
         
       </div>
 
@@ -400,6 +511,18 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
 
       
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/tex.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+        
+      
 
       
       
@@ -415,6 +538,8 @@
     
 
     
+    
+    <script>hljs.initHighlightingOnLoad();</script>
     
 
     

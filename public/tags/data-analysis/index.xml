@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 10 Dec 2017 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 10 Dec 2017 00:00:00 -0600</lastBuildDate>
     
 	<atom:link href="/tags/data-analysis/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Real Estate Market Data Analysis</title>
       <link>/project/boston-housing/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
       
       <guid>/project/boston-housing/</guid>
       <description>In this project, we
@@ -26,7 +26,7 @@
     <item>
       <title>Variational Gaussian Mixtures</title>
       <link>/project/variational-inference/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
       
       <guid>/project/variational-inference/</guid>
       <description>This is the statistical computing course final project, trying to understand, reporduce and extend some results reported in the paper, Variational Inference: A Review for Statisticians.

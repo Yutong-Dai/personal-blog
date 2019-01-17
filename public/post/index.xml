@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 -0600</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -92,7 +92,7 @@ Download datasets on the server. Preprocess datastes. Run experiments.</descript
     </item>
     
     <item>
-      <title>Convergence Analysis for Bloock Coordinate Decent Algorithm and Powell&#39;s Examples</title>
+      <title>Convergence Analysis for Block Coordinate Decent Algorithm and Powell&#39;s Examples</title>
       <link>/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</link>
       <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
       

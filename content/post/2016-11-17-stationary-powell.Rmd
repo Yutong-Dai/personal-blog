@@ -1,5 +1,5 @@
 ---
-title: Convergence Analysis for Bloock Coordinate Decent Algorithm and Powell's Examples
+title: Convergence Analysis for Block Coordinate Decent Algorithm and Powell's Examples
 author: Yutong Dai
 date: '2016-11-17'
 slug: convergence-analysis-for-block-coordinate-descent-algorithm-and-powell's-examples
