@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Tue, 01 Jan 2019 00:00:00 -0600</lastBuildDate>
+    <lastBuildDate>Tue, 01 Jan 2019 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization (To appear.)</title>
       <link>/publication/psum/</link>
-      <pubDate>Tue, 01 Jan 2019 00:00:00 -0600</pubDate>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0800</pubDate>
       
       <guid>/publication/psum/</guid>
       <description>More detail can easily be written here using Markdown and $\rm \LaTeX$ math code.</description>

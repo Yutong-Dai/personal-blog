@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 10 Dec 2017 00:00:00 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 10 Dec 2017 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="/tags/deep-learning/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Show and Tell: A Neural Image Caption Generator</title>
       <link>/project/show-and-tell/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
       <guid>/project/show-and-tell/</guid>
       <description>This is the deep learning course final project trying to reporduce the results reported in the paper, Show and Tell: A Neural Image Caption Generator.

@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Wed, 20 Apr 2016 00:00:00 +0800</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
@@ -170,7 +170,7 @@ contourplot(score ~ Height + Width, data = furniture_grid,region = TRUE)&lt;/cod
     <item>
       <title>Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization (To appear.)</title>
       <link>/publication/psum/</link>
-      <pubDate>Tue, 01 Jan 2019 00:00:00 -0600</pubDate>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0800</pubDate>
       
       <guid>/publication/psum/</guid>
       <description>&lt;p&gt;More detail can easily be written here using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
@@ -180,7 +180,7 @@ contourplot(score ~ Height + Width, data = furniture_grid,region = TRUE)&lt;/cod
     <item>
       <title>Trip to New York</title>
       <link>/gallery/movies/</link>
-      <pubDate>Sun, 23 Dec 2018 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 23 Dec 2018 00:00:00 +0800</pubDate>
       
       <guid>/gallery/movies/</guid>
       <description>
@@ -3897,7 +3897,7 @@ image(as.matrix.csr(A))&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Sketches</title>
       <link>/gallery/sketches/</link>
-      <pubDate>Fri, 27 Apr 2018 00:00:00 -0500</pubDate>
+      <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
       
       <guid>/gallery/sketches/</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/img/gallery-pics/sketch/mango/mango.jpg&#34; alt=&#34;芒果&#34; /&gt;&lt;/p&gt;
@@ -8309,7 +8309,7 @@ anova(lmod.nested.res2, lmod.nested)&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Real Estate Market Data Analysis</title>
       <link>/project/boston-housing/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
       <guid>/project/boston-housing/</guid>
       <description>&lt;p&gt;In this project, we&lt;/p&gt;
@@ -8329,7 +8329,7 @@ anova(lmod.nested.res2, lmod.nested)&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Show and Tell: A Neural Image Caption Generator</title>
       <link>/project/show-and-tell/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
       <guid>/project/show-and-tell/</guid>
       <description>&lt;p&gt;This is the deep learning course final project trying to reporduce the results reported in the paper, &lt;a href=&#34;https://arxiv.org/pdf/1411.4555.pdf&#34; target=&#34;_blank&#34;&gt;Show and Tell: A Neural Image Caption Generator&lt;/a&gt;.&lt;/p&gt;
@@ -8345,7 +8345,7 @@ anova(lmod.nested.res2, lmod.nested)&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Variational Gaussian Mixtures</title>
       <link>/project/variational-inference/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
       <guid>/project/variational-inference/</guid>
       <description>&lt;p&gt;This is the statistical computing course final project, trying to understand, reporduce and extend some results reported in the paper, &lt;a href=&#34;https://arxiv.org/pdf/1601.00670.pdf&#34; target=&#34;_blank&#34;&gt;Variational Inference: A Review for Statisticians&lt;/a&gt;.&lt;/p&gt;

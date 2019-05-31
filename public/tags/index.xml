@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Content tagged as &#39;Academic&#39;</title>
       <link>/tags/academic/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0800</pubDate>
       
       <guid>/tags/academic/</guid>
       <description>Here is a list of all the content that has been tagged as academic.</description>
@@ -24,7 +24,7 @@
     <item>
       <title>CNN</title>
       <link>/tags/cnn/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
       <guid>/tags/cnn/</guid>
       <description></description>
@@ -33,7 +33,7 @@
     <item>
       <title>Data Analysis</title>
       <link>/tags/data-analysis/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
       <guid>/tags/data-analysis/</guid>
       <description></description>
@@ -42,7 +42,7 @@
     <item>
       <title>Deep Learning</title>
       <link>/tags/deep-learning/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
       <guid>/tags/deep-learning/</guid>
       <description></description>
@@ -60,7 +60,7 @@
     <item>
       <title>LSTM</title>
       <link>/tags/lstm/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
       <guid>/tags/lstm/</guid>
       <description></description>
@@ -69,7 +69,7 @@
     <item>
       <title>NYC</title>
       <link>/tags/nyc/</link>
-      <pubDate>Sun, 23 Dec 2018 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 23 Dec 2018 00:00:00 +0800</pubDate>
       
       <guid>/tags/nyc/</guid>
       <description></description>
@@ -105,7 +105,7 @@
     <item>
       <title>Sketches</title>
       <link>/tags/sketches/</link>
-      <pubDate>Fri, 27 Apr 2018 00:00:00 -0500</pubDate>
+      <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
       
       <guid>/tags/sketches/</guid>
       <description></description>
@@ -114,7 +114,7 @@
     <item>
       <title>Videos</title>
       <link>/tags/videos/</link>
-      <pubDate>Sun, 23 Dec 2018 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 23 Dec 2018 00:00:00 +0800</pubDate>
       
       <guid>/tags/videos/</guid>
       <description></description>
@@ -132,7 +132,7 @@
     <item>
       <title>data-analysis</title>
       <link>/tags/data-analysis/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
       <guid>/tags/data-analysis/</guid>
       <description></description>
