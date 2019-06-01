@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors on Dai, Yutong / 戴宇童</title>
+    <link>/authors/</link>
+    <description>Recent content in Authors on Dai, Yutong / 戴宇童</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 01 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>/authors/admin/</link>
+      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/authors/admin/</guid>
+      <description>I am currently a Ph.D. student in Lehigh&amp;rsquo;s Industrial and Systems Engineering (ISE) Department.</description>
+    </item>
+    
+    <item>
+      <title>Weng, Yang</title>
+      <link>/authors/weng-yang/</link>
+      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/authors/weng-yang/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

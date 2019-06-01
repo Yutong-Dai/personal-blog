@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Statistics on Yutong Dai / 戴宇童</title>
+    <title>Statistics on Dai, Yutong / 戴宇童</title>
     <link>/categories/statistics/</link>
-    <description>Recent content in Statistics on Yutong Dai / 戴宇童</description>
+    <description>Recent content in Statistics on Dai, Yutong / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Fri, 04 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
@@ -14,41 +13,13 @@
     
     <item>
       <title>Anomaly Detection</title>
-      <link>/post/anomaly-detection/</link>
+      <link>/post/anomaly-detection/anomaly-detection/</link>
       <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/anomaly-detection/</guid>
+      <guid>/post/anomaly-detection/anomaly-detection/</guid>
       <description>Point Anomaly Detection - Grubbs’ test Grubbs’ test1 is commonly used technique to detect an outlier in univariate problem, where normality assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.
 The hypothesis test is defined as
 \[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\] For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as</description>
-    </item>
-    
-    <item>
-      <title>Fitting Linear Mixed Models</title>
-      <link>/post/fitting-linear-mixed-models/</link>
-      <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/fitting-linear-mixed-models/</guid>
-      <description>Decide the random-effects covariance structure Case-Study IGF-I    Decide the random-effects covariance structure Use function lmList to have an idea of
-which random-effects to include, and what the covariance structure to use.  library(nlme) # centering x to remove the correlation between intercept and slope orth.list &amp;lt;- lmList( distance ~ I(age-11) | Subject, data = Orthodont) # 1-id/2: significance level to identify the outlier pairs(orth.list, id = 0.</description>
-    </item>
-    
-    <item>
-      <title>The structure of grouped data</title>
-      <link>/post/the-structure-of-grouped-data/</link>
-      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/the-structure-of-grouped-data/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Explore the Linear Mixed Effect Model</title>
-      <link>/post/explore-the-linear-mixed-effect-model/</link>
-      <pubDate>Fri, 16 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/explore-the-linear-mixed-effect-model/</guid>
-      <description>Why Ramdom Effect Models One-way classification with Rail example Rail Data Modeling Fitting the model with the package nlme Diagnostic  Two-way classification: A Randomized Block Design egroStool: No Replications Modeling Diagnostic  Machines: Replications Modeling Model Selection  Extensions for interaction terms  ANCOVA with random effects: Orthodont Modeling: Random Intercept Modeling: Random Intercept Predicitons  Nested Classification Factors: Pixel Modeling  Split-plot    References: Pinheiro, J.</description>
     </item>
     
   </channel>

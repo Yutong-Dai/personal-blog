@@ -1,372 +1,219 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
-    
-    <url>
-    
-      <loc>/post/anomaly-detection/</loc>
-      <lastmod>2019-01-04T00:00:00+00:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/resources/tex-rmd/</loc>
+    <lastmod>2019-05-31T00:00:00+00:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/publication/psum/</loc>
-      <lastmod>2019-01-01T00:00:00+08:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/resources/tex-rmd/cheatsheet/</loc>
+    <lastmod>2019-05-31T00:00:00+01:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/gallery/movies/</loc>
-      <lastmod>2018-12-23T00:00:00+08:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/resources/tex-rmd/homework/</loc>
+    <lastmod>2019-05-31T00:00:00+01:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/post/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</loc>
-      <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/resources/tex-rmd/lecturenotes/</loc>
+    <lastmod>2019-05-31T00:00:00+01:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/post/fitting-linear-mixed-models/</loc>
-      <lastmod>2018-06-12T00:00:00+00:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/</loc>
+    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/post/the-structure-of-grouped-data/</loc>
-      <lastmod>2018-06-08T00:00:00+00:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/talk/example/</loc>
+    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/post/play-with-sparse-matrix/</loc>
-      <lastmod>2018-06-01T00:00:00+00:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/talk/</loc>
+    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/post/get-data-from-website/</loc>
-      <lastmod>2018-05-31T00:00:00+00:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/slides/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/post/bookdown-syntax/</loc>
-      <lastmod>2018-05-28T00:00:00+00:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/slides/example/</loc>
+    <lastmod>2019-02-05T00:00:00+00:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/gallery/sketches/</loc>
-      <lastmod>2018-04-27T00:00:00+08:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/authors/admin/</loc>
+    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/post/explore-the-linear-mixed-effect-model/</loc>
-      <lastmod>2018-06-06T00:00:00+00:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/publication/psum/</loc>
+    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/project/boston-housing/</loc>
-      <lastmod>2017-12-10T00:00:00+08:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/publication_types/3/</loc>
+    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/project/show-and-tell/</loc>
-      <lastmod>2017-12-10T00:00:00+08:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/authors/</loc>
+    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/project/variational-inference/</loc>
-      <lastmod>2017-12-10T00:00:00+08:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/tags/block-cooridinate-descent/</loc>
+    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/academic/</loc>
-      <lastmod>2017-01-01T00:00:00+08:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/tags/convex-optimization/</loc>
+    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/post/</loc>
-      <lastmod>2017-01-01T00:00:00+08:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/publication_types/</loc>
+    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/publication/</loc>
-      <lastmod>2017-01-01T00:00:00+08:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/publication/</loc>
+    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</loc>
-      <lastmod>2016-11-17T00:00:00+00:00</lastmod>
-    </url>
-    
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/publication_types/2/</loc>
-      <lastmod>2019-01-01T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/authors/weng-yang/</loc>
+    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/cnn/</loc>
-      <lastmod>2017-12-10T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/post/anomaly-detection/anomaly-detection/</loc>
+    <lastmod>2019-01-04T00:00:00+00:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/categories/</loc>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2019-01-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/data-analysis/</loc>
-      <lastmod>2017-12-10T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-01-04T00:00:00+00:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/deep-learning/</loc>
-      <lastmod>2017-12-10T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/categories/statistics/</loc>
+    <lastmod>2019-01-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/gallery/</loc>
-      <lastmod>2018-12-23T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/tags/data-analysis/</loc>
+    <lastmod>2019-01-04T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/lme/</loc>
-      <lastmod>2018-06-12T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/post/decison-tree-path/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</loc>
+    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/lstm/</loc>
-      <lastmod>2017-12-10T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/categories/python-programming/</loc>
+    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/nyc/</loc>
-      <lastmod>2018-12-23T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/tags/randomforest/</loc>
+    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/powell-example/</loc>
-      <lastmod>2016-11-17T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/privacy/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/project/</loc>
-      <lastmod>2017-12-10T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/tags/cnn/</loc>
+    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/publication_types/</loc>
-      <lastmod>2019-01-01T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/tags/deep-learning/</loc>
+    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/categories/python-programming/</loc>
-      <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/tags/lstm/</loc>
+    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/categories/r-programming/</loc>
-      <lastmod>2018-06-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/project/</loc>
+    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/r-tricks/</loc>
-      <lastmod>2018-06-01T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/project/boston-housing/</loc>
+    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/categories/r-writing/</loc>
-      <lastmod>2018-05-28T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/project/show-and-tell/</loc>
+    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/randomforest/</loc>
-      <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/project/variational-inference/</loc>
+    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/sketches/</loc>
-      <lastmod>2018-04-27T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/post/powell/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</loc>
+    <lastmod>2016-11-17T00:00:00+00:00</lastmod>
+  </url>
   
-    
-    <url>
-    
-      <loc>/categories/statistics/</loc>
-      <lastmod>2019-01-04T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/tags/powell-example/</loc>
+    <lastmod>2016-11-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/</loc>
-      <lastmod>2017-01-01T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/categories/optimization/</loc>
+    <lastmod>2016-11-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
   
-    
-    <url>
-    
-      <loc>/tags/videos/</loc>
-      <lastmod>2018-12-23T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/</loc>
-      <lastmod>2016-04-20T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/bookdown/</loc>
-      <lastmod>2018-05-28T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/tags/data-analysis/</loc>
-      <lastmod>2017-12-10T00:00:00+08:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
-  
-    
-    <url>
-    
-      <loc>/categories/optimization/</loc>
-      <lastmod>2016-11-17T00:00:00+00:00</lastmod>
-      <priority>0</priority>
-    </url>
-    
+  <url>
+    <loc>/resources/</loc>
+  </url>
   
 </urlset>

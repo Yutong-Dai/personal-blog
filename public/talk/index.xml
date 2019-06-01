@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Recent &amp; Upcoming Talks on Yutong Dai / 戴宇童</title>
+    <title>Recent &amp; Upcoming Talks on Dai, Yutong / 戴宇童</title>
     <link>/talk/</link>
-    <description>Recent content in Recent &amp; Upcoming Talks on Yutong Dai / 戴宇童</description>
+    <description>Recent content in Recent &amp; Upcoming Talks on Dai, Yutong / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/talk/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,12 +14,10 @@
     <item>
       <title>Example Talk</title>
       <link>/talk/example/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 -0500</pubDate>
+      <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
       
       <guid>/talk/example/</guid>
-      <description>Click on the Slides button above to view the built-in slides feature.
- Slides can be added in a few ways:
- Create slides using Academic&amp;rsquo;s Slides feature and link using url_slides parameter in the front matter of the talk file Upload an existing slide deck to static/ and link using url_slides parameter in the front matter of the talk file Embed your slides (e.g. Google Slides) or presentation video on this page using shortcodes.</description>
+      <description>An example talk using Academic&amp;rsquo;s Markdown slides feature.</description>
     </item>
     
   </channel>

@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>data-analysis on Yutong Dai / 戴宇童</title>
+    <title>data-analysis on Dai, Yutong / 戴宇童</title>
     <link>/tags/data-analysis/</link>
-    <description>Recent content in data-analysis on Yutong Dai / 戴宇童</description>
+    <description>Recent content in data-analysis on Dai, Yutong / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 10 Dec 2017 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 04 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/data-analysis/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Anomaly Detection</title>
+      <link>/post/anomaly-detection/anomaly-detection/</link>
+      <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/anomaly-detection/anomaly-detection/</guid>
+      <description>Point Anomaly Detection - Grubbs’ test Grubbs’ test1 is commonly used technique to detect an outlier in univariate problem, where normality assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.
+The hypothesis test is defined as
+\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\] For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as</description>
+    </item>
     
     <item>
       <title>Real Estate Market Data Analysis</title>
@@ -18,9 +28,7 @@
       <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
       <guid>/project/boston-housing/</guid>
-      <description>In this project, we
- Develope data products to help Airbnb hosts to determine listing prices using Sparse Regression and RandomForest Researched how amenities and geolocation in uence listing prices Designed a User Interface for customers to gain insight into Airbnb rental markets in Boston  The Video Presentation and Rshiny App Demo are also provided.
- </description>
+      <description>Develope data products to help Airbnb hosts to determine listing prices.</description>
     </item>
     
     <item>
@@ -29,11 +37,7 @@
       <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
       <guid>/project/variational-inference/</guid>
-      <description>This is the statistical computing course final project, trying to understand, reporduce and extend some results reported in the paper, Variational Inference: A Review for Statisticians.
-Three datasets are used here, simulated data, old faithful and imageCLEF.
-Our final result looks like
- Simulated data   old faithful  imageclef
-  For code and report please click here.</description>
+      <description>Clustering under the variation inference framework.</description>
     </item>
     
   </channel>

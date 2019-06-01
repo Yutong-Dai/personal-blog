@@ -32,7 +32,7 @@ This is the deep learning course final project trying to reporduce the results r
 
 The model is trained on the [MS coco2014 dataset](http://cocodataset.org/#home). Our final result looks like 
 
-![](/img/project-pics/caption-demo.png)
+![](./caption-demo.png)
 
 
 For code, UI, and report  please click [here](https://github.com/Rothdyt/Projects/tree/master/Show-and-tell).

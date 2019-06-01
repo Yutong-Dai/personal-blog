@@ -1,33 +1,14 @@
 +++
-# About/Biography widget.
-widget = "about"
-active = true
-date = 2016-04-20T00:00:00
+# About widget.
+widget = "about"  # See https://sourcethemes.com/academic/docs/page-builder/
+headless = true  # This file represents a page section.
+active = true  # Activate this widget? true/false
+weight = 1  # Order that this section will appear in.
 
-# Order that this section will appear in.
-weight = 1
+title = "Biography"
 
-# List your academic interests.
-#[interests]
-  #interests = [
-    #"Artificial Intelligence",
-    #"Computational Linguistics",
-    #"Information Retrieval"
-#  ]
-
-# List your qualifications (such as academic degrees).
-[[education.courses]]
-  course = "MS in Statistics"
-  institution = "University of Illinois at Urbana-Champaign"
-  year = "2019"
-
-[[education.courses]]
-  course = "BS in Statistics (with honors)"
-  institution = "Sichuan University"
-  year = 2017
- 
+# Choose the user profile to display
+# This should be the username of a profile in your `content/authors/` folder.
+# See https://sourcethemes.com/academic/docs/get-started/#introduce-yourself
+author = "admin"
 +++
-
-# Biography
-
-I am a M.S. student in Statistics at the University of Illinois at Urbana-Champaign. Also, I work part-time as a Data Science Intern at Bud Analytics Lab of Anheuser-Busch InBev, focusing on developing data research and innovation.

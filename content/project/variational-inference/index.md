@@ -34,14 +34,14 @@ Our final result looks like
 
 * Simulated data
 
-![](/img/project-pics/simulation.gif)
+![](./simulation.gif)
 
 * old faithful
-![](/img/project-pics/old_faithful.gif)
+![](./old_faithful.gif)
 
 * imageclef
 
-![](/img/project-pics/imageclef.jpg)
+![](./imageclef.jpg)
 
 For code and report please click [here](https://github.com/Rothdyt/Projects/tree/master/Show-and-tell).
 

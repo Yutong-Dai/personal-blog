@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>LSTM on Yutong Dai / 戴宇童</title>
+    <title>LSTM on Dai, Yutong / 戴宇童</title>
     <link>/tags/lstm/</link>
-    <description>Recent content in LSTM on Yutong Dai / 戴宇童</description>
+    <description>Recent content in LSTM on Dai, Yutong / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2018</copyright>
     <lastBuildDate>Sun, 10 Dec 2017 00:00:00 +0800</lastBuildDate>
     
 	<atom:link href="/tags/lstm/index.xml" rel="self" type="application/rss+xml" />
@@ -18,9 +17,7 @@
       <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
       <guid>/project/show-and-tell/</guid>
-      <description>This is the deep learning course final project trying to reporduce the results reported in the paper, Show and Tell: A Neural Image Caption Generator.
-The model is trained on the MS coco2014 dataset. Our final result looks like
-For code, UI, and report please click here.</description>
+      <description>Feed in an image, AI will generate the caption for you!</description>
     </item>
     
   </channel>

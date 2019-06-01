@@ -1,95 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Yutong Dai / 戴宇童</title>
+    <title>Tags on Dai, Yutong / 戴宇童</title>
     <link>/tags/</link>
-    <description>Recent content in Tags on Yutong Dai / 戴宇童</description>
+    <description>Recent content in Tags on Dai, Yutong / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; 2018</copyright>
-    <lastBuildDate>Sun, 01 Jan 2017 00:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 01 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Content tagged as &#39;Academic&#39;</title>
-      <link>/tags/academic/</link>
-      <pubDate>Sun, 01 Jan 2017 00:00:00 +0800</pubDate>
+      <title>Block Cooridinate Descent</title>
+      <link>/tags/block-cooridinate-descent/</link>
+      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/academic/</guid>
-      <description>Here is a list of all the content that has been tagged as academic.</description>
-    </item>
-    
-    <item>
-      <title>CNN</title>
-      <link>/tags/cnn/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
-      
-      <guid>/tags/cnn/</guid>
+      <guid>/tags/block-cooridinate-descent/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Data Analysis</title>
+      <title>Convex Optimization</title>
+      <link>/tags/convex-optimization/</link>
+      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/convex-optimization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data-analysis</title>
       <link>/tags/data-analysis/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
+      <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/data-analysis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Deep Learning</title>
-      <link>/tags/deep-learning/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
-      
-      <guid>/tags/deep-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>LME</title>
-      <link>/tags/lme/</link>
-      <pubDate>Tue, 12 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/lme/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>LSTM</title>
-      <link>/tags/lstm/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
-      
-      <guid>/tags/lstm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>NYC</title>
-      <link>/tags/nyc/</link>
-      <pubDate>Sun, 23 Dec 2018 00:00:00 +0800</pubDate>
-      
-      <guid>/tags/nyc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Powell-Example</title>
-      <link>/tags/powell-example/</link>
-      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/powell-example/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R-tricks</title>
-      <link>/tags/r-tricks/</link>
-      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/r-tricks/</guid>
       <description></description>
     </item>
     
@@ -103,38 +48,38 @@
     </item>
     
     <item>
-      <title>Sketches</title>
-      <link>/tags/sketches/</link>
-      <pubDate>Fri, 27 Apr 2018 00:00:00 +0800</pubDate>
-      
-      <guid>/tags/sketches/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Videos</title>
-      <link>/tags/videos/</link>
-      <pubDate>Sun, 23 Dec 2018 00:00:00 +0800</pubDate>
-      
-      <guid>/tags/videos/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>bookdown</title>
-      <link>/tags/bookdown/</link>
-      <pubDate>Mon, 28 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/bookdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>data-analysis</title>
-      <link>/tags/data-analysis/</link>
+      <title>CNN</title>
+      <link>/tags/cnn/</link>
       <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
       
-      <guid>/tags/data-analysis/</guid>
+      <guid>/tags/cnn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deep Learning</title>
+      <link>/tags/deep-learning/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>LSTM</title>
+      <link>/tags/lstm/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
+      
+      <guid>/tags/lstm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Powell-Example</title>
+      <link>/tags/powell-example/</link>
+      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/powell-example/</guid>
       <description></description>
     </item>
     
