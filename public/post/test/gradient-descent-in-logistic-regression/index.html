@@ -27,10 +27,13 @@
   
     
   
-  <meta name="description" content="Ph.D. student">
+  <meta name="description" content="Problem Formulation There are commonly two ways of formulating the logistic regression problem, depending on the way we label the response variable \(y\). Here we focus on the first formulation and defer the second formulation on the appendix.
+First Formulation:
+Consider restrict \(y\) to \(\{-1,1\}\). Then we have \[ \begin{aligned} &amp;\mathbb{P}(y=1|z)=\sigma(z)=\frac{1}{1 &#43; e^{-z}}\\ &amp;\mathbb{P}(y=-1|z)=\sigma(z)=\frac{1}{1 &#43; e^z}, \end{aligned} \] which can be compactly written as \[ \mathbb{P}(y|z)=\sigma(zy). \]
+If we consider the data $\{x_i, y_i\}_{i=1}^N$ and \(`\{x_i, y_i\}_{i=1}^N`\).">
 
   
-  <link rel="alternate" hreflang="en-us" href="/404.html">
+  <link rel="alternate" hreflang="en-us" href="/post/test/gradient-descent-in-logistic-regression/">
 
   
 
@@ -95,7 +98,7 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/404.html">
+  <link rel="canonical" href="/post/test/gradient-descent-in-logistic-regression/">
 
   
   
@@ -107,19 +110,24 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="Dai, Yutong / 戴宇童">
-  <meta property="og:url" content="/404.html">
-  <meta property="og:title" content="404 Page not found | Dai, Yutong / 戴宇童">
-  <meta property="og:description" content="Ph.D. student"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:url" content="/post/test/gradient-descent-in-logistic-regression/">
+  <meta property="og:title" content="Gradient Descent in Logistic Regression | Dai, Yutong / 戴宇童">
+  <meta property="og:description" content="Problem Formulation There are commonly two ways of formulating the logistic regression problem, depending on the way we label the response variable \(y\). Here we focus on the first formulation and defer the second formulation on the appendix.
+First Formulation:
+Consider restrict \(y\) to \(\{-1,1\}\). Then we have \[ \begin{aligned} &amp;\mathbb{P}(y=1|z)=\sigma(z)=\frac{1}{1 &#43; e^{-z}}\\ &amp;\mathbb{P}(y=-1|z)=\sigma(z)=\frac{1}{1 &#43; e^z}, \end{aligned} \] which can be compactly written as \[ \mathbb{P}(y|z)=\sigma(zy). \]
+If we consider the data $\{x_i, y_i\}_{i=1}^N$ and \(`\{x_i, y_i\}_{i=1}^N`\)."><meta property="og:image" content="/img/icon-192.png">
   <meta property="og:locale" content="en-us">
   
+  <meta property="article:published_time" content="2019-07-01T00:00:00&#43;00:00">
   
+  <meta property="article:modified_time" content="2019-07-01T15:58:50&#43;08:00">
+  
+
   
 
   
 
-  
-
-  <title>404 Page not found | Dai, Yutong / 戴宇童</title>
+  <title>Gradient Descent in Logistic Regression | Dai, Yutong / 戴宇童</title>
 
 </head>
 <body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
@@ -394,51 +402,288 @@
   </div>
 </nav>
 
-<div class="universal-wrapper pt-3">
 
-  <h1>Page not found</h1>
-
-  
-  
-  <form class="d-flex align-items-center mb-3">
-    <input name="q" type="search" class="form-control" id="search-query" placeholder="Search..." autocomplete="off">
-  </form>
-  
+<article class="article" itemscope itemtype="http://schema.org/Article">
 
   
 
-  <p>Perhaps you were looking for one of these?</p>
+
+
+
+
+
+
+
+
+
+
+
+  
 
   
   
   
-  <h2>Latest</h2>
-  <ul>
+<div class="article-container pt-3">
+  <h1 itemprop="name">Gradient Descent in Logistic Regression</h1>
+
+  
+
+  
     
-      <li><a href="/resources/tex-rmd/cheatsheet/">Cheatsheet Template</a></li>
+
+
+
+<meta content="2019-07-01 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-07-01 15:58:50 &#43;0800 CST" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
     
-      <li><a href="/resources/tex-rmd/homework/">Homework Template</a></li>
     
-      <li><a href="/resources/tex-rmd/lecturenotes/">Lecture Notes Template</a></li>
+      
+          Last updated on
+      
     
-      <li><a href="/talk/example/">Example Talk</a></li>
+    <time>2019-07-01</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    1 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder"></i>
+    <a href="/categories/optimization/">optimization</a></span>
+  
+
+  
     
-      <li><a href="/post/gdlogistic/gradient-descent-in-logistic-regression/">Gradient Descent in Logistic Regression</a></li>
-    
-      <li><a href="/slides/example/">Slides</a></li>
-    
-      <li><a href="/publication/psum/">(To appear.) Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization</a></li>
-    
-      <li><a href="/post/anomaly-detection/anomaly-detection/">Anomaly Detection</a></li>
-    
-      <li><a href="/post/decison-tree-path/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/">Decision Tree: How to find the path from the root to the desired terminal node</a></li>
-    
-      <li><a href="/privacy/">Privacy Policy</a></li>
-    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    <li>
+      <a class="twitter"
+         href="https://twitter.com/intent/tweet?text=&amp;url="
+         target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+    <li>
+      <a class="facebook"
+         href="https://www.facebook.com/sharer.php?u="
+         target="_blank" rel="noopener">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </li>
+    <li>
+      <a class="linkedin"
+         href="https://www.linkedin.com/shareArticle?mini=true&amp;url=&amp;title="
+         target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+    <li>
+      <a class="weibo"
+         href="http://service.weibo.com/share/share.php?url=&amp;title="
+         target="_blank" rel="noopener">
+        <i class="fab fa-weibo"></i>
+      </a>
+    </li>
+    <li>
+      <a class="email"
+         href="mailto:?subject=&amp;body=">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
   </ul>
+</div>
+
+
   
 
 </div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+
+<div id="problem-formulation" class="section level1">
+<h1>Problem Formulation</h1>
+<p>There are commonly two ways of formulating the logistic regression problem, depending on the way we label the response variable <span class="math inline">\(y\)</span>. Here we focus on the first formulation and defer the second formulation on the appendix.</p>
+<p><strong>First Formulation:</strong></p>
+<p>Consider restrict <span class="math inline">\(y\)</span> to <span class="math inline">\(\{-1,1\}\)</span>. Then we have <span class="math display">\[
+\begin{aligned}
+&amp;\mathbb{P}(y=1|z)=\sigma(z)=\frac{1}{1 + e^{-z}}\\
+&amp;\mathbb{P}(y=-1|z)=\sigma(z)=\frac{1}{1 + e^z},
+\end{aligned}
+\]</span> which can be compactly written as <span class="math display">\[
+\mathbb{P}(y|z)=\sigma(zy).
+\]</span></p>
+<p>If we consider the data <code>$\{x_i, y_i\}_{i=1}^N$</code> and <span class="math inline">\(`\{x_i, y_i\}_{i=1}^N`\)</span>.</p>
+</div>
+
+    </div>
+
+    
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card" itemscope itemtype="http://schema.org/Person">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar_hueb9c1e73221478fc4ed6d17c75c9b9a0_24549_250x250_fill_q90_lanczos_center.jpg" itemprop="image" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title" itemprop="name"><a href="/">Dai, Yutong</a></h5>
+      <h6 class="card-subtitle">Ph.D. student</h6>
+      <p class="card-text" itemprop="description">My research interests lie at the intersection of statistical modeling and optimization.</p>
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://linkedin.com/in/yutongdai/" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="/#contact" >
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://github.com/rothdyt" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="/files/resume.pdf" >
+              <i class="ai ai-cv"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+
+      
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
 <div class="container">
   <footer class="site-footer">
   
