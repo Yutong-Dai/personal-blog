@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chinese Clock on Dai, Yutong / 戴宇童</title>
+    <link>/post/chinese-clock/</link>
+    <description>Recent content in Chinese Clock on Dai, Yutong / 戴宇童</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 05 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/post/chinese-clock/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>/post/chinese-clock/untitled/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/chinese-clock/untitled/</guid>
+      <description>import plotly import plotly.graph_objs as go plotly.offline.init_notebook_mode(connected=True) colorPlate1 = [ &#39;#ffb3a7&#39;, &#39;#ffc773&#39;, &#39;#ffa400&#39;, &#39;#c9dd22&#39;, &#39;#afdd22&#39;, &#39;#cca4e3&#39;, &#39;#b0a4e3&#39;, &#39;#ffc64b&#39;, &#39;#ffb61e&#39;, &#39;#758a99&#39;, &#39;#6b6882&#39;, &#39;#ffb3a7&#39;, &#39;#f47983&#39;, &#39;#ffc773&#39;, &#39;#ffa400&#39;, &#39;#c9dd22&#39;, &#39;#afdd22&#39;, &#39;#cca4e3&#39;, &#39;#b0a4e3&#39;, &#39;#ffc64b&#39;, &#39;#ffb61e&#39;, &#39;#758a99&#39;, &#39;#6b6882&#39;, &#39;#f47983&#39; ] colorPlate2 = [&#39;#ff4e20&#39;, &#39;#ff7500&#39;, &#39;#789262&#39;, &#39;#8d4bbb&#39;, &#39;#e9bb1d&#39;,&#39;#50616d&#39;] * 2 theta_marker = [&amp;quot;{}:00&amp;quot;.format(i) for i in range(24)] timeStamp = [ &#39;子正&#39;, &#39;丑初&#39;, &#39;丑正&#39;, &#39;寅初&#39;, &#39;寅正&#39;, &#39;卯初&#39;, &#39;卯正&#39;, &#39;辰初&#39;, &#39;辰正&#39;, &#39;巳初&#39;, &#39;巳正&#39;, &#39;午初&#39;, &#39;午正&#39;, &#39;未初&#39;, &#39;未正&#39;, &#39;申初&#39;, &#39;申正&#39;, &#39;酉初&#39;, &#39;酉正&#39;, &#39;戌初&#39;, &#39;戌正&#39;, &#39;亥初&#39;, &#39;亥正&#39;, &#39;子初&#39; ] timeStampMain = [ &#39;子&#39;, &#39;丑&#39;, &#39;寅&#39;, &#39;卯&#39;, &#39;辰&#39;, &#39;巳&#39;, &#39;午&#39;, &#39;未&#39;, &#39;申&#39;, &#39;酉&#39;, &#39;戌&#39;, &#39;亥&#39; ] def sectorChild(name, location, radius, fillcolor=&#39;#ff4e20&#39;): r = [0] * 24 r[location % 24] = radius r[(location + 1) % 24] = radius obj = go.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/post/chinese-clock/plot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/chinese-clock/plot/</guid>
+      <description>window.PlotlyConfig = {MathJaxConfig: &#39;local&#39;}; /** * plotly.js v1.48.1 * Copyright 2012-2019, Plotly, Inc. * All rights reserved. * Licensed under the MIT license */ !function(t){if(&#34;object&#34;==typeof exports&amp;&amp;&#34;undefined&#34;!=typeof module)module.exports=t();else if(&#34;function&#34;==typeof define&amp;&amp;define.amd)define([],t);else{(&#34;undefined&#34;!=typeof window?window:&#34;undefined&#34;!=typeof global?global:&#34;undefined&#34;!=typeof self?self:this).Plotly=t()}}(function(){return function(){return function t(e,r,n){function i(o,s){if(!r[o]){if(!e[o]){var l=&#34;function&#34;==typeof require&amp;&amp;require;if(!s&amp;&amp;l)return l(o,!0);if(a)return a(o,!0);var c=new Error(&#34;Cannot find module &#39;&#34;+o+&#34;&#39;&#34;);throw c.code=&#34;MODULE_NOT_FOUND&#34;,c}var u=r[o]={exports:{}};e[o][0].call(u.exports,function(t){return i(e[o][1][t]||t)},u,u.exports,t,e,r,n)}return r[o].exports}for(var a=&#34;function&#34;==typeof require&amp;&amp;require,o=0;o:not(.watermark)&#34;:&#34;opacity:0;-webkit-transition:opacity 0.3s ease 0s;-moz-transition:opacity 0.3s ease 0s;-ms-transition:opacity 0.3s ease 0s;-o-transition:opacity 0.3s ease 0s;transition:opacity 0.3s ease 0s;&#34;,&#34;X:hover .</description>
+    </item>
+    
+  </channel>
+</rss>

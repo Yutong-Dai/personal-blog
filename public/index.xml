@@ -63,6 +63,136 @@
     </item>
     
     <item>
+      <title>中国传统计时</title>
+      <link>/post/chinese-clock/gradient-descent-in-logistic-regression/</link>
+      <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/chinese-clock/gradient-descent-in-logistic-regression/</guid>
+      <description>
+
+&lt;h1 id=&#34;中国传统计时单位&#34;&gt;中国传统计时单位&lt;/h1&gt;
+
+&lt;p&gt;古时一天分12个时辰，采用地支作为时辰名称，分为&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#39;子&#39;, &#39;丑&#39;, &#39;寅&#39;, &#39;卯&#39;
+&#39;辰&#39;, &#39;巳&#39;, &#39;午&#39;, &#39;未&#39; 
+&#39;申&#39;, &#39;酉&#39;, &#39;戌&#39;, &#39;亥&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;时辰的起点是午夜，即子初。&lt;/p&gt;
+
+&lt;p&gt;点击下图色块便可查看时间对应。
+&lt;iframe
+      src=&#34;https://plot.ly/~Roth/2.embed&#34;
+      width=&#34;100%&#34;
+      height=&#34;500px&#34;
+      style=&#34;border:none;&#34;&gt;
+&lt;/iframe&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;附录&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;参考文献: &lt;a href=&#34;http://www.guoxue.com/?p=4025&#34; target=&#34;_blank&#34;&gt;国学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;用于绘图的Python代码&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# using following code in jupyter notebook
+import plotly
+import plotly.graph_objs as go
+
+plotly.offline.init_notebook_mode(connected=True)
+colorPlate1 = [
+    &#39;#ffb3a7&#39;, 
+    &#39;#ffc773&#39;, &#39;#ffa400&#39;,
+    &#39;#c9dd22&#39;, &#39;#afdd22&#39;,
+    &#39;#cca4e3&#39;, &#39;#b0a4e3&#39;,
+    &#39;#ffc64b&#39;, &#39;#ffb61e&#39;,
+    &#39;#758a99&#39;, &#39;#6b6882&#39;,
+    &#39;#ffb3a7&#39;, &#39;#f47983&#39;,
+    &#39;#ffc773&#39;, &#39;#ffa400&#39;,
+    &#39;#c9dd22&#39;, &#39;#afdd22&#39;,
+    &#39;#cca4e3&#39;, &#39;#b0a4e3&#39;,
+    &#39;#ffc64b&#39;, &#39;#ffb61e&#39;,
+    &#39;#758a99&#39;, &#39;#6b6882&#39;,
+    &#39;#f47983&#39;
+]
+colorPlate2 = [&#39;#ff4e20&#39;, &#39;#ff7500&#39;, &#39;#789262&#39;, &#39;#8d4bbb&#39;, &#39;#e9bb1d&#39;,&#39;#50616d&#39;] * 2
+theta_marker = [&amp;quot;{}:00&amp;quot;.format(i) for i in range(24)]
+timeStamp = [
+&#39;子正&#39;, &#39;丑初&#39;, &#39;丑正&#39;, &#39;寅初&#39;, &#39;寅正&#39;, 
+&#39;卯初&#39;, &#39;卯正&#39;, &#39;辰初&#39;, &#39;辰正&#39;, &#39;巳初&#39;, &#39;巳正&#39;,  
+&#39;午初&#39;, &#39;午正&#39;, &#39;未初&#39;, &#39;未正&#39;, &#39;申初&#39;, &#39;申正&#39;,  
+&#39;酉初&#39;, &#39;酉正&#39;, &#39;戌初&#39;, &#39;戌正&#39;, &#39;亥初&#39;, &#39;亥正&#39;, &#39;子初&#39;
+]
+timeStampMain = [
+&#39;子&#39;, &#39;丑&#39;, &#39;寅&#39;, 
+&#39;卯&#39;, &#39;辰&#39;, &#39;巳&#39;,  
+&#39;午&#39;, &#39;未&#39;, &#39;申&#39;,  
+&#39;酉&#39;, &#39;戌&#39;, &#39;亥&#39;
+]
+
+def sectorChild(name, location, radius,  fillcolor=&#39;#ff4e20&#39;):
+    r = [0] * 24
+    r[location % 24] = radius
+    r[(location + 1) % 24] = radius
+    obj = go.Scatterpolar(
+      name = name,
+      r = r,
+      theta = theta_marker,
+      fill = &amp;quot;toself&amp;quot;,
+      fillcolor = fillcolor,
+      line =  {&amp;quot;color&amp;quot;:&#39;black&#39;}
+    )
+    return obj
+
+def sectorParent(name, location, radius,  fillcolor=&#39;black&#39;):
+    r = [0] * 24
+    if location == 0:
+        r[0] = r[1] = r[23] = radius
+    else:
+        r[location % 24] = radius
+        r[(location + 1) % 24] = radius
+        r[(location + 2) % 24] = radius
+    obj = go.Scatterpolar(
+      name = name,
+      r = r,
+      theta = theta_marker,
+      fill = &amp;quot;toself&amp;quot;,
+      fillcolor = fillcolor,
+      line =  {&amp;quot;color&amp;quot;:&#39;black&#39;}
+    )
+    return obj
+
+
+
+trace = [sectorChild(i, j, 5, k) for (i,j,k) in zip(timeStamp, range(24), colorPlate1)]
+trace += [sectorParent(timeStampMain[0], 0, 3, colorPlate2[0])]
+trace += [sectorParent(i, j, 3, k) for (i,j, k) in zip(timeStampMain[1:], range(1, 23, 2), colorPlate2[1:]) ]
+
+layout = go.Layout(
+    polar = dict(
+      radialaxis = dict(
+        visible = False
+      ),
+      angularaxis = dict(
+        direction = &amp;quot;clockwise&amp;quot;,
+        visible = True,
+        linewidth = 3
+      )
+    ),
+    showlegend = False
+)
+
+
+plotly.offline.iplot({
+    &amp;quot;data&amp;quot;: trace,
+    &amp;quot;layout&amp;quot;: layout
+})
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Gradient Descent in Logistic Regression</title>
       <link>/post/gdlogistic/gradient-descent-in-logistic-regression/</link>
       <pubDate>Mon, 01 Jul 2019 00:00:00 +0000</pubDate>
