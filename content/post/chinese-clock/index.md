@@ -2,7 +2,7 @@
 title: 中国传统计时
 author: yutong
 date: '2019-07-05'
-slug: gradient-descent-in-logistic-regression
+slug: chinese-time
 categories:
   - visualization
 tags: [visualization]
