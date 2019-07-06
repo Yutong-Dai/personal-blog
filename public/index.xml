@@ -84,7 +84,7 @@
 &lt;p&gt;点击下图色块便可查看时间对应。
 &lt;iframe
       src=&#34;https://plot.ly/~Roth/2.embed&#34;
-      width=&#34;120%&#34;
+      width=&#34;100%&#34;
       height=&#34;600px&#34;
       style=&#34;border:none;&#34;&gt;
 &lt;/iframe&gt;&lt;/p&gt;
