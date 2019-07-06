@@ -13,15 +13,15 @@
     
     <item>
       <title>中国传统计时</title>
-      <link>/post/chinese-clock/gradient-descent-in-logistic-regression/</link>
+      <link>/post/chinese-clock/chinese-time/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/chinese-clock/gradient-descent-in-logistic-regression/</guid>
+      <guid>/post/chinese-clock/chinese-time/</guid>
       <description>中国传统计时单位 古时一天分12个时辰，采用地支作为时辰名称，分为
 &#39;子&#39;, &#39;丑&#39;, &#39;寅&#39;, &#39;卯&#39; &#39;辰&#39;, &#39;巳&#39;, &#39;午&#39;, &#39;未&#39; &#39;申&#39;, &#39;酉&#39;, &#39;戌&#39;, &#39;亥&#39;  时辰的起点是午夜，即子初。
 点击下图色块便可查看时间对应。 
 附录
- 参考文献: 国学网 用于绘图的Python代码  # using following code in jupyter notebook import plotly import plotly.graph_objs as go plotly.offline.init_notebook_mode(connected=True) colorPlate1 = [ &#39;#ffb3a7&#39;, &#39;#ffc773&#39;, &#39;#ffa400&#39;, &#39;#c9dd22&#39;, &#39;#afdd22&#39;, &#39;#cca4e3&#39;, &#39;#b0a4e3&#39;, &#39;#ffc64b&#39;, &#39;#ffb61e&#39;, &#39;#758a99&#39;, &#39;#6b6882&#39;, &#39;#ffb3a7&#39;, &#39;#f47983&#39;, &#39;#ffc773&#39;, &#39;#ffa400&#39;, &#39;#c9dd22&#39;, &#39;#afdd22&#39;, &#39;#cca4e3&#39;, &#39;#b0a4e3&#39;, &#39;#ffc64b&#39;, &#39;#ffb61e&#39;, &#39;#758a99&#39;, &#39;#6b6882&#39;, &#39;#f47983&#39; ] colorPlate2 = [&#39;#ff4e20&#39;, &#39;#ff7500&#39;, &#39;#789262&#39;, &#39;#8d4bbb&#39;, &#39;#e9bb1d&#39;,&#39;#50616d&#39;] * 2 theta_marker = [&amp;quot;{}:00&amp;quot;.</description>
+ 参考文献:  国学网 新浪博客 博主知书少年果麦麦  用于绘图的Python代码  # using following code in jupyter notebook import plotly import plotly.graph_objs as go plotly.offline.init_notebook_mode(connected=True) colorPlate1 = [ &#39;#ffb3a7&#39;, &#39;#ffc773&#39;, &#39;#ffa400&#39;, &#39;#c9dd22&#39;, &#39;#afdd22&#39;, &#39;#cca4e3&#39;, &#39;#b0a4e3&#39;, &#39;#ffc64b&#39;, &#39;#ffb61e&#39;, &#39;#758a99&#39;, &#39;#6b6882&#39;, &#39;#ffb3a7&#39;, &#39;#f47983&#39;, &#39;#ffc773&#39;, &#39;#ffa400&#39;, &#39;#c9dd22&#39;, &#39;#afdd22&#39;, &#39;#cca4e3&#39;, &#39;#b0a4e3&#39;, &#39;#ffc64b&#39;, &#39;#ffb61e&#39;, &#39;#758a99&#39;, &#39;#6b6882&#39;, &#39;#f47983&#39; ] colorPlate2 = [&#39;#ff4e20&#39;, &#39;#ff7500&#39;, &#39;#789262&#39;, &#39;#8d4bbb&#39;, &#39;#e9bb1d&#39;,&#39;#50616d&#39;] * 2 theta_marker = [&amp;quot;{}:00&amp;quot;.</description>
     </item>
     
     <item>

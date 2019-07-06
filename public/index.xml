@@ -64,10 +64,10 @@
     
     <item>
       <title>中国传统计时</title>
-      <link>/post/chinese-clock/gradient-descent-in-logistic-regression/</link>
+      <link>/post/chinese-clock/chinese-time/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/chinese-clock/gradient-descent-in-logistic-regression/</guid>
+      <guid>/post/chinese-clock/chinese-time/</guid>
       <description>
 
 &lt;h1 id=&#34;中国传统计时单位&#34;&gt;中国传统计时单位&lt;/h1&gt;
@@ -84,15 +84,20 @@
 &lt;p&gt;点击下图色块便可查看时间对应。
 &lt;iframe
       src=&#34;https://plot.ly/~Roth/2.embed&#34;
-      width=&#34;100%&#34;
-      height=&#34;500px&#34;
+      width=&#34;120%&#34;
+      height=&#34;600px&#34;
       style=&#34;border:none;&#34;&gt;
 &lt;/iframe&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;附录&lt;/strong&gt;&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;参考文献: &lt;a href=&#34;http://www.guoxue.com/?p=4025&#34; target=&#34;_blank&#34;&gt;国学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;参考文献:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.guoxue.com/?p=4025&#34; target=&#34;_blank&#34;&gt;国学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://weibo.com/6421571119/HBrUbvUnQ?from=page_1005056421571119_profile&amp;amp;wvr=6&amp;amp;mod=weibotime&amp;amp;type=comment#_rnd1562428488868&#34; target=&#34;_blank&#34;&gt;新浪博客 博主知书少年果麦麦&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;用于绘图的Python代码&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -125,10 +130,18 @@ timeStamp = [
 &#39;酉初&#39;, &#39;酉正&#39;, &#39;戌初&#39;, &#39;戌正&#39;, &#39;亥初&#39;, &#39;亥正&#39;, &#39;子初&#39;
 ]
 timeStampMain = [
-&#39;子&#39;, &#39;丑&#39;, &#39;寅&#39;, 
-&#39;卯&#39;, &#39;辰&#39;, &#39;巳&#39;,  
-&#39;午&#39;, &#39;未&#39;, &#39;申&#39;,  
-&#39;酉&#39;, &#39;戌&#39;, &#39;亥&#39;
+&#39;子, 名曰「困敦」&amp;lt;br&amp;gt;混沌万物之初萌，藏黄泉之下。&amp;lt;br&amp;gt; 子是兹的意思，这时候万物刚刚开始滋生和繁殖。&#39;, 
+&#39;丑, 名曰「赤奋若」&amp;lt;br&amp;gt;气运奋迅而起，万物无不若其性。&amp;lt;br&amp;gt;形容万物继续萌发，系于生长。&#39;, 
+&#39;寅, 名曰「摄提格」&amp;lt;br&amp;gt;万物承阳而起。&amp;lt;br&amp;gt;植物芽刚刚吐露，要吸收阳气生长，然后全部露出地面。&#39;,  
+&#39;卯, 名曰「单阏」&amp;lt;br&amp;gt;阳气推万物而起. &amp;lt;br&amp;gt;卯，就是茂，茂盛的样子。这个时候，万物生长滋生繁茂。&#39;, 
+&#39;辰, 名曰「执徐」&amp;lt;br&amp;gt;伏蛰之物，而敷舒出。&amp;lt;br&amp;gt;万物都震动而生长，草木伸舒，萌芽而出。&#39;, 
+&#39;巳, 名曰「大荒落&amp;lt;br&amp;gt;万物炽盛而出，霍然落之。&amp;lt;br&amp;gt;万物到了这个时候，都全部长起来了，聚集在一起。炽盛而有光泽的样子。&#39;,  
+&#39;午, 名曰「敦牂」&amp;lt;br&amp;gt;万物壮盛也。&amp;lt;br&amp;gt;万物都达到盛大壮茂，枝柯密布的状态。&#39;,
+&#39;未, 名曰「协洽」&amp;lt;br&amp;gt;阴阳和合，万物化生。&amp;lt;br&amp;gt;未，就是味的意思。当事物成熟的时候，都会发出气味。这时候阴气开始升起，万物稍微衰败。&#39; ,
+&#39;申, 名曰「涒滩」&amp;lt;br&amp;gt;万物吐秀，倾垂也。&amp;lt;br&amp;gt;万物的身体都已成就，倾吐了最后的繁盛，引向衰败。&#39;,  
+&#39;酉, 名曰「作噩」&amp;lt;br&amp;gt;万物皆芒枝起。 &amp;lt;br&amp;gt;万物衰老到极至而成熟。&#39;,
+&#39;戌, 名曰「阉茂」&amp;lt;br&amp;gt;万物皆蔽冒也。&amp;lt;br&amp;gt;戌，灭，杀的意思。意思是到了这时候，万物都已经衰灭了。&#39;, 
+&#39;亥, 名曰「大渊献」&amp;lt;br&amp;gt;万物于天，深盖藏也。&amp;lt;br&amp;gt;亥，核的意思。万物都进入核阂里，意味着阴气劾杀了万物，等待下一个初萌。&#39;
 ]
 
 def sectorChild(name, location, radius,  fillcolor=&#39;#ff4e20&#39;):
