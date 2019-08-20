@@ -183,4 +183,4 @@ where $X=[x\_1,\cdots,x\_n]$ , $D=\text{diag}\{y\_1^2\sigma\_1,\cdots,y\_n^2\sig
 
 1. Lecture notes 9 and 10 presented on this [course website.](https://wiki.illinois.edu/wiki/display/ie510/IE+510+Applied+Nonlinear+Programming+Home)
 
-2. The code for generating graphs can be found in [my git repo](https://github.com/Rothdyt/all_of_optimization/blob/master/_draft/Algorithms/pycode/LogisticRegression.py).
+2. The code for generating graphs can be found in [my git repo](https://github.com/Rothdyt/all_of_optimization/blob/master/_draft/GradientMethod/pycode/LogisticRegression.py).

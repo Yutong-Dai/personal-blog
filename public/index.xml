@@ -172,7 +172,9 @@ def sectorParent(name, location, radius,  fillcolor=&#39;black&#39;):
       theta = theta_marker,
       fill = &amp;quot;toself&amp;quot;,
       fillcolor = fillcolor,
-      line =  {&amp;quot;color&amp;quot;:&#39;black&#39;}
+      line =  {&amp;quot;color&amp;quot;:&#39;black&#39;},
+      hoverinfo = &#39;text&#39;,
+      hoverlabel = {&#39;align&#39;:&#39;left&#39;}
     )
     return obj
 
@@ -442,7 +444,7 @@ where $X=[x_1,\cdots,x_n]$ , $D=\text{diag}{y_1^2\sigma_1,\cdots,y_n^2\sigma_n}$
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Lecture notes 9 and 10 presented on this &lt;a href=&#34;https://wiki.illinois.edu/wiki/display/ie510/IE+510+Applied+Nonlinear+Programming+Home&#34; target=&#34;_blank&#34;&gt;course website.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;The code for generating graphs can be found in &lt;a href=&#34;https://github.com/Rothdyt/all_of_optimization/blob/master/_draft/Algorithms/pycode/LogisticRegression.py&#34; target=&#34;_blank&#34;&gt;my git repo&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The code for generating graphs can be found in &lt;a href=&#34;https://github.com/Rothdyt/all_of_optimization/blob/master/_draft/GradientMethod/pycode/LogisticRegression.py&#34; target=&#34;_blank&#34;&gt;my git repo&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
     </item>
@@ -983,7 +985,7 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Real Estate Market Data Analysis</title>
       <link>/project/boston-housing/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
       
       <guid>/project/boston-housing/</guid>
       <description>&lt;p&gt;In this project, we&lt;/p&gt;
@@ -1003,7 +1005,7 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Show and Tell: A Neural Image Caption Generator</title>
       <link>/project/show-and-tell/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
       
       <guid>/project/show-and-tell/</guid>
       <description>&lt;p&gt;This is the deep learning course final project trying to reporduce the results reported in the paper, &lt;a href=&#34;https://arxiv.org/pdf/1411.4555.pdf&#34; target=&#34;_blank&#34;&gt;Show and Tell: A Neural Image Caption Generator&lt;/a&gt;.&lt;/p&gt;
@@ -1019,7 +1021,7 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
     <item>
       <title>Variational Gaussian Mixtures</title>
       <link>/project/variational-inference/</link>
-      <pubDate>Sun, 10 Dec 2017 00:00:00 +0800</pubDate>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
       
       <guid>/project/variational-inference/</guid>
       <description>&lt;p&gt;This is the statistical computing course final project, trying to understand, reporduce and extend some results reported in the paper, &lt;a href=&#34;https://arxiv.org/pdf/1601.00670.pdf&#34; target=&#34;_blank&#34;&gt;Variational Inference: A Review for Statisticians&lt;/a&gt;.&lt;/p&gt;

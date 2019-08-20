@@ -1,0 +1,10 @@
+a[data-fancybox] img {
+  height: 125px;
+  width: 125px;
+  max-width: 500px;
+  display: inherit;
+  margin: 0;
+  padding: 4px;
+  box-shadow: none;
+  vertical-align: inherit;
+}

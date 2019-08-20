@@ -56,13 +56,13 @@
   </url>
   
   <url>
-    <loc>/tags/visualization/</loc>
+    <loc>/categories/visualization/</loc>
     <lastmod>2019-07-05T15:58:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/visualization/</loc>
+    <loc>/tags/visualization/</loc>
     <lastmod>2019-07-05T15:58:50+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -186,41 +186,41 @@
   
   <url>
     <loc>/tags/cnn/</loc>
-    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+    <lastmod>2017-12-10T00:00:00-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/deep-learning/</loc>
-    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+    <lastmod>2017-12-10T00:00:00-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/lstm/</loc>
-    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+    <lastmod>2017-12-10T00:00:00-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/project/</loc>
-    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+    <lastmod>2017-12-10T00:00:00-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/project/boston-housing/</loc>
-    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+    <lastmod>2017-12-10T00:00:00-05:00</lastmod>
   </url>
   
   <url>
     <loc>/project/show-and-tell/</loc>
-    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+    <lastmod>2017-12-10T00:00:00-05:00</lastmod>
   </url>
   
   <url>
     <loc>/project/variational-inference/</loc>
-    <lastmod>2017-12-10T00:00:00+08:00</lastmod>
+    <lastmod>2017-12-10T00:00:00-05:00</lastmod>
   </url>
   
   <url>

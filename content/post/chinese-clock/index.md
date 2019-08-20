@@ -117,7 +117,9 @@ def sectorParent(name, location, radius,  fillcolor='black'):
       theta = theta_marker,
       fill = "toself",
       fillcolor = fillcolor,
-      line =  {"color":'black'}
+      line =  {"color":'black'},
+      hoverinfo = 'text',
+      hoverlabel = {'align':'left'}
     )
     return obj
 
