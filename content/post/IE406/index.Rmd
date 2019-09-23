@@ -1,0 +1,17 @@
+---
+title: Introduction to Mathematical Programming
+author: Yutong
+date: "`r Sys.Date()`"
+slug: lp
+categories:
+  - Optimization
+tags:
+  - linear programming
+image:
+  caption: ''
+  focal_point: ''
+---
+
+# Some useful notes
+
+1. [Farkas's Lemma, Strong Duality and Criss-Cross Algorithm](./Frakas-Duality-Crisscross.pdf)

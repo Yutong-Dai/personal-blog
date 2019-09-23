@@ -40,29 +40,46 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-07-05T15:58:50+08:00</lastmod>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>/post/ie406/lp/</loc>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
-    <lastmod>2019-07-05T15:58:50+08:00</lastmod>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/</loc>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/linear-programming/</loc>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/optimization/</loc>
+    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/visualization/</loc>
     <lastmod>2019-07-05T15:58:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/visualization/</loc>
-    <lastmod>2019-07-05T15:58:50+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/visualization/</loc>
     <lastmod>2019-07-05T15:58:50+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -75,12 +92,6 @@
   <url>
     <loc>/post/gdlogistic/gradient-descent-in-logistic-regression/</loc>
     <lastmod>2019-07-01T15:58:50+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/optimization/</loc>
-    <lastmod>2019-07-01T15:58:50+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
