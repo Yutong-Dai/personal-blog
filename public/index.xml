@@ -263,7 +263,7 @@ $$
 If we use the first formulation, then it is equivalent to minimize the log-negative of $L(\beta_0,\beta)$,
 $$
 \begin{aligned}
-\min_{\beta_0,\beta}l(\beta_0,\beta)=\frac{1}{N}\sum_{i=1}^N[-y_iz_i+\log(1+e^{z_i})].
+\min_{\beta_0,\beta}l(\beta_0,\beta)=\frac{1}{N}\sum_{i=1}^N\log(1+e^{-y_iz_i}).
 \end{aligned}
 $$
 From now on,  for the sake of simplicity, we drop the intercept term $\beta_0$.&lt;/p&gt;
@@ -435,11 +435,11 @@ $$&lt;/p&gt;
 &lt;p&gt;If we use the second formulation, then maximizing the likelihood  is equivalent to
 $$
 \begin{aligned}
-\min_{\beta_0,\beta}l(\beta_0,\beta)=\frac{1}{N}\sum_{i=1}^N\log(1+e^{-y_iz_i}).
+\min_{\beta_0,\beta}l(\beta_0,\beta)=\frac{1}{N}\sum_{i=1}^N[-y_iz_i+\log(1+e^{z_i})].
 \end{aligned}
 $$&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Derivation of the gradient and Hessian of the loss function&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Derivation of the gradient and Hessian of the loss function (first formualtion)&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;Consider $f(\beta)=\log (1 + \exp(-y\beta^Tx)$, then we have
 $$
@@ -452,10 +452,10 @@ which implies
 $$
 \begin{aligned}
 &amp;amp; \nabla l(\beta)=\frac{1}{N}\sum_{i=1}^N \frac{1}{1 + \exp(y_i\beta^Tx_i)}(-y_ix_i)&lt;br /&gt;
-&amp;amp; \nabla^2 l(\beta)=\frac{1}{N}\sum_{i=1}^N(y_ix_i)\frac{\exp(y\beta^Tx_i)}{1 + \exp(y\beta^Tx_i)}(y_ix_i^T)=\frac{1}{N}XDX^T,
+&amp;amp; \nabla^2 l(\beta)=\frac{1}{N}\sum_{i=1}^N(y_ix_i)\frac{\exp(y\beta^Tx_i)}{(1 + \exp(y\beta^Tx_i))^2}(y_ix_i^T)=\frac{1}{N}XDX^T,
 \end{aligned}
 $$
-where $X=[x_1,\cdots,x_n]$ , $D=\text{diag}{y_1^2\sigma_1,\cdots,y_n^2\sigma_n}$ , and $\sigma_i =\frac{\exp(y\beta^Tx_i)}{1 + \exp(y\beta^Tx_i)} $.&lt;/p&gt;
+where $X=[x_1,\cdots,x_n]$ , $D=\text{diag}({y_1^2\sigma_1(1-\sigma_1),\cdots,y_n^2\sigma_n(1-\sigma_n)})$ , and $\sigma_i =\frac{\exp(y\beta^Tx_i)}{1 + \exp(y\beta^Tx_i)} $.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt;&lt;/p&gt;
 

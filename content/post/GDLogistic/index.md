@@ -48,7 +48,7 @@ $$
 If we use the first formulation, then it is equivalent to minimize the log-negative of $L(\beta\_0,\beta)$,
 $$
 \begin{aligned}
-\min\_{\beta\_0,\beta}l(\beta\_0,\beta)=\frac{1}{N}\sum\_{i=1}^N[-y\_iz\_i+\log(1+e^{z\_i})].
+\min\_{\beta\_0,\beta}l(\beta\_0,\beta)=\frac{1}{N}\sum\_{i=1}^N\log(1+e^{-y\_iz\_i}).
 \end{aligned}
 $$
 From now on,  for the sake of simplicity, we drop the intercept term $\beta\_0$.
@@ -154,12 +154,11 @@ $$
 If we use the second formulation, then maximizing the likelihood  is equivalent to
 $$
 \begin{aligned}
-\min\_{\beta\_0,\beta}l(\beta\_0,\beta)=\frac{1}{N}\sum\_{i=1}^N\log(1+e^{-y\_iz\_i}).
+\min\_{\beta\_0,\beta}l(\beta\_0,\beta)=\frac{1}{N}\sum\_{i=1}^N[-y\_iz\_i+\log(1+e^{z\_i})].
 \end{aligned}
 $$
 
-
-**Derivation of the gradient and Hessian of the loss function**
+**Derivation of the gradient and Hessian of the loss function (first formualtion)**
 
 Consider $f(\beta)=\log (1 + \exp(-y\beta^Tx)$, then we have
 $$
@@ -172,10 +171,10 @@ which implies
 $$
 \begin{aligned}
 & \nabla l(\beta)=\frac{1}{N}\sum\_{i=1}^N \frac{1}{1 + \exp(y\_i\beta^Tx\_i)}(-y\_ix\_i)\\
-& \nabla^2 l(\beta)=\frac{1}{N}\sum\_{i=1}^N(y\_ix\_i)\frac{\exp(y\beta^Tx\_i)}{1 + \exp(y\beta^Tx\_i)}(y\_ix\_i^T)=\frac{1}{N}XDX^T,
+& \nabla^2 l(\beta)=\frac{1}{N}\sum\_{i=1}^N(y\_ix\_i)\frac{\exp(y\beta^Tx\_i)}{(1 + \exp(y\beta^Tx\_i))^2}(y\_ix\_i^T)=\frac{1}{N}XDX^T,
 \end{aligned}
 $$
-where $X=[x\_1,\cdots,x\_n]$ , $D=\text{diag}\{y\_1^2\sigma\_1,\cdots,y\_n^2\sigma\_n\}$ , and $\sigma\_i =\frac{\exp(y\beta^Tx\_i)}{1 + \exp(y\beta^Tx\_i)} $. 
+where $X=[x\_1,\cdots,x\_n]$ , $D=\text{diag}(\{y\_1^2\sigma\_1(1-\sigma\_1),\cdots,y\_n^2\sigma\_n(1-\sigma\_n)\})$ , and $\sigma\_i =\frac{\exp(y\beta^Tx\_i)}{1 + \exp(y\beta^Tx\_i)} $. 
 
 
 
