@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Python-Programming on Dai, Yutong / 戴宇童</title>
-    <link>/categories/python-programming/</link>
-    <description>Recent content in Python-Programming on Dai, Yutong / 戴宇童</description>
+    <title>jupyter on Dai, Yutong / 戴宇童</title>
+    <link>/tags/jupyter/</link>
+    <description>Recent content in jupyter on Dai, Yutong / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 28 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/python-programming/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/jupyter/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>/post/using-the-right-kernel-for-jupyter-notebook/</guid>
       <description># create virtual env with python 3.7.7, whose name is cuppy conda create -n cuppy numpy scipy pandas notebook matplotlib python=3.7.7 # activate cuppy conda activate cuppy # I am using zsh, you may change to bash conda init zsh # activate virtual env cond activate cuppy # point this verison of Python to jupyter ipython kernel install --name &amp;quot;cuppy&amp;quot; --user  </description>
-    </item>
-    
-    <item>
-      <title>Decision Tree: How to find the path from the root to the desired terminal node</title>
-      <link>/post/decison-tree-path/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</link>
-      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/decison-tree-path/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</guid>
-      <description>Find terminal nodes in each tree of the built random forest that give the largest prediction. Then find paths from root to these selected terminal nodes and ensemble them to derive a decision region.</description>
     </item>
     
   </channel>

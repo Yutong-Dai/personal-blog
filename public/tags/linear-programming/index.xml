@@ -6,7 +6,7 @@
     <description>Recent content in linear programming on Dai, Yutong / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 18 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/linear-programming/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Introduction to Mathematical Programming</title>
       <link>/post/ie406/lp/</link>
-      <pubDate>Sun, 22 Sep 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/ie406/lp/</guid>
       <description> Some useful notes Farkas’s Lemma, Strong Duality and Criss-Cross Algorithm   </description>

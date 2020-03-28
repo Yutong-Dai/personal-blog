@@ -40,35 +40,58 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/python-programming/</loc>
+    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/using-the-right-kernel-for-jupyter-notebook/</loc>
+    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/jupyter/</loc>
+    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/kernel/</loc>
+    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/ie406/lp/</loc>
-    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2019-10-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/linear-programming/</loc>
-    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/optimization/</loc>
-    <lastmod>2019-09-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -176,12 +199,6 @@
   <url>
     <loc>/post/decison-tree-path/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/python-programming/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

@@ -63,9 +63,29 @@
     </item>
     
     <item>
+      <title>Using the right kernel for Jupyter Notebook</title>
+      <link>/post/using-the-right-kernel-for-jupyter-notebook/</link>
+      <pubDate>Sat, 28 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/using-the-right-kernel-for-jupyter-notebook/</guid>
+      <description>&lt;pre&gt;&lt;code&gt;# create virtual env with python 3.7.7, whose name is cuppy
+conda create -n cuppy numpy scipy pandas notebook matplotlib python=3.7.7 
+# activate cuppy
+conda activate cuppy
+# I am using zsh, you may change to bash
+conda init zsh 
+# activate virtual env
+cond activate cuppy
+# point this verison of Python to jupyter
+ipython kernel install --name &amp;quot;cuppy&amp;quot; --user
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Introduction to Mathematical Programming</title>
       <link>/post/ie406/lp/</link>
-      <pubDate>Sun, 22 Sep 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>/post/ie406/lp/</guid>
       <description>
