@@ -6,10 +6,55 @@
     <description>Recent content in Tags on Dai, Yutong / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>proximal gradient</title>
+      <link>/tags/proximal-gradient/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/proximal-gradient/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>second-order method</title>
+      <link>/tags/second-order-method/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/second-order-method/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>subspace acceleration</title>
+      <link>/tags/subspace-acceleration/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/subspace-acceleration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>support identification</title>
+      <link>/tags/support-identification/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/support-identification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>/tags/python/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/python/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>jupyter</title>
@@ -50,7 +95,7 @@
     <item>
       <title>Block Cooridinate Descent</title>
       <link>/tags/block-cooridinate-descent/</link>
-      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/block-cooridinate-descent/</guid>
       <description></description>
@@ -59,7 +104,7 @@
     <item>
       <title>Convex Optimization</title>
       <link>/tags/convex-optimization/</link>
-      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/convex-optimization/</guid>
       <description></description>

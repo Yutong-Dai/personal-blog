@@ -39,25 +39,105 @@
   </url>
   
   <url>
+    <loc>/authors/admin/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication_types/3/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/publication/farsagroup/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/authors/daniel-p.-robinson/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/authors/frank-e.-curtis/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/publication_types/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/publication/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/proximal-gradient/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/second-order-method/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/subspace-acceleration/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/support-identification/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
-    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
+    <lastmod>2020-05-01T12:37:30-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
+    <lastmod>2020-05-01T12:37:30-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/python-tricks-learned-from-projects/</loc>
+    <lastmod>2020-05-01T12:37:30-04:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/python-programming/</loc>
-    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
+    <lastmod>2020-05-01T12:37:30-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
+    <loc>/tags/python/</loc>
+    <lastmod>2020-05-01T12:37:30-04:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -84,13 +164,13 @@
   </url>
   
   <url>
-    <loc>/tags/linear-programming/</loc>
+    <loc>/categories/optimization/</loc>
     <lastmod>2019-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/optimization/</loc>
+    <loc>/tags/linear-programming/</loc>
     <lastmod>2019-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -118,6 +198,35 @@
   </url>
   
   <url>
+    <loc>/publication_types/2/</loc>
+    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/block-cooridinate-descent/</loc>
+    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/convex-optimization/</loc>
+    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/publication/psum/</loc>
+    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/yang-weng/</loc>
+    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/slides/</loc>
     <lastmod>2019-02-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -126,57 +235,6 @@
   <url>
     <loc>/slides/example/</loc>
     <lastmod>2019-02-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/admin/</loc>
-    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication/psum/</loc>
-    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication_types/3/</loc>
-    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/authors/</loc>
-    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/block-cooridinate-descent/</loc>
-    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/convex-optimization/</loc>
-    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/publication_types/</loc>
-    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/publication/</loc>
-    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/weng-yang/</loc>
-    <lastmod>2019-02-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

@@ -63,6 +63,57 @@
     </item>
     
     <item>
+      <title>A Subspace Acceleration Method for Minimization Involving a Group Sparsity-Inducing Regularizer</title>
+      <link>/publication/farsagroup/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/farsagroup/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python Tricks Learned From Projects</title>
+      <link>/post/python-tricks-learned-from-projects/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/python-tricks-learned-from-projects/</guid>
+      <description>
+
+&lt;p&gt;&lt;h2&gt;Table of Contents&lt;/h2&gt;
+HAHAHUGOSHORTCODE-TOC0-HBHB&lt;/p&gt;
+
+&lt;h1 id=&#34;show-all-submodules&#34;&gt;Show all submodules&lt;/h1&gt;
+
+&lt;p&gt;I need to import a particular function &lt;code&gt;formulate&lt;/code&gt; from a file in the directory &lt;code&gt;&amp;lt;path-to-the-package&amp;gt;/coinor/dippy/examples/milp/milp_func&lt;/code&gt;.
+It&amp;rsquo;s clear that I need to import it from the submodule &lt;code&gt;coinor.dippy&lt;/code&gt;. But how to do it exactly?
+Use following commands, which list all submodules you can import.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import pkgutil
+import coinor.dippy
+package=coinor.dippy
+for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
+                                                      prefix=package.__name__+&#39;.&#39;,
+                                                      onerror=lambda x: None):
+    print(modname)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Relavant outputs are&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;.....
+coinor.dippy.examples.milp
+coinor.dippy.examples.milp.__main__
+coinor.dippy.examples.milp.milp_func
+.....
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then I can simply use&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from coinor.dippy.examples.milp.milp_func import formulate
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Using the right kernel for Jupyter Notebook</title>
       <link>/post/using-the-right-kernel-for-jupyter-notebook/</link>
       <pubDate>Sat, 28 Mar 2020 00:00:00 +0000</pubDate>
@@ -488,6 +539,15 @@ where $X=[x_1,\cdots,x_n]$ , $D=\text{diag}({y_1^2\sigma_1(1-\sigma_1),\cdots,y_
     </item>
     
     <item>
+      <title>Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization</title>
+      <link>/publication/psum/</link>
+      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/psum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Slides</title>
       <link>/slides/example/</link>
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
@@ -667,15 +727,6 @@ $$&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>(To appear.) Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization</title>
-      <link>/publication/psum/</link>
-      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/psum/</guid>
-      <description></description>
     </item>
     
     <item>

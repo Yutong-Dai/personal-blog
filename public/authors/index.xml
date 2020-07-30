@@ -6,7 +6,7 @@
     <description>Recent content in Authors on Dai, Yutong / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,18 +14,37 @@
     <item>
       <title></title>
       <link>/authors/admin/</link>
-      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>/authors/admin/</guid>
-      <description>I am currently a Ph.D. student in Lehigh&amp;rsquo;s Industrial and Systems Engineering (ISE) Department.</description>
+      <description>Yutong is a Ph.D. student in the Department of Industrial and Systems Engineering at Lehigh University, working under the supervision of Professor Daniel P. Robinson.
+His current research focus on designing and analyzing algorithms for large scale convex non-smooth optimization problems arisen in machine learning.</description>
     </item>
     
     <item>
-      <title>Weng, Yang</title>
-      <link>/authors/weng-yang/</link>
-      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
+      <title>Daniel P. Robinson</title>
+      <link>/authors/daniel-p.-robinson/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>/authors/weng-yang/</guid>
+      <guid>/authors/daniel-p.-robinson/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Frank E. Curtis</title>
+      <link>/authors/frank-e.-curtis/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/authors/frank-e.-curtis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Yang Weng</title>
+      <link>/authors/yang-weng/</link>
+      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/authors/yang-weng/</guid>
       <description></description>
     </item>
     

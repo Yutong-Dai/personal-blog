@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Dai, Yutong / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,14 +14,14 @@
     <item>
       <title>Python-Programming</title>
       <link>/categories/python-programming/</link>
-      <pubDate>Sat, 28 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/categories/python-programming/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>optimization</title>
+      <title>Optimization</title>
       <link>/categories/optimization/</link>
       <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
       

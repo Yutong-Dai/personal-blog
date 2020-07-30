@@ -1,17 +1,17 @@
 ---
-title: "(To appear.) Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization"
+title: "Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization"
 
 authors:
 - admin
-- Weng, Yang
+- Yang Weng
 
-date: "2019-02-01T00:00:00Z"
+date: "2019-04-01"
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
-publication_types: ["3"]
+publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
 publication: "In *Journal of Systems Science and Complexity*, JSSC."
@@ -29,7 +29,7 @@ tags:
 featured: false
 
 links:
-url_pdf: https://github.com/Rothdyt/Projects/blob/master/Thesis-Collection/PSUM.pdf
+url_pdf: https://link.springer.com/content/pdf/10.1007/s11424-020-8313-y.pdf
 
 # Custom links (optional).
 #   Uncomment line below to enable. For multiple links, use the form `[{...}, {...}, {...}]`.

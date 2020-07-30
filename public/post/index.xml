@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Dai, Yutong / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python Tricks Learned From Projects</title>
+      <link>/post/python-tricks-learned-from-projects/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/python-tricks-learned-from-projects/</guid>
+      <description>Table of Contents HAHAHUGOSHORTCODE-TOC0-HBHB
+Show all submodules I need to import a particular function formulate from a file in the directory &amp;lt;path-to-the-package&amp;gt;/coinor/dippy/examples/milp/milp_func. It&amp;rsquo;s clear that I need to import it from the submodule coinor.dippy. But how to do it exactly? Use following commands, which list all submodules you can import.
+import pkgutil import coinor.dippy package=coinor.dippy for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__, prefix=package.__name__+&#39;.&#39;, onerror=lambda x: None): print(modname)  Relavant outputs are</description>
+    </item>
     
     <item>
       <title>Using the right kernel for Jupyter Notebook</title>

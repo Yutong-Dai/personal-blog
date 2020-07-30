@@ -1,6 +1,6 @@
 ---
 # Display name
-name: Dai, Yutong
+name: Yutong Dai
 
 # Username (this should match the folder name)
 authors:
@@ -70,7 +70,6 @@ email: ""
 # - Visitors
 ---
 
-I am currently a Ph.D. student in Lehigh's Industrial and Systems Engineering (ISE) Department. 
+Yutong is a Ph.D. student in the [Department of Industrial and Systems Engineering](https://engineering.lehigh.edu/ise) at Lehigh University, working under the supervision of Professor [Daniel P. Robinson](https://coral.ise.lehigh.edu/danielprobinson/).
 
-<!---
-I earned my master degree in the University of Illinois at Urbana-Champaign. During the master study, I also worked as a part-time Data Scientist at Bud Analytics Lab of Anheuser-Busch InBev, focusing on developing data research and innovation.--->
+His current research focus on designing and analyzing algorithms for large scale convex non-smooth optimization problems arisen in machine learning.

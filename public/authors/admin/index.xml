@@ -6,15 +6,24 @@
     <description>Recent content on Dai, Yutong / 戴宇童</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/authors/admin/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>(To appear.) Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization</title>
+      <title>A Subspace Acceleration Method for Minimization Involving a Group Sparsity-Inducing Regularizer</title>
+      <link>/publication/farsagroup/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/farsagroup/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization</title>
       <link>/publication/psum/</link>
-      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/publication/psum/</guid>
       <description></description>
@@ -23,10 +32,11 @@
     <item>
       <title></title>
       <link>/authors/admin/</link>
-      <pubDate>Fri, 01 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>/authors/admin/</guid>
-      <description>I am currently a Ph.D. student in Lehigh&amp;rsquo;s Industrial and Systems Engineering (ISE) Department.</description>
+      <description>Yutong is a Ph.D. student in the Department of Industrial and Systems Engineering at Lehigh University, working under the supervision of Professor Daniel P. Robinson.
+His current research focus on designing and analyzing algorithms for large scale convex non-smooth optimization problems arisen in machine learning.</description>
     </item>
     
   </channel>
