@@ -447,18 +447,8 @@
     <h2><a href="/post/python-tricks-learned-from-projects/">Python Tricks Learned From Projects</a></h2>
     <div class="article-style">
       
-      Table of Contents  Show all submodules  
+      Table of Contents  Show all submodules Using the right kernel for Jupyter Notebook Running Jupyter Notebook from the remote server  
 Show all submodules I need to import a particular function formulate from a file in the directory &lt;path-to-the-package&gt;/coinor/dippy/examples/milp/milp_func. It&rsquo;s clear that I need to import it from the submodule coinor.dippy. But how to do it exactly? Use following commands, which list all submodules you can import.
-import pkgutil import coinor.dippy package=coinor.dippy for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__, prefix=package.__name__+'.', onerror=lambda x: None): print(modname)  Relavant outputs are
-      
-    </div>
-  </div>
-  
-  <div>
-    <h2><a href="/post/using-the-right-kernel-for-jupyter-notebook/">Using the right kernel for Jupyter Notebook</a></h2>
-    <div class="article-style">
-      
-      # create virtual env with python 3.7.7, whose name is cuppy conda create -n cuppy numpy scipy pandas notebook matplotlib python=3.7.7 # activate cuppy conda activate cuppy # I am using zsh, you may change to bash conda init zsh # activate virtual env cond activate cuppy # point this verison of Python to jupyter ipython kernel install --name &quot;cuppy&quot; --user  
       
     </div>
   </div>

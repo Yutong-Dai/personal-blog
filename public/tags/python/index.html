@@ -447,9 +447,8 @@
     <h2><a href="/post/python-tricks-learned-from-projects/">Python Tricks Learned From Projects</a></h2>
     <div class="article-style">
       
-      Table of Contents  Show all submodules  
+      Table of Contents  Show all submodules Using the right kernel for Jupyter Notebook Running Jupyter Notebook from the remote server  
 Show all submodules I need to import a particular function formulate from a file in the directory &lt;path-to-the-package&gt;/coinor/dippy/examples/milp/milp_func. It&rsquo;s clear that I need to import it from the submodule coinor.dippy. But how to do it exactly? Use following commands, which list all submodules you can import.
-import pkgutil import coinor.dippy package=coinor.dippy for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__, prefix=package.__name__+'.', onerror=lambda x: None): print(modname)  Relavant outputs are
       
     </div>
   </div>

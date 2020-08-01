@@ -142,35 +142,18 @@
   </url>
   
   <url>
-    <loc>/post/using-the-right-kernel-for-jupyter-notebook/</loc>
-    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/jupyter/</loc>
-    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/kernel/</loc>
-    <lastmod>2020-03-28T17:22:55-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/post/ie406/lp/</loc>
     <lastmod>2019-10-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/optimization/</loc>
+    <loc>/tags/linear-programming/</loc>
     <lastmod>2019-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/linear-programming/</loc>
+    <loc>/categories/optimization/</loc>
     <lastmod>2019-10-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -243,13 +226,13 @@
   </url>
   
   <url>
-    <loc>/categories/statistics/</loc>
+    <loc>/tags/data-analysis/</loc>
     <lastmod>2019-01-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/data-analysis/</loc>
+    <loc>/categories/statistics/</loc>
     <lastmod>2019-01-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

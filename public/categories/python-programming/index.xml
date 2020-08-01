@@ -23,15 +23,6 @@ import pkgutil import coinor.dippy package=coinor.dippy for importer, modname, i
     </item>
     
     <item>
-      <title>Using the right kernel for Jupyter Notebook</title>
-      <link>/post/using-the-right-kernel-for-jupyter-notebook/</link>
-      <pubDate>Sat, 28 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/using-the-right-kernel-for-jupyter-notebook/</guid>
-      <description># create virtual env with python 3.7.7, whose name is cuppy conda create -n cuppy numpy scipy pandas notebook matplotlib python=3.7.7 # activate cuppy conda activate cuppy # I am using zsh, you may change to bash conda init zsh # activate virtual env cond activate cuppy # point this verison of Python to jupyter ipython kernel install --name &amp;quot;cuppy&amp;quot; --user  </description>
-    </item>
-    
-    <item>
       <title>Decision Tree: How to find the path from the root to the desired terminal node</title>
       <link>/post/decison-tree-path/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>

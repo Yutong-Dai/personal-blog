@@ -27,9 +27,8 @@
   
     
   
-  <meta name="description" content="Table of Contents  Show all submodules  
-Show all submodules I need to import a particular function formulate from a file in the directory &lt;path-to-the-package&gt;/coinor/dippy/examples/milp/milp_func. It&rsquo;s clear that I need to import it from the submodule coinor.dippy. But how to do it exactly? Use following commands, which list all submodules you can import.
-import pkgutil import coinor.dippy package=coinor.dippy for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__, prefix=package.__name__&#43;&#39;.&#39;, onerror=lambda x: None): print(modname)  Relavant outputs are">
+  <meta name="description" content="Table of Contents  Show all submodules Using the right kernel for Jupyter Notebook Running Jupyter Notebook from the remote server  
+Show all submodules I need to import a particular function formulate from a file in the directory &lt;path-to-the-package&gt;/coinor/dippy/examples/milp/milp_func. It&rsquo;s clear that I need to import it from the submodule coinor.dippy. But how to do it exactly? Use following commands, which list all submodules you can import.">
 
   
   <link rel="alternate" hreflang="en-us" href="/post/python-tricks-learned-from-projects/">
@@ -121,9 +120,8 @@ import pkgutil import coinor.dippy package=coinor.dippy for importer, modname, i
   <meta property="og:site_name" content="Dai, Yutong / 戴宇童">
   <meta property="og:url" content="/post/python-tricks-learned-from-projects/">
   <meta property="og:title" content="Python Tricks Learned From Projects | Dai, Yutong / 戴宇童">
-  <meta property="og:description" content="Table of Contents  Show all submodules  
-Show all submodules I need to import a particular function formulate from a file in the directory &lt;path-to-the-package&gt;/coinor/dippy/examples/milp/milp_func. It&rsquo;s clear that I need to import it from the submodule coinor.dippy. But how to do it exactly? Use following commands, which list all submodules you can import.
-import pkgutil import coinor.dippy package=coinor.dippy for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__, prefix=package.__name__&#43;&#39;.&#39;, onerror=lambda x: None): print(modname)  Relavant outputs are"><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:description" content="Table of Contents  Show all submodules Using the right kernel for Jupyter Notebook Running Jupyter Notebook from the remote server  
+Show all submodules I need to import a particular function formulate from a file in the directory &lt;path-to-the-package&gt;/coinor/dippy/examples/milp/milp_func. It&rsquo;s clear that I need to import it from the submodule coinor.dippy. But how to do it exactly? Use following commands, which list all submodules you can import."><meta property="og:image" content="/img/icon-192.png">
   <meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2020-05-01T00:00:00&#43;00:00">
@@ -466,7 +464,7 @@ import pkgutil import coinor.dippy package=coinor.dippy for importer, modname, i
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    3 min read
   </span>
   
 
@@ -556,6 +554,8 @@ import pkgutil import coinor.dippy package=coinor.dippy for importer, modname, i
 <nav id="TableOfContents">
 <ul>
 <li><a href="#show-all-submodules">Show all submodules</a></li>
+<li><a href="#using-the-right-kernel-for-jupyter-notebook">Using the right kernel for Jupyter Notebook</a></li>
+<li><a href="#running-jupyter-notebook-from-the-remote-server">Running Jupyter Notebook from the remote server</a></li>
 </ul>
 </nav></p>
 
@@ -587,6 +587,90 @@ coinor.dippy.examples.milp.milp_func
 
 <pre><code class="language-python">from coinor.dippy.examples.milp.milp_func import formulate
 </code></pre>
+
+<h1 id="using-the-right-kernel-for-jupyter-notebook">Using the right kernel for Jupyter Notebook</h1>
+
+<pre><code class="language-bash"># create virtual env with python 3.7.7, whose name is cuppy
+conda create -n cuppy numpy scipy pandas notebook matplotlib python=3.7.7 
+# activate cuppy
+conda activate cuppy
+# I am using zsh, you may change to bash
+conda init zsh 
+# activate virtual env
+cond activate cuppy
+# point this verison of Python to jupyter
+ipython kernel install --name &quot;cuppy&quot; --user
+</code></pre>
+
+<h1 id="running-jupyter-notebook-from-the-remote-server">Running Jupyter Notebook from the remote server</h1>
+
+<blockquote>
+<p>Reference</p>
+
+<ol>
+<li><p><a href="https://ljvmiranda921.github.io/notebook/2018/01/31/running-a-jupyter-notebook/" target="_blank">set up jupyter notebook on login nodes</a>.</p></li>
+
+<li><p><a href="https://benjlindsay.com/posts/running-jupyter-lab-remotely#running-on-a-compute-node" target="_blank">set up jupyter notebook on computation nodes</a></p></li>
+</ol>
+</blockquote>
+
+<p><strong>On the server side:</strong></p>
+
+<ul>
+<li>Create following two functions in the <code>.bashrc</code> and reload it using <code>source .bashrc</code></li>
+</ul>
+
+<pre><code class="language-bash">  function Inode(){
+    # provide the computation node name; default is polyp2
+    local nodename=&quot;${1:-polyp2}&quot;
+    echo &quot;starting an interactive section at $nodename&quot;
+    # start an interactive session in the given node
+    qsub -l nodes=$nodename:ppn=4 -l walltime=1:00:00 -l mem=10gb,vmem=10gb -I
+  }
+  
+  function jpt(){
+    # provide the port; default is 1234
+    local port=&quot;${1:-1234}&quot;
+    echo &quot;open jupyter notebook at $(hostname):$port&quot;
+    # Fires-up a Jupyter notebook by supplying a specific port and ip
+    jupyter notebook --no-browser --port=$port --ip=$(hostname)
+  }
+</code></pre>
+
+<ul>
+<li><p>In the server side&rsquo;s terminal, if</p>
+
+<ul>
+<li>If you want to start the jupyter notebook in the login node, just call <code>jpt</code>;</li>
+<li>If you want to start the jupyter notebook in the computation node, call <code>Inode</code> first and then when you are prompted to the computation node, then call <code>jpt</code>. For example, if the comutation node name is <code>polyp3</code>, then call <code>Inode polyp3</code> and then call <code>jpt 1234</code>.
+<br /></li>
+</ul></li>
+</ul>
+
+<p><strong>On the local side:</strong></p>
+
+<ul>
+<li>Create following two functions in the <code>.bashrc</code> and reload it using <code>source .bashrc</code></li>
+</ul>
+
+<pre><code class="language-bash">  function jptt(){
+      local localport=&quot;${1:-2234}&quot;
+      local servername=&quot;${2:-polyp1}&quot;
+      local serverport=&quot;${3:-1234}&quot;
+      # Forwards port $1 into port $3 and listens to it
+      ssh -N -f -L localhost:$localport:$servername:$serverport yud319@polyps.ie.lehigh.edu
+  }
+  function stopjpt(){
+    local localport=&quot;${1:-2234}&quot;
+    lsof -i tcp:$localport |awk 'NR &gt; 1 {print $2}' | xargs kill -9
+    echo &quot;Kill port $localport&quot;
+  }
+</code></pre>
+
+<ul>
+<li>Call <code>jptt</code> on the local terminal, which will listen to the jupyter notebook host on the server</li>
+<li>After finish the job, call <code>stopjpt</code>, which will free the local port.</li>
+</ul>
 
     </div>
 
