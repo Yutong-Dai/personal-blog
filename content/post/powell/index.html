@@ -22,12 +22,12 @@ summary: "Convergence analysis of Block coordinate decent with exact minimizatio
 <li><a href="#algorithm">Algorithm</a></li>
 </ul></li>
 <li><a href="#convergence-analysis">Convergence Analysis</a></li>
-<li><a href="#powells-example">Powell’s example</a></li>
+<li><a href="#powells-example">Powell's example</a></li>
 <li><a href="#r-codes-for-numerical-experiments">R codes for numerical experiments</a></li>
 </ul>
 </div>
 
-<p>We mainly focus on the convergence of Block coordinate decent with exact minimization, whose block update strategy employs Gauss-Seidel manner. And then use Powell’s example to see what will happen if some conditions are not met.</p>
+<p>We mainly focus on the convergence of Block coordinate decent with exact minimization, whose block update strategy employs Gauss-Seidel manner. And then use Powell's example to see what will happen if some conditions are not met.</p>
 <blockquote>
 <p>Reference: 1. Dimitri .P Bertsekas, Nonlinear Programming 2ed 2. Powell ,1973, ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS</p>
 </blockquote>
@@ -37,7 +37,7 @@ summary: "Convergence analysis of Block coordinate decent with exact minimizatio
 <h2>Notations</h2>
 <p>We want to solve the problem:</p>
 <p><span class="math display">\[\mathop{min}_{x\in X}\quad f(x)\]</span></p>
-<p>where X is a Cartesian product of closed convex sets $X_1,…,X_m:X=_{i=1}^n X_i $</p>
+<p>where X is a Cartesian product of closed convex sets $X_1,...,X_m:X=_{i=1}^n X_i $</p>
 <p>We assume that <span class="math inline">\(X_i\)</span> is a closed convex subset of <span class="math inline">\(R^{n_i}\)</span> and <span class="math inline">\(n=\sum_{i=1}^m n_i\)</span>. The vector is partitioned into <span class="math inline">\(m\)</span> block(s) such that <span class="math inline">\(x_i \in X^{n_i}\)</span>.</p>
 <p>We denote <span class="math inline">\(\nabla_i f\)</span> as the gradient of <span class="math inline">\(f\)</span> with respect to component <span class="math inline">\(x_i\)</span>.</p>
 </div>
@@ -83,7 +83,7 @@ summary: "Convergence analysis of Block coordinate decent with exact minimizatio
 <p><span class="math display">\[(x_i-\bar x_i)^T\nabla_i\;f(\bar x_i)\geq 0\qquad x_i\in X_i\]</span></p>
 <p>And thus <span class="math inline">\(\bar x\)</span> is a stationary point, since <span class="math inline">\((x-\bar x)^T\nabla f(\bar x)\geq 0\)</span></p>
 <p>By far, it remains to prove that <span class="math inline">\(\{z_i^{k_j}\}\quad,\forall i\)</span> convergence to <span class="math inline">\(\bar x\)</span>. First,we try to prove that <span class="math inline">\(\{z_1^{k_1}\}\)</span> convergence to <span class="math inline">\(\bar x\)</span>.</p>
-<p>Assume the contrary that <span class="math inline">\(r^{k_j}=\vert \vert z_1^{k_j}-x^{k_j}\vert \vert\)</span> doesn’t convergence to 0. Let <span class="math inline">\(s_1^{k_j}=(z_1^{k_j}-x^{k_j})/r^{k_j}\)</span>. Thus, <span class="math inline">\(z_1^{k_j}=x^{k_j}+r^{k_j}s_1^{k_j}\)</span> , <span class="math inline">\(\vert \vert r_{k_j}\vert \vert =1\)</span> and <span class="math inline">\(s_1^{k_j}\)</span> differs from 0 only along the first block-component. Since <span class="math inline">\(\{s_1^{k_j}\}\)</span> belong to a compact set and therefore without loss of generality, we assume <span class="math inline">\(s_1^{k_j}\)</span> convergences to <span class="math inline">\(\bar s_1\)</span>.</p>
+<p>Assume the contrary that <span class="math inline">\(r^{k_j}=\vert \vert z_1^{k_j}-x^{k_j}\vert \vert\)</span> doesn't convergence to 0. Let <span class="math inline">\(s_1^{k_j}=(z_1^{k_j}-x^{k_j})/r^{k_j}\)</span>. Thus, <span class="math inline">\(z_1^{k_j}=x^{k_j}+r^{k_j}s_1^{k_j}\)</span> , <span class="math inline">\(\vert \vert r_{k_j}\vert \vert =1\)</span> and <span class="math inline">\(s_1^{k_j}\)</span> differs from 0 only along the first block-component. Since <span class="math inline">\(\{s_1^{k_j}\}\)</span> belong to a compact set and therefore without loss of generality, we assume <span class="math inline">\(s_1^{k_j}\)</span> convergences to <span class="math inline">\(\bar s_1\)</span>.</p>
 <p>Since <span class="math inline">\(r^{k_j}&gt;0\)</span>,we can find a <span class="math inline">\(\epsilon\in (0,1)\)</span>, such that <span class="math inline">\(x^{k_j}+\epsilon s_1^{k_j}\)</span> lies on the segment joining <span class="math inline">\(x^{k_j}\)</span> and <span class="math inline">\(x^{k_j}+s_1^{k_j}=z_1^{k_j}\)</span>. Using the non-increasing property of <span class="math inline">\(f\)</span>,we derive,</p>
 <p><span class="math display">\[f(z_1^{k_j})\leq f(x^{k_j}+\epsilon s_1^{k_j}) \leq f(x^{k_j})\]</span></p>
 <p>Again, using (*), we conclude</p>
@@ -92,7 +92,7 @@ summary: "Convergence analysis of Block coordinate decent with exact minimizatio
 <p>Similarly, let <span class="math inline">\(r_t^{k_j}=\vert \vert z_t^{k_j}-z_{t-1}^{k_j}\vert \vert\)</span> for <span class="math inline">\(t=2,3,...,m-1\)</span> and using the same technique shown above, we finally prove that <span class="math inline">\(\{z_i^{k_j}\},\quad \forall i\)</span>.</p>
 </div>
 <div id="powells-example" class="section level1">
-<h1>Powell’s example</h1>
+<h1>Powell's example</h1>
 <p>In <em>ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS</em>, Power actually gives three examples that sequences generated by the algorithm discussed above do not convergence to stationary points once some hypothesis are not met.</p>
 <ul>
 <li><p>The first example is straightforward, However, the remarkable properties of this example can be destroyed by making a small perturbation to the starting vector <span class="math inline">\(x^0\)</span>.</p></li>
@@ -161,10 +161,10 @@ summary: "Convergence analysis of Block coordinate decent with exact minimizatio
 <td>-1-<span class="math inline">\(\frac{1}{256}e\)</span></td>
 </tr>
 <tr class="even">
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
 </tr>
 </tbody>
 </table>
@@ -187,7 +187,7 @@ summary: "Convergence analysis of Block coordinate decent with exact minimizatio
 \begin{cases}x\geq 1: x=1+\frac{1}{2}(y+z)\\-1&lt; x&lt;1: -(y+z)=0\\x\leq -1:x=-1+\frac{1}{2}(y+z) \end{cases}\]</span></p></li>
 <li><p>The gradient of <span class="math inline">\(f(x,y,z)\)</span> on this cyclic path, is <span class="math inline">\(\nabla f(x,y,z)=(-y-z,-x-z,-x-y)\)</span> and <span class="math inline">\(\vert \vert \nabla f(x,y,z)\vert \vert _1=2\)</span></p></li>
 <li><p>This example is unstable with respect to small perturbations. Small changes in the starting point <span class="math inline">\(x_0=(-1-e,1+\frac{1}{2}e,-1-\frac{1}{4}e)\)</span> or smal errors in the numbers that are computed during the calculation will destroy the cyclic behavior.</p>
-<p>It’s s clear the choice of perturbations <span class="math inline">\(e\)</span> plays a key role. Say, <span class="math inline">\(x_0=(-1-e_1,1+e_2,-1-e_3)\)</span> and we have <span class="math inline">\(e_k=\frac{1}{2}(e_{k-2}- e_{k-1})\)</span></p>
+<p>It's s clear the choice of perturbations <span class="math inline">\(e\)</span> plays a key role. Say, <span class="math inline">\(x_0=(-1-e_1,1+e_2,-1-e_3)\)</span> and we have <span class="math inline">\(e_k=\frac{1}{2}(e_{k-2}- e_{k-1})\)</span></p>
 <table>
 <thead>
 <tr class="header">
@@ -235,10 +235,10 @@ summary: "Convergence analysis of Block coordinate decent with exact minimizatio
 <td>-1-<span class="math inline">\(e_9\)</span></td>
 </tr>
 <tr class="odd">
-<td>…</td>
-<td>…</td>
-<td>…</td>
-<td>…</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
 </tr>
 </tbody>
 </table>

@@ -16,10 +16,8 @@ image:
   focal_point: ''
   preview_only: no
 projects: []
+toc: true
 ---
-
-{{% toc %}}
-
 
 # Problem Formulation
 
@@ -90,9 +88,7 @@ Applying the gradient descent with constant stepsize $\frac{1}{L}$ on each datas
 
 Also we plot out following figures to check the convergence. The top two figures describe the algorithm's performance on the dataset 1 while the bottom two is for the  dataset 2.
 
-
-
-![](./LogisticRegression.png)
+{{< figure src="./LogisticRegression.png" class="img-lg">}}
 
 > Fig1: Apply GD with the constant stepsize on two different datasets. The blue curves depicts how the norm of gradient at iterates change while the red curves show the change of the function value in each iteration.
 
@@ -106,13 +102,13 @@ First, if we want to minimize $f(\beta)=\log(1 + \exp(-\beta))$ using gradient d
 
 Now, let's back to the example. The figure 2 shows that the first dataset and second dataset, which correspond to the **non-separable** and **separable** case respectively.
 
-![](./LogisticSeparableNonseparable.png)
+{{< figure src="./LogisticSeparableNonseparable.png" class="img-lg">}}
 
 > Fig2: (Left) First dataset. (Right) Second dataset. The fitted separating line is derived by $y=-\frac{\beta_1}{\beta_2}x$.
 
 We also plot out the norm of iterates at each iteration in figure 3. 
 
-![](./LogisticRegression-iterates.png)
+{{< figure src="./LogisticRegression-iterates.png" class="img-sm">}}
 
 > Fig3: The top figure shows the norm of iterates for the first dataset while the bottom one shows case for the second dataset.
 
@@ -120,12 +116,12 @@ We can see that for non-separable case, the norm of iterates are bounded while t
 
 In non-separable case, $\{\beta^k\}$ *seems*  to stay in "strongly convex" region while in separable case, $\{\beta^k\}$ keeps approaching the flatten region, so you can easily say a sharp decreasing in convergence speed. The following observations can be verified by figure 4 (1-dimensional case) and figure 5 (2-dimensional case).
 
-![](./LogisticRegression-1dcontour.png)
+{{< figure src="./LogisticRegression-1dcontour.png" class="img-sm">}}
 
 
 > Fig4:  (Left) Non-separable dataset  $\{(x\_1=1, y\_1=1), (x\_2=2, y\_2=-1)\}$.  The green dot line is $y=x^2$. The objective function (blue line) preserves the strong convexity in a certain range and the minimal stays in this range. The red point is the start point $x\_0$.  (Right). Separable dataset $\{(x\_1=1, y\_1=1), (x\_2=-1, y\_2=-1)\}$. Although the  objective function is endowed with the strong convexity property in a certain range, however the global minimal is outside of this range.
 
-![LogisticRegression-2dcontour](./LogisticRegression-2dcontour.png)
+{{< figure src="./LogisticRegression-2dcontour.png" class="img-lg">}}
 
 > Fig5:  Dataset 1 is shown in the top 2 pictures with the right one zooming into a particular range. Dataset 2 is shown in the bottom pictures.  The blue dots trace the progression of iterates.
 
@@ -161,6 +157,7 @@ $$
 **Derivation of the gradient and Hessian of the loss function (first formualtion)**
 
 Consider $f(\beta)=\log (1 + \exp(-y\beta^Tx)$, then we have
+
 $$
 \begin{aligned}
 &\nabla f(\beta) = \frac{1}{1 + \exp(y\beta^Tx)}(-yx)\\

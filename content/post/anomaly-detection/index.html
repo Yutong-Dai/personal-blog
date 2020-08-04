@@ -10,12 +10,31 @@ tags:
 image:
   caption: ''
   focal_point: ''
+output:
+  blogdown::html_page:
+    number_sections: true
+    toc: true
 ---
 
 
+<div id="TOC">
+<ul>
+<li><a href="#point-anomaly-detection---grubbs-test"><span class="toc-section-number">1</span> Point Anomaly Detection - Grubbs' test</a></li>
+<li><a href="#collective-anomaly-detection"><span class="toc-section-number">2</span> Collective Anomaly Detection</a><ul>
+<li><a href="#anomaly-in-timeseries---seasonal-hybrid-esd-algorithm"><span class="toc-section-number">2.1</span> Anomaly in timeseries - Seasonal Hybrid ESD algorithm</a></li>
+<li><a href="#distance-based-anomaly-detection"><span class="toc-section-number">2.2</span> Distance-based Anomaly Detection</a><ul>
+<li><a href="#global-anomaly---largest-distance"><span class="toc-section-number">2.2.1</span> Global Anomaly - Largest Distance</a></li>
+<li><a href="#local-anomaly---lof"><span class="toc-section-number">2.2.2</span> Local Anomaly - LOF</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#isolation-forest"><span class="toc-section-number">3</span> Isolation Forest</a><ul>
+<li><a href="#isolation-score"><span class="toc-section-number">3.1</span> Isolation Score</a></li>
+</ul></li>
+</ul>
+</div>
 
 <div id="point-anomaly-detection---grubbs-test" class="section level1">
-<h1>Point Anomaly Detection - Grubbs' test</h1>
+<h1><span class="header-section-number">1</span> Point Anomaly Detection - Grubbs' test</h1>
 <p>Grubbs' test<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> is commonly used technique to detect an outlier in <strong>univariate</strong> problem, where <strong>normality</strong> assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.</p>
 <p>The hypothesis test is defined as</p>
 <p><span class="math display">\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\]</span> For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as</p>
@@ -63,9 +82,9 @@ grubbs.test(simulated_data_with_outliers, two.sided = TRUE)</code></pre>
 <p>Grubbs' test is useful for identify the outliers of a small amount one at a time, but not suitable to detect a group of outliers.</p>
 </div>
 <div id="collective-anomaly-detection" class="section level1">
-<h1>Collective Anomaly Detection</h1>
+<h1><span class="header-section-number">2</span> Collective Anomaly Detection</h1>
 <div id="anomaly-in-timeseries---seasonal-hybrid-esd-algorithm" class="section level2">
-<h2>Anomaly in timeseries - Seasonal Hybrid ESD algorithm</h2>
+<h2><span class="header-section-number">2.1</span> Anomaly in timeseries - Seasonal Hybrid ESD algorithm</h2>
 <pre class="r"><code>#  devtools::install_github(&quot;twitter/AnomalyDetection&quot;)
 library(AnomalyDetection)
 river &lt;- read.csv(&quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/river.csv&quot;)
@@ -74,9 +93,9 @@ results &lt;- AnomalyDetectionVec(river$nitrate, period=12, direction = &#39;bot
 <p><img src="/post/anomaly-detection/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 <div id="distance-based-anomaly-detection" class="section level2">
-<h2>Distance-based Anomaly Detection</h2>
+<h2><span class="header-section-number">2.2</span> Distance-based Anomaly Detection</h2>
 <div id="global-anomaly---largest-distance" class="section level3">
-<h3>Global Anomaly - Largest Distance</h3>
+<h3><span class="header-section-number">2.2.1</span> Global Anomaly - Largest Distance</h3>
 <p>Intuitively, the larger distance the more likely the point would be an outlier.</p>
 <pre class="r"><code>library(FNN)</code></pre>
 <pre><code>## Warning: package &#39;FNN&#39; was built under R version 3.4.4</code></pre>
@@ -90,7 +109,7 @@ points(furniture_scaled$Height[largest_idx], furniture_scaled$Width[largest_idx]
 <p><img src="/post/anomaly-detection/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="local-anomaly---lof" class="section level3">
-<h3>Local Anomaly - LOF</h3>
+<h3><span class="header-section-number">2.2.2</span> Local Anomaly - LOF</h3>
 <p>kNN is useful for finding global anomalies, but is less able to surface local outliers.</p>
 <p>LOF is a ratio of densities:</p>
 <ul>
@@ -109,14 +128,14 @@ points(furniture_lof$Height[largest_idx], furniture_lof$Width[largest_idx], col=
 </div>
 </div>
 <div id="isolation-forest" class="section level1">
-<h1>Isolation Forest</h1>
+<h1><span class="header-section-number">3</span> Isolation Forest</h1>
 <ul>
 <li>Isolation Forest is built on the basis of decision trees;</li>
 <li>To grow a decision tree, at each node, a feature and a corresponding cutoff value are randomly selected;</li>
 <li>Intuitively, outliers are less frequent than regular observations and are different from them in terms of values, so outliers should be identified closer to the root of the tree with fewer splits. We use isolation score to characterize this.</li>
 </ul>
 <div id="isolation-score" class="section level2">
-<h2>Isolation Score</h2>
+<h2><span class="header-section-number">3.1</span> Isolation Score</h2>
 <p>We need some quatity to define the isolation score<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
 <ul>
 <li><strong>Path Length</strong>: <span class="math inline">\(h(x)\)</span> of a point <span class="math inline">\(x\)</span> is measured by the number of edges <span class="math inline">\(x\)</span> traverses an iTree from the root node until the traversal is terminated at an external node.</li>

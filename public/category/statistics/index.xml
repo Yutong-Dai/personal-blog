@@ -19,9 +19,24 @@
       <guid>/post/anomaly-detection/</guid>
       <description>
 
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#point-anomaly-detection---grubbs-test&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;1&lt;/span&gt; Point Anomaly Detection - Grubbs&#39; test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#collective-anomaly-detection&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2&lt;/span&gt; Collective Anomaly Detection&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#anomaly-in-timeseries---seasonal-hybrid-esd-algorithm&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.1&lt;/span&gt; Anomaly in timeseries - Seasonal Hybrid ESD algorithm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#distance-based-anomaly-detection&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.2&lt;/span&gt; Distance-based Anomaly Detection&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#global-anomaly---largest-distance&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.2.1&lt;/span&gt; Global Anomaly - Largest Distance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#local-anomaly---lof&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.2.2&lt;/span&gt; Local Anomaly - LOF&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#isolation-forest&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;3&lt;/span&gt; Isolation Forest&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#isolation-score&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;3.1&lt;/span&gt; Isolation Score&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 
 &lt;div id=&#34;point-anomaly-detection---grubbs-test&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Point Anomaly Detection - Grubbs&#39; test&lt;/h1&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;1&lt;/span&gt; Point Anomaly Detection - Grubbs&#39; test&lt;/h1&gt;
 &lt;p&gt;Grubbs&#39; test&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; is commonly used technique to detect an outlier in &lt;strong&gt;univariate&lt;/strong&gt; problem, where &lt;strong&gt;normality&lt;/strong&gt; assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.&lt;/p&gt;
 &lt;p&gt;The hypothesis test is defined as&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\]&lt;/span&gt; For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as&lt;/p&gt;
@@ -69,9 +84,9 @@ grubbs.test(simulated_data_with_outliers, two.sided = TRUE)&lt;/code&gt;&lt;/pre
 &lt;p&gt;Grubbs&#39; test is useful for identify the outliers of a small amount one at a time, but not suitable to detect a group of outliers.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;collective-anomaly-detection&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Collective Anomaly Detection&lt;/h1&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;2&lt;/span&gt; Collective Anomaly Detection&lt;/h1&gt;
 &lt;div id=&#34;anomaly-in-timeseries---seasonal-hybrid-esd-algorithm&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Anomaly in timeseries - Seasonal Hybrid ESD algorithm&lt;/h2&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.1&lt;/span&gt; Anomaly in timeseries - Seasonal Hybrid ESD algorithm&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  devtools::install_github(&amp;quot;twitter/AnomalyDetection&amp;quot;)
 library(AnomalyDetection)
 river &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/river.csv&amp;quot;)
@@ -80,9 +95,9 @@ results &amp;lt;- AnomalyDetectionVec(river$nitrate, period=12, direction = &amp
 &lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;distance-based-anomaly-detection&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Distance-based Anomaly Detection&lt;/h2&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.2&lt;/span&gt; Distance-based Anomaly Detection&lt;/h2&gt;
 &lt;div id=&#34;global-anomaly---largest-distance&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Global Anomaly - Largest Distance&lt;/h3&gt;
+&lt;h3&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.2.1&lt;/span&gt; Global Anomaly - Largest Distance&lt;/h3&gt;
 &lt;p&gt;Intuitively, the larger distance the more likely the point would be an outlier.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(FNN)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Warning: package &amp;#39;FNN&amp;#39; was built under R version 3.4.4&lt;/code&gt;&lt;/pre&gt;
@@ -96,7 +111,7 @@ points(furniture_scaled$Height[largest_idx], furniture_scaled$Width[largest_idx]
 &lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;local-anomaly---lof&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Local Anomaly - LOF&lt;/h3&gt;
+&lt;h3&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.2.2&lt;/span&gt; Local Anomaly - LOF&lt;/h3&gt;
 &lt;p&gt;kNN is useful for finding global anomalies, but is less able to surface local outliers.&lt;/p&gt;
 &lt;p&gt;LOF is a ratio of densities:&lt;/p&gt;
 &lt;ul&gt;
@@ -115,14 +130,14 @@ points(furniture_lof$Height[largest_idx], furniture_lof$Width[largest_idx], col=
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;isolation-forest&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Isolation Forest&lt;/h1&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;3&lt;/span&gt; Isolation Forest&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Isolation Forest is built on the basis of decision trees;&lt;/li&gt;
 &lt;li&gt;To grow a decision tree, at each node, a feature and a corresponding cutoff value are randomly selected;&lt;/li&gt;
 &lt;li&gt;Intuitively, outliers are less frequent than regular observations and are different from them in terms of values, so outliers should be identified closer to the root of the tree with fewer splits. We use isolation score to characterize this.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;isolation-score&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Isolation Score&lt;/h2&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;3.1&lt;/span&gt; Isolation Score&lt;/h2&gt;
 &lt;p&gt;We need some quatity to define the isolation score&lt;a href=&#34;#fn2&#34; class=&#34;footnoteRef&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Path Length&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(h(x)\)&lt;/span&gt; of a point &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; is measured by the number of edges &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; traverses an iTree from the root node until the traversal is terminated at an external node.&lt;/li&gt;

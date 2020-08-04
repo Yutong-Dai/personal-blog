@@ -27,12 +27,12 @@
 &lt;li&gt;&lt;a href=&#34;#algorithm&#34;&gt;Algorithm&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#convergence-analysis&#34;&gt;Convergence Analysis&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#powells-example&#34;&gt;Powell’s example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#powells-example&#34;&gt;Powell&#39;s example&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#r-codes-for-numerical-experiments&#34;&gt;R codes for numerical experiments&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;p&gt;We mainly focus on the convergence of Block coordinate decent with exact minimization, whose block update strategy employs Gauss-Seidel manner. And then use Powell’s example to see what will happen if some conditions are not met.&lt;/p&gt;
+&lt;p&gt;We mainly focus on the convergence of Block coordinate decent with exact minimization, whose block update strategy employs Gauss-Seidel manner. And then use Powell&#39;s example to see what will happen if some conditions are not met.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Reference: 1. Dimitri .P Bertsekas, Nonlinear Programming 2ed 2. Powell ,1973, ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -42,7 +42,7 @@
 &lt;h2&gt;Notations&lt;/h2&gt;
 &lt;p&gt;We want to solve the problem:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\quad f(x)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;where X is a Cartesian product of closed convex sets $X_1,…,X_m:X=_{i=1}^n X_i $&lt;/p&gt;
+&lt;p&gt;where X is a Cartesian product of closed convex sets $X_1,...,X_m:X=_{i=1}^n X_i $&lt;/p&gt;
 &lt;p&gt;We assume that &lt;span class=&#34;math inline&#34;&gt;\(X_i\)&lt;/span&gt; is a closed convex subset of &lt;span class=&#34;math inline&#34;&gt;\(R^{n_i}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(n=\sum_{i=1}^m n_i\)&lt;/span&gt;. The vector is partitioned into &lt;span class=&#34;math inline&#34;&gt;\(m\)&lt;/span&gt; block(s) such that &lt;span class=&#34;math inline&#34;&gt;\(x_i \in X^{n_i}\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;We denote &lt;span class=&#34;math inline&#34;&gt;\(\nabla_i f\)&lt;/span&gt; as the gradient of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; with respect to component &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -88,7 +88,7 @@
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x_i-\bar x_i)^T\nabla_i\;f(\bar x_i)\geq 0\qquad x_i\in X_i\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;And thus &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; is a stationary point, since &lt;span class=&#34;math inline&#34;&gt;\((x-\bar x)^T\nabla f(\bar x)\geq 0\)&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;By far, it remains to prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\}\quad,\forall i\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;. First,we try to prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_1}\}\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Assume the contrary that &lt;span class=&#34;math inline&#34;&gt;\(r^{k_j}=\vert \vert z_1^{k_j}-x^{k_j}\vert \vert\)&lt;/span&gt; doesn’t convergence to 0. Let &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}=(z_1^{k_j}-x^{k_j})/r^{k_j}\)&lt;/span&gt;. Thus, &lt;span class=&#34;math inline&#34;&gt;\(z_1^{k_j}=x^{k_j}+r^{k_j}s_1^{k_j}\)&lt;/span&gt; , &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert r_{k_j}\vert \vert =1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; differs from 0 only along the first block-component. Since &lt;span class=&#34;math inline&#34;&gt;\(\{s_1^{k_j}\}\)&lt;/span&gt; belong to a compact set and therefore without loss of generality, we assume &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar s_1\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Assume the contrary that &lt;span class=&#34;math inline&#34;&gt;\(r^{k_j}=\vert \vert z_1^{k_j}-x^{k_j}\vert \vert\)&lt;/span&gt; doesn&#39;t convergence to 0. Let &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}=(z_1^{k_j}-x^{k_j})/r^{k_j}\)&lt;/span&gt;. Thus, &lt;span class=&#34;math inline&#34;&gt;\(z_1^{k_j}=x^{k_j}+r^{k_j}s_1^{k_j}\)&lt;/span&gt; , &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert r_{k_j}\vert \vert =1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; differs from 0 only along the first block-component. Since &lt;span class=&#34;math inline&#34;&gt;\(\{s_1^{k_j}\}\)&lt;/span&gt; belong to a compact set and therefore without loss of generality, we assume &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar s_1\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;Since &lt;span class=&#34;math inline&#34;&gt;\(r^{k_j}&amp;gt;0\)&lt;/span&gt;,we can find a &lt;span class=&#34;math inline&#34;&gt;\(\epsilon\in (0,1)\)&lt;/span&gt;, such that &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}+\epsilon s_1^{k_j}\)&lt;/span&gt; lies on the segment joining &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}+s_1^{k_j}=z_1^{k_j}\)&lt;/span&gt;. Using the non-increasing property of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;,we derive,&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(z_1^{k_j})\leq f(x^{k_j}+\epsilon s_1^{k_j}) \leq f(x^{k_j})\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Again, using (*), we conclude&lt;/p&gt;
@@ -97,7 +97,7 @@
 &lt;p&gt;Similarly, let &lt;span class=&#34;math inline&#34;&gt;\(r_t^{k_j}=\vert \vert z_t^{k_j}-z_{t-1}^{k_j}\vert \vert\)&lt;/span&gt; for &lt;span class=&#34;math inline&#34;&gt;\(t=2,3,...,m-1\)&lt;/span&gt; and using the same technique shown above, we finally prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\},\quad \forall i\)&lt;/span&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;powells-example&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Powell’s example&lt;/h1&gt;
+&lt;h1&gt;Powell&#39;s example&lt;/h1&gt;
 &lt;p&gt;In &lt;em&gt;ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS&lt;/em&gt;, Power actually gives three examples that sequences generated by the algorithm discussed above do not convergence to stationary points once some hypothesis are not met.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;The first example is straightforward, However, the remarkable properties of this example can be destroyed by making a small perturbation to the starting vector &lt;span class=&#34;math inline&#34;&gt;\(x^0\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
@@ -166,10 +166,10 @@
 &lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{256}e\)&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
-&lt;td&gt;…&lt;/td&gt;
-&lt;td&gt;…&lt;/td&gt;
-&lt;td&gt;…&lt;/td&gt;
-&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -192,7 +192,7 @@
 \begin{cases}x\geq 1: x=1+\frac{1}{2}(y+z)\\-1&amp;lt; x&amp;lt;1: -(y+z)=0\\x\leq -1:x=-1+\frac{1}{2}(y+z) \end{cases}\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;The gradient of &lt;span class=&#34;math inline&#34;&gt;\(f(x,y,z)\)&lt;/span&gt; on this cyclic path, is &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x,y,z)=(-y-z,-x-z,-x-y)\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x,y,z)\vert \vert _1=2\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;This example is unstable with respect to small perturbations. Small changes in the starting point &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e,1+\frac{1}{2}e,-1-\frac{1}{4}e)\)&lt;/span&gt; or smal errors in the numbers that are computed during the calculation will destroy the cyclic behavior.&lt;/p&gt;
-&lt;p&gt;It’s s clear the choice of perturbations &lt;span class=&#34;math inline&#34;&gt;\(e\)&lt;/span&gt; plays a key role. Say, &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e_1,1+e_2,-1-e_3)\)&lt;/span&gt; and we have &lt;span class=&#34;math inline&#34;&gt;\(e_k=\frac{1}{2}(e_{k-2}- e_{k-1})\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;It&#39;s s clear the choice of perturbations &lt;span class=&#34;math inline&#34;&gt;\(e\)&lt;/span&gt; plays a key role. Say, &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e_1,1+e_2,-1-e_3)\)&lt;/span&gt; and we have &lt;span class=&#34;math inline&#34;&gt;\(e_k=\frac{1}{2}(e_{k-2}- e_{k-1})\)&lt;/span&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr class=&#34;header&#34;&gt;
@@ -240,10 +240,10 @@
 &lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_9\)&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
-&lt;td&gt;…&lt;/td&gt;
-&lt;td&gt;…&lt;/td&gt;
-&lt;td&gt;…&lt;/td&gt;
-&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

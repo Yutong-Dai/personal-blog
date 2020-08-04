@@ -464,17 +464,7 @@ ipython kernel install --name &lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34
       <link>/post/gradient-descent-in-logistic-regression/</link>
       <pubDate>Mon, 01 Jul 2019 00:00:00 +0000</pubDate>
       <guid>/post/gradient-descent-in-logistic-regression/</guid>
-      <description>&lt;h2&gt;Table of Contents&lt;/h2&gt;
-&lt;nav id=&#34;TableOfContents&#34;&gt;
-  &lt;ol&gt;
-    &lt;li&gt;&lt;a href=&#34;#problem-formulation&#34;&gt;Problem Formulation&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#motivating-example&#34;&gt;Motivating Example&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#analysis-why-this-happens&#34;&gt;Analysis: why this happens?&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#questions&#34;&gt;Questions&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#appendix&#34;&gt;Appendix&lt;/a&gt;&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/nav&gt;
-&lt;h1 id=&#34;problem-formulation&#34;&gt;Problem Formulation&lt;/h1&gt;
+      <description>&lt;h1 id=&#34;problem-formulation&#34;&gt;Problem Formulation&lt;/h1&gt;
 &lt;p&gt;There are commonly two ways of formulating the logistic regression problem, depending on the way we label the response variable $y$. Here we focus on the first formulation and defer the second formulation on the appendix.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;First Formulation:&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Consider restrict $y$ to {${-1,1}$}. Then we have
@@ -577,7 +567,37 @@ From now on,  for the sake of simplicity, we drop the intercept term $\beta_0$.&
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;Also we plot out following figures to check the convergence. The top two figures describe the algorithm&amp;rsquo;s performance on the dataset 1 while the bottom two is for the  dataset 2.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./LogisticRegression.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure class=&#34;img-lg&#34; &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;./LogisticRegression.png&#34; &gt;
+
+
+  &lt;img src=&#34;./LogisticRegression.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;Fig1: Apply GD with the constant stepsize on two different datasets. The blue curves depicts how the norm of gradient at iterates change while the red curves show the change of the function value in each iteration.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -589,22 +609,142 @@ From now on,  for the sake of simplicity, we drop the intercept term $\beta_0$.&
 &lt;li&gt;The worst-case iteration complexity is $\mathcal{O}(\frac{1}{k})$, indicating a sublinear convergence rate.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Now, let&amp;rsquo;s back to the example. The figure 2 shows that the first dataset and second dataset, which correspond to the &lt;strong&gt;non-separable&lt;/strong&gt; and &lt;strong&gt;separable&lt;/strong&gt; case respectively.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./LogisticSeparableNonseparable.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure class=&#34;img-lg&#34; &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;./LogisticSeparableNonseparable.png&#34; &gt;
+
+
+  &lt;img src=&#34;./LogisticSeparableNonseparable.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;Fig2: (Left) First dataset. (Right) Second dataset. The fitted separating line is derived by $y=-\frac{\beta_1}{\beta_2}x$.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;We also plot out the norm of iterates at each iteration in figure 3.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./LogisticRegression-iterates.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure class=&#34;img-sm&#34; &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;./LogisticRegression-iterates.png&#34; &gt;
+
+
+  &lt;img src=&#34;./LogisticRegression-iterates.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;Fig3: The top figure shows the norm of iterates for the first dataset while the bottom one shows case for the second dataset.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;We can see that for non-separable case, the norm of iterates are bounded while the latter goes to infinity (if we increase the number of iterations).&lt;/p&gt;
 &lt;p&gt;In non-separable case, ${\beta^k}$ &lt;em&gt;seems&lt;/em&gt;  to stay in &amp;ldquo;strongly convex&amp;rdquo; region while in separable case, ${\beta^k}$ keeps approaching the flatten region, so you can easily say a sharp decreasing in convergence speed. The following observations can be verified by figure 4 (1-dimensional case) and figure 5 (2-dimensional case).&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;./LogisticRegression-1dcontour.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure class=&#34;img-sm&#34; &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;./LogisticRegression-1dcontour.png&#34; &gt;
+
+
+  &lt;img src=&#34;./LogisticRegression-1dcontour.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;Fig4:  (Left) Non-separable dataset  ${(x_1=1, y_1=1), (x_2=2, y_2=-1)}$.  The green dot line is $y=x^2$. The objective function (blue line) preserves the strong convexity in a certain range and the minimal stays in this range. The red point is the start point $x_0$.  (Right). Separable dataset ${(x_1=1, y_1=1), (x_2=-1, y_2=-1)}$. Although the  objective function is endowed with the strong convexity property in a certain range, however the global minimal is outside of this range.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src=&#34;./LogisticRegression-2dcontour.png&#34; alt=&#34;LogisticRegression-2dcontour&#34;&gt;&lt;/p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure class=&#34;img-lg&#34; &gt;
+
+
+  &lt;a data-fancybox=&#34;&#34; href=&#34;./LogisticRegression-2dcontour.png&#34; &gt;
+
+
+  &lt;img src=&#34;./LogisticRegression-2dcontour.png&#34; alt=&#34;&#34;  &gt;
+&lt;/a&gt;
+
+
+
+&lt;/figure&gt;
+
 &lt;blockquote&gt;
 &lt;p&gt;Fig5:  Dataset 1 is shown in the top 2 pictures with the right one zooming into a particular range. Dataset 2 is shown in the bottom pictures.  The blue dots trace the progression of iterates.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -634,8 +774,8 @@ $$
 \end{aligned}
 $$&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Derivation of the gradient and Hessian of the loss function (first formualtion)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Consider $f(\beta)=\log (1 + \exp(-y\beta^Tx)$, then we have
-$$
+&lt;p&gt;Consider $f(\beta)=\log (1 + \exp(-y\beta^Tx)$, then we have&lt;/p&gt;
+&lt;p&gt;$$
 \begin{aligned}
 &amp;amp;\nabla f(\beta) = \frac{1}{1 + \exp(y\beta^Tx)}(-yx)\&lt;br&gt;
 &amp;amp;\nabla^2 f(\beta) = (yx)\frac{\exp(y\beta^Tx)}{1 + \exp(y\beta^Tx)}(yx^T),
@@ -670,9 +810,24 @@ where $X=[x_1,\cdots,x_n]$ , $D=\text{diag}({y_1^2\sigma_1(1-\sigma_1),\cdots,y_
       <guid>/post/anomaly-detection/</guid>
       <description>
 
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#point-anomaly-detection---grubbs-test&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;1&lt;/span&gt; Point Anomaly Detection - Grubbs&#39; test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#collective-anomaly-detection&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2&lt;/span&gt; Collective Anomaly Detection&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#anomaly-in-timeseries---seasonal-hybrid-esd-algorithm&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.1&lt;/span&gt; Anomaly in timeseries - Seasonal Hybrid ESD algorithm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#distance-based-anomaly-detection&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.2&lt;/span&gt; Distance-based Anomaly Detection&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#global-anomaly---largest-distance&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.2.1&lt;/span&gt; Global Anomaly - Largest Distance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#local-anomaly---lof&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;2.2.2&lt;/span&gt; Local Anomaly - LOF&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#isolation-forest&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;3&lt;/span&gt; Isolation Forest&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#isolation-score&#34;&gt;&lt;span class=&#34;toc-section-number&#34;&gt;3.1&lt;/span&gt; Isolation Score&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 
 &lt;div id=&#34;point-anomaly-detection---grubbs-test&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Point Anomaly Detection - Grubbs&#39; test&lt;/h1&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;1&lt;/span&gt; Point Anomaly Detection - Grubbs&#39; test&lt;/h1&gt;
 &lt;p&gt;Grubbs&#39; test&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; is commonly used technique to detect an outlier in &lt;strong&gt;univariate&lt;/strong&gt; problem, where &lt;strong&gt;normality&lt;/strong&gt; assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.&lt;/p&gt;
 &lt;p&gt;The hypothesis test is defined as&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\]&lt;/span&gt; For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as&lt;/p&gt;
@@ -720,9 +875,9 @@ grubbs.test(simulated_data_with_outliers, two.sided = TRUE)&lt;/code&gt;&lt;/pre
 &lt;p&gt;Grubbs&#39; test is useful for identify the outliers of a small amount one at a time, but not suitable to detect a group of outliers.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;collective-anomaly-detection&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Collective Anomaly Detection&lt;/h1&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;2&lt;/span&gt; Collective Anomaly Detection&lt;/h1&gt;
 &lt;div id=&#34;anomaly-in-timeseries---seasonal-hybrid-esd-algorithm&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Anomaly in timeseries - Seasonal Hybrid ESD algorithm&lt;/h2&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.1&lt;/span&gt; Anomaly in timeseries - Seasonal Hybrid ESD algorithm&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  devtools::install_github(&amp;quot;twitter/AnomalyDetection&amp;quot;)
 library(AnomalyDetection)
 river &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/river.csv&amp;quot;)
@@ -731,9 +886,9 @@ results &amp;lt;- AnomalyDetectionVec(river$nitrate, period=12, direction = &amp
 &lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;distance-based-anomaly-detection&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Distance-based Anomaly Detection&lt;/h2&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.2&lt;/span&gt; Distance-based Anomaly Detection&lt;/h2&gt;
 &lt;div id=&#34;global-anomaly---largest-distance&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Global Anomaly - Largest Distance&lt;/h3&gt;
+&lt;h3&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.2.1&lt;/span&gt; Global Anomaly - Largest Distance&lt;/h3&gt;
 &lt;p&gt;Intuitively, the larger distance the more likely the point would be an outlier.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(FNN)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Warning: package &amp;#39;FNN&amp;#39; was built under R version 3.4.4&lt;/code&gt;&lt;/pre&gt;
@@ -747,7 +902,7 @@ points(furniture_scaled$Height[largest_idx], furniture_scaled$Width[largest_idx]
 &lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;local-anomaly---lof&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;Local Anomaly - LOF&lt;/h3&gt;
+&lt;h3&gt;&lt;span class=&#34;header-section-number&#34;&gt;2.2.2&lt;/span&gt; Local Anomaly - LOF&lt;/h3&gt;
 &lt;p&gt;kNN is useful for finding global anomalies, but is less able to surface local outliers.&lt;/p&gt;
 &lt;p&gt;LOF is a ratio of densities:&lt;/p&gt;
 &lt;ul&gt;
@@ -766,14 +921,14 @@ points(furniture_lof$Height[largest_idx], furniture_lof$Width[largest_idx], col=
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;isolation-forest&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Isolation Forest&lt;/h1&gt;
+&lt;h1&gt;&lt;span class=&#34;header-section-number&#34;&gt;3&lt;/span&gt; Isolation Forest&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Isolation Forest is built on the basis of decision trees;&lt;/li&gt;
 &lt;li&gt;To grow a decision tree, at each node, a feature and a corresponding cutoff value are randomly selected;&lt;/li&gt;
 &lt;li&gt;Intuitively, outliers are less frequent than regular observations and are different from them in terms of values, so outliers should be identified closer to the root of the tree with fewer splits. We use isolation score to characterize this.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;isolation-score&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Isolation Score&lt;/h2&gt;
+&lt;h2&gt;&lt;span class=&#34;header-section-number&#34;&gt;3.1&lt;/span&gt; Isolation Score&lt;/h2&gt;
 &lt;p&gt;We need some quatity to define the isolation score&lt;a href=&#34;#fn2&#34; class=&#34;footnoteRef&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Path Length&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(h(x)\)&lt;/span&gt; of a point &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; is measured by the number of edges &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; traverses an iTree from the root node until the traversal is terminated at an external node.&lt;/li&gt;
@@ -1008,12 +1163,12 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
 &lt;li&gt;&lt;a href=&#34;#algorithm&#34;&gt;Algorithm&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#convergence-analysis&#34;&gt;Convergence Analysis&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#powells-example&#34;&gt;Powell’s example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#powells-example&#34;&gt;Powell&#39;s example&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#r-codes-for-numerical-experiments&#34;&gt;R codes for numerical experiments&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;p&gt;We mainly focus on the convergence of Block coordinate decent with exact minimization, whose block update strategy employs Gauss-Seidel manner. And then use Powell’s example to see what will happen if some conditions are not met.&lt;/p&gt;
+&lt;p&gt;We mainly focus on the convergence of Block coordinate decent with exact minimization, whose block update strategy employs Gauss-Seidel manner. And then use Powell&#39;s example to see what will happen if some conditions are not met.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Reference: 1. Dimitri .P Bertsekas, Nonlinear Programming 2ed 2. Powell ,1973, ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1023,7 +1178,7 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
 &lt;h2&gt;Notations&lt;/h2&gt;
 &lt;p&gt;We want to solve the problem:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\quad f(x)\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;where X is a Cartesian product of closed convex sets $X_1,…,X_m:X=_{i=1}^n X_i $&lt;/p&gt;
+&lt;p&gt;where X is a Cartesian product of closed convex sets $X_1,...,X_m:X=_{i=1}^n X_i $&lt;/p&gt;
 &lt;p&gt;We assume that &lt;span class=&#34;math inline&#34;&gt;\(X_i\)&lt;/span&gt; is a closed convex subset of &lt;span class=&#34;math inline&#34;&gt;\(R^{n_i}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(n=\sum_{i=1}^m n_i\)&lt;/span&gt;. The vector is partitioned into &lt;span class=&#34;math inline&#34;&gt;\(m\)&lt;/span&gt; block(s) such that &lt;span class=&#34;math inline&#34;&gt;\(x_i \in X^{n_i}\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;We denote &lt;span class=&#34;math inline&#34;&gt;\(\nabla_i f\)&lt;/span&gt; as the gradient of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; with respect to component &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -1069,7 +1224,7 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x_i-\bar x_i)^T\nabla_i\;f(\bar x_i)\geq 0\qquad x_i\in X_i\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;And thus &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; is a stationary point, since &lt;span class=&#34;math inline&#34;&gt;\((x-\bar x)^T\nabla f(\bar x)\geq 0\)&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;By far, it remains to prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\}\quad,\forall i\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;. First,we try to prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_1}\}\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Assume the contrary that &lt;span class=&#34;math inline&#34;&gt;\(r^{k_j}=\vert \vert z_1^{k_j}-x^{k_j}\vert \vert\)&lt;/span&gt; doesn’t convergence to 0. Let &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}=(z_1^{k_j}-x^{k_j})/r^{k_j}\)&lt;/span&gt;. Thus, &lt;span class=&#34;math inline&#34;&gt;\(z_1^{k_j}=x^{k_j}+r^{k_j}s_1^{k_j}\)&lt;/span&gt; , &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert r_{k_j}\vert \vert =1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; differs from 0 only along the first block-component. Since &lt;span class=&#34;math inline&#34;&gt;\(\{s_1^{k_j}\}\)&lt;/span&gt; belong to a compact set and therefore without loss of generality, we assume &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar s_1\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Assume the contrary that &lt;span class=&#34;math inline&#34;&gt;\(r^{k_j}=\vert \vert z_1^{k_j}-x^{k_j}\vert \vert\)&lt;/span&gt; doesn&#39;t convergence to 0. Let &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}=(z_1^{k_j}-x^{k_j})/r^{k_j}\)&lt;/span&gt;. Thus, &lt;span class=&#34;math inline&#34;&gt;\(z_1^{k_j}=x^{k_j}+r^{k_j}s_1^{k_j}\)&lt;/span&gt; , &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert r_{k_j}\vert \vert =1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; differs from 0 only along the first block-component. Since &lt;span class=&#34;math inline&#34;&gt;\(\{s_1^{k_j}\}\)&lt;/span&gt; belong to a compact set and therefore without loss of generality, we assume &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar s_1\)&lt;/span&gt;.&lt;/p&gt;
 &lt;p&gt;Since &lt;span class=&#34;math inline&#34;&gt;\(r^{k_j}&amp;gt;0\)&lt;/span&gt;,we can find a &lt;span class=&#34;math inline&#34;&gt;\(\epsilon\in (0,1)\)&lt;/span&gt;, such that &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}+\epsilon s_1^{k_j}\)&lt;/span&gt; lies on the segment joining &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}+s_1^{k_j}=z_1^{k_j}\)&lt;/span&gt;. Using the non-increasing property of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;,we derive,&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(z_1^{k_j})\leq f(x^{k_j}+\epsilon s_1^{k_j}) \leq f(x^{k_j})\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Again, using (*), we conclude&lt;/p&gt;
@@ -1078,7 +1233,7 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Similarly, let &lt;span class=&#34;math inline&#34;&gt;\(r_t^{k_j}=\vert \vert z_t^{k_j}-z_{t-1}^{k_j}\vert \vert\)&lt;/span&gt; for &lt;span class=&#34;math inline&#34;&gt;\(t=2,3,...,m-1\)&lt;/span&gt; and using the same technique shown above, we finally prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\},\quad \forall i\)&lt;/span&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;powells-example&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Powell’s example&lt;/h1&gt;
+&lt;h1&gt;Powell&#39;s example&lt;/h1&gt;
 &lt;p&gt;In &lt;em&gt;ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS&lt;/em&gt;, Power actually gives three examples that sequences generated by the algorithm discussed above do not convergence to stationary points once some hypothesis are not met.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;The first example is straightforward, However, the remarkable properties of this example can be destroyed by making a small perturbation to the starting vector &lt;span class=&#34;math inline&#34;&gt;\(x^0\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
@@ -1147,10 +1302,10 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
 &lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{256}e\)&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;even&#34;&gt;
-&lt;td&gt;…&lt;/td&gt;
-&lt;td&gt;…&lt;/td&gt;
-&lt;td&gt;…&lt;/td&gt;
-&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -1173,7 +1328,7 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
 \begin{cases}x\geq 1: x=1+\frac{1}{2}(y+z)\\-1&amp;lt; x&amp;lt;1: -(y+z)=0\\x\leq -1:x=-1+\frac{1}{2}(y+z) \end{cases}\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;The gradient of &lt;span class=&#34;math inline&#34;&gt;\(f(x,y,z)\)&lt;/span&gt; on this cyclic path, is &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x,y,z)=(-y-z,-x-z,-x-y)\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x,y,z)\vert \vert _1=2\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;This example is unstable with respect to small perturbations. Small changes in the starting point &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e,1+\frac{1}{2}e,-1-\frac{1}{4}e)\)&lt;/span&gt; or smal errors in the numbers that are computed during the calculation will destroy the cyclic behavior.&lt;/p&gt;
-&lt;p&gt;It’s s clear the choice of perturbations &lt;span class=&#34;math inline&#34;&gt;\(e\)&lt;/span&gt; plays a key role. Say, &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e_1,1+e_2,-1-e_3)\)&lt;/span&gt; and we have &lt;span class=&#34;math inline&#34;&gt;\(e_k=\frac{1}{2}(e_{k-2}- e_{k-1})\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;It&#39;s s clear the choice of perturbations &lt;span class=&#34;math inline&#34;&gt;\(e\)&lt;/span&gt; plays a key role. Say, &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e_1,1+e_2,-1-e_3)\)&lt;/span&gt; and we have &lt;span class=&#34;math inline&#34;&gt;\(e_k=\frac{1}{2}(e_{k-2}- e_{k-1})\)&lt;/span&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr class=&#34;header&#34;&gt;
@@ -1221,10 +1376,10 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
 &lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_9\)&lt;/span&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr class=&#34;odd&#34;&gt;
-&lt;td&gt;…&lt;/td&gt;
-&lt;td&gt;…&lt;/td&gt;
-&lt;td&gt;…&lt;/td&gt;
-&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
+&lt;td&gt;...&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
