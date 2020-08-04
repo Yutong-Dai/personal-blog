@@ -1,41 +1,77 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Projects on Dai, Yutong / 戴宇童</title>
+    <title>Projects | Dai, Yutong/ 戴宇童</title>
     <link>/project/</link>
-    <description>Recent content in Projects on Dai, Yutong / 戴宇童</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 10 Dec 2017 00:00:00 -0500</lastBuildDate>
-    
-	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Sun, 10 Dec 2017 00:00:00 -0500</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Projects</title>
+      <link>/project/</link>
+    </image>
     
     <item>
       <title>Real Estate Market Data Analysis</title>
       <link>/project/boston-housing/</link>
       <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
-      
       <guid>/project/boston-housing/</guid>
-      <description>Develope data products to help Airbnb hosts to determine listing prices.</description>
+      <description>&lt;p&gt;In this project, we&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Develope data products to help Airbnb hosts to determine listing prices using Sparse Regression and RandomForest&lt;/li&gt;
+&lt;li&gt;Researched how amenities and geolocation in uence listing prices&lt;/li&gt;
+&lt;li&gt;Designed a User Interface for customers to gain insight into Airbnb rental markets in Boston&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The 
+&lt;a href=&#34;https://mediaspace.illinois.edu/media/t/1_3yvpnzqn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video Presentation&lt;/a&gt; and 
+&lt;a href=&#34;https://yutongdai.shinyapps.io/shinyapp/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Rshiny App Demo&lt;/a&gt; are also provided.&lt;/p&gt;
+&lt;iframe id=&#34;kmsembed-1_3yvpnzqn&#34; width=&#34;640&#34; height=&#34;394&#34; src=&#34;https://mediaspace.illinois.edu/embed/secure/iframe/entryId/1_3yvpnzqn/uiConfId/26883701&#34; class=&#34;kmsembed&#34; allowfullscreen webkitallowfullscreen mozAllowFullScreen allow=&#34;autoplay *; fullscreen *; encrypted-media *&#34; frameborder=&#34;0&#34; title=&#34;Kaltura Player&#34;&gt;&lt;/iframe&gt;</description>
     </item>
     
     <item>
       <title>Show and Tell: A Neural Image Caption Generator</title>
       <link>/project/show-and-tell/</link>
       <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
-      
       <guid>/project/show-and-tell/</guid>
-      <description>Feed in an image, AI will generate the caption for you!</description>
+      <description>&lt;p&gt;This is the deep learning course final project trying to reporduce the results reported in the paper, 
+&lt;a href=&#34;https://arxiv.org/pdf/1411.4555.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Show and Tell: A Neural Image Caption Generator&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The model is trained on the 
+&lt;a href=&#34;http://cocodataset.org/#home&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MS coco2014 dataset&lt;/a&gt;. Our final result looks like&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./caption-demo.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;For code, UI, and report  please click 
+&lt;a href=&#34;https://github.com/Rothdyt/Projects/tree/master/Show-and-tell&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>Variational Gaussian Mixtures</title>
       <link>/project/variational-inference/</link>
       <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
-      
       <guid>/project/variational-inference/</guid>
-      <description>Clustering under the variation inference framework.</description>
+      <description>&lt;p&gt;This is the statistical computing course final project, trying to understand, reporduce and extend some results reported in the paper, 
+&lt;a href=&#34;https://arxiv.org/pdf/1601.00670.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Variational Inference: A Review for Statisticians&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Three datasets are used here, simulated data, 
+&lt;a href=&#34;https://www.stat.cmu.edu/~larry/all-of-statistics/=data/faithful.dat&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;old faithful&lt;/a&gt; and 
+&lt;a href=&#34;https://www.imageclef.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;imageCLEF&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Our final result looks like&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Simulated data&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;./simulation.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;old faithful
+&lt;img src=&#34;./old_faithful.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;imageclef&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;./imageclef.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;For code and report please click 
+&lt;a href=&#34;https://github.com/Rothdyt/Projects/tree/master/Show-and-tell&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
     </item>
     
   </channel>

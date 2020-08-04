@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Statistics | Dai, Yutong/ 戴宇童</title>
+    <link>/category/statistics/</link>
+      <atom:link href="/category/statistics/index.xml" rel="self" type="application/rss+xml" />
+    <description>Statistics</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Fri, 04 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Statistics</title>
+      <link>/category/statistics/</link>
+    </image>
+    
+    <item>
+      <title>Anomaly Detection</title>
+      <link>/post/anomaly-detection/</link>
+      <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>/post/anomaly-detection/</guid>
+      <description>
+
+
+&lt;div id=&#34;point-anomaly-detection---grubbs-test&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Point Anomaly Detection - Grubbs&#39; test&lt;/h1&gt;
+&lt;p&gt;Grubbs&#39; test&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; is commonly used technique to detect an outlier in &lt;strong&gt;univariate&lt;/strong&gt; problem, where &lt;strong&gt;normality&lt;/strong&gt; assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.&lt;/p&gt;
+&lt;p&gt;The hypothesis test is defined as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\]&lt;/span&gt; For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+G = \frac{\max_i |X_i - \bar X|}{s},
+\]&lt;/span&gt; where the &lt;span class=&#34;math inline&#34;&gt;\(\bar X\)&lt;/span&gt; is the sample mean and &lt;span class=&#34;math inline&#34;&gt;\(s\)&lt;/span&gt; is the sample deviation.&lt;/p&gt;
+&lt;p&gt;Let&#39;s look at one simulated example.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(123)
+simulated_data &amp;lt;- rnorm(100, 0, 1)
+simulated_data_with_outliers &amp;lt;- c(simulated_data, c(3.5, -3.7))
+# normality check
+shapiro.test(simulated_data_with_outliers)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Shapiro-Wilk normality test
+## 
+## data:  simulated_data_with_outliers
+## W = 0.9804, p-value = 0.1344&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Shapiro-Wilk normality test impiles the data is normally distributed. Now, let&#39;s performe the grubbs&#39; test.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(outliers)
+grubbs.test(simulated_data_with_outliers, two.sided = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Grubbs test for one outlier
+## 
+## data:  simulated_data_with_outliers
+## G = 3.65380, U = 0.86651, p-value = 0.01626
+## alternative hypothesis: lowest value -3.7 is an outlier&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The test result detecs the lowest value as an outlier.&lt;/p&gt;
+&lt;p&gt;Let&#39;s remove the -3.7 and performe the test again.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;grubbs.test(head(simulated_data_with_outliers,101), two.sided = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Grubbs test for one outlier
+## 
+## data:  head(simulated_data_with_outliers, 101)
+## G = 3.48190, U = 0.87755, p-value = 0.03378
+## alternative hypothesis: highest value 3.5 is an outlier&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, let&#39;s remove two outliers altogether.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;grubbs.test(head(simulated_data_with_outliers,100), two.sided = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Grubbs test for one outlier
+## 
+## data:  head(simulated_data_with_outliers, 100)
+## G = 2.62880, U = 0.92949, p-value = 0.7584
+## alternative hypothesis: lowest value -2.30916887564081 is an outlier&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This impiles there are no outliers.&lt;/p&gt;
+&lt;p&gt;Grubbs&#39; test is useful for identify the outliers of a small amount one at a time, but not suitable to detect a group of outliers.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;collective-anomaly-detection&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Collective Anomaly Detection&lt;/h1&gt;
+&lt;div id=&#34;anomaly-in-timeseries---seasonal-hybrid-esd-algorithm&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Anomaly in timeseries - Seasonal Hybrid ESD algorithm&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  devtools::install_github(&amp;quot;twitter/AnomalyDetection&amp;quot;)
+library(AnomalyDetection)
+river &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/river.csv&amp;quot;)
+results &amp;lt;- AnomalyDetectionVec(river$nitrate, period=12, direction = &amp;#39;both&amp;#39;, plot = T)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;results$plot&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;distance-based-anomaly-detection&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Distance-based Anomaly Detection&lt;/h2&gt;
+&lt;div id=&#34;global-anomaly---largest-distance&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Global Anomaly - Largest Distance&lt;/h3&gt;
+&lt;p&gt;Intuitively, the larger distance the more likely the point would be an outlier.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(FNN)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: package &amp;#39;FNN&amp;#39; was built under R version 3.4.4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;furniture &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/furniture.csv&amp;quot;)
+furniture_scaled &amp;lt;- data.frame(Height = scale(furniture$Height), Width = scale(furniture$Width))
+furniture_knn &amp;lt;- get.knn(furniture_scaled, k = 5)
+furniture_scaled$score_knn &amp;lt;- rowMeans(furniture_knn$nn.dist)
+largest_idx &amp;lt;- which.max(furniture_scaled$score_knn)
+plot(furniture_scaled$Height, furniture_scaled$Width, cex=sqrt(furniture_scaled$score_knn), pch=20)
+points(furniture_scaled$Height[largest_idx], furniture_scaled$Width[largest_idx], col=&amp;quot;red&amp;quot;, pch=20)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;local-anomaly---lof&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Local Anomaly - LOF&lt;/h3&gt;
+&lt;p&gt;kNN is useful for finding global anomalies, but is less able to surface local outliers.&lt;/p&gt;
+&lt;p&gt;LOF is a ratio of densities:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LOF &amp;gt; 1 more likely to be anomalous LOF ≤ 1 less likely to be anomalous&lt;/li&gt;
+&lt;li&gt;Large LOF values indicate more isolated points&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dbscan)
+furniture_lof &amp;lt;- furniture[,2:3]
+furniture_lof$score_lof &amp;lt;- lof(scale(furniture_lof), k=5)
+largest_idx &amp;lt;- which.max(furniture_lof$score_lof)
+plot(furniture_lof$Height, furniture_lof$Width, cex=sqrt(furniture_lof$score_lof), pch=20)
+points(furniture_lof$Height[largest_idx], furniture_lof$Width[largest_idx], col=&amp;quot;red&amp;quot;, pch=20)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It&#39;s clear that, lof successfuly detects the local outlier.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;isolation-forest&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Isolation Forest&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Isolation Forest is built on the basis of decision trees;&lt;/li&gt;
+&lt;li&gt;To grow a decision tree, at each node, a feature and a corresponding cutoff value are randomly selected;&lt;/li&gt;
+&lt;li&gt;Intuitively, outliers are less frequent than regular observations and are different from them in terms of values, so outliers should be identified closer to the root of the tree with fewer splits. We use isolation score to characterize this.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;isolation-score&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Isolation Score&lt;/h2&gt;
+&lt;p&gt;We need some quatity to define the isolation score&lt;a href=&#34;#fn2&#34; class=&#34;footnoteRef&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Path Length&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(h(x)\)&lt;/span&gt; of a point &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; is measured by the number of edges &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; traverses an iTree from the root node until the traversal is terminated at an external node.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Normalizing constant&lt;/strong&gt; &lt;span class=&#34;math display&#34;&gt;\[c(n) = 2H(n − 1) − (2(n − 1)/n)\]&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is the number of samples to grow a tree and &lt;span class=&#34;math inline&#34;&gt;\(H(i)\)&lt;/span&gt; is the harmonic number and it can be estimated by &lt;span class=&#34;math inline&#34;&gt;\(ln(i) + 0.5772156649\)&lt;/span&gt; (Euler’s constant).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The isolation score &lt;span class=&#34;math inline&#34;&gt;\(s\)&lt;/span&gt; of an sample &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; is defined as &lt;span class=&#34;math display&#34;&gt;\[s(x,n)= 2^{-\frac{E(h(x))}{c(n)}},\]&lt;/span&gt; where the &lt;span class=&#34;math inline&#34;&gt;\(E()\)&lt;/span&gt; is the expectation of &lt;span class=&#34;math inline&#34;&gt;\(h(x)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Interpreting the isolation score:&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Scores between 0 and 1&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Scores near 1 indicate anomalies (small path length)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# devtools::install_github(&amp;quot;Zelazny7/isofor&amp;quot;)
+library(isofor)
+furniture &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/furniture.csv&amp;quot;)
+furniture &amp;lt;- data.frame(Height = furniture$Height, Width = furniture$Width)
+scores &amp;lt;- matrix(nrow=dim(furniture)[1])
+for (ntree in c(100, 200, 500)){
+  furniture_tree &amp;lt;- iForest(furniture, nt = ntree, phi=50)
+  scores &amp;lt;- cbind(scores, predict(furniture_tree, furniture)) 
+}
+plot(scores[,3], scores[,4], xlab = &amp;quot;200 tress&amp;quot;, ylab=&amp;quot;500 tress&amp;quot;)
+abline(a=0,b=1)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This graph is used to assess wheter the number of trees is enough for the isolation score to converge. From the graph above, we know that 200 tress are enough for us to identify the anomalies.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lattice)
+furniture_forest &amp;lt;- iForest(furniture, nt = 200, phi=50)
+h_seq &amp;lt;- seq(min(furniture$Height), max(furniture$Height), length.out = 20) 
+w_seq &amp;lt;- seq(min(furniture$Width), max(furniture$Width), length.out = 20)
+furniture_grid &amp;lt;- expand.grid(Width = w_seq, Height = h_seq)
+furniture_grid$score &amp;lt;- predict(furniture_forest, furniture_grid)
+contourplot(score ~ Height + Width, data = furniture_grid,region = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This contour graph used to identify the anomaly regions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Grubbs%27_test_for_outliers&#34;&gt;https://en.wikipedia.org/wiki/Grubbs%27_test_for_outliers&lt;/a&gt;&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;Zhihua Zhou et al. &lt;a href=&#34;https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/icdm08b.pdf&#34; class=&#34;uri&#34;&gt;https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/icdm08b.pdf&lt;/a&gt;&lt;a href=&#34;#fnref2&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

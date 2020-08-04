@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>proximal gradient | Dai, Yutong/ 戴宇童</title>
+    <link>/tag/proximal-gradient/</link>
+      <atom:link href="/tag/proximal-gradient/index.xml" rel="self" type="application/rss+xml" />
+    <description>proximal gradient</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Wed, 01 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>proximal gradient</title>
+      <link>/tag/proximal-gradient/</link>
+    </image>
+    
+    <item>
+      <title>A Subspace Acceleration Method for Minimization Involving a Group Sparsity-Inducing Regularizer</title>
+      <link>/publication/farsagroup/</link>
+      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
+      <guid>/publication/farsagroup/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

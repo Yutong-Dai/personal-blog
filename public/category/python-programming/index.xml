@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python-Programming | Dai, Yutong/ 戴宇童</title>
+    <link>/category/python-programming/</link>
+      <atom:link href="/category/python-programming/index.xml" rel="self" type="application/rss+xml" />
+    <description>Python-Programming</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Sat, 07 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Python-Programming</title>
+      <link>/category/python-programming/</link>
+    </image>
+    
+    <item>
+      <title>Decision Tree: How to find the path from the root to the desired terminal node</title>
+      <link>/post/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</link>
+      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      <guid>/post/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#prepare-a-fitted-random-forest&#34;&gt;Prepare a fitted random forest&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#find-the-path-to-desired-terminal-node&#34;&gt;Find the path to desired terminal node&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#collect-paths-in-the-random-forest&#34;&gt;Collect Paths in the random forest&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#summarize-the-decison-region&#34;&gt;Summarize the decison region&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;prepare-a-fitted-random-forest&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Prepare a fitted random forest&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;import random
+import pandas as pd
+from sklearn.ensemble.forest import RandomForestRegressor
+from sklearn import tree
+data = pd.DataFrame({&amp;quot;Y&amp;quot;:[1,5,3,4,3,4,2], &amp;quot;X_1&amp;quot;:[&amp;quot;red&amp;quot;, &amp;quot;blue&amp;quot;, &amp;quot;blue&amp;quot;, &amp;quot;red&amp;quot;,&amp;quot;red&amp;quot;,&amp;quot;blue&amp;quot;, &amp;quot;red&amp;quot;],
+                    &amp;quot;X_2&amp;quot;:[18.4, 7.5, 9.3, 3.7, 5.2, 3.2, 5.2]})
+data = pd.get_dummies(data)
+X = data.drop([&amp;quot;Y&amp;quot;], axis=1)
+y = data[&amp;quot;Y&amp;quot;]
+rf = RandomForestRegressor(n_estimators = 10, random_state = 1234)
+rf.fit(X, y)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;output:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;RandomForestRegressor(bootstrap=True, criterion=&amp;#39;mse&amp;#39;, max_depth=None,
+           max_features=&amp;#39;auto&amp;#39;, max_leaf_nodes=None,
+           min_impurity_decrease=0.0, min_impurity_split=None,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, n_estimators=10, n_jobs=1,
+           oob_score=False, random_state=1234, verbose=0, warm_start=False)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;find-the-path-to-desired-terminal-node&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Find the path to desired terminal node&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;import pydotplus
+import re 
+def return_node_path_to_max_prediction(onetree, verbose=True):
+    &amp;quot;&amp;quot;&amp;quot;
+    @input: a tree from the sklearn randomforest
+    @output: the node path to maxmium terminal node
+        [[split_node_1], [split_node_2], ...]
+        [splite_node_1] = [var_index, cutoff, direction]
+    &amp;quot;&amp;quot;&amp;quot;
+    if verbose:
+        print(&amp;quot;Generating Tree Graph, it may take a while...&amp;quot;)
+    dot_data = tree.export_graphviz(onetree,
+                                    out_file = None,
+                                    filled   = True,
+                                    rounded  = True,
+                                    special_characters = True)  
+    graph = pydotplus.graph_from_dot_data(dot_data)
+    graph_ = {}
+    for edge in graph.get_edge_list():
+        graph_[edge.get_source()] = edge.get_destination()
+    # find all terminal node
+    terminal_node = {}
+    non_decimal = re.compile(r&amp;#39;[^\d.]+&amp;#39;)
+    for node in graph.get_node_list():
+        if node.get_name() not in graph_:
+            if node.get_name() not in [&amp;quot;node&amp;quot;, &amp;quot;edge&amp;quot;]:
+                value = node.get_label()
+                value = re.sub(r&amp;#39;.*v&amp;#39;, &amp;#39;v&amp;#39;, value)
+                terminal_node[node.get_name()] = float(non_decimal.sub(&amp;#39;&amp;#39;, value))
+    # find the path down to the terminal with maximum predition value
+    flag = True
+    destination = max(terminal_node, key=terminal_node.get)
+    edge_list = graph.get_edge_list()
+    node_list = graph.get_node_list()
+    split_node = []
+    while flag:
+        myedge = [edge for edge in edge_list  if edge.get_destination() == destination][0]
+        if int(myedge.get_destination()) - int(myedge.get_source()) &amp;gt; 1:
+            direction = &amp;quot;Right&amp;quot;
+        else:
+            direction = &amp;quot;Left&amp;quot;
+        
+        mynode = [node for node in node_list if node.get_name() == myedge.get_source()][0]
+        var_val = re.findall(r&amp;quot;[-+]?\d*\.\d+|\d+&amp;quot;, mynode.get_label())[:2]
+        # record the growing path:
+        #  var_val[0]: Index of variable participating in splitting
+        #  var_val[1]: cutoff point of the splitting
+        #  direction: If Right, means greater than var_val[1]; 
+        #             If Left, means no greater than var_val[1]
+        split_node.append([int(var_val[0]),float(var_val[1]),direction])
+        if verbose:
+            print(myedge.get_destination() + &amp;quot;&amp;lt;-&amp;quot; + myedge.get_source() + 
+                  &amp;quot;: Split at Variable X&amp;quot; + var_val[0] + &amp;quot;; The cutoff is &amp;quot; + var_val[1] + 
+                 &amp;quot;; Turn &amp;quot; + direction)
+        destination = myedge.get_source()
+        if destination == &amp;quot;0&amp;quot;:
+            flag = False
+        
+    return [*reversed(split_node)]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Test:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;return_node_path_to_max_prediction(rf[1], verbose=True)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Outputs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Generating Tree Graph, it may take a while...
+3&amp;lt;-1: Split at Variable X0; The cutoff is 5.6; Turn Right
+1&amp;lt;-0: Split at Variable X0; The cutoff is 12.95; Turn Left&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From the output above, we know the path from the root to the desired terminal node is :&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Root[X0(&amp;lt;= 12.95)] -&amp;gt; X0 (&amp;gt;=5.6) -&amp;gt; Terminal Node&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;collect-paths-in-the-random-forest&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Collect Paths in the random forest&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;def collect_path(rf, verbose=True):
+    n_tree = len(rf)
+    result = []
+    for i in range(n_tree):
+        if verbose:
+            print(&amp;quot;Construct the %s tree graph out of %s trees&amp;quot; %(i+1, n_tree))
+        result.append(return_node_path_to_max_prediction(rf.estimators_[i], verbose=False))
+    return result&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Test:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;result = collect_path(rf)
+print(result)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Outputs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Construct the 1 tree graph out of 10 trees
+Construct the 2 tree graph out of 10 trees
+Construct the 3 tree graph out of 10 trees
+Construct the 4 tree graph out of 10 trees
+Construct the 5 tree graph out of 10 trees
+Construct the 6 tree graph out of 10 trees
+Construct the 7 tree graph out of 10 trees
+Construct the 8 tree graph out of 10 trees
+Construct the 9 tree graph out of 10 trees
+Construct the 10 tree graph out of 10 trees
+[[[0, 4.2, &amp;#39;Left&amp;#39;]], [[0, 12.95, &amp;#39;Left&amp;#39;], [0, 5.6, &amp;#39;Right&amp;#39;]], [[1, 0.5, &amp;#39;Right&amp;#39;], [0, 8.4, &amp;#39;Left&amp;#39;]], [[0, 13.85, &amp;#39;Left&amp;#39;], [0, 8.4, &amp;#39;Left&amp;#39;], [1, 0.5, &amp;#39;Right&amp;#39;]], [[0, 8.4, &amp;#39;Left&amp;#39;], [0, 6.35, &amp;#39;Right&amp;#39;]], [[0, 12.95, &amp;#39;Left&amp;#39;], [0, 5.6, &amp;#39;Right&amp;#39;]], [[2, 0.5, &amp;#39;Left&amp;#39;], [0, 5.35, &amp;#39;Right&amp;#39;]], [[1, 0.5, &amp;#39;Right&amp;#39;], [0, 5.35, &amp;#39;Right&amp;#39;]], [[0, 13.85, &amp;#39;Left&amp;#39;], [1, 0.5, &amp;#39;Right&amp;#39;], [0, 8.4, &amp;#39;Left&amp;#39;], [0, 5.35, &amp;#39;Right&amp;#39;]], [[0, 13.85, &amp;#39;Left&amp;#39;], [0, 6.35, &amp;#39;Right&amp;#39;], [0, 8.4, &amp;#39;Left&amp;#39;]]]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summarize-the-decison-region&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Summarize the decison region&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;def summarize_region(result, features):
+    decision_region = {k: [[] for _ in range(2)] for k in features}
+    for i in range(len(result)):
+        for j in range(len(result[i])):
+            if result[i][j][2] == &amp;quot;Left&amp;quot;:
+                 decision_region[features[result[i][j][0]]][0].append(result[i][j][1])
+            else:
+                decision_region[features[result[i][j][0]]][1].append(result[i][j][1]) 
+    
+    decision_region_ = {}
+    for k in features:
+        try:
+            upper_bound = min(decision_region[k][0])
+        except ValueError:
+            upper_bound = &amp;quot;Unknown&amp;quot;
+        try:
+            lower_bound = max(decision_region[k][1])
+        except ValueError:
+            lower_bound = &amp;quot;Unknown&amp;quot;
+        decision_region_[k] = [lower_bound, upper_bound]
+        
+    value_to_remove = [&amp;#39;Unknown&amp;#39;, &amp;#39;Unknown&amp;#39;]
+    decision_region_ = {key: value for key, value in decision_region_.items() if value != value_to_remove}
+    value_to_remove = [0.5, 0.5]
+    decision_region_ = {key: value for key, value in decision_region_.items() if value != value_to_remove}
+    
+    return (decision_region_)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Test:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;features = X.columns
+summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Outputs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{&amp;#39;X_1_blue&amp;#39;: [0.5, &amp;#39;Unknown&amp;#39;], &amp;#39;X_1_red&amp;#39;: [&amp;#39;Unknown&amp;#39;, 0.5], &amp;#39;X_2&amp;#39;: [6.35, 4.2]}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From the output above, we know that the decision region:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{blue} * [6.35, 4.2]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But it seems that the region &lt;strong&gt;[6.35, 4.2]&lt;/strong&gt; is not reasonable due to the poorly generated data. But it may happens in some situations, which may require us to come up with new ways to ensemble these terminal nodes.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

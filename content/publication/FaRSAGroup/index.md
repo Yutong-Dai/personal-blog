@@ -3,7 +3,7 @@ title: "A Subspace Acceleration Method for Minimization Involving a Group Sparsi
 
 authors:
 - Frank E. Curtis
-- admin
+- Yutong Dai
 - Daniel P. Robinson
 
 date: "2020-07-01"

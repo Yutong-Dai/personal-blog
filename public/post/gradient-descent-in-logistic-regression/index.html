@@ -1,0 +1,1314 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Table of Contents  Problem Formulation Motivating Example Analysis: why this happens? Questions Appendix   Problem Formulation There are commonly two ways of formulating the logistic regression problem, depending on the way we label the response variable $y$.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/gradient-descent-in-logistic-regression/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/gradient-descent-in-logistic-regression/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Dai, Yutong/ 戴宇童">
+  <meta property="og:url" content="/post/gradient-descent-in-logistic-regression/">
+  <meta property="og:title" content="Gradient Descent in Logistic Regression | Dai, Yutong/ 戴宇童">
+  <meta property="og:description" content="Table of Contents  Problem Formulation Motivating Example Analysis: why this happens? Questions Appendix   Problem Formulation There are commonly two ways of formulating the logistic regression problem, depending on the way we label the response variable $y$."><meta property="og:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-07-01T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-07-01T15:58:50&#43;08:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/gradient-descent-in-logistic-regression/"
+  },
+  "headline": "Gradient Descent in Logistic Regression",
+  
+  "datePublished": "2019-07-01T00:00:00Z",
+  "dateModified": "2019-07-01T15:58:50+08:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Dai, Yutong/ 戴宇童",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Table of Contents  Problem Formulation Motivating Example Analysis: why this happens? Questions Appendix   Problem Formulation There are commonly two ways of formulating the logistic regression problem, depending on the way we label the response variable $y$."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Gradient Descent in Logistic Regression | Dai, Yutong/ 戴宇童</title>
+
+</head>
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Dai, Yutong/ 戴宇童</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Dai, Yutong/ 戴宇童</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/resources/"><span>Resources</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-palette" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+        <article class="article">
+            
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Gradient Descent in Logistic Regression</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    Jul 1, 2019
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/optimization/">optimization</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+            <div class="article-container">
+              <div class="article-style">
+                <h2>Table of Contents</h2>
+<nav id="TableOfContents">
+  <ol>
+    <li><a href="#problem-formulation">Problem Formulation</a></li>
+    <li><a href="#motivating-example">Motivating Example</a></li>
+    <li><a href="#analysis-why-this-happens">Analysis: why this happens?</a></li>
+    <li><a href="#questions">Questions</a></li>
+    <li><a href="#appendix">Appendix</a></li>
+  </ol>
+</nav>
+<h1 id="problem-formulation">Problem Formulation</h1>
+<p>There are commonly two ways of formulating the logistic regression problem, depending on the way we label the response variable $y$. Here we focus on the first formulation and defer the second formulation on the appendix.</p>
+<p><strong>First Formulation:</strong></p>
+<p>Consider restrict $y$ to {${-1,1}$}. Then we have
+$$
+\begin{aligned}
+&amp;\mathbb{P}(y=1|z)=\sigma(z)=\frac{1}{1 + e^{-z}}\<br>
+&amp;\mathbb{P}(y=-1|z)=\sigma(z)=\frac{1}{1 + e^z},
+\end{aligned}
+$$
+which can be compactly written as
+$$
+\mathbb{P}(y|z)=\sigma(zy).
+$$
+If we consider the data $({x_i,y_i})_{i=1}^N$ and we want to use the Likelihood Principle to fit the Logistic Regression, then we would like to maximize the following loss function,
+$$
+\begin{aligned}
+&amp;   L(\beta_0,\beta) = \prod_{i=1}^N \mathbb{P}(y_i|z_i)\<br>
+&amp; z_i =\beta_0+\beta^Tx_i.
+\end{aligned}
+$$
+If we use the first formulation, then it is equivalent to minimize the log-negative of $L(\beta_0,\beta)$,
+$$
+\begin{aligned}
+\min_{\beta_0,\beta}l(\beta_0,\beta)=\frac{1}{N}\sum_{i=1}^N\log(1+e^{-y_iz_i}).
+\end{aligned}
+$$
+From now on,  for the sake of simplicity, we drop the intercept term $\beta_0$.</p>
+<h1 id="motivating-example">Motivating Example</h1>
+<p>Consider two simulated datasets:</p>
+<p>Dataset 1:</p>
+<table>
+<thead>
+<tr>
+<th>$x_1$</th>
+<th>$x_2$</th>
+<th>$y$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.3</td>
+<td>0.9</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>1.5</td>
+<td>-1</td>
+</tr>
+</tbody>
+</table>
+<p>Dataset 2:</p>
+<table>
+<thead>
+<tr>
+<th>$x_1$</th>
+<th>$x_2$</th>
+<th>$y$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>-1</td>
+<td>-1</td>
+<td>-1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Some Analysis:</strong></p>
+<ol>
+<li>The objective function $l(\beta)$ is strictly convex by looking at its Hessian, which is positive defined. However, it is not strongly convex.</li>
+<li>For given Data set, the Hessian is upper bounded by $(\sum_{i=1}^N|x_i|^2)I$ (see Appendix).</li>
+<li>The stepsize can be chosen as $\alpha = \frac{1}{\sum_{i=1}^N|x_i|^2}$.</li>
+</ol>
+<p>Applying the gradient descent with constant stepsize $\frac{1}{L}$ on each dataset for 1000 steps, then we obtain the estimations as follows.</p>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>$\beta_1$</th>
+<th>$\beta_2$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>-0.12058225</td>
+<td>-0.36174676</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3.59370507</td>
+<td>3.04825501</td>
+</tr>
+</tbody>
+</table>
+<p>Also we plot out following figures to check the convergence. The top two figures describe the algorithm&rsquo;s performance on the dataset 1 while the bottom two is for the  dataset 2.</p>
+<p><img src="./LogisticRegression.png" alt=""></p>
+<blockquote>
+<p>Fig1: Apply GD with the constant stepsize on two different datasets. The blue curves depicts how the norm of gradient at iterates change while the red curves show the change of the function value in each iteration.</p>
+</blockquote>
+<h1 id="analysis-why-this-happens">Analysis: why this happens?</h1>
+<p>First, if we want to minimize $f(\beta)=\log(1 + \exp(-\beta))$ using gradient descent with constant stepsize $\frac{1}{L}$, then we will facing following issues. Here we assume $\beta \in \mathbb{R}$.</p>
+<ol>
+<li>The global minimal is not attainable, i.e., $+\infty$, though we can have $\nabla f(\beta^k)\rightarrow 0$, which means $\beta \rightarrow +\infty$, hence the iterates diverge.</li>
+<li>Indeed,  the ${f(\beta^k)}$ converges to $f^*=0$ by as it monotonously decreasing and lower bounded by $0$.</li>
+<li>The worst-case iteration complexity is $\mathcal{O}(\frac{1}{k})$, indicating a sublinear convergence rate.</li>
+</ol>
+<p>Now, let&rsquo;s back to the example. The figure 2 shows that the first dataset and second dataset, which correspond to the <strong>non-separable</strong> and <strong>separable</strong> case respectively.</p>
+<p><img src="./LogisticSeparableNonseparable.png" alt=""></p>
+<blockquote>
+<p>Fig2: (Left) First dataset. (Right) Second dataset. The fitted separating line is derived by $y=-\frac{\beta_1}{\beta_2}x$.</p>
+</blockquote>
+<p>We also plot out the norm of iterates at each iteration in figure 3.</p>
+<p><img src="./LogisticRegression-iterates.png" alt=""></p>
+<blockquote>
+<p>Fig3: The top figure shows the norm of iterates for the first dataset while the bottom one shows case for the second dataset.</p>
+</blockquote>
+<p>We can see that for non-separable case, the norm of iterates are bounded while the latter goes to infinity (if we increase the number of iterations).</p>
+<p>In non-separable case, ${\beta^k}$ <em>seems</em>  to stay in &ldquo;strongly convex&rdquo; region while in separable case, ${\beta^k}$ keeps approaching the flatten region, so you can easily say a sharp decreasing in convergence speed. The following observations can be verified by figure 4 (1-dimensional case) and figure 5 (2-dimensional case).</p>
+<p><img src="./LogisticRegression-1dcontour.png" alt=""></p>
+<blockquote>
+<p>Fig4:  (Left) Non-separable dataset  ${(x_1=1, y_1=1), (x_2=2, y_2=-1)}$.  The green dot line is $y=x^2$. The objective function (blue line) preserves the strong convexity in a certain range and the minimal stays in this range. The red point is the start point $x_0$.  (Right). Separable dataset ${(x_1=1, y_1=1), (x_2=-1, y_2=-1)}$. Although the  objective function is endowed with the strong convexity property in a certain range, however the global minimal is outside of this range.</p>
+</blockquote>
+<p><img src="./LogisticRegression-2dcontour.png" alt="LogisticRegression-2dcontour"></p>
+<blockquote>
+<p>Fig5:  Dataset 1 is shown in the top 2 pictures with the right one zooming into a particular range. Dataset 2 is shown in the bottom pictures.  The blue dots trace the progression of iterates.</p>
+</blockquote>
+<h1 id="questions">Questions</h1>
+<ol>
+<li>Why the separability would cause such a difference? From the Fig4 and Fig5, we know data as <em>parameters</em> can influence the shape of the objective function a lot.  Given the data set,  can we predict the behavior of the performance of gradient descent with constant stepsize, i.e., linear convergence rate or sublinear convergence rate? Can we extend our conclusion to higher dimension?</li>
+<li>In real world application, it&rsquo;s likely that the data is semi-separable, i.e., most data points can be split into two groups with a few exceptions. How&rsquo;s that influence the performance of the algorithm?</li>
+<li>Will second formulation (see below) also encounter the similar issue? My guess is yes.</li>
+</ol>
+<h1 id="appendix">Appendix</h1>
+<p><strong>Second Formulation of Logistic Regression</strong></p>
+<p>Consider restrict $y$ to ${0,1}$. Then we have
+$$
+\begin{aligned}
+&amp;\mathbb{P}(y=1|z)=\sigma(z)=\frac{1}{1 + e^{-z}}\<br>
+&amp;\mathbb{P}(y=0|z)=\sigma(z)=\frac{1}{1 + e^z},
+\end{aligned}
+$$
+which can be compactly written as
+$$
+\mathbb{P}(y|z)=\sigma(z)^y(1-\sigma(z))^{1-y}.
+$$</p>
+<p>If we use the second formulation, then maximizing the likelihood  is equivalent to
+$$
+\begin{aligned}
+\min_{\beta_0,\beta}l(\beta_0,\beta)=\frac{1}{N}\sum_{i=1}^N[-y_iz_i+\log(1+e^{z_i})].
+\end{aligned}
+$$</p>
+<p><strong>Derivation of the gradient and Hessian of the loss function (first formualtion)</strong></p>
+<p>Consider $f(\beta)=\log (1 + \exp(-y\beta^Tx)$, then we have
+$$
+\begin{aligned}
+&amp;\nabla f(\beta) = \frac{1}{1 + \exp(y\beta^Tx)}(-yx)\<br>
+&amp;\nabla^2 f(\beta) = (yx)\frac{\exp(y\beta^Tx)}{1 + \exp(y\beta^Tx)}(yx^T),
+\end{aligned}
+$$
+which implies
+$$
+\begin{aligned}
+&amp; \nabla l(\beta)=\frac{1}{N}\sum_{i=1}^N \frac{1}{1 + \exp(y_i\beta^Tx_i)}(-y_ix_i)\<br>
+&amp; \nabla^2 l(\beta)=\frac{1}{N}\sum_{i=1}^N(y_ix_i)\frac{\exp(y\beta^Tx_i)}{(1 + \exp(y\beta^Tx_i))^2}(y_ix_i^T)=\frac{1}{N}XDX^T,
+\end{aligned}
+$$
+where $X=[x_1,\cdots,x_n]$ , $D=\text{diag}({y_1^2\sigma_1(1-\sigma_1),\cdots,y_n^2\sigma_n(1-\sigma_n)})$ , and $\sigma_i =\frac{\exp(y\beta^Tx_i)}{1 + \exp(y\beta^Tx_i)} $.</p>
+<p><strong>Reference:</strong></p>
+<ol>
+<li>
+<p>Lecture notes 9 and 10 presented on this 
+<a href="https://wiki.illinois.edu/wiki/display/ie510/IE&#43;510&#43;Applied&#43;Nonlinear&#43;Programming&#43;Home" target="_blank" rel="noopener">course website.</a></p>
+</li>
+<li>
+<p>The code for generating graphs can be found in 
+<a href="https://github.com/Rothdyt/all_of_optimization/blob/master/_draft/GradientMethod/pycode/LogisticRegression.py" target="_blank" rel="noopener">my git repo</a>.</p>
+</li>
+</ol>
+
+              </div>
+              
+
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/gradient-descent-in-logistic-regression/&amp;text=Gradient%20Descent%20in%20Logistic%20Regression" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/gradient-descent-in-logistic-regression/&amp;t=Gradient%20Descent%20in%20Logistic%20Regression" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Gradient%20Descent%20in%20Logistic%20Regression&amp;body=/post/gradient-descent-in-logistic-regression/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/gradient-descent-in-logistic-regression/&amp;title=Gradient%20Descent%20in%20Logistic%20Regression" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Gradient%20Descent%20in%20Logistic%20Regression%20/post/gradient-descent-in-logistic-regression/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/gradient-descent-in-logistic-regression/&amp;title=Gradient%20Descent%20in%20Logistic%20Regression" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+    
+    
+    
+      
+    
+    
+    
+    <div class="media author-card content-widget-hr">
+      
+        
+        <img class="avatar mr-3 avatar-circle" src="/author/avatar_hueb9c1e73221478fc4ed6d17c75c9b9a0_24549_270x270_fill_q90_lanczos_center.jpg" alt="">
+      
+
+      <div class="media-body">
+        <h5 class="card-title"><a href="/"></a></h5>
+        <h6 class="card-subtitle">Ph.D. student</h6>
+        <p class="card-text">My research interests lie at the intersection of statistical modeling and optimization.</p>
+        <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://linkedin.com/in/yutongdai/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/rothdyt" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/resume.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+      </div>
+    </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/lp/">Introduction to Mathematical Programming</a></li>
+      
+      <li><a href="/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/">Convergence Analysis for Block Coordinate Decent Algorithm and Powell&#39;s Examples</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+
+
+            </div>
+        </article>
+  
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/bash.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/cpp.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.66c553246b0f279a03be6e5597f72b52.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+  <p class="powered-by">
+    
+      <a href="/privacy/">Privacy Policy</a>
+    
+    
+       &middot; 
+      <a href="/terms/">Terms</a>
+    
+  </p>
+  
+
+  <p class="powered-by">
+    © 2020
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    Published with
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic Website Builder</a>
+    
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -68,7 +68,7 @@ Grubbs' test is useful for identify the outliers of a small amount one at a time
 ```{r}
 #  devtools::install_github("twitter/AnomalyDetection")
 library(AnomalyDetection)
-river <- read.csv("https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/post_data/river.csv")
+river <- read.csv("https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/river.csv")
 results <- AnomalyDetectionVec(river$nitrate, period=12, direction = 'both', plot = T)
 ```
 
@@ -84,7 +84,7 @@ Intuitively, the larger distance the more likely the point would be an outlier.
 
 ```{r}
 library(FNN)
-furniture <- read.csv("https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/post_data/furniture.csv")
+furniture <- read.csv("https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/furniture.csv")
 furniture_scaled <- data.frame(Height = scale(furniture$Height), Width = scale(furniture$Width))
 furniture_knn <- get.knn(furniture_scaled, k = 5)
 furniture_scaled$score_knn <- rowMeans(furniture_knn$nn.dist)
@@ -139,7 +139,7 @@ The isolation score $s$ of an sample $x$ is defined as $$s(x,n)= 2^{-\frac{E(h(x
 ```{r}
 # devtools::install_github("Zelazny7/isofor")
 library(isofor)
-furniture <- read.csv("https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/post_data/furniture.csv")
+furniture <- read.csv("https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/furniture.csv")
 furniture <- data.frame(Height = furniture$Height, Width = furniture$Width)
 scores <- matrix(nrow=dim(furniture)[1])
 for (ntree in c(100, 200, 500)){

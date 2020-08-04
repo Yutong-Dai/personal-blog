@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -25,7 +25,6 @@
   <url>
     <loc>/</loc>
     <lastmod>2030-06-01T13:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -39,14 +38,8 @@
   </url>
   
   <url>
-    <loc>/authors/admin/</loc>
+    <loc>/publication-type/3/</loc>
     <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication_types/3/</loc>
-    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -57,25 +50,26 @@
   <url>
     <loc>/authors/</loc>
     <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/authors/daniel-p.-robinson/</loc>
+    <loc>/author/daniel-p.-robinson/</loc>
     <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/authors/frank-e.-curtis/</loc>
+    <loc>/author/frank-e.-curtis/</loc>
     <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tag/proximal-gradient/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/publication_types/</loc>
     <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -84,118 +78,108 @@
   </url>
   
   <url>
+    <loc>/tag/second-order-method/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/subspace-acceleration/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/support-identification/</loc>
+    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/</loc>
-    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2020-08-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/proximal-gradient/</loc>
+    <loc>/author/yutong-dai/</loc>
     <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/second-order-method/</loc>
-    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/subspace-acceleration/</loc>
-    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/support-identification/</loc>
-    <lastmod>2020-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-05-01T12:37:30-04:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2020-08-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2020-05-01T12:37:30-04:00</lastmod>
+    <lastmod>2020-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/python/</loc>
+    <lastmod>2020-08-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/category/python/</loc>
+    <lastmod>2020-08-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/python-tricks-learned-from-projects/</loc>
-    <lastmod>2020-05-01T12:37:30-04:00</lastmod>
+    <lastmod>2020-08-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/python-programming/</loc>
-    <lastmod>2020-05-01T12:37:30-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/python/</loc>
-    <lastmod>2020-05-01T12:37:30-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/ie406/lp/</loc>
+    <loc>/post/lp/</loc>
     <lastmod>2019-10-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/optimization/</loc>
+    <loc>/tag/linear-programming/</loc>
     <lastmod>2019-10-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/linear-programming/</loc>
+    <loc>/category/optimization/</loc>
     <lastmod>2019-10-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/categories/visualization/</loc>
-    <lastmod>2019-07-05T15:58:50+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/visualization/</loc>
-    <lastmod>2019-07-05T15:58:50+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/chinese-clock/chinese-time/</loc>
+    <loc>/tag/visualization/</loc>
     <lastmod>2019-07-05T15:58:50+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/gdlogistic/gradient-descent-in-logistic-regression/</loc>
+    <loc>/category/visualization/</loc>
+    <lastmod>2019-07-05T15:58:50+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/chinese-time/</loc>
+    <lastmod>2019-07-05T15:58:50+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/gradient-descent-in-logistic-regression/</loc>
     <lastmod>2019-07-01T15:58:50+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/publication_types/2/</loc>
-    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>/resources/</loc>
+    <lastmod>2019-05-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/block-cooridinate-descent/</loc>
+    <loc>/publication-type/2/</loc>
     <lastmod>2019-04-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/convex-optimization/</loc>
+    <loc>/tag/block-cooridinate-descent/</loc>
     <lastmod>2019-04-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tag/convex-optimization/</loc>
+    <lastmod>2019-04-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -204,15 +188,13 @@
   </url>
   
   <url>
-    <loc>/authors/yang-weng/</loc>
+    <loc>/author/yang-weng/</loc>
     <lastmod>2019-04-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/slides/</loc>
     <lastmod>2019-02-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -221,31 +203,33 @@
   </url>
   
   <url>
-    <loc>/post/anomaly-detection/anomaly-detection/</loc>
+    <loc>/post/anomaly-detection/</loc>
     <lastmod>2019-01-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/statistics/</loc>
+    <loc>/tag/data-analysis/</loc>
     <lastmod>2019-01-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/data-analysis/</loc>
+    <loc>/category/statistics/</loc>
     <lastmod>2019-01-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/post/decison-tree-path/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</loc>
+    <loc>/post/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/randomforest/</loc>
+    <loc>/category/python-programming/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tag/randomforest/</loc>
+    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -254,27 +238,28 @@
   </url>
   
   <url>
-    <loc>/tags/cnn/</loc>
-    <lastmod>2017-12-10T00:00:00-05:00</lastmod>
-    <priority>0</priority>
+    <loc>/terms/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/deep-learning/</loc>
+    <loc>/tag/cnn/</loc>
     <lastmod>2017-12-10T00:00:00-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/lstm/</loc>
+    <loc>/tag/deep-learning/</loc>
     <lastmod>2017-12-10T00:00:00-05:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tag/lstm/</loc>
+    <lastmod>2017-12-10T00:00:00-05:00</lastmod>
   </url>
   
   <url>
     <loc>/project/</loc>
     <lastmod>2017-12-10T00:00:00-05:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -293,18 +278,17 @@
   </url>
   
   <url>
-    <loc>/post/powell/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</loc>
+    <loc>/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</loc>
     <lastmod>2016-11-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/powell-example/</loc>
+    <loc>/tag/powell-example/</loc>
     <lastmod>2016-11-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/resources/</loc>
+    <loc>/author/</loc>
   </url>
   
 </urlset>

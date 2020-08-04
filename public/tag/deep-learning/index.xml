@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deep Learning | Dai, Yutong/ 戴宇童</title>
+    <link>/tag/deep-learning/</link>
+      <atom:link href="/tag/deep-learning/index.xml" rel="self" type="application/rss+xml" />
+    <description>Deep Learning</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Sun, 10 Dec 2017 00:00:00 -0500</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Deep Learning</title>
+      <link>/tag/deep-learning/</link>
+    </image>
+    
+    <item>
+      <title>Show and Tell: A Neural Image Caption Generator</title>
+      <link>/project/show-and-tell/</link>
+      <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
+      <guid>/project/show-and-tell/</guid>
+      <description>&lt;p&gt;This is the deep learning course final project trying to reporduce the results reported in the paper, 
+&lt;a href=&#34;https://arxiv.org/pdf/1411.4555.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Show and Tell: A Neural Image Caption Generator&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The model is trained on the 
+&lt;a href=&#34;http://cocodataset.org/#home&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MS coco2014 dataset&lt;/a&gt;. Our final result looks like&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./caption-demo.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;For code, UI, and report  please click 
+&lt;a href=&#34;https://github.com/Rothdyt/Projects/tree/master/Show-and-tell&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

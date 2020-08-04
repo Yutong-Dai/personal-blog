@@ -2,7 +2,7 @@
 title: "Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization"
 
 authors:
-- admin
+- Yutong Dai
 - Yang Weng
 
 date: "2019-04-01"

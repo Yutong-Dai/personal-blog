@@ -1,89 +1,1156 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Dai, Yutong / 戴宇童</title>
+    <title>Posts | Dai, Yutong/ 戴宇童</title>
     <link>/post/</link>
-    <description>Recent content in Posts on Dai, Yutong / 戴宇童</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>Posts</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Posts</title>
+      <link>/post/</link>
+    </image>
     
     <item>
       <title>Python Tricks Learned From Projects</title>
       <link>/post/python-tricks-learned-from-projects/</link>
       <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
-      
       <guid>/post/python-tricks-learned-from-projects/</guid>
-      <description>Table of Contents HAHAHUGOSHORTCODE-TOC0-HBHB
-Show all submodules I need to import a particular function formulate from a file in the directory &amp;lt;path-to-the-package&amp;gt;/coinor/dippy/examples/milp/milp_func. It&amp;rsquo;s clear that I need to import it from the submodule coinor.dippy. But how to do it exactly? Use following commands, which list all submodules you can import.
-import pkgutil import coinor.dippy package=coinor.dippy for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__, prefix=package.__name__+&#39;.&#39;, onerror=lambda x: None): print(modname)  Relavant outputs are</description>
+      <description>&lt;h1 id=&#34;show-all-submodules&#34;&gt;Show all submodules&lt;/h1&gt;
+&lt;p&gt;I need to import a particular function &lt;code&gt;formulate&lt;/code&gt; from a file in the directory &lt;code&gt;&amp;lt;path-to-the-package&amp;gt;/coinor/dippy/examples/milp/milp_func&lt;/code&gt;.
+It&amp;rsquo;s clear that I need to import it from the submodule &lt;code&gt;coinor.dippy&lt;/code&gt;. But how to do it exactly?
+Use following commands, which list all submodules you can import.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import pkgutil
+import coinor.dippy
+package=coinor.dippy
+for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
+                                                      prefix=package.__name__+&#39;.&#39;,
+                                                      onerror=lambda x: None):
+    print(modname)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Relavant outputs are&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;.....
+coinor.dippy.examples.milp
+coinor.dippy.examples.milp.__main__
+coinor.dippy.examples.milp.milp_func
+.....
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then I can simply use&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from coinor.dippy.examples.milp.milp_func import formulate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;using-the-right-kernel-for-jupyter-notebook&#34;&gt;Using the right kernel for Jupyter Notebook&lt;/h1&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# create virtual env with python 3.7.7, whose name is cuppy
+conda create -n cuppy numpy scipy pandas notebook matplotlib python=3.7.7 
+# activate cuppy
+conda activate cuppy
+# I am using zsh, you may change to bash
+conda init zsh 
+# activate virtual env
+cond activate cuppy
+# point this verison of Python to jupyter
+ipython kernel install --name &amp;quot;cuppy&amp;quot; --user
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;running-jupyter-notebook-from-the-remote-server&#34;&gt;Running Jupyter Notebook from the remote server&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Reference&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://ljvmiranda921.github.io/notebook/2018/01/31/running-a-jupyter-notebook/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;set up jupyter notebook on login nodes&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://benjlindsay.com/posts/running-jupyter-lab-remotely#running-on-a-compute-node&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;set up jupyter notebook on computation nodes&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;On the server side:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Create following two functions in the &lt;code&gt;.bashrc&lt;/code&gt; and reload it using &lt;code&gt;source .bashrc&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;function Inode(){
+  # provide the computation node name; default is polyp2
+  local nodename=&amp;quot;${1:-polyp2}&amp;quot;
+  echo &amp;quot;starting an interactive section at $nodename&amp;quot;
+  # start an interactive session in the given node
+  qsub -l nodes=$nodename:ppn=4 -l walltime=1:00:00 -l mem=10gb,vmem=10gb -I
+}
+  
+function jpt(){
+  # provide the port; default is 1234
+  local port=&amp;quot;${1:-1234}&amp;quot;
+  echo &amp;quot;open jupyter notebook at $(hostname):$port&amp;quot;
+  # Fires-up a Jupyter notebook by supplying a specific port and ip
+  jupyter notebook --no-browser --port=$port --ip=$(hostname)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the server side&amp;rsquo;s terminal, if&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If you want to start the jupyter notebook in the login node, just call &lt;code&gt;jpt&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;If you want to start the jupyter notebook in the computation node, call &lt;code&gt;Inode&lt;/code&gt; first and then when you are prompted to the computation node, then call &lt;code&gt;jpt&lt;/code&gt;. For example, if the comutation node name is &lt;code&gt;polyp3&lt;/code&gt;, then call &lt;code&gt;Inode polyp3&lt;/code&gt; and then call &lt;code&gt;jpt 1234&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;On the local side:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Create following two functions in the &lt;code&gt;.bashrc&lt;/code&gt; and reload it using &lt;code&gt;source .bashrc&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;function jptt(){
+    local localport=&amp;quot;${1:-2234}&amp;quot;
+    local servername=&amp;quot;${2:-polyp1}&amp;quot;
+    local serverport=&amp;quot;${3:-1234}&amp;quot;
+    # Forwards port $1 into port $3 and listens to it
+    ssh -N -f -L localhost:$localport:$servername:$serverport yud319@polyps.ie.lehigh.edu
+}
+function stopjpt(){
+  local localport=&amp;quot;${1:-2234}&amp;quot;
+  lsof -i tcp:$localport |awk &#39;NR &amp;gt; 1 {print $2}&#39; | xargs kill -9
+  echo &amp;quot;Kill port $localport&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Call &lt;code&gt;jptt&lt;/code&gt; on the local terminal, which will listen to the jupyter notebook host on the server&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After finish the job, call &lt;code&gt;stopjpt&lt;/code&gt;, which will free the local port.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>Introduction to Mathematical Programming</title>
-      <link>/post/ie406/lp/</link>
+      <link>/post/lp/</link>
       <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/ie406/lp/</guid>
-      <description> Some useful notes Farkas’s Lemma, Strong Duality and Criss-Cross Algorithm   </description>
+      <guid>/post/lp/</guid>
+      <description>
+
+
+&lt;div id=&#34;some-useful-notes&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Some useful notes&lt;/h1&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;./Frakas-Duality-Crisscross.pdf&#34;&gt;Farkas’s Lemma, Strong Duality and Criss-Cross Algorithm&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
       <title>中国传统计时</title>
-      <link>/post/chinese-clock/chinese-time/</link>
+      <link>/post/chinese-time/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/chinese-clock/chinese-time/</guid>
-      <description>中国传统计时单位 古时一天分12个时辰，采用地支作为时辰名称，分为
-&#39;子&#39;, &#39;丑&#39;, &#39;寅&#39;, &#39;卯&#39; &#39;辰&#39;, &#39;巳&#39;, &#39;午&#39;, &#39;未&#39; &#39;申&#39;, &#39;酉&#39;, &#39;戌&#39;, &#39;亥&#39;  时辰的起点是午夜，即子初。
-点击下图色块便可查看时间对应。 
-附录
- 参考文献:  国学网 新浪博客 博主知书少年果麦麦  用于绘图的Python代码  # using following code in jupyter notebook import plotly import plotly.graph_objs as go plotly.offline.init_notebook_mode(connected=True) colorPlate1 = [ &#39;#ffb3a7&#39;, &#39;#ffc773&#39;, &#39;#ffa400&#39;, &#39;#c9dd22&#39;, &#39;#afdd22&#39;, &#39;#cca4e3&#39;, &#39;#b0a4e3&#39;, &#39;#ffc64b&#39;, &#39;#ffb61e&#39;, &#39;#758a99&#39;, &#39;#6b6882&#39;, &#39;#ffb3a7&#39;, &#39;#f47983&#39;, &#39;#ffc773&#39;, &#39;#ffa400&#39;, &#39;#c9dd22&#39;, &#39;#afdd22&#39;, &#39;#cca4e3&#39;, &#39;#b0a4e3&#39;, &#39;#ffc64b&#39;, &#39;#ffb61e&#39;, &#39;#758a99&#39;, &#39;#6b6882&#39;, &#39;#f47983&#39; ] colorPlate2 = [&#39;#ff4e20&#39;, &#39;#ff7500&#39;, &#39;#789262&#39;, &#39;#8d4bbb&#39;, &#39;#e9bb1d&#39;,&#39;#50616d&#39;] * 2 theta_marker = [&amp;quot;{}:00&amp;quot;.</description>
+      <guid>/post/chinese-time/</guid>
+      <description>&lt;h1 id=&#34;中国传统计时单位&#34;&gt;中国传统计时单位&lt;/h1&gt;
+&lt;p&gt;古时一天分12个时辰，采用地支作为时辰名称，分为&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&#39;子&#39;, &#39;丑&#39;, &#39;寅&#39;, &#39;卯&#39;
+&#39;辰&#39;, &#39;巳&#39;, &#39;午&#39;, &#39;未&#39; 
+&#39;申&#39;, &#39;酉&#39;, &#39;戌&#39;, &#39;亥&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;时辰的起点是午夜，即子初。&lt;/p&gt;
+&lt;p&gt;点击下图色块便可查看时间对应。&lt;/p&gt;
+&lt;iframe
+      src=&#34;https://plot.ly/~Roth/2.embed&#34;
+      width=&#34;100%&#34;
+      height=&#34;600px&#34;
+      style=&#34;border:none;&#34;&gt;
+&lt;/iframe&gt;
+&lt;p&gt;&lt;strong&gt;附录&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;参考文献:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;http://www.guoxue.com/?p=4025&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;国学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://weibo.com/6421571119/HBrUbvUnQ?from=page_1005056421571119_profile&amp;amp;wvr=6&amp;amp;mod=weibotime&amp;amp;type=comment#_rnd1562428488868&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;新浪博客 博主知书少年果麦麦&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;用于绘图的Python代码&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# using following code in jupyter notebook
+import plotly
+import plotly.graph_objs as go
+
+plotly.offline.init_notebook_mode(connected=True)
+colorPlate1 = [
+    &#39;#ffb3a7&#39;, 
+    &#39;#ffc773&#39;, &#39;#ffa400&#39;,
+    &#39;#c9dd22&#39;, &#39;#afdd22&#39;,
+    &#39;#cca4e3&#39;, &#39;#b0a4e3&#39;,
+    &#39;#ffc64b&#39;, &#39;#ffb61e&#39;,
+    &#39;#758a99&#39;, &#39;#6b6882&#39;,
+    &#39;#ffb3a7&#39;, &#39;#f47983&#39;,
+    &#39;#ffc773&#39;, &#39;#ffa400&#39;,
+    &#39;#c9dd22&#39;, &#39;#afdd22&#39;,
+    &#39;#cca4e3&#39;, &#39;#b0a4e3&#39;,
+    &#39;#ffc64b&#39;, &#39;#ffb61e&#39;,
+    &#39;#758a99&#39;, &#39;#6b6882&#39;,
+    &#39;#f47983&#39;
+]
+colorPlate2 = [&#39;#ff4e20&#39;, &#39;#ff7500&#39;, &#39;#789262&#39;, &#39;#8d4bbb&#39;, &#39;#e9bb1d&#39;,&#39;#50616d&#39;] * 2
+theta_marker = [&amp;quot;{}:00&amp;quot;.format(i) for i in range(24)]
+timeStamp = [
+&#39;子正&#39;, &#39;丑初&#39;, &#39;丑正&#39;, &#39;寅初&#39;, &#39;寅正&#39;, 
+&#39;卯初&#39;, &#39;卯正&#39;, &#39;辰初&#39;, &#39;辰正&#39;, &#39;巳初&#39;, &#39;巳正&#39;,  
+&#39;午初&#39;, &#39;午正&#39;, &#39;未初&#39;, &#39;未正&#39;, &#39;申初&#39;, &#39;申正&#39;,  
+&#39;酉初&#39;, &#39;酉正&#39;, &#39;戌初&#39;, &#39;戌正&#39;, &#39;亥初&#39;, &#39;亥正&#39;, &#39;子初&#39;
+]
+timeStampMain = [
+&#39;子, 名曰「困敦」&amp;lt;br&amp;gt;混沌万物之初萌，藏黄泉之下。&amp;lt;br&amp;gt; 子是兹的意思，这时候万物刚刚开始滋生和繁殖。&#39;, 
+&#39;丑, 名曰「赤奋若」&amp;lt;br&amp;gt;气运奋迅而起，万物无不若其性。&amp;lt;br&amp;gt;形容万物继续萌发，系于生长。&#39;, 
+&#39;寅, 名曰「摄提格」&amp;lt;br&amp;gt;万物承阳而起。&amp;lt;br&amp;gt;植物芽刚刚吐露，要吸收阳气生长，然后全部露出地面。&#39;,  
+&#39;卯, 名曰「单阏」&amp;lt;br&amp;gt;阳气推万物而起. &amp;lt;br&amp;gt;卯，就是茂，茂盛的样子。这个时候，万物生长滋生繁茂。&#39;, 
+&#39;辰, 名曰「执徐」&amp;lt;br&amp;gt;伏蛰之物，而敷舒出。&amp;lt;br&amp;gt;万物都震动而生长，草木伸舒，萌芽而出。&#39;, 
+&#39;巳, 名曰「大荒落&amp;lt;br&amp;gt;万物炽盛而出，霍然落之。&amp;lt;br&amp;gt;万物到了这个时候，都全部长起来了，聚集在一起。炽盛而有光泽的样子。&#39;,  
+&#39;午, 名曰「敦牂」&amp;lt;br&amp;gt;万物壮盛也。&amp;lt;br&amp;gt;万物都达到盛大壮茂，枝柯密布的状态。&#39;,
+&#39;未, 名曰「协洽」&amp;lt;br&amp;gt;阴阳和合，万物化生。&amp;lt;br&amp;gt;未，就是味的意思。当事物成熟的时候，都会发出气味。这时候阴气开始升起，万物稍微衰败。&#39; ,
+&#39;申, 名曰「涒滩」&amp;lt;br&amp;gt;万物吐秀，倾垂也。&amp;lt;br&amp;gt;万物的身体都已成就，倾吐了最后的繁盛，引向衰败。&#39;,  
+&#39;酉, 名曰「作噩」&amp;lt;br&amp;gt;万物皆芒枝起。 &amp;lt;br&amp;gt;万物衰老到极至而成熟。&#39;,
+&#39;戌, 名曰「阉茂」&amp;lt;br&amp;gt;万物皆蔽冒也。&amp;lt;br&amp;gt;戌，灭，杀的意思。意思是到了这时候，万物都已经衰灭了。&#39;, 
+&#39;亥, 名曰「大渊献」&amp;lt;br&amp;gt;万物于天，深盖藏也。&amp;lt;br&amp;gt;亥，核的意思。万物都进入核阂里，意味着阴气劾杀了万物，等待下一个初萌。&#39;
+]
+
+def sectorChild(name, location, radius,  fillcolor=&#39;#ff4e20&#39;):
+    r = [0] * 24
+    r[location % 24] = radius
+    r[(location + 1) % 24] = radius
+    obj = go.Scatterpolar(
+      name = name,
+      r = r,
+      theta = theta_marker,
+      fill = &amp;quot;toself&amp;quot;,
+      fillcolor = fillcolor,
+      line =  {&amp;quot;color&amp;quot;:&#39;black&#39;}
+    )
+    return obj
+
+def sectorParent(name, location, radius,  fillcolor=&#39;black&#39;):
+    r = [0] * 24
+    if location == 0:
+        r[0] = r[1] = r[23] = radius
+    else:
+        r[location % 24] = radius
+        r[(location + 1) % 24] = radius
+        r[(location + 2) % 24] = radius
+    obj = go.Scatterpolar(
+      name = name,
+      r = r,
+      theta = theta_marker,
+      fill = &amp;quot;toself&amp;quot;,
+      fillcolor = fillcolor,
+      line =  {&amp;quot;color&amp;quot;:&#39;black&#39;},
+      hoverinfo = &#39;text&#39;,
+      hoverlabel = {&#39;align&#39;:&#39;left&#39;}
+    )
+    return obj
+
+
+
+trace = [sectorChild(i, j, 5, k) for (i,j,k) in zip(timeStamp, range(24), colorPlate1)]
+trace += [sectorParent(timeStampMain[0], 0, 3, colorPlate2[0])]
+trace += [sectorParent(i, j, 3, k) for (i,j, k) in zip(timeStampMain[1:], range(1, 23, 2), colorPlate2[1:]) ]
+
+layout = go.Layout(
+    polar = dict(
+      radialaxis = dict(
+        visible = False
+      ),
+      angularaxis = dict(
+        direction = &amp;quot;clockwise&amp;quot;,
+        visible = True,
+        linewidth = 3
+      )
+    ),
+    showlegend = False
+)
+
+
+plotly.offline.iplot({
+    &amp;quot;data&amp;quot;: trace,
+    &amp;quot;layout&amp;quot;: layout
+})
+&lt;/code&gt;&lt;/pre&gt;
+</description>
     </item>
     
     <item>
       <title>Gradient Descent in Logistic Regression</title>
-      <link>/post/gdlogistic/gradient-descent-in-logistic-regression/</link>
+      <link>/post/gradient-descent-in-logistic-regression/</link>
       <pubDate>Mon, 01 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/gdlogistic/gradient-descent-in-logistic-regression/</guid>
-      <description>Table of Contents HAHAHUGOSHORTCODE-TOC0-HBHB
-Problem Formulation There are commonly two ways of formulating the logistic regression problem, depending on the way we label the response variable $y$. Here we focus on the first formulation and defer the second formulation on the appendix.
-First Formulation:
-Consider restrict $y$ to {${-1,1}$}. Then we have $$ \begin{aligned} &amp;amp;\mathbb{P}(y=1|z)=\sigma(z)=\frac{1}{1 + e^{-z}}
-&amp;amp;\mathbb{P}(y=-1|z)=\sigma(z)=\frac{1}{1 + e^z}, \end{aligned} $$ which can be compactly written as $$ \mathbb{P}(y|z)=\sigma(zy).</description>
+      <guid>/post/gradient-descent-in-logistic-regression/</guid>
+      <description>&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href=&#34;#problem-formulation&#34;&gt;Problem Formulation&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#motivating-example&#34;&gt;Motivating Example&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#analysis-why-this-happens&#34;&gt;Analysis: why this happens?&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#questions&#34;&gt;Questions&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#appendix&#34;&gt;Appendix&lt;/a&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;
+&lt;h1 id=&#34;problem-formulation&#34;&gt;Problem Formulation&lt;/h1&gt;
+&lt;p&gt;There are commonly two ways of formulating the logistic regression problem, depending on the way we label the response variable $y$. Here we focus on the first formulation and defer the second formulation on the appendix.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;First Formulation:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Consider restrict $y$ to {${-1,1}$}. Then we have
+$$
+\begin{aligned}
+&amp;amp;\mathbb{P}(y=1|z)=\sigma(z)=\frac{1}{1 + e^{-z}}\&lt;br&gt;
+&amp;amp;\mathbb{P}(y=-1|z)=\sigma(z)=\frac{1}{1 + e^z},
+\end{aligned}
+$$
+which can be compactly written as
+$$
+\mathbb{P}(y|z)=\sigma(zy).
+$$
+If we consider the data $({x_i,y_i})_{i=1}^N$ and we want to use the Likelihood Principle to fit the Logistic Regression, then we would like to maximize the following loss function,
+$$
+\begin{aligned}
+&amp;amp;   L(\beta_0,\beta) = \prod_{i=1}^N \mathbb{P}(y_i|z_i)\&lt;br&gt;
+&amp;amp; z_i =\beta_0+\beta^Tx_i.
+\end{aligned}
+$$
+If we use the first formulation, then it is equivalent to minimize the log-negative of $L(\beta_0,\beta)$,
+$$
+\begin{aligned}
+\min_{\beta_0,\beta}l(\beta_0,\beta)=\frac{1}{N}\sum_{i=1}^N\log(1+e^{-y_iz_i}).
+\end{aligned}
+$$
+From now on,  for the sake of simplicity, we drop the intercept term $\beta_0$.&lt;/p&gt;
+&lt;h1 id=&#34;motivating-example&#34;&gt;Motivating Example&lt;/h1&gt;
+&lt;p&gt;Consider two simulated datasets:&lt;/p&gt;
+&lt;p&gt;Dataset 1:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;$x_1$&lt;/th&gt;
+&lt;th&gt;$x_2$&lt;/th&gt;
+&lt;th&gt;$y$&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0.3&lt;/td&gt;
+&lt;td&gt;0.9&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0.5&lt;/td&gt;
+&lt;td&gt;1.5&lt;/td&gt;
+&lt;td&gt;-1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Dataset 2:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;$x_1$&lt;/th&gt;
+&lt;th&gt;$x_2$&lt;/th&gt;
+&lt;th&gt;$y$&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-1&lt;/td&gt;
+&lt;td&gt;-1&lt;/td&gt;
+&lt;td&gt;-1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Some Analysis:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The objective function $l(\beta)$ is strictly convex by looking at its Hessian, which is positive defined. However, it is not strongly convex.&lt;/li&gt;
+&lt;li&gt;For given Data set, the Hessian is upper bounded by $(\sum_{i=1}^N|x_i|^2)I$ (see Appendix).&lt;/li&gt;
+&lt;li&gt;The stepsize can be chosen as $\alpha = \frac{1}{\sum_{i=1}^N|x_i|^2}$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Applying the gradient descent with constant stepsize $\frac{1}{L}$ on each dataset for 1000 steps, then we obtain the estimations as follows.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Dataset&lt;/th&gt;
+&lt;th&gt;$\beta_1$&lt;/th&gt;
+&lt;th&gt;$\beta_2$&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;-0.12058225&lt;/td&gt;
+&lt;td&gt;-0.36174676&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;3.59370507&lt;/td&gt;
+&lt;td&gt;3.04825501&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Also we plot out following figures to check the convergence. The top two figures describe the algorithm&amp;rsquo;s performance on the dataset 1 while the bottom two is for the  dataset 2.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./LogisticRegression.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fig1: Apply GD with the constant stepsize on two different datasets. The blue curves depicts how the norm of gradient at iterates change while the red curves show the change of the function value in each iteration.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;analysis-why-this-happens&#34;&gt;Analysis: why this happens?&lt;/h1&gt;
+&lt;p&gt;First, if we want to minimize $f(\beta)=\log(1 + \exp(-\beta))$ using gradient descent with constant stepsize $\frac{1}{L}$, then we will facing following issues. Here we assume $\beta \in \mathbb{R}$.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;The global minimal is not attainable, i.e., $+\infty$, though we can have $\nabla f(\beta^k)\rightarrow 0$, which means $\beta \rightarrow +\infty$, hence the iterates diverge.&lt;/li&gt;
+&lt;li&gt;Indeed,  the ${f(\beta^k)}$ converges to $f^*=0$ by as it monotonously decreasing and lower bounded by $0$.&lt;/li&gt;
+&lt;li&gt;The worst-case iteration complexity is $\mathcal{O}(\frac{1}{k})$, indicating a sublinear convergence rate.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Now, let&amp;rsquo;s back to the example. The figure 2 shows that the first dataset and second dataset, which correspond to the &lt;strong&gt;non-separable&lt;/strong&gt; and &lt;strong&gt;separable&lt;/strong&gt; case respectively.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./LogisticSeparableNonseparable.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fig2: (Left) First dataset. (Right) Second dataset. The fitted separating line is derived by $y=-\frac{\beta_1}{\beta_2}x$.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We also plot out the norm of iterates at each iteration in figure 3.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./LogisticRegression-iterates.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fig3: The top figure shows the norm of iterates for the first dataset while the bottom one shows case for the second dataset.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We can see that for non-separable case, the norm of iterates are bounded while the latter goes to infinity (if we increase the number of iterations).&lt;/p&gt;
+&lt;p&gt;In non-separable case, ${\beta^k}$ &lt;em&gt;seems&lt;/em&gt;  to stay in &amp;ldquo;strongly convex&amp;rdquo; region while in separable case, ${\beta^k}$ keeps approaching the flatten region, so you can easily say a sharp decreasing in convergence speed. The following observations can be verified by figure 4 (1-dimensional case) and figure 5 (2-dimensional case).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./LogisticRegression-1dcontour.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fig4:  (Left) Non-separable dataset  ${(x_1=1, y_1=1), (x_2=2, y_2=-1)}$.  The green dot line is $y=x^2$. The objective function (blue line) preserves the strong convexity in a certain range and the minimal stays in this range. The red point is the start point $x_0$.  (Right). Separable dataset ${(x_1=1, y_1=1), (x_2=-1, y_2=-1)}$. Although the  objective function is endowed with the strong convexity property in a certain range, however the global minimal is outside of this range.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;./LogisticRegression-2dcontour.png&#34; alt=&#34;LogisticRegression-2dcontour&#34;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fig5:  Dataset 1 is shown in the top 2 pictures with the right one zooming into a particular range. Dataset 2 is shown in the bottom pictures.  The blue dots trace the progression of iterates.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&#34;questions&#34;&gt;Questions&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Why the separability would cause such a difference? From the Fig4 and Fig5, we know data as &lt;em&gt;parameters&lt;/em&gt; can influence the shape of the objective function a lot.  Given the data set,  can we predict the behavior of the performance of gradient descent with constant stepsize, i.e., linear convergence rate or sublinear convergence rate? Can we extend our conclusion to higher dimension?&lt;/li&gt;
+&lt;li&gt;In real world application, it&amp;rsquo;s likely that the data is semi-separable, i.e., most data points can be split into two groups with a few exceptions. How&amp;rsquo;s that influence the performance of the algorithm?&lt;/li&gt;
+&lt;li&gt;Will second formulation (see below) also encounter the similar issue? My guess is yes.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;appendix&#34;&gt;Appendix&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Second Formulation of Logistic Regression&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Consider restrict $y$ to ${0,1}$. Then we have
+$$
+\begin{aligned}
+&amp;amp;\mathbb{P}(y=1|z)=\sigma(z)=\frac{1}{1 + e^{-z}}\&lt;br&gt;
+&amp;amp;\mathbb{P}(y=0|z)=\sigma(z)=\frac{1}{1 + e^z},
+\end{aligned}
+$$
+which can be compactly written as
+$$
+\mathbb{P}(y|z)=\sigma(z)^y(1-\sigma(z))^{1-y}.
+$$&lt;/p&gt;
+&lt;p&gt;If we use the second formulation, then maximizing the likelihood  is equivalent to
+$$
+\begin{aligned}
+\min_{\beta_0,\beta}l(\beta_0,\beta)=\frac{1}{N}\sum_{i=1}^N[-y_iz_i+\log(1+e^{z_i})].
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Derivation of the gradient and Hessian of the loss function (first formualtion)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Consider $f(\beta)=\log (1 + \exp(-y\beta^Tx)$, then we have
+$$
+\begin{aligned}
+&amp;amp;\nabla f(\beta) = \frac{1}{1 + \exp(y\beta^Tx)}(-yx)\&lt;br&gt;
+&amp;amp;\nabla^2 f(\beta) = (yx)\frac{\exp(y\beta^Tx)}{1 + \exp(y\beta^Tx)}(yx^T),
+\end{aligned}
+$$
+which implies
+$$
+\begin{aligned}
+&amp;amp; \nabla l(\beta)=\frac{1}{N}\sum_{i=1}^N \frac{1}{1 + \exp(y_i\beta^Tx_i)}(-y_ix_i)\&lt;br&gt;
+&amp;amp; \nabla^2 l(\beta)=\frac{1}{N}\sum_{i=1}^N(y_ix_i)\frac{\exp(y\beta^Tx_i)}{(1 + \exp(y\beta^Tx_i))^2}(y_ix_i^T)=\frac{1}{N}XDX^T,
+\end{aligned}
+$$
+where $X=[x_1,\cdots,x_n]$ , $D=\text{diag}({y_1^2\sigma_1(1-\sigma_1),\cdots,y_n^2\sigma_n(1-\sigma_n)})$ , and $\sigma_i =\frac{\exp(y\beta^Tx_i)}{1 + \exp(y\beta^Tx_i)} $.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Lecture notes 9 and 10 presented on this 
+&lt;a href=&#34;https://wiki.illinois.edu/wiki/display/ie510/IE&amp;#43;510&amp;#43;Applied&amp;#43;Nonlinear&amp;#43;Programming&amp;#43;Home&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;course website.&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The code for generating graphs can be found in 
+&lt;a href=&#34;https://github.com/Rothdyt/all_of_optimization/blob/master/_draft/GradientMethod/pycode/LogisticRegression.py&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;my git repo&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
     </item>
     
     <item>
       <title>Anomaly Detection</title>
-      <link>/post/anomaly-detection/anomaly-detection/</link>
+      <link>/post/anomaly-detection/</link>
       <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/anomaly-detection/anomaly-detection/</guid>
-      <description>Point Anomaly Detection - Grubbs’ test Grubbs’ test1 is commonly used technique to detect an outlier in univariate problem, where normality assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.
-The hypothesis test is defined as
-\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\] For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as</description>
+      <guid>/post/anomaly-detection/</guid>
+      <description>
+
+
+&lt;div id=&#34;point-anomaly-detection---grubbs-test&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Point Anomaly Detection - Grubbs&#39; test&lt;/h1&gt;
+&lt;p&gt;Grubbs&#39; test&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; is commonly used technique to detect an outlier in &lt;strong&gt;univariate&lt;/strong&gt; problem, where &lt;strong&gt;normality&lt;/strong&gt; assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.&lt;/p&gt;
+&lt;p&gt;The hypothesis test is defined as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\]&lt;/span&gt; For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
+G = \frac{\max_i |X_i - \bar X|}{s},
+\]&lt;/span&gt; where the &lt;span class=&#34;math inline&#34;&gt;\(\bar X\)&lt;/span&gt; is the sample mean and &lt;span class=&#34;math inline&#34;&gt;\(s\)&lt;/span&gt; is the sample deviation.&lt;/p&gt;
+&lt;p&gt;Let&#39;s look at one simulated example.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(123)
+simulated_data &amp;lt;- rnorm(100, 0, 1)
+simulated_data_with_outliers &amp;lt;- c(simulated_data, c(3.5, -3.7))
+# normality check
+shapiro.test(simulated_data_with_outliers)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Shapiro-Wilk normality test
+## 
+## data:  simulated_data_with_outliers
+## W = 0.9804, p-value = 0.1344&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Shapiro-Wilk normality test impiles the data is normally distributed. Now, let&#39;s performe the grubbs&#39; test.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(outliers)
+grubbs.test(simulated_data_with_outliers, two.sided = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Grubbs test for one outlier
+## 
+## data:  simulated_data_with_outliers
+## G = 3.65380, U = 0.86651, p-value = 0.01626
+## alternative hypothesis: lowest value -3.7 is an outlier&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The test result detecs the lowest value as an outlier.&lt;/p&gt;
+&lt;p&gt;Let&#39;s remove the -3.7 and performe the test again.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;grubbs.test(head(simulated_data_with_outliers,101), two.sided = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Grubbs test for one outlier
+## 
+## data:  head(simulated_data_with_outliers, 101)
+## G = 3.48190, U = 0.87755, p-value = 0.03378
+## alternative hypothesis: highest value 3.5 is an outlier&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, let&#39;s remove two outliers altogether.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;grubbs.test(head(simulated_data_with_outliers,100), two.sided = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+##  Grubbs test for one outlier
+## 
+## data:  head(simulated_data_with_outliers, 100)
+## G = 2.62880, U = 0.92949, p-value = 0.7584
+## alternative hypothesis: lowest value -2.30916887564081 is an outlier&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This impiles there are no outliers.&lt;/p&gt;
+&lt;p&gt;Grubbs&#39; test is useful for identify the outliers of a small amount one at a time, but not suitable to detect a group of outliers.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;collective-anomaly-detection&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Collective Anomaly Detection&lt;/h1&gt;
+&lt;div id=&#34;anomaly-in-timeseries---seasonal-hybrid-esd-algorithm&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Anomaly in timeseries - Seasonal Hybrid ESD algorithm&lt;/h2&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  devtools::install_github(&amp;quot;twitter/AnomalyDetection&amp;quot;)
+library(AnomalyDetection)
+river &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/river.csv&amp;quot;)
+results &amp;lt;- AnomalyDetectionVec(river$nitrate, period=12, direction = &amp;#39;both&amp;#39;, plot = T)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;results$plot&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;distance-based-anomaly-detection&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Distance-based Anomaly Detection&lt;/h2&gt;
+&lt;div id=&#34;global-anomaly---largest-distance&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Global Anomaly - Largest Distance&lt;/h3&gt;
+&lt;p&gt;Intuitively, the larger distance the more likely the point would be an outlier.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(FNN)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: package &amp;#39;FNN&amp;#39; was built under R version 3.4.4&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;furniture &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/furniture.csv&amp;quot;)
+furniture_scaled &amp;lt;- data.frame(Height = scale(furniture$Height), Width = scale(furniture$Width))
+furniture_knn &amp;lt;- get.knn(furniture_scaled, k = 5)
+furniture_scaled$score_knn &amp;lt;- rowMeans(furniture_knn$nn.dist)
+largest_idx &amp;lt;- which.max(furniture_scaled$score_knn)
+plot(furniture_scaled$Height, furniture_scaled$Width, cex=sqrt(furniture_scaled$score_knn), pch=20)
+points(furniture_scaled$Height[largest_idx], furniture_scaled$Width[largest_idx], col=&amp;quot;red&amp;quot;, pch=20)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;local-anomaly---lof&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Local Anomaly - LOF&lt;/h3&gt;
+&lt;p&gt;kNN is useful for finding global anomalies, but is less able to surface local outliers.&lt;/p&gt;
+&lt;p&gt;LOF is a ratio of densities:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LOF &amp;gt; 1 more likely to be anomalous LOF ≤ 1 less likely to be anomalous&lt;/li&gt;
+&lt;li&gt;Large LOF values indicate more isolated points&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(dbscan)
+furniture_lof &amp;lt;- furniture[,2:3]
+furniture_lof$score_lof &amp;lt;- lof(scale(furniture_lof), k=5)
+largest_idx &amp;lt;- which.max(furniture_lof$score_lof)
+plot(furniture_lof$Height, furniture_lof$Width, cex=sqrt(furniture_lof$score_lof), pch=20)
+points(furniture_lof$Height[largest_idx], furniture_lof$Width[largest_idx], col=&amp;quot;red&amp;quot;, pch=20)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;It&#39;s clear that, lof successfuly detects the local outlier.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;isolation-forest&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Isolation Forest&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Isolation Forest is built on the basis of decision trees;&lt;/li&gt;
+&lt;li&gt;To grow a decision tree, at each node, a feature and a corresponding cutoff value are randomly selected;&lt;/li&gt;
+&lt;li&gt;Intuitively, outliers are less frequent than regular observations and are different from them in terms of values, so outliers should be identified closer to the root of the tree with fewer splits. We use isolation score to characterize this.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;isolation-score&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Isolation Score&lt;/h2&gt;
+&lt;p&gt;We need some quatity to define the isolation score&lt;a href=&#34;#fn2&#34; class=&#34;footnoteRef&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Path Length&lt;/strong&gt;: &lt;span class=&#34;math inline&#34;&gt;\(h(x)\)&lt;/span&gt; of a point &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; is measured by the number of edges &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; traverses an iTree from the root node until the traversal is terminated at an external node.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Normalizing constant&lt;/strong&gt; &lt;span class=&#34;math display&#34;&gt;\[c(n) = 2H(n − 1) − (2(n − 1)/n)\]&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; is the number of samples to grow a tree and &lt;span class=&#34;math inline&#34;&gt;\(H(i)\)&lt;/span&gt; is the harmonic number and it can be estimated by &lt;span class=&#34;math inline&#34;&gt;\(ln(i) + 0.5772156649\)&lt;/span&gt; (Euler’s constant).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The isolation score &lt;span class=&#34;math inline&#34;&gt;\(s\)&lt;/span&gt; of an sample &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; is defined as &lt;span class=&#34;math display&#34;&gt;\[s(x,n)= 2^{-\frac{E(h(x))}{c(n)}},\]&lt;/span&gt; where the &lt;span class=&#34;math inline&#34;&gt;\(E()\)&lt;/span&gt; is the expectation of &lt;span class=&#34;math inline&#34;&gt;\(h(x)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Interpreting the isolation score:&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;Scores between 0 and 1&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Scores near 1 indicate anomalies (small path length)&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# devtools::install_github(&amp;quot;Zelazny7/isofor&amp;quot;)
+library(isofor)
+furniture &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/furniture.csv&amp;quot;)
+furniture &amp;lt;- data.frame(Height = furniture$Height, Width = furniture$Width)
+scores &amp;lt;- matrix(nrow=dim(furniture)[1])
+for (ntree in c(100, 200, 500)){
+  furniture_tree &amp;lt;- iForest(furniture, nt = ntree, phi=50)
+  scores &amp;lt;- cbind(scores, predict(furniture_tree, furniture)) 
+}
+plot(scores[,3], scores[,4], xlab = &amp;quot;200 tress&amp;quot;, ylab=&amp;quot;500 tress&amp;quot;)
+abline(a=0,b=1)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This graph is used to assess wheter the number of trees is enough for the isolation score to converge. From the graph above, we know that 200 tress are enough for us to identify the anomalies.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(lattice)
+furniture_forest &amp;lt;- iForest(furniture, nt = 200, phi=50)
+h_seq &amp;lt;- seq(min(furniture$Height), max(furniture$Height), length.out = 20) 
+w_seq &amp;lt;- seq(min(furniture$Width), max(furniture$Width), length.out = 20)
+furniture_grid &amp;lt;- expand.grid(Width = w_seq, Height = h_seq)
+furniture_grid$score &amp;lt;- predict(furniture_forest, furniture_grid)
+contourplot(score ~ Height + Width, data = furniture_grid,region = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This contour graph used to identify the anomaly regions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Grubbs%27_test_for_outliers&#34;&gt;https://en.wikipedia.org/wiki/Grubbs%27_test_for_outliers&lt;/a&gt;&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;Zhihua Zhou et al. &lt;a href=&#34;https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/icdm08b.pdf&#34; class=&#34;uri&#34;&gt;https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/icdm08b.pdf&lt;/a&gt;&lt;a href=&#34;#fnref2&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
       <title>Decision Tree: How to find the path from the root to the desired terminal node</title>
-      <link>/post/decison-tree-path/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</link>
+      <link>/post/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/decison-tree-path/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</guid>
-      <description>Find terminal nodes in each tree of the built random forest that give the largest prediction. Then find paths from root to these selected terminal nodes and ensemble them to derive a decision region.</description>
+      <guid>/post/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#prepare-a-fitted-random-forest&#34;&gt;Prepare a fitted random forest&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#find-the-path-to-desired-terminal-node&#34;&gt;Find the path to desired terminal node&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#collect-paths-in-the-random-forest&#34;&gt;Collect Paths in the random forest&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#summarize-the-decison-region&#34;&gt;Summarize the decison region&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id=&#34;prepare-a-fitted-random-forest&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Prepare a fitted random forest&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;import random
+import pandas as pd
+from sklearn.ensemble.forest import RandomForestRegressor
+from sklearn import tree
+data = pd.DataFrame({&amp;quot;Y&amp;quot;:[1,5,3,4,3,4,2], &amp;quot;X_1&amp;quot;:[&amp;quot;red&amp;quot;, &amp;quot;blue&amp;quot;, &amp;quot;blue&amp;quot;, &amp;quot;red&amp;quot;,&amp;quot;red&amp;quot;,&amp;quot;blue&amp;quot;, &amp;quot;red&amp;quot;],
+                    &amp;quot;X_2&amp;quot;:[18.4, 7.5, 9.3, 3.7, 5.2, 3.2, 5.2]})
+data = pd.get_dummies(data)
+X = data.drop([&amp;quot;Y&amp;quot;], axis=1)
+y = data[&amp;quot;Y&amp;quot;]
+rf = RandomForestRegressor(n_estimators = 10, random_state = 1234)
+rf.fit(X, y)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;output:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;RandomForestRegressor(bootstrap=True, criterion=&amp;#39;mse&amp;#39;, max_depth=None,
+           max_features=&amp;#39;auto&amp;#39;, max_leaf_nodes=None,
+           min_impurity_decrease=0.0, min_impurity_split=None,
+           min_samples_leaf=1, min_samples_split=2,
+           min_weight_fraction_leaf=0.0, n_estimators=10, n_jobs=1,
+           oob_score=False, random_state=1234, verbose=0, warm_start=False)&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;find-the-path-to-desired-terminal-node&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Find the path to desired terminal node&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;import pydotplus
+import re 
+def return_node_path_to_max_prediction(onetree, verbose=True):
+    &amp;quot;&amp;quot;&amp;quot;
+    @input: a tree from the sklearn randomforest
+    @output: the node path to maxmium terminal node
+        [[split_node_1], [split_node_2], ...]
+        [splite_node_1] = [var_index, cutoff, direction]
+    &amp;quot;&amp;quot;&amp;quot;
+    if verbose:
+        print(&amp;quot;Generating Tree Graph, it may take a while...&amp;quot;)
+    dot_data = tree.export_graphviz(onetree,
+                                    out_file = None,
+                                    filled   = True,
+                                    rounded  = True,
+                                    special_characters = True)  
+    graph = pydotplus.graph_from_dot_data(dot_data)
+    graph_ = {}
+    for edge in graph.get_edge_list():
+        graph_[edge.get_source()] = edge.get_destination()
+    # find all terminal node
+    terminal_node = {}
+    non_decimal = re.compile(r&amp;#39;[^\d.]+&amp;#39;)
+    for node in graph.get_node_list():
+        if node.get_name() not in graph_:
+            if node.get_name() not in [&amp;quot;node&amp;quot;, &amp;quot;edge&amp;quot;]:
+                value = node.get_label()
+                value = re.sub(r&amp;#39;.*v&amp;#39;, &amp;#39;v&amp;#39;, value)
+                terminal_node[node.get_name()] = float(non_decimal.sub(&amp;#39;&amp;#39;, value))
+    # find the path down to the terminal with maximum predition value
+    flag = True
+    destination = max(terminal_node, key=terminal_node.get)
+    edge_list = graph.get_edge_list()
+    node_list = graph.get_node_list()
+    split_node = []
+    while flag:
+        myedge = [edge for edge in edge_list  if edge.get_destination() == destination][0]
+        if int(myedge.get_destination()) - int(myedge.get_source()) &amp;gt; 1:
+            direction = &amp;quot;Right&amp;quot;
+        else:
+            direction = &amp;quot;Left&amp;quot;
+        
+        mynode = [node for node in node_list if node.get_name() == myedge.get_source()][0]
+        var_val = re.findall(r&amp;quot;[-+]?\d*\.\d+|\d+&amp;quot;, mynode.get_label())[:2]
+        # record the growing path:
+        #  var_val[0]: Index of variable participating in splitting
+        #  var_val[1]: cutoff point of the splitting
+        #  direction: If Right, means greater than var_val[1]; 
+        #             If Left, means no greater than var_val[1]
+        split_node.append([int(var_val[0]),float(var_val[1]),direction])
+        if verbose:
+            print(myedge.get_destination() + &amp;quot;&amp;lt;-&amp;quot; + myedge.get_source() + 
+                  &amp;quot;: Split at Variable X&amp;quot; + var_val[0] + &amp;quot;; The cutoff is &amp;quot; + var_val[1] + 
+                 &amp;quot;; Turn &amp;quot; + direction)
+        destination = myedge.get_source()
+        if destination == &amp;quot;0&amp;quot;:
+            flag = False
+        
+    return [*reversed(split_node)]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Test:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;return_node_path_to_max_prediction(rf[1], verbose=True)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Outputs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Generating Tree Graph, it may take a while...
+3&amp;lt;-1: Split at Variable X0; The cutoff is 5.6; Turn Right
+1&amp;lt;-0: Split at Variable X0; The cutoff is 12.95; Turn Left&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From the output above, we know the path from the root to the desired terminal node is :&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Root[X0(&amp;lt;= 12.95)] -&amp;gt; X0 (&amp;gt;=5.6) -&amp;gt; Terminal Node&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;collect-paths-in-the-random-forest&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Collect Paths in the random forest&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;def collect_path(rf, verbose=True):
+    n_tree = len(rf)
+    result = []
+    for i in range(n_tree):
+        if verbose:
+            print(&amp;quot;Construct the %s tree graph out of %s trees&amp;quot; %(i+1, n_tree))
+        result.append(return_node_path_to_max_prediction(rf.estimators_[i], verbose=False))
+    return result&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Test:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;result = collect_path(rf)
+print(result)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Outputs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Construct the 1 tree graph out of 10 trees
+Construct the 2 tree graph out of 10 trees
+Construct the 3 tree graph out of 10 trees
+Construct the 4 tree graph out of 10 trees
+Construct the 5 tree graph out of 10 trees
+Construct the 6 tree graph out of 10 trees
+Construct the 7 tree graph out of 10 trees
+Construct the 8 tree graph out of 10 trees
+Construct the 9 tree graph out of 10 trees
+Construct the 10 tree graph out of 10 trees
+[[[0, 4.2, &amp;#39;Left&amp;#39;]], [[0, 12.95, &amp;#39;Left&amp;#39;], [0, 5.6, &amp;#39;Right&amp;#39;]], [[1, 0.5, &amp;#39;Right&amp;#39;], [0, 8.4, &amp;#39;Left&amp;#39;]], [[0, 13.85, &amp;#39;Left&amp;#39;], [0, 8.4, &amp;#39;Left&amp;#39;], [1, 0.5, &amp;#39;Right&amp;#39;]], [[0, 8.4, &amp;#39;Left&amp;#39;], [0, 6.35, &amp;#39;Right&amp;#39;]], [[0, 12.95, &amp;#39;Left&amp;#39;], [0, 5.6, &amp;#39;Right&amp;#39;]], [[2, 0.5, &amp;#39;Left&amp;#39;], [0, 5.35, &amp;#39;Right&amp;#39;]], [[1, 0.5, &amp;#39;Right&amp;#39;], [0, 5.35, &amp;#39;Right&amp;#39;]], [[0, 13.85, &amp;#39;Left&amp;#39;], [1, 0.5, &amp;#39;Right&amp;#39;], [0, 8.4, &amp;#39;Left&amp;#39;], [0, 5.35, &amp;#39;Right&amp;#39;]], [[0, 13.85, &amp;#39;Left&amp;#39;], [0, 6.35, &amp;#39;Right&amp;#39;], [0, 8.4, &amp;#39;Left&amp;#39;]]]&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;summarize-the-decison-region&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Summarize the decison region&lt;/h1&gt;
+&lt;pre&gt;&lt;code&gt;def summarize_region(result, features):
+    decision_region = {k: [[] for _ in range(2)] for k in features}
+    for i in range(len(result)):
+        for j in range(len(result[i])):
+            if result[i][j][2] == &amp;quot;Left&amp;quot;:
+                 decision_region[features[result[i][j][0]]][0].append(result[i][j][1])
+            else:
+                decision_region[features[result[i][j][0]]][1].append(result[i][j][1]) 
+    
+    decision_region_ = {}
+    for k in features:
+        try:
+            upper_bound = min(decision_region[k][0])
+        except ValueError:
+            upper_bound = &amp;quot;Unknown&amp;quot;
+        try:
+            lower_bound = max(decision_region[k][1])
+        except ValueError:
+            lower_bound = &amp;quot;Unknown&amp;quot;
+        decision_region_[k] = [lower_bound, upper_bound]
+        
+    value_to_remove = [&amp;#39;Unknown&amp;#39;, &amp;#39;Unknown&amp;#39;]
+    decision_region_ = {key: value for key, value in decision_region_.items() if value != value_to_remove}
+    value_to_remove = [0.5, 0.5]
+    decision_region_ = {key: value for key, value in decision_region_.items() if value != value_to_remove}
+    
+    return (decision_region_)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Test:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;features = X.columns
+summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Outputs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{&amp;#39;X_1_blue&amp;#39;: [0.5, &amp;#39;Unknown&amp;#39;], &amp;#39;X_1_red&amp;#39;: [&amp;#39;Unknown&amp;#39;, 0.5], &amp;#39;X_2&amp;#39;: [6.35, 4.2]}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;From the output above, we know that the decision region:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{blue} * [6.35, 4.2]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But it seems that the region &lt;strong&gt;[6.35, 4.2]&lt;/strong&gt; is not reasonable due to the poorly generated data. But it may happens in some situations, which may require us to come up with new ways to ensemble these terminal nodes.&lt;/p&gt;
+&lt;/div&gt;
+</description>
     </item>
     
     <item>
       <title>Convergence Analysis for Block Coordinate Decent Algorithm and Powell&#39;s Examples</title>
-      <link>/post/powell/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</link>
+      <link>/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</link>
       <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/post/powell/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</guid>
-      <description>Convergence analysis of Block coordinate decent with exact minimization.</description>
+      <guid>/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#problem-description&#34;&gt;Problem description&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#notations&#34;&gt;Notations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#assumption&#34;&gt;Assumption&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#algorithm&#34;&gt;Algorithm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#convergence-analysis&#34;&gt;Convergence Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#powells-example&#34;&gt;Powell’s example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#r-codes-for-numerical-experiments&#34;&gt;R codes for numerical experiments&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We mainly focus on the convergence of Block coordinate decent with exact minimization, whose block update strategy employs Gauss-Seidel manner. And then use Powell’s example to see what will happen if some conditions are not met.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Reference: 1. Dimitri .P Bertsekas, Nonlinear Programming 2ed 2. Powell ,1973, ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div id=&#34;problem-description&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Problem description&lt;/h1&gt;
+&lt;div id=&#34;notations&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Notations&lt;/h2&gt;
+&lt;p&gt;We want to solve the problem:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\quad f(x)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where X is a Cartesian product of closed convex sets $X_1,…,X_m:X=_{i=1}^n X_i $&lt;/p&gt;
+&lt;p&gt;We assume that &lt;span class=&#34;math inline&#34;&gt;\(X_i\)&lt;/span&gt; is a closed convex subset of &lt;span class=&#34;math inline&#34;&gt;\(R^{n_i}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(n=\sum_{i=1}^m n_i\)&lt;/span&gt;. The vector is partitioned into &lt;span class=&#34;math inline&#34;&gt;\(m\)&lt;/span&gt; block(s) such that &lt;span class=&#34;math inline&#34;&gt;\(x_i \in X^{n_i}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;We denote &lt;span class=&#34;math inline&#34;&gt;\(\nabla_i f\)&lt;/span&gt; as the gradient of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; with respect to component &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;assumption&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Assumption&lt;/h2&gt;
+&lt;p&gt;We shall assume that for every &lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(i=1,2,...m\)&lt;/span&gt; the optimization problem&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{\xi\in X_i}\quad f(x_1,...,x_{i-1},\xi,x_{i+1,....,x_m})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;has &lt;strong&gt;at least one solution&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;algorithm&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;The Gauss-Seidel method, generates the next iterate &lt;span class=&#34;math inline&#34;&gt;\(x^{k+1}=(x^{k+1}_1,...,x^{k+1}_m)\)&lt;/span&gt;, given the current the iterate &lt;span class=&#34;math inline&#34;&gt;\(x^{k}=(x^{k}_1,...,x^{k}_m)\)&lt;/span&gt;, according to the iteration&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x^{k+1}_i=\mathop{argmin}_{\xi\in X_i}\quad f(x_1^{k+1},...,x^{k+1}_{i-1},\xi,x^k_{i+1},...,x_m^k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;convergence-analysis&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Convergence Analysis&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;Theorem&lt;/code&gt; Suppose that &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; is &lt;strong&gt;continuously differentiable&lt;/strong&gt; over the set &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; defined as above. Furthermore, suppose that for each &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt;,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x_1,...,x_{i-1},\xi,x_{i+1,....,x_m})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;viewed as a function of &lt;span class=&#34;math inline&#34;&gt;\(\xi\)&lt;/span&gt;, attains a unique minimum &lt;span class=&#34;math inline&#34;&gt;\(\bar x_i\)&lt;/span&gt; over &lt;span class=&#34;math inline&#34;&gt;\(X_i\)&lt;/span&gt; and is monotonically non-increasing in the interval from &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; to &lt;span class=&#34;math inline&#34;&gt;\(\bar \xi\)&lt;/span&gt;. Let &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt; be the sequence generated by the block coordinate method with Gauss-Seidel manner. Then, every limit point of &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt; is a stationary point.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PROOF&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Let&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[z_i^k=(x_1^{k+1},...,x_i^{k+1},x_{i+1}^k,...,x_m^k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;By the nature of this algorithm, for all &lt;span class=&#34;math inline&#34;&gt;\(k\geq 0\)&lt;/span&gt;, we have following inequality&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x^k)\geq f(z_1^k)\geq f(z_2^k)\geq ...\geq f(z_{m-1}^k)\geq f(x^{k+1}) \quad (*)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Since &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}in X\)&lt;/span&gt;, we can assume &lt;span class=&#34;math inline&#34;&gt;\(\{x^{k_j}\}\)&lt;/span&gt; is the subsequence that converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x=(\bar x_1,..,\bar x_m)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Now we want prove that &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; is the stationary point of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;From (*), we know that&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(z_1^{k_j})\leq f(x_1,x_2^{k_j},..., x_m^{k_j})\qquad \forall x_1\in X_1\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(j\rightarrow +\infty\)&lt;/span&gt;, we derive&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(\bar x)\leq f(x_1,\bar x_2,..., \bar x_m)\overset \Delta = h(x_1)\qquad \forall x_1\in X_1\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;which implies that &lt;span class=&#34;math inline&#34;&gt;\(\bar x_i\)&lt;/span&gt; is the minima of &lt;span class=&#34;math inline&#34;&gt;\(h(x_1)\)&lt;/span&gt; on &lt;span class=&#34;math inline&#34;&gt;\(X_1\)&lt;/span&gt;. Using the optimality over a convex set, we conclude that&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[h&amp;#39;(\bar x_1)(\bar x_1 -x_1)\geq 0 \Leftrightarrow (x_1-\bar x_1)^T\nabla_1f(\bar x_1)\geq 0\qquad x_1\in X_1\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;At this stage, if we can prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_j}\}\)&lt;/span&gt; converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;, we can show that&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ (x_2-\bar x_2)^T\nabla_2 f(\bar x_2)\geq 0\qquad x_2\in X_2\]&lt;/span&gt;, since&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(z_1^{k_j})=f(x_1^{k_j+1},x_2^{k_j},x_3^{k_j},...,x_m^{k_j})\leq f(x_1^{k_j+1},x_2,x_3^{k_j},...,x_m^{k_j})\qquad x_2\in X_2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(j\rightarrow +\infty\)&lt;/span&gt;, we derive&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(\bar x)\leq f(\bar x_1,\bar x_2,\bar x_3,..., \bar x_m)\qquad \forall x_2\in X_2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x_2-\bar x_2)^T\nabla_2f(\bar x_2)\geq 0\qquad x_2\in X_2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;(Note: Although &lt;span class=&#34;math inline&#34;&gt;\(x_1^{k_j+1}\)&lt;/span&gt; may not in the sequence &lt;span class=&#34;math inline&#34;&gt;\(\{x_1^{k_t}\}_{t\geq 1}\)&lt;/span&gt; ,which convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar x_1\)&lt;/span&gt;, but &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_j}\}\)&lt;/span&gt; converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;, so its component &lt;span class=&#34;math inline&#34;&gt;\(x_1^{k_j+1}\)&lt;/span&gt; converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x_1\)&lt;/span&gt;).&lt;/p&gt;
+&lt;p&gt;Furthermore, if we prove that for &lt;span class=&#34;math inline&#34;&gt;\(i=1,2,...,m-1\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\}\)&lt;/span&gt; convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;, then we have&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x_i-\bar x_i)^T\nabla_i\;f(\bar x_i)\geq 0\qquad x_i\in X_i\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;And thus &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; is a stationary point, since &lt;span class=&#34;math inline&#34;&gt;\((x-\bar x)^T\nabla f(\bar x)\geq 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;By far, it remains to prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\}\quad,\forall i\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;. First,we try to prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_1}\}\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Assume the contrary that &lt;span class=&#34;math inline&#34;&gt;\(r^{k_j}=\vert \vert z_1^{k_j}-x^{k_j}\vert \vert\)&lt;/span&gt; doesn’t convergence to 0. Let &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}=(z_1^{k_j}-x^{k_j})/r^{k_j}\)&lt;/span&gt;. Thus, &lt;span class=&#34;math inline&#34;&gt;\(z_1^{k_j}=x^{k_j}+r^{k_j}s_1^{k_j}\)&lt;/span&gt; , &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert r_{k_j}\vert \vert =1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; differs from 0 only along the first block-component. Since &lt;span class=&#34;math inline&#34;&gt;\(\{s_1^{k_j}\}\)&lt;/span&gt; belong to a compact set and therefore without loss of generality, we assume &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar s_1\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Since &lt;span class=&#34;math inline&#34;&gt;\(r^{k_j}&amp;gt;0\)&lt;/span&gt;,we can find a &lt;span class=&#34;math inline&#34;&gt;\(\epsilon\in (0,1)\)&lt;/span&gt;, such that &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}+\epsilon s_1^{k_j}\)&lt;/span&gt; lies on the segment joining &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}+s_1^{k_j}=z_1^{k_j}\)&lt;/span&gt;. Using the non-increasing property of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;,we derive,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(z_1^{k_j})\leq f(x^{k_j}+\epsilon s_1^{k_j}) \leq f(x^{k_j})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Again, using (*), we conclude&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x^{k_{j+1}})\leq f(z_1^{k_j})\leq f(x^{k_j}+\epsilon s_1^{k_j}) \leq f(x^{k_j})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(j\rightarrow +\infty\)&lt;/span&gt;, we derive &lt;span class=&#34;math inline&#34;&gt;\(f(\bar x)=f(\bar x+\epsilon \bar s_1)\)&lt;/span&gt;, which contradicts the hypothesis that &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; is uniquely minimized when viewed as a function of the first block component. This contradiction establishes that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_1}\}\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Similarly, let &lt;span class=&#34;math inline&#34;&gt;\(r_t^{k_j}=\vert \vert z_t^{k_j}-z_{t-1}^{k_j}\vert \vert\)&lt;/span&gt; for &lt;span class=&#34;math inline&#34;&gt;\(t=2,3,...,m-1\)&lt;/span&gt; and using the same technique shown above, we finally prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\},\quad \forall i\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;powells-example&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Powell’s example&lt;/h1&gt;
+&lt;p&gt;In &lt;em&gt;ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS&lt;/em&gt;, Power actually gives three examples that sequences generated by the algorithm discussed above do not convergence to stationary points once some hypothesis are not met.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The first example is straightforward, However, the remarkable properties of this example can be destroyed by making a small perturbation to the starting vector &lt;span class=&#34;math inline&#34;&gt;\(x^0\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The second example is not sensitive to either small changes in the initial data or to small errors introduced during the iterative process, for example computer rounding errors.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The third example suggests that a function that is infinitely differentiable that also causes an endless loop in the iterative minimization method.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We here only presents the first example. Consider the following function&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x,y,z)=-(xy+yz+zx)+(x-1)_+^2+(-x-1)_+^2+(y-1)_+^2+(-y-1)_+^2+(z-1)_+^2+(-z-1)_+^2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x-c)_+^2=\begin{cases}0,x-c&amp;lt; 0\\ (x-c)^2,x-c\geq 0\end{cases}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Given the starting point &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e,1+\frac{1}{2}e,-1-\frac{1}{4}e)\)&lt;/span&gt; and use block coordinate decent algorithm,and we update the variable in a manner of &lt;span class=&#34;math inline&#34;&gt;\(x\rightarrow y\rightarrow z\rightarrow x ...\)&lt;/span&gt; with&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}^{**}\leftarrow \text{sign}(y_k+z_k)[1+\frac{1}{2}\vert y_k+z_k\vert ]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[y_{k+1}^{**}\leftarrow \text{sign}(x_{k+1}+z_k)[1+\frac{1}{2}\vert x_{k+1}+z_k\vert ]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[z_{k+1}^{**}\leftarrow \text{sign}(x_{k+1}+y_{k+1})[1+\frac{1}{2}\vert x_{k+1}+y_{k+1}\vert ]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;We here present the first six steps of this case&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;cycle/totall iteration&lt;/th&gt;
+&lt;th&gt;x&lt;/th&gt;
+&lt;th&gt;y&lt;/th&gt;
+&lt;th&gt;z&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1/1&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{8}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+$e $&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{4}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;1/2&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{8}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{16}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{4}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1/3&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{8}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{16}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{32}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2/4&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{64}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{16}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{32}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;2/5&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{64}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{128}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{32}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2/6&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{64}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{128}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{256}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;3/7&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{512}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{128}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{256}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This result implies that the sequence obtained by this algorithm can not converge to one single point since &lt;span class=&#34;math inline&#34;&gt;\(x-coordinate\)&lt;/span&gt; change its sign as the even cycle and odd cycle alternate. Situations are similar for &lt;span class=&#34;math inline&#34;&gt;\(y-coordinate\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(z-coordinate\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;But &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt; has six sub-sequences which convergence to (1,1,-1), (1,-1,-1), (1,-1,1), (-1,-1,1),(-1,-1,1),(-1,1,1),(-1,1,-1) respectively.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;14748787199151.jpg&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;A hint to derive the update formula:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x\leftarrow \text{sign}(y+z)[1+\frac{1}{2}(y+z)]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Indeed, derivates of &lt;span class=&#34;math inline&#34;&gt;\((x-1)_+^2\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\((-x-1)_+^2\)&lt;/span&gt; are as follows respecively&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{d(x-1)_+^2}{dx}=\begin{cases}2(x-1),x\geq 1\\0,x&amp;lt;1\end{cases}\quad 
+    \frac{d(-x-1)_+^2}{dx}=\begin{cases}2(-x-1),x\leq -1\\0,x&amp;gt;-1\end{cases}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;So for the univariate optimization problem, setting the derivate of &lt;span class=&#34;math inline&#34;&gt;\(g(x)=f(x,y,z)\)&lt;/span&gt; to zero, we conclude&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x,y,x)}{\partial x}=0\Rightarrow 
+\begin{cases}x\geq 1: x=1+\frac{1}{2}(y+z)\\-1&amp;lt; x&amp;lt;1: -(y+z)=0\\x\leq -1:x=-1+\frac{1}{2}(y+z) \end{cases}\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The gradient of &lt;span class=&#34;math inline&#34;&gt;\(f(x,y,z)\)&lt;/span&gt; on this cyclic path, is &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x,y,z)=(-y-z,-x-z,-x-y)\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x,y,z)\vert \vert _1=2\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;This example is unstable with respect to small perturbations. Small changes in the starting point &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e,1+\frac{1}{2}e,-1-\frac{1}{4}e)\)&lt;/span&gt; or smal errors in the numbers that are computed during the calculation will destroy the cyclic behavior.&lt;/p&gt;
+&lt;p&gt;It’s s clear the choice of perturbations &lt;span class=&#34;math inline&#34;&gt;\(e\)&lt;/span&gt; plays a key role. Say, &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e_1,1+e_2,-1-e_3)\)&lt;/span&gt; and we have &lt;span class=&#34;math inline&#34;&gt;\(e_k=\frac{1}{2}(e_{k-2}- e_{k-1})\)&lt;/span&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;cycle/totall iteration&lt;/th&gt;
+&lt;th&gt;x&lt;/th&gt;
+&lt;th&gt;y&lt;/th&gt;
+&lt;th&gt;z&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1/1&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_4\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_3\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;1/2&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_4\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_5\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_3\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1/3&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_4\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_5\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_6\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2/4&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_7\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_5\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_6\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;2/5&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_7\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_8\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_6\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2/6&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_7\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_8\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_9\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;To preserve the cyclic behavior , we have to make sure that &lt;span class=&#34;math inline&#34;&gt;\(e_{k-2}&amp;gt;e_{k-1}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;And in practice, when we do some numerical tests, we shall find that, this theoretically-existed endless loop actual breaks down due to the rounding errors. A brief illustration is given below. In this experiment, loop ends at the 52 steps.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;Snip20161117_13.png&#34; alt=&#34;Snip20161117_13&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;Snip20161117_14.png&#34; alt=&#34;Snip20161117_14&#34; /&gt; &lt;img src=&#34;Snip20161117_15.png&#34; alt=&#34;Snip20161117_15&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;As&lt;br /&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x,y,x)}{\partial x}=0\Rightarrow 
+\begin{cases}x\geq 1: x=1+\frac{1}{2}(y+z)\\-1&amp;lt; x&amp;lt;1: -(y+z)=0\\x\leq -1:x=-1+\frac{1}{2}(y+z) \end{cases}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;suggests that, when &lt;span class=&#34;math inline&#34;&gt;\(-1&amp;lt;x&amp;lt;1\)&lt;/span&gt;, the choice of &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; is arbitrary and we set &lt;span class=&#34;math inline&#34;&gt;\(x^*=0\)&lt;/span&gt; in the case above. So the uniqueness requirement is violated. It turns out that the six vertices are even not the stationary points.&lt;/p&gt;
+&lt;p&gt;For example, at point &lt;span class=&#34;math inline&#34;&gt;\(\bar x=(1,1,-1)\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(\bar x)=(0,0,-2)\)&lt;/span&gt; and for any ponit &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; in the unit cubic &lt;span class=&#34;math inline&#34;&gt;\((x-\bar x)^T\nabla f(\bar x)\leq 0\)&lt;/span&gt;. Say, &lt;span class=&#34;math inline&#34;&gt;\(x=(0.9,0.9,-0.9)\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\((x-\bar x)^T\nabla f(\bar x)=-0.2&amp;lt;0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Actually, as in the proof of &lt;code&gt;Theorem&lt;/code&gt;, we prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_j}\}\)&lt;/span&gt; converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; is the limit point of &lt;span class=&#34;math inline&#34;&gt;\(\{x^{k_j}\}\)&lt;/span&gt;. But in this example, the limit point of &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_j}\}\)&lt;/span&gt; is (1,1,-1) while the limit point of &lt;span class=&#34;math inline&#34;&gt;\(\{x^{k_j}\}\)&lt;/span&gt; is either (-1,1,-1) or (1,-1,1). So the requirement of uniqueness is not met.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;r-codes-for-numerical-experiments&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;R codes for numerical experiments&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;####################
+### Function for test ###
+####################
+
+PowellE1&amp;lt;-function(xstart,cycles,fig=T){
+  #######function part ##############
+  UpdateCycle&amp;lt;-function(x){
+    Sign&amp;lt;-function(x){
+      if (x&amp;gt;0){
+        return(1)
+      }else{
+        if (x&amp;lt;0){
+          return(-1)
+        }else{
+          return(0)
+        }
+      }
+    }
+    x.new&amp;lt;-c()
+    x.new[1]&amp;lt;-Sign(x[2]+x[3])*(1+0.5*abs(x[2]+x[3]))
+    x.new[2]&amp;lt;-Sign(x.new[1]+x[3])*(1+0.5*abs(x.new[1]+x[3]))
+    x.new[3]&amp;lt;-Sign(x.new[1]+x.new[2])*(1+0.5*abs(x.new[1]+x.new[2]))
+    cycle&amp;lt;-matrix(c(x.new[1],x[2],x[3],x.new[1],x.new[2],x[3],x.new[1],x.new[2],x.new[3]),
+                  ncol=3,byrow=T)
+    return(cycle)
+  }
+  
+  fpowell&amp;lt;-function(x){
+    
+    PostivePart&amp;lt;-function(x){
+      ifelse(x&amp;gt;=0,x,0)
+    }
+    
+    fval&amp;lt;-(-(x[1]*x[2]+x[2]*x[3]+x[1]*x[3]))+
+      PostivePart(x[1]-1)^2+PostivePart(-x[1]-1)^2+
+      PostivePart(x[2]-1)^2+PostivePart(-x[2]-1)^2+
+      PostivePart(x[3]-1)^2+PostivePart(-x[3]-1)^2
+    return(fval)
+  }
+  ############ operation part ################
+  x.store&amp;lt;-matrix(ncol=3,nrow=cycles*3+1)
+  x.store[1,]&amp;lt;-xstart
+  for (i in seq_len(cycles)){
+    x.store[(3*i-1):(3*i+1),]&amp;lt;-UpdateCycle(x.store[3*i-2,])
+  }
+  x.store&amp;lt;-x.store[-1,]
+  fval&amp;lt;-rep(0,cycles*3)
+  
+  for(i in seq_len(cycles*3)){
+    fval[i]&amp;lt;-fpowell(x.store[i,])
+  }
+  fval&amp;lt;-as.matrix(fval)
+  
+  if (fig==T){
+    plot(fval,ylim=c(min(fval)-1,max(fval)+1),type=&amp;quot;l&amp;quot;,xlab=&amp;quot;Iterations&amp;quot;,ylab = &amp;quot;F value&amp;quot;)
+  }
+  r&amp;lt;-list()
+  r$x.iterate&amp;lt;-x.store
+  r$fval&amp;lt;-fval
+  return(r)
+}
+
+
+##################
+#### Test 1 ########
+##################
+
+
+perturb&amp;lt;-0.5
+xstart&amp;lt;-c(-1-perturb,1+0.5*perturb,-1-0.25*perturb)
+cycles&amp;lt;-20
+
+r&amp;lt;-PowellE1(xstart,cycles,fig=T)
+
+##################
+#### Test 2 ########
+##################
+
+perturb&amp;lt;-0.5
+xstart&amp;lt;-c(-1-perturb,1+0.5*perturb,-1-0.25*perturb)
+cycles&amp;lt;-20
+
+r&amp;lt;-PowellE1(xstart,cycles,fig=T)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/powell/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;##################
+#### Test 3 ########
+##################
+
+xstart&amp;lt;-c(3,2,1)
+cycles&amp;lt;-100
+
+r&amp;lt;-PowellE1(xstart,cycles,fig=T)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/powell/index_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
     </item>
     
   </channel>

@@ -1,52 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Authors on Dai, Yutong / 戴宇童</title>
+    <title>Authors | Dai, Yutong/ 戴宇童</title>
     <link>/authors/</link>
-    <description>Recent content in Authors on Dai, Yutong / 戴宇童</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 01 Jul 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title></title>
-      <link>/authors/admin/</link>
-      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/authors/admin/</guid>
-      <description>Yutong is a Ph.D. student in the Department of Industrial and Systems Engineering at Lehigh University, working under the supervision of Professor Daniel P. Robinson.
-His current research focus on designing and analyzing algorithms for large scale convex non-smooth optimization problems arisen in machine learning.</description>
-    </item>
-    
-    <item>
-      <title>Daniel P. Robinson</title>
-      <link>/authors/daniel-p.-robinson/</link>
-      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/authors/daniel-p.-robinson/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Frank E. Curtis</title>
-      <link>/authors/frank-e.-curtis/</link>
-      <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/authors/frank-e.-curtis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Yang Weng</title>
-      <link>/authors/yang-weng/</link>
-      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/authors/yang-weng/</guid>
-      <description></description>
-    </item>
+      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Wed, 01 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Authors</title>
+      <link>/authors/</link>
+    </image>
     
   </channel>
 </rss>

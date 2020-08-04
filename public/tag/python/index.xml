@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>python | Dai, Yutong/ 戴宇童</title>
+    <link>/tag/python/</link>
+      <atom:link href="/tag/python/index.xml" rel="self" type="application/rss+xml" />
+    <description>python</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Fri, 01 May 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>python</title>
+      <link>/tag/python/</link>
+    </image>
+    
+    <item>
+      <title>Python Tricks Learned From Projects</title>
+      <link>/post/python-tricks-learned-from-projects/</link>
+      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
+      <guid>/post/python-tricks-learned-from-projects/</guid>
+      <description>&lt;h1 id=&#34;show-all-submodules&#34;&gt;Show all submodules&lt;/h1&gt;
+&lt;p&gt;I need to import a particular function &lt;code&gt;formulate&lt;/code&gt; from a file in the directory &lt;code&gt;&amp;lt;path-to-the-package&amp;gt;/coinor/dippy/examples/milp/milp_func&lt;/code&gt;.
+It&amp;rsquo;s clear that I need to import it from the submodule &lt;code&gt;coinor.dippy&lt;/code&gt;. But how to do it exactly?
+Use following commands, which list all submodules you can import.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import pkgutil
+import coinor.dippy
+package=coinor.dippy
+for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
+                                                      prefix=package.__name__+&#39;.&#39;,
+                                                      onerror=lambda x: None):
+    print(modname)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Relavant outputs are&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;.....
+coinor.dippy.examples.milp
+coinor.dippy.examples.milp.__main__
+coinor.dippy.examples.milp.milp_func
+.....
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then I can simply use&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from coinor.dippy.examples.milp.milp_func import formulate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;using-the-right-kernel-for-jupyter-notebook&#34;&gt;Using the right kernel for Jupyter Notebook&lt;/h1&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# create virtual env with python 3.7.7, whose name is cuppy
+conda create -n cuppy numpy scipy pandas notebook matplotlib python=3.7.7 
+# activate cuppy
+conda activate cuppy
+# I am using zsh, you may change to bash
+conda init zsh 
+# activate virtual env
+cond activate cuppy
+# point this verison of Python to jupyter
+ipython kernel install --name &amp;quot;cuppy&amp;quot; --user
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;running-jupyter-notebook-from-the-remote-server&#34;&gt;Running Jupyter Notebook from the remote server&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Reference&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://ljvmiranda921.github.io/notebook/2018/01/31/running-a-jupyter-notebook/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;set up jupyter notebook on login nodes&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://benjlindsay.com/posts/running-jupyter-lab-remotely#running-on-a-compute-node&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;set up jupyter notebook on computation nodes&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;On the server side:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Create following two functions in the &lt;code&gt;.bashrc&lt;/code&gt; and reload it using &lt;code&gt;source .bashrc&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;function Inode(){
+  # provide the computation node name; default is polyp2
+  local nodename=&amp;quot;${1:-polyp2}&amp;quot;
+  echo &amp;quot;starting an interactive section at $nodename&amp;quot;
+  # start an interactive session in the given node
+  qsub -l nodes=$nodename:ppn=4 -l walltime=1:00:00 -l mem=10gb,vmem=10gb -I
+}
+  
+function jpt(){
+  # provide the port; default is 1234
+  local port=&amp;quot;${1:-1234}&amp;quot;
+  echo &amp;quot;open jupyter notebook at $(hostname):$port&amp;quot;
+  # Fires-up a Jupyter notebook by supplying a specific port and ip
+  jupyter notebook --no-browser --port=$port --ip=$(hostname)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the server side&amp;rsquo;s terminal, if&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If you want to start the jupyter notebook in the login node, just call &lt;code&gt;jpt&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;If you want to start the jupyter notebook in the computation node, call &lt;code&gt;Inode&lt;/code&gt; first and then when you are prompted to the computation node, then call &lt;code&gt;jpt&lt;/code&gt;. For example, if the comutation node name is &lt;code&gt;polyp3&lt;/code&gt;, then call &lt;code&gt;Inode polyp3&lt;/code&gt; and then call &lt;code&gt;jpt 1234&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;On the local side:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Create following two functions in the &lt;code&gt;.bashrc&lt;/code&gt; and reload it using &lt;code&gt;source .bashrc&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;function jptt(){
+    local localport=&amp;quot;${1:-2234}&amp;quot;
+    local servername=&amp;quot;${2:-polyp1}&amp;quot;
+    local serverport=&amp;quot;${3:-1234}&amp;quot;
+    # Forwards port $1 into port $3 and listens to it
+    ssh -N -f -L localhost:$localport:$servername:$serverport yud319@polyps.ie.lehigh.edu
+}
+function stopjpt(){
+  local localport=&amp;quot;${1:-2234}&amp;quot;
+  lsof -i tcp:$localport |awk &#39;NR &amp;gt; 1 {print $2}&#39; | xargs kill -9
+  echo &amp;quot;Kill port $localport&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Call &lt;code&gt;jptt&lt;/code&gt; on the local terminal, which will listen to the jupyter notebook host on the server&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After finish the job, call &lt;code&gt;stopjpt&lt;/code&gt;, which will free the local port.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

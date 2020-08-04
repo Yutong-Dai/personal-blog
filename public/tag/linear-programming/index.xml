@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>linear programming | Dai, Yutong/ 戴宇童</title>
+    <link>/tag/linear-programming/</link>
+      <atom:link href="/tag/linear-programming/index.xml" rel="self" type="application/rss+xml" />
+    <description>linear programming</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Fri, 18 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>linear programming</title>
+      <link>/tag/linear-programming/</link>
+    </image>
+    
+    <item>
+      <title>Introduction to Mathematical Programming</title>
+      <link>/post/lp/</link>
+      <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/post/lp/</guid>
+      <description>
+
+
+&lt;div id=&#34;some-useful-notes&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Some useful notes&lt;/h1&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;a href=&#34;./Frakas-Duality-Crisscross.pdf&#34;&gt;Farkas’s Lemma, Strong Duality and Criss-Cross Algorithm&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Powell-Example | Dai, Yutong/ 戴宇童</title>
+    <link>/tag/powell-example/</link>
+      <atom:link href="/tag/powell-example/index.xml" rel="self" type="application/rss+xml" />
+    <description>Powell-Example</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Thu, 17 Nov 2016 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Powell-Example</title>
+      <link>/tag/powell-example/</link>
+    </image>
+    
+    <item>
+      <title>Convergence Analysis for Block Coordinate Decent Algorithm and Powell&#39;s Examples</title>
+      <link>/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</link>
+      <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
+      <guid>/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#problem-description&#34;&gt;Problem description&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#notations&#34;&gt;Notations&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#assumption&#34;&gt;Assumption&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#algorithm&#34;&gt;Algorithm&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#convergence-analysis&#34;&gt;Convergence Analysis&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#powells-example&#34;&gt;Powell’s example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#r-codes-for-numerical-experiments&#34;&gt;R codes for numerical experiments&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;We mainly focus on the convergence of Block coordinate decent with exact minimization, whose block update strategy employs Gauss-Seidel manner. And then use Powell’s example to see what will happen if some conditions are not met.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Reference: 1. Dimitri .P Bertsekas, Nonlinear Programming 2ed 2. Powell ,1973, ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div id=&#34;problem-description&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Problem description&lt;/h1&gt;
+&lt;div id=&#34;notations&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Notations&lt;/h2&gt;
+&lt;p&gt;We want to solve the problem:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{x\in X}\quad f(x)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where X is a Cartesian product of closed convex sets $X_1,…,X_m:X=_{i=1}^n X_i $&lt;/p&gt;
+&lt;p&gt;We assume that &lt;span class=&#34;math inline&#34;&gt;\(X_i\)&lt;/span&gt; is a closed convex subset of &lt;span class=&#34;math inline&#34;&gt;\(R^{n_i}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(n=\sum_{i=1}^m n_i\)&lt;/span&gt;. The vector is partitioned into &lt;span class=&#34;math inline&#34;&gt;\(m\)&lt;/span&gt; block(s) such that &lt;span class=&#34;math inline&#34;&gt;\(x_i \in X^{n_i}\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;We denote &lt;span class=&#34;math inline&#34;&gt;\(\nabla_i f\)&lt;/span&gt; as the gradient of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; with respect to component &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;assumption&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Assumption&lt;/h2&gt;
+&lt;p&gt;We shall assume that for every &lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(i=1,2,...m\)&lt;/span&gt; the optimization problem&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\mathop{min}_{\xi\in X_i}\quad f(x_1,...,x_{i-1},\xi,x_{i+1,....,x_m})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;has &lt;strong&gt;at least one solution&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;algorithm&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Algorithm&lt;/h2&gt;
+&lt;p&gt;The Gauss-Seidel method, generates the next iterate &lt;span class=&#34;math inline&#34;&gt;\(x^{k+1}=(x^{k+1}_1,...,x^{k+1}_m)\)&lt;/span&gt;, given the current the iterate &lt;span class=&#34;math inline&#34;&gt;\(x^{k}=(x^{k}_1,...,x^{k}_m)\)&lt;/span&gt;, according to the iteration&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x^{k+1}_i=\mathop{argmin}_{\xi\in X_i}\quad f(x_1^{k+1},...,x^{k+1}_{i-1},\xi,x^k_{i+1},...,x_m^k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;convergence-analysis&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Convergence Analysis&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;Theorem&lt;/code&gt; Suppose that &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; is &lt;strong&gt;continuously differentiable&lt;/strong&gt; over the set &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; defined as above. Furthermore, suppose that for each &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(x\in X\)&lt;/span&gt;,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x_1,...,x_{i-1},\xi,x_{i+1,....,x_m})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;viewed as a function of &lt;span class=&#34;math inline&#34;&gt;\(\xi\)&lt;/span&gt;, attains a unique minimum &lt;span class=&#34;math inline&#34;&gt;\(\bar x_i\)&lt;/span&gt; over &lt;span class=&#34;math inline&#34;&gt;\(X_i\)&lt;/span&gt; and is monotonically non-increasing in the interval from &lt;span class=&#34;math inline&#34;&gt;\(x_i\)&lt;/span&gt; to &lt;span class=&#34;math inline&#34;&gt;\(\bar \xi\)&lt;/span&gt;. Let &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt; be the sequence generated by the block coordinate method with Gauss-Seidel manner. Then, every limit point of &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt; is a stationary point.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;PROOF&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Let&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[z_i^k=(x_1^{k+1},...,x_i^{k+1},x_{i+1}^k,...,x_m^k)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;By the nature of this algorithm, for all &lt;span class=&#34;math inline&#34;&gt;\(k\geq 0\)&lt;/span&gt;, we have following inequality&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x^k)\geq f(z_1^k)\geq f(z_2^k)\geq ...\geq f(z_{m-1}^k)\geq f(x^{k+1}) \quad (*)\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Since &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}in X\)&lt;/span&gt;, we can assume &lt;span class=&#34;math inline&#34;&gt;\(\{x^{k_j}\}\)&lt;/span&gt; is the subsequence that converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x=(\bar x_1,..,\bar x_m)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Now we want prove that &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; is the stationary point of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;From (*), we know that&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(z_1^{k_j})\leq f(x_1,x_2^{k_j},..., x_m^{k_j})\qquad \forall x_1\in X_1\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(j\rightarrow +\infty\)&lt;/span&gt;, we derive&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(\bar x)\leq f(x_1,\bar x_2,..., \bar x_m)\overset \Delta = h(x_1)\qquad \forall x_1\in X_1\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;which implies that &lt;span class=&#34;math inline&#34;&gt;\(\bar x_i\)&lt;/span&gt; is the minima of &lt;span class=&#34;math inline&#34;&gt;\(h(x_1)\)&lt;/span&gt; on &lt;span class=&#34;math inline&#34;&gt;\(X_1\)&lt;/span&gt;. Using the optimality over a convex set, we conclude that&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[h&amp;#39;(\bar x_1)(\bar x_1 -x_1)\geq 0 \Leftrightarrow (x_1-\bar x_1)^T\nabla_1f(\bar x_1)\geq 0\qquad x_1\in X_1\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;At this stage, if we can prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_j}\}\)&lt;/span&gt; converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;, we can show that&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ (x_2-\bar x_2)^T\nabla_2 f(\bar x_2)\geq 0\qquad x_2\in X_2\]&lt;/span&gt;, since&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(z_1^{k_j})=f(x_1^{k_j+1},x_2^{k_j},x_3^{k_j},...,x_m^{k_j})\leq f(x_1^{k_j+1},x_2,x_3^{k_j},...,x_m^{k_j})\qquad x_2\in X_2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(j\rightarrow +\infty\)&lt;/span&gt;, we derive&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(\bar x)\leq f(\bar x_1,\bar x_2,\bar x_3,..., \bar x_m)\qquad \forall x_2\in X_2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;and&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x_2-\bar x_2)^T\nabla_2f(\bar x_2)\geq 0\qquad x_2\in X_2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;(Note: Although &lt;span class=&#34;math inline&#34;&gt;\(x_1^{k_j+1}\)&lt;/span&gt; may not in the sequence &lt;span class=&#34;math inline&#34;&gt;\(\{x_1^{k_t}\}_{t\geq 1}\)&lt;/span&gt; ,which convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar x_1\)&lt;/span&gt;, but &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_j}\}\)&lt;/span&gt; converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;, so its component &lt;span class=&#34;math inline&#34;&gt;\(x_1^{k_j+1}\)&lt;/span&gt; converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x_1\)&lt;/span&gt;).&lt;/p&gt;
+&lt;p&gt;Furthermore, if we prove that for &lt;span class=&#34;math inline&#34;&gt;\(i=1,2,...,m-1\)&lt;/span&gt;,&lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\}\)&lt;/span&gt; convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;, then we have&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x_i-\bar x_i)^T\nabla_i\;f(\bar x_i)\geq 0\qquad x_i\in X_i\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;And thus &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; is a stationary point, since &lt;span class=&#34;math inline&#34;&gt;\((x-\bar x)^T\nabla f(\bar x)\geq 0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;By far, it remains to prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\}\quad,\forall i\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;. First,we try to prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_1}\}\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Assume the contrary that &lt;span class=&#34;math inline&#34;&gt;\(r^{k_j}=\vert \vert z_1^{k_j}-x^{k_j}\vert \vert\)&lt;/span&gt; doesn’t convergence to 0. Let &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}=(z_1^{k_j}-x^{k_j})/r^{k_j}\)&lt;/span&gt;. Thus, &lt;span class=&#34;math inline&#34;&gt;\(z_1^{k_j}=x^{k_j}+r^{k_j}s_1^{k_j}\)&lt;/span&gt; , &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert r_{k_j}\vert \vert =1\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; differs from 0 only along the first block-component. Since &lt;span class=&#34;math inline&#34;&gt;\(\{s_1^{k_j}\}\)&lt;/span&gt; belong to a compact set and therefore without loss of generality, we assume &lt;span class=&#34;math inline&#34;&gt;\(s_1^{k_j}\)&lt;/span&gt; convergences to &lt;span class=&#34;math inline&#34;&gt;\(\bar s_1\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Since &lt;span class=&#34;math inline&#34;&gt;\(r^{k_j}&amp;gt;0\)&lt;/span&gt;,we can find a &lt;span class=&#34;math inline&#34;&gt;\(\epsilon\in (0,1)\)&lt;/span&gt;, such that &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}+\epsilon s_1^{k_j}\)&lt;/span&gt; lies on the segment joining &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(x^{k_j}+s_1^{k_j}=z_1^{k_j}\)&lt;/span&gt;. Using the non-increasing property of &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt;,we derive,&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(z_1^{k_j})\leq f(x^{k_j}+\epsilon s_1^{k_j}) \leq f(x^{k_j})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Again, using (*), we conclude&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x^{k_{j+1}})\leq f(z_1^{k_j})\leq f(x^{k_j}+\epsilon s_1^{k_j}) \leq f(x^{k_j})\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Let &lt;span class=&#34;math inline&#34;&gt;\(j\rightarrow +\infty\)&lt;/span&gt;, we derive &lt;span class=&#34;math inline&#34;&gt;\(f(\bar x)=f(\bar x+\epsilon \bar s_1)\)&lt;/span&gt;, which contradicts the hypothesis that &lt;span class=&#34;math inline&#34;&gt;\(f\)&lt;/span&gt; is uniquely minimized when viewed as a function of the first block component. This contradiction establishes that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_1}\}\)&lt;/span&gt; convergence to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Similarly, let &lt;span class=&#34;math inline&#34;&gt;\(r_t^{k_j}=\vert \vert z_t^{k_j}-z_{t-1}^{k_j}\vert \vert\)&lt;/span&gt; for &lt;span class=&#34;math inline&#34;&gt;\(t=2,3,...,m-1\)&lt;/span&gt; and using the same technique shown above, we finally prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_i^{k_j}\},\quad \forall i\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;powells-example&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Powell’s example&lt;/h1&gt;
+&lt;p&gt;In &lt;em&gt;ON SEARCH DIRECTIONS FOR MINIMIZATION ALGORITHMS&lt;/em&gt;, Power actually gives three examples that sequences generated by the algorithm discussed above do not convergence to stationary points once some hypothesis are not met.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The first example is straightforward, However, the remarkable properties of this example can be destroyed by making a small perturbation to the starting vector &lt;span class=&#34;math inline&#34;&gt;\(x^0\)&lt;/span&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The second example is not sensitive to either small changes in the initial data or to small errors introduced during the iterative process, for example computer rounding errors.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The third example suggests that a function that is infinitely differentiable that also causes an endless loop in the iterative minimization method.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We here only presents the first example. Consider the following function&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[f(x,y,z)=-(xy+yz+zx)+(x-1)_+^2+(-x-1)_+^2+(y-1)_+^2+(-y-1)_+^2+(z-1)_+^2+(-z-1)_+^2\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;where&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[(x-c)_+^2=\begin{cases}0,x-c&amp;lt; 0\\ (x-c)^2,x-c\geq 0\end{cases}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Given the starting point &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e,1+\frac{1}{2}e,-1-\frac{1}{4}e)\)&lt;/span&gt; and use block coordinate decent algorithm,and we update the variable in a manner of &lt;span class=&#34;math inline&#34;&gt;\(x\rightarrow y\rightarrow z\rightarrow x ...\)&lt;/span&gt; with&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x_{k+1}^{**}\leftarrow \text{sign}(y_k+z_k)[1+\frac{1}{2}\vert y_k+z_k\vert ]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[y_{k+1}^{**}\leftarrow \text{sign}(x_{k+1}+z_k)[1+\frac{1}{2}\vert x_{k+1}+z_k\vert ]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[z_{k+1}^{**}\leftarrow \text{sign}(x_{k+1}+y_{k+1})[1+\frac{1}{2}\vert x_{k+1}+y_{k+1}\vert ]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;We here present the first six steps of this case&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;cycle/totall iteration&lt;/th&gt;
+&lt;th&gt;x&lt;/th&gt;
+&lt;th&gt;y&lt;/th&gt;
+&lt;th&gt;z&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1/1&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{8}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+$e $&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{4}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;1/2&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{8}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{16}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{4}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1/3&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{8}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{16}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{32}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2/4&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{64}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{16}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{32}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;2/5&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{64}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{128}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{32}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2/6&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{64}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{128}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{256}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;3/7&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{512}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{128}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(\frac{1}{256}e\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This result implies that the sequence obtained by this algorithm can not converge to one single point since &lt;span class=&#34;math inline&#34;&gt;\(x-coordinate\)&lt;/span&gt; change its sign as the even cycle and odd cycle alternate. Situations are similar for &lt;span class=&#34;math inline&#34;&gt;\(y-coordinate\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(z-coordinate\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;But &lt;span class=&#34;math inline&#34;&gt;\(\{x_k\}\)&lt;/span&gt; has six sub-sequences which convergence to (1,1,-1), (1,-1,-1), (1,-1,1), (-1,-1,1),(-1,-1,1),(-1,1,1),(-1,1,-1) respectively.&lt;/p&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;14748787199151.jpg&#34; /&gt;
+
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Remark&lt;/strong&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;A hint to derive the update formula:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[x\leftarrow \text{sign}(y+z)[1+\frac{1}{2}(y+z)]\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Indeed, derivates of &lt;span class=&#34;math inline&#34;&gt;\((x-1)_+^2\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\((-x-1)_+^2\)&lt;/span&gt; are as follows respecively&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{d(x-1)_+^2}{dx}=\begin{cases}2(x-1),x\geq 1\\0,x&amp;lt;1\end{cases}\quad 
+    \frac{d(-x-1)_+^2}{dx}=\begin{cases}2(-x-1),x\leq -1\\0,x&amp;gt;-1\end{cases}
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;So for the univariate optimization problem, setting the derivate of &lt;span class=&#34;math inline&#34;&gt;\(g(x)=f(x,y,z)\)&lt;/span&gt; to zero, we conclude&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x,y,x)}{\partial x}=0\Rightarrow 
+\begin{cases}x\geq 1: x=1+\frac{1}{2}(y+z)\\-1&amp;lt; x&amp;lt;1: -(y+z)=0\\x\leq -1:x=-1+\frac{1}{2}(y+z) \end{cases}\]&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The gradient of &lt;span class=&#34;math inline&#34;&gt;\(f(x,y,z)\)&lt;/span&gt; on this cyclic path, is &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(x,y,z)=(-y-z,-x-z,-x-y)\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\vert \vert \nabla f(x,y,z)\vert \vert _1=2\)&lt;/span&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;This example is unstable with respect to small perturbations. Small changes in the starting point &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e,1+\frac{1}{2}e,-1-\frac{1}{4}e)\)&lt;/span&gt; or smal errors in the numbers that are computed during the calculation will destroy the cyclic behavior.&lt;/p&gt;
+&lt;p&gt;It’s s clear the choice of perturbations &lt;span class=&#34;math inline&#34;&gt;\(e\)&lt;/span&gt; plays a key role. Say, &lt;span class=&#34;math inline&#34;&gt;\(x_0=(-1-e_1,1+e_2,-1-e_3)\)&lt;/span&gt; and we have &lt;span class=&#34;math inline&#34;&gt;\(e_k=\frac{1}{2}(e_{k-2}- e_{k-1})\)&lt;/span&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;cycle/totall iteration&lt;/th&gt;
+&lt;th&gt;x&lt;/th&gt;
+&lt;th&gt;y&lt;/th&gt;
+&lt;th&gt;z&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1/1&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_4\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_2\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_3\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;1/2&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_4\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_5\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_3\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;1/3&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_4\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_5\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_6\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2/4&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_7\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_5\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_6\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;2/5&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_7\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_8\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_6\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;2/6&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_7\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1+&lt;span class=&#34;math inline&#34;&gt;\(e_8\)&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;-1-&lt;span class=&#34;math inline&#34;&gt;\(e_9\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;td&gt;…&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;To preserve the cyclic behavior , we have to make sure that &lt;span class=&#34;math inline&#34;&gt;\(e_{k-2}&amp;gt;e_{k-1}\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;And in practice, when we do some numerical tests, we shall find that, this theoretically-existed endless loop actual breaks down due to the rounding errors. A brief illustration is given below. In this experiment, loop ends at the 52 steps.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;Snip20161117_13.png&#34; alt=&#34;Snip20161117_13&#34; /&gt;&lt;br /&gt;
+&lt;img src=&#34;Snip20161117_14.png&#34; alt=&#34;Snip20161117_14&#34; /&gt; &lt;img src=&#34;Snip20161117_15.png&#34; alt=&#34;Snip20161117_15&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;As&lt;br /&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\frac{\partial f(x,y,x)}{\partial x}=0\Rightarrow 
+\begin{cases}x\geq 1: x=1+\frac{1}{2}(y+z)\\-1&amp;lt; x&amp;lt;1: -(y+z)=0\\x\leq -1:x=-1+\frac{1}{2}(y+z) \end{cases}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;suggests that, when &lt;span class=&#34;math inline&#34;&gt;\(-1&amp;lt;x&amp;lt;1\)&lt;/span&gt;, the choice of &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; is arbitrary and we set &lt;span class=&#34;math inline&#34;&gt;\(x^*=0\)&lt;/span&gt; in the case above. So the uniqueness requirement is violated. It turns out that the six vertices are even not the stationary points.&lt;/p&gt;
+&lt;p&gt;For example, at point &lt;span class=&#34;math inline&#34;&gt;\(\bar x=(1,1,-1)\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\nabla f(\bar x)=(0,0,-2)\)&lt;/span&gt; and for any ponit &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; in the unit cubic &lt;span class=&#34;math inline&#34;&gt;\((x-\bar x)^T\nabla f(\bar x)\leq 0\)&lt;/span&gt;. Say, &lt;span class=&#34;math inline&#34;&gt;\(x=(0.9,0.9,-0.9)\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\((x-\bar x)^T\nabla f(\bar x)=-0.2&amp;lt;0\)&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Actually, as in the proof of &lt;code&gt;Theorem&lt;/code&gt;, we prove that &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_j}\}\)&lt;/span&gt; converges to &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(\bar x\)&lt;/span&gt; is the limit point of &lt;span class=&#34;math inline&#34;&gt;\(\{x^{k_j}\}\)&lt;/span&gt;. But in this example, the limit point of &lt;span class=&#34;math inline&#34;&gt;\(\{z_1^{k_j}\}\)&lt;/span&gt; is (1,1,-1) while the limit point of &lt;span class=&#34;math inline&#34;&gt;\(\{x^{k_j}\}\)&lt;/span&gt; is either (-1,1,-1) or (1,-1,1). So the requirement of uniqueness is not met.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;r-codes-for-numerical-experiments&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;R codes for numerical experiments&lt;/h1&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;####################
+### Function for test ###
+####################
+
+PowellE1&amp;lt;-function(xstart,cycles,fig=T){
+  #######function part ##############
+  UpdateCycle&amp;lt;-function(x){
+    Sign&amp;lt;-function(x){
+      if (x&amp;gt;0){
+        return(1)
+      }else{
+        if (x&amp;lt;0){
+          return(-1)
+        }else{
+          return(0)
+        }
+      }
+    }
+    x.new&amp;lt;-c()
+    x.new[1]&amp;lt;-Sign(x[2]+x[3])*(1+0.5*abs(x[2]+x[3]))
+    x.new[2]&amp;lt;-Sign(x.new[1]+x[3])*(1+0.5*abs(x.new[1]+x[3]))
+    x.new[3]&amp;lt;-Sign(x.new[1]+x.new[2])*(1+0.5*abs(x.new[1]+x.new[2]))
+    cycle&amp;lt;-matrix(c(x.new[1],x[2],x[3],x.new[1],x.new[2],x[3],x.new[1],x.new[2],x.new[3]),
+                  ncol=3,byrow=T)
+    return(cycle)
+  }
+  
+  fpowell&amp;lt;-function(x){
+    
+    PostivePart&amp;lt;-function(x){
+      ifelse(x&amp;gt;=0,x,0)
+    }
+    
+    fval&amp;lt;-(-(x[1]*x[2]+x[2]*x[3]+x[1]*x[3]))+
+      PostivePart(x[1]-1)^2+PostivePart(-x[1]-1)^2+
+      PostivePart(x[2]-1)^2+PostivePart(-x[2]-1)^2+
+      PostivePart(x[3]-1)^2+PostivePart(-x[3]-1)^2
+    return(fval)
+  }
+  ############ operation part ################
+  x.store&amp;lt;-matrix(ncol=3,nrow=cycles*3+1)
+  x.store[1,]&amp;lt;-xstart
+  for (i in seq_len(cycles)){
+    x.store[(3*i-1):(3*i+1),]&amp;lt;-UpdateCycle(x.store[3*i-2,])
+  }
+  x.store&amp;lt;-x.store[-1,]
+  fval&amp;lt;-rep(0,cycles*3)
+  
+  for(i in seq_len(cycles*3)){
+    fval[i]&amp;lt;-fpowell(x.store[i,])
+  }
+  fval&amp;lt;-as.matrix(fval)
+  
+  if (fig==T){
+    plot(fval,ylim=c(min(fval)-1,max(fval)+1),type=&amp;quot;l&amp;quot;,xlab=&amp;quot;Iterations&amp;quot;,ylab = &amp;quot;F value&amp;quot;)
+  }
+  r&amp;lt;-list()
+  r$x.iterate&amp;lt;-x.store
+  r$fval&amp;lt;-fval
+  return(r)
+}
+
+
+##################
+#### Test 1 ########
+##################
+
+
+perturb&amp;lt;-0.5
+xstart&amp;lt;-c(-1-perturb,1+0.5*perturb,-1-0.25*perturb)
+cycles&amp;lt;-20
+
+r&amp;lt;-PowellE1(xstart,cycles,fig=T)
+
+##################
+#### Test 2 ########
+##################
+
+perturb&amp;lt;-0.5
+xstart&amp;lt;-c(-1-perturb,1+0.5*perturb,-1-0.25*perturb)
+cycles&amp;lt;-20
+
+r&amp;lt;-PowellE1(xstart,cycles,fig=T)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/powell/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;##################
+#### Test 3 ########
+##################
+
+xstart&amp;lt;-c(3,2,1)
+cycles&amp;lt;-100
+
+r&amp;lt;-PowellE1(xstart,cycles,fig=T)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/powell/index_files/figure-html/unnamed-chunk-1-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

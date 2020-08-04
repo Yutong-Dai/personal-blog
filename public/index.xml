@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Dai, Yutong / 戴宇童</title>
+    <title>Dai, Yutong/ 戴宇童</title>
     <link>/</link>
-    <description>Recent content on Dai, Yutong / 戴宇童</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
-    
-	    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <description>Dai, Yutong/ 戴宇童</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Dai, Yutong/ 戴宇童</title>
+      <link>/</link>
+    </image>
     
     <item>
       <title>Cheatsheet Template</title>
       <link>/resources/tex-rmd/cheatsheet/</link>
       <pubDate>Fri, 31 May 2019 00:00:00 +0100</pubDate>
-      
       <guid>/resources/tex-rmd/cheatsheet/</guid>
       <description></description>
     </item>
@@ -24,7 +24,6 @@
       <title>Homework Template</title>
       <link>/resources/tex-rmd/homework/</link>
       <pubDate>Fri, 31 May 2019 00:00:00 +0100</pubDate>
-      
       <guid>/resources/tex-rmd/homework/</guid>
       <description></description>
     </item>
@@ -33,7 +32,6 @@
       <title>Lecture Notes Template</title>
       <link>/resources/tex-rmd/lecturenotes/</link>
       <pubDate>Fri, 31 May 2019 00:00:00 +0100</pubDate>
-      
       <guid>/resources/tex-rmd/lecturenotes/</guid>
       <description></description>
     </item>
@@ -42,22 +40,20 @@
       <title>Example Talk</title>
       <link>/talk/example/</link>
       <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
-      
       <guid>/talk/example/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click on the &lt;strong&gt;Slides&lt;/strong&gt; button above to view the built-in slides feature.
   &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;p&gt;Slides can be added in a few ways:&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Create&lt;/strong&gt; slides using Academic&amp;rsquo;s &lt;a href=&#34;https://sourcethemes.com/academic/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34;&gt;&lt;em&gt;Slides&lt;/em&gt;&lt;/a&gt; feature and link using &lt;code&gt;slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Create&lt;/strong&gt; slides using Academic&amp;rsquo;s 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/managing-content/#create-slides&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;em&gt;Slides&lt;/em&gt;&lt;/a&gt; feature and link using &lt;code&gt;slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Upload&lt;/strong&gt; an existing slide deck to &lt;code&gt;static/&lt;/code&gt; and link using &lt;code&gt;url_slides&lt;/code&gt; parameter in the front matter of the talk file&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Embed&lt;/strong&gt; your slides (e.g. Google Slides) or presentation video on this page using &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;shortcodes&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Embed&lt;/strong&gt; your slides (e.g. Google Slides) or presentation video on this page using 
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;shortcodes&lt;/a&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Further talk details can easily be added to this page using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
 </description>
     </item>
@@ -66,7 +62,6 @@
       <title>A Subspace Acceleration Method for Minimization Involving a Group Sparsity-Inducing Regularizer</title>
       <link>/publication/farsagroup/</link>
       <pubDate>Wed, 01 Jul 2020 00:00:00 +0000</pubDate>
-      
       <guid>/publication/farsagroup/</guid>
       <description></description>
     </item>
@@ -75,19 +70,11 @@
       <title>Python Tricks Learned From Projects</title>
       <link>/post/python-tricks-learned-from-projects/</link>
       <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
-      
       <guid>/post/python-tricks-learned-from-projects/</guid>
-      <description>
-
-&lt;p&gt;&lt;h2&gt;Table of Contents&lt;/h2&gt;
-HAHAHUGOSHORTCODE-TOC0-HBHB&lt;/p&gt;
-
-&lt;h1 id=&#34;show-all-submodules&#34;&gt;Show all submodules&lt;/h1&gt;
-
+      <description>&lt;h1 id=&#34;show-all-submodules&#34;&gt;Show all submodules&lt;/h1&gt;
 &lt;p&gt;I need to import a particular function &lt;code&gt;formulate&lt;/code&gt; from a file in the directory &lt;code&gt;&amp;lt;path-to-the-package&amp;gt;/coinor/dippy/examples/milp/milp_func&lt;/code&gt;.
 It&amp;rsquo;s clear that I need to import it from the submodule &lt;code&gt;coinor.dippy&lt;/code&gt;. But how to do it exactly?
 Use following commands, which list all submodules you can import.&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import pkgutil
 import coinor.dippy
 package=coinor.dippy
@@ -96,23 +83,17 @@ for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
                                                       onerror=lambda x: None):
     print(modname)
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Relavant outputs are&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;.....
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;.....
 coinor.dippy.examples.milp
 coinor.dippy.examples.milp.__main__
 coinor.dippy.examples.milp.milp_func
 .....
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Then I can simply use&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from coinor.dippy.examples.milp.milp_func import formulate
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h1 id=&#34;using-the-right-kernel-for-jupyter-notebook&#34;&gt;Using the right kernel for Jupyter Notebook&lt;/h1&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# create virtual env with python 3.7.7, whose name is cuppy
 conda create -n cuppy numpy scipy pandas notebook matplotlib python=3.7.7 
 # activate cuppy
@@ -124,85 +105,78 @@ cond activate cuppy
 # point this verison of Python to jupyter
 ipython kernel install --name &amp;quot;cuppy&amp;quot; --user
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;h1 id=&#34;running-jupyter-notebook-from-the-remote-server&#34;&gt;Running Jupyter Notebook from the remote server&lt;/h1&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;Reference&lt;/p&gt;
-
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://ljvmiranda921.github.io/notebook/2018/01/31/running-a-jupyter-notebook/&#34; target=&#34;_blank&#34;&gt;set up jupyter notebook on login nodes&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://benjlindsay.com/posts/running-jupyter-lab-remotely#running-on-a-compute-node&#34; target=&#34;_blank&#34;&gt;set up jupyter notebook on computation nodes&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://ljvmiranda921.github.io/notebook/2018/01/31/running-a-jupyter-notebook/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;set up jupyter notebook on login nodes&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://benjlindsay.com/posts/running-jupyter-lab-remotely#running-on-a-compute-node&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;set up jupyter notebook on computation nodes&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;&lt;strong&gt;On the server side:&lt;/strong&gt;&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Create following two functions in the &lt;code&gt;.bashrc&lt;/code&gt; and reload it using &lt;code&gt;source .bashrc&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;  function Inode(){
-    # provide the computation node name; default is polyp2
-    local nodename=&amp;quot;${1:-polyp2}&amp;quot;
-    echo &amp;quot;starting an interactive section at $nodename&amp;quot;
-    # start an interactive session in the given node
-    qsub -l nodes=$nodename:ppn=4 -l walltime=1:00:00 -l mem=10gb,vmem=10gb -I
-  }
+&lt;li&gt;
+&lt;p&gt;Create following two functions in the &lt;code&gt;.bashrc&lt;/code&gt; and reload it using &lt;code&gt;source .bashrc&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;function Inode(){
+  # provide the computation node name; default is polyp2
+  local nodename=&amp;quot;${1:-polyp2}&amp;quot;
+  echo &amp;quot;starting an interactive section at $nodename&amp;quot;
+  # start an interactive session in the given node
+  qsub -l nodes=$nodename:ppn=4 -l walltime=1:00:00 -l mem=10gb,vmem=10gb -I
+}
   
-  function jpt(){
-    # provide the port; default is 1234
-    local port=&amp;quot;${1:-1234}&amp;quot;
-    echo &amp;quot;open jupyter notebook at $(hostname):$port&amp;quot;
-    # Fires-up a Jupyter notebook by supplying a specific port and ip
-    jupyter notebook --no-browser --port=$port --ip=$(hostname)
-  }
+function jpt(){
+  # provide the port; default is 1234
+  local port=&amp;quot;${1:-1234}&amp;quot;
+  echo &amp;quot;open jupyter notebook at $(hostname):$port&amp;quot;
+  # Fires-up a Jupyter notebook by supplying a specific port and ip
+  jupyter notebook --no-browser --port=$port --ip=$(hostname)
+}
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;In the server side&amp;rsquo;s terminal, if&lt;/p&gt;
-
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In the server side&amp;rsquo;s terminal, if&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;If you want to start the jupyter notebook in the login node, just call &lt;code&gt;jpt&lt;/code&gt;;&lt;/li&gt;
-&lt;li&gt;If you want to start the jupyter notebook in the computation node, call &lt;code&gt;Inode&lt;/code&gt; first and then when you are prompted to the computation node, then call &lt;code&gt;jpt&lt;/code&gt;. For example, if the comutation node name is &lt;code&gt;polyp3&lt;/code&gt;, then call &lt;code&gt;Inode polyp3&lt;/code&gt; and then call &lt;code&gt;jpt 1234&lt;/code&gt;.
-&lt;br /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;If you want to start the jupyter notebook in the computation node, call &lt;code&gt;Inode&lt;/code&gt; first and then when you are prompted to the computation node, then call &lt;code&gt;jpt&lt;/code&gt;. For example, if the comutation node name is &lt;code&gt;polyp3&lt;/code&gt;, then call &lt;code&gt;Inode polyp3&lt;/code&gt; and then call &lt;code&gt;jpt 1234&lt;/code&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;On the local side:&lt;/strong&gt;&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Create following two functions in the &lt;code&gt;.bashrc&lt;/code&gt; and reload it using &lt;code&gt;source .bashrc&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;  function jptt(){
-      local localport=&amp;quot;${1:-2234}&amp;quot;
-      local servername=&amp;quot;${2:-polyp1}&amp;quot;
-      local serverport=&amp;quot;${3:-1234}&amp;quot;
-      # Forwards port $1 into port $3 and listens to it
-      ssh -N -f -L localhost:$localport:$servername:$serverport yud319@polyps.ie.lehigh.edu
-  }
-  function stopjpt(){
+&lt;li&gt;
+&lt;p&gt;Create following two functions in the &lt;code&gt;.bashrc&lt;/code&gt; and reload it using &lt;code&gt;source .bashrc&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;function jptt(){
     local localport=&amp;quot;${1:-2234}&amp;quot;
-    lsof -i tcp:$localport |awk &#39;NR &amp;gt; 1 {print $2}&#39; | xargs kill -9
-    echo &amp;quot;Kill port $localport&amp;quot;
-  }
+    local servername=&amp;quot;${2:-polyp1}&amp;quot;
+    local serverport=&amp;quot;${3:-1234}&amp;quot;
+    # Forwards port $1 into port $3 and listens to it
+    ssh -N -f -L localhost:$localport:$servername:$serverport yud319@polyps.ie.lehigh.edu
+}
+function stopjpt(){
+  local localport=&amp;quot;${1:-2234}&amp;quot;
+  lsof -i tcp:$localport |awk &#39;NR &amp;gt; 1 {print $2}&#39; | xargs kill -9
+  echo &amp;quot;Kill port $localport&amp;quot;
+}
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Call &lt;code&gt;jptt&lt;/code&gt; on the local terminal, which will listen to the jupyter notebook host on the server&lt;/li&gt;
-&lt;li&gt;After finish the job, call &lt;code&gt;stopjpt&lt;/code&gt;, which will free the local port.&lt;/li&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Call &lt;code&gt;jptt&lt;/code&gt; on the local terminal, which will listen to the jupyter notebook host on the server&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After finish the job, call &lt;code&gt;stopjpt&lt;/code&gt;, which will free the local port.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
     
     <item>
       <title>Introduction to Mathematical Programming</title>
-      <link>/post/ie406/lp/</link>
+      <link>/post/lp/</link>
       <pubDate>Fri, 18 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/ie406/lp/</guid>
+      <guid>/post/lp/</guid>
       <description>
 
 
@@ -217,43 +191,36 @@ ipython kernel install --name &amp;quot;cuppy&amp;quot; --user
     
     <item>
       <title>中国传统计时</title>
-      <link>/post/chinese-clock/chinese-time/</link>
+      <link>/post/chinese-time/</link>
       <pubDate>Fri, 05 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/chinese-clock/chinese-time/</guid>
-      <description>
-
-&lt;h1 id=&#34;中国传统计时单位&#34;&gt;中国传统计时单位&lt;/h1&gt;
-
+      <guid>/post/chinese-time/</guid>
+      <description>&lt;h1 id=&#34;中国传统计时单位&#34;&gt;中国传统计时单位&lt;/h1&gt;
 &lt;p&gt;古时一天分12个时辰，采用地支作为时辰名称，分为&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;&#39;子&#39;, &#39;丑&#39;, &#39;寅&#39;, &#39;卯&#39;
 &#39;辰&#39;, &#39;巳&#39;, &#39;午&#39;, &#39;未&#39; 
 &#39;申&#39;, &#39;酉&#39;, &#39;戌&#39;, &#39;亥&#39;
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;时辰的起点是午夜，即子初。&lt;/p&gt;
-
-&lt;p&gt;点击下图色块便可查看时间对应。
+&lt;p&gt;点击下图色块便可查看时间对应。&lt;/p&gt;
 &lt;iframe
       src=&#34;https://plot.ly/~Roth/2.embed&#34;
       width=&#34;100%&#34;
       height=&#34;600px&#34;
       style=&#34;border:none;&#34;&gt;
-&lt;/iframe&gt;&lt;/p&gt;
-
+&lt;/iframe&gt;
 &lt;p&gt;&lt;strong&gt;附录&lt;/strong&gt;&lt;/p&gt;
-
 &lt;ol&gt;
-&lt;li&gt;参考文献:
-
+&lt;li&gt;参考文献:&lt;/li&gt;
+&lt;/ol&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.guoxue.com/?p=4025&#34; target=&#34;_blank&#34;&gt;国学网&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://weibo.com/6421571119/HBrUbvUnQ?from=page_1005056421571119_profile&amp;amp;wvr=6&amp;amp;mod=weibotime&amp;amp;type=comment#_rnd1562428488868&#34; target=&#34;_blank&#34;&gt;新浪博客 博主知书少年果麦麦&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;http://www.guoxue.com/?p=4025&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;国学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://weibo.com/6421571119/HBrUbvUnQ?from=page_1005056421571119_profile&amp;amp;wvr=6&amp;amp;mod=weibotime&amp;amp;type=comment#_rnd1562428488868&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;新浪博客 博主知书少年果麦麦&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
 &lt;li&gt;用于绘图的Python代码&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# using following code in jupyter notebook
 import plotly
 import plotly.graph_objs as go
@@ -362,25 +329,26 @@ plotly.offline.iplot({
     
     <item>
       <title>Gradient Descent in Logistic Regression</title>
-      <link>/post/gdlogistic/gradient-descent-in-logistic-regression/</link>
+      <link>/post/gradient-descent-in-logistic-regression/</link>
       <pubDate>Mon, 01 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/gdlogistic/gradient-descent-in-logistic-regression/</guid>
-      <description>
-
-&lt;p&gt;&lt;h2&gt;Table of Contents&lt;/h2&gt;
-HAHAHUGOSHORTCODE-TOC0-HBHB&lt;/p&gt;
-
+      <guid>/post/gradient-descent-in-logistic-regression/</guid>
+      <description>&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;a href=&#34;#problem-formulation&#34;&gt;Problem Formulation&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#motivating-example&#34;&gt;Motivating Example&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#analysis-why-this-happens&#34;&gt;Analysis: why this happens?&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#questions&#34;&gt;Questions&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#appendix&#34;&gt;Appendix&lt;/a&gt;&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;
 &lt;h1 id=&#34;problem-formulation&#34;&gt;Problem Formulation&lt;/h1&gt;
-
 &lt;p&gt;There are commonly two ways of formulating the logistic regression problem, depending on the way we label the response variable $y$. Here we focus on the first formulation and defer the second formulation on the appendix.&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;First Formulation:&lt;/strong&gt;&lt;/p&gt;
-
 &lt;p&gt;Consider restrict $y$ to {${-1,1}$}. Then we have
 $$
 \begin{aligned}
-&amp;amp;\mathbb{P}(y=1|z)=\sigma(z)=\frac{1}{1 + e^{-z}}&lt;br /&gt;
+&amp;amp;\mathbb{P}(y=1|z)=\sigma(z)=\frac{1}{1 + e^{-z}}\&lt;br&gt;
 &amp;amp;\mathbb{P}(y=-1|z)=\sigma(z)=\frac{1}{1 + e^z},
 \end{aligned}
 $$
@@ -391,7 +359,7 @@ $$
 If we consider the data $({x_i,y_i})_{i=1}^N$ and we want to use the Likelihood Principle to fit the Logistic Regression, then we would like to maximize the following loss function,
 $$
 \begin{aligned}
-&amp;amp;   L(\beta_0,\beta) = \prod_{i=1}^N \mathbb{P}(y_i|z_i)&lt;br /&gt;
+&amp;amp;   L(\beta_0,\beta) = \prod_{i=1}^N \mathbb{P}(y_i|z_i)\&lt;br&gt;
 &amp;amp; z_i =\beta_0+\beta^Tx_i.
 \end{aligned}
 $$
@@ -402,13 +370,9 @@ $$
 \end{aligned}
 $$
 From now on,  for the sake of simplicity, we drop the intercept term $\beta_0$.&lt;/p&gt;
-
 &lt;h1 id=&#34;motivating-example&#34;&gt;Motivating Example&lt;/h1&gt;
-
 &lt;p&gt;Consider two simulated datasets:&lt;/p&gt;
-
 &lt;p&gt;Dataset 1:&lt;/p&gt;
-
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -417,14 +381,12 @@ From now on,  for the sake of simplicity, we drop the intercept term $\beta_0$.&
 &lt;th&gt;$y$&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
-
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;0.3&lt;/td&gt;
 &lt;td&gt;0.9&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;0.5&lt;/td&gt;
 &lt;td&gt;1.5&lt;/td&gt;
@@ -432,9 +394,7 @@ From now on,  for the sake of simplicity, we drop the intercept term $\beta_0$.&
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-
 &lt;p&gt;Dataset 2:&lt;/p&gt;
-
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -443,14 +403,12 @@ From now on,  for the sake of simplicity, we drop the intercept term $\beta_0$.&
 &lt;th&gt;$y$&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
-
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;-1&lt;/td&gt;
 &lt;td&gt;-1&lt;/td&gt;
@@ -458,17 +416,13 @@ From now on,  for the sake of simplicity, we drop the intercept term $\beta_0$.&
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-
 &lt;p&gt;&lt;strong&gt;Some Analysis:&lt;/strong&gt;&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;The objective function $l(\beta)$ is strictly convex by looking at its Hessian, which is positive defined. However, it is not strongly convex.&lt;/li&gt;
 &lt;li&gt;For given Data set, the Hessian is upper bounded by $(\sum_{i=1}^N|x_i|^2)I$ (see Appendix).&lt;/li&gt;
 &lt;li&gt;The stepsize can be chosen as $\alpha = \frac{1}{\sum_{i=1}^N|x_i|^2}$.&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;Applying the gradient descent with constant stepsize $\frac{1}{L}$ on each dataset for 1000 steps, then we obtain the estimations as follows.&lt;/p&gt;
-
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -477,14 +431,12 @@ From now on,  for the sake of simplicity, we drop the intercept term $\beta_0$.&
 &lt;th&gt;$\beta_2$&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
-
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;1&lt;/td&gt;
 &lt;td&gt;-0.12058225&lt;/td&gt;
 &lt;td&gt;-0.36174676&lt;/td&gt;
 &lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td&gt;2&lt;/td&gt;
 &lt;td&gt;3.59370507&lt;/td&gt;
@@ -492,73 +444,50 @@ From now on,  for the sake of simplicity, we drop the intercept term $\beta_0$.&
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-
 &lt;p&gt;Also we plot out following figures to check the convergence. The top two figures describe the algorithm&amp;rsquo;s performance on the dataset 1 while the bottom two is for the  dataset 2.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;./LogisticRegression.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;./LogisticRegression.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Fig1: Apply GD with the constant stepsize on two different datasets. The blue curves depicts how the norm of gradient at iterates change while the red curves show the change of the function value in each iteration.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;h1 id=&#34;analysis-why-this-happens&#34;&gt;Analysis: why this happens?&lt;/h1&gt;
-
 &lt;p&gt;First, if we want to minimize $f(\beta)=\log(1 + \exp(-\beta))$ using gradient descent with constant stepsize $\frac{1}{L}$, then we will facing following issues. Here we assume $\beta \in \mathbb{R}$.&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;The global minimal is not attainable, i.e., $+\infty$, though we can have $\nabla f(\beta^k)\rightarrow 0$, which means $\beta \rightarrow +\infty$, hence the iterates diverge.&lt;/li&gt;
 &lt;li&gt;Indeed,  the ${f(\beta^k)}$ converges to $f^*=0$ by as it monotonously decreasing and lower bounded by $0$.&lt;/li&gt;
 &lt;li&gt;The worst-case iteration complexity is $\mathcal{O}(\frac{1}{k})$, indicating a sublinear convergence rate.&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;Now, let&amp;rsquo;s back to the example. The figure 2 shows that the first dataset and second dataset, which correspond to the &lt;strong&gt;non-separable&lt;/strong&gt; and &lt;strong&gt;separable&lt;/strong&gt; case respectively.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;./LogisticSeparableNonseparable.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;./LogisticSeparableNonseparable.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Fig2: (Left) First dataset. (Right) Second dataset. The fitted separating line is derived by $y=-\frac{\beta_1}{\beta_2}x$.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;We also plot out the norm of iterates at each iteration in figure 3.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;./LogisticRegression-iterates.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;./LogisticRegression-iterates.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Fig3: The top figure shows the norm of iterates for the first dataset while the bottom one shows case for the second dataset.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;We can see that for non-separable case, the norm of iterates are bounded while the latter goes to infinity (if we increase the number of iterations).&lt;/p&gt;
-
 &lt;p&gt;In non-separable case, ${\beta^k}$ &lt;em&gt;seems&lt;/em&gt;  to stay in &amp;ldquo;strongly convex&amp;rdquo; region while in separable case, ${\beta^k}$ keeps approaching the flatten region, so you can easily say a sharp decreasing in convergence speed. The following observations can be verified by figure 4 (1-dimensional case) and figure 5 (2-dimensional case).&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;./LogisticRegression-1dcontour.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;./LogisticRegression-1dcontour.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Fig4:  (Left) Non-separable dataset  ${(x_1=1, y_1=1), (x_2=2, y_2=-1)}$.  The green dot line is $y=x^2$. The objective function (blue line) preserves the strong convexity in a certain range and the minimal stays in this range. The red point is the start point $x_0$.  (Right). Separable dataset ${(x_1=1, y_1=1), (x_2=-1, y_2=-1)}$. Although the  objective function is endowed with the strong convexity property in a certain range, however the global minimal is outside of this range.&lt;/p&gt;
 &lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&#34;./LogisticRegression-2dcontour.png&#34; alt=&#34;LogisticRegression-2dcontour&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;./LogisticRegression-2dcontour.png&#34; alt=&#34;LogisticRegression-2dcontour&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Fig5:  Dataset 1 is shown in the top 2 pictures with the right one zooming into a particular range. Dataset 2 is shown in the bottom pictures.  The blue dots trace the progression of iterates.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;h1 id=&#34;questions&#34;&gt;Questions&lt;/h1&gt;
-
 &lt;ol&gt;
 &lt;li&gt;Why the separability would cause such a difference? From the Fig4 and Fig5, we know data as &lt;em&gt;parameters&lt;/em&gt; can influence the shape of the objective function a lot.  Given the data set,  can we predict the behavior of the performance of gradient descent with constant stepsize, i.e., linear convergence rate or sublinear convergence rate? Can we extend our conclusion to higher dimension?&lt;/li&gt;
 &lt;li&gt;In real world application, it&amp;rsquo;s likely that the data is semi-separable, i.e., most data points can be split into two groups with a few exceptions. How&amp;rsquo;s that influence the performance of the algorithm?&lt;/li&gt;
 &lt;li&gt;Will second formulation (see below) also encounter the similar issue? My guess is yes.&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;h1 id=&#34;appendix&#34;&gt;Appendix&lt;/h1&gt;
-
 &lt;p&gt;&lt;strong&gt;Second Formulation of Logistic Regression&lt;/strong&gt;&lt;/p&gt;
-
 &lt;p&gt;Consider restrict $y$ to ${0,1}$. Then we have
 $$
 \begin{aligned}
-&amp;amp;\mathbb{P}(y=1|z)=\sigma(z)=\frac{1}{1 + e^{-z}}&lt;br /&gt;
+&amp;amp;\mathbb{P}(y=1|z)=\sigma(z)=\frac{1}{1 + e^{-z}}\&lt;br&gt;
 &amp;amp;\mathbb{P}(y=0|z)=\sigma(z)=\frac{1}{1 + e^z},
 \end{aligned}
 $$
@@ -566,38 +495,38 @@ which can be compactly written as
 $$
 \mathbb{P}(y|z)=\sigma(z)^y(1-\sigma(z))^{1-y}.
 $$&lt;/p&gt;
-
 &lt;p&gt;If we use the second formulation, then maximizing the likelihood  is equivalent to
 $$
 \begin{aligned}
 \min_{\beta_0,\beta}l(\beta_0,\beta)=\frac{1}{N}\sum_{i=1}^N[-y_iz_i+\log(1+e^{z_i})].
 \end{aligned}
 $$&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;Derivation of the gradient and Hessian of the loss function (first formualtion)&lt;/strong&gt;&lt;/p&gt;
-
 &lt;p&gt;Consider $f(\beta)=\log (1 + \exp(-y\beta^Tx)$, then we have
 $$
 \begin{aligned}
-&amp;amp;\nabla f(\beta) = \frac{1}{1 + \exp(y\beta^Tx)}(-yx)&lt;br /&gt;
+&amp;amp;\nabla f(\beta) = \frac{1}{1 + \exp(y\beta^Tx)}(-yx)\&lt;br&gt;
 &amp;amp;\nabla^2 f(\beta) = (yx)\frac{\exp(y\beta^Tx)}{1 + \exp(y\beta^Tx)}(yx^T),
 \end{aligned}
 $$
 which implies
 $$
 \begin{aligned}
-&amp;amp; \nabla l(\beta)=\frac{1}{N}\sum_{i=1}^N \frac{1}{1 + \exp(y_i\beta^Tx_i)}(-y_ix_i)&lt;br /&gt;
+&amp;amp; \nabla l(\beta)=\frac{1}{N}\sum_{i=1}^N \frac{1}{1 + \exp(y_i\beta^Tx_i)}(-y_ix_i)\&lt;br&gt;
 &amp;amp; \nabla^2 l(\beta)=\frac{1}{N}\sum_{i=1}^N(y_ix_i)\frac{\exp(y\beta^Tx_i)}{(1 + \exp(y\beta^Tx_i))^2}(y_ix_i^T)=\frac{1}{N}XDX^T,
 \end{aligned}
 $$
 where $X=[x_1,\cdots,x_n]$ , $D=\text{diag}({y_1^2\sigma_1(1-\sigma_1),\cdots,y_n^2\sigma_n(1-\sigma_n)})$ , and $\sigma_i =\frac{\exp(y\beta^Tx_i)}{1 + \exp(y\beta^Tx_i)} $.&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;Reference:&lt;/strong&gt;&lt;/p&gt;
-
 &lt;ol&gt;
-&lt;li&gt;&lt;p&gt;Lecture notes 9 and 10 presented on this &lt;a href=&#34;https://wiki.illinois.edu/wiki/display/ie510/IE+510+Applied+Nonlinear+Programming+Home&#34; target=&#34;_blank&#34;&gt;course website.&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The code for generating graphs can be found in &lt;a href=&#34;https://github.com/Rothdyt/all_of_optimization/blob/master/_draft/GradientMethod/pycode/LogisticRegression.py&#34; target=&#34;_blank&#34;&gt;my git repo&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lecture notes 9 and 10 presented on this 
+&lt;a href=&#34;https://wiki.illinois.edu/wiki/display/ie510/IE&amp;#43;510&amp;#43;Applied&amp;#43;Nonlinear&amp;#43;Programming&amp;#43;Home&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;course website.&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The code for generating graphs can be found in 
+&lt;a href=&#34;https://github.com/Rothdyt/all_of_optimization/blob/master/_draft/GradientMethod/pycode/LogisticRegression.py&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;my git repo&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 </description>
     </item>
@@ -606,7 +535,6 @@ where $X=[x_1,\cdots,x_n]$ , $D=\text{diag}({y_1^2\sigma_1(1-\sigma_1),\cdots,y_
       <title>Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization</title>
       <link>/publication/psum/</link>
       <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
-      
       <guid>/publication/psum/</guid>
       <description></description>
     </item>
@@ -615,29 +543,20 @@ where $X=[x_1,\cdots,x_n]$ , $D=\text{diag}({y_1^2\sigma_1(1-\sigma_1),\cdots,y_
       <title>Slides</title>
       <link>/slides/example/</link>
       <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      
       <guid>/slides/example/</guid>
-      <description>
-
-&lt;h1 id=&#34;welcome-to-slides&#34;&gt;Welcome to Slides&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/&#34; target=&#34;_blank&#34;&gt;Academic&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
+      <description>&lt;h1 id=&#34;welcome-to-slides&#34;&gt;Welcome to Slides&lt;/h1&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://sourcethemes.com/academic/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Academic&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
 &lt;h2 id=&#34;features&#34;&gt;Features&lt;/h2&gt;
-
 &lt;ul&gt;
 &lt;li&gt;Efficiently write slides in Markdown&lt;/li&gt;
 &lt;li&gt;3-in-1: Create, Present, and Publish your slides&lt;/li&gt;
 &lt;li&gt;Supports speaker notes&lt;/li&gt;
 &lt;li&gt;Mobile friendly slides&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;hr /&gt;
-
+&lt;hr&gt;
 &lt;h2 id=&#34;controls&#34;&gt;Controls&lt;/h2&gt;
-
 &lt;ul&gt;
 &lt;li&gt;Next: &lt;code&gt;Right Arrow&lt;/code&gt; or &lt;code&gt;Space&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Previous: &lt;code&gt;Left Arrow&lt;/code&gt;&lt;/li&gt;
@@ -647,91 +566,65 @@ where $X=[x_1,\cdots,x_n]$ , $D=\text{diag}({y_1^2\sigma_1(1-\sigma_1),\cdots,y_
 &lt;li&gt;Speaker notes: &lt;code&gt;S&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Fullscreen: &lt;code&gt;F&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;Zoom: &lt;code&gt;Alt + Click&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/hakimel/reveal.js#pdf-export&#34; target=&#34;_blank&#34;&gt;PDF Export&lt;/a&gt;: &lt;code&gt;E&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://github.com/hakimel/reveal.js#pdf-export&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PDF Export&lt;/a&gt;: &lt;code&gt;E&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;hr /&gt;
-
+&lt;hr&gt;
 &lt;h2 id=&#34;code-highlighting&#34;&gt;Code Highlighting&lt;/h2&gt;
-
 &lt;p&gt;Inline code: &lt;code&gt;variable&lt;/code&gt;&lt;/p&gt;
-
 &lt;p&gt;Code block:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;porridge = &amp;quot;blueberry&amp;quot;
 if porridge == &amp;quot;blueberry&amp;quot;:
     print(&amp;quot;Eating...&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
+&lt;hr&gt;
 &lt;h2 id=&#34;math&#34;&gt;Math&lt;/h2&gt;
-
 &lt;p&gt;In-line math: $x + y = z$&lt;/p&gt;
-
 &lt;p&gt;Block math:&lt;/p&gt;
-
 &lt;p&gt;$$
-f\left( x \right) = \;\frac{{2\left( {x + 4} \right)\left( {x - 4} \right)}}{{\left( {x + 4} \right)\left( {x + 1} \right)}}
+f\left( x \right) = ;\frac{{2\left( {x + 4} \right)\left( {x - 4} \right)}}{{\left( {x + 4} \right)\left( {x + 1} \right)}}
 $$&lt;/p&gt;
-
-&lt;hr /&gt;
-
+&lt;hr&gt;
 &lt;h2 id=&#34;fragments&#34;&gt;Fragments&lt;/h2&gt;
-
 &lt;p&gt;Make content appear incrementally&lt;/p&gt;
-
 &lt;pre&gt;&lt;code&gt;{{% fragment %}} One {{% /fragment %}}
 {{% fragment %}} **Two** {{% /fragment %}}
 {{% fragment %}} Three {{% /fragment %}}
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Press &lt;code&gt;Space&lt;/code&gt; to play!&lt;/p&gt;
-
 &lt;p&gt;&lt;span class=&#34;fragment &#34; &gt;
-   One
+One
 &lt;/span&gt;
 &lt;span class=&#34;fragment &#34; &gt;
-   &lt;strong&gt;Two&lt;/strong&gt;
+&lt;strong&gt;Two&lt;/strong&gt;
 &lt;/span&gt;
 &lt;span class=&#34;fragment &#34; &gt;
-   Three
+Three
 &lt;/span&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
+&lt;hr&gt;
 &lt;p&gt;A fragment can accept two optional parameters:&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;class&lt;/code&gt;: use a custom style (requires definition in custom CSS)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;weight&lt;/code&gt;: sets the order in which a fragment appears&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;hr /&gt;
-
+&lt;hr&gt;
 &lt;h2 id=&#34;speaker-notes&#34;&gt;Speaker Notes&lt;/h2&gt;
-
 &lt;p&gt;Add speaker notes to your presentation&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{% speaker_note %}}
 - Only the speaker can read these notes
 - Press `S` key to view
 {{% /speaker_note %}}
 &lt;/code&gt;&lt;/pre&gt;
-
 &lt;p&gt;Press the &lt;code&gt;S&lt;/code&gt; key to view the speaker notes!&lt;/p&gt;
-
 &lt;aside class=&#34;notes&#34;&gt;
   &lt;ul&gt;
 &lt;li&gt;Only the speaker can read these notes&lt;/li&gt;
 &lt;li&gt;Press &lt;code&gt;S&lt;/code&gt; key to view&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;/aside&gt;
-
-&lt;hr /&gt;
-
+&lt;hr&gt;
 &lt;h2 id=&#34;themes&#34;&gt;Themes&lt;/h2&gt;
-
 &lt;ul&gt;
 &lt;li&gt;black: Black background, white text, blue links (default)&lt;/li&gt;
 &lt;li&gt;white: White background, black text, blue links&lt;/li&gt;
@@ -739,18 +632,14 @@ $$&lt;/p&gt;
 &lt;li&gt;beige: Beige background, dark text, brown links&lt;/li&gt;
 &lt;li&gt;sky: Blue background, thin dark text, blue links&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;hr /&gt;
-
+&lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;night: Black background, thick white text, orange links&lt;/li&gt;
 &lt;li&gt;serif: Cappuccino background, gray text, brown links&lt;/li&gt;
 &lt;li&gt;simple: White background, black text, blue links&lt;/li&gt;
 &lt;li&gt;solarized: Cream-colored background, dark green text, blue links&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;hr /&gt;
-
+&lt;hr&gt;
 
 &lt;section data-noprocess data-shortcode-slide
   
@@ -758,59 +647,48 @@ $$&lt;/p&gt;
       data-background-image=&#34;/img/boards.jpg&#34;
   &gt;
 
-
 &lt;h2 id=&#34;custom-slide&#34;&gt;Custom Slide&lt;/h2&gt;
-
 &lt;p&gt;Customize the slide style and background&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-markdown&#34;&gt;{{&amp;lt; slide background-image=&amp;quot;/img/boards.jpg&amp;quot; &amp;gt;}}
 {{&amp;lt; slide background-color=&amp;quot;#0000FF&amp;quot; &amp;gt;}}
 {{&amp;lt; slide class=&amp;quot;my-style&amp;quot; &amp;gt;}}
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
+&lt;hr&gt;
 &lt;h2 id=&#34;custom-css-example&#34;&gt;Custom CSS Example&lt;/h2&gt;
-
 &lt;p&gt;Let&amp;rsquo;s make headers navy colored.&lt;/p&gt;
-
 &lt;p&gt;Create &lt;code&gt;assets/css/reveal_custom.css&lt;/code&gt; with:&lt;/p&gt;
-
 &lt;pre&gt;&lt;code class=&#34;language-css&#34;&gt;.reveal section h1,
 .reveal section h2,
 .reveal section h3 {
   color: navy;
 }
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
+&lt;hr&gt;
 &lt;h1 id=&#34;questions&#34;&gt;Questions?&lt;/h1&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://discourse.gohugo.io&#34; target=&#34;_blank&#34;&gt;Ask&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://discourse.gohugo.io&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Ask&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Documentation&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Anomaly Detection</title>
-      <link>/post/anomaly-detection/anomaly-detection/</link>
+      <link>/post/anomaly-detection/</link>
       <pubDate>Fri, 04 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/anomaly-detection/anomaly-detection/</guid>
+      <guid>/post/anomaly-detection/</guid>
       <description>
 
 
 &lt;div id=&#34;point-anomaly-detection---grubbs-test&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Point Anomaly Detection - Grubbs’ test&lt;/h1&gt;
-&lt;p&gt;Grubbs’ test&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; is commonly used technique to detect an outlier in &lt;strong&gt;univariate&lt;/strong&gt; problem, where &lt;strong&gt;normality&lt;/strong&gt; assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.&lt;/p&gt;
+&lt;h1&gt;Point Anomaly Detection - Grubbs&#39; test&lt;/h1&gt;
+&lt;p&gt;Grubbs&#39; test&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; is commonly used technique to detect an outlier in &lt;strong&gt;univariate&lt;/strong&gt; problem, where &lt;strong&gt;normality&lt;/strong&gt; assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.&lt;/p&gt;
 &lt;p&gt;The hypothesis test is defined as&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\]&lt;/span&gt; For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[
 G = \frac{\max_i |X_i - \bar X|}{s},
 \]&lt;/span&gt; where the &lt;span class=&#34;math inline&#34;&gt;\(\bar X\)&lt;/span&gt; is the sample mean and &lt;span class=&#34;math inline&#34;&gt;\(s\)&lt;/span&gt; is the sample deviation.&lt;/p&gt;
-&lt;p&gt;Let’s look at one simulated example.&lt;/p&gt;
+&lt;p&gt;Let&#39;s look at one simulated example.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;set.seed(123)
 simulated_data &amp;lt;- rnorm(100, 0, 1)
 simulated_data_with_outliers &amp;lt;- c(simulated_data, c(3.5, -3.7))
@@ -821,7 +699,7 @@ shapiro.test(simulated_data_with_outliers)&lt;/code&gt;&lt;/pre&gt;
 ## 
 ## data:  simulated_data_with_outliers
 ## W = 0.9804, p-value = 0.1344&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Shapiro-Wilk normality test impiles the data is normally distributed. Now, let’s performe the grubbs’ test.&lt;/p&gt;
+&lt;p&gt;Shapiro-Wilk normality test impiles the data is normally distributed. Now, let&#39;s performe the grubbs&#39; test.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(outliers)
 grubbs.test(simulated_data_with_outliers, two.sided = TRUE)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## 
@@ -831,7 +709,7 @@ grubbs.test(simulated_data_with_outliers, two.sided = TRUE)&lt;/code&gt;&lt;/pre
 ## G = 3.65380, U = 0.86651, p-value = 0.01626
 ## alternative hypothesis: lowest value -3.7 is an outlier&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The test result detecs the lowest value as an outlier.&lt;/p&gt;
-&lt;p&gt;Let’s remove the -3.7 and performe the test again.&lt;/p&gt;
+&lt;p&gt;Let&#39;s remove the -3.7 and performe the test again.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;grubbs.test(head(simulated_data_with_outliers,101), two.sided = TRUE)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## 
 ##  Grubbs test for one outlier
@@ -839,7 +717,7 @@ grubbs.test(simulated_data_with_outliers, two.sided = TRUE)&lt;/code&gt;&lt;/pre
 ## data:  head(simulated_data_with_outliers, 101)
 ## G = 3.48190, U = 0.87755, p-value = 0.03378
 ## alternative hypothesis: highest value 3.5 is an outlier&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Finally, let’s remove two outliers altogether.&lt;/p&gt;
+&lt;p&gt;Finally, let&#39;s remove two outliers altogether.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;grubbs.test(head(simulated_data_with_outliers,100), two.sided = TRUE)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## 
 ##  Grubbs test for one outlier
@@ -848,7 +726,7 @@ grubbs.test(simulated_data_with_outliers, two.sided = TRUE)&lt;/code&gt;&lt;/pre
 ## G = 2.62880, U = 0.92949, p-value = 0.7584
 ## alternative hypothesis: lowest value -2.30916887564081 is an outlier&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This impiles there are no outliers.&lt;/p&gt;
-&lt;p&gt;Grubbs’ test is useful for identify the outliers of a small amount one at a time, but not suitable to detect a group of outliers.&lt;/p&gt;
+&lt;p&gt;Grubbs&#39; test is useful for identify the outliers of a small amount one at a time, but not suitable to detect a group of outliers.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;collective-anomaly-detection&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Collective Anomaly Detection&lt;/h1&gt;
@@ -856,7 +734,7 @@ grubbs.test(simulated_data_with_outliers, two.sided = TRUE)&lt;/code&gt;&lt;/pre
 &lt;h2&gt;Anomaly in timeseries - Seasonal Hybrid ESD algorithm&lt;/h2&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;#  devtools::install_github(&amp;quot;twitter/AnomalyDetection&amp;quot;)
 library(AnomalyDetection)
-river &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/post_data/river.csv&amp;quot;)
+river &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/river.csv&amp;quot;)
 results &amp;lt;- AnomalyDetectionVec(river$nitrate, period=12, direction = &amp;#39;both&amp;#39;, plot = T)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;results$plot&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
@@ -868,7 +746,7 @@ results &amp;lt;- AnomalyDetectionVec(river$nitrate, period=12, direction = &amp
 &lt;p&gt;Intuitively, the larger distance the more likely the point would be an outlier.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(FNN)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Warning: package &amp;#39;FNN&amp;#39; was built under R version 3.4.4&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;furniture &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/post_data/furniture.csv&amp;quot;)
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;furniture &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/furniture.csv&amp;quot;)
 furniture_scaled &amp;lt;- data.frame(Height = scale(furniture$Height), Width = scale(furniture$Width))
 furniture_knn &amp;lt;- get.knn(furniture_scaled, k = 5)
 furniture_scaled$score_knn &amp;lt;- rowMeans(furniture_knn$nn.dist)
@@ -892,7 +770,7 @@ largest_idx &amp;lt;- which.max(furniture_lof$score_lof)
 plot(furniture_lof$Height, furniture_lof$Width, cex=sqrt(furniture_lof$score_lof), pch=20)
 points(furniture_lof$Height[largest_idx], furniture_lof$Width[largest_idx], col=&amp;quot;red&amp;quot;, pch=20)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/anomaly-detection/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;It’s clear that, lof successfuly detects the local outlier.&lt;/p&gt;
+&lt;p&gt;It&#39;s clear that, lof successfuly detects the local outlier.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -918,7 +796,7 @@ points(furniture_lof$Height[largest_idx], furniture_lof$Width[largest_idx], col=
 &lt;/ul&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# devtools::install_github(&amp;quot;Zelazny7/isofor&amp;quot;)
 library(isofor)
-furniture &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/post_data/furniture.csv&amp;quot;)
+furniture &amp;lt;- read.csv(&amp;quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/furniture.csv&amp;quot;)
 furniture &amp;lt;- data.frame(Height = furniture$Height, Width = furniture$Width)
 scores &amp;lt;- matrix(nrow=dim(furniture)[1])
 for (ntree in c(100, 200, 500)){
@@ -952,10 +830,9 @@ contourplot(score ~ Height + Width, data = furniture_grid,region = TRUE)&lt;/cod
     
     <item>
       <title>Decision Tree: How to find the path from the root to the desired terminal node</title>
-      <link>/post/decison-tree-path/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</link>
+      <link>/post/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/decison-tree-path/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</guid>
+      <guid>/post/decision-tree-how-to-find-the-path-from-the-root-to-the-desired-terminal-node/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -1129,9 +1006,17 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
       <title>Privacy Policy</title>
       <link>/privacy/</link>
       <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
-      
       <guid>/privacy/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Terms</title>
+      <link>/terms/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
+      <guid>/terms/</guid>
+      <description>&lt;p&gt;Add your terms here and set &lt;code&gt;draft: false&lt;/code&gt; to publish it. Otherwise, delete this file if you don&amp;rsquo;t need it.&lt;/p&gt;
 </description>
     </item>
     
@@ -1139,35 +1024,31 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
       <title>Real Estate Market Data Analysis</title>
       <link>/project/boston-housing/</link>
       <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
-      
       <guid>/project/boston-housing/</guid>
       <description>&lt;p&gt;In this project, we&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;Develope data products to help Airbnb hosts to determine listing prices using Sparse Regression and RandomForest&lt;/li&gt;
 &lt;li&gt;Researched how amenities and geolocation in uence listing prices&lt;/li&gt;
 &lt;li&gt;Designed a User Interface for customers to gain insight into Airbnb rental markets in Boston&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;The &lt;a href=&#34;https://mediaspace.illinois.edu/media/t/1_3yvpnzqn&#34; target=&#34;_blank&#34;&gt;Video Presentation&lt;/a&gt; and &lt;a href=&#34;https://yutongdai.shinyapps.io/shinyapp/&#34; target=&#34;_blank&#34;&gt;Rshiny App Demo&lt;/a&gt; are also provided.&lt;/p&gt;
-
-&lt;iframe id=&#34;kmsembed-1_3yvpnzqn&#34; width=&#34;640&#34; height=&#34;394&#34; src=&#34;https://mediaspace.illinois.edu/embed/secure/iframe/entryId/1_3yvpnzqn/uiConfId/26883701&#34; class=&#34;kmsembed&#34; allowfullscreen webkitallowfullscreen mozAllowFullScreen allow=&#34;autoplay *; fullscreen *; encrypted-media *&#34; frameborder=&#34;0&#34; title=&#34;Kaltura Player&#34;&gt;&lt;/iframe&gt;
-</description>
+&lt;p&gt;The 
+&lt;a href=&#34;https://mediaspace.illinois.edu/media/t/1_3yvpnzqn&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Video Presentation&lt;/a&gt; and 
+&lt;a href=&#34;https://yutongdai.shinyapps.io/shinyapp/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Rshiny App Demo&lt;/a&gt; are also provided.&lt;/p&gt;
+&lt;iframe id=&#34;kmsembed-1_3yvpnzqn&#34; width=&#34;640&#34; height=&#34;394&#34; src=&#34;https://mediaspace.illinois.edu/embed/secure/iframe/entryId/1_3yvpnzqn/uiConfId/26883701&#34; class=&#34;kmsembed&#34; allowfullscreen webkitallowfullscreen mozAllowFullScreen allow=&#34;autoplay *; fullscreen *; encrypted-media *&#34; frameborder=&#34;0&#34; title=&#34;Kaltura Player&#34;&gt;&lt;/iframe&gt;</description>
     </item>
     
     <item>
       <title>Show and Tell: A Neural Image Caption Generator</title>
       <link>/project/show-and-tell/</link>
       <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
-      
       <guid>/project/show-and-tell/</guid>
-      <description>&lt;p&gt;This is the deep learning course final project trying to reporduce the results reported in the paper, &lt;a href=&#34;https://arxiv.org/pdf/1411.4555.pdf&#34; target=&#34;_blank&#34;&gt;Show and Tell: A Neural Image Caption Generator&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;The model is trained on the &lt;a href=&#34;http://cocodataset.org/#home&#34; target=&#34;_blank&#34;&gt;MS coco2014 dataset&lt;/a&gt;. Our final result looks like&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;./caption-demo.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;For code, UI, and report  please click &lt;a href=&#34;https://github.com/Rothdyt/Projects/tree/master/Show-and-tell&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;This is the deep learning course final project trying to reporduce the results reported in the paper, 
+&lt;a href=&#34;https://arxiv.org/pdf/1411.4555.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Show and Tell: A Neural Image Caption Generator&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The model is trained on the 
+&lt;a href=&#34;http://cocodataset.org/#home&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MS coco2014 dataset&lt;/a&gt;. Our final result looks like&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./caption-demo.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;For code, UI, and report  please click 
+&lt;a href=&#34;https://github.com/Rothdyt/Projects/tree/master/Show-and-tell&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -1175,39 +1056,37 @@ summarize_region(result, features)&lt;/code&gt;&lt;/pre&gt;
       <title>Variational Gaussian Mixtures</title>
       <link>/project/variational-inference/</link>
       <pubDate>Sun, 10 Dec 2017 00:00:00 -0500</pubDate>
-      
       <guid>/project/variational-inference/</guid>
-      <description>&lt;p&gt;This is the statistical computing course final project, trying to understand, reporduce and extend some results reported in the paper, &lt;a href=&#34;https://arxiv.org/pdf/1601.00670.pdf&#34; target=&#34;_blank&#34;&gt;Variational Inference: A Review for Statisticians&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;Three datasets are used here, simulated data, &lt;a href=&#34;https://www.stat.cmu.edu/~larry/all-of-statistics/=data/faithful.dat&#34; target=&#34;_blank&#34;&gt;old faithful&lt;/a&gt; and &lt;a href=&#34;https://www.imageclef.org&#34; target=&#34;_blank&#34;&gt;imageCLEF&lt;/a&gt;.&lt;/p&gt;
-
+      <description>&lt;p&gt;This is the statistical computing course final project, trying to understand, reporduce and extend some results reported in the paper, 
+&lt;a href=&#34;https://arxiv.org/pdf/1601.00670.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Variational Inference: A Review for Statisticians&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Three datasets are used here, simulated data, 
+&lt;a href=&#34;https://www.stat.cmu.edu/~larry/all-of-statistics/=data/faithful.dat&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;old faithful&lt;/a&gt; and 
+&lt;a href=&#34;https://www.imageclef.org&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;imageCLEF&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Our final result looks like&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;Simulated data&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#34;./simulation.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
+&lt;p&gt;&lt;img src=&#34;./simulation.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;old faithful
-&lt;img src=&#34;./old_faithful.gif&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;imageclef&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;old faithful
+&lt;img src=&#34;./old_faithful.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;imageclef&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#34;./imageclef.jpg&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;For code and report please click &lt;a href=&#34;https://github.com/Rothdyt/Projects/tree/master/Show-and-tell&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;./imageclef.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;For code and report please click 
+&lt;a href=&#34;https://github.com/Rothdyt/Projects/tree/master/Show-and-tell&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Convergence Analysis for Block Coordinate Decent Algorithm and Powell&#39;s Examples</title>
-      <link>/post/powell/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</link>
+      <link>/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</link>
       <pubDate>Thu, 17 Nov 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/post/powell/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</guid>
+      <guid>/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;

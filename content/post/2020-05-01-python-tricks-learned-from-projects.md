@@ -4,22 +4,22 @@ author: Yutong Dai
 date: '2020-05-01'
 slug: python-tricks-learned-from-projects
 categories:
-  - Python-Programming
+  - python
 tags:
   - python
 subtitle: ''
 summary: ''
 authors: []
-lastmod: '2020-05-01T12:37:30-04:00'
+lastmod: '2020-08-03'
 featured: no
 image:
   caption: ''
   focal_point: ''
   preview_only: no
 projects: []
+toc: true
 ---
 
-{{% toc %}}
 
 # Show all submodules
 
@@ -37,7 +37,7 @@ for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
     print(modname)
 ```
 Relavant outputs are
-```
+```python
 .....
 coinor.dippy.examples.milp
 coinor.dippy.examples.milp.__main__
@@ -69,9 +69,7 @@ ipython kernel install --name "cuppy" --user
 # Running Jupyter Notebook from the remote server
 
 > Reference
-
 > 1. [set up jupyter notebook on login nodes](https://ljvmiranda921.github.io/notebook/2018/01/31/running-a-jupyter-notebook/).
-
 > 2. [set up jupyter notebook on computation nodes](https://benjlindsay.com/posts/running-jupyter-lab-remotely#running-on-a-compute-node)
 
 **On the server side:**

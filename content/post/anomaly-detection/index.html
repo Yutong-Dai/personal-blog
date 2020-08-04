@@ -15,14 +15,14 @@ image:
 
 
 <div id="point-anomaly-detection---grubbs-test" class="section level1">
-<h1>Point Anomaly Detection - Grubbs’ test</h1>
-<p>Grubbs’ test<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> is commonly used technique to detect an outlier in <strong>univariate</strong> problem, where <strong>normality</strong> assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.</p>
+<h1>Point Anomaly Detection - Grubbs' test</h1>
+<p>Grubbs' test<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> is commonly used technique to detect an outlier in <strong>univariate</strong> problem, where <strong>normality</strong> assumption is required. It can be formualted as either one-side testing problem or two-sided testing problem.</p>
 <p>The hypothesis test is defined as</p>
 <p><span class="math display">\[H_0: \text{There are no outlier in the data set} \quad H_1: \text{There is exactly one outlier in the data set}.\]</span> For two-sided testing, it tries to determine whether the observation with the largest absolute deviation is an outlier, where the test statistic is defined as</p>
 <p><span class="math display">\[
 G = \frac{\max_i |X_i - \bar X|}{s},
 \]</span> where the <span class="math inline">\(\bar X\)</span> is the sample mean and <span class="math inline">\(s\)</span> is the sample deviation.</p>
-<p>Let’s look at one simulated example.</p>
+<p>Let's look at one simulated example.</p>
 <pre class="r"><code>set.seed(123)
 simulated_data &lt;- rnorm(100, 0, 1)
 simulated_data_with_outliers &lt;- c(simulated_data, c(3.5, -3.7))
@@ -33,7 +33,7 @@ shapiro.test(simulated_data_with_outliers)</code></pre>
 ## 
 ## data:  simulated_data_with_outliers
 ## W = 0.9804, p-value = 0.1344</code></pre>
-<p>Shapiro-Wilk normality test impiles the data is normally distributed. Now, let’s performe the grubbs’ test.</p>
+<p>Shapiro-Wilk normality test impiles the data is normally distributed. Now, let's performe the grubbs' test.</p>
 <pre class="r"><code>library(outliers)
 grubbs.test(simulated_data_with_outliers, two.sided = TRUE)</code></pre>
 <pre><code>## 
@@ -43,7 +43,7 @@ grubbs.test(simulated_data_with_outliers, two.sided = TRUE)</code></pre>
 ## G = 3.65380, U = 0.86651, p-value = 0.01626
 ## alternative hypothesis: lowest value -3.7 is an outlier</code></pre>
 <p>The test result detecs the lowest value as an outlier.</p>
-<p>Let’s remove the -3.7 and performe the test again.</p>
+<p>Let's remove the -3.7 and performe the test again.</p>
 <pre class="r"><code>grubbs.test(head(simulated_data_with_outliers,101), two.sided = TRUE)</code></pre>
 <pre><code>## 
 ##  Grubbs test for one outlier
@@ -51,7 +51,7 @@ grubbs.test(simulated_data_with_outliers, two.sided = TRUE)</code></pre>
 ## data:  head(simulated_data_with_outliers, 101)
 ## G = 3.48190, U = 0.87755, p-value = 0.03378
 ## alternative hypothesis: highest value 3.5 is an outlier</code></pre>
-<p>Finally, let’s remove two outliers altogether.</p>
+<p>Finally, let's remove two outliers altogether.</p>
 <pre class="r"><code>grubbs.test(head(simulated_data_with_outliers,100), two.sided = TRUE)</code></pre>
 <pre><code>## 
 ##  Grubbs test for one outlier
@@ -60,7 +60,7 @@ grubbs.test(simulated_data_with_outliers, two.sided = TRUE)</code></pre>
 ## G = 2.62880, U = 0.92949, p-value = 0.7584
 ## alternative hypothesis: lowest value -2.30916887564081 is an outlier</code></pre>
 <p>This impiles there are no outliers.</p>
-<p>Grubbs’ test is useful for identify the outliers of a small amount one at a time, but not suitable to detect a group of outliers.</p>
+<p>Grubbs' test is useful for identify the outliers of a small amount one at a time, but not suitable to detect a group of outliers.</p>
 </div>
 <div id="collective-anomaly-detection" class="section level1">
 <h1>Collective Anomaly Detection</h1>
@@ -68,7 +68,7 @@ grubbs.test(simulated_data_with_outliers, two.sided = TRUE)</code></pre>
 <h2>Anomaly in timeseries - Seasonal Hybrid ESD algorithm</h2>
 <pre class="r"><code>#  devtools::install_github(&quot;twitter/AnomalyDetection&quot;)
 library(AnomalyDetection)
-river &lt;- read.csv(&quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/post_data/river.csv&quot;)
+river &lt;- read.csv(&quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/river.csv&quot;)
 results &lt;- AnomalyDetectionVec(river$nitrate, period=12, direction = &#39;both&#39;, plot = T)</code></pre>
 <pre class="r"><code>results$plot</code></pre>
 <p><img src="/post/anomaly-detection/index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
@@ -80,7 +80,7 @@ results &lt;- AnomalyDetectionVec(river$nitrate, period=12, direction = &#39;bot
 <p>Intuitively, the larger distance the more likely the point would be an outlier.</p>
 <pre class="r"><code>library(FNN)</code></pre>
 <pre><code>## Warning: package &#39;FNN&#39; was built under R version 3.4.4</code></pre>
-<pre class="r"><code>furniture &lt;- read.csv(&quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/post_data/furniture.csv&quot;)
+<pre class="r"><code>furniture &lt;- read.csv(&quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/furniture.csv&quot;)
 furniture_scaled &lt;- data.frame(Height = scale(furniture$Height), Width = scale(furniture$Width))
 furniture_knn &lt;- get.knn(furniture_scaled, k = 5)
 furniture_scaled$score_knn &lt;- rowMeans(furniture_knn$nn.dist)
@@ -104,7 +104,7 @@ largest_idx &lt;- which.max(furniture_lof$score_lof)
 plot(furniture_lof$Height, furniture_lof$Width, cex=sqrt(furniture_lof$score_lof), pch=20)
 points(furniture_lof$Height[largest_idx], furniture_lof$Width[largest_idx], col=&quot;red&quot;, pch=20)</code></pre>
 <p><img src="/post/anomaly-detection/index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>It’s clear that, lof successfuly detects the local outlier.</p>
+<p>It's clear that, lof successfuly detects the local outlier.</p>
 </div>
 </div>
 </div>
@@ -130,7 +130,7 @@ points(furniture_lof$Height[largest_idx], furniture_lof$Width[largest_idx], col=
 </ul>
 <pre class="r"><code># devtools::install_github(&quot;Zelazny7/isofor&quot;)
 library(isofor)
-furniture &lt;- read.csv(&quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/files/post_data/furniture.csv&quot;)
+furniture &lt;- read.csv(&quot;https://raw.githubusercontent.com/Rothdyt/personal-blog/master/static/post/dataset/furniture.csv&quot;)
 furniture &lt;- data.frame(Height = furniture$Height, Width = furniture$Width)
 scores &lt;- matrix(nrow=dim(furniture)[1])
 for (ntree in c(100, 200, 500)){
