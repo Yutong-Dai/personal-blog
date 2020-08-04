@@ -10,6 +10,8 @@ tags:
 image:
   caption: ''
   focal_point: ''
+toc: ture
+number_sections: true
 ---
 
 # Point Anomaly Detection - Grubbs' test
