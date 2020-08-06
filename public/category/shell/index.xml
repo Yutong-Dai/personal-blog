@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>shell | Dai, Yutong/ 戴宇童</title>
+    <link>/category/shell/</link>
+      <atom:link href="/category/shell/index.xml" rel="self" type="application/rss+xml" />
+    <description>shell</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Tue, 04 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>shell</title>
+      <link>/category/shell/</link>
+    </image>
+    
+    <item>
+      <title>bash commands collection</title>
+      <link>/post/bash-commands-collection/</link>
+      <pubDate>Tue, 04 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>/post/bash-commands-collection/</guid>
+      <description>&lt;h3 id=&#34;find-files-with-specific-patterns&#34;&gt;Find files with specific patterns&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# This command find files with name has `news20` in the current directory and all of its sub-directories.
+find . -name &#39;*news20*&#39;
+# This command find and delete files with name has `news20` in the current directory and all of its sub-directories.
+find . -name &#39;*news20*&#39; -delete
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;show-file-size&#34;&gt;Show file size&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;ls -l --block-size=M
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

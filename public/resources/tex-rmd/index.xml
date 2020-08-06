@@ -12,29 +12,5 @@
       <link>/resources/tex-rmd/</link>
     </image>
     
-    <item>
-      <title>Cheatsheet Template</title>
-      <link>/resources/tex-rmd/cheatsheet/</link>
-      <pubDate>Fri, 31 May 2019 00:00:00 +0100</pubDate>
-      <guid>/resources/tex-rmd/cheatsheet/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Homework Template</title>
-      <link>/resources/tex-rmd/homework/</link>
-      <pubDate>Fri, 31 May 2019 00:00:00 +0100</pubDate>
-      <guid>/resources/tex-rmd/homework/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Lecture Notes Template</title>
-      <link>/resources/tex-rmd/lecturenotes/</link>
-      <pubDate>Fri, 31 May 2019 00:00:00 +0100</pubDate>
-      <guid>/resources/tex-rmd/lecturenotes/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>

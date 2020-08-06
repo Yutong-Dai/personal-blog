@@ -21,80 +21,37 @@
 &lt;p&gt;I need to import a particular function &lt;code&gt;formulate&lt;/code&gt; from a file in the directory &lt;code&gt;&amp;lt;path-to-the-package&amp;gt;/coinor/dippy/examples/milp/milp_func&lt;/code&gt;.
 It&amp;rsquo;s clear that I need to import it from the submodule &lt;code&gt;coinor.dippy&lt;/code&gt;. But how to do it exactly?
 Use following commands, which list all submodules you can import.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;7
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#dc322f;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;pkgutil&lt;/span&gt;
-&lt;span style=&#34;color:#dc322f;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;coinor.dippy&lt;/span&gt;
-&lt;span style=&#34;color:#268bd2&#34;&gt;package&lt;/span&gt;=&lt;span style=&#34;color:#268bd2&#34;&gt;coinor&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;dippy&lt;/span&gt;
-&lt;span style=&#34;color:#859900&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;importer&lt;/span&gt;, &lt;span style=&#34;color:#268bd2&#34;&gt;modname&lt;/span&gt;, &lt;span style=&#34;color:#268bd2&#34;&gt;ispkg&lt;/span&gt; &lt;span style=&#34;color:#859900&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;pkgutil&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;walk_packages&lt;/span&gt;(&lt;span style=&#34;color:#268bd2&#34;&gt;path&lt;/span&gt;=&lt;span style=&#34;color:#268bd2&#34;&gt;package&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;__path__&lt;/span&gt;,
-                                                      &lt;span style=&#34;color:#268bd2&#34;&gt;prefix&lt;/span&gt;=&lt;span style=&#34;color:#268bd2&#34;&gt;package&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;__name__&lt;/span&gt;+&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#39;.&amp;#39;&lt;/span&gt;,
-                                                      &lt;span style=&#34;color:#268bd2&#34;&gt;onerror&lt;/span&gt;=&lt;span style=&#34;color:#859900&#34;&gt;lambda&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;x&lt;/span&gt;: &lt;span style=&#34;color:#268bd2&#34;&gt;None&lt;/span&gt;):
-    &lt;span style=&#34;color:#859900&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#268bd2&#34;&gt;modname&lt;/span&gt;)
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Relavant outputs are&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;5
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;.....
-&lt;span style=&#34;color:#268bd2&#34;&gt;coinor&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;dippy&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;examples&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;milp&lt;/span&gt;
-&lt;span style=&#34;color:#268bd2&#34;&gt;coinor&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;dippy&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;examples&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;milp&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;__main__&lt;/span&gt;
-&lt;span style=&#34;color:#268bd2&#34;&gt;coinor&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;dippy&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;examples&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;milp&lt;/span&gt;.&lt;span style=&#34;color:#268bd2&#34;&gt;milp_func&lt;/span&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import pkgutil
+import coinor.dippy
+package=coinor.dippy
+for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
+                                                      prefix=package.__name__+&#39;.&#39;,
+                                                      onerror=lambda x: None):
+    print(modname)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Relavant outputs are&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;.....
+coinor.dippy.examples.milp
+coinor.dippy.examples.milp.__main__
+coinor.dippy.examples.milp.milp_func
 .....
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;Then I can simply use&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#dc322f;font-weight:bold&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;coinor.dippy.examples.milp.milp_func&lt;/span&gt; &lt;span style=&#34;color:#dc322f;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;formulate&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;using-the-right-kernel-for-jupyter-notebook&#34;&gt;Using the right kernel for Jupyter Notebook&lt;/h1&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 7
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 8
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 9
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;10
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;# create virtual env with python 3.7.7, whose name is cuppy&lt;/span&gt;
-conda create -n cuppy numpy scipy pandas notebook matplotlib &lt;span style=&#34;color:#268bd2&#34;&gt;python&lt;/span&gt;=3.7.7 
-&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;# activate cuppy&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then I can simply use&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;from coinor.dippy.examples.milp.milp_func import formulate
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;using-the-right-kernel-for-jupyter-notebook&#34;&gt;Using the right kernel for Jupyter Notebook&lt;/h1&gt;
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# create virtual env with python 3.7.7, whose name is cuppy
+conda create -n cuppy numpy scipy pandas notebook matplotlib python=3.7.7 
+# activate cuppy
 conda activate cuppy
-&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;# I am using zsh, you may change to bash&lt;/span&gt;
+# I am using zsh, you may change to bash
 conda init zsh 
-&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;# activate virtual env&lt;/span&gt;
+# activate virtual env
 cond activate cuppy
-&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;# point this verison of Python to jupyter&lt;/span&gt;
-ipython kernel install --name &lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;cuppy&amp;#34;&lt;/span&gt; --user
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h1 id=&#34;running-jupyter-notebook-from-the-remote-server&#34;&gt;Running Jupyter Notebook from the remote server&lt;/h1&gt;
+# point this verison of Python to jupyter
+ipython kernel install --name &amp;quot;cuppy&amp;quot; --user
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h1 id=&#34;running-jupyter-notebook-from-the-remote-server&#34;&gt;Running Jupyter Notebook from the remote server&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Reference&lt;/p&gt;
 &lt;ol&gt;
@@ -108,43 +65,23 @@ ipython kernel install --name &lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Create following two functions in the &lt;code&gt;.bashrc&lt;/code&gt; and reload it using &lt;code&gt;source .bashrc&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 7
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 8
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 9
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;10
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;11
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;12
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;13
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;14
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;15
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#859900&#34;&gt;function&lt;/span&gt; Inode(){
-  &lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;# provide the computation node name; default is polyp2&lt;/span&gt;
-  &lt;span style=&#34;color:#cb4b16&#34;&gt;local&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;nodename&lt;/span&gt;=&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#859900&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;polyp2&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#cb4b16&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;starting an interactive section at &lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;$nodename&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;# start an interactive session in the given node&lt;/span&gt;
-  qsub -l &lt;span style=&#34;color:#268bd2&#34;&gt;nodes&lt;/span&gt;=&lt;span style=&#34;color:#268bd2&#34;&gt;$nodename&lt;/span&gt;:ppn=&lt;span style=&#34;color:#2aa198;font-weight:bold&#34;&gt;4&lt;/span&gt; -l &lt;span style=&#34;color:#268bd2&#34;&gt;walltime&lt;/span&gt;=1:00:00 -l &lt;span style=&#34;color:#268bd2&#34;&gt;mem&lt;/span&gt;=10gb,vmem=10gb -I
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;function Inode(){
+  # provide the computation node name; default is polyp2
+  local nodename=&amp;quot;${1:-polyp2}&amp;quot;
+  echo &amp;quot;starting an interactive section at $nodename&amp;quot;
+  # start an interactive session in the given node
+  qsub -l nodes=$nodename:ppn=4 -l walltime=1:00:00 -l mem=10gb,vmem=10gb -I
 }
   
-&lt;span style=&#34;color:#859900&#34;&gt;function&lt;/span&gt; jpt(){
-  &lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;# provide the port; default is 1234&lt;/span&gt;
-  &lt;span style=&#34;color:#cb4b16&#34;&gt;local&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;port&lt;/span&gt;=&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#859900&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;1234&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#cb4b16&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;open jupyter notebook at &lt;/span&gt;&lt;span style=&#34;color:#859900&#34;&gt;$(&lt;/span&gt;hostname&lt;span style=&#34;color:#859900&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;$port&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;
-  &lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;# Fires-up a Jupyter notebook by supplying a specific port and ip&lt;/span&gt;
-  jupyter notebook --no-browser --port=&lt;span style=&#34;color:#268bd2&#34;&gt;$port&lt;/span&gt; --ip=&lt;span style=&#34;color:#859900&#34;&gt;$(&lt;/span&gt;hostname&lt;span style=&#34;color:#859900&#34;&gt;)&lt;/span&gt;
+function jpt(){
+  # provide the port; default is 1234
+  local port=&amp;quot;${1:-1234}&amp;quot;
+  echo &amp;quot;open jupyter notebook at $(hostname):$port&amp;quot;
+  # Fires-up a Jupyter notebook by supplying a specific port and ip
+  jupyter notebook --no-browser --port=$port --ip=$(hostname)
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;In the server side&amp;rsquo;s terminal, if&lt;/p&gt;
 &lt;ul&gt;
@@ -157,37 +94,20 @@ ipython kernel install --name &lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Create following two functions in the &lt;code&gt;.bashrc&lt;/code&gt; and reload it using &lt;code&gt;source .bashrc&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 1
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 2
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 3
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 4
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 5
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 6
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 7
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 8
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt; 9
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;10
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;11
-&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;12
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#859900&#34;&gt;function&lt;/span&gt; jptt(){
-    &lt;span style=&#34;color:#cb4b16&#34;&gt;local&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;localport&lt;/span&gt;=&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#859900&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;2234&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#cb4b16&#34;&gt;local&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;servername&lt;/span&gt;=&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#859900&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;polyp1&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#cb4b16&#34;&gt;local&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;serverport&lt;/span&gt;=&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#859900&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;1234&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;
-    &lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;# Forwards port $1 into port $3 and listens to it&lt;/span&gt;
-    ssh -N -f -L localhost:&lt;span style=&#34;color:#268bd2&#34;&gt;$localport&lt;/span&gt;:&lt;span style=&#34;color:#268bd2&#34;&gt;$servername&lt;/span&gt;:&lt;span style=&#34;color:#268bd2&#34;&gt;$serverport&lt;/span&gt; yud319@polyps.ie.lehigh.edu
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;function jptt(){
+    local localport=&amp;quot;${1:-2234}&amp;quot;
+    local servername=&amp;quot;${2:-polyp1}&amp;quot;
+    local serverport=&amp;quot;${3:-1234}&amp;quot;
+    # Forwards port $1 into port $3 and listens to it
+    ssh -N -f -L localhost:$localport:$servername:$serverport yud319@polyps.ie.lehigh.edu
 }
-&lt;span style=&#34;color:#859900&#34;&gt;function&lt;/span&gt; stopjpt(){
-  &lt;span style=&#34;color:#cb4b16&#34;&gt;local&lt;/span&gt; &lt;span style=&#34;color:#268bd2&#34;&gt;localport&lt;/span&gt;=&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#859900&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;2234&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;
-  lsof -i tcp:&lt;span style=&#34;color:#268bd2&#34;&gt;$localport&lt;/span&gt; |awk &lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#39;NR &amp;gt; 1 {print $2}&amp;#39;&lt;/span&gt; | xargs &lt;span style=&#34;color:#cb4b16&#34;&gt;kill&lt;/span&gt; -9
-  &lt;span style=&#34;color:#cb4b16&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;Kill port &lt;/span&gt;&lt;span style=&#34;color:#268bd2&#34;&gt;$localport&lt;/span&gt;&lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#34;&lt;/span&gt;
+function stopjpt(){
+  local localport=&amp;quot;${1:-2234}&amp;quot;
+  lsof -i tcp:$localport |awk &#39;NR &amp;gt; 1 {print $2}&#39; | xargs kill -9
+  echo &amp;quot;Kill port $localport&amp;quot;
 }
-&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/li&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Call &lt;code&gt;jptt&lt;/code&gt; on the local terminal, which will listen to the jupyter notebook host on the server&lt;/p&gt;
 &lt;/li&gt;

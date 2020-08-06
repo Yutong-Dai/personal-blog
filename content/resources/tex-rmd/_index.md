@@ -1,7 +1,7 @@
 ---
 # Overview
 linktitle: LaTex and Rmarkdown Templates
-summary: Templates for lecture notes, homework and cheatsheet.
+summary: Templates for lecture notes, homework and cheatsheet and more.
 weight: 1
 
 # Page metadata.
@@ -21,3 +21,4 @@ menu:
     weight: 1
 ---
 
+This page collects $\LaTeX$ and `Rmarkdown` templates that I adapted from the Internet for a variety purpose, which includes but not limited to taking lecture notes, writing homework and making cheatsheet.
