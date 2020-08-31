@@ -67,8 +67,8 @@
     
       
       
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/solarized-light.min.css" crossorigin="anonymous" title="hl-light">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/solarized-light.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/rainbow.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/rainbow.min.css" crossorigin="anonymous" title="hl-dark" disabled>
       
     
 
@@ -702,37 +702,80 @@
 <p>I need to import a particular function <code>formulate</code> from a file in the directory <code>&lt;path-to-the-package&gt;/coinor/dippy/examples/milp/milp_func</code>.
 It&rsquo;s clear that I need to import it from the submodule <code>coinor.dippy</code>. But how to do it exactly?
 Use following commands, which list all submodules you can import.</p>
-<pre><code class="language-python">import pkgutil
-import coinor.dippy
-package=coinor.dippy
-for importer, modname, ispkg in pkgutil.walk_packages(path=package.__path__,
-                                                      prefix=package.__name__+'.',
-                                                      onerror=lambda x: None):
-    print(modname)
-</code></pre>
-<p>Relavant outputs are</p>
-<pre><code class="language-python">.....
-coinor.dippy.examples.milp
-coinor.dippy.examples.milp.__main__
-coinor.dippy.examples.milp.milp_func
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">pkgutil</span>
+<span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">coinor.dippy</span>
+<span style="color:#268bd2">package</span>=<span style="color:#268bd2">coinor</span>.<span style="color:#268bd2">dippy</span>
+<span style="color:#859900">for</span> <span style="color:#268bd2">importer</span>, <span style="color:#268bd2">modname</span>, <span style="color:#268bd2">ispkg</span> <span style="color:#859900">in</span> <span style="color:#268bd2">pkgutil</span>.<span style="color:#268bd2">walk_packages</span>(<span style="color:#268bd2">path</span>=<span style="color:#268bd2">package</span>.<span style="color:#268bd2">__path__</span>,
+                                                      <span style="color:#268bd2">prefix</span>=<span style="color:#268bd2">package</span>.<span style="color:#268bd2">__name__</span>+<span style="color:#2aa198">&#39;.&#39;</span>,
+                                                      <span style="color:#268bd2">onerror</span>=<span style="color:#859900">lambda</span> <span style="color:#268bd2">x</span>: <span style="color:#268bd2">None</span>):
+    <span style="color:#859900">print</span>(<span style="color:#268bd2">modname</span>)
+</code></pre></td></tr></table>
+</div>
+</div><p>Relavant outputs are</p>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">.....
+<span style="color:#268bd2">coinor</span>.<span style="color:#268bd2">dippy</span>.<span style="color:#268bd2">examples</span>.<span style="color:#268bd2">milp</span>
+<span style="color:#268bd2">coinor</span>.<span style="color:#268bd2">dippy</span>.<span style="color:#268bd2">examples</span>.<span style="color:#268bd2">milp</span>.<span style="color:#268bd2">__main__</span>
+<span style="color:#268bd2">coinor</span>.<span style="color:#268bd2">dippy</span>.<span style="color:#268bd2">examples</span>.<span style="color:#268bd2">milp</span>.<span style="color:#268bd2">milp_func</span>
 .....
-</code></pre>
-<p>Then I can simply use</p>
-<pre><code class="language-python">from coinor.dippy.examples.milp.milp_func import formulate
-</code></pre>
-<h1 id="using-the-right-kernel-for-jupyter-notebook">Using the right kernel for Jupyter Notebook</h1>
-<pre><code class="language-bash"># create virtual env with python 3.7.7, whose name is cuppy
-conda create -n cuppy numpy scipy pandas notebook matplotlib python=3.7.7 
-# activate cuppy
+</code></pre></td></tr></table>
+</div>
+</div><p>Then I can simply use</p>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#dc322f;font-weight:bold">from</span> <span style="color:#268bd2">coinor.dippy.examples.milp.milp_func</span> <span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">formulate</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="using-the-right-kernel-for-jupyter-notebook">Using the right kernel for Jupyter Notebook</h1>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#93a1a1;font-style:italic"># create virtual env with python 3.7.7, whose name is cuppy</span>
+conda create -n cuppy numpy scipy pandas notebook matplotlib <span style="color:#268bd2">python</span>=3.7.7 
+<span style="color:#93a1a1;font-style:italic"># activate cuppy</span>
 conda activate cuppy
-# I am using zsh, you may change to bash
+<span style="color:#93a1a1;font-style:italic"># I am using zsh, you may change to bash</span>
 conda init zsh 
-# activate virtual env
+<span style="color:#93a1a1;font-style:italic"># activate virtual env</span>
 cond activate cuppy
-# point this verison of Python to jupyter
-ipython kernel install --name &quot;cuppy&quot; --user
-</code></pre>
-<h1 id="running-jupyter-notebook-from-the-remote-server">Running Jupyter Notebook from the remote server</h1>
+<span style="color:#93a1a1;font-style:italic"># point this verison of Python to jupyter</span>
+ipython kernel install --name <span style="color:#2aa198">&#34;cuppy&#34;</span> --user
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="running-jupyter-notebook-from-the-remote-server">Running Jupyter Notebook from the remote server</h1>
 <blockquote>
 <p>Reference</p>
 <ol>
@@ -746,23 +789,43 @@ ipython kernel install --name &quot;cuppy&quot; --user
 <ul>
 <li>
 <p>Create following two functions in the <code>.bashrc</code> and reload it using <code>source .bashrc</code></p>
-<pre><code class="language-bash">function Inode(){
-  # provide the computation node name; default is polyp2
-  local nodename=&quot;${1:-polyp2}&quot;
-  echo &quot;starting an interactive section at $nodename&quot;
-  # start an interactive session in the given node
-  qsub -l nodes=$nodename:ppn=4 -l walltime=1:00:00 -l mem=10gb,vmem=10gb -I
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#859900">function</span> Inode(){
+  <span style="color:#93a1a1;font-style:italic"># provide the computation node name; default is polyp2</span>
+  <span style="color:#cb4b16">local</span> <span style="color:#268bd2">nodename</span>=<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">1</span><span style="color:#859900">:-</span><span style="color:#268bd2">polyp2</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+  <span style="color:#cb4b16">echo</span> <span style="color:#2aa198">&#34;starting an interactive section at </span><span style="color:#268bd2">$nodename</span><span style="color:#2aa198">&#34;</span>
+  <span style="color:#93a1a1;font-style:italic"># start an interactive session in the given node</span>
+  qsub -l <span style="color:#268bd2">nodes</span>=<span style="color:#268bd2">$nodename</span>:ppn=<span style="color:#2aa198;font-weight:bold">4</span> -l <span style="color:#268bd2">walltime</span>=1:00:00 -l <span style="color:#268bd2">mem</span>=10gb,vmem=10gb -I
 }
   
-function jpt(){
-  # provide the port; default is 1234
-  local port=&quot;${1:-1234}&quot;
-  echo &quot;open jupyter notebook at $(hostname):$port&quot;
-  # Fires-up a Jupyter notebook by supplying a specific port and ip
-  jupyter notebook --no-browser --port=$port --ip=$(hostname)
+<span style="color:#859900">function</span> jpt(){
+  <span style="color:#93a1a1;font-style:italic"># provide the port; default is 1234</span>
+  <span style="color:#cb4b16">local</span> <span style="color:#268bd2">port</span>=<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">1</span><span style="color:#859900">:-</span><span style="color:#268bd2">1234</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+  <span style="color:#cb4b16">echo</span> <span style="color:#2aa198">&#34;open jupyter notebook at </span><span style="color:#859900">$(</span>hostname<span style="color:#859900">)</span><span style="color:#2aa198">:</span><span style="color:#268bd2">$port</span><span style="color:#2aa198">&#34;</span>
+  <span style="color:#93a1a1;font-style:italic"># Fires-up a Jupyter notebook by supplying a specific port and ip</span>
+  jupyter notebook --no-browser --port=<span style="color:#268bd2">$port</span> --ip=<span style="color:#859900">$(</span>hostname<span style="color:#859900">)</span>
 }
-</code></pre>
-</li>
+</code></pre></td></tr></table>
+</div>
+</div></li>
 <li>
 <p>In the server side&rsquo;s terminal, if</p>
 <ul>
@@ -775,22 +838,42 @@ function jpt(){
 <ul>
 <li>
 <p>Create following two functions in the <code>.bashrc</code> and reload it using <code>source .bashrc</code></p>
-<pre><code class="language-bash">function jptt(){
-    local localport=&quot;${1:-2234}&quot;
-    local servername=&quot;${2:-polyp1}&quot;
-    local serverport=&quot;${3:-1234}&quot;
-    # Forwards port $1 into port $3 and listens to it
-    ssh -N -f -L localhost:$localport:$servername:$serverport yud319@polyps.ie.lehigh.edu
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#859900">function</span> jptt(){
+    <span style="color:#cb4b16">local</span> <span style="color:#268bd2">localport</span>=<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">1</span><span style="color:#859900">:-</span><span style="color:#268bd2">2234</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+    <span style="color:#cb4b16">local</span> <span style="color:#268bd2">servername</span>=<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">2</span><span style="color:#859900">:-</span><span style="color:#268bd2">polyp1</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+    <span style="color:#cb4b16">local</span> <span style="color:#268bd2">serverport</span>=<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">3</span><span style="color:#859900">:-</span><span style="color:#268bd2">1234</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+    <span style="color:#93a1a1;font-style:italic"># Forwards port $1 into port $3 and listens to it</span>
+    ssh -N -f -L localhost:<span style="color:#268bd2">$localport</span>:<span style="color:#268bd2">$servername</span>:<span style="color:#268bd2">$serverport</span> yud319@polyps.ie.lehigh.edu
 }
-function stopjpt(){
-  local localport=&quot;${1:-2234}&quot;
-  lsof -i tcp:$localport |awk 'NR &gt; 1 {print $2}' | xargs kill -9
-  echo &quot;Kill port $localport&quot;
+<span style="color:#859900">function</span> stopjpt(){
+  <span style="color:#cb4b16">local</span> <span style="color:#268bd2">localport</span>=<span style="color:#2aa198">&#34;</span><span style="color:#2aa198">${</span><span style="color:#268bd2">1</span><span style="color:#859900">:-</span><span style="color:#268bd2">2234</span><span style="color:#2aa198">}</span><span style="color:#2aa198">&#34;</span>
+  lsof -i tcp:<span style="color:#268bd2">$localport</span> |awk <span style="color:#2aa198">&#39;NR &gt; 1 {print $2}&#39;</span> | xargs <span style="color:#cb4b16">kill</span> -9
+  <span style="color:#cb4b16">echo</span> <span style="color:#2aa198">&#34;Kill port </span><span style="color:#268bd2">$localport</span><span style="color:#2aa198">&#34;</span>
 }
-</code></pre>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Call <code>jptt</code> on the local terminal, which will listen to the jupyter notebook host on the server.</p>
 </li>
 <li>
-<p>Call <code>jptt</code> on the local terminal, which will listen to the jupyter notebook host on the server</p>
+<p>In the browser, if the port on local side is set to <code>2234</code>, the just type <code>localhost::2234</code>.</p>
 </li>
 <li>
 <p>After finish the job, call <code>stopjpt</code>, which will free the local port.</p>

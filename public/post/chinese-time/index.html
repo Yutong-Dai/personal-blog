@@ -67,8 +67,8 @@
     
       
       
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/solarized-light.min.css" crossorigin="anonymous" title="hl-light">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/solarized-light.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/rainbow.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/rainbow.min.css" crossorigin="anonymous" title="hl-dark" disabled>
       
     
 
@@ -686,8 +686,7 @@
 <pre><code>'子', '丑', '寅', '卯'
 '辰', '巳', '午', '未' 
 '申', '酉', '戌', '亥'
-</code></pre>
-<p>时辰的起点是午夜，即子初。</p>
+</code></pre><p>时辰的起点是午夜，即子初。</p>
 <p>点击下图色块便可查看时间对应。</p>
 <iframe
       src="https://plot.ly/~Roth/2.embed"
@@ -708,110 +707,217 @@
 <ol start="2">
 <li>用于绘图的Python代码</li>
 </ol>
-<pre><code class="language-python"># using following code in jupyter notebook
-import plotly
-import plotly.graph_objs as go
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">  9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 47
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 48
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 49
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 50
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 51
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 52
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 53
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 54
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 55
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 56
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 57
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 58
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 59
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 60
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 61
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 62
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 63
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 64
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 65
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 66
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 67
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 68
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 69
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 70
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 71
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 72
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 73
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 74
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 75
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 76
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 77
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 78
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 79
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 80
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 81
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 82
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 83
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 84
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 85
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 86
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 87
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 88
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 89
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 90
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 91
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 92
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 93
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 94
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 95
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 96
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 97
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 98
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 99
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">100
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">101
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">102
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#93a1a1;font-style:italic"># using following code in jupyter notebook</span>
+<span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">plotly</span>
+<span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">plotly.graph_objs</span> <span style="color:#dc322f;font-weight:bold">as</span> <span style="color:#268bd2">go</span>
 
-plotly.offline.init_notebook_mode(connected=True)
-colorPlate1 = [
-    '#ffb3a7', 
-    '#ffc773', '#ffa400',
-    '#c9dd22', '#afdd22',
-    '#cca4e3', '#b0a4e3',
-    '#ffc64b', '#ffb61e',
-    '#758a99', '#6b6882',
-    '#ffb3a7', '#f47983',
-    '#ffc773', '#ffa400',
-    '#c9dd22', '#afdd22',
-    '#cca4e3', '#b0a4e3',
-    '#ffc64b', '#ffb61e',
-    '#758a99', '#6b6882',
-    '#f47983'
+<span style="color:#268bd2">plotly</span>.<span style="color:#268bd2">offline</span>.<span style="color:#268bd2">init_notebook_mode</span>(<span style="color:#268bd2">connected</span>=<span style="color:#268bd2">True</span>)
+<span style="color:#268bd2">colorPlate1</span> = [
+    <span style="color:#2aa198">&#39;#ffb3a7&#39;</span>, 
+    <span style="color:#2aa198">&#39;#ffc773&#39;</span>, <span style="color:#2aa198">&#39;#ffa400&#39;</span>,
+    <span style="color:#2aa198">&#39;#c9dd22&#39;</span>, <span style="color:#2aa198">&#39;#afdd22&#39;</span>,
+    <span style="color:#2aa198">&#39;#cca4e3&#39;</span>, <span style="color:#2aa198">&#39;#b0a4e3&#39;</span>,
+    <span style="color:#2aa198">&#39;#ffc64b&#39;</span>, <span style="color:#2aa198">&#39;#ffb61e&#39;</span>,
+    <span style="color:#2aa198">&#39;#758a99&#39;</span>, <span style="color:#2aa198">&#39;#6b6882&#39;</span>,
+    <span style="color:#2aa198">&#39;#ffb3a7&#39;</span>, <span style="color:#2aa198">&#39;#f47983&#39;</span>,
+    <span style="color:#2aa198">&#39;#ffc773&#39;</span>, <span style="color:#2aa198">&#39;#ffa400&#39;</span>,
+    <span style="color:#2aa198">&#39;#c9dd22&#39;</span>, <span style="color:#2aa198">&#39;#afdd22&#39;</span>,
+    <span style="color:#2aa198">&#39;#cca4e3&#39;</span>, <span style="color:#2aa198">&#39;#b0a4e3&#39;</span>,
+    <span style="color:#2aa198">&#39;#ffc64b&#39;</span>, <span style="color:#2aa198">&#39;#ffb61e&#39;</span>,
+    <span style="color:#2aa198">&#39;#758a99&#39;</span>, <span style="color:#2aa198">&#39;#6b6882&#39;</span>,
+    <span style="color:#2aa198">&#39;#f47983&#39;</span>
 ]
-colorPlate2 = ['#ff4e20', '#ff7500', '#789262', '#8d4bbb', '#e9bb1d','#50616d'] * 2
-theta_marker = [&quot;{}:00&quot;.format(i) for i in range(24)]
-timeStamp = [
-'子正', '丑初', '丑正', '寅初', '寅正', 
-'卯初', '卯正', '辰初', '辰正', '巳初', '巳正',  
-'午初', '午正', '未初', '未正', '申初', '申正',  
-'酉初', '酉正', '戌初', '戌正', '亥初', '亥正', '子初'
+<span style="color:#268bd2">colorPlate2</span> = [<span style="color:#2aa198">&#39;#ff4e20&#39;</span>, <span style="color:#2aa198">&#39;#ff7500&#39;</span>, <span style="color:#2aa198">&#39;#789262&#39;</span>, <span style="color:#2aa198">&#39;#8d4bbb&#39;</span>, <span style="color:#2aa198">&#39;#e9bb1d&#39;</span>,<span style="color:#2aa198">&#39;#50616d&#39;</span>] * <span style="color:#2aa198;font-weight:bold">2</span>
+<span style="color:#268bd2">theta_marker</span> = [<span style="color:#2aa198">&#34;{}:00&#34;</span>.<span style="color:#268bd2">format</span>(<span style="color:#268bd2">i</span>) <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#2aa198;font-weight:bold">24</span>)]
+<span style="color:#268bd2">timeStamp</span> = [
+<span style="color:#2aa198">&#39;子正&#39;</span>, <span style="color:#2aa198">&#39;丑初&#39;</span>, <span style="color:#2aa198">&#39;丑正&#39;</span>, <span style="color:#2aa198">&#39;寅初&#39;</span>, <span style="color:#2aa198">&#39;寅正&#39;</span>, 
+<span style="color:#2aa198">&#39;卯初&#39;</span>, <span style="color:#2aa198">&#39;卯正&#39;</span>, <span style="color:#2aa198">&#39;辰初&#39;</span>, <span style="color:#2aa198">&#39;辰正&#39;</span>, <span style="color:#2aa198">&#39;巳初&#39;</span>, <span style="color:#2aa198">&#39;巳正&#39;</span>,  
+<span style="color:#2aa198">&#39;午初&#39;</span>, <span style="color:#2aa198">&#39;午正&#39;</span>, <span style="color:#2aa198">&#39;未初&#39;</span>, <span style="color:#2aa198">&#39;未正&#39;</span>, <span style="color:#2aa198">&#39;申初&#39;</span>, <span style="color:#2aa198">&#39;申正&#39;</span>,  
+<span style="color:#2aa198">&#39;酉初&#39;</span>, <span style="color:#2aa198">&#39;酉正&#39;</span>, <span style="color:#2aa198">&#39;戌初&#39;</span>, <span style="color:#2aa198">&#39;戌正&#39;</span>, <span style="color:#2aa198">&#39;亥初&#39;</span>, <span style="color:#2aa198">&#39;亥正&#39;</span>, <span style="color:#2aa198">&#39;子初&#39;</span>
 ]
-timeStampMain = [
-'子, 名曰「困敦」&lt;br&gt;混沌万物之初萌，藏黄泉之下。&lt;br&gt; 子是兹的意思，这时候万物刚刚开始滋生和繁殖。', 
-'丑, 名曰「赤奋若」&lt;br&gt;气运奋迅而起，万物无不若其性。&lt;br&gt;形容万物继续萌发，系于生长。', 
-'寅, 名曰「摄提格」&lt;br&gt;万物承阳而起。&lt;br&gt;植物芽刚刚吐露，要吸收阳气生长，然后全部露出地面。',  
-'卯, 名曰「单阏」&lt;br&gt;阳气推万物而起. &lt;br&gt;卯，就是茂，茂盛的样子。这个时候，万物生长滋生繁茂。', 
-'辰, 名曰「执徐」&lt;br&gt;伏蛰之物，而敷舒出。&lt;br&gt;万物都震动而生长，草木伸舒，萌芽而出。', 
-'巳, 名曰「大荒落&lt;br&gt;万物炽盛而出，霍然落之。&lt;br&gt;万物到了这个时候，都全部长起来了，聚集在一起。炽盛而有光泽的样子。',  
-'午, 名曰「敦牂」&lt;br&gt;万物壮盛也。&lt;br&gt;万物都达到盛大壮茂，枝柯密布的状态。',
-'未, 名曰「协洽」&lt;br&gt;阴阳和合，万物化生。&lt;br&gt;未，就是味的意思。当事物成熟的时候，都会发出气味。这时候阴气开始升起，万物稍微衰败。' ,
-'申, 名曰「涒滩」&lt;br&gt;万物吐秀，倾垂也。&lt;br&gt;万物的身体都已成就，倾吐了最后的繁盛，引向衰败。',  
-'酉, 名曰「作噩」&lt;br&gt;万物皆芒枝起。 &lt;br&gt;万物衰老到极至而成熟。',
-'戌, 名曰「阉茂」&lt;br&gt;万物皆蔽冒也。&lt;br&gt;戌，灭，杀的意思。意思是到了这时候，万物都已经衰灭了。', 
-'亥, 名曰「大渊献」&lt;br&gt;万物于天，深盖藏也。&lt;br&gt;亥，核的意思。万物都进入核阂里，意味着阴气劾杀了万物，等待下一个初萌。'
+<span style="color:#268bd2">timeStampMain</span> = [
+<span style="color:#2aa198">&#39;子, 名曰「困敦」&lt;br&gt;混沌万物之初萌，藏黄泉之下。&lt;br&gt; 子是兹的意思，这时候万物刚刚开始滋生和繁殖。&#39;</span>, 
+<span style="color:#2aa198">&#39;丑, 名曰「赤奋若」&lt;br&gt;气运奋迅而起，万物无不若其性。&lt;br&gt;形容万物继续萌发，系于生长。&#39;</span>, 
+<span style="color:#2aa198">&#39;寅, 名曰「摄提格」&lt;br&gt;万物承阳而起。&lt;br&gt;植物芽刚刚吐露，要吸收阳气生长，然后全部露出地面。&#39;</span>,  
+<span style="color:#2aa198">&#39;卯, 名曰「单阏」&lt;br&gt;阳气推万物而起. &lt;br&gt;卯，就是茂，茂盛的样子。这个时候，万物生长滋生繁茂。&#39;</span>, 
+<span style="color:#2aa198">&#39;辰, 名曰「执徐」&lt;br&gt;伏蛰之物，而敷舒出。&lt;br&gt;万物都震动而生长，草木伸舒，萌芽而出。&#39;</span>, 
+<span style="color:#2aa198">&#39;巳, 名曰「大荒落&lt;br&gt;万物炽盛而出，霍然落之。&lt;br&gt;万物到了这个时候，都全部长起来了，聚集在一起。炽盛而有光泽的样子。&#39;</span>,  
+<span style="color:#2aa198">&#39;午, 名曰「敦牂」&lt;br&gt;万物壮盛也。&lt;br&gt;万物都达到盛大壮茂，枝柯密布的状态。&#39;</span>,
+<span style="color:#2aa198">&#39;未, 名曰「协洽」&lt;br&gt;阴阳和合，万物化生。&lt;br&gt;未，就是味的意思。当事物成熟的时候，都会发出气味。这时候阴气开始升起，万物稍微衰败。&#39;</span> ,
+<span style="color:#2aa198">&#39;申, 名曰「涒滩」&lt;br&gt;万物吐秀，倾垂也。&lt;br&gt;万物的身体都已成就，倾吐了最后的繁盛，引向衰败。&#39;</span>,  
+<span style="color:#2aa198">&#39;酉, 名曰「作噩」&lt;br&gt;万物皆芒枝起。 &lt;br&gt;万物衰老到极至而成熟。&#39;</span>,
+<span style="color:#2aa198">&#39;戌, 名曰「阉茂」&lt;br&gt;万物皆蔽冒也。&lt;br&gt;戌，灭，杀的意思。意思是到了这时候，万物都已经衰灭了。&#39;</span>, 
+<span style="color:#2aa198">&#39;亥, 名曰「大渊献」&lt;br&gt;万物于天，深盖藏也。&lt;br&gt;亥，核的意思。万物都进入核阂里，意味着阴气劾杀了万物，等待下一个初萌。&#39;</span>
 ]
 
-def sectorChild(name, location, radius,  fillcolor='#ff4e20'):
-    r = [0] * 24
-    r[location % 24] = radius
-    r[(location + 1) % 24] = radius
-    obj = go.Scatterpolar(
-      name = name,
-      r = r,
-      theta = theta_marker,
-      fill = &quot;toself&quot;,
-      fillcolor = fillcolor,
-      line =  {&quot;color&quot;:'black'}
+<span style="color:#859900">def</span> <span style="color:#268bd2">sectorChild</span>(<span style="color:#268bd2">name</span>, <span style="color:#268bd2">location</span>, <span style="color:#268bd2">radius</span>,  <span style="color:#268bd2">fillcolor</span>=<span style="color:#2aa198">&#39;#ff4e20&#39;</span>):
+    <span style="color:#268bd2">r</span> = [<span style="color:#2aa198;font-weight:bold">0</span>] * <span style="color:#2aa198;font-weight:bold">24</span>
+    <span style="color:#268bd2">r</span>[<span style="color:#268bd2">location</span> % <span style="color:#2aa198;font-weight:bold">24</span>] = <span style="color:#268bd2">radius</span>
+    <span style="color:#268bd2">r</span>[(<span style="color:#268bd2">location</span> + <span style="color:#2aa198;font-weight:bold">1</span>) % <span style="color:#2aa198;font-weight:bold">24</span>] = <span style="color:#268bd2">radius</span>
+    <span style="color:#268bd2">obj</span> = <span style="color:#268bd2">go</span>.<span style="color:#268bd2">Scatterpolar</span>(
+      <span style="color:#268bd2">name</span> = <span style="color:#268bd2">name</span>,
+      <span style="color:#268bd2">r</span> = <span style="color:#268bd2">r</span>,
+      <span style="color:#268bd2">theta</span> = <span style="color:#268bd2">theta_marker</span>,
+      <span style="color:#268bd2">fill</span> = <span style="color:#2aa198">&#34;toself&#34;</span>,
+      <span style="color:#268bd2">fillcolor</span> = <span style="color:#268bd2">fillcolor</span>,
+      <span style="color:#268bd2">line</span> =  {<span style="color:#2aa198">&#34;color&#34;</span>:<span style="color:#2aa198">&#39;black&#39;</span>}
     )
-    return obj
+    <span style="color:#859900">return</span> <span style="color:#268bd2">obj</span>
 
-def sectorParent(name, location, radius,  fillcolor='black'):
-    r = [0] * 24
-    if location == 0:
-        r[0] = r[1] = r[23] = radius
-    else:
-        r[location % 24] = radius
-        r[(location + 1) % 24] = radius
-        r[(location + 2) % 24] = radius
-    obj = go.Scatterpolar(
-      name = name,
-      r = r,
-      theta = theta_marker,
-      fill = &quot;toself&quot;,
-      fillcolor = fillcolor,
-      line =  {&quot;color&quot;:'black'},
-      hoverinfo = 'text',
-      hoverlabel = {'align':'left'}
+<span style="color:#859900">def</span> <span style="color:#268bd2">sectorParent</span>(<span style="color:#268bd2">name</span>, <span style="color:#268bd2">location</span>, <span style="color:#268bd2">radius</span>,  <span style="color:#268bd2">fillcolor</span>=<span style="color:#2aa198">&#39;black&#39;</span>):
+    <span style="color:#268bd2">r</span> = [<span style="color:#2aa198;font-weight:bold">0</span>] * <span style="color:#2aa198;font-weight:bold">24</span>
+    <span style="color:#859900">if</span> <span style="color:#268bd2">location</span> == <span style="color:#2aa198;font-weight:bold">0</span>:
+        <span style="color:#268bd2">r</span>[<span style="color:#2aa198;font-weight:bold">0</span>] = <span style="color:#268bd2">r</span>[<span style="color:#2aa198;font-weight:bold">1</span>] = <span style="color:#268bd2">r</span>[<span style="color:#2aa198;font-weight:bold">23</span>] = <span style="color:#268bd2">radius</span>
+    <span style="color:#859900">else</span>:
+        <span style="color:#268bd2">r</span>[<span style="color:#268bd2">location</span> % <span style="color:#2aa198;font-weight:bold">24</span>] = <span style="color:#268bd2">radius</span>
+        <span style="color:#268bd2">r</span>[(<span style="color:#268bd2">location</span> + <span style="color:#2aa198;font-weight:bold">1</span>) % <span style="color:#2aa198;font-weight:bold">24</span>] = <span style="color:#268bd2">radius</span>
+        <span style="color:#268bd2">r</span>[(<span style="color:#268bd2">location</span> + <span style="color:#2aa198;font-weight:bold">2</span>) % <span style="color:#2aa198;font-weight:bold">24</span>] = <span style="color:#268bd2">radius</span>
+    <span style="color:#268bd2">obj</span> = <span style="color:#268bd2">go</span>.<span style="color:#268bd2">Scatterpolar</span>(
+      <span style="color:#268bd2">name</span> = <span style="color:#268bd2">name</span>,
+      <span style="color:#268bd2">r</span> = <span style="color:#268bd2">r</span>,
+      <span style="color:#268bd2">theta</span> = <span style="color:#268bd2">theta_marker</span>,
+      <span style="color:#268bd2">fill</span> = <span style="color:#2aa198">&#34;toself&#34;</span>,
+      <span style="color:#268bd2">fillcolor</span> = <span style="color:#268bd2">fillcolor</span>,
+      <span style="color:#268bd2">line</span> =  {<span style="color:#2aa198">&#34;color&#34;</span>:<span style="color:#2aa198">&#39;black&#39;</span>},
+      <span style="color:#268bd2">hoverinfo</span> = <span style="color:#2aa198">&#39;text&#39;</span>,
+      <span style="color:#268bd2">hoverlabel</span> = {<span style="color:#2aa198">&#39;align&#39;</span>:<span style="color:#2aa198">&#39;left&#39;</span>}
     )
-    return obj
+    <span style="color:#859900">return</span> <span style="color:#268bd2">obj</span>
 
 
 
-trace = [sectorChild(i, j, 5, k) for (i,j,k) in zip(timeStamp, range(24), colorPlate1)]
-trace += [sectorParent(timeStampMain[0], 0, 3, colorPlate2[0])]
-trace += [sectorParent(i, j, 3, k) for (i,j, k) in zip(timeStampMain[1:], range(1, 23, 2), colorPlate2[1:]) ]
+<span style="color:#268bd2">trace</span> = [<span style="color:#268bd2">sectorChild</span>(<span style="color:#268bd2">i</span>, <span style="color:#268bd2">j</span>, <span style="color:#2aa198;font-weight:bold">5</span>, <span style="color:#268bd2">k</span>) <span style="color:#859900">for</span> (<span style="color:#268bd2">i</span>,<span style="color:#268bd2">j</span>,<span style="color:#268bd2">k</span>) <span style="color:#859900">in</span> <span style="color:#cb4b16">zip</span>(<span style="color:#268bd2">timeStamp</span>, <span style="color:#cb4b16">range</span>(<span style="color:#2aa198;font-weight:bold">24</span>), <span style="color:#268bd2">colorPlate1</span>)]
+<span style="color:#268bd2">trace</span> += [<span style="color:#268bd2">sectorParent</span>(<span style="color:#268bd2">timeStampMain</span>[<span style="color:#2aa198;font-weight:bold">0</span>], <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">3</span>, <span style="color:#268bd2">colorPlate2</span>[<span style="color:#2aa198;font-weight:bold">0</span>])]
+<span style="color:#268bd2">trace</span> += [<span style="color:#268bd2">sectorParent</span>(<span style="color:#268bd2">i</span>, <span style="color:#268bd2">j</span>, <span style="color:#2aa198;font-weight:bold">3</span>, <span style="color:#268bd2">k</span>) <span style="color:#859900">for</span> (<span style="color:#268bd2">i</span>,<span style="color:#268bd2">j</span>, <span style="color:#268bd2">k</span>) <span style="color:#859900">in</span> <span style="color:#cb4b16">zip</span>(<span style="color:#268bd2">timeStampMain</span>[<span style="color:#2aa198;font-weight:bold">1</span>:], <span style="color:#cb4b16">range</span>(<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">23</span>, <span style="color:#2aa198;font-weight:bold">2</span>), <span style="color:#268bd2">colorPlate2</span>[<span style="color:#2aa198;font-weight:bold">1</span>:]) ]
 
-layout = go.Layout(
-    polar = dict(
-      radialaxis = dict(
-        visible = False
+<span style="color:#268bd2">layout</span> = <span style="color:#268bd2">go</span>.<span style="color:#268bd2">Layout</span>(
+    <span style="color:#268bd2">polar</span> = <span style="color:#cb4b16">dict</span>(
+      <span style="color:#268bd2">radialaxis</span> = <span style="color:#cb4b16">dict</span>(
+        <span style="color:#268bd2">visible</span> = <span style="color:#268bd2">False</span>
       ),
-      angularaxis = dict(
-        direction = &quot;clockwise&quot;,
-        visible = True,
-        linewidth = 3
+      <span style="color:#268bd2">angularaxis</span> = <span style="color:#cb4b16">dict</span>(
+        <span style="color:#268bd2">direction</span> = <span style="color:#2aa198">&#34;clockwise&#34;</span>,
+        <span style="color:#268bd2">visible</span> = <span style="color:#268bd2">True</span>,
+        <span style="color:#268bd2">linewidth</span> = <span style="color:#2aa198;font-weight:bold">3</span>
       )
     ),
-    showlegend = False
+    <span style="color:#268bd2">showlegend</span> = <span style="color:#268bd2">False</span>
 )
 
 
-plotly.offline.iplot({
-    &quot;data&quot;: trace,
-    &quot;layout&quot;: layout
+<span style="color:#268bd2">plotly</span>.<span style="color:#268bd2">offline</span>.<span style="color:#268bd2">iplot</span>({
+    <span style="color:#2aa198">&#34;data&#34;</span>: <span style="color:#268bd2">trace</span>,
+    <span style="color:#2aa198">&#34;layout&#34;</span>: <span style="color:#268bd2">layout</span>
 })
-</code></pre>
-
+</code></pre></td></tr></table>
+</div>
+</div>
               </div>
               
 

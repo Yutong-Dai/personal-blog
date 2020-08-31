@@ -67,8 +67,8 @@
     
       
       
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/solarized-light.min.css" crossorigin="anonymous" title="hl-light">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/solarized-light.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/rainbow.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/rainbow.min.css" crossorigin="anonymous" title="hl-dark" disabled>
       
     
 
@@ -701,46 +701,89 @@
 <h2 id="usage">Usage</h2>
 <p>Put <code>standalone.tex</code> and <code>note.cls</code> in the same folder and complie.</p>
 <h3 id="minimal-example">Minimal Example</h3>
-<pre><code class="language-tex">% in your .tex file
-\documentclass[doctype=s]{note}
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#93a1a1;font-style:italic">% in your .tex file
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">\documentclass</span><span style="color:#268bd2">[doctype=s]</span><span style="color:#cb4b16">{</span>note<span style="color:#cb4b16">}</span>
 
-\title{Put your note title here.}
-\author{Yutong Dai}
-\date{Last Update: \today}
+<span style="color:#859900">\title</span><span style="color:#cb4b16">{</span>Put your note title here.<span style="color:#cb4b16">}</span>
+<span style="color:#859900">\author</span><span style="color:#cb4b16">{</span>Yutong Dai<span style="color:#cb4b16">}</span>
+<span style="color:#859900">\date</span><span style="color:#cb4b16">{</span>Last Update: <span style="color:#859900">\today</span><span style="color:#cb4b16">}</span>
 
-\usepackage{lipsum}
-\usepackage[margin=1.5cm, portrait]{geometry}
-\begin{document}
-% \maketitle
-\pre{Questions}
-    {
-        \begin{enumerate}
-            \item{What's the first question this section will answer?}
-            \item{What's the second question?}
-        \end{enumerate}
-    }
-\note[key term 1]
-    {
-        \begin{itemize} 
-            \item{A cool thing}
-            \item{Another cool thing}
-            \item{Not all things are cool}
-        \end{itemize}
-    }
-\note[key term 2]
-    {
-        \lipsum[4]
-    }
+<span style="color:#859900">\usepackage</span><span style="color:#cb4b16">{</span>lipsum<span style="color:#cb4b16">}</span>
+<span style="color:#859900">\usepackage</span><span style="color:#268bd2">[margin=1.5cm, portrait]</span><span style="color:#cb4b16">{</span>geometry<span style="color:#cb4b16">}</span>
+<span style="color:#859900">\begin</span><span style="color:#cb4b16">{</span>document<span style="color:#cb4b16">}</span>
+<span style="color:#93a1a1;font-style:italic">% \maketitle
+</span><span style="color:#93a1a1;font-style:italic"></span><span style="color:#859900">\pre</span><span style="color:#cb4b16">{</span>Questions<span style="color:#cb4b16">}</span>
+    <span style="color:#cb4b16">{</span>
+        <span style="color:#859900">\begin</span><span style="color:#cb4b16">{</span>enumerate<span style="color:#cb4b16">}</span>
+            <span style="color:#859900">\item</span><span style="color:#cb4b16">{</span>What&#39;s the first question this section will answer?<span style="color:#cb4b16">}</span>
+            <span style="color:#859900">\item</span><span style="color:#cb4b16">{</span>What&#39;s the second question?<span style="color:#cb4b16">}</span>
+        <span style="color:#859900">\end</span><span style="color:#cb4b16">{</span>enumerate<span style="color:#cb4b16">}</span>
+    <span style="color:#cb4b16">}</span>
+<span style="color:#859900">\note</span><span style="color:#268bd2">[key term 1]</span>
+    <span style="color:#cb4b16">{</span>
+        <span style="color:#859900">\begin</span><span style="color:#cb4b16">{</span>itemize<span style="color:#cb4b16">}</span> 
+            <span style="color:#859900">\item</span><span style="color:#cb4b16">{</span>A cool thing<span style="color:#cb4b16">}</span>
+            <span style="color:#859900">\item</span><span style="color:#cb4b16">{</span>Another cool thing<span style="color:#cb4b16">}</span>
+            <span style="color:#859900">\item</span><span style="color:#cb4b16">{</span>Not all things are cool<span style="color:#cb4b16">}</span>
+        <span style="color:#859900">\end</span><span style="color:#cb4b16">{</span>itemize<span style="color:#cb4b16">}</span>
+    <span style="color:#cb4b16">}</span>
+<span style="color:#859900">\note</span><span style="color:#268bd2">[key term 2]</span>
+    <span style="color:#cb4b16">{</span>
+        <span style="color:#859900">\lipsum</span><span style="color:#268bd2">[4]</span>
+    <span style="color:#cb4b16">}</span>
 
-\note[Very very very very very very very very long head]
-    {
-        \lipsum[5]
-    }
+<span style="color:#859900">\note</span><span style="color:#268bd2">[Very very very very very very very very long head]</span>
+    <span style="color:#cb4b16">{</span>
+        <span style="color:#859900">\lipsum</span><span style="color:#268bd2">[5]</span>
+    <span style="color:#cb4b16">}</span>
 
-\summary{Summary}{A fabulous summary}
-\end{document}
-</code></pre>
-<h3 id="key-components">Key components</h3>
+<span style="color:#859900">\summary</span><span style="color:#cb4b16">{</span>Summary<span style="color:#cb4b16">}{</span>A fabulous summary<span style="color:#cb4b16">}</span>
+<span style="color:#859900">\end</span><span style="color:#cb4b16">{</span>document<span style="color:#cb4b16">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="key-components">Key components</h3>
 <ul>
 <li>
 <p><code>\title{}</code>: the title for your document. If you want to leave it blank, please use <code>\title{}</code>; otherwise use <code>\title{your title}</code>.</p>
@@ -769,47 +812,91 @@
 </li>
 <li>
 <p><code>collection</code> mode: Use this note as a widget, which can be direcrly incorporated in your article. Since <code>note</code> class directly inherit from the <code>article</code> class. To use <code>collection</code> mode just pass <code>doctype=c</code> to the <code>\documnetclass</code> as the demo code indicates.</p>
-<pre><code class="language-tex">% in your .tex file
-  \documentclass[doctype=c]{note}
-  \title{Put your note title here.}
-  \author{Yutong Dai}
-  \date{Last Update: \today}
-  \usepackage{lipsum}
-  \usepackage[margin=1.5cm, portrait]{geometry}
-  \begin{document}
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#93a1a1;font-style:italic">% in your .tex file
+</span><span style="color:#93a1a1;font-style:italic"></span>  <span style="color:#859900">\documentclass</span><span style="color:#268bd2">[doctype=c]</span><span style="color:#cb4b16">{</span>note<span style="color:#cb4b16">}</span>
+  <span style="color:#859900">\title</span><span style="color:#cb4b16">{</span>Put your note title here.<span style="color:#cb4b16">}</span>
+  <span style="color:#859900">\author</span><span style="color:#cb4b16">{</span>Yutong Dai<span style="color:#cb4b16">}</span>
+  <span style="color:#859900">\date</span><span style="color:#cb4b16">{</span>Last Update: <span style="color:#859900">\today</span><span style="color:#cb4b16">}</span>
+  <span style="color:#859900">\usepackage</span><span style="color:#cb4b16">{</span>lipsum<span style="color:#cb4b16">}</span>
+  <span style="color:#859900">\usepackage</span><span style="color:#268bd2">[margin=1.5cm, portrait]</span><span style="color:#cb4b16">{</span>geometry<span style="color:#cb4b16">}</span>
+  <span style="color:#859900">\begin</span><span style="color:#cb4b16">{</span>document<span style="color:#cb4b16">}</span>
     
-  \maketitle
-  \tableofcontents
-  \newpage
-  \section{First section}
-  \pre{Questions}
-      {
-          \begin{enumerate}
-              \item{What's the first question this section will answer?}
-              \item{What's the second question?}
-          \end{enumerate}
-      }
-  \note[key term 1]
-      {
-          \begin{itemize} 
-              \item{A cool thing}
-              \item{Another cool thing}
-              \item{Not all things are cool}
-          \end{itemize}
-      }
-  \note[key term 2]
-      {
-          \lipsum[4]
-      }
+  <span style="color:#859900">\maketitle</span>
+  <span style="color:#859900">\tableofcontents</span>
+  <span style="color:#859900">\newpage</span>
+  <span style="color:#859900">\section</span><span style="color:#cb4b16">{</span>First section<span style="color:#cb4b16">}</span>
+  <span style="color:#859900">\pre</span><span style="color:#cb4b16">{</span>Questions<span style="color:#cb4b16">}</span>
+      <span style="color:#cb4b16">{</span>
+          <span style="color:#859900">\begin</span><span style="color:#cb4b16">{</span>enumerate<span style="color:#cb4b16">}</span>
+              <span style="color:#859900">\item</span><span style="color:#cb4b16">{</span>What&#39;s the first question this section will answer?<span style="color:#cb4b16">}</span>
+              <span style="color:#859900">\item</span><span style="color:#cb4b16">{</span>What&#39;s the second question?<span style="color:#cb4b16">}</span>
+          <span style="color:#859900">\end</span><span style="color:#cb4b16">{</span>enumerate<span style="color:#cb4b16">}</span>
+      <span style="color:#cb4b16">}</span>
+  <span style="color:#859900">\note</span><span style="color:#268bd2">[key term 1]</span>
+      <span style="color:#cb4b16">{</span>
+          <span style="color:#859900">\begin</span><span style="color:#cb4b16">{</span>itemize<span style="color:#cb4b16">}</span> 
+              <span style="color:#859900">\item</span><span style="color:#cb4b16">{</span>A cool thing<span style="color:#cb4b16">}</span>
+              <span style="color:#859900">\item</span><span style="color:#cb4b16">{</span>Another cool thing<span style="color:#cb4b16">}</span>
+              <span style="color:#859900">\item</span><span style="color:#cb4b16">{</span>Not all things are cool<span style="color:#cb4b16">}</span>
+          <span style="color:#859900">\end</span><span style="color:#cb4b16">{</span>itemize<span style="color:#cb4b16">}</span>
+      <span style="color:#cb4b16">}</span>
+  <span style="color:#859900">\note</span><span style="color:#268bd2">[key term 2]</span>
+      <span style="color:#cb4b16">{</span>
+          <span style="color:#859900">\lipsum</span><span style="color:#268bd2">[4]</span>
+      <span style="color:#cb4b16">}</span>
     
-  \note[Very very very very very very very very long head]
-      {
-          \lipsum[5]
-      }
+  <span style="color:#859900">\note</span><span style="color:#268bd2">[Very very very very very very very very long head]</span>
+      <span style="color:#cb4b16">{</span>
+          <span style="color:#859900">\lipsum</span><span style="color:#268bd2">[5]</span>
+      <span style="color:#cb4b16">}</span>
     
-  \summary{Summary}{A fabulous summary}
-</code></pre>
-</li>
+  <span style="color:#859900">\summary</span><span style="color:#cb4b16">{</span>Summary<span style="color:#cb4b16">}{</span>A fabulous summary<span style="color:#cb4b16">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
 </ul>
 <h3 id="change-the-layout">Change the layout</h3>
 <p>The default layout is <em>portrait</em>, if you would like to switch to <em>landscape</em>, just use <code>\usepackage[landscape]{geometry}</code>.</p>

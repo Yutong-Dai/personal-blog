@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elements of C&#43;&#43; | Dai, Yutong/ 戴宇童</title>
+    <link>/resources/cpp_laopt/cpp/</link>
+      <atom:link href="/resources/cpp_laopt/cpp/index.xml" rel="self" type="application/rss+xml" />
+    <description>Elements of C&#43;&#43;</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Tue, 11 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
+      <title>Elements of C&#43;&#43;</title>
+      <link>/resources/cpp_laopt/cpp/</link>
+    </image>
+    
+    <item>
+      <title>Compile your program</title>
+      <link>/resources/cpp_laopt/cpp/makefile/</link>
+      <pubDate>Sun, 16 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>/resources/cpp_laopt/cpp/makefile/</guid>
+      <description>&lt;h1 id=&#34;compile-your-code-in-command-line&#34;&gt;Compile your code in command line&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Reference: Pitt-Francis, J., &amp;amp; Whiteley, J. (2017). Guide to Scientific Computing in C++ Secon Edition. Springer.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;compiler [-flag1 -flag2 ...] -o excutableFileName sourceCodeFile
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Compiler: &lt;code&gt;g++&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Compiler flags:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-Wall&lt;/code&gt;: list out anything unexpected that is not actually an error, but will still create an executable file.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-O&lt;/code&gt;: (upper case &lt;code&gt;o&lt;/code&gt;): optimize the executable file at the cost of longer compilation time&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-g&lt;/code&gt;: compile code with debugging information preserved&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-o&lt;/code&gt;: use this to allow name the excutable file name&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Inputs:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;excutableFileName&lt;/code&gt;: the parameter provided to the flag &lt;code&gt;-o&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sourceCodeFile&lt;/code&gt;: the &lt;code&gt;cpp&lt;/code&gt; file which you want to compile&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;g++ -Wall -O -o addTwoNumbers addTwoNumbers.cpp
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Pointers and Reference</title>
+      <link>/resources/cpp_laopt/cpp/pointers/</link>
+      <pubDate>Tue, 11 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>/resources/cpp_laopt/cpp/pointers/</guid>
+      <description>&lt;h2 id=&#34;smart-pointers---shared-pointer&#34;&gt;Smart Pointers - shared pointer&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://docs.microsoft.com/en-us/cpp/cpp/how-to-create-and-use-shared-ptr-instances?view=vs-2019&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;shared pointer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://www.internalpointers.com/post/move-smart-pointers-and-out-functions-modern-c&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;pass shared pointer to function&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;pass-by-reference-and-pass-by-pointer&#34;&gt;Pass by Reference and Pass by Pointer&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href=&#34;https://www.geeksforgeeks.org/passing-by-pointer-vs-passing-by-reference-in-c/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;differences between pass-by-reference and pass-by-pointer&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

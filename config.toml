@@ -63,9 +63,11 @@ ignoreFiles = ["\\.ipynb$", ".ipynb_checkpoints$", "\\.Rmd$", "\\.Rmarkdown$", "
     [markup.goldmark.renderer]
       unsafe = true  # Enable user to embed HTML snippets in Markdown content.
   [markup.highlight]
-    codeFences = false  # Disable Hugo's code highlighter as it conflicts with Academic's highligher.
-    style = "solarized-light"
+    codeFences = true  # Disable Hugo's code highlighter as it conflicts with Academic's highligher.
+    noClasses = true
     lineNos = true
+    style = "solarized-light"
+    tabWidth = 4
   [markup.tableOfContents]
     startLevel = 1
     endLevel = 3

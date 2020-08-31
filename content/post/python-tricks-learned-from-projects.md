@@ -118,5 +118,6 @@ ipython kernel install --name "cuppy" --user
     echo "Kill port $localport"
   }
   ```
-* Call `jptt` on the local terminal, which will listen to the jupyter notebook host on the server
+* Call `jptt` on the local terminal, which will listen to the jupyter notebook host on the server.
+* In the browser, if the port on local side is set to `2234`, the just type `localhost::2234`.
 * After finish the job, call `stopjpt`, which will free the local port.

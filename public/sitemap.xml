@@ -3,33 +3,53 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/resources/cpp_laopt/cpp/makefile/</loc>
+    <lastmod>2020-08-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/resources/cpp_laopt/</loc>
+    <lastmod>2020-08-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/resources/cpp_laopt/cpp/</loc>
+    <lastmod>2020-08-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/resources/cpp_laopt/cpp/pointers/</loc>
+    <lastmod>2020-08-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/resources/tex-rmd/cornellnotes/</loc>
-    <lastmod>2020-08-06T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-06T15:14:02-04:00</lastmod>
   </url>
   
   <url>
     <loc>/resources/tex-rmd/</loc>
-    <lastmod>2019-06-02T00:43:22+08:00</lastmod>
+    <lastmod>2020-08-06T15:14:02-04:00</lastmod>
   </url>
   
   <url>
     <loc>/resources/tex-rmd/cheatsheet/</loc>
-    <lastmod>2019-05-31T00:00:00+01:00</lastmod>
+    <lastmod>2020-08-06T15:14:02-04:00</lastmod>
   </url>
   
   <url>
     <loc>/resources/tex-rmd/homework/</loc>
-    <lastmod>2019-05-31T00:00:00+01:00</lastmod>
+    <lastmod>2020-08-06T15:14:02-04:00</lastmod>
   </url>
   
   <url>
     <loc>/resources/tex-rmd/lecturenotes/</loc>
-    <lastmod>2019-05-31T00:00:00+01:00</lastmod>
+    <lastmod>2020-08-06T15:14:02-04:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-08-06T00:00:00+00:00</lastmod>
+    <lastmod>2020-08-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -39,17 +59,17 @@
   
   <url>
     <loc>/post/bash-commands-collection/</loc>
-    <lastmod>2020-08-04T11:51:43-04:00</lastmod>
+    <lastmod>2020-08-06T15:14:02-04:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-08-04T11:51:43-04:00</lastmod>
+    <lastmod>2020-08-06T15:14:02-04:00</lastmod>
   </url>
   
   <url>
     <loc>/category/shell/</loc>
-    <lastmod>2020-08-04T11:51:43-04:00</lastmod>
+    <lastmod>2020-08-06T15:14:02-04:00</lastmod>
   </url>
   
   <url>
@@ -304,7 +324,7 @@
   
   <url>
     <loc>/resources/</loc>
-    <lastmod>2019-06-02T00:43:22+08:00</lastmod>
+    <lastmod>2020-08-06T15:14:02-04:00</lastmod>
   </url>
   
 </urlset>
