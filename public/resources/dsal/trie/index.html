@@ -1,0 +1,1380 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Ph.D. student">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/resources/dsal/trie/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/rainbow.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/rainbow.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+  <link rel="alternate" href="/resources/dsal/trie/index.xml" type="application/rss+xml" title="Dai, Yutong/ 戴宇童">
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/resources/dsal/trie/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Dai, Yutong/ 戴宇童">
+  <meta property="og:url" content="/resources/dsal/trie/">
+  <meta property="og:title" content="Trie 前缀树 | Dai, Yutong/ 戴宇童">
+  <meta property="og:description" content="Ph.D. student"><meta property="og:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    <meta property="og:updated_time" content="2020-12-12T00:00:00&#43;00:00">
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Trie 前缀树 | Dai, Yutong/ 戴宇童</title>
+
+</head>
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Dai, Yutong/ 戴宇童</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Dai, Yutong/ 戴宇童</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/resources/"><span>Resources</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-palette" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+    
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/">前言</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/tree/">Tree and Graph</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/resources/dsal/tree/tree_basic/">tree-concepts-algorithm</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/bit-operations/">Bit operations</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/prefix-sum/">Prefix Sum</a>
+
+  </div>
+  
+  <div class="docs-toc-item active">
+    <a class="docs-toc-link" href="/resources/dsal/trie/">Trie</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/union-find/">Union Find</a>
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前缀树的数据结构">前缀树的数据结构</a></li>
+    <li><a href="#677-键值映射">677. 键值映射</a>
+      <ul>
+        <li><a href="#题目描述">题目描述</a></li>
+        <li><a href="#思路">思路</a></li>
+        <li><a href="#代码">代码</a></li>
+        <li><a href="#复杂度">复杂度</a></li>
+      </ul>
+    </li>
+    <li><a href="#题目-面试题-1717-多次搜索">题目: 面试题 17.17. 多次搜索</a>
+      <ul>
+        <li><a href="#思路-1-暴力搜索超时">思路 1： 暴力搜索（超时）</a></li>
+        <li><a href="#思路-2前缀树">思路 2：前缀树</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>Trie 前缀树</h1>
+
+          <div class="article-style">
+            <h1 id="前缀树的数据结构">前缀树的数据结构</h1>
+<p>
+<a href="https://github.com/leetcode-pp/91alg-2/blob/master/lecture/advanced-trie.md" target="_blank" rel="noopener">参考</a>.</p>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">44
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">45
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">46
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">47
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Node</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">__init__</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">val</span>: <span style="color:#cb4b16">str</span>, <span style="color:#268bd2">isWord</span>=<span style="color:#268bd2">False</span>) -&gt; <span style="color:#268bd2">None</span>:
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">val</span> = <span style="color:#268bd2">val</span>
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">children</span> = {}
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">isWord</span> = <span style="color:#268bd2">isWord</span>
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Trie</span>:
+
+    <span style="color:#859900">def</span> <span style="color:#268bd2">__init__</span>(<span style="color:#268bd2">self</span>):
+        <span style="color:#2aa198">&#34;&#34;&#34;
+</span><span style="color:#2aa198">        Initialize your data structure here.
+</span><span style="color:#2aa198">        &#34;&#34;&#34;</span>
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">root</span> = <span style="color:#268bd2">Node</span>(<span style="color:#268bd2">val</span>=<span style="color:#268bd2">None</span>)
+
+
+    <span style="color:#859900">def</span> <span style="color:#268bd2">insert</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">word</span>: <span style="color:#cb4b16">str</span>) -&gt; <span style="color:#268bd2">None</span>:
+        <span style="color:#2aa198">&#34;&#34;&#34;
+</span><span style="color:#2aa198">        Inserts a word into the trie.
+</span><span style="color:#2aa198">        &#34;&#34;&#34;</span>
+        <span style="color:#268bd2">node</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">root</span>
+        <span style="color:#859900">for</span> <span style="color:#268bd2">char</span> <span style="color:#859900">in</span> <span style="color:#268bd2">word</span>:
+            <span style="color:#859900">if</span> <span style="color:#268bd2">char</span> <span style="color:#859900">not</span> <span style="color:#859900">in</span> <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>:
+                <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">char</span>] = <span style="color:#268bd2">Node</span>(<span style="color:#268bd2">val</span>=<span style="color:#268bd2">char</span>)
+            <span style="color:#268bd2">node</span> = <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">char</span>]
+        <span style="color:#268bd2">node</span>.<span style="color:#268bd2">isWord</span> = <span style="color:#268bd2">True</span>
+
+    <span style="color:#859900">def</span> <span style="color:#268bd2">search</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">word</span>: <span style="color:#cb4b16">str</span>) -&gt; <span style="color:#cb4b16">bool</span>:
+        <span style="color:#2aa198">&#34;&#34;&#34;
+</span><span style="color:#2aa198">        Returns if the word is in the trie.
+</span><span style="color:#2aa198">        &#34;&#34;&#34;</span>
+        <span style="color:#268bd2">node</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">root</span>
+        <span style="color:#859900">for</span> <span style="color:#268bd2">char</span> <span style="color:#859900">in</span> <span style="color:#268bd2">word</span>:
+            <span style="color:#859900">if</span> <span style="color:#268bd2">char</span> <span style="color:#859900">not</span> <span style="color:#859900">in</span> <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>:
+                <span style="color:#859900">return</span> <span style="color:#268bd2">False</span>
+            <span style="color:#268bd2">node</span> = <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">char</span>]
+        <span style="color:#859900">if</span> <span style="color:#268bd2">node</span>.<span style="color:#268bd2">isWord</span>: <span style="color:#859900">return</span> <span style="color:#268bd2">True</span>
+        <span style="color:#859900">return</span> <span style="color:#268bd2">False</span>
+
+    <span style="color:#859900">def</span> <span style="color:#268bd2">startsWith</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">prefix</span>: <span style="color:#cb4b16">str</span>) -&gt; <span style="color:#cb4b16">bool</span>:
+        <span style="color:#2aa198">&#34;&#34;&#34;
+</span><span style="color:#2aa198">        Returns if there is any word in the trie that starts with the given prefix.
+</span><span style="color:#2aa198">        &#34;&#34;&#34;</span>
+        <span style="color:#268bd2">node</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">root</span>
+        <span style="color:#859900">for</span> <span style="color:#268bd2">char</span> <span style="color:#859900">in</span> <span style="color:#268bd2">prefix</span>:
+            <span style="color:#859900">if</span> <span style="color:#268bd2">char</span> <span style="color:#859900">not</span> <span style="color:#859900">in</span> <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>:
+                <span style="color:#859900">return</span> <span style="color:#268bd2">False</span>
+            <span style="color:#268bd2">node</span> = <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">char</span>]
+        <span style="color:#859900">return</span> <span style="color:#268bd2">True</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>时间复杂度：$O(n)$，n 是字符串长度， <code>insert</code> <code>search</code> <code>startsWith</code> 操作都是。</li>
+<li>空间复杂度：$O(26^{h})$，h 是插入所有字符串最长的长度。</li>
+</ul>
+<h1 id="677-键值映射">677. 键值映射</h1>
+<h2 id="题目描述">题目描述</h2>
+<pre><code>实现一个 MapSum 类，支持两个方法，insert 和 sum：
+
+MapSum()  初始化 MapSum 对象
+void insert(String key, int val) 插入 key-val 键值对，字符串表示键 key ，整数表示值 val 。如果键 key 已经存在，那么原来的键值对将被替代成新的键值对。
+int sum(string prefix) 返回所有以该前缀 prefix 开头的键 key 的值的总和。
+
+
+示例：
+
+输入：
+[&quot;MapSum&quot;, &quot;insert&quot;, &quot;sum&quot;, &quot;insert&quot;, &quot;sum&quot;]
+[[], [&quot;apple&quot;, 3], [&quot;ap&quot;], [&quot;app&quot;, 2], [&quot;ap&quot;]]
+输出：
+[null, null, 3, null, 5]
+
+解释：
+MapSum mapSum = new MapSum();
+mapSum.insert(&quot;apple&quot;, 3);  
+mapSum.sum(&quot;ap&quot;);           // return 3 (apple = 3)
+mapSum.insert(&quot;app&quot;, 2);    
+mapSum.sum(&quot;ap&quot;);           // return 5 (apple + app = 3 + 2 = 5)
+
+
+提示：
+
+1 &lt;= key.length, prefix.length &lt;= 50
+key 和 prefix 仅由小写英文字母组成
+1 &lt;= val &lt;= 1000
+最多调用 50 次 insert 和 sum
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/map-sum-pairs
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路">思路</h2>
+<ol>
+<li>
+<p>题干中要求<code>返回以该前缀 prefix 开头的键 key 的值的总和</code> &mdash; 前缀树，空间换时间。使用前缀树模版。</p>
+</li>
+<li>
+<p><code>insert(key, val)</code>: 将key中的每一个字符作为一个多叉树的node, 依次将node放入树中。最后需要在leaf node上记录 val， 并将其标记为一个单词的结尾。如果插入的重复的key, 只需跟新leaf node的值就好。</p>
+</li>
+<li>
+<p><code>sum(prefix)</code>:  沿着多叉树找到以<code>prefix</code>最后一个字符结尾的node(如果存在)。利用层次遍历其所有的leaf node，然后将上面的数字求和便可得到答案。</p>
+</li>
+</ol>
+<p><img src="./trie.png" alt=""></p>
+<h2 id="代码">代码</h2>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Node</span>:
+  <span style="color:#859900">def</span> <span style="color:#268bd2">__init__</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">key</span>=<span style="color:#268bd2">None</span>, <span style="color:#268bd2">isWord</span>=<span style="color:#268bd2">False</span>, <span style="color:#268bd2">val</span>=<span style="color:#268bd2">None</span>):
+  <span style="color:#268bd2">self</span>.<span style="color:#268bd2">key</span> = <span style="color:#268bd2">key</span>
+  <span style="color:#268bd2">self</span>.<span style="color:#268bd2">children</span> = {}
+  <span style="color:#268bd2">self</span>.<span style="color:#268bd2">isWord</span> = <span style="color:#268bd2">isWord</span>
+  <span style="color:#268bd2">self</span>.<span style="color:#268bd2">val</span> = <span style="color:#268bd2">None</span>
+
+<span style="color:#859900">class</span> <span style="color:#cb4b16">MapSum</span>:
+  <span style="color:#859900">def</span> <span style="color:#268bd2">__init__</span>(<span style="color:#268bd2">self</span>):
+  <span style="color:#2aa198">&#34;&#34;&#34;
+</span><span style="color:#2aa198">  Initialize your data structure here.
+</span><span style="color:#2aa198">  &#34;&#34;&#34;</span>
+  <span style="color:#268bd2">self</span>.<span style="color:#268bd2">root</span> = <span style="color:#268bd2">Node</span>()
+  <span style="color:#859900">def</span> <span style="color:#268bd2">insert</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">key</span>: <span style="color:#cb4b16">str</span>, <span style="color:#268bd2">val</span>: <span style="color:#cb4b16">int</span>) -&gt; <span style="color:#268bd2">None</span>:
+    <span style="color:#268bd2">node</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">root</span>
+  <span style="color:#859900">for</span> <span style="color:#268bd2">char</span> <span style="color:#859900">in</span> <span style="color:#268bd2">key</span>:
+    <span style="color:#859900">if</span> <span style="color:#268bd2">char</span> <span style="color:#859900">not</span> <span style="color:#859900">in</span> <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>:
+    <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">char</span>] = <span style="color:#268bd2">Node</span>(<span style="color:#268bd2">key</span>=<span style="color:#268bd2">char</span>)
+  <span style="color:#268bd2">node</span> = <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">char</span>]
+  <span style="color:#93a1a1;font-style:italic"># the last node stores the last char in key, hence is a word</span>
+  <span style="color:#268bd2">node</span>.<span style="color:#268bd2">isWord</span> = <span style="color:#268bd2">True</span>
+  <span style="color:#268bd2">node</span>.<span style="color:#268bd2">val</span> = <span style="color:#268bd2">val</span>
+  
+  <span style="color:#859900">def</span> <span style="color:#268bd2">sum</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">prefix</span>: <span style="color:#cb4b16">str</span>) -&gt; <span style="color:#cb4b16">int</span>:
+    <span style="color:#268bd2">node</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">root</span>
+  <span style="color:#268bd2">ans</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+  <span style="color:#859900">for</span> <span style="color:#268bd2">char</span> <span style="color:#859900">in</span> <span style="color:#268bd2">prefix</span>:
+    <span style="color:#859900">if</span> <span style="color:#268bd2">char</span> <span style="color:#859900">not</span> <span style="color:#859900">in</span> <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>:
+    <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+  <span style="color:#268bd2">node</span> = <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">char</span>]
+  <span style="color:#93a1a1;font-style:italic"># the node stores the ending char in the prefix</span>
+  <span style="color:#268bd2">queue</span> = [<span style="color:#268bd2">node</span>]
+  <span style="color:#859900">while</span> <span style="color:#268bd2">queue</span>:
+    <span style="color:#268bd2">node</span> = <span style="color:#268bd2">queue</span>.<span style="color:#268bd2">pop</span>(<span style="color:#2aa198;font-weight:bold">0</span>)
+  <span style="color:#859900">if</span> <span style="color:#268bd2">node</span>.<span style="color:#268bd2">isWord</span>: <span style="color:#268bd2">ans</span> += <span style="color:#268bd2">node</span>.<span style="color:#268bd2">val</span>
+  <span style="color:#859900">for</span> <span style="color:#268bd2">child</span> <span style="color:#859900">in</span> <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>:
+    <span style="color:#268bd2">queue</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">child</span>])
+  <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="复杂度">复杂度</h2>
+<ul>
+<li>时间</li>
+<li>insert: $O(n)$, n &mdash;&gt; key这个字符串的长度</li>
+<li>sum: $O(26^h)$, h&mdash;&gt; h为多叉树的高度。最差的情况prefix在root，树是一个满多叉树。</li>
+<li>空间： $O(26^h)$</li>
+</ul>
+<h1 id="题目-面试题-1717-多次搜索">题目: 面试题 17.17. 多次搜索</h1>
+<pre><code>给定一个较长字符串big和一个包含较短字符串的数组smalls，设计一个方法，根据smalls中的每一个较短字符串，对big进行搜索。输出smalls中的字符串在big里出现的所有位置positions，其中positions[i]为smalls[i]出现的所有位置。
+
+示例：
+
+输入：
+big = &quot;mississippi&quot;
+smalls = [&quot;is&quot;,&quot;ppi&quot;,&quot;hi&quot;,&quot;sis&quot;,&quot;i&quot;,&quot;ssippi&quot;]
+输出： [[1,4],[8],[],[3],[1,4,7,10],[5]]
+提示：
+
+0 &lt;= len(big) &lt;= 1000
+0 &lt;= len(smalls[i]) &lt;= 1000
+smalls的总字符数不会超过 100000。
+你可以认为smalls中没有重复字符串。
+所有出现的字符均为英文小写字母。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/multi-search-lcci
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路-1-暴力搜索超时">思路 1： 暴力搜索（超时）</h2>
+<p>对每个来自<code>smalls</code>中的word<code>small</code> 遍历一次<code>big</code>去匹配。</p>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">multiSearch</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">big</span>: <span style="color:#cb4b16">str</span>, <span style="color:#268bd2">smalls</span>: <span style="color:#268bd2">List</span>[<span style="color:#cb4b16">str</span>]) -&gt; <span style="color:#268bd2">List</span>[<span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]]:
+        <span style="color:#268bd2">nBig</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">big</span>)
+        <span style="color:#268bd2">ans</span> = []
+        <span style="color:#859900">for</span> <span style="color:#268bd2">idx</span>, <span style="color:#268bd2">small</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">enumerate</span>(<span style="color:#268bd2">smalls</span>):
+            <span style="color:#268bd2">ans</span>.<span style="color:#268bd2">append</span>([])
+            <span style="color:#859900">if</span> <span style="color:#268bd2">small</span> == <span style="color:#2aa198">&#34;&#34;</span>:
+                <span style="color:#859900">continue</span>
+            <span style="color:#268bd2">nSmall</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">small</span>)
+            <span style="color:#268bd2">idx_small</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+            <span style="color:#268bd2">prefix</span> = <span style="color:#268bd2">small</span>[<span style="color:#268bd2">idx_small</span>]
+            <span style="color:#93a1a1;font-style:italic"># find the occurence of the prefix of the small in big</span>
+            <span style="color:#93a1a1;font-style:italic"># print(&#34;search for:&#39;{}&#39; | prefix:{}&#34;.format(small, prefix))</span>
+            <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">nBig</span>):
+                <span style="color:#93a1a1;font-style:italic"># print(&#34;Seach the {}-th char in big to match prefix.&#34;.format(i))</span>
+                <span style="color:#859900">if</span> <span style="color:#268bd2">big</span>[<span style="color:#268bd2">i</span>] == <span style="color:#268bd2">prefix</span>:
+                    <span style="color:#93a1a1;font-style:italic"># print(&#34;   prefix matched!&#34;)</span>
+                    <span style="color:#859900">for</span> <span style="color:#268bd2">j</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">i</span>, <span style="color:#268bd2">i</span>+<span style="color:#268bd2">nSmall</span>):
+                        <span style="color:#859900">if</span> <span style="color:#268bd2">j</span> &lt; <span style="color:#268bd2">nBig</span>:
+                            <span style="color:#859900">if</span> <span style="color:#268bd2">small</span>[<span style="color:#268bd2">idx_small</span>] == <span style="color:#268bd2">big</span>[<span style="color:#268bd2">j</span>]:
+                                <span style="color:#268bd2">idx_small</span> += <span style="color:#2aa198;font-weight:bold">1</span>
+                            <span style="color:#859900">else</span>:
+                                <span style="color:#859900">break</span>
+                    <span style="color:#93a1a1;font-style:italic"># match</span>
+                    <span style="color:#859900">if</span> <span style="color:#268bd2">idx_small</span> == <span style="color:#268bd2">nSmall</span>:
+                        <span style="color:#93a1a1;font-style:italic"># print(&#34;   matched&#34;)</span>
+                        <span style="color:#268bd2">ans</span>[-<span style="color:#2aa198;font-weight:bold">1</span>].<span style="color:#268bd2">append</span>(<span style="color:#268bd2">i</span>)
+                    <span style="color:#93a1a1;font-style:italic"># reset index to loop over small</span>
+                    <span style="color:#268bd2">idx_small</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>时间复杂度: $O(n_{big} * n_{smalls} * s_{max})$: 其中 $n_{big}$, $n_{smalls}$, $s_{max}$分别是 字符串<code>big</code>的长度，<code>smalls</code> 单词的个数，以及<code>smalls</code>中单词最大的长度。</p>
+</li>
+<li>
+<p>空间复杂度：$O(1)$ (不算返回的数组)</p>
+</li>
+</ul>
+<h2 id="思路-2前缀树">思路 2：前缀树</h2>
+<ul>
+<li>
+<p>用什么建树：第一反应是用 <code>big</code>的所有子字符串去建树，有如下问题</p>
+<ul>
+<li>空间复杂度和最大长度有关，如果<code>big</code>很长，就很糟糕。</li>
+<li>找所有子列是$O(2^{n_{big}})$的复杂度
+所以用<code>smalls</code>中的字符串去建树。</li>
+</ul>
+</li>
+<li>
+<p>怎么设计前缀树</p>
+<ul>
+<li>除了套用模板记录 <code>isWord</code> 之外，我们需要用一个 属性<code>idx</code> 来表明当前这个字符(如果代表一个word)在smalls中的位置。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Node</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">__init__</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">idx</span>=<span style="color:#268bd2">None</span>):
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">children</span> = {}
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">isWord</span> = <span style="color:#268bd2">False</span>
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">idx</span> = <span style="color:#268bd2">idx</span>
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">insert</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">word</span>, <span style="color:#268bd2">idx</span>):
+        <span style="color:#268bd2">node</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">root</span>
+        <span style="color:#859900">for</span> <span style="color:#268bd2">char</span> <span style="color:#859900">in</span> <span style="color:#268bd2">word</span>:
+            <span style="color:#859900">if</span> <span style="color:#268bd2">char</span> <span style="color:#859900">not</span> <span style="color:#859900">in</span> <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>:
+                <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">char</span>] = <span style="color:#268bd2">Node</span>()
+            <span style="color:#268bd2">node</span> = <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">char</span>]
+        <span style="color:#93a1a1;font-style:italic"># reach the end of the word</span>
+        <span style="color:#268bd2">node</span>.<span style="color:#268bd2">idx</span> = <span style="color:#268bd2">idx</span>
+        <span style="color:#268bd2">node</span>.<span style="color:#268bd2">isWord</span> = <span style="color:#268bd2">True</span>
+
+    <span style="color:#859900">def</span> <span style="color:#268bd2">multiSearch</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">big</span>: <span style="color:#cb4b16">str</span>, <span style="color:#268bd2">smalls</span>: <span style="color:#268bd2">List</span>[<span style="color:#cb4b16">str</span>]) -&gt; <span style="color:#268bd2">List</span>[<span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]]:
+        <span style="color:#268bd2">n</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">smalls</span>)
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">root</span> =  <span style="color:#268bd2">Node</span>()
+        <span style="color:#268bd2">ans</span> = []
+        <span style="color:#93a1a1;font-style:italic"># build the trie</span>
+        <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">n</span>):
+            <span style="color:#268bd2">self</span>.<span style="color:#268bd2">insert</span>(<span style="color:#268bd2">smalls</span>[<span style="color:#268bd2">i</span>], <span style="color:#268bd2">i</span>)
+            <span style="color:#268bd2">ans</span>.<span style="color:#268bd2">append</span>([])
+        <span style="color:#93a1a1;font-style:italic"># begin search</span>
+        <span style="color:#268bd2">nBig</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">big</span>)
+        <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">nBig</span>):
+            <span style="color:#268bd2">node</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">root</span>
+            <span style="color:#859900">for</span> <span style="color:#268bd2">j</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">i</span>, <span style="color:#268bd2">nBig</span>):
+                <span style="color:#268bd2">current_char</span> = <span style="color:#268bd2">big</span>[<span style="color:#268bd2">j</span>]
+                <span style="color:#93a1a1;font-style:italic"># no match</span>
+                <span style="color:#859900">if</span> <span style="color:#268bd2">current_char</span> <span style="color:#859900">not</span> <span style="color:#859900">in</span> <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>:
+                    <span style="color:#859900">break</span>
+                <span style="color:#859900">if</span> <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">current_char</span>].<span style="color:#268bd2">isWord</span>:
+                    <span style="color:#268bd2">ans</span>[<span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">current_char</span>].<span style="color:#268bd2">idx</span>].<span style="color:#268bd2">append</span>(<span style="color:#268bd2">i</span>)
+                <span style="color:#268bd2">node</span> = <span style="color:#268bd2">node</span>.<span style="color:#268bd2">children</span>[<span style="color:#268bd2">current_char</span>]
+        <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>时间复杂度:
+<ul>
+<li>建树: $O(n_{small} * s_{max})$</li>
+<li>搜索: $O(s_{max} * n_{big})$</li>
+<li>显著的比暴力的 $O(n_{big} * n_{smalls} * s_{max})$ 节约时间</li>
+</ul>
+</li>
+<li>空间复杂度：
+<ul>
+<li>建树：$O(n_{small} * s_{max})$</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Dec 12, 2020</p>
+
+          
+
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/resources/DSAL/trie/_index.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+
+          
+
+
+  
+  
+
+
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+  <p class="powered-by">
+    
+      <a href="/privacy/">Privacy Policy</a>
+    
+    
+       &middot; 
+      <a href="/terms/">Terms</a>
+    
+  </p>
+  
+
+  <p class="powered-by">
+    © 2020
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    Published with
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic Website Builder</a>
+    
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/bash.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/cpp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/tex.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.66c553246b0f279a03be6e5597f72b52.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

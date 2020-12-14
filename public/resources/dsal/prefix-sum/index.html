@@ -30,11 +30,10 @@
   
     
   
-  <meta name="description" content="Compile your code in command line  Reference: Pitt-Francis, J., &amp; Whiteley, J. (2017). Guide to Scientific Computing in C&#43;&#43; Secon Edition. Springer.
- compiler [-flag1 -flag2 ...] -o excutableFileName sourceCodeFile   Compiler: g&#43;&#43;">
+  <meta name="description" content="Ph.D. student">
 
   
-  <link rel="alternate" hreflang="en-us" href="/resources/cpp_laopt/cpp/makefile/">
+  <link rel="alternate" hreflang="en-us" href="/resources/dsal/prefix-sum/">
 
   
 
@@ -228,12 +227,14 @@
   
 
   
+  <link rel="alternate" href="/resources/dsal/prefix-sum/index.xml" type="application/rss+xml" title="Dai, Yutong/ 戴宇童">
+  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/resources/cpp_laopt/cpp/makefile/">
+  <link rel="canonical" href="/resources/dsal/prefix-sum/">
 
   
   
@@ -249,23 +250,17 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="Dai, Yutong/ 戴宇童">
-  <meta property="og:url" content="/resources/cpp_laopt/cpp/makefile/">
-  <meta property="og:title" content="Compile your program | Dai, Yutong/ 戴宇童">
-  <meta property="og:description" content="Compile your code in command line  Reference: Pitt-Francis, J., &amp; Whiteley, J. (2017). Guide to Scientific Computing in C&#43;&#43; Secon Edition. Springer.
- compiler [-flag1 -flag2 ...] -o excutableFileName sourceCodeFile   Compiler: g&#43;&#43;"><meta property="og:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="og:url" content="/resources/dsal/prefix-sum/">
+  <meta property="og:title" content="Prefix Sum | Dai, Yutong/ 戴宇童">
+  <meta property="og:description" content="Ph.D. student"><meta property="og:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
-    
-      <meta property="article:published_time" content="2020-08-16T00:00:00&#43;00:00">
-    
-    <meta property="article:modified_time" content="2020-08-31T15:09:49-04:00">
+    <meta property="og:updated_time" content="2020-12-09T00:00:00&#43;00:00">
   
 
   
 
 
-
-  
 
 
   
@@ -277,7 +272,7 @@
 
 
 
-  <title>Compile your program | Dai, Yutong/ 戴宇童</title>
+  <title>Prefix Sum | Dai, Yutong/ 戴宇童</title>
 
 </head>
 <body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
@@ -597,24 +592,40 @@
   
   
   <div class="docs-toc-item">
-    <a class="docs-toc-link" href="/resources/cpp_laopt/">Overview</a>
+    <a class="docs-toc-link" href="/resources/dsal/">前言</a>
 
   </div>
   
   <div class="docs-toc-item">
-    <a class="docs-toc-link" href="/resources/cpp_laopt/cpp/">Elements of C&#43;&#43;</a>
+    <a class="docs-toc-link" href="/resources/dsal/tree/">Tree and Graph</a>
     <ul class="nav docs-sidenav">
       
-      <li class="active">
-        <a href="/resources/cpp_laopt/cpp/makefile/">Compile your program</a>
-      </li>
-      
       <li >
-        <a href="/resources/cpp_laopt/cpp/pointers/">Pointers and Reference</a>
+        <a href="/resources/dsal/tree/tree_basic/">tree-concepts-algorithm</a>
       </li>
       
     </ul>
     
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/bit-operations/">Bit operations</a>
+
+  </div>
+  
+  <div class="docs-toc-item active">
+    <a class="docs-toc-link" href="/resources/dsal/prefix-sum/">Prefix Sum</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/trie/">Trie</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/union-find/">Union Find</a>
 
   </div>
   
@@ -631,7 +642,12 @@
 
       <nav id="TableOfContents">
   <ul>
-    <li><a href="#compile-your-code-in-command-line">Compile your code in command line</a></li>
+    <li><a href="#560-和为k的子数组">560. 和为k的子数组</a>
+      <ul>
+        <li><a href="#思路">思路</a></li>
+        <li><a href="#再次优化">再次优化</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -644,44 +660,156 @@
       <article class="article">
 
         <div class="docs-article-container">
-          <h1>Compile your program</h1>
+          <h1>Prefix Sum</h1>
 
           <div class="article-style">
-            <h1 id="compile-your-code-in-command-line">Compile your code in command line</h1>
-<blockquote>
-<p>Reference: Pitt-Francis, J., &amp; Whiteley, J. (2017). Guide to Scientific Computing in C++ Secon Edition. Springer.</p>
-</blockquote>
-<pre><code>compiler [-flag1 -flag2 ...] -o excutableFileName sourceCodeFile
-</code></pre><ul>
-<li>
-<p>Compiler: <code>g++</code></p>
-</li>
-<li>
-<p>Compiler flags:</p>
-<ul>
-<li><code>-Wall</code>: list out anything unexpected that is not actually an error, but will still create an executable file.</li>
-<li><code>-O</code>: (upper case <code>o</code>): optimize the executable file at the cost of longer compilation time</li>
-<li><code>-g</code>: compile code with debugging information preserved</li>
-<li><code>-o</code>: use this to allow name the excutable file name</li>
-</ul>
-</li>
-<li>
-<p>Inputs:</p>
-<ul>
-<li><code>excutableFileName</code>: the parameter provided to the flag <code>-o</code></li>
-<li><code>sourceCodeFile</code>: the <code>cpp</code> file which you want to compile</li>
-</ul>
-</li>
-</ul>
+            <h1 id="560-和为k的子数组">560. 和为k的子数组</h1>
+<pre><code>给定一个整数数组和一个整数 k，你需要找到该数组中和为 k 的连续的子数组的个数。
+
+示例 1 :
+
+输入:nums = [1,1,1], k = 2
+输出: 2 , [1,1] 与 [1,1] 为两种不同的情况。
+说明 :
+
+数组的长度为 [1, 20,000]。
+数组中元素的范围是 [-1000, 1000] ，且整数 k 的范围是 [-1e7, 1e7]。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/subarray-sum-equals-k
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路">思路</h2>
+<p>最直观的想法便是给定了 <code>start</code>与<code>end</code> ，对子数组<code>num[start:end]</code>里的元素求和。如果和为<code>k</code>则说明找到一组符合条件的子数组。但是这样的复杂度为$O(n^3)$。</p>
+<h3 id="初次优化">初次优化</h3>
+<p>观察到</p>
 <div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">g++ -Wall -O -o addTwoNumbers addTwoNumbers.cpp
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#cb4b16">sum</span>(<span style="color:#268bd2">num</span>[<span style="color:#268bd2">start</span>-<span style="color:#2aa198;font-weight:bold">1</span>:<span style="color:#268bd2">end</span>]) + <span style="color:#268bd2">num</span>[<span style="color:#268bd2">start</span>] = <span style="color:#cb4b16">sum</span>(<span style="color:#268bd2">num</span>[<span style="color:#268bd2">start</span>:<span style="color:#268bd2">end</span>])
 </code></pre></td></tr></table>
 </div>
+</div><p>我们可以固定住<code>end</code> 然后让 <code>start</code>从 <code>end</code>开始递减到0，对在这个循环过程中得到子列和与<code>k</code>比较并统计符合条件的子列数量。</p>
+<p>这样的话时间复杂度为$O(n^2)$. 可惜Python的版本会超时。</p>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>(<span style="color:#cb4b16">object</span>):
+    <span style="color:#859900">def</span> <span style="color:#268bd2">subarraySum</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">nums</span>, <span style="color:#268bd2">k</span>):
+        <span style="color:#2aa198">&#34;&#34;&#34;
+</span><span style="color:#2aa198">        :type nums: List[int]
+</span><span style="color:#2aa198">        :type k: int
+</span><span style="color:#2aa198">        :rtype: int
+</span><span style="color:#2aa198">        &#34;&#34;&#34;</span>
+        <span style="color:#268bd2">total</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#859900">if</span> <span style="color:#859900">not</span> <span style="color:#268bd2">nums</span>:
+            <span style="color:#859900">return</span> <span style="color:#268bd2">total</span>
+        <span style="color:#268bd2">n</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">nums</span>)
+        <span style="color:#859900">for</span> <span style="color:#268bd2">end</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">n</span>):
+            <span style="color:#268bd2">tempSum</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+            <span style="color:#859900">for</span> <span style="color:#268bd2">start</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">end</span>, -<span style="color:#2aa198;font-weight:bold">1</span>, -<span style="color:#2aa198;font-weight:bold">1</span>):
+                <span style="color:#268bd2">tempSum</span> += <span style="color:#268bd2">nums</span>[<span style="color:#268bd2">start</span>]
+                <span style="color:#859900">if</span> <span style="color:#268bd2">tempSum</span> == <span style="color:#268bd2">k</span>:
+                    <span style="color:#268bd2">total</span> += <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#859900">return</span> <span style="color:#268bd2">total</span>
+</code></pre></td></tr></table>
 </div>
+</div><h2 id="再次优化">再次优化</h2>
+<p>假设我们有个数列<code>cumSum</code>其中<code>cumsum[i]</code>是<code>num</code>中前<code>i</code>个数的和，比如</p>
+<pre><code>cumSum[0] = num[0]
+cumSum[1] = num[0] + num[1] 
+....
+
+更加紧凑的我们有
+
+cumSum[0] = num[0]
+cumSum[i] = num[i] + cumSum[i-1], i &gt;= 1
+</code></pre><p>对于满足的条件的子列(从<code>start</code>开始，到<code>end</code>结束 )，那么我们有</p>
+<pre><code>k = sum(num[start:end]) = cumSum[end]  - cumSum[start-1]  ---&gt;
+
+cumSum[start-1]  = cumSum[end]  -  k 
+</code></pre><p>本质就是寻找 从<code>0</code> 到 <code>end</code> 有多少个 index <code>i</code> 使得 <code>cumSum[i] </code> 为<code>k</code>。
+之前的方法是用循环，这里考虑用哈希表<code>dic</code>。在建立<code>cumSum</code>这个数组的时候，我们
+可以以 <code>cumSum[i] </code>为key 以 <code>cumSum[i] </code>出现的频次为value。
+那么对于以<code>end</code>结束的子列，满足条件的子列有<code>dic[cumSum[end]  -  k ]</code>。</p>
+<p>最后两个小细节：</p>
+<ol>
+<li>边界情况。<code>num[end]</code> 直接为<code>k</code>。我们在初始化哈希表时，需要加入一个 以<code>0</code>为key 以 <code>1</code>为value的key-value pair。</li>
+<li>我们不需要维护一个数组<code>cumSum[i] </code> 而是用一个变量就够了。</li>
+</ol>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#dc322f;font-weight:bold">from</span> <span style="color:#268bd2">collections</span> <span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">defaultdict</span>
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>(<span style="color:#cb4b16">object</span>):
+    <span style="color:#859900">def</span> <span style="color:#268bd2">subarraySum</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">nums</span>, <span style="color:#268bd2">k</span>):
+        <span style="color:#2aa198">&#34;&#34;&#34;
+</span><span style="color:#2aa198">        :type nums: List[int]
+</span><span style="color:#2aa198">        :type k: int
+</span><span style="color:#2aa198">        :rtype: int
+</span><span style="color:#2aa198">        &#34;&#34;&#34;</span>
+        <span style="color:#859900">if</span> <span style="color:#859900">not</span> <span style="color:#268bd2">nums</span>:
+            <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#268bd2">total</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#268bd2">n</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">nums</span>)
+        <span style="color:#268bd2">cumSum</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#268bd2">cumSumFreq</span> = <span style="color:#268bd2">defaultdict</span>()
+        <span style="color:#93a1a1;font-style:italic"># 边界条件：什么都不选的时候 cumulative sum 为 0</span>
+        <span style="color:#268bd2">cumSumFreq</span>[<span style="color:#2aa198;font-weight:bold">0</span>] = <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#859900">for</span> <span style="color:#268bd2">start</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">n</span>):
+            <span style="color:#268bd2">cumSum</span> += <span style="color:#268bd2">nums</span>[<span style="color:#268bd2">start</span>]
+            <span style="color:#268bd2">total</span> += <span style="color:#268bd2">cumSumFreq</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">cumSum</span> - <span style="color:#268bd2">k</span>, <span style="color:#2aa198;font-weight:bold">0</span>)
+            <span style="color:#93a1a1;font-style:italic"># 更新字典必须在求和之后</span>
+            <span style="color:#268bd2">cumSumFreq</span>[<span style="color:#268bd2">cumSum</span>] = <span style="color:#268bd2">cumSumFreq</span>.<span style="color:#268bd2">get</span>(<span style="color:#268bd2">cumSum</span>, <span style="color:#2aa198;font-weight:bold">0</span>) + <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#859900">return</span> <span style="color:#268bd2">total</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>时间复杂度： $O(n)$
+空间复杂度： $O(n)$</p>
+
           </div>
 
           
@@ -694,12 +822,6 @@
 <div class="post-nav">
   
   
-  
-  <div class="post-nav-item">
-    <div class="meta-nav">Next</div>
-    <a href="/resources/cpp_laopt/cpp/pointers/" rel="prev">Pointers and Reference</a>
-  </div>
-  
 </div>
 
           </div>
@@ -707,7 +829,7 @@
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Aug 31, 2020</p>
+          <p>Last updated on Dec 9, 2020</p>
 
           
 
@@ -720,7 +842,7 @@
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/resources/cpp_LAOPT/cpp/makefile.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/resources/DSAL/prefix-sum/_index.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

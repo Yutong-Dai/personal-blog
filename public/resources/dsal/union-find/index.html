@@ -1,0 +1,1210 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Ph.D. student">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/resources/dsal/union-find/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/rainbow.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/rainbow.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+  <link rel="alternate" href="/resources/dsal/union-find/index.xml" type="application/rss+xml" title="Dai, Yutong/ 戴宇童">
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/resources/dsal/union-find/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Dai, Yutong/ 戴宇童">
+  <meta property="og:url" content="/resources/dsal/union-find/">
+  <meta property="og:title" content="Union Find 并查集 | Dai, Yutong/ 戴宇童">
+  <meta property="og:description" content="Ph.D. student"><meta property="og:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    <meta property="og:updated_time" content="2020-12-14T00:00:00&#43;00:00">
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Union Find 并查集 | Dai, Yutong/ 戴宇童</title>
+
+</head>
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Dai, Yutong/ 戴宇童</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Dai, Yutong/ 戴宇童</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/resources/"><span>Resources</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-palette" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+    
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/">前言</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/tree/">Tree and Graph</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/resources/dsal/tree/tree_basic/">tree-concepts-algorithm</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/bit-operations/">Bit operations</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/prefix-sum/">Prefix Sum</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/trie/">Trie</a>
+
+  </div>
+  
+  <div class="docs-toc-item active">
+    <a class="docs-toc-link" href="/resources/dsal/union-find/">Union Find</a>
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#并查集的数据结构">并查集的数据结构</a></li>
+    <li><a href="#题目">题目</a>
+      <ul>
+        <li><a href="#思路一-并查集">思路一： 并查集</a></li>
+        <li><a href="#思路二-无向图的搜索">思路二: 无向图的搜索</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>Union Find 并查集</h1>
+
+          <div class="article-style">
+            <h1 id="并查集的数据结构">并查集的数据结构</h1>
+<p>
+<a href="https://github.com/leetcode-pp/91alg-2/blob/master/lecture/advanced-union-find-set.md" target="_blank" rel="noopener">参考</a>.</p>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">UF</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">__init__</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">n</span>:<span style="color:#cb4b16">int</span>):
+        <span style="color:#2aa198">&#34;&#34;&#34;
+</span><span style="color:#2aa198">        n: 图中有多少个node
+</span><span style="color:#2aa198">        &#34;&#34;&#34;</span>
+        <span style="color:#93a1a1;font-style:italic"># 初始化: 每个node是自己的根节点</span>
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span> = [<span style="color:#268bd2">i</span> <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">n</span>)]
+        <span style="color:#93a1a1;font-style:italic"># 初始化: 以自己为根节点的tree的size都是1</span>
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span> = [<span style="color:#2aa198;font-weight:bold">1</span>] * <span style="color:#268bd2">n</span>
+        <span style="color:#93a1a1;font-style:italic"># 初始化: 连通图的个数</span>
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">count</span> = <span style="color:#268bd2">n</span>
+    <span style="color:#859900">def</span> <span style="color:#268bd2">find</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">node</span>:<span style="color:#cb4b16">int</span>):
+        <span style="color:#859900">while</span> <span style="color:#268bd2">node</span> != <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">node</span>]:
+            <span style="color:#93a1a1;font-style:italic"># 路径压缩</span>
+            <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">node</span>] = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">node</span>]]
+            <span style="color:#268bd2">node</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">node</span>]
+        <span style="color:#859900">return</span> <span style="color:#268bd2">node</span>
+    <span style="color:#859900">def</span> <span style="color:#268bd2">union</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">p</span>:<span style="color:#cb4b16">int</span>, <span style="color:#268bd2">q</span>:<span style="color:#cb4b16">int</span>):
+        <span style="color:#268bd2">pRoot</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">find</span>(<span style="color:#268bd2">p</span>)
+        <span style="color:#268bd2">qRoot</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">find</span>(<span style="color:#268bd2">q</span>)
+        <span style="color:#859900">if</span> <span style="color:#268bd2">pRoot</span> != <span style="color:#268bd2">qRoot</span>:
+            <span style="color:#93a1a1;font-style:italic"># 小树挂在大树上</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">pRoot</span>] &gt;= <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">qRoot</span>]:
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">qRoot</span>] = <span style="color:#268bd2">pRoot</span>
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">pRoot</span>] += <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">qRoot</span>]
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">qRoot</span>] = <span style="color:#268bd2">None</span>
+            <span style="color:#859900">else</span>:
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">pRoot</span>] = <span style="color:#268bd2">qRoot</span>
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">qRoot</span>] += <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">pRoot</span>]
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">pRoot</span>] = <span style="color:#268bd2">None</span>
+            <span style="color:#268bd2">self</span>.<span style="color:#268bd2">count</span> -= <span style="color:#2aa198;font-weight:bold">1</span>
+      <span style="color:#859900">def</span> <span style="color:#268bd2">connected</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">p</span>:<span style="color:#cb4b16">int</span>, <span style="color:#268bd2">q</span>:<span style="color:#cb4b16">int</span>):
+          <span style="color:#859900">return</span> <span style="color:#268bd2">self</span>.<span style="color:#268bd2">find</span>(<span style="color:#268bd2">p</span>) == <span style="color:#268bd2">self</span>.<span style="color:#268bd2">find</span>(<span style="color:#268bd2">q</span>)
+</code></pre></td></tr></table>
+</div>
+</div><p>应用:</p>
+<ol>
+<li>确定无向图的连通分量</li>
+</ol>
+<h1 id="题目">题目</h1>
+<pre><code>班上有 N 名学生。其中有些人是朋友，有些则不是。他们的友谊具有是传递性。如果已知 A 是 B 的朋友，B 是 C 的朋友，那么我们可以认为 A 也是 C 的朋友。所谓的朋友圈，是指所有朋友的集合。
+
+给定一个 N * N 的矩阵 M，表示班级中学生之间的朋友关系。如果M[i][j] = 1，表示已知第 i 个和 j 个学生互为朋友关系，否则为不知道。你必须输出所有学生中的已知的朋友圈总数。
+
+ 
+
+示例 1：
+
+输入：
+[[1,1,0],
+ [1,1,0],
+ [0,0,1]]
+输出：2 
+解释：已知学生 0 和学生 1 互为朋友，他们在一个朋友圈。
+第2个学生自己在一个朋友圈。所以返回 2 。
+示例 2：
+
+输入：
+[[1,1,0],
+ [1,1,1],
+ [0,1,1]]
+输出：1
+解释：已知学生 0 和学生 1 互为朋友，学生 1 和学生 2 互为朋友，所以学生 0 和学生 2 也是朋友，所以他们三个在一个朋友圈，返回 1 。
+ 
+
+提示：
+
+1 &lt;= N &lt;= 200
+M[i][i] == 1
+M[i][j] == M[j][i]
+
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/friend-circles
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路一-并查集">思路一： 并查集</h2>
+<p>消化模板中</p>
+<p><img src="https://user-images.githubusercontent.com/19240875/102106672-d9ccd780-3dfe-11eb-8579-767fe45178f7.jpg" alt="IMG_0273"></p>
+<h3 id="代码">代码</h3>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">42
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">43
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">UF</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">__init__</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">n</span>:<span style="color:#cb4b16">int</span>):
+        <span style="color:#2aa198">&#34;&#34;&#34;
+</span><span style="color:#2aa198">        n: 图中有多少个node
+</span><span style="color:#2aa198">        &#34;&#34;&#34;</span>
+        <span style="color:#93a1a1;font-style:italic"># 初始化: 每个node是自己的根节点</span>
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span> = [<span style="color:#268bd2">i</span> <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">n</span>)]
+        <span style="color:#93a1a1;font-style:italic"># 初始化: 以自己为根节点的tree的size都是1</span>
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span> = [<span style="color:#2aa198;font-weight:bold">1</span>] * <span style="color:#268bd2">n</span>
+        <span style="color:#93a1a1;font-style:italic"># 初始化: 连通图的个数</span>
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">count</span> = <span style="color:#268bd2">n</span>
+    <span style="color:#859900">def</span> <span style="color:#268bd2">find</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">node</span>:<span style="color:#cb4b16">int</span>):
+        <span style="color:#859900">while</span> <span style="color:#268bd2">node</span> != <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">node</span>]:
+            <span style="color:#93a1a1;font-style:italic"># 路径压缩</span>
+            <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">node</span>] = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">node</span>]]
+            <span style="color:#268bd2">node</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">node</span>]
+        <span style="color:#859900">return</span> <span style="color:#268bd2">node</span>
+    <span style="color:#859900">def</span> <span style="color:#268bd2">union</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">p</span>:<span style="color:#cb4b16">int</span>, <span style="color:#268bd2">q</span>:<span style="color:#cb4b16">int</span>):
+        <span style="color:#268bd2">pRoot</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">find</span>(<span style="color:#268bd2">p</span>)
+        <span style="color:#268bd2">qRoot</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">find</span>(<span style="color:#268bd2">q</span>)
+        <span style="color:#859900">if</span> <span style="color:#268bd2">pRoot</span> != <span style="color:#268bd2">qRoot</span>:
+            <span style="color:#93a1a1;font-style:italic"># 小树挂在大树上</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">pRoot</span>] &gt;= <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">qRoot</span>]:
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">qRoot</span>] = <span style="color:#268bd2">pRoot</span>
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">pRoot</span>] += <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">qRoot</span>]
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">qRoot</span>] = <span style="color:#268bd2">None</span>
+            <span style="color:#859900">else</span>:
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">pRoot</span>] = <span style="color:#268bd2">qRoot</span>
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">qRoot</span>] += <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">pRoot</span>]
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">pRoot</span>] = <span style="color:#268bd2">None</span>
+            <span style="color:#268bd2">self</span>.<span style="color:#268bd2">count</span> -= <span style="color:#2aa198;font-weight:bold">1</span>
+
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">findCircleNum</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">M</span>: <span style="color:#268bd2">List</span>[<span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]]) -&gt; <span style="color:#cb4b16">int</span>:
+        <span style="color:#268bd2">n</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">M</span>)
+        <span style="color:#268bd2">uf</span> = <span style="color:#268bd2">UF</span>(<span style="color:#268bd2">n</span>)
+        <span style="color:#859900">if</span> <span style="color:#268bd2">n</span> == <span style="color:#2aa198;font-weight:bold">0</span>:
+            <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">n</span>):
+            <span style="color:#859900">for</span> <span style="color:#268bd2">j</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">i</span>+<span style="color:#2aa198;font-weight:bold">1</span>,<span style="color:#268bd2">n</span>):
+                <span style="color:#859900">if</span> <span style="color:#268bd2">M</span>[<span style="color:#268bd2">i</span>][<span style="color:#268bd2">j</span>] == <span style="color:#2aa198;font-weight:bold">1</span>:
+                    <span style="color:#268bd2">uf</span>.<span style="color:#268bd2">union</span>(<span style="color:#268bd2">i</span>, <span style="color:#268bd2">j</span>)
+        <span style="color:#859900">return</span> <span style="color:#268bd2">uf</span>.<span style="color:#268bd2">count</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="复杂度">复杂度:</h3>
+<ul>
+<li>时间：$O(n^2)$</li>
+<li>空间：$O(n)$</li>
+</ul>
+<h2 id="思路二-无向图的搜索">思路二: 无向图的搜索</h2>
+<h3 id="bfs">BFS</h3>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#268bd2">M</span> = [[<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">1</span>], [<span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">0</span>], [<span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">0</span>], [<span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">0</span>], [<span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">0</span>], [<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">0</span> ,<span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">1</span>]]
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">findCircleNum</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">M</span>):
+        <span style="color:#268bd2">num_of_students</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">M</span>)
+        <span style="color:#268bd2">visited</span> = [<span style="color:#2aa198;font-weight:bold">0</span>] * <span style="color:#268bd2">num_of_students</span>
+        <span style="color:#268bd2">count</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#268bd2">queue</span> = []
+        <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">num_of_students</span>):
+            <span style="color:#859900">print</span>(<span style="color:#2aa198">&#34;Explore node {}&#34;</span>.<span style="color:#268bd2">format</span>(<span style="color:#268bd2">i</span>))
+            <span style="color:#859900">if</span> <span style="color:#268bd2">visited</span>[<span style="color:#268bd2">i</span>]:
+                <span style="color:#859900">print</span>(<span style="color:#2aa198">&#34;node {} is visited&#34;</span>.<span style="color:#268bd2">format</span>(<span style="color:#268bd2">i</span>))
+                <span style="color:#859900">continue</span>
+            <span style="color:#859900">else</span>:
+                <span style="color:#859900">print</span>(<span style="color:#2aa198">&#34;node {} is unexplored&#34;</span>.<span style="color:#268bd2">format</span>(<span style="color:#268bd2">i</span>))
+                <span style="color:#268bd2">queue</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">i</span>)
+                <span style="color:#859900">print</span>(<span style="color:#2aa198">&#34;add node {} to queue | queue:{}&#34;</span>.<span style="color:#268bd2">format</span>(<span style="color:#268bd2">i</span>, <span style="color:#268bd2">queue</span>))
+                <span style="color:#268bd2">visited</span>[<span style="color:#268bd2">i</span>] = <span style="color:#2aa198;font-weight:bold">1</span>
+                <span style="color:#859900">print</span>(<span style="color:#2aa198">&#34;mark node {} as visited&#34;</span>.<span style="color:#268bd2">format</span>(<span style="color:#268bd2">i</span>))
+            <span style="color:#859900">while</span> <span style="color:#268bd2">queue</span>:
+                <span style="color:#268bd2">next_node_index</span> = <span style="color:#268bd2">queue</span>.<span style="color:#268bd2">pop</span>(<span style="color:#2aa198;font-weight:bold">0</span>)
+                <span style="color:#859900">print</span>(<span style="color:#2aa198">&#34;node to be explored:{}&#34;</span>.<span style="color:#268bd2">format</span>(<span style="color:#268bd2">next_node_index</span>))
+                <span style="color:#859900">for</span> <span style="color:#268bd2">j</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">i</span>, <span style="color:#268bd2">num_of_students</span>):
+                    <span style="color:#859900">if</span> <span style="color:#268bd2">M</span>[<span style="color:#268bd2">next_node_index</span>][<span style="color:#268bd2">j</span>] == <span style="color:#2aa198;font-weight:bold">1</span> <span style="color:#859900">and</span> <span style="color:#268bd2">visited</span>[<span style="color:#268bd2">j</span>] != <span style="color:#2aa198;font-weight:bold">1</span>:
+                        <span style="color:#859900">print</span>(<span style="color:#2aa198">&#34;node:{} and node:{} are connected!&#34;</span>.<span style="color:#268bd2">format</span>(<span style="color:#268bd2">next_node_index</span>, <span style="color:#268bd2">j</span>))
+                        <span style="color:#268bd2">queue</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">j</span>)
+                        <span style="color:#859900">print</span>(<span style="color:#2aa198">&#34;add node {} to queue | queue:{}&#34;</span>.<span style="color:#268bd2">format</span>(<span style="color:#268bd2">j</span>, <span style="color:#268bd2">queue</span>))
+                        <span style="color:#268bd2">visited</span>[<span style="color:#268bd2">j</span>] = <span style="color:#2aa198;font-weight:bold">1</span>
+                        <span style="color:#859900">print</span>(<span style="color:#2aa198">&#34;mark node {} as visited&#34;</span>.<span style="color:#268bd2">format</span>(<span style="color:#268bd2">j</span>))
+            <span style="color:#268bd2">count</span> += <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#859900">print</span>(<span style="color:#2aa198">&#34;====&#34;</span>)
+        <span style="color:#859900">return</span> <span style="color:#268bd2">count</span> 
+<span style="color:#268bd2">s</span> = <span style="color:#268bd2">Solution</span>()
+<span style="color:#268bd2">s</span>.<span style="color:#268bd2">findCircleNum</span>(<span style="color:#268bd2">M</span>)
+</code></pre></td></tr></table>
+</div>
+</div>
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Dec 14, 2020</p>
+
+          
+
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/resources/DSAL/union-find/_index.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+
+          
+
+
+  
+  
+
+
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+  <p class="powered-by">
+    
+      <a href="/privacy/">Privacy Policy</a>
+    
+    
+       &middot; 
+      <a href="/terms/">Terms</a>
+    
+  </p>
+  
+
+  <p class="powered-by">
+    © 2020
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    Published with
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic Website Builder</a>
+    
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/bash.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/cpp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/tex.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.66c553246b0f279a03be6e5597f72b52.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
