@@ -610,6 +610,11 @@
   </div>
   
   <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/heap/">Heap</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
     <a class="docs-toc-link" href="/resources/dsal/bit-operations/">Bit operations</a>
 
   </div>
@@ -621,6 +626,11 @@
   
   <div class="docs-toc-item">
     <a class="docs-toc-link" href="/resources/dsal/trie/">Trie</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/backtracking/">backtracking</a>
 
   </div>
   
@@ -647,6 +657,13 @@
       <ul>
         <li><a href="#思路一-并查集">思路一： 并查集</a></li>
         <li><a href="#思路二-无向图的搜索">思路二: 无向图的搜索</a></li>
+      </ul>
+    </li>
+    <li><a href="#1319-连通网络的操作次数">1319. 连通网络的操作次数</a>
+      <ul>
+        <li><a href="#思路">思路</a></li>
+        <li><a href="#代码-1">代码</a></li>
+        <li><a href="#复杂度-1">复杂度</a></li>
       </ul>
     </li>
   </ul>
@@ -954,7 +971,146 @@ M[i][j] == M[j][i]
 <span style="color:#268bd2">s</span>.<span style="color:#268bd2">findCircleNum</span>(<span style="color:#268bd2">M</span>)
 </code></pre></td></tr></table>
 </div>
+</div><h1 id="1319-连通网络的操作次数">1319. 连通网络的操作次数</h1>
+<pre><code>用以太网线缆将 n 台计算机连接成一个网络，计算机的编号从 0 到 n-1。线缆用 connections 表示，其中 connections[i] = [a, b] 连接了计算机 a 和 b。
+
+网络中的任何一台计算机都可以通过网络直接或者间接访问同一个网络中其他任意一台计算机。
+
+给你这个计算机网络的初始布线 connections，你可以拔开任意两台直连计算机之间的线缆，并用它连接一对未直连的计算机。请你计算并返回使所有计算机都连通所需的最少操作次数。如果不可能，则返回 -1 。 
+
+用以太网线缆将 n 台计算机连接成一个网络，计算机的编号从 0 到 n-1。线缆用 connections 表示，其中 connections[i] = [a, b] 连接了计算机 a 和 b。
+
+网络中的任何一台计算机都可以通过网络直接或者间接访问同一个网络中其他任意一台计算机。
+
+给你这个计算机网络的初始布线 connections，你可以拔开任意两台直连计算机之间的线缆，并用它连接一对未直连的计算机。请你计算并返回使所有计算机都连通所需的最少操作次数。如果不可能，则返回 -1 。 
+
+示例 1：
+
+
+
+输入：n = 4, connections = [[0,1],[0,2],[1,2]]
+输出：1
+解释：拔下计算机 1 和 2 之间的线缆，并将它插到计算机 1 和 3 上。
+示例 2：
+
+
+
+输入：n = 6, connections = [[0,1],[0,2],[0,3],[1,2],[1,3]]
+输出：2
+示例 3：
+
+输入：n = 6, connections = [[0,1],[0,2],[0,3],[1,2]]
+输出：-1
+解释：线缆数量不足。
+示例 4：
+
+输入：n = 5, connections = [[0,1],[0,2],[3,4],[2,3]]
+输出：0
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/number-of-operations-to-make-network-connected
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路">思路</h2>
+<p>思考如下几个问题:</p>
+<ol>
+<li>
+<p>什么时候无法把所有节点连接起来？当<code>connections</code>中给定的边的数量<code>len(connections)</code>少于无向图中的节点数量<code>n</code>时，一定无法构建一个连通图。当 <code>len(connections)</code>&gt;<code>n</code>时， 我们一定知道可以通过移动某些边使得整个无向图连通。</p>
+</li>
+<li>
+<p>我们需要多少次操作呢？考虑有<code>n</code>个孤立的节点，我们只需要操作<code>n-1</code>次，即可构建一个连通的无向图。同理，如果我们有<code>k</code>个连通集，则只需要<code>k-1</code>次操作。所有问题变成找一个无向图连通集的个数<code>m</code>。然后返回答案<code>m-1</code>。</p>
+</li>
+</ol>
+<h2 id="代码-1">代码</h2>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">UF</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">__init__</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">n</span>):
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span> = [<span style="color:#268bd2">i</span> <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">n</span>)]
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span> = [<span style="color:#2aa198;font-weight:bold">1</span> <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">n</span>)]
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">count</span> = <span style="color:#268bd2">n</span>
+    <span style="color:#859900">def</span> <span style="color:#268bd2">find</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">p</span>):
+        <span style="color:#859900">while</span> <span style="color:#268bd2">p</span> != <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">p</span>]:
+            <span style="color:#268bd2">p</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">p</span>]
+            <span style="color:#93a1a1;font-style:italic"># compression</span>
+            <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">p</span>] = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">p</span>]]
+        <span style="color:#859900">return</span> <span style="color:#268bd2">p</span>
+    <span style="color:#859900">def</span> <span style="color:#268bd2">union</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">p</span>, <span style="color:#268bd2">q</span>):
+        <span style="color:#268bd2">p_root</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">find</span>(<span style="color:#268bd2">p</span>)
+        <span style="color:#268bd2">q_root</span> = <span style="color:#268bd2">self</span>.<span style="color:#268bd2">find</span>(<span style="color:#268bd2">q</span>)
+        <span style="color:#859900">if</span> <span style="color:#268bd2">p_root</span> == <span style="color:#268bd2">q_root</span>:
+            <span style="color:#859900">return</span>
+        <span style="color:#859900">else</span>:
+            <span style="color:#859900">if</span> <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">p_root</span>] &gt;= <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">q_root</span>]:
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">q_root</span>] = <span style="color:#268bd2">p_root</span>
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">p_root</span>] += <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">q_root</span>]
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">q_root</span>] = <span style="color:#268bd2">None</span>
+            <span style="color:#859900">else</span>:
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">parent</span>[<span style="color:#268bd2">p_root</span>] = <span style="color:#268bd2">q_root</span>
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">q_root</span>] += <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">p_root</span>]
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">size</span>[<span style="color:#268bd2">p_root</span>] = <span style="color:#268bd2">None</span>
+            <span style="color:#268bd2">self</span>.<span style="color:#268bd2">count</span> -= <span style="color:#2aa198;font-weight:bold">1</span>
+            
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">makeConnected</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">n</span>: <span style="color:#cb4b16">int</span>, <span style="color:#268bd2">connections</span>: <span style="color:#268bd2">List</span>[<span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]]) -&gt; <span style="color:#cb4b16">int</span>:
+        <span style="color:#268bd2">nEdges</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">connections</span>)
+        <span style="color:#93a1a1;font-style:italic"># 线缆不足</span>
+        <span style="color:#859900">if</span> <span style="color:#268bd2">nEdges</span> &lt; <span style="color:#268bd2">n</span> - <span style="color:#2aa198;font-weight:bold">1</span>:
+            <span style="color:#859900">return</span> -<span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#93a1a1;font-style:italic"># 建立并查集</span>
+        <span style="color:#268bd2">uf</span> = <span style="color:#268bd2">UF</span>(<span style="color:#268bd2">n</span>)
+        <span style="color:#859900">for</span> <span style="color:#268bd2">edge</span> <span style="color:#859900">in</span> <span style="color:#268bd2">connections</span>:
+            <span style="color:#268bd2">p</span>, <span style="color:#268bd2">q</span> = <span style="color:#268bd2">edge</span>[<span style="color:#2aa198;font-weight:bold">0</span>], <span style="color:#268bd2">edge</span>[<span style="color:#2aa198;font-weight:bold">1</span>]
+            <span style="color:#268bd2">uf</span>.<span style="color:#268bd2">union</span>(<span style="color:#268bd2">p</span>, <span style="color:#268bd2">q</span>)
+        <span style="color:#859900">return</span>  <span style="color:#268bd2">uf</span>.<span style="color:#268bd2">count</span> - <span style="color:#2aa198;font-weight:bold">1</span>
+</code></pre></td></tr></table>
 </div>
+</div><h2 id="复杂度-1">复杂度</h2>
+<ul>
+<li>空间: $O(n)$ &mdash;-&gt; n: 节点数</li>
+<li>时间: $O(n+m\alpha(n))$   &mdash;&gt; m: 边的数量 \alpha(n) inverse Ackermann function. 每次find的cost 是$O(\alpha(n))$,几乎是一个常数。</li>
+</ul>
+
           </div>
 
           

@@ -1,0 +1,1305 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Ph.D. student">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/resources/dsal/heap/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#2962ff">
+  
+
+  
+  
+  
+  <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/rainbow.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/rainbow.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+    
+      
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+    
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+  
+
+  
+  <link rel="alternate" href="/resources/dsal/heap/index.xml" type="application/rss+xml" title="Dai, Yutong/ 戴宇童">
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/resources/dsal/heap/">
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="og:site_name" content="Dai, Yutong/ 戴宇童">
+  <meta property="og:url" content="/resources/dsal/heap/">
+  <meta property="og:title" content="Heap | Dai, Yutong/ 戴宇童">
+  <meta property="og:description" content="Ph.D. student"><meta property="og:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
+  <meta property="twitter:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
+  
+    <meta property="og:updated_time" content="2020-12-05T00:00:00&#43;00:00">
+  
+
+  
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+  <title>Heap | Dai, Yutong/ 戴宇童</title>
+
+</head>
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Dai, Yutong/ 戴宇童</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Dai, Yutong/ 戴宇童</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/resources/"><span>Resources</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link js-theme-selector" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-palette" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+  
+    
+  
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+
+  
+  
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/">前言</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/tree/">Tree and Graph</a>
+    <ul class="nav docs-sidenav">
+      
+      <li >
+        <a href="/resources/dsal/tree/tree_basic/">tree-concepts-algorithm</a>
+      </li>
+      
+    </ul>
+    
+
+  </div>
+  
+  <div class="docs-toc-item active">
+    <a class="docs-toc-link" href="/resources/dsal/heap/">Heap</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/bit-operations/">Bit operations</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/prefix-sum/">Prefix Sum</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/trie/">Trie</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/backtracking/">backtracking</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/union-find/">Union Find</a>
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+    <div class="d-none d-xl-block col-xl-2 docs-toc">
+      <ul class="nav toc-top">
+        <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
+      </ul>
+
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#heap-basics">Heap Basics</a></li>
+    <li><a href="#215-数组中第k个最大元素">215 数组中第k个最大元素</a>
+      <ul>
+        <li><a href="#思路">思路</a></li>
+        <li><a href="#代码">代码</a></li>
+        <li><a href="#复杂度">复杂度</a></li>
+      </ul>
+    </li>
+    <li><a href="#1046-最后一块石头的重量">1046. 最后一块石头的重量</a>
+      <ul>
+        <li><a href="#思路-1">思路</a></li>
+        <li><a href="#代码-1">代码</a></li>
+        <li><a href="#复杂度-1">复杂度</a></li>
+      </ul>
+    </li>
+    <li><a href="#23-合并k个升序链表">23. 合并k个升序链表</a>
+      <ul>
+        <li><a href="#思路一-暴力合并k个链表">思路一： 暴力合并k个链表</a></li>
+        <li><a href="#最小堆">最小堆</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+      
+    </div>
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article">
+
+        <div class="docs-article-container">
+          <h1>Heap</h1>
+
+          <div class="article-style">
+            <h1 id="heap-basics">Heap Basics</h1>
+<p>We consider the <code>minHeap</code> with <code>n</code> elements being stored.</p>
+<p><code>minHeap</code>, is a complete binary tree, which can be stored in an array <code>A</code>.</p>
+<p><strong>Properties:</strong></p>
+<ol>
+<li>Given the index of the element in the array <code>A</code>, the left child and right children of <code>A[i]</code> are <code>A[2i+1]</code> and <code>A[2i+2]</code> respectively. The parent of <code>A[i]</code> is <code>A[floor(i-1)/2]</code>.</li>
+<li>(<strong>Heap Property</strong>)Excluding the root <code>A[0]</code>, <code>A[parent[i]] &lt;= A[i]</code> for all $i&gt;0$.</li>
+</ol>
+<p><strong>Basic operations</strong></p>
+<ul>
+<li>
+<p><code>parent(i)</code>: return the parent of the node $i$.</p>
+</li>
+<li>
+<p><code>left(i)</code>: return the left children of the node $i$.</p>
+</li>
+<li>
+<p><code>right(i)</code>: return the right children of the node $i$.</p>
+</li>
+<li>
+<p><code>insert(element)</code>: $O(\log(n))$. Put the inserted element at the end of the array. If it&rsquo;s larger than its parent, then there is nothing left to do. Otherwise, swap it with its parent. Repeat this process until either the inserted element becomes the first element of the array or find a parent which is smaller than the inserted element.</p>
+</li>
+<li>
+<p><code>delete()</code>: $O(\log(n))$.  Place the root element in a variable to return later. Remove the last element in the deepest level and move it to the root. While the moved element has a value greater than at least one of its children, swap this value with the smaller-valued child.  Return the original root that was saved.</p>
+</li>
+</ul>
+<p><strong>heapify and build-heap</strong></p>
+<ul>
+<li>
+<p><code>heapify(A,i)</code>: Matain the <strong>Heap Property</strong> of a subtree rooted at <code>i</code>. Its inputs are an array <code>A</code> and an index <code>i</code> into the array. When <code>heapify(A,i)</code> is called, it is assumed that the binary trees rooted at <code>left(i)</code> and <code>right(i)</code> are <code>minHeaps</code>, but that <code>A[i]</code> may be larger than its children, thus violating the<strong>Heap Property</strong>. The function of <code>heapify(A,i)</code> is to let the value at <code>A[i]</code> &ldquo;float down&rdquo; in the heap so that the subtree rooted at index <code>i</code> becomes a heap. To achieve this, you just need to compare <code>A[i]</code> with <code>A[left(i)]</code> and <code>A[right(i)]</code> and swap when necessary. (Similart to <code>delete()</code> but nothing is deleted.) The complexity is $O(\texttt{height}(i))$, where $\texttt{height}(i)$ is the height of node <code>i</code> in the tree.</p>
+</li>
+<li>
+<p><code>build-heap(L)</code>: Its input is an unsorted array <code>L</code> with size <code>n</code>. Then do the following.</p>
+<pre><code>  for i := floor(n/2) downto 1 
+          do HEAPIFY(L, i); 
+  end for 
+</code></pre><p>The last <code>floor(n/2)</code> elements of height 0, hence already are <code>minHeap</code> themselves. The total time comlexity is
+$$
+\sum_{h=1}^{\log_2(n)} \lceil \frac{n}{2^{h+1}}\rceil * O(\log_2(h)) = O(n).
+$$</p>
+</li>
+</ul>
+<h1 id="215-数组中第k个最大元素">215 数组中第k个最大元素</h1>
+<pre><code>在未排序的数组中找到第 k 个最大的元素。请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
+
+示例 1:
+
+输入: [3,2,1,5,6,4] 和 k = 2
+输出: 5
+示例 2:
+
+输入: [3,2,3,1,2,4,5,5,6] 和 k = 4
+输出: 4
+说明:
+
+你可以假设 k 总是有效的，且 1 ≤ k ≤ 数组的长度。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/kth-largest-element-in-an-array
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路">思路</h2>
+<ol>
+<li>利用前k个数构造一个大小为k的minHeap</li>
+<li>从第k+1个数开始将其与minHeap中的root相比较，如果比root大则移除root并插入该元素 （同时维持minHeap的性质）
+遍历完成后，minHeap中为最大的k个数，且第k大的数在root</li>
+</ol>
+<h2 id="代码">代码</h2>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">heapq</span>
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">findKthLargest</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">nums</span>: <span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>], <span style="color:#268bd2">k</span>: <span style="color:#cb4b16">int</span>) -&gt; <span style="color:#cb4b16">int</span>:
+        <span style="color:#268bd2">minHeap</span> = <span style="color:#268bd2">nums</span>[:<span style="color:#268bd2">k</span>]
+        <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heapify</span>(<span style="color:#268bd2">minHeap</span>)
+        <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#268bd2">nums</span>[<span style="color:#268bd2">k</span>:]:
+            <span style="color:#859900">if</span> <span style="color:#268bd2">i</span> &gt; <span style="color:#268bd2">minHeap</span>[<span style="color:#2aa198;font-weight:bold">0</span>]:
+                <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappushpop</span>(<span style="color:#268bd2">minHeap</span>, <span style="color:#268bd2">i</span>)
+        <span style="color:#859900">return</span> <span style="color:#268bd2">minHeap</span>[<span style="color:#2aa198;font-weight:bold">0</span>]
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="复杂度">复杂度</h2>
+<ol>
+<li>时间$O(k + (n-k)logk)$:
+<ul>
+<li>建大小为k的minHeap:  $O(k)$</li>
+<li>比较并(可能插入)n-k个元素: $O((n-k)log(k))$</li>
+</ul>
+</li>
+<li>空间复杂度 $O(k)$</li>
+</ol>
+<h1 id="1046-最后一块石头的重量">1046. 最后一块石头的重量</h1>
+<pre><code>有一堆石头，每块石头的重量都是正整数。
+
+每一回合，从中选出两块 最重的 石头，然后将它们一起粉碎。假设石头的重量分别为 x 和 y，且 x &lt;= y。那么粉碎的可能结果如下：
+
+如果 x == y，那么两块石头都会被完全粉碎；
+如果 x != y，那么重量为 x 的石头将会完全粉碎，而重量为 y 的石头新重量为 y-x。
+最后，最多只会剩下一块石头。返回此石头的重量。如果没有石头剩下，就返回 0。
+
+ 
+
+示例：
+
+输入：[2,7,4,1,8,1]
+输出：1
+解释：
+先选出 7 和 8，得到 1，所以数组转换为 [2,4,1,1,1]，
+再选出 2 和 4，得到 2，所以数组转换为 [2,1,1,1]，
+接着是 2 和 1，得到 1，所以数组转换为 [1,1,1]，
+最后选出 1 和 1，得到 0，最终数组转换为 [1]，这就是最后剩下那块石头的重量。
+ 
+
+提示：
+
+1 &lt;= stones.length &lt;= 30
+1 &lt;= stones[i] &lt;= 1000
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/last-stone-weight
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路-1">思路</h2>
+<p>1.构建一个<code>maxHeap</code>
+2.每次从<code>maxHeap</code>中<code>pop</code>两个出来(如果有元素的话)
+3.如果<code>y-x&gt;0</code> 则<code>push</code>进<code>maxHeap</code>直到<code>maxHeap</code>为空</p>
+<h2 id="代码-1">代码</h2>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">heapq</span>
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">lastStoneWeight</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">stones</span>: <span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]) -&gt; <span style="color:#cb4b16">int</span>:
+        <span style="color:#859900">if</span> <span style="color:#859900">not</span> <span style="color:#268bd2">stones</span>:
+            <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#268bd2">maxHeap</span> = [-<span style="color:#268bd2">i</span> <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#268bd2">stones</span>]
+        <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heapify</span>(<span style="color:#268bd2">maxHeap</span>)
+        <span style="color:#859900">while</span> <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">maxHeap</span>) &gt; <span style="color:#2aa198;font-weight:bold">1</span>:
+            <span style="color:#268bd2">y</span> = -<span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappop</span>(<span style="color:#268bd2">maxHeap</span>)
+            <span style="color:#268bd2">x</span> = -<span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappop</span>(<span style="color:#268bd2">maxHeap</span>)
+            <span style="color:#859900">if</span> <span style="color:#268bd2">x</span> != <span style="color:#268bd2">y</span>:
+                <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappush</span>(<span style="color:#268bd2">maxHeap</span>, <span style="color:#268bd2">x</span>-<span style="color:#268bd2">y</span>)
+        <span style="color:#859900">if</span> <span style="color:#859900">not</span> <span style="color:#268bd2">maxHeap</span>:
+            <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#859900">else</span>:
+            <span style="color:#859900">return</span> -<span style="color:#268bd2">maxHeap</span>[<span style="color:#2aa198;font-weight:bold">0</span>]
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="复杂度-1">复杂度</h2>
+<ul>
+<li>时间复杂度：$O(nlog_2n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<h1 id="23-合并k个升序链表">23. 合并k个升序链表</h1>
+<pre><code>给你一个链表数组，每个链表都已经按升序排列。
+
+请你将所有链表合并到一个升序链表中，返回合并后的链表。
+
+ 
+
+示例 1：
+
+输入：lists = [[1,4,5],[1,3,4],[2,6]]
+输出：[1,1,2,3,4,4,5,6]
+解释：链表数组如下：
+[
+  1-&gt;4-&gt;5,
+  1-&gt;3-&gt;4,
+  2-&gt;6
+]
+将它们合并到一个有序链表中得到。
+1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4-&gt;5-&gt;6
+示例 2：
+
+输入：lists = []
+输出：[]
+示例 3：
+
+输入：lists = [[]]
+输出：[]
+ 
+
+提示：
+
+k == lists.length
+0 &lt;= k &lt;= 10^4
+0 &lt;= lists[i].length &lt;= 500
+-10^4 &lt;= lists[i][j] &lt;= 10^4
+lists[i] 按 升序 排列
+lists[i].length 的总和不超过 10^4
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/merge-k-sorted-lists
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路一-暴力合并k个链表">思路一： 暴力合并k个链表</h2>
+<p>遍历<code>lists</code>里所有的链表，然后套用合并两个链表的模板。</p>
+<h3 id="代码-2">代码</h3>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#93a1a1;font-style:italic"># Definition for singly-linked list.</span>
+<span style="color:#93a1a1;font-style:italic"># class ListNode:</span>
+<span style="color:#93a1a1;font-style:italic">#     def __init__(self, val=0, next=None):</span>
+<span style="color:#93a1a1;font-style:italic">#         self.val = val</span>
+<span style="color:#93a1a1;font-style:italic">#         self.next = next</span>
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">mergeKLists</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">lists</span>: <span style="color:#268bd2">List</span>[<span style="color:#268bd2">ListNode</span>]) -&gt; <span style="color:#268bd2">ListNode</span>:
+        <span style="color:#859900">if</span> <span style="color:#859900">not</span> <span style="color:#268bd2">lists</span>:
+            <span style="color:#859900">return</span> <span style="color:#268bd2">None</span>
+        <span style="color:#268bd2">n</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">lists</span>)
+        <span style="color:#268bd2">merged</span> = <span style="color:#268bd2">lists</span>[<span style="color:#2aa198;font-weight:bold">0</span>]
+        <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">n</span>):
+            <span style="color:#268bd2">tobeMerge</span> = <span style="color:#268bd2">lists</span>[<span style="color:#268bd2">i</span>]
+            <span style="color:#268bd2">l1</span> = <span style="color:#268bd2">merged</span>
+            <span style="color:#268bd2">l2</span> = <span style="color:#268bd2">tobeMerge</span>
+            <span style="color:#268bd2">ans</span> = <span style="color:#268bd2">ListNode</span>()
+            <span style="color:#268bd2">cur</span> = <span style="color:#268bd2">ans</span>
+            <span style="color:#859900">while</span> <span style="color:#268bd2">l1</span> <span style="color:#859900">and</span> <span style="color:#268bd2">l2</span>:
+                <span style="color:#859900">if</span> <span style="color:#268bd2">l1</span>.<span style="color:#268bd2">val</span> &lt;= <span style="color:#268bd2">l2</span>.<span style="color:#268bd2">val</span>:
+                    <span style="color:#268bd2">cur</span>.<span style="color:#268bd2">next</span> = <span style="color:#268bd2">l1</span>
+                    <span style="color:#268bd2">l1</span> = <span style="color:#268bd2">l1</span>.<span style="color:#268bd2">next</span>
+                <span style="color:#859900">else</span>:
+                    <span style="color:#268bd2">cur</span>.<span style="color:#268bd2">next</span> = <span style="color:#268bd2">l2</span>
+                    <span style="color:#268bd2">l2</span> = <span style="color:#268bd2">l2</span>.<span style="color:#268bd2">next</span> 
+                <span style="color:#268bd2">cur</span> = <span style="color:#268bd2">cur</span>.<span style="color:#268bd2">next</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">l1</span> <span style="color:#859900">is</span> <span style="color:#268bd2">None</span>:
+                <span style="color:#268bd2">cur</span>.<span style="color:#268bd2">next</span> = <span style="color:#268bd2">l2</span>
+            <span style="color:#859900">else</span>:
+                <span style="color:#268bd2">cur</span>.<span style="color:#268bd2">next</span> = <span style="color:#268bd2">l1</span>
+            <span style="color:#268bd2">merged</span> = <span style="color:#268bd2">ans</span>.<span style="color:#268bd2">next</span>
+        <span style="color:#859900">return</span> <span style="color:#268bd2">merged</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="复杂度-2">复杂度</h3>
+<ul>
+<li>时间复杂度: 假设<code>lists</code>里有<code>k</code>个链表，<code>n</code>为<code>k</code>个链表的最大长度。则时间复杂度为$O(k^2n)$</li>
+<li>空间复杂度: $O(1)$</li>
+</ul>
+<h2 id="最小堆">最小堆</h2>
+<h3 id="思路-2">思路</h3>
+<p><img src="https://user-images.githubusercontent.com/19240875/103142275-6a909680-46ce-11eb-9323-7478f1665fa6.png" alt="image"></p>
+<h3 id="代码-3">代码</h3>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">heapq</span>
+<span style="color:#93a1a1;font-style:italic"># override default method for LitsNode class.</span>
+<span style="color:#859900">def</span> <span style="color:#268bd2">__lt__</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">other</span>):
+    <span style="color:#859900">return</span>  <span style="color:#268bd2">self</span>.<span style="color:#268bd2">val</span> &lt; <span style="color:#268bd2">other</span>.<span style="color:#268bd2">val</span>
+<span style="color:#859900">def</span> <span style="color:#268bd2">__le__</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">other</span>):
+    <span style="color:#859900">return</span>  <span style="color:#268bd2">self</span>.<span style="color:#268bd2">val</span> &lt; <span style="color:#268bd2">other</span>.<span style="color:#268bd2">val</span>
+<span style="color:#268bd2">ListNode</span>.<span style="color:#268bd2">__lt__</span> = <span style="color:#268bd2">__lt__</span>
+<span style="color:#268bd2">ListNode</span>.<span style="color:#268bd2">__le__</span> = <span style="color:#268bd2">__le__</span>
+
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">mergeKLists</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">lists</span>: <span style="color:#268bd2">List</span>[<span style="color:#268bd2">ListNode</span>]) -&gt; <span style="color:#268bd2">ListNode</span>:
+        <span style="color:#268bd2">minHeap</span> = []
+        <span style="color:#93a1a1;font-style:italic"># 本来想用heapify但是存在[[],[]]输入。。。</span>
+        <span style="color:#859900">for</span> <span style="color:#268bd2">node</span> <span style="color:#859900">in</span> <span style="color:#268bd2">lists</span>:
+            <span style="color:#859900">if</span> <span style="color:#268bd2">node</span>:
+                <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappush</span>(<span style="color:#268bd2">minHeap</span>, <span style="color:#268bd2">node</span>)
+        <span style="color:#268bd2">ans</span> = <span style="color:#268bd2">ListNode</span>()
+        <span style="color:#268bd2">cur</span> = <span style="color:#268bd2">ans</span>
+        <span style="color:#859900">while</span> <span style="color:#268bd2">minHeap</span>:
+            <span style="color:#268bd2">curMin</span> = <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappop</span>(<span style="color:#268bd2">minHeap</span>)
+            <span style="color:#268bd2">cur</span>.<span style="color:#268bd2">next</span> = <span style="color:#268bd2">curMin</span>
+            <span style="color:#268bd2">cur</span> = <span style="color:#268bd2">cur</span>.<span style="color:#268bd2">next</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">curMin</span>.<span style="color:#268bd2">next</span>:
+                <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappush</span>(<span style="color:#268bd2">minHeap</span>, <span style="color:#268bd2">curMin</span>.<span style="color:#268bd2">next</span>)
+        <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>.<span style="color:#268bd2">next</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="复杂度-3">复杂度</h3>
+<ul>
+<li>时间复杂度: 假设<code>lists</code>里有<code>k</code>个链表，<code>n</code>为<code>k</code>个链表的最大长度。则时间复杂度为$O(nk\log_2k)$</li>
+<li>空间复杂度: $O(k)$ &mdash; <code>minHeap</code>的大小</li>
+</ul>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          <p>Last updated on Dec 5, 2020</p>
+
+          
+
+
+
+
+
+
+  
+  
+
+<p class="edit-page">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/resources/DSAL/heap/_index.md">
+    <i class="fas fa-pen pr-2"></i>Edit this page
+  </a>
+</p>
+
+
+
+
+          
+
+
+          
+
+
+  
+  
+
+
+
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+  <p class="powered-by">
+    
+      <a href="/privacy/">Privacy Policy</a>
+    
+    
+       &middot; 
+      <a href="/terms/">Terms</a>
+    
+  </p>
+  
+
+  <p class="powered-by">
+    © 2020
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    Published with
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic Website Builder</a>
+    
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/bash.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/cpp.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/tex.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks",
+        'slides' : "Slides"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.66c553246b0f279a03be6e5597f72b52.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

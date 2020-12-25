@@ -33,7 +33,7 @@
   <meta name="description" content="Ph.D. student">
 
   
-  <link rel="alternate" hreflang="en-us" href="/resources/dsal/bit-operations/">
+  <link rel="alternate" hreflang="en-us" href="/resources/dsal/tree-copy/">
 
   
 
@@ -227,14 +227,14 @@
   
 
   
-  <link rel="alternate" href="/resources/dsal/bit-operations/index.xml" type="application/rss+xml" title="Dai, Yutong/ 戴宇童">
+  <link rel="alternate" href="/resources/dsal/tree-copy/index.xml" type="application/rss+xml" title="Dai, Yutong/ 戴宇童">
   
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/resources/dsal/bit-operations/">
+  <link rel="canonical" href="/resources/dsal/tree-copy/">
 
   
   
@@ -250,8 +250,8 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="Dai, Yutong/ 戴宇童">
-  <meta property="og:url" content="/resources/dsal/bit-operations/">
-  <meta property="og:title" content="Bit operations | Dai, Yutong/ 戴宇童">
+  <meta property="og:url" content="/resources/dsal/tree-copy/">
+  <meta property="og:title" content="Tree and Graph | Dai, Yutong/ 戴宇童">
   <meta property="og:description" content="Ph.D. student"><meta property="og:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
@@ -272,7 +272,7 @@
 
 
 
-  <title>Bit operations | Dai, Yutong/ 戴宇童</title>
+  <title>Tree and Graph | Dai, Yutong/ 戴宇童</title>
 
 </head>
 <body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
@@ -596,12 +596,12 @@
 
   </div>
   
-  <div class="docs-toc-item">
-    <a class="docs-toc-link" href="/resources/dsal/tree/">Tree and Graph</a>
+  <div class="docs-toc-item active">
+    <a class="docs-toc-link" href="/resources/dsal/tree-copy/">Tree and Graph</a>
     <ul class="nav docs-sidenav">
       
       <li >
-        <a href="/resources/dsal/tree/tree_basic/">tree-concepts-algorithm</a>
+        <a href="/resources/dsal/tree-copy/tree_basic/">tree-concepts-algorithm</a>
       </li>
       
     </ul>
@@ -610,11 +610,6 @@
   </div>
   
   <div class="docs-toc-item">
-    <a class="docs-toc-link" href="/resources/dsal/heap/">Heap</a>
-
-  </div>
-  
-  <div class="docs-toc-item active">
     <a class="docs-toc-link" href="/resources/dsal/bit-operations/">Bit operations</a>
 
   </div>
@@ -650,17 +645,7 @@
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      <nav id="TableOfContents">
-  <ul>
-    <li><a href="#leetcode-78-子集">leetcode 78: 子集</a>
-      <ul>
-        <li><a href="#思路">思路</a></li>
-        <li><a href="#代码">代码</a></li>
-        <li><a href="#复杂度">复杂度</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+      <nav id="TableOfContents"></nav>
 
       
     </div>
@@ -671,117 +656,10 @@
       <article class="article">
 
         <div class="docs-article-container">
-          <h1>Bit operations</h1>
+          <h1>Tree and Graph</h1>
 
           <div class="article-style">
-            <h1 id="leetcode-78-子集">leetcode 78: 子集</h1>
-<p>题目描述</p>
-<pre><code>给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）。
-
-说明：解集不能包含重复的子集。
-
-示例:
-
-输入: nums = [1,2,3]
-输出:
-[
-  [3],
-  [1],
-  [2],
-  [1,2,3],
-  [1,3],
-  [2,3],
-  [1,2],
-  []
-]
-
-来源：力扣（LeetCode）
-链接：https://leetcode-cn.com/problems/subsets
-著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-</code></pre><h2 id="思路">思路</h2>
-<p>数学上来说，每个元素存在选和不选两个可能性，所以一共有2^n种结果，其中n是<code>nums</code> 元素中的个数。
-问题变成了枚举[0, 2^n-1]的二进制表达。举个例子</p>
-<pre><code>nums = [3,2,1]  ---&gt; 8 = 2^3 中可能
-
-每种可能对应的二进制表示如下
-
-1.   000   []
-2.   001   [1]
-3.   010   [2]
-4.   011   [1,2]
-5.   100   [3]
-6.   101   [1,3]
-7.   110   [1,2]
-8.   111   [1,2,3]
-</code></pre><p>但是如何用计算机语言来，尤其是利用位运算来枚举上述所有情况呢。因为对这个不熟，参考了
-<a href="https://leetcode-cn.com/problems/subsets/solution/hui-su-wei-yun-suan-di-gui-deng-gong-4chong-fang-s/" target="_blank" rel="noopener">这里</a>的处理方式。</p>
-<p>举个例子</p>
-<pre><code>110
-从右往左(0-indexed)在第1和第2位置出现了1. 如何用位运算找到呢？
-每次向右移动n个bit然后和 1 做 “并” 运算，便可知道第n位是否为1。
-举个例子
-
-将110向右移动0个bit: 110&gt;&gt;0 ---&gt; 110. 110 &amp; 001 ---&gt; 0: 说明第0位不为1
-将110向右移动1个bit: 110&gt;&gt;1 ---&gt; 011.  011 &amp; 001 ---&gt; 1: 说明第1位为1
-将110向右移动2个bit: 110&gt;&gt;2 ---&gt; 001.  001 &amp; 001 ---&gt; 1: 说明第2位为1
-</code></pre><h2 id="代码">代码</h2>
-<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>(<span style="color:#cb4b16">object</span>):
-    <span style="color:#859900">def</span> <span style="color:#268bd2">subsets</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">nums</span>):
-        <span style="color:#2aa198">&#34;&#34;&#34;
-</span><span style="color:#2aa198">        :type nums: List[int]
-</span><span style="color:#2aa198">        :rtype: List[List[int]]
-</span><span style="color:#2aa198">        &#34;&#34;&#34;</span>
-        <span style="color:#268bd2">n</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">nums</span>)
-        <span style="color:#268bd2">numElements</span> =  <span style="color:#2aa198;font-weight:bold">1</span> &lt;&lt; <span style="color:#268bd2">n</span>
-        <span style="color:#268bd2">ans</span> = [<span style="color:#2aa198;font-weight:bold">0</span>] * <span style="color:#268bd2">numElements</span>
-        <span style="color:#859900">for</span> <span style="color:#268bd2">mask</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">numElements</span>):
-            <span style="color:#93a1a1;font-style:italic"># 寻找 mask 的二进制表达中 1出现的位置</span>
-            <span style="color:#93a1a1;font-style:italic"># 因为我们一共有n个数字在nums中， 所以2^n</span>
-            <span style="color:#93a1a1;font-style:italic"># 有n个bits。 从而最左位数最多能向右移动n-1次</span>
-            <span style="color:#268bd2">temp</span> = []
-            <span style="color:#859900">for</span> <span style="color:#268bd2">rightShift</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">n</span>):
-                <span style="color:#93a1a1;font-style:italic"># 从右往左数，mask的第rightShift位刚好是1</span>
-                <span style="color:#859900">if</span> (<span style="color:#268bd2">mask</span> &gt;&gt; <span style="color:#268bd2">rightShift</span>) &amp; <span style="color:#2aa198;font-weight:bold">1</span> == <span style="color:#2aa198;font-weight:bold">1</span>:
-                    <span style="color:#268bd2">temp</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">nums</span>[<span style="color:#268bd2">rightShift</span>])
-            <span style="color:#268bd2">ans</span>[<span style="color:#268bd2">mask</span>] = <span style="color:#268bd2">temp</span>
-        <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
-</code></pre></td></tr></table>
-</div>
-</div><h2 id="复杂度">复杂度</h2>
-<ul>
-<li>时间：$O(n2^n)$
-<ul>
-<li><code>for mask in range(numElements)</code>: $2^n$</li>
-<li><code> for rightShift in range(n):</code>: $n$</li>
-</ul>
-</li>
-<li>空间: 不算返回数组是 $O(n)$</li>
-</ul>
-
+            
           </div>
 
           
@@ -801,7 +679,7 @@
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Dec 14, 2020</p>
+          <p>Last updated on Dec 5, 2020</p>
 
           
 
@@ -814,7 +692,7 @@
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/resources/DSAL/bit-operations/_index.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/resources/DSAL/tree%20copy/_index.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>
