@@ -294,3 +294,230 @@ class Solution:
 
 * 时间复杂度: 假设`lists`里有`k`个链表，`n`为`k`个链表的最大长度。则时间复杂度为$O(nk\log_2k)$
 * 空间复杂度: $O(k)$ --- `minHeap`的大小
+
+
+# 378. 有序矩阵中第k小的元素
+
+```
+给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第 k 小的元素。
+请注意，它是排序后的第 k 小元素，而不是第 k 个不同的元素。
+
+ 
+
+示例：
+
+matrix = [
+   [ 1,  5,  9],
+   [10, 11, 13],
+   [12, 13, 15]
+],
+k = 8,
+
+返回 13。
+ 
+
+提示：
+你可以假设 k 的值永远是有效的，1 ≤ k ≤ n2 。
+
+
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+```
+
+## 思路1: 遍历 + maxHeap
+
+遍历整个矩阵，构建并维护一个大小为`k`的`maxHeap`。只有当新元素比堆顶的元素（堆中最大的元素）小的时候才将堆顶元素弹出，新元素压入。这样可以保证遍历完矩阵后，堆顶的元素为第`k`小的元素。
+
+### 代码
+
+```python
+import heapq
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        if not matrix or not matrix[0]:
+            return 0
+        self.maxHeap = []
+        n = len(matrix)
+        for i in range(n):
+            for j in range(n):
+                self.addElement(matrix[i][j], k)
+        return -self.maxHeap[0]
+    def addElement(self, e, k):
+        if len(self.maxHeap) < k:
+            heapq.heappush(self.maxHeap, -e)
+        else:
+            if e < -self.maxHeap[0]:
+                out = heapq.heappushpop(self.maxHeap, -e)
+```
+
+### 复杂度
+
+* 时间: $O(n^2log_2k)$ --- 每个元素都被压入(弹出)`maxHeap`中。
+* 空间: $O(k)$  --- 维护一个大小为`k`的`maxHeap`.
+
+时间和空间复杂度会比将整个二维矩阵变为一维数列再排序要好。
+
+## 模仿合并k个升序链表（23）
+
+
+### 代码
+
+```python
+import heapq
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        if not matrix or not matrix[0]:
+            return 0
+        j = 0
+        n = len(matrix)
+        minHeap = [(matrix[i][j], i, j) for i in range(n)]
+        heapq.heapify(minHeap)
+        print(minHeap)
+        while k > 0:
+            head = heapq.heappop(minHeap)
+            i,j = head[1], head[2]
+            if j <= n-2:
+                heapq.heappush(minHeap, (matrix[i][j+1], i, j+1))
+            k -= 1
+        return head[0]
+```
+
+### 复杂度
+
+* 时间: $O(n+k\log_2n)$ --- $O(n)$建`minHeap`; $O(k\log_2n)$ 压入弹出`k`个元素。最坏的情况下$k=n^2$.
+* 空间: $O(n)$  --- 维护一个大小为`n`的`minHeap`.
+
+
+## 思路三： 二分法（官方题解）
+
+![](./matrix-search.png)
+
+```python
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        def search(target, n):
+            ans = 0
+            i = n - 1
+            j = 0
+            while i >= 0 and j < n:
+                if matrix[i][j] <= target:
+                    # elements from matrix[0][j] to matrix[i][j]
+                    # are smaller than the target
+                    ans += (i + 1) # there are i+1 elements in selected column qualified
+                    # check the next column
+                    j += 1
+                else:
+                    i -= 1
+            return ans
+        if not matrix or not matrix[0]:
+            return 0
+        n = len(matrix)
+        left, right = matrix[0][0], matrix[n-1][n-1]
+        count = n * n + 1
+        while left<right:
+            mid = (left + right) // 2
+            count = search(mid, n)
+            if count < k:
+                left = mid + 1
+            else:
+                right = mid
+        return left
+```
+
+### 复杂度
+
+* 时间: $O(nlog_2(r-l))$ --- `l`, `r`分别为矩阵中最大最小元素
+* 空间: $O(1)$ 
+
+# 1054 条形码
+
+```
+在一个仓库里，有一排条形码，其中第 i 个条形码为 barcodes[i]。
+
+请你重新排列这些条形码，使其中两个相邻的条形码 不能 相等。 你可以返回任何满足该要求的答案，此题保证存在答案。
+
+ 
+
+示例 1：
+
+输入：[1,1,1,2,2,2]
+输出：[2,1,2,1,2,1]
+示例 2：
+
+输入：[1,1,1,1,2,2,3,3]
+输出：[1,3,1,3,2,1,2,1]
+ 
+
+提示：
+
+1 <= barcodes.length <= 10000
+1 <= barcodes[i] <= 10000
+ 
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/distant-barcodes
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+```
+## 思路
+
+第一反应，见缝插针。举个例子
+ 
+```
+barcodes: [1,1,1,1,2,2,2,3,3]
+
+1 出现的频次最多, 所以我们希望用2，3来将其分割开。那些位置可以插入呢? 下图横线中位置都可放入
+
+_ 1 _ 1 _ 1 _ 1 _
+
+考虑一种插入
+_ 1 _  2 _ 1 _ 2 _ 1 _ 2 _
+```
+
+但是每次去记录可以插入的位置以及可以插入的数字是很头痛的事情。其实上述思路有可以稍微修改一下，优先使用`barcodes`出现频次最高的，后面接上一个出现频次第二高的。 用画图的方式来阐述这个点。
+
+![](./barcode.png)
+
+
+
+
+## 代码
+
+```python
+import heapq
+from collections import Counter
+class Solution:
+    def rearrangeBarcodes(self, barcodes: List[int]) -> List[int]:
+        # edge case
+        if len(barcodes) == 1:
+            return barcodes
+        c = Counter(barcodes)
+        # create (freq, label) pairs
+        maxHeap = [(-i[1], i[0]) for i in c.items()]
+        heapq.heapify(maxHeap)
+        ans = []
+        while len(maxHeap) >= 2:
+            pair1 = heapq.heappop(maxHeap)
+            pair2 = heapq.heappop(maxHeap)
+            ans.append(pair1[1])
+            ans.append(pair2[1])
+            if -pair1[0] - 1 > 0:
+                heapq.heappush(maxHeap, (pair1[0]+1, pair1[1]))
+            if -pair2[0] - 1 > 0:
+                heapq.heappush(maxHeap, (pair2[0]+1, pair2[1]))
+        if len(maxHeap) == 1:
+            # only one pair left in the maxHeap and the freq is
+            # guaranteed to be 1
+            ans.append(maxHeap[0][1])
+        return ans
+```
+
+
+## 复杂度
+
+* 时间复杂度：$O(n\log_2n)$
+    * 统计频次 $O(n)$
+    * 建堆 $O(n)$
+    * 每个元素出堆 $O(n\log_2n)$
+* 空间复杂度: $O(n)$ 

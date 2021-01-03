@@ -256,7 +256,7 @@
     
       <meta property="article:published_time" content="2020-05-01T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2020-08-31T15:09:49-04:00">
+    <meta property="article:modified_time" content="2020-05-01T00:00:00&#43;00:00">
   
 
   
@@ -285,7 +285,7 @@
   "headline": "Python Tricks Learned From Projects",
   
   "datePublished": "2020-05-01T00:00:00Z",
-  "dateModified": "2020-08-31T15:09:49-04:00",
+  "dateModified": "2020-05-01T00:00:00Z",
   
   "publisher": {
     "@type": "Organization",
@@ -609,6 +609,7 @@
     <li><a href="#show-all-submodules">Show all submodules</a></li>
     <li><a href="#using-the-right-kernel-for-jupyter-notebook">Using the right kernel for Jupyter Notebook</a></li>
     <li><a href="#running-jupyter-notebook-from-the-remote-server">Running Jupyter Notebook from the remote server</a></li>
+    <li><a href="#copy-and-deepcopy-caveats">copy and deepcopy caveats</a></li>
   </ul>
 </nav>
         
@@ -653,10 +654,8 @@
     
     
       
-          Last updated on
-      
     
-    Aug 31, 2020
+    May 1, 2020
   </span>
   
 
@@ -879,6 +878,54 @@ ipython kernel install --name <span style="color:#2aa198">&#34;cuppy&#34;</span>
 <p>After finish the job, call <code>stopjpt</code>, which will free the local port.</p>
 </li>
 </ul>
+<h1 id="copy-and-deepcopy-caveats">copy and deepcopy caveats</h1>
+<ul>
+<li>slicing in the list: slicing operator and assigning in Python makes a shallow copy of the sliced list. But the following example can be confusing.</li>
+</ul>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#268bd2">a</span> = [<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">2</span>, <span style="color:#2aa198;font-weight:bold">3</span>, <span style="color:#2aa198;font-weight:bold">4</span>]
+<span style="color:#268bd2">a_copy</span> = <span style="color:#268bd2">a</span>[:]
+<span style="color:#268bd2">a_copy</span>[<span style="color:#2aa198;font-weight:bold">0</span>] = <span style="color:#2aa198;font-weight:bold">2</span>
+<span style="color:#859900">print</span>(<span style="color:#268bd2">f</span><span style="color:#2aa198">&#34;a:     {a}</span><span style="color:#2aa198">\n</span><span style="color:#2aa198">a_copy:{a_copy}&#34;</span>)
+
+<span style="color:#268bd2">b</span> = [[<span style="color:#2aa198;font-weight:bold">1</span>,<span style="color:#2aa198;font-weight:bold">2</span>], [<span style="color:#2aa198;font-weight:bold">3</span>,<span style="color:#2aa198;font-weight:bold">4</span>]]
+<span style="color:#268bd2">b_copy</span> = <span style="color:#268bd2">b</span>[:]
+<span style="color:#268bd2">b_copy</span>[<span style="color:#2aa198;font-weight:bold">0</span>][<span style="color:#2aa198;font-weight:bold">0</span>] = <span style="color:#2aa198;font-weight:bold">100</span>
+<span style="color:#859900">print</span>(<span style="color:#268bd2">f</span><span style="color:#2aa198">&#34;b:     {b}</span><span style="color:#2aa198">\n</span><span style="color:#2aa198">b_copy:{b_copy}&#34;</span>)
+
+<span style="color:#268bd2">c</span> = [[<span style="color:#2aa198;font-weight:bold">1</span>,<span style="color:#2aa198;font-weight:bold">2</span>], [<span style="color:#2aa198;font-weight:bold">3</span>,<span style="color:#2aa198;font-weight:bold">4</span>]]
+<span style="color:#268bd2">c_copy</span> = <span style="color:#268bd2">c</span>[:]
+<span style="color:#268bd2">c_copy</span>[<span style="color:#2aa198;font-weight:bold">0</span>] = [-<span style="color:#2aa198;font-weight:bold">1</span>, -<span style="color:#2aa198;font-weight:bold">1</span>]
+<span style="color:#859900">print</span>(<span style="color:#268bd2">f</span><span style="color:#2aa198">&#34;c:     {c}</span><span style="color:#2aa198">\n</span><span style="color:#2aa198">c_copy:{c_copy}&#34;</span>)
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>output:</strong></p>
+<pre><code>a:     [1, 2, 3, 4]
+a_copy:[2, 2, 3, 4]
+b:     [[100, 2], [3, 4]]
+b_copy:[[100, 2], [3, 4]]
+c:     [[1, 2], [3, 4]]
+c_copy:[[-1, -1], [3, 4]]
+</code></pre><p><strong>
+<a href="https://stackoverflow.com/questions/19068707/does-a-slicing-operation-give-me-a-deep-or-shallow-copy" target="_blank" rel="noopener">explaination</a></strong>: the original <code>list</code> is copied to a new <code>list</code> object. Just all elements within the <code>list</code> are not copied, so if the <code>list</code> contains a mutable object (<code>int</code>s are not mutable) changing that object will change it in both the original and the copied list because both have a copy of the reference to the same object.</p>
+<p><img src="slicing.png" alt=""></p>
 
               </div>
               
@@ -1255,7 +1302,7 @@ ipython kernel install --name <span style="color:#2aa198">&#34;cuppy&#34;</span>
   
 
   <p class="powered-by">
-    © 2020
+    © 2021
   </p>
 
   

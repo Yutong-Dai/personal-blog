@@ -10,7 +10,9 @@ tags:
 subtitle: ''
 summary: ''
 authors: []
-lastmod: '2020-08-03'
+# lastmod: "{{ .LastMod}}"
+lastmod: 
+    - :fileModTime
 featured: no
 image:
   caption: ''
@@ -121,3 +123,40 @@ ipython kernel install --name "cuppy" --user
 * Call `jptt` on the local terminal, which will listen to the jupyter notebook host on the server.
 * In the browser, if the port on local side is set to `2234`, the just type `localhost::2234`.
 * After finish the job, call `stopjpt`, which will free the local port.
+
+
+# copy and deepcopy caveats
+
+*  slicing in the list: slicing operator and assigning in Python makes a shallow copy of the sliced list. But the following example can be confusing.
+
+```python
+a = [1, 2, 3, 4]
+a_copy = a[:]
+a_copy[0] = 2
+print(f"a:     {a}\na_copy:{a_copy}")
+
+b = [[1,2], [3,4]]
+b_copy = b[:]
+b_copy[0][0] = 100
+print(f"b:     {b}\nb_copy:{b_copy}")
+
+c = [[1,2], [3,4]]
+c_copy = c[:]
+c_copy[0] = [-1, -1]
+print(f"c:     {c}\nc_copy:{c_copy}")
+```
+
+**output:**
+
+```
+a:     [1, 2, 3, 4]
+a_copy:[2, 2, 3, 4]
+b:     [[100, 2], [3, 4]]
+b_copy:[[100, 2], [3, 4]]
+c:     [[1, 2], [3, 4]]
+c_copy:[[-1, -1], [3, 4]]
+```
+
+**[explaination](https://stackoverflow.com/questions/19068707/does-a-slicing-operation-give-me-a-deep-or-shallow-copy)**: the original `list` is copied to a new `list` object. Just all elements within the `list` are not copied, so if the `list` contains a mutable object (`int`s are not mutable) changing that object will change it in both the original and the copied list because both have a copy of the reference to the same object.
+
+![](slicing.png)

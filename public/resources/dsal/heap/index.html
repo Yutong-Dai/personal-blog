@@ -639,6 +639,16 @@
 
   </div>
   
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/dp/">dynamic programming</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/bisection/">bisection</a>
+
+  </div>
+  
   
 </nav>
 
@@ -671,6 +681,20 @@
       <ul>
         <li><a href="#思路一-暴力合并k个链表">思路一： 暴力合并k个链表</a></li>
         <li><a href="#最小堆">最小堆</a></li>
+      </ul>
+    </li>
+    <li><a href="#378-有序矩阵中第k小的元素">378. 有序矩阵中第k小的元素</a>
+      <ul>
+        <li><a href="#思路1-遍历--maxheap">思路1: 遍历 + maxHeap</a></li>
+        <li><a href="#模仿合并k个升序链表23">模仿合并k个升序链表（23）</a></li>
+        <li><a href="#思路三-二分法官方题解">思路三： 二分法（官方题解）</a></li>
+      </ul>
+    </li>
+    <li><a href="#1054-条形码">1054 条形码</a>
+      <ul>
+        <li><a href="#思路-3">思路</a></li>
+        <li><a href="#代码-6">代码</a></li>
+        <li><a href="#复杂度-7">复杂度</a></li>
       </ul>
     </li>
   </ul>
@@ -1049,6 +1073,307 @@ lists[i].length 的总和不超过 10^4
 <li>时间复杂度: 假设<code>lists</code>里有<code>k</code>个链表，<code>n</code>为<code>k</code>个链表的最大长度。则时间复杂度为$O(nk\log_2k)$</li>
 <li>空间复杂度: $O(k)$ &mdash; <code>minHeap</code>的大小</li>
 </ul>
+<h1 id="378-有序矩阵中第k小的元素">378. 有序矩阵中第k小的元素</h1>
+<pre><code>给定一个 n x n 矩阵，其中每行和每列元素均按升序排序，找到矩阵中第 k 小的元素。
+请注意，它是排序后的第 k 小元素，而不是第 k 个不同的元素。
+
+ 
+
+示例：
+
+matrix = [
+   [ 1,  5,  9],
+   [10, 11, 13],
+   [12, 13, 15]
+],
+k = 8,
+
+返回 13。
+ 
+
+提示：
+你可以假设 k 的值永远是有效的，1 ≤ k ≤ n2 。
+
+
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/kth-smallest-element-in-a-sorted-matrix
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路1-遍历--maxheap">思路1: 遍历 + maxHeap</h2>
+<p>遍历整个矩阵，构建并维护一个大小为<code>k</code>的<code>maxHeap</code>。只有当新元素比堆顶的元素（堆中最大的元素）小的时候才将堆顶元素弹出，新元素压入。这样可以保证遍历完矩阵后，堆顶的元素为第<code>k</code>小的元素。</p>
+<h3 id="代码-4">代码</h3>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">heapq</span>
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">kthSmallest</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">matrix</span>: <span style="color:#268bd2">List</span>[<span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]], <span style="color:#268bd2">k</span>: <span style="color:#cb4b16">int</span>) -&gt; <span style="color:#cb4b16">int</span>:
+        <span style="color:#859900">if</span> <span style="color:#859900">not</span> <span style="color:#268bd2">matrix</span> <span style="color:#859900">or</span> <span style="color:#859900">not</span> <span style="color:#268bd2">matrix</span>[<span style="color:#2aa198;font-weight:bold">0</span>]:
+            <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#268bd2">self</span>.<span style="color:#268bd2">maxHeap</span> = []
+        <span style="color:#268bd2">n</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">matrix</span>)
+        <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">n</span>):
+            <span style="color:#859900">for</span> <span style="color:#268bd2">j</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">n</span>):
+                <span style="color:#268bd2">self</span>.<span style="color:#268bd2">addElement</span>(<span style="color:#268bd2">matrix</span>[<span style="color:#268bd2">i</span>][<span style="color:#268bd2">j</span>], <span style="color:#268bd2">k</span>)
+        <span style="color:#859900">return</span> -<span style="color:#268bd2">self</span>.<span style="color:#268bd2">maxHeap</span>[<span style="color:#2aa198;font-weight:bold">0</span>]
+    <span style="color:#859900">def</span> <span style="color:#268bd2">addElement</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">e</span>, <span style="color:#268bd2">k</span>):
+        <span style="color:#859900">if</span> <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">self</span>.<span style="color:#268bd2">maxHeap</span>) &lt; <span style="color:#268bd2">k</span>:
+            <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappush</span>(<span style="color:#268bd2">self</span>.<span style="color:#268bd2">maxHeap</span>, -<span style="color:#268bd2">e</span>)
+        <span style="color:#859900">else</span>:
+            <span style="color:#859900">if</span> <span style="color:#268bd2">e</span> &lt; -<span style="color:#268bd2">self</span>.<span style="color:#268bd2">maxHeap</span>[<span style="color:#2aa198;font-weight:bold">0</span>]:
+                <span style="color:#268bd2">out</span> = <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappushpop</span>(<span style="color:#268bd2">self</span>.<span style="color:#268bd2">maxHeap</span>, -<span style="color:#268bd2">e</span>)
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="复杂度-4">复杂度</h3>
+<ul>
+<li>时间: $O(n^2log_2k)$ &mdash; 每个元素都被压入(弹出)<code>maxHeap</code>中。</li>
+<li>空间: $O(k)$  &mdash; 维护一个大小为<code>k</code>的<code>maxHeap</code>.</li>
+</ul>
+<p>时间和空间复杂度会比将整个二维矩阵变为一维数列再排序要好。</p>
+<h2 id="模仿合并k个升序链表23">模仿合并k个升序链表（23）</h2>
+<h3 id="代码-5">代码</h3>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">heapq</span>
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">kthSmallest</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">matrix</span>: <span style="color:#268bd2">List</span>[<span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]], <span style="color:#268bd2">k</span>: <span style="color:#cb4b16">int</span>) -&gt; <span style="color:#cb4b16">int</span>:
+        <span style="color:#859900">if</span> <span style="color:#859900">not</span> <span style="color:#268bd2">matrix</span> <span style="color:#859900">or</span> <span style="color:#859900">not</span> <span style="color:#268bd2">matrix</span>[<span style="color:#2aa198;font-weight:bold">0</span>]:
+            <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#268bd2">j</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#268bd2">n</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">matrix</span>)
+        <span style="color:#268bd2">minHeap</span> = [(<span style="color:#268bd2">matrix</span>[<span style="color:#268bd2">i</span>][<span style="color:#268bd2">j</span>], <span style="color:#268bd2">i</span>, <span style="color:#268bd2">j</span>) <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">n</span>)]
+        <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heapify</span>(<span style="color:#268bd2">minHeap</span>)
+        <span style="color:#859900">print</span>(<span style="color:#268bd2">minHeap</span>)
+        <span style="color:#859900">while</span> <span style="color:#268bd2">k</span> &gt; <span style="color:#2aa198;font-weight:bold">0</span>:
+            <span style="color:#268bd2">head</span> = <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappop</span>(<span style="color:#268bd2">minHeap</span>)
+            <span style="color:#268bd2">i</span>,<span style="color:#268bd2">j</span> = <span style="color:#268bd2">head</span>[<span style="color:#2aa198;font-weight:bold">1</span>], <span style="color:#268bd2">head</span>[<span style="color:#2aa198;font-weight:bold">2</span>]
+            <span style="color:#859900">if</span> <span style="color:#268bd2">j</span> &lt;= <span style="color:#268bd2">n</span>-<span style="color:#2aa198;font-weight:bold">2</span>:
+                <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappush</span>(<span style="color:#268bd2">minHeap</span>, (<span style="color:#268bd2">matrix</span>[<span style="color:#268bd2">i</span>][<span style="color:#268bd2">j</span>+<span style="color:#2aa198;font-weight:bold">1</span>], <span style="color:#268bd2">i</span>, <span style="color:#268bd2">j</span>+<span style="color:#2aa198;font-weight:bold">1</span>))
+            <span style="color:#268bd2">k</span> -= <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#859900">return</span> <span style="color:#268bd2">head</span>[<span style="color:#2aa198;font-weight:bold">0</span>]
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="复杂度-5">复杂度</h3>
+<ul>
+<li>时间: $O(n+k\log_2n)$ &mdash; $O(n)$建<code>minHeap</code>; $O(k\log_2n)$ 压入弹出<code>k</code>个元素。最坏的情况下$k=n^2$.</li>
+<li>空间: $O(n)$  &mdash; 维护一个大小为<code>n</code>的<code>minHeap</code>.</li>
+</ul>
+<h2 id="思路三-二分法官方题解">思路三： 二分法（官方题解）</h2>
+<p><img src="./matrix-search.png" alt=""></p>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">kthSmallest</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">matrix</span>: <span style="color:#268bd2">List</span>[<span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]], <span style="color:#268bd2">k</span>: <span style="color:#cb4b16">int</span>) -&gt; <span style="color:#cb4b16">int</span>:
+        <span style="color:#859900">def</span> <span style="color:#268bd2">search</span>(<span style="color:#268bd2">target</span>, <span style="color:#268bd2">n</span>):
+            <span style="color:#268bd2">ans</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+            <span style="color:#268bd2">i</span> = <span style="color:#268bd2">n</span> - <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">j</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+            <span style="color:#859900">while</span> <span style="color:#268bd2">i</span> &gt;= <span style="color:#2aa198;font-weight:bold">0</span> <span style="color:#859900">and</span> <span style="color:#268bd2">j</span> &lt; <span style="color:#268bd2">n</span>:
+                <span style="color:#859900">if</span> <span style="color:#268bd2">matrix</span>[<span style="color:#268bd2">i</span>][<span style="color:#268bd2">j</span>] &lt;= <span style="color:#268bd2">target</span>:
+                    <span style="color:#93a1a1;font-style:italic"># elements from matrix[0][j] to matrix[i][j]</span>
+                    <span style="color:#93a1a1;font-style:italic"># are smaller than the target</span>
+                    <span style="color:#268bd2">ans</span> += (<span style="color:#268bd2">i</span> + <span style="color:#2aa198;font-weight:bold">1</span>) <span style="color:#93a1a1;font-style:italic"># there are i+1 elements in selected column qualified</span>
+                    <span style="color:#93a1a1;font-style:italic"># check the next column</span>
+                    <span style="color:#268bd2">j</span> += <span style="color:#2aa198;font-weight:bold">1</span>
+                <span style="color:#859900">else</span>:
+                    <span style="color:#268bd2">i</span> -= <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+        <span style="color:#859900">if</span> <span style="color:#859900">not</span> <span style="color:#268bd2">matrix</span> <span style="color:#859900">or</span> <span style="color:#859900">not</span> <span style="color:#268bd2">matrix</span>[<span style="color:#2aa198;font-weight:bold">0</span>]:
+            <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#268bd2">n</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">matrix</span>)
+        <span style="color:#268bd2">left</span>, <span style="color:#268bd2">right</span> = <span style="color:#268bd2">matrix</span>[<span style="color:#2aa198;font-weight:bold">0</span>][<span style="color:#2aa198;font-weight:bold">0</span>], <span style="color:#268bd2">matrix</span>[<span style="color:#268bd2">n</span>-<span style="color:#2aa198;font-weight:bold">1</span>][<span style="color:#268bd2">n</span>-<span style="color:#2aa198;font-weight:bold">1</span>]
+        <span style="color:#268bd2">count</span> = <span style="color:#268bd2">n</span> * <span style="color:#268bd2">n</span> + <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#859900">while</span> <span style="color:#268bd2">left</span>&lt;<span style="color:#268bd2">right</span>:
+            <span style="color:#268bd2">mid</span> = (<span style="color:#268bd2">left</span> + <span style="color:#268bd2">right</span>) // <span style="color:#2aa198;font-weight:bold">2</span>
+            <span style="color:#268bd2">count</span> = <span style="color:#268bd2">search</span>(<span style="color:#268bd2">mid</span>, <span style="color:#268bd2">n</span>)
+            <span style="color:#859900">if</span> <span style="color:#268bd2">count</span> &lt; <span style="color:#268bd2">k</span>:
+                <span style="color:#268bd2">left</span> = <span style="color:#268bd2">mid</span> + <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#859900">else</span>:
+                <span style="color:#268bd2">right</span> = <span style="color:#268bd2">mid</span>
+        <span style="color:#859900">return</span> <span style="color:#268bd2">left</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="复杂度-6">复杂度</h3>
+<ul>
+<li>时间: $O(nlog_2(r-l))$ &mdash; <code>l</code>, <code>r</code>分别为矩阵中最大最小元素</li>
+<li>空间: $O(1)$</li>
+</ul>
+<h1 id="1054-条形码">1054 条形码</h1>
+<pre><code>在一个仓库里，有一排条形码，其中第 i 个条形码为 barcodes[i]。
+
+请你重新排列这些条形码，使其中两个相邻的条形码 不能 相等。 你可以返回任何满足该要求的答案，此题保证存在答案。
+
+ 
+
+示例 1：
+
+输入：[1,1,1,2,2,2]
+输出：[2,1,2,1,2,1]
+示例 2：
+
+输入：[1,1,1,1,2,2,3,3]
+输出：[1,3,1,3,2,1,2,1]
+ 
+
+提示：
+
+1 &lt;= barcodes.length &lt;= 10000
+1 &lt;= barcodes[i] &lt;= 10000
+ 
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/distant-barcodes
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路-3">思路</h2>
+<p>第一反应，见缝插针。举个例子</p>
+<pre><code>barcodes: [1,1,1,1,2,2,2,3,3]
+
+1 出现的频次最多, 所以我们希望用2，3来将其分割开。那些位置可以插入呢? 下图横线中位置都可放入
+
+_ 1 _ 1 _ 1 _ 1 _
+
+考虑一种插入
+_ 1 _  2 _ 1 _ 2 _ 1 _ 2 _
+</code></pre><p>但是每次去记录可以插入的位置以及可以插入的数字是很头痛的事情。其实上述思路有可以稍微修改一下，优先使用<code>barcodes</code>出现频次最高的，后面接上一个出现频次第二高的。 用画图的方式来阐述这个点。</p>
+<p><img src="./barcode.png" alt=""></p>
+<h2 id="代码-6">代码</h2>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">heapq</span>
+<span style="color:#dc322f;font-weight:bold">from</span> <span style="color:#268bd2">collections</span> <span style="color:#dc322f;font-weight:bold">import</span> <span style="color:#268bd2">Counter</span>
+<span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">rearrangeBarcodes</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">barcodes</span>: <span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]) -&gt; <span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]:
+        <span style="color:#93a1a1;font-style:italic"># edge case</span>
+        <span style="color:#859900">if</span> <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">barcodes</span>) == <span style="color:#2aa198;font-weight:bold">1</span>:
+            <span style="color:#859900">return</span> <span style="color:#268bd2">barcodes</span>
+        <span style="color:#268bd2">c</span> = <span style="color:#268bd2">Counter</span>(<span style="color:#268bd2">barcodes</span>)
+        <span style="color:#93a1a1;font-style:italic"># create (freq, label) pairs</span>
+        <span style="color:#268bd2">maxHeap</span> = [(-<span style="color:#268bd2">i</span>[<span style="color:#2aa198;font-weight:bold">1</span>], <span style="color:#268bd2">i</span>[<span style="color:#2aa198;font-weight:bold">0</span>]) <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#268bd2">c</span>.<span style="color:#268bd2">items</span>()]
+        <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heapify</span>(<span style="color:#268bd2">maxHeap</span>)
+        <span style="color:#268bd2">ans</span> = []
+        <span style="color:#859900">while</span> <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">maxHeap</span>) &gt;= <span style="color:#2aa198;font-weight:bold">2</span>:
+            <span style="color:#268bd2">pair1</span> = <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappop</span>(<span style="color:#268bd2">maxHeap</span>)
+            <span style="color:#268bd2">pair2</span> = <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappop</span>(<span style="color:#268bd2">maxHeap</span>)
+            <span style="color:#268bd2">ans</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">pair1</span>[<span style="color:#2aa198;font-weight:bold">1</span>])
+            <span style="color:#268bd2">ans</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">pair2</span>[<span style="color:#2aa198;font-weight:bold">1</span>])
+            <span style="color:#859900">if</span> -<span style="color:#268bd2">pair1</span>[<span style="color:#2aa198;font-weight:bold">0</span>] - <span style="color:#2aa198;font-weight:bold">1</span> &gt; <span style="color:#2aa198;font-weight:bold">0</span>:
+                <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappush</span>(<span style="color:#268bd2">maxHeap</span>, (<span style="color:#268bd2">pair1</span>[<span style="color:#2aa198;font-weight:bold">0</span>]+<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">pair1</span>[<span style="color:#2aa198;font-weight:bold">1</span>]))
+            <span style="color:#859900">if</span> -<span style="color:#268bd2">pair2</span>[<span style="color:#2aa198;font-weight:bold">0</span>] - <span style="color:#2aa198;font-weight:bold">1</span> &gt; <span style="color:#2aa198;font-weight:bold">0</span>:
+                <span style="color:#268bd2">heapq</span>.<span style="color:#268bd2">heappush</span>(<span style="color:#268bd2">maxHeap</span>, (<span style="color:#268bd2">pair2</span>[<span style="color:#2aa198;font-weight:bold">0</span>]+<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">pair2</span>[<span style="color:#2aa198;font-weight:bold">1</span>]))
+        <span style="color:#859900">if</span> <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">maxHeap</span>) == <span style="color:#2aa198;font-weight:bold">1</span>:
+            <span style="color:#93a1a1;font-style:italic"># only one pair left in the maxHeap and the freq is</span>
+            <span style="color:#93a1a1;font-style:italic"># guaranteed to be 1</span>
+            <span style="color:#268bd2">ans</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">maxHeap</span>[<span style="color:#2aa198;font-weight:bold">0</span>][<span style="color:#2aa198;font-weight:bold">1</span>])
+        <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="复杂度-7">复杂度</h2>
+<ul>
+<li>时间复杂度：$O(n\log_2n)$
+<ul>
+<li>统计频次 $O(n)$</li>
+<li>建堆 $O(n)$</li>
+<li>每个元素出堆 $O(n\log_2n)$</li>
+</ul>
+</li>
+<li>空间复杂度: $O(n)$</li>
+</ul>
 
           </div>
 
@@ -1119,7 +1444,7 @@ lists[i].length 的总和不超过 10^4
   
 
   <p class="powered-by">
-    © 2020
+    © 2021
   </p>
 
   
