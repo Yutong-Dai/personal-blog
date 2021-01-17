@@ -635,12 +635,22 @@
   </div>
   
   <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/search/">Search</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
     <a class="docs-toc-link" href="/resources/dsal/union-find/">Union Find</a>
 
   </div>
   
   <div class="docs-toc-item">
     <a class="docs-toc-link" href="/resources/dsal/dp/">dynamic programming</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/sliding-window/">sliding-window</a>
 
   </div>
   
@@ -676,6 +686,13 @@
         <li><a href="#思路-1">思路</a></li>
         <li><a href="#代码-1">代码</a></li>
         <li><a href="#复杂度-1">复杂度</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-寻找两个正序数组的中位数">4. 寻找两个正序数组的中位数</a>
+      <ul>
+        <li><a href="#思路-2">思路</a></li>
+        <li><a href="#代码-2">代码</a></li>
+        <li><a href="#复杂度-2">复杂度</a></li>
       </ul>
     </li>
   </ul>
@@ -1024,6 +1041,127 @@ cumsum_mid &lt; cumsum_left and cumsum_right &lt; cumsum_mid
 <ul>
 <li>时间复杂度：$O(n\log_2n)$</li>
 <li>空间复杂度：$O(n)$</li>
+</ul>
+<h1 id="4-寻找两个正序数组的中位数">4. 寻找两个正序数组的中位数</h1>
+<pre><code>给定两个大小为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的中位数。
+
+进阶：你能设计一个时间复杂度为 O(log (m+n)) 的算法解决此问题吗？
+
+ 
+
+示例 1：
+
+输入：nums1 = [1,3], nums2 = [2]
+输出：2.00000
+解释：合并数组 = [1,2,3] ，中位数 2
+示例 2：
+
+输入：nums1 = [1,2], nums2 = [3,4]
+输出：2.50000
+解释：合并数组 = [1,2,3,4] ，中位数 (2 + 3) / 2 = 2.5
+示例 3：
+
+输入：nums1 = [0,0], nums2 = [0,0]
+输出：0.00000
+示例 4：
+
+输入：nums1 = [], nums2 = [1]
+输出：1.00000
+示例 5：
+
+输入：nums1 = [2], nums2 = []
+输出：2.00000
+ 
+
+提示：
+
+nums1.length == m
+nums2.length == n
+0 &lt;= m &lt;= 1000
+0 &lt;= n &lt;= 1000
+1 &lt;= m + n &lt;= 2000
+-106 &lt;= nums1[i], nums2[i] &lt;= 106
+
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/median-of-two-sorted-arrays
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路-2">思路</h2>
+<p>我是看这里的
+<a href="https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-w-2/" target="_blank" rel="noopener">方法三</a>.</p>
+<h2 id="代码-2">代码</h2>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">findMedianSortedArrays</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">nums1</span>: <span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>], <span style="color:#268bd2">nums2</span>: <span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]) -&gt; <span style="color:#cb4b16">float</span>:
+        <span style="color:#268bd2">m</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">nums1</span>)
+        <span style="color:#268bd2">n</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">nums2</span>)
+        <span style="color:#93a1a1;font-style:italic"># 对m+n的奇偶分开讨论；</span>
+        <span style="color:#93a1a1;font-style:italic"># m+n 为奇数时 median_idx_odd 和 median_idx_even 一样</span>
+        <span style="color:#93a1a1;font-style:italic"># m+n 为偶数时 median_idx_odd 比 median_idx_even 小1</span>
+        <span style="color:#268bd2">median_idx_odd</span> = (<span style="color:#268bd2">m</span> + <span style="color:#268bd2">n</span> - <span style="color:#2aa198;font-weight:bold">1</span>) &gt;&gt; <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#268bd2">median_idx_even</span> = (<span style="color:#268bd2">m</span> + <span style="color:#268bd2">n</span>) &gt;&gt; <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#859900">if</span> <span style="color:#268bd2">median_idx_even</span> == <span style="color:#268bd2">median_idx_odd</span>:
+            <span style="color:#859900">return</span> <span style="color:#268bd2">self</span>.<span style="color:#268bd2">findKthSmallet</span>(<span style="color:#268bd2">nums1</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#268bd2">m</span>-<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">nums2</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#268bd2">n</span>-<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">median_idx_odd</span>+<span style="color:#2aa198;font-weight:bold">1</span>)
+        <span style="color:#859900">else</span>:
+            <span style="color:#859900">return</span> (<span style="color:#268bd2">self</span>.<span style="color:#268bd2">findKthSmallet</span>(<span style="color:#268bd2">nums1</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#268bd2">m</span>-<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">nums2</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#268bd2">n</span>-<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">median_idx_odd</span>+<span style="color:#2aa198;font-weight:bold">1</span>) + <span style="color:#268bd2">self</span>.<span style="color:#268bd2">findKthSmallet</span>(<span style="color:#268bd2">nums1</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#268bd2">m</span>-<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">nums2</span>, <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#268bd2">n</span>-<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">median_idx_even</span>+<span style="color:#2aa198;font-weight:bold">1</span>)) / <span style="color:#2aa198;font-weight:bold">2</span>
+
+    <span style="color:#859900">def</span> <span style="color:#268bd2">findKthSmallet</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">nums1</span>, <span style="color:#268bd2">start1</span>, <span style="color:#268bd2">end1</span>, <span style="color:#268bd2">nums2</span>, <span style="color:#268bd2">start2</span>, <span style="color:#268bd2">end2</span>, <span style="color:#268bd2">k</span>):
+        <span style="color:#268bd2">m</span> = <span style="color:#268bd2">end1</span> - <span style="color:#268bd2">start1</span> + <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#268bd2">n</span> = <span style="color:#268bd2">end2</span> - <span style="color:#268bd2">start2</span> + <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#93a1a1;font-style:italic"># nums1 中的元素被用完了</span>
+        <span style="color:#859900">if</span> <span style="color:#268bd2">m</span> == <span style="color:#2aa198;font-weight:bold">0</span>: <span style="color:#859900">return</span> <span style="color:#268bd2">nums2</span>[<span style="color:#268bd2">start2</span>+<span style="color:#268bd2">k</span>-<span style="color:#2aa198;font-weight:bold">1</span>]
+        <span style="color:#93a1a1;font-style:italic"># nums2 中的元素被用完了</span>
+        <span style="color:#859900">if</span> <span style="color:#268bd2">n</span> == <span style="color:#2aa198;font-weight:bold">0</span>: <span style="color:#859900">return</span> <span style="color:#268bd2">nums1</span>[<span style="color:#268bd2">start1</span>+<span style="color:#268bd2">k</span>-<span style="color:#2aa198;font-weight:bold">1</span>]
+        <span style="color:#93a1a1;font-style:italic"># 只需要找最后一个</span>
+        <span style="color:#859900">if</span> <span style="color:#268bd2">k</span> == <span style="color:#2aa198;font-weight:bold">1</span>: <span style="color:#859900">return</span> <span style="color:#cb4b16">min</span>(<span style="color:#268bd2">nums1</span>[<span style="color:#268bd2">start1</span>], <span style="color:#268bd2">nums2</span>[<span style="color:#268bd2">start2</span>])
+        <span style="color:#268bd2">idx1</span> = <span style="color:#268bd2">start1</span> + <span style="color:#cb4b16">min</span>(<span style="color:#268bd2">k</span>&gt;&gt;<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">m</span>) - <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#268bd2">idx2</span> = <span style="color:#268bd2">start2</span> + <span style="color:#cb4b16">min</span>(<span style="color:#268bd2">k</span>&gt;&gt;<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">n</span>) - <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#859900">if</span> <span style="color:#268bd2">nums1</span>[<span style="color:#268bd2">idx1</span>] &gt; <span style="color:#268bd2">nums2</span>[<span style="color:#268bd2">idx2</span>]:
+            <span style="color:#268bd2">newk</span> = <span style="color:#268bd2">k</span> - (<span style="color:#268bd2">idx2</span>-<span style="color:#268bd2">start2</span>+<span style="color:#2aa198;font-weight:bold">1</span>)
+            <span style="color:#859900">return</span> <span style="color:#268bd2">self</span>.<span style="color:#268bd2">findKthSmallet</span>(<span style="color:#268bd2">nums1</span>, <span style="color:#268bd2">start1</span>, <span style="color:#268bd2">end1</span>, <span style="color:#268bd2">nums2</span>, <span style="color:#268bd2">idx2</span>+<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">end2</span>, <span style="color:#268bd2">newk</span>)
+        <span style="color:#859900">else</span>:
+            <span style="color:#268bd2">newk</span> = <span style="color:#268bd2">k</span> - (<span style="color:#268bd2">idx1</span>-<span style="color:#268bd2">start1</span>+<span style="color:#2aa198;font-weight:bold">1</span>)
+            <span style="color:#859900">return</span> <span style="color:#268bd2">self</span>.<span style="color:#268bd2">findKthSmallet</span>(<span style="color:#268bd2">nums1</span>, <span style="color:#268bd2">idx1</span>+<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">end1</span>, <span style="color:#268bd2">nums2</span>, <span style="color:#268bd2">start2</span>, <span style="color:#268bd2">end2</span>, <span style="color:#268bd2">newk</span>)
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="复杂度-2">复杂度</h2>
+<ul>
+<li>时间: $O(\log_2(m+n))$</li>
+<li>空间: $O(1)$ (使用尾递归， 但是python 没有尾递归优化，所以是 $O(\log_2(m+n))$)</li>
 </ul>
 
           </div>

@@ -33,7 +33,7 @@
   <meta name="description" content="Ph.D. student">
 
   
-  <link rel="alternate" hreflang="en-us" href="/resources/dsal/tree/">
+  <link rel="alternate" hreflang="en-us" href="/resources/dsal/sliding-window/">
 
   
 
@@ -227,14 +227,14 @@
   
 
   
-  <link rel="alternate" href="/resources/dsal/tree/index.xml" type="application/rss+xml" title="Dai, Yutong/ 戴宇童">
+  <link rel="alternate" href="/resources/dsal/sliding-window/index.xml" type="application/rss+xml" title="Dai, Yutong/ 戴宇童">
   
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/resources/dsal/tree/">
+  <link rel="canonical" href="/resources/dsal/sliding-window/">
 
   
   
@@ -250,12 +250,12 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="Dai, Yutong/ 戴宇童">
-  <meta property="og:url" content="/resources/dsal/tree/">
-  <meta property="og:title" content="Tree and Graph | Dai, Yutong/ 戴宇童">
+  <meta property="og:url" content="/resources/dsal/sliding-window/">
+  <meta property="og:title" content="滑动窗口 | Dai, Yutong/ 戴宇童">
   <meta property="og:description" content="Ph.D. student"><meta property="og:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png">
   <meta property="twitter:image" content="/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2020-12-05T00:00:00&#43;00:00">
+    <meta property="og:updated_time" content="2020-12-14T00:00:00&#43;00:00">
   
 
   
@@ -272,7 +272,7 @@
 
 
 
-  <title>Tree and Graph | Dai, Yutong/ 戴宇童</title>
+  <title>滑动窗口 | Dai, Yutong/ 戴宇童</title>
 
 </head>
 <body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
@@ -596,7 +596,7 @@
 
   </div>
   
-  <div class="docs-toc-item active">
+  <div class="docs-toc-item">
     <a class="docs-toc-link" href="/resources/dsal/tree/">Tree and Graph</a>
     <ul class="nav docs-sidenav">
       
@@ -649,7 +649,7 @@
 
   </div>
   
-  <div class="docs-toc-item">
+  <div class="docs-toc-item active">
     <a class="docs-toc-link" href="/resources/dsal/sliding-window/">sliding-window</a>
 
   </div>
@@ -670,7 +670,17 @@
         <li><a href="#" id="back_to_top" class="docs-toc-title">Contents</a></li>
       </ul>
 
-      <nav id="TableOfContents"></nav>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1456定长子串中元音的最大数目">1456.定长子串中元音的最大数目</a>
+      <ul>
+        <li><a href="#思路">思路</a></li>
+        <li><a href="#代码">代码</a></li>
+        <li><a href="#复杂度">复杂度</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
       
     </div>
@@ -681,10 +691,110 @@
       <article class="article">
 
         <div class="docs-article-container">
-          <h1>Tree and Graph</h1>
+          <h1>滑动窗口</h1>
 
           <div class="article-style">
-            
+            <h1 id="1456定长子串中元音的最大数目">1456.定长子串中元音的最大数目</h1>
+<pre><code>给你字符串 s 和整数 k 。
+
+请返回字符串 s 中长度为 k 的单个子字符串中可能包含的最大元音字母数。
+
+英文中的 元音字母 为（a, e, i, o, u）。
+
+ 
+
+示例 1：
+
+输入：s = &quot;abciiidef&quot;, k = 3
+输出：3
+解释：子字符串 &quot;iii&quot; 包含 3 个元音字母。
+示例 2：
+
+输入：s = &quot;aeiou&quot;, k = 2
+输出：2
+解释：任意长度为 2 的子字符串都包含 2 个元音字母。
+示例 3：
+
+输入：s = &quot;leetcode&quot;, k = 3
+输出：2
+解释：&quot;lee&quot;、&quot;eet&quot; 和 &quot;ode&quot; 都包含 2 个元音字母。
+示例 4：
+
+输入：s = &quot;rhythms&quot;, k = 4
+输出：0
+解释：字符串 s 中不含任何元音字母。
+示例 5：
+
+输入：s = &quot;tryhard&quot;, k = 4
+输出：1
+ 
+
+提示：
+
+1 &lt;= s.length &lt;= 10^5
+s 由小写英文字母组成
+1 &lt;= k &lt;= s.length
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路">思路</h2>
+<p>滑动窗口。</p>
+<ol>
+<li>首先检查前 <code>k</code>字符里有多少个元音字母。记录为<code>ans</code></li>
+<li>建立 <code>l</code>, <code>r</code>左右指针，每次将<code>l</code>和<code>r</code>增加1，直到越界。同时可以只关心增加的字符(<code>r</code>右移动)和移除的字符(<code>l</code>左移动)是否是元音(用hashTable)便可得到到当前窗口中元音字母个数。最后和<code>ans</code>比较取较大的即可。</li>
+</ol>
+<h2 id="代码">代码</h2>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">maxVowels</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">s</span>: <span style="color:#cb4b16">str</span>, <span style="color:#268bd2">k</span>: <span style="color:#cb4b16">int</span>) -&gt; <span style="color:#cb4b16">int</span>:
+        <span style="color:#268bd2">vowel</span> = <span style="color:#cb4b16">set</span>([<span style="color:#2aa198">&#39;a&#39;</span>, <span style="color:#2aa198">&#39;e&#39;</span>, <span style="color:#2aa198">&#39;i&#39;</span>, <span style="color:#2aa198">&#39;o&#39;</span>, <span style="color:#2aa198">&#39;u&#39;</span>])
+        <span style="color:#268bd2">r</span>, <span style="color:#268bd2">l</span> = <span style="color:#268bd2">k</span>-<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#268bd2">n</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">s</span>)
+        <span style="color:#268bd2">ans</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">l</span>, <span style="color:#268bd2">r</span>+<span style="color:#2aa198;font-weight:bold">1</span>):
+            <span style="color:#859900">if</span> <span style="color:#268bd2">s</span>[<span style="color:#268bd2">i</span>] <span style="color:#859900">in</span> <span style="color:#268bd2">vowel</span>:
+                <span style="color:#268bd2">ans</span> += <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#268bd2">last_window</span> = <span style="color:#268bd2">ans</span>
+        <span style="color:#859900">while</span> <span style="color:#268bd2">r</span> &lt; <span style="color:#268bd2">n</span>:
+            <span style="color:#268bd2">l</span> += <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">r</span> += <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">current_window</span> = <span style="color:#268bd2">last_window</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">s</span>[<span style="color:#268bd2">l</span>-<span style="color:#2aa198;font-weight:bold">1</span>] <span style="color:#859900">in</span> <span style="color:#268bd2">vowel</span>: <span style="color:#268bd2">current_window</span> -= <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">r</span> &lt; <span style="color:#268bd2">n</span> <span style="color:#859900">and</span> <span style="color:#268bd2">s</span>[<span style="color:#268bd2">r</span>] <span style="color:#859900">in</span> <span style="color:#268bd2">vowel</span>: <span style="color:#268bd2">current_window</span> += + <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">ans</span> = <span style="color:#cb4b16">max</span>(<span style="color:#268bd2">ans</span>, <span style="color:#268bd2">current_window</span>)
+            <span style="color:#268bd2">last_window</span> = <span style="color:#268bd2">current_window</span>
+        <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="复杂度">复杂度</h2>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+
           </div>
 
           
@@ -717,7 +827,7 @@
   
 
 <p class="edit-page">
-  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/resources/DSAL/tree/_index.md">
+  <a href="https://github.com/gcushen/hugo-academic/edit/master/content/resources/DSAL/sliding-window/_index.md">
     <i class="fas fa-pen pr-2"></i>Edit this page
   </a>
 </p>

@@ -256,7 +256,7 @@
     
       <meta property="article:published_time" content="2020-05-01T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2020-05-01T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2021-01-03T17:41:52-05:00">
   
 
   
@@ -285,7 +285,7 @@
   "headline": "Python Tricks Learned From Projects",
   
   "datePublished": "2020-05-01T00:00:00Z",
-  "dateModified": "2020-05-01T00:00:00Z",
+  "dateModified": "2021-01-03T17:41:52-05:00",
   
   "publisher": {
     "@type": "Organization",
@@ -610,6 +610,7 @@
     <li><a href="#using-the-right-kernel-for-jupyter-notebook">Using the right kernel for Jupyter Notebook</a></li>
     <li><a href="#running-jupyter-notebook-from-the-remote-server">Running Jupyter Notebook from the remote server</a></li>
     <li><a href="#copy-and-deepcopy-caveats">copy and deepcopy caveats</a></li>
+    <li><a href="#matplotlib-caveats">Matplotlib caveats</a></li>
   </ul>
 </nav>
         
@@ -654,8 +655,10 @@
     
     
       
+          Last updated on
+      
     
-    May 1, 2020
+    Jan 3, 2021
   </span>
   
 
@@ -926,7 +929,18 @@ c_copy:[[-1, -1], [3, 4]]
 </code></pre><p><strong>
 <a href="https://stackoverflow.com/questions/19068707/does-a-slicing-operation-give-me-a-deep-or-shallow-copy" target="_blank" rel="noopener">explaination</a></strong>: the original <code>list</code> is copied to a new <code>list</code> object. Just all elements within the <code>list</code> are not copied, so if the <code>list</code> contains a mutable object (<code>int</code>s are not mutable) changing that object will change it in both the original and the copied list because both have a copy of the reference to the same object.</p>
 <p><img src="slicing.png" alt=""></p>
-
+<h1 id="matplotlib-caveats">Matplotlib caveats</h1>
+<p>Sometimes your x-axis label contains underscore <code>_</code>. Since in the backend matplotlib shall use <code>Tex</code> to render texts, such special characters shall cause issues.</p>
+<p>If you x-axis happens to be in a column of the <code>pd.DataFrame</code>, you can easily change the <code>_</code> to <code>-</code> by using</p>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#268bd2">df_plot</span>[<span style="color:#2aa198">&#39;you_x_axis_label&#39;</span>].<span style="color:#268bd2">str</span>.<span style="color:#268bd2">replace</span>(<span style="color:#2aa198">&#39;_&#39;</span>, <span style="color:#2aa198">&#39;-&#39;</span>, <span style="color:#268bd2">regex</span>=<span style="color:#268bd2">False</span>)
+</code></pre></td></tr></table>
+</div>
+</div>
               </div>
               
 

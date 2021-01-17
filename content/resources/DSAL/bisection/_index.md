@@ -247,3 +247,96 @@ class Solution:
 * 时间复杂度：$O(n\log_2n)$
 * 空间复杂度：$O(n)$
 
+# 4. 寻找两个正序数组的中位数
+
+```
+给定两个大小为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的中位数。
+
+进阶：你能设计一个时间复杂度为 O(log (m+n)) 的算法解决此问题吗？
+
+ 
+
+示例 1：
+
+输入：nums1 = [1,3], nums2 = [2]
+输出：2.00000
+解释：合并数组 = [1,2,3] ，中位数 2
+示例 2：
+
+输入：nums1 = [1,2], nums2 = [3,4]
+输出：2.50000
+解释：合并数组 = [1,2,3,4] ，中位数 (2 + 3) / 2 = 2.5
+示例 3：
+
+输入：nums1 = [0,0], nums2 = [0,0]
+输出：0.00000
+示例 4：
+
+输入：nums1 = [], nums2 = [1]
+输出：1.00000
+示例 5：
+
+输入：nums1 = [2], nums2 = []
+输出：2.00000
+ 
+
+提示：
+
+nums1.length == m
+nums2.length == n
+0 <= m <= 1000
+0 <= n <= 1000
+1 <= m + n <= 2000
+-106 <= nums1[i], nums2[i] <= 106
+
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/median-of-two-sorted-arrays
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+```
+
+## 思路
+
+我是看这里的[方法三](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-w-2/).
+
+## 代码
+
+```python
+class Solution:
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
+        m = len(nums1)
+        n = len(nums2)
+        # 对m+n的奇偶分开讨论；
+        # m+n 为奇数时 median_idx_odd 和 median_idx_even 一样
+        # m+n 为偶数时 median_idx_odd 比 median_idx_even 小1
+        median_idx_odd = (m + n - 1) >> 1
+        median_idx_even = (m + n) >> 1
+        if median_idx_even == median_idx_odd:
+            return self.findKthSmallet(nums1, 0, m-1, nums2, 0, n-1, median_idx_odd+1)
+        else:
+            return (self.findKthSmallet(nums1, 0, m-1, nums2, 0, n-1, median_idx_odd+1) + self.findKthSmallet(nums1, 0, m-1, nums2, 0, n-1, median_idx_even+1)) / 2
+
+    def findKthSmallet(self, nums1, start1, end1, nums2, start2, end2, k):
+        m = end1 - start1 + 1
+        n = end2 - start2 + 1
+        # nums1 中的元素被用完了
+        if m == 0: return nums2[start2+k-1]
+        # nums2 中的元素被用完了
+        if n == 0: return nums1[start1+k-1]
+        # 只需要找最后一个
+        if k == 1: return min(nums1[start1], nums2[start2])
+        idx1 = start1 + min(k>>1, m) - 1
+        idx2 = start2 + min(k>>1, n) - 1
+        if nums1[idx1] > nums2[idx2]:
+            newk = k - (idx2-start2+1)
+            return self.findKthSmallet(nums1, start1, end1, nums2, idx2+1, end2, newk)
+        else:
+            newk = k - (idx1-start1+1)
+            return self.findKthSmallet(nums1, idx1+1, end1, nums2, start2, end2, newk)
+```
+
+## 复杂度
+
+* 时间: $O(\log_2(m+n))$
+* 空间: $O(1)$ (使用尾递归， 但是python 没有尾递归优化，所以是 $O(\log_2(m+n))$)
+

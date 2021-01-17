@@ -160,3 +160,13 @@ c_copy:[[-1, -1], [3, 4]]
 **[explaination](https://stackoverflow.com/questions/19068707/does-a-slicing-operation-give-me-a-deep-or-shallow-copy)**: the original `list` is copied to a new `list` object. Just all elements within the `list` are not copied, so if the `list` contains a mutable object (`int`s are not mutable) changing that object will change it in both the original and the copied list because both have a copy of the reference to the same object.
 
 ![](slicing.png)
+
+# Matplotlib caveats
+
+Sometimes your x-axis label contains underscore `_`. Since in the backend matplotlib shall use `Tex` to render texts, such special characters shall cause issues.
+
+If you x-axis happens to be in a column of the `pd.DataFrame`, you can easily change the `_` to `-` by using 
+
+```python
+df_plot['you_x_axis_label'].str.replace('_', '-', regex=False)
+```

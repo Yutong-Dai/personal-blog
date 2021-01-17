@@ -635,12 +635,22 @@
   </div>
   
   <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/search/">Search</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
     <a class="docs-toc-link" href="/resources/dsal/union-find/">Union Find</a>
 
   </div>
   
   <div class="docs-toc-item">
     <a class="docs-toc-link" href="/resources/dsal/dp/">dynamic programming</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/sliding-window/">sliding-window</a>
 
   </div>
   
@@ -682,6 +692,13 @@
         <li><a href="#思路-1">思路</a></li>
         <li><a href="#代码-2">代码</a></li>
         <li><a href="#复杂度-2">复杂度</a></li>
+      </ul>
+    </li>
+    <li><a href="#401-二进制手表">401. 二进制手表</a>
+      <ul>
+        <li><a href="#思路-2">思路</a></li>
+        <li><a href="#代码-3">代码</a></li>
+        <li><a href="#复杂度-3">复杂度</a></li>
       </ul>
     </li>
   </ul>
@@ -1109,6 +1126,119 @@ candidates 中的每个数字在每个组合中只能使用一次。
 <li>时间复杂度 $O(n*n!)$</li>
 <li>空间复杂度 $O(n)$</li>
 </ul>
+<h1 id="401-二进制手表">401. 二进制手表</h1>
+<pre><code>二进制手表顶部有 4 个 LED 代表 小时（0-11），底部的 6 个 LED 代表 分钟（0-59）。
+
+每个 LED 代表一个 0 或 1，最低位在右侧。
+
+
+
+例如，上面的二进制手表读取 “3:25”。
+
+给定一个非负整数 n 代表当前 LED 亮着的数量，返回所有可能的时间。
+
+ 
+
+示例：
+
+输入: n = 1
+返回: [&quot;1:00&quot;, &quot;2:00&quot;, &quot;4:00&quot;, &quot;8:00&quot;, &quot;0:01&quot;, &quot;0:02&quot;, &quot;0:04&quot;, &quot;0:08&quot;, &quot;0:16&quot;, &quot;0:32&quot;]
+ 
+
+提示：
+
+输出的顺序没有要求。
+小时不会以零开头，比如 “01:00” 是不允许的，应为 “1:00”。
+分钟必须由两位数组成，可能会以零开头，比如 “10:2” 是无效的，应为 “10:02”。
+超过表示范围（小时 0-11，分钟 0-59）的数据将会被舍弃，也就是说不会出现 &quot;13:00&quot;, &quot;0:61&quot; 等时间。
+</code></pre><h2 id="思路-2">思路</h2>
+<p>和找给定数组所有不重复的子集思路几乎一致，只不过需要写一个函数来将子集转换成时间，如果不符合要求舍弃即可。
+具体的看代码。</p>
+<h2 id="代码-3">代码</h2>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">readBinaryWatch</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">num</span>: <span style="color:#cb4b16">int</span>) -&gt; <span style="color:#268bd2">List</span>[<span style="color:#cb4b16">str</span>]:
+        <span style="color:#93a1a1;font-style:italic"># 边界情况</span>
+        <span style="color:#859900">if</span> <span style="color:#268bd2">num</span> == <span style="color:#2aa198;font-weight:bold">0</span>:
+            <span style="color:#859900">return</span> [<span style="color:#2aa198">&#39;0:00&#39;</span>]
+        <span style="color:#93a1a1;font-style:italic"># 将子集翻译成时间</span>
+        <span style="color:#859900">def</span> <span style="color:#268bd2">decode</span>(<span style="color:#268bd2">path</span>):
+            <span style="color:#268bd2">m</span> = <span style="color:#268bd2">h</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+            <span style="color:#859900">for</span> <span style="color:#268bd2">idx</span> <span style="color:#859900">in</span> <span style="color:#268bd2">path</span>:
+                <span style="color:#859900">if</span> <span style="color:#268bd2">idx</span> &lt;= <span style="color:#2aa198;font-weight:bold">5</span>:
+                    <span style="color:#268bd2">m</span> += <span style="color:#268bd2">choices</span>[<span style="color:#268bd2">idx</span>]
+                <span style="color:#859900">else</span>:
+                    <span style="color:#268bd2">h</span> += <span style="color:#268bd2">choices</span>[<span style="color:#268bd2">idx</span>]
+            <span style="color:#859900">if</span> <span style="color:#268bd2">h</span>&gt;=<span style="color:#2aa198;font-weight:bold">12</span> <span style="color:#859900">or</span> <span style="color:#268bd2">m</span>&gt;=<span style="color:#2aa198;font-weight:bold">60</span>:
+                <span style="color:#859900">return</span> <span style="color:#268bd2">None</span>
+            <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">f</span><span style="color:#2aa198">&#39;{h}:{str(m).zfill(2)}&#39;</span>)
+        <span style="color:#93a1a1;font-style:italic"># path: 表示当前子集中元素的索引</span>
+        <span style="color:#93a1a1;font-style:italic"># depth: 递归的深度</span>
+        <span style="color:#93a1a1;font-style:italic"># start: 可以选取元素在数组中的引索</span>
+        <span style="color:#859900">def</span> <span style="color:#268bd2">dfs</span>(<span style="color:#268bd2">path</span>, <span style="color:#268bd2">depth</span>, <span style="color:#268bd2">start</span>):
+            <span style="color:#93a1a1;font-style:italic"># 选取的子集大小符合要求了</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">depth</span> &gt;= <span style="color:#268bd2">num</span>:
+                <span style="color:#268bd2">decode</span>(<span style="color:#268bd2">path</span>)                    
+                <span style="color:#859900">return</span> 
+            <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">start</span>, <span style="color:#2aa198;font-weight:bold">10</span>):
+                <span style="color:#268bd2">path</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">i</span>)
+                <span style="color:#93a1a1;font-style:italic"># 注意这里 start=i+1 是用于剪枝避免重复</span>
+                <span style="color:#93a1a1;font-style:italic"># 举个例子 path = 【2，1】 和 path = 【1，2】</span>
+                <span style="color:#93a1a1;font-style:italic"># 对最后结果没影响</span>
+                <span style="color:#268bd2">dfs</span>(<span style="color:#268bd2">path</span>, <span style="color:#268bd2">depth</span>+<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">i</span>+<span style="color:#2aa198;font-weight:bold">1</span>)
+                <span style="color:#268bd2">path</span>.<span style="color:#268bd2">pop</span>(-<span style="color:#2aa198;font-weight:bold">1</span>)
+        <span style="color:#93a1a1;font-style:italic"># 所有可选的数字</span>
+        <span style="color:#268bd2">choices</span> = [<span style="color:#2aa198;font-weight:bold">1</span>,<span style="color:#2aa198;font-weight:bold">2</span>,<span style="color:#2aa198;font-weight:bold">4</span>,<span style="color:#2aa198;font-weight:bold">8</span>,<span style="color:#2aa198;font-weight:bold">16</span>,<span style="color:#2aa198;font-weight:bold">32</span>,<span style="color:#2aa198;font-weight:bold">1</span>,<span style="color:#2aa198;font-weight:bold">2</span>,<span style="color:#2aa198;font-weight:bold">4</span>,<span style="color:#2aa198;font-weight:bold">8</span>]
+        <span style="color:#268bd2">ans</span> = []
+        <span style="color:#268bd2">dfs</span>([], <span style="color:#2aa198;font-weight:bold">0</span>, <span style="color:#2aa198;font-weight:bold">0</span>)
+        <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="复杂度-3">复杂度</h2>
+<ul>
+<li>时间复杂度：$O(nlog_2(n))$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
+<p>其中<code>n</code>是<code>num</code>中数字的个数。</p>
 
           </div>
 

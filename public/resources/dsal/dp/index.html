@@ -635,12 +635,22 @@
   </div>
   
   <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/search/">Search</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
     <a class="docs-toc-link" href="/resources/dsal/union-find/">Union Find</a>
 
   </div>
   
   <div class="docs-toc-item active">
     <a class="docs-toc-link" href="/resources/dsal/dp/">dynamic programming</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/sliding-window/">sliding-window</a>
 
   </div>
   
@@ -665,6 +675,18 @@
     <li><a href="#435-无重叠区间">435. 无重叠区间</a>
       <ul>
         <li><a href="#思路">思路</a></li>
+      </ul>
+    </li>
+    <li><a href="#837-新21点">837. 新21点</a></li>
+    <li><a href="#思路-1">思路</a></li>
+    <li><a href="#代码">代码</a></li>
+    <li><a href="#复杂度">复杂度</a></li>
+    <li><a href="#438-找到字符串中所有字母异位词">438. 找到字符串中所有字母异位词</a>
+      <ul>
+        <li><a href="#思路-2">思路</a></li>
+        <li><a href="#代码-1">代码</a></li>
+        <li><a href="#复杂度分析">复杂度分析</a></li>
+        <li><a href="#代码的改进">代码的改进</a></li>
       </ul>
     </li>
   </ul>
@@ -814,7 +836,256 @@ $$</p>
 <li>时间: $O(n^2)$</li>
 <li>空间: $O(n)$</li>
 </ul>
+<h1 id="837-新21点">837. 新21点</h1>
+<pre><code>爱丽丝参与一个大致基于纸牌游戏 “21点” 规则的游戏，描述如下：
 
+爱丽丝以 0 分开始，并在她的得分少于 K 分时抽取数字。 抽取时，她从 [1, W] 的范围中随机获得一个整数作为分数进行累计，其中 W 是整数。 每次抽取都是独立的，其结果具有相同的概率。
+
+当爱丽丝获得不少于 K 分时，她就停止抽取数字。 爱丽丝的分数不超过 N 的概率是多少？
+
+ 
+
+示例 1：
+
+输入：N = 10, K = 1, W = 10
+输出：1.00000
+说明：爱丽丝得到一张卡，然后停止。
+示例 2：
+
+输入：N = 6, K = 1, W = 10
+输出：0.60000
+说明：爱丽丝得到一张卡，然后停止。
+在 W = 10 的 6 种可能下，她的得分不超过 N = 6 分。
+示例 3：
+
+输入：N = 21, K = 17, W = 10
+输出：0.73278
+ 
+
+提示：
+
+0 &lt;= K &lt;= N &lt;= 10000
+1 &lt;= W &lt;= 10000
+如果答案与正确答案的误差不超过 10^-5，则该答案将被视为正确答案通过。
+此问题的判断限制时间已经减少。
+
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/new-21-game
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h1 id="思路-1">思路</h1>
+<p>参考
+<a href="https://leetcode-cn.com/problems/new-21-game/solution/zen-yang-de-dao-guan-fang-ti-jie-zhong-de-zhuang-t/" target="_blank" rel="noopener">这里</a>.</p>
+<h1 id="代码">代码</h1>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">new21Game</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">N</span>: <span style="color:#cb4b16">int</span>, <span style="color:#268bd2">K</span>: <span style="color:#cb4b16">int</span>, <span style="color:#268bd2">W</span>: <span style="color:#cb4b16">int</span>) -&gt; <span style="color:#cb4b16">float</span>:
+        <span style="color:#859900">if</span> <span style="color:#268bd2">K</span> == <span style="color:#2aa198;font-weight:bold">0</span>:
+            <span style="color:#859900">return</span> <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#268bd2">dp</span> = [<span style="color:#2aa198;font-weight:bold">0</span>] * ((<span style="color:#268bd2">K</span>-<span style="color:#2aa198;font-weight:bold">1</span>+<span style="color:#268bd2">W</span>) + <span style="color:#2aa198;font-weight:bold">1</span>)
+        <span style="color:#859900">for</span> <span style="color:#268bd2">j</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">K</span>, <span style="color:#cb4b16">min</span>(<span style="color:#268bd2">N</span>, <span style="color:#268bd2">K</span>-<span style="color:#2aa198;font-weight:bold">1</span>+<span style="color:#268bd2">W</span>)+<span style="color:#2aa198;font-weight:bold">1</span>): <span style="color:#268bd2">dp</span>[<span style="color:#268bd2">j</span>] = <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#268bd2">dp</span>[<span style="color:#268bd2">K</span>-<span style="color:#2aa198;font-weight:bold">1</span>] = <span style="color:#cb4b16">min</span>(<span style="color:#268bd2">N</span>-<span style="color:#268bd2">K</span>+<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">W</span>) / <span style="color:#268bd2">W</span>
+        <span style="color:#859900">for</span> <span style="color:#268bd2">s</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">K</span>-<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#2aa198;font-weight:bold">0</span>, -<span style="color:#2aa198;font-weight:bold">1</span>):
+            <span style="color:#268bd2">dp</span>[<span style="color:#268bd2">s</span>-<span style="color:#2aa198;font-weight:bold">1</span>] = <span style="color:#268bd2">dp</span>[<span style="color:#268bd2">s</span>] + (<span style="color:#268bd2">dp</span>[<span style="color:#268bd2">s</span>] - <span style="color:#268bd2">dp</span>[<span style="color:#268bd2">s</span>+<span style="color:#268bd2">W</span>]) / <span style="color:#268bd2">W</span>
+        <span style="color:#859900">return</span> <span style="color:#268bd2">dp</span>[<span style="color:#2aa198;font-weight:bold">0</span>]
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="复杂度">复杂度</h1>
+<ul>
+<li>时间复杂度: $O(K+W)$</li>
+<li>空间复杂度: $O(K+W)$</li>
+</ul>
+<h1 id="438-找到字符串中所有字母异位词">438. 找到字符串中所有字母异位词</h1>
+<pre><code>给定一个字符串 s 和一个非空字符串 p，找到 s 中所有是 p 的字母异位词的子串，返回这些子串的起始索引。
+
+字符串只包含小写英文字母，并且字符串 s 和 p 的长度都不超过 20100。
+
+说明：
+
+字母异位词指字母相同，但排列不同的字符串。
+不考虑答案输出的顺序。
+示例 1:
+
+输入:
+s: &quot;cbaebabacd&quot; p: &quot;abc&quot;
+
+输出:
+[0, 6]
+
+解释:
+起始索引等于 0 的子串是 &quot;cba&quot;, 它是 &quot;abc&quot; 的字母异位词。
+起始索引等于 6 的子串是 &quot;bac&quot;, 它是 &quot;abc&quot; 的字母异位词。
+ 示例 2:
+
+输入:
+s: &quot;abab&quot; p: &quot;ab&quot;
+
+输出:
+[0, 1, 2]
+
+解释:
+起始索引等于 0 的子串是 &quot;ab&quot;, 它是 &quot;ab&quot; 的字母异位词。
+起始索引等于 1 的子串是 &quot;ba&quot;, 它是 &quot;ab&quot; 的字母异位词。
+起始索引等于 2 的子串是 &quot;ab&quot;, 它是 &quot;ab&quot; 的字母异位词。
+
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/find-all-anagrams-in-a-string
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+</code></pre><h2 id="思路-2">思路</h2>
+<p>刚开始做想到用一个<code>set</code>来记录<code>p</code>中的字母，然后利用滑动窗口记录当前窗口中元素与set的匹配情况。后来发现测试案例中有 <code>p=‘aa’</code>这种带重复字母的情况。所以变成用一个长度为26的<code>list</code>来记录<code>p</code>中每个元素出现的频率，然后再开一个长度为26的<code>list</code> 来记录<code>s</code>中当前窗口字母的频次，如果两个<code>list</code>一样，则找到一个符合条件的<code>字母异位词</code>。</p>
+<h2 id="代码-1">代码</h2>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">findAnagrams</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">s</span>: <span style="color:#cb4b16">str</span>, <span style="color:#268bd2">p</span>: <span style="color:#cb4b16">str</span>) -&gt; <span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]:
+        <span style="color:#268bd2">n</span>, <span style="color:#268bd2">size</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">s</span>), <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">p</span>)
+        <span style="color:#268bd2">ans</span> = []
+        <span style="color:#859900">if</span> <span style="color:#268bd2">n</span> &lt; <span style="color:#268bd2">size</span>: <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+        <span style="color:#268bd2">p_array</span> = [<span style="color:#2aa198;font-weight:bold">0</span>] * <span style="color:#2aa198;font-weight:bold">26</span>
+        <span style="color:#268bd2">s_array</span> = [<span style="color:#2aa198;font-weight:bold">0</span>] * <span style="color:#2aa198;font-weight:bold">26</span>
+
+        <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">size</span>):
+            <span style="color:#268bd2">p_array</span>[<span style="color:#cb4b16">ord</span>(<span style="color:#268bd2">p</span>[<span style="color:#268bd2">i</span>]) - <span style="color:#cb4b16">ord</span>(<span style="color:#2aa198">&#39;a&#39;</span>)] += <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">s_array</span>[<span style="color:#cb4b16">ord</span>(<span style="color:#268bd2">s</span>[<span style="color:#268bd2">i</span>]) - <span style="color:#cb4b16">ord</span>(<span style="color:#2aa198">&#39;a&#39;</span>)] += <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#859900">if</span> <span style="color:#268bd2">s_array</span> == <span style="color:#268bd2">p_array</span>:
+            <span style="color:#268bd2">ans</span>.<span style="color:#268bd2">append</span>(<span style="color:#2aa198;font-weight:bold">0</span>)
+        <span style="color:#268bd2">l</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#859900">while</span> <span style="color:#268bd2">l</span> &lt; <span style="color:#268bd2">n</span>-<span style="color:#268bd2">size</span>:
+            <span style="color:#268bd2">l</span> += <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">r</span> = <span style="color:#268bd2">l</span> + <span style="color:#268bd2">size</span> - <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">s_array</span>[<span style="color:#cb4b16">ord</span>(<span style="color:#268bd2">s</span>[<span style="color:#268bd2">l</span>-<span style="color:#2aa198;font-weight:bold">1</span>]) - <span style="color:#cb4b16">ord</span>(<span style="color:#2aa198">&#39;a&#39;</span>)] -= <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">s_array</span>[<span style="color:#cb4b16">ord</span>(<span style="color:#268bd2">s</span>[<span style="color:#268bd2">r</span>]) - <span style="color:#cb4b16">ord</span>(<span style="color:#2aa198">&#39;a&#39;</span>)] += <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">s_array</span> == <span style="color:#268bd2">p_array</span>:
+                <span style="color:#268bd2">ans</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">l</span>)
+        <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="复杂度分析">复杂度分析</h2>
+<ul>
+<li>时间复杂度：$O(n)$, <code>n</code>为<code>s</code>的长度;</li>
+<li>空间复杂度：$O(1)$</li>
+</ul>
+<h2 id="代码的改进">代码的改进</h2>
+<p>仔细看代码，发现比较两个数组<code>s_array == p_array</code>可以优化。具体来说</p>
+<ol>
+<li>初始一个 <code>debit</code>的<code>list</code>。遍历<code>p</code>中的字符，并在<code>debit</code>中该字符对应的位置减去1，表示“负债”情况。</li>
+<li>每次跟新窗口的时候，如果移除的字母当前对应的<code>debit</code>小于等于0，则说明该字母出现在<code>p</code>中; 对增加的字母也可同理。</li>
+</ol>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">findAnagrams</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">s</span>: <span style="color:#cb4b16">str</span>, <span style="color:#268bd2">p</span>: <span style="color:#cb4b16">str</span>) -&gt; <span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]:
+        <span style="color:#268bd2">n</span>, <span style="color:#268bd2">size</span> = <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">s</span>), <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">p</span>)
+        <span style="color:#268bd2">ans</span> = []
+        <span style="color:#859900">if</span> <span style="color:#268bd2">n</span> &lt; <span style="color:#268bd2">size</span>: <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+        <span style="color:#268bd2">debit</span> = [<span style="color:#2aa198;font-weight:bold">0</span>] * <span style="color:#2aa198;font-weight:bold">26</span>
+        <span style="color:#859900">for</span> <span style="color:#268bd2">char</span> <span style="color:#859900">in</span> <span style="color:#268bd2">p</span>:
+            <span style="color:#93a1a1;font-style:italic"># 初始负债情况</span>
+            <span style="color:#268bd2">debit</span>[<span style="color:#cb4b16">ord</span>(<span style="color:#268bd2">char</span>) - <span style="color:#cb4b16">ord</span>(<span style="color:#2aa198">&#39;a&#39;</span>)] -= <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#268bd2">l</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+        <span style="color:#268bd2">lack</span> = <span style="color:#268bd2">size</span>
+        <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#268bd2">size</span>):
+            <span style="color:#268bd2">idx</span> = <span style="color:#cb4b16">ord</span>(<span style="color:#268bd2">s</span>[<span style="color:#268bd2">i</span>]) - <span style="color:#cb4b16">ord</span>(<span style="color:#2aa198">&#39;a&#39;</span>)
+            <span style="color:#93a1a1;font-style:italic"># 给正确的地方充值</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">debit</span>[<span style="color:#268bd2">idx</span>] &lt; <span style="color:#2aa198;font-weight:bold">0</span>:
+                <span style="color:#268bd2">lack</span> -= <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">debit</span>[<span style="color:#268bd2">idx</span>] += <span style="color:#2aa198;font-weight:bold">1</span>
+        <span style="color:#93a1a1;font-style:italic"># 负债为0，当前窗口的字母和p中字母匹配上了</span>
+        <span style="color:#859900">if</span> <span style="color:#268bd2">lack</span> == <span style="color:#2aa198;font-weight:bold">0</span>: <span style="color:#268bd2">ans</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">l</span>)
+        <span style="color:#859900">while</span> <span style="color:#268bd2">l</span> &lt; <span style="color:#268bd2">n</span>-<span style="color:#268bd2">size</span>:
+            <span style="color:#268bd2">l</span> += <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">r</span> = <span style="color:#268bd2">l</span> + <span style="color:#268bd2">size</span> - <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">rm_idx</span> = <span style="color:#cb4b16">ord</span>(<span style="color:#268bd2">s</span>[<span style="color:#268bd2">l</span>-<span style="color:#2aa198;font-weight:bold">1</span>]) - <span style="color:#cb4b16">ord</span>(<span style="color:#2aa198">&#39;a&#39;</span>)
+            <span style="color:#268bd2">add_idx</span> = <span style="color:#cb4b16">ord</span>(<span style="color:#268bd2">s</span>[<span style="color:#268bd2">r</span>]) - <span style="color:#cb4b16">ord</span>(<span style="color:#2aa198">&#39;a&#39;</span>)
+            <span style="color:#93a1a1;font-style:italic"># 给正确的地方扣钱</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">debit</span>[<span style="color:#268bd2">rm_idx</span>] &lt;= <span style="color:#2aa198;font-weight:bold">0</span>:
+                <span style="color:#268bd2">lack</span> += <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">debit</span>[<span style="color:#268bd2">rm_idx</span>] -= <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#268bd2">debit</span>[<span style="color:#268bd2">add_idx</span>] += <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#93a1a1;font-style:italic"># 给正确的地方充值</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">debit</span>[<span style="color:#268bd2">add_idx</span>] &lt;= <span style="color:#2aa198;font-weight:bold">0</span>:
+                <span style="color:#268bd2">lack</span> -= <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">lack</span> == <span style="color:#2aa198;font-weight:bold">0</span>:
+                <span style="color:#268bd2">ans</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">l</span>)
+        <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+</code></pre></td></tr></table>
+</div>
+</div>
           </div>
 
           
@@ -834,7 +1105,7 @@ $$</p>
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Dec 14, 2020</p>
+          <p>Last updated on Jan 3, 2021</p>
 
           
 

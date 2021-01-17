@@ -9,7 +9,7 @@
   
   <url>
     <loc>/resources/cpp_laopt/cpp/makefile/</loc>
-    <lastmod>2020-08-31T15:09:49-04:00</lastmod>
+    <lastmod>2021-01-03T17:41:52-05:00</lastmod>
   </url>
   
   <url>
@@ -59,7 +59,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2021-01-03T00:00:00+00:00</lastmod>
+    <lastmod>2021-01-03T17:41:52-05:00</lastmod>
   </url>
   
   <url>
@@ -69,11 +69,21 @@
   
   <url>
     <loc>/resources/dsal/bisection/</loc>
-    <lastmod>2021-01-03T00:00:00+00:00</lastmod>
+    <lastmod>2021-01-03T17:41:52-05:00</lastmod>
   </url>
   
   <url>
     <loc>/resources/dsal/dp/</loc>
+    <lastmod>2021-01-03T17:41:52-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/resources/dsal/search/</loc>
+    <lastmod>2020-12-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/resources/dsal/sliding-window/</loc>
     <lastmod>2020-12-14T00:00:00+00:00</lastmod>
   </url>
   
@@ -104,7 +114,7 @@
   
   <url>
     <loc>/resources/dsal/heap/</loc>
-    <lastmod>2020-12-25T17:34:28-05:00</lastmod>
+    <lastmod>2021-01-03T17:41:52-05:00</lastmod>
   </url>
   
   <url>
@@ -119,7 +129,7 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-08-06T15:14:02-04:00</lastmod>
+    <lastmod>2021-01-03T17:41:52-05:00</lastmod>
   </url>
   
   <url>
@@ -179,7 +189,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2020-08-03T23:29:36-04:00</lastmod>
+    <lastmod>2021-01-03T17:41:52-05:00</lastmod>
   </url>
   
   <url>
@@ -189,17 +199,17 @@
   
   <url>
     <loc>/tag/python/</loc>
-    <lastmod>2020-05-01T00:00:00+00:00</lastmod>
+    <lastmod>2021-01-03T17:41:52-05:00</lastmod>
   </url>
   
   <url>
     <loc>/category/python/</loc>
-    <lastmod>2020-05-01T00:00:00+00:00</lastmod>
+    <lastmod>2021-01-03T17:41:52-05:00</lastmod>
   </url>
   
   <url>
     <loc>/post/python-tricks-learned-from-projects/</loc>
-    <lastmod>2020-05-01T00:00:00+00:00</lastmod>
+    <lastmod>2021-01-03T17:41:52-05:00</lastmod>
   </url>
   
   <url>

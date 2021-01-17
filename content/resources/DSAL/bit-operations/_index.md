@@ -11,6 +11,153 @@ menu:
     weight: 10
 ---
 
+# 268. 丢失的数字
+
+```
+给定一个包含 [0, n] 中 n 个数的数组 nums ，找出 [0, n] 这个范围内没有出现在数组中的那个数。
+
+ 
+
+进阶：
+
+你能否实现线性时间复杂度、仅使用额外常数空间的算法解决此问题?
+ 
+
+示例 1：
+
+输入：nums = [3,0,1]
+输出：2
+解释：n = 3，因为有 3 个数字，所以所有的数字都在范围 [0,3] 内。2 是丢失的数字，因为它没有出现在 nums 中。
+示例 2：
+
+输入：nums = [0,1]
+输出：2
+解释：n = 2，因为有 2 个数字，所以所有的数字都在范围 [0,2] 内。2 是丢失的数字，因为它没有出现在 nums 中。
+示例 3：
+
+输入：nums = [9,6,4,2,3,5,7,0,1]
+输出：8
+解释：n = 9，因为有 9 个数字，所以所有的数字都在范围 [0,9] 内。8 是丢失的数字，因为它没有出现在 nums 中。
+示例 4：
+
+输入：nums = [0]
+输出：1
+解释：n = 1，因为有 1 个数字，所以所有的数字都在范围 [0,1] 内。1 是丢失的数字，因为它没有出现在 nums 中。
+ 
+
+提示：
+
+n == nums.length
+1 <= n <= 104
+0 <= nums[i] <= n
+nums 中的所有数字都 独一无二
+
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/missing-number
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+```
+
+## 思路1: 数学加减法
+
+对`[0,n]`求和 然后减去`sum(numse)` 即为答案
+
+```python
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        n = len(nums) 
+        return int(n * (n+1) / 2) - sum(nums)
+```
+
+* 时间复杂度：$O(n)$
+* 空间复杂度：$O(1)$
+
+## 思路2: 异或`XOR`运算
+
+用到的异或运算法则：
+1. `a ^ a = 0`
+2. `a^b^c=a^c^b`
+3. `a ^ b ^ c = a ^ (b ^ c) = (a ^ b) ^ c`
+
+考虑
+
+```
+nums = [0,2,3]
+index = [0,1,2,3]
+
+1 = (0^0)^1^(2^2)^(3^3) = (0^2^3) ^ (0^1^2^3) 
+```
+
+因此便有如下代码
+
+```python
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        n = len(nums)
+        ans = n
+        for i in range(n):
+            ans ^= (i^nums[i])
+        return ans
+```
+* 时间复杂度：$O(n)$
+* 空间复杂度：$O(1)$
+
+# 面试题 01.01. 判定字符是否唯一
+
+```
+实现一个算法，确定一个字符串 s 的所有字符是否全都不同。
+
+示例 1：
+
+输入: s = "leetcode"
+输出: false 
+示例 2：
+
+输入: s = "abc"
+输出: true
+限制：
+
+0 <= len(s) <= 100
+如果你不使用额外的数据结构，会很加分。
+```
+
+## 思路
+
+基本思路如下
+
+1. 创建一个长度为26的array并初始为全0值，a-z 各自对应 0-25. 
+2. 遍历`astr`，对当前字符`char`在array中对应位置的元素加1。
+3. 在遍历过程中，如果array中有位置出现2，则说明出现了重复的值。否则无重复。
+
+如果我们用`0`表示一个字符尚未出现，`1`表示字符已经出现了，则上述操作可以全部使用 `位运算`完成。
+
+* `创建一个长度为26的array并初始为全0值`:  创建一个变量`seen`, 并初始为0。
+* `对当前字符char在array中对应位置的元素加1`： 计算当前字符`char`与`a`的距离为`d`, 利用 `seen | 1<<(d+1)`。
+* `如果array中有位置出现2`:  计算当前字符`char`与`a`的距离为`d`, 利用 `seen & 1<<(d+1) `。
+
+## 代码
+
+```python
+class Solution:
+    def isUnique(self, astr: str) -> bool:
+        seen = 0
+        origin = ord('a')
+        for char in astr:
+            d = ord(char) - origin + 1
+            temp = 1 << d
+            # 如果 返回 True, 则说明 char 已经出现过了
+            if seen & temp == temp:
+                return False
+            # 标记 char 为被发现
+            seen = seen | temp
+        return True
+```
+
+# 复杂度分析：
+* 时间复杂度：$O(n)$
+* 空间复杂度：$O(1)$
+
+
 # leetcode 78: 子集
 
 题目描述
