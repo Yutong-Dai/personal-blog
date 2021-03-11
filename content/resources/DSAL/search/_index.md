@@ -264,3 +264,76 @@ class Solution(object):
 * 时间： $O(n)$ 节点数
 * 空间：不算返回的答案的话 $O(\log_2(n))$ 栈深度
 
+
+# 301. 删除无效的括号
+
+```
+删除最小数量的无效括号，使得输入的字符串有效，返回所有可能的结果。
+
+说明: 输入可能包含了除 ( 和 ) 以外的字符。
+
+示例 1:
+
+输入: "()())()"
+输出: ["()()()", "(())()"]
+示例 2:
+
+输入: "(a)())()"
+输出: ["(a)()()", "(a())()"]
+示例 3:
+
+输入: ")("
+输出: [""]
+```
+
+## 思路
+
+[参考题解](https://leetcode-cn.com/problems/remove-invalid-parentheses/solution/bfsjian-dan-er-you-xiang-xi-de-pythonjiang-jie-by-/)
+BFS
+1. 每次从字符串中删除一个括号字符，并列举出所有可能的结果，用`set()`存储避免重复情况出现
+2. 判断列举出的所有结果是否有有效的字符串，如果有直接返回有效字符串
+3. 如果没有有效字符串，说明删除的字符还不够多，再删除一个括号字符，列举出所有可能的结果
+4. 继续判断列举出的所有结果中是否有有效字符，如果有直接返回有效字符串
+5. 一直循环以上`删除一个字符-->判断是否有有效字符串`的步骤，直到找到有效字符串为止
+
+## 代码
+
+```python
+class Solution(object):
+    def removeInvalidParentheses(self, s):
+        """
+        :type s: str
+        :rtype: List[str]
+        """
+        def isValid(string):
+            count = 0
+            for char in string:
+                if char == '(':
+                    count += 1
+                if char == ')':
+                    count -= 1
+                if count < 0:
+                    return False
+            if count>0:
+                return False
+            else:
+                return True
+        current_level = {s}
+        while True:
+            ans = filter(isValid, current_level)
+            if ans:
+                return ans
+            next_level = set()
+            for item in current_level:
+                for i in range(len(item)):
+                    if item[i] in '()':
+                        next_level.add(item[:i] + item[i+1:])
+            current_level = next_level
+```
+##  复杂度
+
+* 时间复杂度：$O(2^n)$
+* 空间复杂度：$O(n!)$
+
+
+

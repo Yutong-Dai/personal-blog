@@ -650,6 +650,11 @@
   </div>
   
   <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/knapsack/">Knapsack</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
     <a class="docs-toc-link" href="/resources/dsal/sliding-window/">sliding-window</a>
 
   </div>
@@ -687,6 +692,13 @@
         <li><a href="#代码-1">代码</a></li>
         <li><a href="#复杂度分析">复杂度分析</a></li>
         <li><a href="#代码的改进">代码的改进</a></li>
+      </ul>
+    </li>
+    <li><a href="#338-比特位计数">338. 比特位计数</a></li>
+    <li><a href="#思路-3">思路</a>
+      <ul>
+        <li><a href="#代码-2">代码</a></li>
+        <li><a href="#复杂度分析-1">复杂度分析</a></li>
       </ul>
     </li>
   </ul>
@@ -1085,7 +1097,72 @@ s: &quot;abab&quot; p: &quot;ab&quot;
         <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
 </code></pre></td></tr></table>
 </div>
+</div><h1 id="338-比特位计数">338. 比特位计数</h1>
+<pre><code>给定一个非负整数 num。对于 0 ≤ i ≤ num 范围中的每个数字 i ，计算其二进制数中的 1 的数目并将它们作为数组返回。
+
+示例 1:
+
+输入: 2
+输出: [0,1,1]
+示例 2:
+
+输入: 5
+输出: [0,1,1,2,1,2]
+进阶:
+
+给出时间复杂度为O(n*sizeof(integer))的解答非常容易。但你可以在线性时间O(n)内用一趟扫描做到吗？
+要求算法的空间复杂度为O(n)。
+你能进一步完善解法吗？要求在C++或任何其他语言中不使用任何内置函数（如 C++ 中的 __builtin_popcount）来执行此操作。
+</code></pre><h1 id="思路-3">思路</h1>
+<p>动态规划 + 位运算</p>
+<ol>
+<li><code>dp[i]</code>: 数字<code>i</code>中<code>1</code>的个数</li>
+<li>如果<code>i</code>是奇数，则<code>dp[i]=dp[i-1]+1</code>， 因为<code>i</code>的二进制表达中末尾一定是1恰好比<code>dp[i-1]</code>的二进制表达多出1个1</li>
+<li>如果<code>i</code>是偶数, 不难发现其二进制表达中末尾一定是0，因此去掉该0对最后结果没有影响。而<code>i&gt;&gt;1</code>一定比<code>i</code>小，而且我们已经计算过了。</li>
+</ol>
+<h2 id="代码-2">代码</h2>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>(<span style="color:#cb4b16">object</span>):
+    <span style="color:#859900">def</span> <span style="color:#268bd2">countBits</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">num</span>):
+        <span style="color:#2aa198">&#34;&#34;&#34;
+</span><span style="color:#2aa198">        :type num: int
+</span><span style="color:#2aa198">        :rtype: List[int]
+</span><span style="color:#2aa198">        &#34;&#34;&#34;</span>
+        <span style="color:#859900">if</span> <span style="color:#268bd2">num</span> == <span style="color:#2aa198;font-weight:bold">0</span>:
+            <span style="color:#859900">return</span> [<span style="color:#2aa198;font-weight:bold">0</span>]
+        <span style="color:#268bd2">dp</span> = [<span style="color:#2aa198;font-weight:bold">0</span>] * (<span style="color:#268bd2">num</span>+<span style="color:#2aa198;font-weight:bold">1</span>)
+        <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#2aa198;font-weight:bold">1</span>, <span style="color:#268bd2">num</span>+<span style="color:#2aa198;font-weight:bold">1</span>):
+            <span style="color:#859900">if</span> <span style="color:#268bd2">i</span> % <span style="color:#2aa198;font-weight:bold">2</span> == <span style="color:#2aa198;font-weight:bold">1</span>:
+                <span style="color:#268bd2">dp</span>[<span style="color:#268bd2">i</span>] = <span style="color:#268bd2">dp</span>[<span style="color:#268bd2">i</span>-<span style="color:#2aa198;font-weight:bold">1</span>] + <span style="color:#2aa198;font-weight:bold">1</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">i</span> % <span style="color:#2aa198;font-weight:bold">2</span> == <span style="color:#2aa198;font-weight:bold">0</span>:
+                <span style="color:#268bd2">dp</span>[<span style="color:#268bd2">i</span>] = <span style="color:#268bd2">dp</span>[<span style="color:#268bd2">i</span>&gt;&gt;<span style="color:#2aa198;font-weight:bold">1</span>]
+        <span style="color:#859900">return</span> <span style="color:#268bd2">dp</span>
+</code></pre></td></tr></table>
 </div>
+</div><h2 id="复杂度分析-1">复杂度分析</h2>
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：不算返回的数组的话应该是 O(1)</li>
+</ul>
+
           </div>
 
           
@@ -1105,7 +1182,7 @@ s: &quot;abab&quot; p: &quot;ab&quot;
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Jan 3, 2021</p>
+          <p>Last updated on Jan 17, 2021</p>
 
           
 

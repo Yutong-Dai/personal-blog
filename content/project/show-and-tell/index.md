@@ -35,4 +35,4 @@ The model is trained on the [MS coco2014 dataset](http://cocodataset.org/#home).
 ![](./caption-demo.png)
 
 
-For code, UI, and report  please click [here](https://github.com/Rothdyt/Projects/tree/master/Show-and-tell).
+For code, UI, and report  please click [here](https://github.com/Yutong-Dai/Projects/tree/master/Show-and-tell).

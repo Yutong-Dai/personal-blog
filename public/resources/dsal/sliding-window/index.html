@@ -649,6 +649,11 @@
 
   </div>
   
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/knapsack/">Knapsack</a>
+
+  </div>
+  
   <div class="docs-toc-item active">
     <a class="docs-toc-link" href="/resources/dsal/sliding-window/">sliding-window</a>
 
@@ -677,6 +682,18 @@
         <li><a href="#思路">思路</a></li>
         <li><a href="#代码">代码</a></li>
         <li><a href="#复杂度">复杂度</a></li>
+      </ul>
+    </li>
+    <li><a href="#1423-可获得的最大点数">1423. 可获得的最大点数</a>
+      <ul>
+        <li><a href="#思路-1">思路</a></li>
+        <li><a href="#代码-1">代码</a></li>
+      </ul>
+    </li>
+    <li><a href="#768-最多能完成排序的块-ii">768. 最多能完成排序的块 II</a>
+      <ul>
+        <li><a href="#思路-2">思路</a></li>
+        <li><a href="#代码-2">代码</a></li>
       </ul>
     </li>
   </ul>
@@ -794,6 +811,142 @@ s 由小写英文字母组成
 <li>时间复杂度：$O(n)$</li>
 <li>空间复杂度：$O(1)$</li>
 </ul>
+<h1 id="1423-可获得的最大点数">1423. 可获得的最大点数</h1>
+<pre><code>几张卡牌 排成一行，每张卡牌都有一个对应的点数。点数由整数数组 cardPoints 给出。
+
+每次行动，你可以从行的开头或者末尾拿一张卡牌，最终你必须正好拿 k 张卡牌。
+
+你的点数就是你拿到手中的所有卡牌的点数之和。
+
+给你一个整数数组 cardPoints 和整数 k，请你返回可以获得的最大点数。
+
+ 
+
+示例 1：
+
+输入：cardPoints = [1,2,3,4,5,6,1], k = 3
+输出：12
+解释：第一次行动，不管拿哪张牌，你的点数总是 1 。但是，先拿最右边的卡牌将会最大化你的可获得点数。最优策略是拿右边的三张牌，最终点数为 1 + 6 + 5 = 12 。
+示例 2：
+
+输入：cardPoints = [2,2,2], k = 2
+输出：4
+解释：无论你拿起哪两张卡牌，可获得的点数总是 4 。
+示例 3：
+
+输入：cardPoints = [9,7,7,9,7,7,9], k = 7
+输出：55
+解释：你必须拿起所有卡牌，可以获得的点数为所有卡牌的点数之和。
+示例 4：
+
+输入：cardPoints = [1,1000,1], k = 1
+输出：1
+解释：你无法拿到中间那张卡牌，所以可以获得的最大点数为 1 。 
+示例 5：
+
+输入：cardPoints = [1,79,80,1,1,1,200,1], k = 3
+输出：202
+ 
+
+提示：
+
+1 &lt;= cardPoints.length &lt;= 10^5
+1 &lt;= cardPoints[i] &lt;= 10^4
+1 &lt;= k &lt;= cardPoints.length
+</code></pre><h2 id="思路-1">思路</h2>
+<ol>
+<li>假设卡片是首位相连的。</li>
+<li>找到一个窗口大小是k的滑动窗口，使得窗口内数字和最大。</li>
+</ol>
+<p>为了满足抽卡的规则, 初始化<code>left=0, right=k-1</code>。然后不停将<code>left</code>向左滑动<code>left = n-i</code>， <code>i</code>是滑动的次数。
+根据题意，最多可以滑动<code>k</code> 次。</p>
+<h2 id="代码-1">代码</h2>
+<pre><code>class Solution:
+    def maxScore(self, cardPoints: List[int], k: int) -&gt; int:
+        n = len(cardPoints)
+        windowSum = 0
+        for i in range(k):
+            windowSum += cardPoints[i]
+        ans = windowSum
+        for i in range(k):
+            windowSum = windowSum-cardPoints[k-1-i] + cardPoints[n-1-i]
+            ans = max(windowSum, ans)
+        return ans
+</code></pre><h1 id="768-最多能完成排序的块-ii">768. 最多能完成排序的块 II</h1>
+<pre><code>这个问题和“最多能完成排序的块”相似，但给定数组中的元素可以重复，输入数组最大长度为2000，其中的元素最大为10**8。
+
+arr是一个可能包含重复元素的整数数组，我们将这个数组分割成几个“块”，并将这些块分别进行排序。之后再连接起来，使得连接的结果和按升序排序后的原数组相同。
+
+我们最多能将数组分成多少块？
+
+示例 1:
+
+输入: arr = [5,4,3,2,1]
+输出: 1
+解释:
+将数组分成2块或者更多块，都无法得到所需的结果。
+例如，分成 [5, 4], [3, 2, 1] 的结果是 [4, 5, 1, 2, 3]，这不是有序的数组。 
+示例 2:
+
+输入: arr = [2,1,3,4,4]
+输出: 4
+解释:
+我们可以把它分成两块，例如 [2, 1], [3, 4, 4]。
+然而，分成 [2, 1], [3], [4], [4] 可以得到最多的块数。 
+注意:
+
+arr的长度在[1, 2000]之间。
+arr[i]的大小在[0, 10**8]之间。
+</code></pre><h2 id="思路-2">思路</h2>
+<ol>
+<li>根据题意不难发现，我们分割成的块需要满足：第<code>k-1</code>一块的的最大元素小于等于第<code>k</code>块最小的元素。</li>
+<li>存下每块最大元素，并统计存下元素个数，则为答案。</li>
+</ol>
+<p>如何统计第<code>k</code>块的最大元素？ 利用单调栈的思想，稍微做点变形。遍历数组，</p>
+<ol>
+<li>如果当前元素<code>element</code>大于等于栈顶元素，则直接入栈。</li>
+<li>如果当前元素<code>element</code>小于栈顶元素，则记录下栈顶元素<code>topMax</code>（当前栈的最大元素）并将其推出。持续推出栈顶元素，直到<code>element</code>不小于当前栈顶元素，重新将<code>topMax</code>入栈。</li>
+</ol>
+<p>
+<a href="https://lucifer.ren/blog/2020/11/03/monotone-stack/" target="_blank" rel="noopener">单调栈</a>.</p>
+<h2 id="代码-2">代码</h2>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>:
+    <span style="color:#859900">def</span> <span style="color:#268bd2">maxChunksToSorted</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">arr</span>: <span style="color:#268bd2">List</span>[<span style="color:#cb4b16">int</span>]) -&gt; <span style="color:#cb4b16">int</span>:
+        <span style="color:#268bd2">monotoneStack</span> = [<span style="color:#268bd2">arr</span>[<span style="color:#2aa198;font-weight:bold">0</span>]]
+        <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#2aa198;font-weight:bold">1</span>,<span style="color:#cb4b16">len</span>(<span style="color:#268bd2">arr</span>)):
+            <span style="color:#268bd2">element</span> = <span style="color:#268bd2">arr</span>[<span style="color:#268bd2">i</span>]
+            <span style="color:#859900">if</span> <span style="color:#268bd2">element</span> &gt;= <span style="color:#268bd2">monotoneStack</span>[-<span style="color:#2aa198;font-weight:bold">1</span>]:
+                <span style="color:#268bd2">monotoneStack</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">element</span>)
+            <span style="color:#859900">else</span>:
+                <span style="color:#268bd2">topMax</span> = <span style="color:#268bd2">monotoneStack</span>[-<span style="color:#2aa198;font-weight:bold">1</span>]
+                <span style="color:#859900">while</span> <span style="color:#268bd2">monotoneStack</span> <span style="color:#859900">and</span> <span style="color:#268bd2">element</span> &lt; <span style="color:#268bd2">monotoneStack</span>[-<span style="color:#2aa198;font-weight:bold">1</span>]:
+                    <span style="color:#268bd2">monotoneStack</span>.<span style="color:#268bd2">pop</span>(-<span style="color:#2aa198;font-weight:bold">1</span>)
+                <span style="color:#268bd2">monotoneStack</span>.<span style="color:#268bd2">append</span>(<span style="color:#268bd2">topMax</span>)
+        <span style="color:#859900">return</span> <span style="color:#cb4b16">len</span>(<span style="color:#268bd2">monotoneStack</span>)
+</code></pre></td></tr></table>
+</div>
+</div><p>复杂度分析</p>
+<ul>
+<li>时间复杂度：$O(n)$</li>
+<li>空间复杂度：$O(n)$</li>
+</ul>
 
           </div>
 
@@ -814,7 +967,7 @@ s 由小写英文字母组成
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Dec 14, 2020</p>
+          <p>Last updated on Jan 17, 2021</p>
 
           
 

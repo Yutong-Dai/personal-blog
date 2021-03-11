@@ -650,6 +650,11 @@
   </div>
   
   <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/resources/dsal/knapsack/">Knapsack</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
     <a class="docs-toc-link" href="/resources/dsal/sliding-window/">sliding-window</a>
 
   </div>
@@ -691,6 +696,13 @@
         <li><a href="#思路-2">思路</a></li>
         <li><a href="#代码-2">代码</a></li>
         <li><a href="#复杂度-2">复杂度</a></li>
+      </ul>
+    </li>
+    <li><a href="#301-删除无效的括号">301. 删除无效的括号</a>
+      <ul>
+        <li><a href="#思路-3">思路</a></li>
+        <li><a href="#代码-3">代码</a></li>
+        <li><a href="#复杂度-3">复杂度</a></li>
       </ul>
     </li>
   </ul>
@@ -1052,6 +1064,106 @@ grid[i][j] 不是 0 就是 1
 <li>时间： $O(n)$ 节点数</li>
 <li>空间：不算返回的答案的话 $O(\log_2(n))$ 栈深度</li>
 </ul>
+<h1 id="301-删除无效的括号">301. 删除无效的括号</h1>
+<pre><code>删除最小数量的无效括号，使得输入的字符串有效，返回所有可能的结果。
+
+说明: 输入可能包含了除 ( 和 ) 以外的字符。
+
+示例 1:
+
+输入: &quot;()())()&quot;
+输出: [&quot;()()()&quot;, &quot;(())()&quot;]
+示例 2:
+
+输入: &quot;(a)())()&quot;
+输出: [&quot;(a)()()&quot;, &quot;(a())()&quot;]
+示例 3:
+
+输入: &quot;)(&quot;
+输出: [&quot;&quot;]
+</code></pre><h2 id="思路-3">思路</h2>
+<p>
+<a href="https://leetcode-cn.com/problems/remove-invalid-parentheses/solution/bfsjian-dan-er-you-xiang-xi-de-pythonjiang-jie-by-/" target="_blank" rel="noopener">参考题解</a>
+BFS</p>
+<ol>
+<li>每次从字符串中删除一个括号字符，并列举出所有可能的结果，用<code>set()</code>存储避免重复情况出现</li>
+<li>判断列举出的所有结果是否有有效的字符串，如果有直接返回有效字符串</li>
+<li>如果没有有效字符串，说明删除的字符还不够多，再删除一个括号字符，列举出所有可能的结果</li>
+<li>继续判断列举出的所有结果中是否有有效字符，如果有直接返回有效字符串</li>
+<li>一直循环以上<code>删除一个字符--&gt;判断是否有有效字符串</code>的步骤，直到找到有效字符串为止</li>
+</ol>
+<h2 id="代码-3">代码</h2>
+<div class="highlight"><div style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#859900">class</span> <span style="color:#cb4b16">Solution</span>(<span style="color:#cb4b16">object</span>):
+    <span style="color:#859900">def</span> <span style="color:#268bd2">removeInvalidParentheses</span>(<span style="color:#268bd2">self</span>, <span style="color:#268bd2">s</span>):
+        <span style="color:#2aa198">&#34;&#34;&#34;
+</span><span style="color:#2aa198">        :type s: str
+</span><span style="color:#2aa198">        :rtype: List[str]
+</span><span style="color:#2aa198">        &#34;&#34;&#34;</span>
+        <span style="color:#859900">def</span> <span style="color:#268bd2">isValid</span>(<span style="color:#268bd2">string</span>):
+            <span style="color:#268bd2">count</span> = <span style="color:#2aa198;font-weight:bold">0</span>
+            <span style="color:#859900">for</span> <span style="color:#268bd2">char</span> <span style="color:#859900">in</span> <span style="color:#268bd2">string</span>:
+                <span style="color:#859900">if</span> <span style="color:#268bd2">char</span> == <span style="color:#2aa198">&#39;(&#39;</span>:
+                    <span style="color:#268bd2">count</span> += <span style="color:#2aa198;font-weight:bold">1</span>
+                <span style="color:#859900">if</span> <span style="color:#268bd2">char</span> == <span style="color:#2aa198">&#39;)&#39;</span>:
+                    <span style="color:#268bd2">count</span> -= <span style="color:#2aa198;font-weight:bold">1</span>
+                <span style="color:#859900">if</span> <span style="color:#268bd2">count</span> &lt; <span style="color:#2aa198;font-weight:bold">0</span>:
+                    <span style="color:#859900">return</span> <span style="color:#268bd2">False</span>
+            <span style="color:#859900">if</span> <span style="color:#268bd2">count</span>&gt;<span style="color:#2aa198;font-weight:bold">0</span>:
+                <span style="color:#859900">return</span> <span style="color:#268bd2">False</span>
+            <span style="color:#859900">else</span>:
+                <span style="color:#859900">return</span> <span style="color:#268bd2">True</span>
+        <span style="color:#268bd2">current_level</span> = {<span style="color:#268bd2">s</span>}
+        <span style="color:#859900">while</span> <span style="color:#268bd2">True</span>:
+            <span style="color:#268bd2">ans</span> = <span style="color:#cb4b16">filter</span>(<span style="color:#268bd2">isValid</span>, <span style="color:#268bd2">current_level</span>)
+            <span style="color:#859900">if</span> <span style="color:#268bd2">ans</span>:
+                <span style="color:#859900">return</span> <span style="color:#268bd2">ans</span>
+            <span style="color:#268bd2">next_level</span> = <span style="color:#cb4b16">set</span>()
+            <span style="color:#859900">for</span> <span style="color:#268bd2">item</span> <span style="color:#859900">in</span> <span style="color:#268bd2">current_level</span>:
+                <span style="color:#859900">for</span> <span style="color:#268bd2">i</span> <span style="color:#859900">in</span> <span style="color:#cb4b16">range</span>(<span style="color:#cb4b16">len</span>(<span style="color:#268bd2">item</span>)):
+                    <span style="color:#859900">if</span> <span style="color:#268bd2">item</span>[<span style="color:#268bd2">i</span>] <span style="color:#859900">in</span> <span style="color:#2aa198">&#39;()&#39;</span>:
+                        <span style="color:#268bd2">next_level</span>.<span style="color:#268bd2">add</span>(<span style="color:#268bd2">item</span>[:<span style="color:#268bd2">i</span>] + <span style="color:#268bd2">item</span>[<span style="color:#268bd2">i</span>+<span style="color:#2aa198;font-weight:bold">1</span>:])
+            <span style="color:#268bd2">current_level</span> = <span style="color:#268bd2">next_level</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="复杂度-3">复杂度</h2>
+<ul>
+<li>时间复杂度：$O(2^n)$</li>
+<li>空间复杂度：$O(n!)$</li>
+</ul>
 
           </div>
 
@@ -1072,7 +1184,7 @@ grid[i][j] 不是 0 就是 1
         </div>
 
         <div class="body-footer">
-          <p>Last updated on Dec 14, 2020</p>
+          <p>Last updated on Jan 17, 2021</p>
 
           
 

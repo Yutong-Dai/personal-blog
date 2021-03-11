@@ -27,3 +27,8 @@ find . -name '*news20*' -delete
 ```bash
 ls -l --block-size=M
 ```
+
+```bash
+# show the disk usage of each directories under the path [dir]
+du -h --max-depth=1 [dir]
+```

@@ -94,3 +94,139 @@ class Solution:
 
 * 时间复杂度：$O(n)$
 * 空间复杂度：$O(1)$
+
+
+# 1423. 可获得的最大点数
+
+```
+几张卡牌 排成一行，每张卡牌都有一个对应的点数。点数由整数数组 cardPoints 给出。
+
+每次行动，你可以从行的开头或者末尾拿一张卡牌，最终你必须正好拿 k 张卡牌。
+
+你的点数就是你拿到手中的所有卡牌的点数之和。
+
+给你一个整数数组 cardPoints 和整数 k，请你返回可以获得的最大点数。
+
+ 
+
+示例 1：
+
+输入：cardPoints = [1,2,3,4,5,6,1], k = 3
+输出：12
+解释：第一次行动，不管拿哪张牌，你的点数总是 1 。但是，先拿最右边的卡牌将会最大化你的可获得点数。最优策略是拿右边的三张牌，最终点数为 1 + 6 + 5 = 12 。
+示例 2：
+
+输入：cardPoints = [2,2,2], k = 2
+输出：4
+解释：无论你拿起哪两张卡牌，可获得的点数总是 4 。
+示例 3：
+
+输入：cardPoints = [9,7,7,9,7,7,9], k = 7
+输出：55
+解释：你必须拿起所有卡牌，可以获得的点数为所有卡牌的点数之和。
+示例 4：
+
+输入：cardPoints = [1,1000,1], k = 1
+输出：1
+解释：你无法拿到中间那张卡牌，所以可以获得的最大点数为 1 。 
+示例 5：
+
+输入：cardPoints = [1,79,80,1,1,1,200,1], k = 3
+输出：202
+ 
+
+提示：
+
+1 <= cardPoints.length <= 10^5
+1 <= cardPoints[i] <= 10^4
+1 <= k <= cardPoints.length
+```
+
+## 思路
+
+1. 假设卡片是首位相连的。
+2. 找到一个窗口大小是k的滑动窗口，使得窗口内数字和最大。
+
+为了满足抽卡的规则, 初始化`left=0, right=k-1`。然后不停将`left`向左滑动`left = n-i`， `i`是滑动的次数。
+根据题意，最多可以滑动`k` 次。
+
+## 代码
+
+```
+class Solution:
+    def maxScore(self, cardPoints: List[int], k: int) -> int:
+        n = len(cardPoints)
+        windowSum = 0
+        for i in range(k):
+            windowSum += cardPoints[i]
+        ans = windowSum
+        for i in range(k):
+            windowSum = windowSum-cardPoints[k-1-i] + cardPoints[n-1-i]
+            ans = max(windowSum, ans)
+        return ans
+```        
+        
+        
+# 768. 最多能完成排序的块 II
+
+```
+这个问题和“最多能完成排序的块”相似，但给定数组中的元素可以重复，输入数组最大长度为2000，其中的元素最大为10**8。
+
+arr是一个可能包含重复元素的整数数组，我们将这个数组分割成几个“块”，并将这些块分别进行排序。之后再连接起来，使得连接的结果和按升序排序后的原数组相同。
+
+我们最多能将数组分成多少块？
+
+示例 1:
+
+输入: arr = [5,4,3,2,1]
+输出: 1
+解释:
+将数组分成2块或者更多块，都无法得到所需的结果。
+例如，分成 [5, 4], [3, 2, 1] 的结果是 [4, 5, 1, 2, 3]，这不是有序的数组。 
+示例 2:
+
+输入: arr = [2,1,3,4,4]
+输出: 4
+解释:
+我们可以把它分成两块，例如 [2, 1], [3, 4, 4]。
+然而，分成 [2, 1], [3], [4], [4] 可以得到最多的块数。 
+注意:
+
+arr的长度在[1, 2000]之间。
+arr[i]的大小在[0, 10**8]之间。
+```
+
+## 思路
+
+1. 根据题意不难发现，我们分割成的块需要满足：第`k-1`一块的的最大元素小于等于第`k`块最小的元素。
+2. 存下每块最大元素，并统计存下元素个数，则为答案。
+
+如何统计第`k`块的最大元素？ 利用单调栈的思想，稍微做点变形。遍历数组，
+
+1. 如果当前元素`element`大于等于栈顶元素，则直接入栈。
+2. 如果当前元素`element`小于栈顶元素，则记录下栈顶元素`topMax`（当前栈的最大元素）并将其推出。持续推出栈顶元素，直到`element`不小于当前栈顶元素，重新将`topMax`入栈。
+
+[单调栈](https://lucifer.ren/blog/2020/11/03/monotone-stack/).
+
+## 代码
+
+```python
+class Solution:
+    def maxChunksToSorted(self, arr: List[int]) -> int:
+        monotoneStack = [arr[0]]
+        for i in range(1,len(arr)):
+            element = arr[i]
+            if element >= monotoneStack[-1]:
+                monotoneStack.append(element)
+            else:
+                topMax = monotoneStack[-1]
+                while monotoneStack and element < monotoneStack[-1]:
+                    monotoneStack.pop(-1)
+                monotoneStack.append(topMax)
+        return len(monotoneStack)
+```
+
+复杂度分析
+
+* 时间复杂度：$O(n)$
+* 空间复杂度：$O(n)$        

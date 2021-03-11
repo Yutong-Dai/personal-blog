@@ -43,6 +43,6 @@ Our final result looks like
 
 ![](./imageclef.jpg)
 
-For code and report please click [here](https://github.com/Rothdyt/Projects/tree/master/Show-and-tell).
+For code and report please click [here](https://github.com/Yutong-Dai/Projects/tree/master/Variational_Bayes).
 
 
