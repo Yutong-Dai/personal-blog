@@ -59,7 +59,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
@@ -68,8 +68,33 @@
   </url>
   
   <url>
+    <loc>/categories/</loc>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/lp/</loc>
+    <lastmod>2020-03-28T17:23:58-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tag/linear-programming/</loc>
+    <lastmod>2020-03-28T17:23:58-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/category/optimization/</loc>
+    <lastmod>2020-08-03T23:29:36-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/resources/dsal/knapsack/</loc>
-    <lastmod>2021-01-20T00:00:00+00:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
@@ -79,17 +104,17 @@
   
   <url>
     <loc>/resources/dsal/dp/</loc>
-    <lastmod>2021-01-17T13:02:28-05:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
     <loc>/resources/dsal/search/</loc>
-    <lastmod>2021-01-17T13:02:28-05:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
     <loc>/resources/dsal/sliding-window/</loc>
-    <lastmod>2021-01-17T13:02:28-05:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
@@ -129,17 +154,12 @@
   
   <url>
     <loc>/post/bash-commands-collection/</loc>
-    <lastmod>2020-08-06T15:14:02-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2021-01-17T13:02:28-05:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
     <loc>/category/shell/</loc>
-    <lastmod>2020-08-06T15:14:02-04:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
@@ -154,7 +174,7 @@
   
   <url>
     <loc>/authors/</loc>
-    <lastmod>2020-08-03T23:29:36-04:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
@@ -193,11 +213,6 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2021-01-17T13:02:28-05:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/author/yutong-dai/</loc>
     <lastmod>2020-08-03T23:29:36-04:00</lastmod>
   </url>
@@ -215,21 +230,6 @@
   <url>
     <loc>/post/python-tricks-learned-from-projects/</loc>
     <lastmod>2021-01-17T13:02:28-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/lp/</loc>
-    <lastmod>2020-03-28T17:23:58-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tag/linear-programming/</loc>
-    <lastmod>2020-03-28T17:23:58-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/category/optimization/</loc>
-    <lastmod>2020-08-03T23:29:36-04:00</lastmod>
   </url>
   
   <url>
@@ -294,7 +294,7 @@
   
   <url>
     <loc>/tag/data-analysis/</loc>
-    <lastmod>2020-08-03T23:29:36-04:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
@@ -329,22 +329,22 @@
   
   <url>
     <loc>/tag/cnn/</loc>
-    <lastmod>2019-06-02T00:43:22+08:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
     <loc>/tag/deep-learning/</loc>
-    <lastmod>2019-06-02T00:43:22+08:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
     <loc>/tag/lstm/</loc>
-    <lastmod>2019-06-02T00:43:22+08:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
     <loc>/project/</loc>
-    <lastmod>2019-06-02T00:43:22+08:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
@@ -354,12 +354,12 @@
   
   <url>
     <loc>/project/show-and-tell/</loc>
-    <lastmod>2019-06-02T00:43:22+08:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
     <loc>/project/variational-inference/</loc>
-    <lastmod>2019-06-02T00:43:22+08:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>
@@ -374,7 +374,7 @@
   
   <url>
     <loc>/author/</loc>
-    <lastmod>2020-07-30T00:04:32-04:00</lastmod>
+    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
   </url>
   
   <url>

@@ -11,6 +11,7 @@ output:
   blogdown::html_page:
     toc: yes
 summary: "Convergence analysis of Block coordinate decent with exact minimization."
+draft: true
 ---
 
 We mainly focus on the convergence  of Block coordinate decent with exact minimization, whose block update strategy employs Gauss-Seidel manner.  And then use Powell's example to see what will happen if some conditions are not met.

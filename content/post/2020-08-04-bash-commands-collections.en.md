@@ -11,6 +11,7 @@ summary: ''
 authors: []
 lastmod: '2020-08-04T11:51:43-04:00'
 toc: true
+draft: true
 ---
 
 ### Find files with specific patterns
@@ -31,4 +32,12 @@ ls -l --block-size=M
 ```bash
 # show the disk usage of each directories under the path [dir]
 du -h --max-depth=1 [dir]
+```
+
+### pbs tricks
+
+```bash
+# delete all jobs on sever
+qselect -u <username> | xargs qdel
+qstat -u <username> | wc -l
 ```

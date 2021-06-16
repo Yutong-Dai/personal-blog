@@ -51,6 +51,19 @@ find . -name &lt;span style=&#34;color:#2aa198&#34;&gt;&amp;#39;*news20*&amp;#39
 du -h --max-depth=&lt;span style=&#34;color:#2aa198;font-weight:bold&#34;&gt;1&lt;/span&gt; [dir]
 &lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;pbs-tricks&#34;&gt;pbs tricks&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre style=&#34;color:#586e75;background-color:#eee8d5;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#93a1a1;font-style:italic&#34;&gt;# delete all jobs on sever&lt;/span&gt;
+qselect -u &amp;lt;username&amp;gt; | xargs qdel
+qstat -u &amp;lt;username&amp;gt; | wc -l
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
     
