@@ -58,8 +58,16 @@
   </url>
   
   <url>
+    <loc>/resources/software/libsvmdata-downloader/</loc>
+  </url>
+  
+  <url>
+    <loc>/resources/software/</loc>
+  </url>
+  
+  <url>
     <loc>/</loc>
-    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
+    <lastmod>2021-06-16T00:13:48-04:00</lastmod>
   </url>
   
   <url>
@@ -69,27 +77,27 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
+    <lastmod>2021-06-16T00:13:48-04:00</lastmod>
   </url>
   
   <url>
     <loc>/post/lp/</loc>
-    <lastmod>2020-03-28T17:23:58-04:00</lastmod>
+    <lastmod>2021-06-16T00:13:48-04:00</lastmod>
   </url>
   
   <url>
     <loc>/tag/linear-programming/</loc>
-    <lastmod>2020-03-28T17:23:58-04:00</lastmod>
+    <lastmod>2021-06-16T00:13:48-04:00</lastmod>
   </url>
   
   <url>
     <loc>/category/optimization/</loc>
-    <lastmod>2020-08-03T23:29:36-04:00</lastmod>
+    <lastmod>2021-06-16T00:13:48-04:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
+    <lastmod>2021-06-16T00:13:48-04:00</lastmod>
   </url>
   
   <url>
@@ -154,12 +162,12 @@
   
   <url>
     <loc>/post/bash-commands-collection/</loc>
-    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
+    <lastmod>2021-06-16T00:13:48-04:00</lastmod>
   </url>
   
   <url>
     <loc>/category/shell/</loc>
-    <lastmod>2021-03-10T21:44:08-05:00</lastmod>
+    <lastmod>2021-06-16T00:13:48-04:00</lastmod>
   </url>
   
   <url>
@@ -364,12 +372,12 @@
   
   <url>
     <loc>/post/convergence-analysis-for-block-coordinate-descent-algorithm-and-powells-examples/</loc>
-    <lastmod>2020-08-03T23:29:36-04:00</lastmod>
+    <lastmod>2021-06-16T00:13:48-04:00</lastmod>
   </url>
   
   <url>
     <loc>/tag/powell-example/</loc>
-    <lastmod>2020-08-03T23:29:36-04:00</lastmod>
+    <lastmod>2021-06-16T00:13:48-04:00</lastmod>
   </url>
   
   <url>
