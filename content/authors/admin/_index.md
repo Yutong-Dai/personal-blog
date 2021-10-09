@@ -21,7 +21,10 @@ organizations:
 bio: My research interests lie at the intersection of statistical modeling and optimization.
 
 interests:
+  - General nonlinear optimization algorithms
   - Optimization in Machine Learning 
+  - Adversarial Machine Learning
+  - Federated Learning
 
 education:
   courses:
@@ -72,4 +75,4 @@ email: ""
 
 Yutong is a Ph.D. student in the [Department of Industrial and Systems Engineering](https://engineering.lehigh.edu/ise) at Lehigh University, working under the supervision of Professor [Daniel P. Robinson](https://coral.ise.lehigh.edu/danielprobinson/).
 
-His current research focus on designing and analyzing algorithms for large scale convex non-smooth optimization problems arisen in machine learning.
+His current research focuses on 1) designing, analyzing and implementing algorithms for large scale non-convex non-smooth optimization problems arisen in machine learning and federated learning; 2) making machine learning and deep learning algorithms secure, private, and robust.

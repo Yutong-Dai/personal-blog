@@ -5,12 +5,20 @@
     <link>/publication-type/3/</link>
       <atom:link href="/publication-type/3/index.xml" rel="self" type="application/rss+xml" />
     <description>3</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021</copyright><lastBuildDate>Wed, 01 Jul 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021</copyright><lastBuildDate>Mon, 13 Sep 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_hu0b7a4cb9992c9ac0e91bd28ffd38dd00_9727_512x512_fill_lanczos_center_2.png</url>
       <title>3</title>
       <link>/publication-type/3/</link>
     </image>
+    
+    <item>
+      <title>Local-Global Knowledge Distillation in Heterogeneous Federated Learning with Non-IID Data</title>
+      <link>/publication/fedgkd/</link>
+      <pubDate>Mon, 13 Sep 2021 00:00:00 +0000</pubDate>
+      <guid>/publication/fedgkd/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>A Subspace Acceleration Method for Minimization Involving a Group Sparsity-Inducing Regularizer</title>
