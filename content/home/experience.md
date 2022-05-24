@@ -18,12 +18,20 @@ date_format = "Jan 2006"
 #   Leave `date_end` empty if it's your current employer.
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 [[experience]]
+  title = "Research Intern"
+  company = "Salesforce"
+  company_url = "https://www.salesforceairesearch.com"
+  location = "Palo Alto, CA"
+  date_start = "2022-05-31"
+  date_end = "2022-08-16"
+  description = ""
+[[experience]]
   title = "Data Scientists Intern"
   company = "Bud Analytic Lab of Anheuser-Busch InBev"
   company_url = "www.ab-inbev.com/"
   location = "Urbana, IL"
   date_start = "2018-01-18"
   date_end = "2019-05-11"
-  description = "Leverage the power of the machine learning algorithms and domain knowledge to support global agronomist teams manage Barley in a smart way."
-
+  description = ""
+  # Leverage the power of the machine learning algorithms and domain knowledge to support global agronomist teams manage Barley in a smart way.
 +++
