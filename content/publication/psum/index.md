@@ -14,8 +14,8 @@ date: "2019-04-01"
 publication_types: ["2"]
 
 # Publication name and optional abbreviated publication name.
-publication: "In *Journal of Systems Science and Complexity*, JSSC."
-publication_short: ""
+publication: "*Journal of Systems Science and Complexity*."
+publication_short: "JSSC"
 
 abstract: "In this paper, we propose a synchronous parallel block coordinate descent algorithm(PSUM) for minimizing a composite function, which consists of a smooth convex function plus a non-smooth but separable convex function. Due to the generalization of our method, some existing synchronous parallel algorithms can be considered as special cases. To tackle high dimensional problems, we further develop a randomized variant, which randomly update some blocks of coordinates at each round of computation. Both proposed parallel algorithms are proven to have sub-linear convergence rate under rather mild assumptions. The numerical experiments on solving the large scale regularized logistic regression with $l_1$ norm penalty show that the implementation is quite efficient. We conclude with explanation on the observed experimental results and discussion on the potential improvements."
 
