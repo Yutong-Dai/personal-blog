@@ -10,7 +10,7 @@ authors:
 superuser: true
 
 # Role/position
-role: Ph.D. student
+role: Ph.D. Candidate
 
 # Organizations/Affiliations
 organizations:
@@ -22,9 +22,10 @@ bio: My research interests lie at the intersection of statistical modeling and o
 
 interests:
   - Nonsmooth Optimizaiton with Structured Sparsity
+  - Federated Learning
   - Optimization in Machine Learning 
   - Adversarial Machine Learning
-  - Federated Learning
+  
 
 education:
   courses:

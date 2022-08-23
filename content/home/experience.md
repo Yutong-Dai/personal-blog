@@ -23,7 +23,7 @@ date_format = "Jan 2006"
   company_url = "https://www.salesforceairesearch.com"
   location = "Palo Alto, CA"
   date_start = "2022-05-31"
-  date_end = "2022-08-16"
+  date_end = "2022-08-19"
   description = ""
 [[experience]]
   title = "Data Scientists Intern"
