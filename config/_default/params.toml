@@ -89,7 +89,7 @@ show_related = {docs = true, page = false, post = true, project = true, publicat
 
 # Enter contact details (optional). To hide a field, clear it to "".
 email = "yud319@lehigh.edu"
-phone = "217.721.9646"
+phone = ""
 
 # Address
 # For country_code, use the 2-letter ISO code (see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 )
@@ -103,7 +103,8 @@ coordinates = {latitude = "40.607703", longitude = "-75.381400"}
 
 # Office hours
 # A list of your office hours. To remove, set to an empty list `[]`.
-office_hours = ["TBD", ""]
+#office_hours = ["TBD", ""]
+office_hours = []
 
 # Enter an optional link for booking appointments (e.g. calendly.com).
 # appointment_url = "https://calendly.com"

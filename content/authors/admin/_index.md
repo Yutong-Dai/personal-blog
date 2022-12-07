@@ -24,7 +24,7 @@ interests:
   - Nonsmooth Optimizaiton with Structured Sparsity
   - Federated Learning
   - Optimization in Machine Learning 
-  - Adversarial Machine Learning
+  # - Adversarial Machine Learning
   
 
 education:

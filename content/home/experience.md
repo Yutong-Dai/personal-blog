@@ -26,7 +26,7 @@ date_format = "Jan 2006"
   date_end = "2022-08-19"
   description = ""
 [[experience]]
-  title = "Data Scientists Intern"
+  title = "Data Scientist Intern"
   company = "Bud Analytic Lab of Anheuser-Busch InBev"
   company_url = "www.ab-inbev.com/"
   location = "Urbana, IL"
