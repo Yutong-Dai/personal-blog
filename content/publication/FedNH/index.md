@@ -1,5 +1,5 @@
 ---
-title: "Tackling Data Heterogeneity in Federated Learning with Class Prototypes"
+title: "Tackling Data Heterogeneity in Federated Learning with Class Prototypes (AAAI2023)"
 
 authors:
 - Yutong Dai

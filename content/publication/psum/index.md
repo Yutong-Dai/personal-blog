@@ -1,5 +1,5 @@
 ---
-title: "Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization"
+title: "Synchronous Parallel Block Coordinate Descent Method for Nonsmooth Convex Function Minimization (JSSC, 2019)"
 
 authors:
 - Yutong Dai

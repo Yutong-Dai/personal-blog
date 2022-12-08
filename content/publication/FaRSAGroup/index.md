@@ -1,5 +1,5 @@
 ---
-title: "A Subspace Acceleration Method for Minimization Involving a Group Sparsity-Inducing Regularizer"
+title: "A Subspace Acceleration Method for Minimization Involving a Group Sparsity-Inducing Regularizer. (SIOPT, 2022)"
 
 authors:
 - Frank E. Curtis

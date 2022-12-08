@@ -24,14 +24,14 @@ date_format = "Jan 2006"
   location = "Palo Alto, CA"
   date_start = "2022-05-31"
   date_end = "2022-08-19"
-  description = ""
+  description = "Conduct research on federated learning focusing on data heterogeneity with class imbalance. The work was accepted by AAAI2023."
 [[experience]]
   title = "Data Scientist Intern"
   company = "Bud Analytic Lab of Anheuser-Busch InBev"
-  company_url = "www.ab-inbev.com/"
+  company_url = "https://www.ab-inbev.com"
   location = "Urbana, IL"
   date_start = "2018-01-18"
   date_end = "2019-05-11"
-  description = ""
-  # Leverage the power of the machine learning algorithms and domain knowledge to support global agronomist teams manage Barley in a smart way.
+  description = "Leverage the power of the machine learning algorithms and domain knowledge to support global agronomist teams manage Barley in a data-driven way."
+  # 
 +++
