@@ -33,7 +33,7 @@ featured: true
 # url_code: ""
 url_pdf: ""
 url_slides: "main.pdf"
-url_video: ""
+url_video: "informs2020_FaRSAGroup.mp4"
 
 # Markdown Slides (optional).
 #   Associate this talk with Markdown slides.
