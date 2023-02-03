@@ -11,7 +11,7 @@ subtitle = ""
 
 1. Reviewer: 
   * Conferences: AISTATS2023
-  * Journals: Journal of Scientific Computing
+  * Journals: Journal of Scientific Computing, Optimization Letters
 2. Teaching Assistant: 
   * [ISE 417 Nonlinear Optimization](https://coral.ise.lehigh.edu/danielprobinson/teaching/ise-417/): Spring 2021, Spring 2022 ([`course code`](https://github.com/daniel-p-robinson/nonlinear-optimization-course))
 

@@ -21,7 +21,7 @@ organizations:
 bio: My research interests lie at the intersection of machine learning and optimization.
 
 interests:
-  - Nonsmooth Optimizaiton with Structured Sparsity
+  - Nonsmooth Optimization with Structured Sparsity
   - Federated Learning
   - Optimization in Machine Learning 
   # - Adversarial Machine Learning
@@ -29,7 +29,7 @@ interests:
 
 education:
   courses:
-  - course: Ph.D. in Industrail & Systems Engineering
+  - course: Ph.D. in Industrial & Systems Engineering
     institution: Lehigh University
     year: December, 2023 (expected)
   - course: M.S. in Statistics
