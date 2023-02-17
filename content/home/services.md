@@ -12,6 +12,10 @@ subtitle = ""
 1. Reviewer: 
   * Conferences: KDD(2), AISTATS(2)
   * Journals: Journal of Scientific Computing(2), Optimization Letters(2)
-2. Teaching Assistant: 
+
+2. Conference Sessions Organizer:
+  * [MOPTA Conference: Bethlehem, PA, USA, August 2023](https://coral.ise.lehigh.edu/~mopta/): Nonlinear and Stochastic Optimization Algorithms
+  
+3. Teaching Assistant: 
   * [ISE 417 Nonlinear Optimization](https://coral.ise.lehigh.edu/danielprobinson/teaching/ise-417/): Spring 2021, Spring 2022 ([`course code`](https://github.com/daniel-p-robinson/nonlinear-optimization-course))
 

@@ -40,7 +40,9 @@ url_pdf: https://arxiv.org/abs/2212.02758
 url_code: https://github.com/Yutong-Dai/FedNH
 url_poster: "Poster_FedNH.pdf"
 url_slides: "Slides_FedNH.pdf"
-url_video: "https://drive.google.com/file/d/12W5ImDBhcYEk52FXJWVH13uZFWzY85Kk/view?usp=share_link"
+url_bilibili: "https://www.bilibili.com/video/BV1H14y1F7n2/?vd_source=661b529b1faba8da25fdd41ca4add627"
+url_googledrive: "https://drive.google.com/file/d/12W5ImDBhcYEk52FXJWVH13uZFWzY85Kk/view?usp=share_link"
+
 
 # Custom links (optional).
 #   Uncomment line below to enable. For multiple links, use the form `[{...}, {...}, {...}]`.
