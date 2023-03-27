@@ -36,7 +36,7 @@ tags:
 featured: false
 
 links:
-url_preprint: https://arxiv.org/pdf/2107.00051.pdf
+url_arxiv: https://arxiv.org/pdf/2107.00051.pdf
 
 # Custom links (optional).
 #   Uncomment line below to enable. For multiple links, use the form `[{...}, {...}, {...}]`.

@@ -36,7 +36,7 @@ tags:
 featured: true
 
 links:
-url_pdf: https://arxiv.org/abs/2212.02758
+url_arxiv: https://arxiv.org/abs/2212.02758
 url_code: https://github.com/Yutong-Dai/FedNH
 url_poster: "Poster_FedNH.pdf"
 url_slides: "Slides_FedNH.pdf"

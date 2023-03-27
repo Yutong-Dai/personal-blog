@@ -34,6 +34,7 @@ featured: true
 
 links:
 url_pdf: https://epubs.siam.org/doi/abs/10.1137/21M1411111
+url_arxiv: https://arxiv.org/abs/2007.14951
 url_code: https://github.com/Yutong-Dai/GroupFaRSA
 url_poster: "poster.pdf"
 # Custom links (optional).
