@@ -31,7 +31,7 @@ tags:
 featured: true
 
 links:
-url_preprint: https://arxiv.org/pdf/2211.02214.pdf
+url_arxiv: https://arxiv.org/pdf/2211.02214.pdf
 url_code: https://github.com/Yutong-Dai/InexactPG
 
 # Custom links (optional).
