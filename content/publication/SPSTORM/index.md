@@ -33,7 +33,8 @@ tags:
 featured: true
 
 links:
-url_arxiv: https://arxiv.org/abs/2302.06790
+url_pdf: https://proceedings.mlr.press/v206/dai23a.html
+# url_arxiv: https://arxiv.org/abs/2302.06790
 url_code: https://github.com/Yutong-Dai/S-PStorm
 url_poster: "Poster_SPSTORM.pdf"
 # url_slides: "Slides_FedNH.pdf"
