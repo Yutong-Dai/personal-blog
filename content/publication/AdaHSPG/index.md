@@ -7,7 +7,7 @@ authors:
 - Guanyi Wang
 - Daniel P. Robinson
 
-date: "2023-06-01"
+date: "2023-05-01"
 
 # Publication type.
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
@@ -31,7 +31,7 @@ tags:
 featured: true
 
 links:
-url_pdf: www.google.com
+url_pdf: https://openreview.net/forum?id=KBhSyBBeeO
 
 # Custom links (optional).
 #   Uncomment line below to enable. For multiple links, use the form `[{...}, {...}, {...}]`.
