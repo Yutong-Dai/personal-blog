@@ -31,7 +31,7 @@ tags:
 featured: true
 
 links:
-url_pdf: https://openreview.net/forum?id=KBhSyBBeeO
+url_pdf: www.google.com
 
 # Custom links (optional).
 #   Uncomment line below to enable. For multiple links, use the form `[{...}, {...}, {...}]`.
