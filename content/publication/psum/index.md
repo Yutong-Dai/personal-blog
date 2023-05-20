@@ -26,7 +26,7 @@ summary: ""
 tags:
 - Convex Optimization
 - Block Cooridinate Descent
-featured: false
+featured: true
 
 links:
 url_pdf: https://link.springer.com/content/pdf/10.1007/s11424-020-8313-y.pdf

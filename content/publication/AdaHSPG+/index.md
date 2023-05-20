@@ -26,9 +26,9 @@ summary: ""
 
 # Is this a selected publication? (true/false)
 tags:
-- Convex Optimization
-- Block Cooridinate Descent
-featured: false
+- Nonconvex Sparse Optimization
+- Neural Netowrk Compression
+featured: true
 
 links:
 url_pdf: https://openreview.net/forum?id=KBhSyBBeeO
