@@ -24,7 +24,7 @@ date_format = "Jan 2006"
   location = "San Jose, CA"
   date_start = "2023-05-30"
   date_end = "2023-08-16"
-  description = "Incoming Intern.."
+  description = "Benchmarked personalized ranking algorithms based on implicit feedback data from Adobe's products; Developed a multi-objective optimization framework to improve the current ranking algorithms to accommodate the diverse needs of business partners."
 
 [[experience]]
   title = "Research Intern"
