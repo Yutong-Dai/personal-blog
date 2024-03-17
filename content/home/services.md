@@ -11,7 +11,7 @@ subtitle = ""
 
 1. Reviewer: 
   * Conferences: KDD(2), AISTATS(2)
-  * Journals: Journal of Scientific Computing (5), Optimization Letters (3), Mathematical Programming Series A (1)
+  * Journals: Journal of Scientific Computing (6), Optimization Letters (3), Mathematical Programming Series A (2)
 
 2. Conference Sessions Organizer:
   * [MOPTA Conference: Bethlehem, PA, USA, August 2023](https://coral.ise.lehigh.edu/~mopta/): Nonlinear and Stochastic Optimization Algorithms

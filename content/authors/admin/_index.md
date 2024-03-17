@@ -10,7 +10,7 @@ authors:
 superuser: true
 
 # Role/position
-role: Ph.D. Candidate
+role: Ph.D.
 
 # Organizations/Affiliations
 organizations:
@@ -24,6 +24,7 @@ interests:
   - Nonsmooth Optimization with Structured Sparsity
   - Federated Learning
   - Optimization in Machine Learning 
+  - Multimodal Large Language Model
   # - Adversarial Machine Learning
   
 
@@ -31,7 +32,7 @@ education:
   courses:
   - course: Ph.D. in Industrial & Systems Engineering
     institution: Lehigh University
-    year: December, 2023 (expected)
+    year: December, 2023
   - course: M.S. in Statistics
     institution: University of Illinois at Urbana-Champaign
     year: May, 2019
@@ -81,8 +82,8 @@ email: ""
 # - Visitors
 ---
 
-Yutong Dai is a Ph.D. candidate in the [Department of Industrial and Systems Engineering](https://engineering.lehigh.edu/ise) at Lehigh University, under the supervision of Professor [Daniel P. Robinson](https://coral.ise.lehigh.edu/danielprobinson/). He also works closely with Professor [Lichao Sun](https://lichao-sun.github.io). 
+Yutong Dai earned his Ph.D. degree from the [Department of Industrial and Systems Engineering](https://engineering.lehigh.edu/ise) at Lehigh University, under the supervision of Professor [Daniel P. Robinson](https://coral.ise.lehigh.edu/danielprobinson/). He also works closely with Professor [Lichao Sun](https://lichao-sun.github.io). 
 
-His current research interests include
+His research interests include
 1. designing, analyzing and implementing algorithms for large scale non-convex non-smooth optimization problems arisen in machine learning and federated learning, and
 2. making machine learning and deep learning algorithms secure, private, and robust.
