@@ -23,7 +23,7 @@ date_format = "Jan 2006"
   company_url = "https://www.salesforceairesearch.com"
   location = "Palo Alto, CA"
   date_start = "2024-01-16"
-  description = "LLM & MLLM"
+  # description = "LLM & MLLM"
   
 [[experience]]
   title = "Machine Learning Engineer Intern"
@@ -32,7 +32,7 @@ date_format = "Jan 2006"
   location = "San Jose, CA"
   date_start = "2023-05-30"
   date_end = "2023-08-16"
-  description = "Benchmarked personalized ranking algorithms based on implicit feedback data from Adobe's products; Developed a multi-objective optimization framework to improve the current ranking algorithms to accommodate the diverse needs of business partners."
+  # description = "Benchmarked personalized ranking algorithms based on implicit feedback data from Adobe's products; Developed a multi-objective optimization framework to improve the current ranking algorithms to accommodate the diverse needs of business partners."
 
 [[experience]]
   title = "Research Intern"
@@ -41,7 +41,7 @@ date_format = "Jan 2006"
   location = "Palo Alto, CA"
   date_start = "2022-05-31"
   date_end = "2022-08-19"
-  description = "Conduct research on federated learning focusing on data heterogeneity with class imbalance. The work was accepted by AAAI'23."
+  # description = "Conduct research on federated learning focusing on data heterogeneity with class imbalance. The work was accepted by AAAI'23."
   
 [[experience]]
   title = "Data Scientist Intern"
@@ -50,6 +50,6 @@ date_format = "Jan 2006"
   location = "Urbana, IL"
   date_start = "2018-01-18"
   date_end = "2019-05-11"
-  description = "Leverage the power of the machine learning algorithms and domain knowledge to support global agronomist teams manage Barley in a data-driven way."
+  # description = "Leverage the power of the machine learning algorithms and domain knowledge to support global agronomist teams manage Barley in a data-driven way."
   # 
 +++
