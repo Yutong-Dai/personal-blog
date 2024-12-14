@@ -18,7 +18,7 @@ date_format = "Jan 2006"
 #   Leave `date_end` empty if it's your current employer.
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 [[experience]]
-  title = "Applied Research Scientist"
+  title = "Applied Scientist"
   company = "Salesforce"
   company_url = "https://www.salesforceairesearch.com"
   location = "Palo Alto, CA"
@@ -26,7 +26,7 @@ date_format = "Jan 2006"
   # description = "LLM & MLLM"
   
 [[experience]]
-  title = "Machine Learning Engineer Intern"
+  title = "Engineer Intern"
   company = "Adobe"
   company_url = "https://research.adobe.com"
   location = "San Jose, CA"
@@ -41,7 +41,7 @@ date_format = "Jan 2006"
   location = "Palo Alto, CA"
   date_start = "2022-05-31"
   date_end = "2022-08-19"
-  # description = "Conduct research on federated learning focusing on data heterogeneity with class imbalance. The work was accepted by AAAI'23."
+  # description = "Conduct research on federated learning focusing on data heterogeneity with class imbalance."
   
 [[experience]]
   title = "Data Scientist Intern"
