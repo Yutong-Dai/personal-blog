@@ -14,18 +14,17 @@ role: Ph.D.
 
 # Organizations/Affiliations
 organizations:
-- name: Lehigh University
-  url: "https://engineering.lehigh.edu/ise"
+- name: Salesforce (Formerly with Lehigh University)
+
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interests lie at the intersection of machine learning and optimization.
 
 interests:
+  - Computer Use Agents
+  - Multimodal Large Language Model
   - Nonsmooth Optimization with Structured Sparsity
   - Federated Learning
-  - Optimization in Machine Learning 
-  - Multimodal Large Language Model
-  # - Adversarial Machine Learning
   
 
 education:
@@ -82,8 +81,10 @@ email: ""
 # - Visitors
 ---
 
-Yutong Dai earned his Ph.D. degree from the [Department of Industrial and Systems Engineering](https://engineering.lehigh.edu/ise) at Lehigh University, under the supervision of Professor [Daniel P. Robinson](https://coral.ise.lehigh.edu/danielprobinson/). He also works closely with Professor [Lichao Sun](https://lichao-sun.github.io). 
+Yutong Dai works as the Senior Applied Scientist in Salesforce. He earned his Ph.D. degree from the [Department of Industrial and Systems Engineering](https://engineering.lehigh.edu/ise) at Lehigh University, under the supervision of Professor [Daniel P. Robinson](https://coral.ise.lehigh.edu/danielprobinson/). He also works closely with Professor [Lichao Sun](https://lichao-sun.github.io). 
 
 His research interests include
-1. designing, analyzing and implementing algorithms for large scale non-convex non-smooth optimization problems arisen in machine learning and federated learning, and
-2. making machine learning and deep learning algorithms secure, private, and robust.
+  * building and evaluating computer/browser use agents 
+  * training (multimodal) large language models 
+  * designing, analyzing and implementing algorithms for large scale non-convex non-smooth optimization problems arisen in machine learning and federated learning, and
+  * making machine learning and deep learning algorithms secure, private, and robust.

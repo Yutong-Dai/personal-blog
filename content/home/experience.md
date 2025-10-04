@@ -17,13 +17,22 @@ date_format = "Jan 2006"
 #   Required fields are `title`, `company`, and `date_start`.
 #   Leave `date_end` empty if it's your current employer.
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
+
+[[experience]]
+  title = "Senior Applied Scientist"
+  company = "Salesforce"
+  company_url = "https://www.salesforceairesearch.com"
+  location = "Palo Alto, CA"
+  date_start = "2025-08-01"
+
 [[experience]]
   title = "Applied Scientist"
   company = "Salesforce"
   company_url = "https://www.salesforceairesearch.com"
   location = "Palo Alto, CA"
   date_start = "2024-01-16"
-  # description = "LLM & MLLM"
+  date_end = "2025-07-31"
+  # description = "Product: text to salesforce flow generation; research: on device blip3"
   
 [[experience]]
   title = "Engineer Intern"
