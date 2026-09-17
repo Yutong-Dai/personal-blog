@@ -1,5 +1,5 @@
 ---
-title: "CoAct-1: Computer-using Agents with Coding as Actions (arixv, 2025)"
+title: "CoAct-1: Computer-using multi-agent system with coding actions (ICLR, 2026)"
 
 authors:
 - Linxin Song
@@ -21,11 +21,11 @@ date: "2025-08-05"
 # Legend: 0 = Uncategorized; 1 = Conference paper; 2 = Journal article;
 # 3 = Preprint / Working Paper; 4 = Report; 5 = Book; 6 = Book section;
 # 7 = Thesis; 8 = Patent
-publication_types: ["3"]
+publication_types: ["1"]
 
 # Publication name and optional abbreviated publication name.
-publication: "arXiv."
-publication_short: "arXiv"
+publication: "International Conference on Learning Representations (2026)"
+publication_short: "ICLR2026"
 
 abstract: "Autonomous agents that operate computers via Graphical User Interfaces (GUIs) often struggle with efficiency and reliability on complex, long-horizon tasks. While augmenting these agents with planners can improve task decomposition, they remain constrained by the inherent limitations of performing all actions through GUI manipulation, leading to brittleness and inefficiency. In this work, we introduce a more robust and flexible paradigm: enabling agents to use coding as a enhanced action. We present CoAct-1, a novel multi-agent system that synergistically combines GUI-based control with direct programmatic execution. CoAct-1 features an Orchestrator that dynamically delegates subtasks to either a conventional GUI Operator or a specialized Programmer agent, which can write and execute Python or Bash scripts. This hybrid approach allows the agent to bypass inefficient GUI action sequences for tasks like file management and data processing, while still leveraging visual interaction when necessary. We evaluate our system on the challenging OSWorld benchmark, where CoAct-1 achieves a new state-of-the-art success rate of 60.76%, significantly outperforming prior methods. Furthermore, our approach dramatically improves efficiency, reducing the average number of steps required to complete a task to just 10.15, compared to 15 for leading GUI agents. Our results demonstrate that integrating coding as a core action provides a more powerful, efficient, and scalable path toward generalized computer automation."
 
@@ -38,9 +38,9 @@ tags:
 featured: true
 
 links:
-url_code: https://linxins.net/coact/
-url_pdf: https://arxiv.org/pdf/2508.03923
-
+url_code: https://github.com/SalesforceAIResearch/CoAct-1
+url_pdf: https://proceedings.iclr.cc/paper_files/paper/2026/file/ce65173b994cf7c925c71b482ee14a8d-Paper-Conference.pdf
+url_media: https://venturebeat.com/ai/salesforces-new-coact-1-agents-dont-just-point-and-click-they-write-code-to-accomplish-tasks-faster-and-with-greater-success-rates
 
 # Custom links (optional).
 #   Uncomment line below to enable. For multiple links, use the form `[{...}, {...}, {...}]`.

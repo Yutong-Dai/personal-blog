@@ -93,11 +93,11 @@ phone = ""
 
 # Address
 # For country_code, use the 2-letter ISO code (see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 )
-address = {street = "200 West Packer Avenue", city = "Bethlehem", region = "PA", postcode = "18015", country = "United States", country_code = "US"}
+address = {street = "", city = "Sunnyvale", region = "CA", postcode = "94089", country = "United States", country_code = "US"}
 
 # Geographic coordinates
 # To get your coordinates, right-click on Google Maps and choose "What's here?". The coords will show up at the bottom.
-coordinates = {latitude = "40.607703", longitude = "-75.381400"}
+coordinates = {latitude = "37.397662686836284", longitude = "-122.00610340656856"}
 # Directions for visitors to locate you.
 # directions = "Enter Building 1 and take the stairs to Office 200 on Floor 2"
 
